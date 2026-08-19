@@ -1,47 +1,34 @@
-# NBA Courtside — Exhibition Prototype v0.1
+# NBA Courtside — Possession Lab v0.2
 
-A deliberately small, mobile-first GitHub Pages prototype built to answer one question first: **is the simulated basketball game fun and believable enough to build the franchise systems around it?**
+Mobile-first GitHub Pages exhibition prototype focused on the new possession-by-possession interaction model.
 
-## Included
+## What this build tests
 
-- 8 players per side
-- Five-player on-court lineups + three-player bench
-- Possession-by-possession simulation
-- Temporary player-specific shooting, usage, passing, rebounding, defense and turnover inputs
-- Fatigue and automatic rotations
-- User coaching controls:
-  - Offense: Balanced / Attack Rim / Shoot 3 / Feed Star / Pick & Roll
-  - Defense: Balanced / Protect Paint / Pressure 3 / Switch
-  - Pace: Slow / Normal / Fast
-  - Rotation: Star Heavy / Balanced / Fresh Legs
-- CPU strategy changes late in games
-- Live game feed and full box score
-- Run alerts and clutch-mode pauses
-- 50-game simulation lab for quick tuning
-- iPhone-first visual layout
-
-## Important prototype note
-
-The player inputs in `app.js` are **temporary test values**. They are close enough to recognizable player profiles to test the simulation, but they are not yet the final NBA.com-derived data model. The next data pass should replace these inputs with an authored/statistical pipeline using selected NBA seasons.
+- 8-player Lakers and Celtics test rosters (5 on court + 3 bench)
+- iPhone-first five-player portrait control surface
+- Orange outline for the offensive ball handler
+- Red outline for the primary on-ball defender
+- Prominent 24-second shot clock
+- Court-location state and natural-language possession context
+- Context-sensitive ball-handler actions
+- Context-sensitive off-ball actions
+- Context-sensitive defensive actions
+- Actions consume time from the shot clock and game clock
+- Passing, drives, screens, post-ups, cuts, spacing, shots, rebounds, turnovers and basic defensive reactions
+- Play Both / Offense Only / Defense Only modes
+- Sim Possession / Sim 1 Minute / Sim to Quarter
+- Continuous Autopilot with Take Control
+- Automatic bench rotation based on energy
+- Live feed and box score
 
 ## Run locally
 
-Open `index.html` in a browser, or serve the folder with any basic local web server.
+Open `index.html` in a browser. The NBA headshots are loaded from the NBA CDN, so an internet connection is needed for player imagery.
 
 ## GitHub Pages
 
-Upload the contents of this folder to a repository and enable GitHub Pages from the repository root. `index.html` is already the entry point.
+Upload the contents of this folder to the repository root (or a Pages folder) and publish normally. No build step or dependencies are required.
 
-## What to judge
+## Important
 
-Do not judge the franchise layer yet. Play/replay the exhibition and focus on:
-
-- Do final scores look plausible?
-- Does Boston feel stronger without being unbeatable?
-- Do stars naturally lead scoring and usage?
-- Do different tactics visibly change shot profile and game flow?
-- Does fatigue make the bench matter?
-- Does the final two minutes feel more involving?
-- Is the amount of user control enough without manually playing basketball?
-
-Those answers should drive v0.2.
+The player inputs are temporary test values carried over from the first exhibition prototype. This version is for evaluating interaction, pacing and simulation feel before building the historical four-card/statistical model.
