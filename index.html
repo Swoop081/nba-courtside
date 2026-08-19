@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a12" />
+  <title>Courtside — Exhibition Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">NBA COURTSIDE</div>
+        <div class="brand">EXHIBITION</div>
+      </div>
+      <button id="resetBtn" class="icon-btn" aria-label="Reset match">↻</button>
+    </header>
+
+    <main>
+      <section id="pregameScreen" class="screen active">
+        <div class="hero-card">
+          <div class="hero-copy">
+            <span class="pill hot">SIMULATION TEST</span>
+            <h1>8 vs 8.<br><span>Coach the game.</span></h1>
+            <p>Possession-by-possession simulation with tactics, fatigue, rotations, runs and a live box score.</p>
+          </div>
+          <div class="hero-stack">
+            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png" alt="LeBron James" />
+            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/1628369.png" alt="Jayson Tatum" />
+          </div>
+        </div>
+
+        <div class="matchup-card">
+          <div class="team-block lakers">
+            <div class="team-abbr">LAL</div>
+            <div>
+              <strong>LOS ANGELES</strong>
+              <span>Lakers</span>
+            </div>
+          </div>
+          <div class="vs">VS</div>
+          <div class="team-block celtics">
+            <div class="team-abbr">BOS</div>
+            <div>
+              <strong>BOSTON</strong>
+              <span>Celtics</span>
+            </div>
+          </div>
+        </div>
+
+        <section class="panel roster-panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">YOUR TEAM</span>
+              <h2>Lakers — 8</h2>
+            </div>
+            <span class="mini-badge">2023–24 TEST DATA</span>
+          </div>
+          <div id="userRoster" class="player-strip"></div>
+        </section>
+
+        <section class="panel roster-panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">OPPONENT</span>
+              <h2>Celtics — 8</h2>
+            </div>
+            <span class="mini-badge">CPU</span>
+          </div>
+          <div id="cpuRoster" class="player-strip"></div>
+        </section>
+
+        <button id="tipoffBtn" class="primary-btn">TIP OFF</button>
+        <button id="labBtn" class="secondary-btn">RUN 50-GAME SIM LAB</button>
+        <div id="labResult" class="lab-result hidden"></div>
+        <p class="prototype-note">Player sim ratings are temporary prototype inputs so we can judge the engine first. Final ratings can later be generated from NBA.com season data.</p>
+      </section>
+
+      <section id="gameScreen" class="screen">
+        <div class="scoreboard">
+          <div class="score-team">
+            <span class="score-abbr">LAL</span>
+            <strong id="userScore">0</strong>
+          </div>
+          <div class="game-clock">
+            <span id="quarterLabel">1ST</span>
+            <strong id="clockLabel">12:00</strong>
+            <small id="possessionLabel">LAL BALL</small>
+          </div>
+          <div class="score-team right">
+            <strong id="cpuScore">0</strong>
+            <span class="score-abbr">BOS</span>
+          </div>
+        </div>
+
+        <div id="momentBanner" class="moment-banner hidden"></div>
+
+        <section id="highlightCard" class="highlight-card">
+          <div class="highlight-bg"></div>
+          <img id="highlightImage" src="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png" alt="Featured player" />
+          <div class="highlight-copy">
+            <span id="highlightKicker">TIP OFF</span>
+            <h2 id="highlightHeadline">COURTSIDE</h2>
+            <p id="highlightSub">Set your tactics, then start the simulation.</p>
+          </div>
+        </section>
+
+        <section class="panel tactics-panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">COACHING</span>
+              <h2>Your Game Plan</h2>
+            </div>
+            <div id="runBadge" class="run-badge">RUN 0–0</div>
+          </div>
+
+          <div class="control-group">
+            <label>OFFENSE</label>
+            <div class="segmented" id="offenseControls">
+              <button data-value="balanced" class="active">Balanced</button>
+              <button data-value="rim">Attack Rim</button>
+              <button data-value="three">Shoot 3</button>
+              <button data-value="star">Feed Star</button>
+              <button data-value="pnr">Pick & Roll</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>DEFENSE</label>
+            <div class="segmented" id="defenseControls">
+              <button data-value="balanced" class="active">Balanced</button>
+              <button data-value="paint">Protect Paint</button>
+              <button data-value="perimeter">Pressure 3</button>
+              <button data-value="switch">Switch</button>
+            </div>
+          </div>
+
+          <div class="control-group split-control">
+            <div>
+              <label>PACE</label>
+              <div class="segmented compact" id="paceControls">
+                <button data-value="slow">Slow</button>
+                <button data-value="normal" class="active">Normal</button>
+                <button data-value="fast">Fast</button>
+              </div>
+            </div>
+            <div>
+              <label>ROTATION</label>
+              <div class="segmented compact" id="rotationControls">
+                <button data-value="star">Star Heavy</button>
+                <button data-value="balanced" class="active">Balanced</button>
+                <button data-value="fresh">Fresh Legs</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel court-panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">ON COURT</span>
+              <h2>Your Five</h2>
+            </div>
+            <button id="forceSubsBtn" class="text-btn">AUTO SUB</button>
+          </div>
+          <div id="onCourtStrip" class="court-strip"></div>
+        </section>
+
+        <section class="panel game-controls">
+          <div class="sim-buttons">
+            <button id="possessionBtn">+1 POS</button>
+            <button id="minuteBtn">SIM 1 MIN</button>
+            <button id="quarterBtn">SIM TO Q</button>
+          </div>
+          <button id="autoBtn" class="primary-btn live-btn">START LIVE SIM</button>
+        </section>
+
+        <section class="panel feed-panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">LIVE</span>
+              <h2>Game Feed</h2>
+            </div>
+            <button id="boxBtn" class="text-btn">BOX SCORE</button>
+          </div>
+          <div id="gameFeed" class="game-feed"></div>
+        </section>
+      </section>
+
+      <section id="finalScreen" class="screen">
+        <div id="finalHero" class="final-hero">
+          <span class="pill">FINAL</span>
+          <h1 id="finalScore">LAL 0 — 0 BOS</h1>
+          <p id="finalSummary">Exhibition complete.</p>
+        </div>
+        <section class="panel">
+          <div class="panel-title-row">
+            <div>
+              <span class="eyebrow">GAME LEADERS</span>
+              <h2>Top Performers</h2>
+            </div>
+          </div>
+          <div id="leaders" class="leaders"></div>
+        </section>
+        <button id="finalBoxBtn" class="secondary-btn">VIEW BOX SCORE</button>
+        <button id="againBtn" class="primary-btn">RUN IT BACK</button>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="boxDialog" class="box-dialog">
+    <div class="dialog-head">
+      <div>
+        <span class="eyebrow">LIVE BOX SCORE</span>
+        <h2 id="dialogScore">LAL 0 — 0 BOS</h2>
+      </div>
+      <button id="closeBoxBtn" class="icon-btn">×</button>
+    </div>
+    <div class="box-tabs">
+      <button data-team="user" class="active">LAL</button>
+      <button data-team="cpu">BOS</button>
+    </div>
+    <div id="boxTable" class="box-table"></div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
