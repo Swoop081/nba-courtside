@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm');
+const root='/mnt/data/NBA-Courtside-League-Pulse-v0.8';
+const dataJs=fs.readFileSync(root+'/data/data.js','utf8');
+const schedJs=fs.readFileSync(root+'/data/schedule.js','utf8');
+let src=fs.readFileSync(root+'/app.js','utf8');
+src=src.replace(/\/\/ Initialise\.[\s\S]*?\}\)\(\);\s*$/m, `window.__test={getState:()=>state,getGames:()=>games,ensureAllRotations,startSeason,simulateGame};\n})();`);
+src=src.replace(/function setTop\(\)\{[^\n]*\}/,'function setTop(){}');
+src=src.replace(/function renderView\(\)\{[^\n]*\}/,'function renderView(){}');
+src=src.replace(/function toast\(text\)\{[^\n]*\}/,'function toast(){}');
+const store={nbaCourtsideSaveV07:JSON.stringify({version:7,userTeam:'TOR',seasonYear:2026,date:'2026-08-19',seasonStarted:false,seasonComplete:false})};
+const noop=()=>{};
+const ctx={console,structuredClone,Date,setTimeout:(f)=>f(),confirm:()=>true,scrollTo:noop,location:{reload:noop},window:{},document:{documentElement:{style:{setProperty:noop}},querySelector:()=>null,querySelectorAll:()=>[],getElementById:()=>null,createElement:()=>({classList:{add:noop,remove:noop}}),body:{appendChild:noop,style:{}}},localStorage:{getItem:k=>store[k]||null,setItem:(k,v)=>{store[k]=v},removeItem:k=>{delete store[k]}},Math};ctx.window=ctx;
+vm.createContext(ctx);vm.runInContext(dataJs,ctx);vm.runInContext(schedJs,ctx);vm.runInContext(src,ctx);
+const t=ctx.__test;t.ensureAllRotations();t.startSeason();for(const g of t.getGames().slice(0,120))t.simulateGame(g);const s=t.getState();s.date=t.getGames()[119].date;store.nbaCourtsideSaveV08=JSON.stringify(s);fs.writeFileSync(root+'/scripts/demo-save-v08.json',store.nbaCourtsideSaveV08);console.log(s.date,Object.keys(s.results).length);

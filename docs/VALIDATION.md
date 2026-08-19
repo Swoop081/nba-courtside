@@ -1,18 +1,41 @@
-# v0.7 Validation
+# NBA Courtside v0.8 — Validation
 
-Validated 19 Aug 2026 development build.
+## Structural data audit
+- 30 teams
+- 442 player records
+- 392 statistically rated players
+- 44 projection-pending players
+- 3 unsigned RFAs
+- 0 duplicate player identities
+- 1,230 regular-season games
+- 82 games per team
+- 41 home / 41 away per team
+- 0 duplicate game IDs
 
-- 30 NBA franchises available for GM selection.
-- 442 base player records.
-- 1,230-game regular-season calendar scaffold.
-- 82 games per team / 41 home / 41 away.
-- Every team generates a legal 5-starter rotation with 8–11 active rotation players.
-- Every regulation rotation totals exactly 240 target minutes.
-- User minute adjustments remain zero-sum at 240.
-- Calendar advancement stops on the user's next unsimulated scheduled game instead of silently simulating it.
-- Scheduled Game Day exposes Watch Game and Sim Game from GM mode.
-- Watch and Sim routes use the same `gameday.js` possession engine; Sim is a fast-forward path.
-- Game Day smoke test completed 218 possessions, 10-player rotations per side, full box scores, season stat accumulation and per-player game logs.
-- Regulation team minutes reconcile to 240; overtime adds 25 player-minutes per OT.
-- GM home UI contains no player-facing Exhibition mode or launcher.
-- Existing postseason, awards, aging/retirement, lottery, fictional draft and next-season loop structural audit still passes.
+## GM + Game Day integration
+- Every tested team rotation resolves to exactly 240 regulation minutes.
+- User calendar still gates on the next franchise Game Day rather than silently simulating it.
+- Watch Game and Sim Game continue to use the integrated Game Day path.
+- Standalone Exhibition remains absent from the player-facing GM UI.
+- Possession-engine smoke test: 116–114, 218 possessions, 10-player rotations each side, 240 team minutes, persistent box scores and game logs.
+
+## League Pulse smoke test
+A deterministic 120-game early-season simulation was used to exercise the new feedback layer.
+
+Verified:
+- scoring / rebounding / assists / steals / blocks leader ordering
+- live MVP, DPOY and Rookie ladders populated
+- save-generated league headlines populated
+- team Last 10, streak, home/road form and point differential populated
+- Home Around the League modules render
+- League Pulse page renders
+- Leaders page renders
+- Awards Race page renders
+
+Example deterministic test output:
+- scoring leader: Kawhi Leonard — 31.0 PPG
+- MVP leader: Nikola Jokic
+- rookie leader: Keaton Wagler
+- generated stories included a big-night headline, a four-game Memphis win streak, MVP watch and rookie watch
+
+These are test-universe outcomes, not hard-coded season claims.

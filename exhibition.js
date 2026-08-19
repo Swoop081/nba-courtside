@@ -12,7 +12,7 @@ const prettyPeriod=n=>n===1?'1ST':n===2?'2ND':n===3?'3RD':n===4?'4TH':`OT${n===5
 const fmtClock=s=>`${Math.floor(Math.max(0,s)/60)}:${String(Math.floor(Math.max(0,s)%60)).padStart(2,'0')}`;
 const pct=v=>Math.round(clamp(v,0,100));
 
-function readSave(){for(const key of ['nbaCourtsideSaveV07','nbaCourtsideSaveV05','nbaCourtsideSaveV04']){try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x)return x}catch(e){}}return null}
+function readSave(){for(const key of ['nbaCourtsideSaveV08','nbaCourtsideSaveV07','nbaCourtsideSaveV05','nbaCourtsideSaveV04']){try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x)return x}catch(e){}}return null}
 const save=readSave();
 let players=[...basePlayers,...(save?.generatedPlayers||[])];
 if(save?.playerOverrides){for(const p of players){const o=save.playerOverrides[p.id];if(o){if(o.age!=null)p.age=o.age;if(o.ratings)p.ratings=structuredClone(o.ratings);if(o.development_profile)p.development_profile={...(p.development_profile||{}),...o.development_profile}}}}
