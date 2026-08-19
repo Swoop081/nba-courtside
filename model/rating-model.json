@@ -1,0 +1,72 @@
+{
+  "version": "0.2",
+  "historical_portability": "core inputs are traditional box-score stats available across eras",
+  "input_fields": [
+    "GP",
+    "GS",
+    "MIN",
+    "FGM",
+    "FGA",
+    "3PM",
+    "3PA",
+    "FTM",
+    "FTA",
+    "OREB",
+    "DREB",
+    "AST",
+    "TOV",
+    "STL",
+    "BLK",
+    "PF",
+    "PTS",
+    "age",
+    "position"
+  ],
+  "normalization": "per-36 volume + season-relative percentile normalization",
+  "bayesian_shrinkage": {
+    "three_point_attempt_prior": 100,
+    "two_point_attempt_prior": 150,
+    "free_throw_attempt_prior": 75,
+    "league_3p_pct": 0.3597,
+    "league_2p_pct": 0.5496,
+    "league_ft_pct": 0.7831
+  },
+  "display_rating": "clip(round(50 + 49 * percentile_score), 35, 99)",
+  "ratings": {
+    "three_pt": "75% adjusted 3P% percentile + 25% 3PA/36 percentile",
+    "finishing": "65% adjusted 2P% percentile + 25% 2PA/36 + 10% FTA/36",
+    "free_throw": "adjusted FT% percentile",
+    "shot_creation": "55% FGA/36 + 25% FTA/36 + 20% PTS/36",
+    "playmaking": "70% AST/36 + 30% AST:TOV proxy",
+    "ball_security": "turnovers relative to offensive-responsibility proxy",
+    "offensive_rebounding": "OREB/36 percentile",
+    "defensive_rebounding": "DREB/36 percentile",
+    "perimeter_defense": "65% STL/36 + 20% foul discipline + 15% position proxy",
+    "interior_defense": "55% BLK/36 + 25% DREB/36 + 20% position proxy",
+    "stamina": "65% MPG percentile + 35% GP percentile"
+  },
+  "confidence": {
+    "formula": "min(1, total_minutes / 1200)",
+    "low_sample_flag_below": 0.25,
+    "future": "blend low-sample season with prior established level"
+  },
+  "rookies": {
+    "no_nba_stats": "ratings remain null / projection_pending in this foundation",
+    "planned_projection_inputs": [
+      "pre-NBA stats",
+      "age",
+      "height/weight",
+      "competition level",
+      "draft/scouting tier"
+    ],
+    "draft_position_rule": "potential signal > current ability",
+    "nba_takeover": "nba_weight=min(1, career_nba_minutes/1500)"
+  },
+  "development": {
+    "display": "career stage + trend + broad prime window",
+    "save_engine": "attribute-specific age curve + hidden ceiling + role/minutes/injury context + controlled variance",
+    "attribute_aging": "athletic traits decline earlier; shooting/playmaking/IQ can peak later and decline slower",
+    "retirement": "probabilistic after late-career decline, not a fixed age"
+  },
+  "overall": "72% position-weighted skill overall + 28% season-relative impact summary (PTS/36, AST/36, REB/36, STL/36, BLK/36, TS proxy)"
+}

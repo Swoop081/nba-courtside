@@ -1,0 +1,42 @@
+{
+  "freeze_date": "2026-08-19",
+  "version": "v0.2",
+  "player_rows": 442,
+  "teams": 30,
+  "signed_standard_or_inactive": 439,
+  "unsigned_restricted_free_agents": 3,
+  "established_with_2025_26_stats": 392,
+  "rated_players": 392,
+  "projection_pending": 44,
+  "no_current_rating": 50,
+  "headshot_matched": 393,
+  "repaired_stat_matches": [
+    "Yang Hansen",
+    "Egor Demin"
+  ],
+  "rfa_rights_cases": {
+    "Jalen Duren": {
+      "rights_team": "DET",
+      "qualifying_offer": 9615600,
+      "cap_hold": 19449432,
+      "status": "restricted_free_agent_unsigned"
+    },
+    "Bennedict Mathurin": {
+      "rights_team": "LAC",
+      "qualifying_offer": 8774590,
+      "cap_hold": 27562719,
+      "status": "restricted_free_agent_unsigned"
+    },
+    "Peyton Watson": {
+      "rights_team": "DEN",
+      "qualifying_offer": 6534714,
+      "cap_hold": 13069428,
+      "status": "restricted_free_agent_unsigned"
+    }
+  },
+  "warnings": [
+    "2025-26 statistical bulk seed is near-final and not yet the exact official NBA.com season-complete export.",
+    "Historical-portable box-score ratings intentionally do not claim to capture every component of defense.",
+    "Rookies/newcomers without NBA evidence remain projection-pending until the pre-NBA translation layer is populated."
+  ]
+}

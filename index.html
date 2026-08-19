@@ -1,205 +1,36 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#090810" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>NBA Courtside — Matchup Lab</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#070811" />
+<title>NBA Courtside — 2026 Data Lab</title>
+<style>
+:root{--bg:#070811;--panel:#11131f;--panel2:#181b2a;--text:#f7f8ff;--muted:#9da2b8;--line:#2b2f43;--accent:#dfff31;--team:#552583;--team2:#fdb927;--danger:#ff496c;--orange:#ff7a18;--blue:#58a6ff}
+*{box-sizing:border-box}html{background:var(--bg)}body{margin:0;background:radial-gradient(circle at 20% -10%,color-mix(in srgb,var(--team) 25%,transparent),transparent 40%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;min-height:100vh;overflow-x:hidden}
+button,input{font:inherit}.shell{max-width:920px;margin:auto;padding:calc(env(safe-area-inset-top) + 18px) 16px calc(env(safe-area-inset-bottom) + 36px)}
+.kicker{font-size:12px;letter-spacing:.28em;font-weight:900;color:var(--accent);text-transform:uppercase}.title{font-size:clamp(30px,8vw,54px);line-height:.92;margin:7px 0 8px;font-weight:950;letter-spacing:-.05em}.subtitle{color:var(--muted);font-weight:700;font-size:14px;line-height:1.45}.hero{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:30px;padding:22px;background:linear-gradient(135deg,color-mix(in srgb,var(--team) 36%,#11131f),#11131f 48%,color-mix(in srgb,var(--team2) 18%,#11131f));box-shadow:0 22px 70px #0008}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:var(--team2);filter:blur(100px);opacity:.16;right:-80px;top:-100px;pointer-events:none}.heroTop{display:flex;gap:15px;align-items:center}.teamLogo{width:82px;height:82px;object-fit:contain;filter:drop-shadow(0 12px 18px #0008)}.teamName{font-size:29px;font-weight:950;letter-spacing:-.04em}.conf{color:var(--muted);font-size:13px;font-weight:800;margin-top:3px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:18px}.metric{background:#07081199;border:1px solid #ffffff14;border-radius:17px;padding:12px;min-width:0}.metric b{display:block;font-size:20px;letter-spacing:-.04em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.metric span{display:block;font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);font-weight:900;margin-top:4px}.apronBar{height:8px;background:#ffffff12;border-radius:99px;margin-top:16px;overflow:hidden}.apronFill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--team2),var(--accent));width:50%}.apronLabels{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;font-weight:800;margin-top:5px}
+.toolbar{position:sticky;top:0;z-index:20;margin:14px -16px 0;padding:11px 16px;background:linear-gradient(#070811f4,#070811dd 76%,transparent);backdrop-filter:blur(18px)}.search{display:flex;gap:9px}.search input{width:100%;border:1px solid var(--line);background:#11131fe6;color:white;border-radius:16px;padding:13px 15px;outline:none;font-weight:750}.search input:focus{border-color:var(--team2)}.teamStrip{display:flex;overflow:auto;gap:8px;padding:10px 0 4px;scrollbar-width:none}.teamStrip::-webkit-scrollbar{display:none}.teamChip{flex:0 0 auto;width:55px;height:55px;border:1px solid var(--line);border-radius:17px;background:#11131f;display:grid;place-items:center;padding:9px;transition:.15s}.teamChip img{width:100%;height:100%;object-fit:contain}.teamChip.active{border:2px solid var(--team2);background:color-mix(in srgb,var(--team) 35%,#11131f);transform:translateY(-1px)}
+.sectionHead{display:flex;justify-content:space-between;align-items:end;margin:16px 2px 10px}.sectionHead h2{margin:0;font-size:25px;letter-spacing:-.04em}.sectionHead span{font-size:11px;color:var(--muted);font-weight:850}.roster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}@media(min-width:620px){.roster{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.player{position:relative;min-height:236px;border-radius:23px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(165deg,color-mix(in srgb,var(--team) 27%,#1a1c29),#10121b 58%);text-align:left;color:white;padding:0;box-shadow:0 8px 24px #0004}.player:active{transform:scale(.985)}.portrait{position:absolute;left:0;right:0;top:0;height:154px;width:100%;object-fit:cover;object-position:center 15%;filter:saturate(1.07);z-index:1}.fallback{position:absolute;inset:0 0 auto;height:154px;display:grid;place-items:center;font-size:44px;font-weight:950;background:linear-gradient(145deg,var(--team),var(--team2));z-index:0}.shade{position:absolute;z-index:2;inset:75px 0 0;background:linear-gradient(transparent,#10121b 38%)}.ovr{position:absolute;z-index:4;top:10px;left:10px;background:#070811e8;border:1px solid #ffffff26;border-radius:13px;padding:7px 9px;font-weight:950;font-size:19px}.proj{font-size:11px;letter-spacing:.12em}.statusDot{position:absolute;z-index:4;top:10px;right:10px;border-radius:99px;padding:6px 8px;font-size:9px;font-weight:950;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:#081000}.statusDot.disabled{background:var(--danger);color:white}.info{position:absolute;z-index:3;left:12px;right:12px;bottom:11px}.pname{font-size:18px;font-weight:950;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#c3c7d7;font-weight:900;margin-top:3px}.salary{margin-top:7px;font-size:14px;font-weight:900;color:var(--accent)}
+.empty{border:1px dashed var(--line);border-radius:24px;padding:30px;text-align:center;color:var(--muted)}
+.sheet{position:fixed;z-index:100;inset:0;background:#070811;overflow:auto;transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.85,.2,1);padding-bottom:calc(env(safe-area-inset-bottom) + 25px)}.sheet.open{transform:none}.sheetInner{max-width:760px;margin:auto}.sheetHero{position:relative;min-height:360px;padding:calc(env(safe-area-inset-top) + 14px) 18px 22px;overflow:hidden;background:linear-gradient(145deg,var(--team),#10111b 67%)}.sheetHero:after{content:"";position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#070811)}.close{position:relative;z-index:9;width:46px;height:46px;border-radius:16px;border:1px solid #ffffff30;color:white;background:#0809109e;font-size:25px}.bigPortrait{position:absolute;width:100%;height:315px;right:-18%;bottom:0;object-fit:contain;object-position:center bottom;z-index:1;filter:drop-shadow(0 20px 30px #0009)}.bigFallback{position:absolute;right:-5%;bottom:20px;width:250px;height:250px;border-radius:50%;display:grid;place-items:center;font-size:80px;font-weight:950;background:var(--team2);color:var(--team);opacity:.45}.sheetTitle{position:absolute;z-index:4;left:18px;right:18px;bottom:16px}.sheetTitle h1{font-size:42px;line-height:.9;margin:0;max-width:72%;font-weight:950;letter-spacing:-.055em}.sheetTitle p{margin:9px 0 0;color:#e6e8f1;font-weight:850;font-size:13px}.content{padding:0 16px}.bigStats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.bigStat{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:12px 8px;text-align:center}.bigStat b{font-size:23px;display:block}.bigStat span{font-size:9px;letter-spacing:.13em;color:var(--muted);font-weight:900}.card{margin-top:12px;background:var(--panel);border:1px solid var(--line);border-radius:23px;padding:17px}.card h3{margin:0 0 12px;font-size:20px}.contractRow{display:flex;overflow:auto;gap:8px;padding-bottom:3px}.yearBox{flex:0 0 118px;border-radius:16px;background:var(--panel2);padding:11px}.yearBox b{font-size:16px;display:block}.yearBox span{font-size:9px;color:var(--muted);font-weight:850;letter-spacing:.08em}.yearBox em{font-style:normal;font-size:9px;color:var(--accent);text-transform:uppercase;font-weight:900}.ratings{display:grid;gap:9px}.ratingLine{display:grid;grid-template-columns:1fr 38px;gap:9px;align-items:center}.rname{font-weight:800;font-size:13px}.rval{font-size:16px;font-weight:950;text-align:right}.bar{grid-column:1 / -1;height:6px;border-radius:99px;background:#ffffff12;overflow:hidden;margin-top:-5px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--team2),var(--accent));border-radius:99px}.notice{border-radius:17px;padding:13px;background:#ffffff09;color:#c8cbda;font-size:12px;line-height:1.45;font-weight:700}.notice strong{color:white}.quality{display:inline-block;margin-top:8px;border-radius:99px;padding:6px 9px;background:#ffffff0c;color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.footer{color:#747a91;font-size:10px;line-height:1.5;padding:24px 4px 0}.hidden{display:none!important}
+</style>
 </head>
 <body>
-  <div class="app-shell">
-    <header class="topbar">
-      <div>
-        <div class="eyebrow">NBA COURTSIDE</div>
-        <div class="brand">MATCHUP LAB</div>
-      </div>
-      <button id="resetBtn" class="icon-btn" aria-label="Reset game">↻</button>
-    </header>
-
-    <main>
-      <section id="pregameScreen" class="screen active">
-        <div class="pregame-hero">
-          <div class="hero-glow"></div>
-          <div class="hero-copy">
-            <span class="pill">EXHIBITION v0.3</span>
-            <h1>Touch the five.<br><span>Run the possession.</span></h1>
-            <p>No coaching sliders. Tap the player with the ball for direct actions, or tap an off-ball teammate to shape the possession.</p>
-          </div>
-          <div class="hero-players" aria-hidden="true">
-            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png" alt="" />
-            <img src="https://cdn.nba.com/headshots/nba/latest/1040x760/203076.png" alt="" />
-          </div>
-        </div>
-
-        <div class="matchup-card">
-          <div class="match-team lal-side">
-            <div class="team-code">LAL</div>
-            <div><strong>LOS ANGELES</strong><span>Lakers</span></div>
-          </div>
-          <div class="versus">VS</div>
-          <div class="match-team bos-side">
-            <div class="team-code">BOS</div>
-            <div><strong>BOSTON</strong><span>Celtics</span></div>
-          </div>
-        </div>
-
-        <section class="panel mode-panel">
-          <span class="eyebrow">HOW MUCH DO YOU WANT TO PLAY?</span>
-          <h2>Control Mode</h2>
-          <div class="control-mode-grid" id="pregameModeControls">
-            <button data-mode="both" class="active"><strong>PLAY BOTH</strong><span>Offense + defense</span></button>
-            <button data-mode="offense"><strong>OFFENSE</strong><span>CPU handles defense</span></button>
-            <button data-mode="defense"><strong>DEFENSE</strong><span>CPU handles offense</span></button>
-          </div>
-        </section>
-
-        <section class="panel compact-roster-panel">
-          <div class="panel-title-row">
-            <div><span class="eyebrow">YOUR EIGHT</span><h2>Lakers</h2></div>
-            <span class="mini-badge">TEST ROSTER</span>
-          </div>
-          <div id="pregameUserRoster" class="mini-roster"></div>
-        </section>
-
-        <section class="panel compact-roster-panel">
-          <div class="panel-title-row">
-            <div><span class="eyebrow">OPPONENT</span><h2>Celtics</h2></div>
-            <span class="mini-badge">CPU</span>
-          </div>
-          <div id="pregameCpuRoster" class="mini-roster"></div>
-        </section>
-
-        <button id="tipoffBtn" class="primary-btn">TIP OFF</button>
-        <p class="prototype-note">This build is testing the possession interface and simulation feel. Player ratings are temporary prototype inputs, not the final historical-card model.</p>
-      </section>
-
-      <section id="gameScreen" class="screen">
-        <div class="scoreboard-wrap">
-          <div class="scoreboard">
-            <div class="score-team"><span>LAL</span><strong id="userScore">0</strong></div>
-            <div class="game-clock">
-              <span id="quarterLabel">1ST</span>
-              <strong id="clockLabel">12:00</strong>
-              <small id="possessionLabel">LAL BALL</small>
-            </div>
-            <div class="score-team right"><strong id="cpuScore">0</strong><span>BOS</span></div>
-          </div>
-        </div>
-
-        <section class="shot-stage compact-shot-stage">
-          <div class="shot-topline">
-            <span id="phaseChip" class="phase-chip offense">OFFENSE</span>
-            <button id="modeChip" class="mode-chip">PLAY BOTH</button>
-          </div>
-          <div id="shotClock" class="shot-clock">24</div>
-          <div class="shot-label">SHOT CLOCK</div>
-          <div id="situationLine" class="situation-line">Reaves has it on the right wing.</div>
-          <div id="secondaryLine" class="secondary-line">Tap a Lakers player to make the next decision.</div>
-        </section>
-
-        <section class="panel matchup-panel">
-          <div class="panel-title-row matchup-title-row">
-            <div>
-              <span id="matchupEyebrow" class="eyebrow">ON COURT</span>
-              <h2 id="matchupTitle">Five-on-five matchups</h2>
-            </div>
-            <button id="autoSubBtn" class="text-btn">AUTO SUB</button>
-          </div>
-
-          <div class="team-row-label">
-            <span>BOSTON</span><small id="cpuRowHint">OFFENSE</small>
-          </div>
-          <div id="cpuMatchupRow" class="matchup-row cpu-row"></div>
-
-          <div class="matchup-lines" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-
-          <div class="team-row-label user-row-label">
-            <span>LAKERS</span><small id="userRowHint">DEFENSE</small>
-          </div>
-          <div id="userMatchupRow" class="matchup-row user-row"></div>
-
-          <div id="matchupHint" class="action-hint">Orange = ball handler · tap any Lakers portrait</div>
-        </section>
-
-        <section id="actionPanel" class="action-panel panel compact-action-panel">
-          <div class="action-head">
-            <div id="selectedAvatar" class="selected-avatar"></div>
-            <div class="action-copy">
-              <span id="actionKicker" class="eyebrow">SELECT A PLAYER</span>
-              <h2 id="actionTitle">Tap a Lakers portrait</h2>
-              <p id="actionSub">Your four options will appear here.</p>
-            </div>
-          </div>
-          <div id="actionButtons" class="action-grid"></div>
-        </section>
-
-        <section class="panel control-panel compact-controls">
-          <div class="panel-title-row">
-            <div><span class="eyebrow">CONTROL</span><h2>Jump in or out anytime</h2></div>
-          </div>
-          <div class="control-mode-strip" id="inGameModeControls">
-            <button data-mode="both" class="active">BOTH</button>
-            <button data-mode="offense">OFFENSE</button>
-            <button data-mode="defense">DEFENSE</button>
-          </div>
-          <div class="sim-grid">
-            <button id="simPossBtn">SIM POS</button>
-            <button id="simMinuteBtn">SIM 1 MIN</button>
-            <button id="simQuarterBtn">SIM TO Q</button>
-          </div>
-          <button id="autoBtn" class="primary-btn autoplay-btn">START AUTOPILOT</button>
-          <div id="autoStatus" class="auto-status hidden"></div>
-        </section>
-
-        <section class="panel bench-panel">
-          <div class="panel-title-row">
-            <div><span class="eyebrow">BENCH</span><h2>Your three</h2></div>
-            <button id="boxBtn" class="text-btn">BOX SCORE</button>
-          </div>
-          <div id="benchStrip" class="bench-strip"></div>
-        </section>
-
-        <section class="panel feed-panel">
-          <div class="panel-title-row">
-            <div><span class="eyebrow">LIVE</span><h2>Last possessions</h2></div>
-          </div>
-          <div id="gameFeed" class="game-feed"></div>
-        </section>
-      </section>
-
-      <section id="finalScreen" class="screen">
-        <div class="final-hero">
-          <span class="pill">FINAL</span>
-          <h1 id="finalScore">LAL 0 — 0 BOS</h1>
-          <p id="finalSummary">Exhibition complete.</p>
-        </div>
-        <section class="panel">
-          <div class="panel-title-row"><div><span class="eyebrow">GAME LEADERS</span><h2>Top performers</h2></div></div>
-          <div id="leaders" class="leaders"></div>
-        </section>
-        <button id="finalBoxBtn" class="secondary-btn">VIEW BOX SCORE</button>
-        <button id="againBtn" class="primary-btn">RUN IT BACK</button>
-      </section>
-    </main>
+<div class="shell">
+  <header><div class="kicker">NBA Courtside</div><div class="title">2026 ROSTER LAB</div><div class="subtitle">Frozen 19 Aug 2026 · current rosters + contracts · ratings + career trajectory</div></header>
+  <div class="toolbar">
+    <div class="search"><input id="search" placeholder="Search roster…" autocomplete="off" /></div>
+    <div class="teamStrip" id="teamStrip"></div>
   </div>
-
-  <dialog id="boxDialog" class="box-dialog">
-    <div class="dialog-head">
-      <div><span class="eyebrow">BOX SCORE</span><h2 id="dialogScore">LAL 0 — 0 BOS</h2></div>
-      <button id="closeBoxBtn" class="icon-btn">×</button>
-    </div>
-    <div class="box-tabs">
-      <button data-team="user" class="active">LAL</button>
-      <button data-team="cpu">BOS</button>
-    </div>
-    <div id="boxTable" class="box-table"></div>
-  </dialog>
-
-  <script src="app.js"></script>
+  <section class="hero" id="hero"></section>
+  <div class="sectionHead"><h2 id="rosterTitle">Roster</h2><span id="rosterMeta"></span></div>
+  <main class="roster" id="roster"></main>
+  <div class="footer">Current-day GM data foundation. Display ratings are generated from portable box-score evidence; the simulation retains the underlying rates. Unsigned RFAs are represented by rights/cap holds. Rookie projections remain blank until pre-NBA evidence is imported.</div>
+</div>
+<div class="sheet" id="sheet"><div class="sheetInner" id="sheetInner"></div></div>
+<script src="data/data.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

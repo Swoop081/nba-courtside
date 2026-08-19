@@ -1,0 +1,43 @@
+{
+  "snapshot_date": "2026-08-19",
+  "primary": [
+    {
+      "name": "NBA.com 2026 offseason transactions",
+      "url": "https://www.nba.com/news/nba-offseason-deals-2026",
+      "purpose": "current transaction/team verification"
+    },
+    {
+      "name": "NBA.com 2026-27 salary cap",
+      "url": "https://www.nba.com/news/nba-salary-cap-2026-27-season",
+      "purpose": "salary cap, tax and apron thresholds"
+    },
+    {
+      "name": "NBA.com Stats",
+      "url": "https://www.nba.com/stats/players/traditional",
+      "purpose": "canonical target for final 2025-26 statistical import"
+    },
+    {
+      "name": "NBA.com 2026 free-agency options and qualifying offers",
+      "url": "https://www.nba.com/news/2026-free-agency-options-and-qualifying-offers",
+      "purpose": "RFA/qualifying-offer status"
+    },
+    {
+      "name": "NBA.com LeBron James to Philadelphia",
+      "url": "https://www.nba.com/news/lebron-james-free-agency-sixers-2026",
+      "purpose": "LeBron current-team and deal verification"
+    }
+  ],
+  "working_secondary": [
+    {
+      "name": "SalarySwish",
+      "url": "https://www.salaryswish.com/",
+      "purpose": "working year-by-year contract, cap-hold and qualifying-offer values"
+    },
+    {
+      "name": "Basketball-Reference 2025-26 player stats",
+      "url": "https://www.basketball-reference.com/leagues/NBA_2026_per_game.html",
+      "purpose": "season-complete sanity checks while exact NBA.com bulk import remains pending"
+    }
+  ],
+  "stat_seed_status": "near-final bootstrap; not final canonical NBA.com export"
+}
