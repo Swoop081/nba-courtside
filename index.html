@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#090810" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>NBA Courtside — Possession Lab</title>
+  <title>NBA Courtside — Matchup Lab</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,7 +14,7 @@
     <header class="topbar">
       <div>
         <div class="eyebrow">NBA COURTSIDE</div>
-        <div class="brand">POSSESSION LAB</div>
+        <div class="brand">MATCHUP LAB</div>
       </div>
       <button id="resetBtn" class="icon-btn" aria-label="Reset game">↻</button>
     </header>
@@ -24,7 +24,7 @@
         <div class="pregame-hero">
           <div class="hero-glow"></div>
           <div class="hero-copy">
-            <span class="pill">EXHIBITION v0.2</span>
+            <span class="pill">EXHIBITION v0.3</span>
             <h1>Touch the five.<br><span>Run the possession.</span></h1>
             <p>No coaching sliders. Tap the player with the ball for direct actions, or tap an off-ball teammate to shape the possession.</p>
           </div>
@@ -89,7 +89,7 @@
           </div>
         </div>
 
-        <section class="shot-stage">
+        <section class="shot-stage compact-shot-stage">
           <div class="shot-topline">
             <span id="phaseChip" class="phase-chip offense">OFFENSE</span>
             <button id="modeChip" class="mode-chip">PLAY BOTH</button>
@@ -97,43 +97,48 @@
           <div id="shotClock" class="shot-clock">24</div>
           <div class="shot-label">SHOT CLOCK</div>
           <div id="situationLine" class="situation-line">Reaves has it on the right wing.</div>
-          <div id="secondaryLine" class="secondary-line">Tap any Lakers player to choose an action.</div>
-          <div id="cpuThreat" class="cpu-threat hidden"></div>
+          <div id="secondaryLine" class="secondary-line">Tap a Lakers player to make the next decision.</div>
         </section>
 
-        <section class="panel five-panel">
-          <div class="panel-title-row five-title-row">
+        <section class="panel matchup-panel">
+          <div class="panel-title-row matchup-title-row">
             <div>
-              <span id="fiveEyebrow" class="eyebrow">YOUR FIVE — OFFENSE</span>
-              <h2 id="fiveTitle">Make the next decision</h2>
+              <span id="matchupEyebrow" class="eyebrow">ON COURT</span>
+              <h2 id="matchupTitle">Five-on-five matchups</h2>
             </div>
             <button id="autoSubBtn" class="text-btn">AUTO SUB</button>
           </div>
-          <div id="onCourtFive" class="five-grid"></div>
-          <div id="actionHint" class="action-hint">Orange = ball handler</div>
+
+          <div class="team-row-label">
+            <span>BOSTON</span><small id="cpuRowHint">OFFENSE</small>
+          </div>
+          <div id="cpuMatchupRow" class="matchup-row cpu-row"></div>
+
+          <div class="matchup-lines" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="team-row-label user-row-label">
+            <span>LAKERS</span><small id="userRowHint">DEFENSE</small>
+          </div>
+          <div id="userMatchupRow" class="matchup-row user-row"></div>
+
+          <div id="matchupHint" class="action-hint">Orange = ball handler · tap any Lakers portrait</div>
         </section>
 
-        <section id="actionPanel" class="action-panel panel">
+        <section id="actionPanel" class="action-panel panel compact-action-panel">
           <div class="action-head">
             <div id="selectedAvatar" class="selected-avatar"></div>
             <div class="action-copy">
               <span id="actionKicker" class="eyebrow">SELECT A PLAYER</span>
-              <h2 id="actionTitle">Tap one of your five</h2>
-              <p id="actionSub">Ball-handler and off-ball players have different options.</p>
+              <h2 id="actionTitle">Tap a Lakers portrait</h2>
+              <p id="actionSub">Your four options will appear here.</p>
             </div>
           </div>
           <div id="actionButtons" class="action-grid"></div>
         </section>
 
-        <section class="panel opponent-panel">
-          <div class="panel-title-row">
-            <div><span class="eyebrow">BOSTON FIVE</span><h2 id="opponentTitle">Matchups</h2></div>
-            <span id="possessionArrow" class="mini-badge">DEFENDING</span>
-          </div>
-          <div id="opponentFive" class="opponent-five"></div>
-        </section>
-
-        <section class="panel control-panel">
+        <section class="panel control-panel compact-controls">
           <div class="panel-title-row">
             <div><span class="eyebrow">CONTROL</span><h2>Jump in or out anytime</h2></div>
           </div>

@@ -50,13 +50,14 @@ function freshState(){
     user:deepPlayers(userTemplate),cpu:deepPlayers(cpuTemplate),score:{user:0,cpu:0},quarter:1,clock:720,
     possession:'user',shotClock:24,controlMode:'both',autopilot:false,selectedId:null,targetMode:null,over:false,
     feed:[],started:false,sequence:{advantage:0,screen:false,postBoost:0,openPlayer:null,lastPasser:null,lastPassAge:99,defense:null},
+    userDefAssignments:{},switchSourceId:null,
     situation:'Tip off. Lakers possession.',secondary:'Tap any Lakers player to choose an action.',pendingAutoAdvance:false
   };
 }
 
 function init(){
   state=freshState();
-  assignHalfCourt('user');assignHalfCourt('cpu');
+  assignHalfCourt('user');assignHalfCourt('cpu');syncUserDefAssignments(true);
   wire();renderPregame();renderGame();showScreen('pregameScreen');
 }
 
@@ -84,7 +85,7 @@ function startGame(){
   renderGame();
   scheduleIfUncontrolled();
 }
-function resetAll(){stopAutopilot();state=freshState();assignHalfCourt('user');assignHalfCourt('cpu');renderPregame();renderGame();showScreen('pregameScreen');}
+function resetAll(){stopAutopilot();state=freshState();assignHalfCourt('user');assignHalfCourt('cpu');syncUserDefAssignments(true);renderPregame();renderGame();showScreen('pregameScreen');}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));el(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
 
 function setControlMode(mode){
@@ -121,12 +122,38 @@ function assignHalfCourt(team){
 function bestInitialHandler(five){return weightedChoice(five,p=>p.handle+p.ast*4+p.usage*1.2);}
 function currentBallhandler(team=state.possession){return findPlayer(team,state.ballhandlerId);}
 function matchupIndex(team,p){return Math.max(0,line(team).findIndex(x=>x.id===p.id));}
-function matchedDefender(offTeam,p){const d=line(opponent(offTeam));return d[clamp(matchupIndex(offTeam,p),0,d.length-1)]||d[0];}
+function syncUserDefAssignments(force=false){
+  const cpuFive=line('cpu'), userFive=line('user');
+  const cpuIds=new Set(cpuFive.map(p=>p.id)), userIds=new Set(userFive.map(p=>p.id));
+  if(force)state.userDefAssignments={};
+  Object.keys(state.userDefAssignments).forEach(cpuId=>{
+    if(!cpuIds.has(cpuId)||!userIds.has(state.userDefAssignments[cpuId]))delete state.userDefAssignments[cpuId];
+  });
+  const used=new Set(Object.values(state.userDefAssignments));
+  cpuFive.forEach((cpuPlayer,i)=>{
+    if(state.userDefAssignments[cpuPlayer.id])return;
+    const preferred=userFive[i];
+    const defender=(preferred&&!used.has(preferred.id))?preferred:userFive.find(p=>!used.has(p.id));
+    if(defender){state.userDefAssignments[cpuPlayer.id]=defender.id;used.add(defender.id);}
+  });
+}
+function matchedDefender(offTeam,p){
+  if(offTeam==='cpu'){
+    syncUserDefAssignments();
+    const assigned=findPlayer('user',state.userDefAssignments[p.id]);
+    if(assigned&&assigned.onCourt)return assigned;
+  }
+  const d=line(opponent(offTeam));return d[clamp(matchupIndex(offTeam,p),0,d.length-1)]||d[0];
+}
+function matchedCpuPlayerForDefender(defender){
+  syncUserDefAssignments();
+  return line('cpu').find(p=>state.userDefAssignments[p.id]===defender.id)||null;
+}
 
 function beginPossession(team,keepClock=false){
-  state.possession=team;state.shotClock=24;state.selectedId=null;state.targetMode=null;
+  state.possession=team;state.shotClock=24;state.selectedId=null;state.targetMode=null;state.switchSourceId=null;
   state.sequence={advantage:0,screen:false,postBoost:0,openPlayer:null,lastPasser:null,lastPassAge:99,defense:null};
-  assignHalfCourt(team); assignHalfCourt(opponent(team));
+  assignHalfCourt(team); assignHalfCourt(opponent(team));syncUserDefAssignments();
   const h=bestInitialHandler(line(team));state.ballhandlerId=h.id;h.zone='top';
   state.situation=`${h.short} has it at ${zones[h.zone]}.`;
   state.secondary=team==='user'?'Tap the ball handler or shape the possession off-ball.':`${matchedDefender(team,h).short} has the primary matchup.`;
@@ -151,36 +178,57 @@ function renderGame(){
   const phase=el('phaseChip');
   const offense=state.possession==='user';
   phase.textContent=state.autopilot?'AUTOPILOT':offense?'OFFENSE':'DEFENSE';phase.className=`phase-chip ${state.autopilot?'auto':offense?'offense':'defense'}`;
-  el('fiveEyebrow').textContent=`YOUR FIVE — ${offense?'OFFENSE':'DEFENSE'}`;
-  el('fiveTitle').textContent=state.autopilot?'Watching the possession':manualEligible()?'Make the next decision':`CPU is handling ${offense?'offense':'defense'}`;
-  el('possessionArrow').textContent=offense?'DEFENDING':'ON OFFENSE';
-  renderFive();renderOpponentFive();renderActions();renderBench();renderFeed();renderBox();renderAuto();
+  el('matchupTitle').textContent=state.autopilot?'Watching the floor':manualEligible()?'Tap a Laker to act':`CPU is handling ${offense?'offense':'defense'}`;
+  el('cpuRowHint').textContent=offense?'DEFENSE':'OFFENSE';
+  el('userRowHint').textContent=offense?'OFFENSE':'DEFENSE';
+  renderMatchupBoard();renderActions();renderBench();renderFeed();renderBox();renderAuto();
 }
 function qLabel(){if(state.quarter<=4)return ['1ST','2ND','3RD','4TH'][state.quarter-1];return `OT${state.quarter===5?'':state.quarter-4}`;}
 function formatClock(sec){sec=Math.max(0,Math.ceil(sec));return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
 
-function renderFive(){
-  const five=line('user');const offense=state.possession==='user';const cpuHandler=currentBallhandler('cpu');
-  let guarding=null;if(!offense&&cpuHandler)guarding=line('user')[matchupIndex('cpu',cpuHandler)];
-  el('onCourtFive').innerHTML=five.map(p=>{
-    const isBall=offense&&p.id===state.ballhandlerId;const isGuard=!offense&&guarding&&p.id===guarding.id;const sel=p.id===state.selectedId;
-    return `<button class="court-player ${isBall?'ball':''} ${isGuard?'guard':''} ${sel?'selected':''}" data-player="${p.id}">
-      <img src="${p.image}" alt="${p.name}" onerror="this.style.opacity=.12">
-      <div class="rating-bubble">${p.rating}</div>${isBall?'<div class="ball-bubble">●</div>':''}${isGuard?'<div class="guard-bubble">ON BALL</div>':''}
-      <div class="court-copy"><div class="court-name">${p.short}</div><div class="court-meta">${p.pos} · ${Math.round(p.energy)}%</div><div class="court-location">${offense?zones[p.zone].toUpperCase():(isGuard?'PRIMARY MATCHUP':'HELP SIDE')}</div><div class="energy-line"><span style="width:${p.energy}%"></span></div></div>
+function renderMatchupBoard(){
+  syncUserDefAssignments();
+  const cpuFive=line('cpu');
+  const userFive=line('user');
+  let top,bottom;
+  if(state.possession==='cpu'){
+    top=cpuFive;
+    bottom=top.map(cpuPlayer=>findPlayer('user',state.userDefAssignments[cpuPlayer.id])).filter(Boolean);
+  }else{
+    bottom=userFive;
+    top=bottom.map((userPlayer,i)=>cpuFive[i]).filter(Boolean);
+  }
+  const cpuBall=state.possession==='cpu'?state.ballhandlerId:null;
+  const userBall=state.possession==='user'?state.ballhandlerId:null;
+  const cpuHandler=state.possession==='cpu'?currentBallhandler('cpu'):null;
+  const onBallDef=cpuHandler?matchedDefender('cpu',cpuHandler):null;
+
+  el('cpuMatchupRow').innerHTML=top.map(p=>`<div class="matchup-player cpu-player ${p.id===cpuBall?'ball':''}">
+    <div class="square-face"><img src="${p.image}" alt="${p.name}" onerror="this.style.opacity=.12">${p.id===cpuBall?'<span class="ball-dot">●</span>':''}</div>
+    <div class="matchup-name">${p.short}</div>
+    <div class="matchup-loc">${state.possession==='cpu'?shortZone(p.zone):'DEFENDER'}</div>
+  </div>`).join('');
+
+  el('userMatchupRow').innerHTML=bottom.map(p=>{
+    const isBall=p.id===userBall, selected=p.id===state.selectedId, isPrimary=onBallDef&&p.id===onBallDef.id;
+    const guarded=state.possession==='cpu'?matchedCpuPlayerForDefender(p):null;
+    const lineText=state.possession==='cpu'?(isPrimary?'ON BALL':guarded?`vs ${guarded.short}`:'HELP'):shortZone(p.zone);
+    return `<button class="matchup-player user-player ${isBall?'ball':''} ${selected?'selected':''} ${isPrimary?'primary-defender':''}" data-player="${p.id}">
+      <div class="square-face"><img src="${p.image}" alt="${p.name}" onerror="this.style.opacity=.12">${isBall?'<span class="ball-dot">●</span>':''}${isPrimary?'<span class="def-dot">D</span>':''}</div>
+      <div class="matchup-name">${p.short}</div>
+      <div class="matchup-loc">${lineText}</div>
+      <div class="stamina-track"><span style="width:${p.energy}%"></span></div>
+      <div class="stamina-copy">${Math.round(p.energy)}%</div>
     </button>`;
   }).join('');
-  el('onCourtFive').querySelectorAll('[data-player]').forEach(btn=>btn.onclick=()=>selectPlayer(btn.dataset.player));
-  el('actionHint').textContent=offense?'Orange = ball handler · tap anyone':'Red = on-ball defender · tap anyone';
+  el('userMatchupRow').querySelectorAll('[data-player]').forEach(btn=>btn.onclick=()=>selectPlayer(btn.dataset.player));
+
+  if(state.targetMode==='switch')el('matchupHint').textContent='SWITCH: tap the second Lakers defender to swap assignments';
+  else if(state.targetMode==='pass')el('matchupHint').textContent='PASS: tap the Lakers teammate you want to receive it';
+  else if(state.possession==='cpu')el('matchupHint').textContent='Columns are matchups · your defender sits directly under his man';
+  else el('matchupHint').textContent='Orange = ball handler · tap any Lakers portrait';
 }
-function renderOpponentFive(){
-  const five=line('cpu');
-  el('opponentFive').innerHTML=five.map(p=>`<div class="opp-player ${state.possession==='cpu'&&p.id===state.ballhandlerId?'ball':''}"><div class="opp-face"><img src="${p.image}" alt="${p.name}" onerror="this.style.opacity=.12"></div><span>${p.short}</span></div>`).join('');
-  const h=state.possession==='cpu'?currentBallhandler('cpu'):null;
-  el('opponentTitle').textContent=h?`${h.short} has the ball`:'Matchups';
-  const threat=el('cpuThreat');
-  if(h){threat.classList.remove('hidden');threat.innerHTML=`<img src="${h.image}" alt="${h.name}"><span><strong>${h.short}</strong> · ${zones[h.zone]}</span>`;}else threat.classList.add('hidden');
-}
+function shortZone(z){return ({top:'TOP',lwing:'L WING',rwing:'R WING',lcorner:'L CORNER',rcorner:'R CORNER',lelbow:'L ELBOW',relbow:'R ELBOW',lblock:'L BLOCK',rblock:'R BLOCK',paint:'PAINT',rim:'RIM'})[z]||String(z||'').toUpperCase();}
 function renderBench(){el('benchStrip').innerHTML=bench('user').map(p=>`<div class="bench-card"><img src="${p.image}" alt="${p.name}" onerror="this.style.opacity=.12"><div>${p.short}<span>${p.pos} · ${Math.round(p.energy)}% ENERGY</span></div></div>`).join('');}
 function renderFeed(){
   el('gameFeed').innerHTML=state.feed.slice(0,8).map(f=>`<div class="feed-item">${f.player?`<img src="${f.player.image}" alt="${f.player.short}">`:'<div class="feed-placeholder"></div>'}<div><strong>${f.title}</strong><span>${f.sub}</span></div><span class="feed-score">${f.score}</span></div>`).join('')||'<div class="prototype-note">Game events will appear here.</div>';
@@ -191,7 +239,10 @@ function selectPlayer(id){
   if(state.possession==='user'){
     if(state.targetMode==='pass')return completePass(id);
     state.selectedId=id;state.targetMode=null;
-  }else state.selectedId=id;
+  }else{
+    if(state.targetMode==='switch')return completeSwitch(id);
+    state.selectedId=id;
+  }
   renderGame();
 }
 
@@ -204,7 +255,10 @@ function renderActions(){
   if(state.targetMode==='pass'){
     const h=currentBallhandler('user');av.innerHTML=`<img src="${h.image}" alt="${h.name}">`;el('actionKicker').textContent='PASS';el('actionTitle').textContent='Choose the receiver';el('actionSub').textContent='Tap one of the other four portraits.';return;
   }
-  if(!state.selectedId){av.innerHTML='';el('actionKicker').textContent='SELECT A PLAYER';el('actionTitle').textContent='Tap one of your five';el('actionSub').textContent=state.possession==='user'?'Ball-handler and off-ball players have different options.':'Choose the defender you want to influence.';return;}
+  if(state.targetMode==='switch'){
+    const p=findPlayer('user',state.switchSourceId);av.innerHTML=p?`<img src="${p.image}" alt="${p.name}">`:'';el('actionKicker').textContent='SWITCH MATCHUP';el('actionTitle').textContent='Choose the second defender';el('actionSub').textContent='Tap another Lakers portrait. The two defenders will swap columns.';return;
+  }
+  if(!state.selectedId){av.innerHTML='';el('actionKicker').textContent='SELECT A PLAYER';el('actionTitle').textContent='Tap a Lakers portrait';el('actionSub').textContent=state.possession==='user'?'Ball-handler and off-ball players have different options.':'Your defender is directly underneath his matchup.';return;}
   const p=findPlayer('user',state.selectedId);av.innerHTML=`<img src="${p.image}" alt="${p.name}">`;
   const actions=state.possession==='user'?offenseActions(p):defenseActions(p);
   el('actionKicker').textContent=state.possession==='user'?(p.id===state.ballhandlerId?'BALL HANDLER':'OFF BALL'):(isOnBallDefender(p)?'ON-BALL DEFENSE':'OFF-BALL DEFENSE');
@@ -226,11 +280,11 @@ function offenseActions(p){
 }
 function defenseActions(p){
   return isOnBallDefender(p)
-    ? [A('pressure','PRESSURE','4 sec · crowd the ball'),A('sag','SAG OFF','4 sec · protect the drive'),A('forceleft','FORCE LEFT','4 sec · shade the handler'),A('double','DOUBLE','4 sec · send help now')]
-    : [A('deny','DENY','4 sec · take away the pass'),A('help','HELP','4 sec · shrink the floor'),A('stayhome','STAY HOME','4 sec · protect your shooter'),A('boxout','BOX OUT','4 sec · prepare for the miss')];
+    ? [A('pressure','PRESSURE','4 sec · crowd the ball'),A('sag','SAG OFF','4 sec · protect the drive'),A('switch','SWITCH','2 sec · swap defensive matchups'),A('double','DOUBLE','4 sec · send help now')]
+    : [A('deny','DENY','4 sec · take away the pass'),A('help','HELP','4 sec · shrink the floor'),A('switch','SWITCH','2 sec · swap defensive matchups'),A('stayhome','STAY HOME','4 sec · protect your shooter')];
 }
 function A(key,label,desc){return {key,label,desc};}
-function isOnBallDefender(p){if(state.possession!=='cpu')return false;const h=currentBallhandler('cpu');return h&&line('user')[matchupIndex('cpu',h)]?.id===p.id;}
+function isOnBallDefender(p){if(state.possession!=='cpu')return false;const h=currentBallhandler('cpu');return h&&matchedDefender('cpu',h)?.id===p.id;}
 
 function performAction(action,p){
   if(state.over||!manualEligible())return;
@@ -299,6 +353,10 @@ function autoKickout(from){
 }
 
 function performDefenseAction(action,p){
+  if(action==='switch'){
+    state.targetMode='switch';state.switchSourceId=p.id;state.selectedId=p.id;
+    state.secondary=`Choose another defender to swap with ${p.short}.`;renderGame();return;
+  }
   const buzzerAction=state.shotClock<=4;
   if(!advanceClocks(4,buzzerAction))return;
   state.sequence.defense={action,defenderId:p.id};
@@ -331,7 +389,26 @@ function cpuOffensiveRead(defAction,defender){
     h.zone=chance(.55)?'paint':pick(['lelbow','relbow']);state.sequence.advantage=defAction==='sag'?-0.02:.025;state.situation=`${h.short} probes into the ${zones[h.zone]}.`;state.secondary='The defense has another decision to make.';
   }
 }
-function matchedOffensivePlayer(defender){const idx=matchupIndex('user',defender);return line('cpu')[idx]||null;}
+function completeSwitch(targetId){
+  if(state.possession!=='cpu'||!state.switchSourceId)return;
+  const a=findPlayer('user',state.switchSourceId),b=findPlayer('user',targetId);
+  if(!a||!b||!a.onCourt||!b.onCourt){state.targetMode=null;state.switchSourceId=null;renderGame();return;}
+  if(a.id===b.id){state.targetMode=null;state.switchSourceId=null;state.selectedId=null;state.secondary='Switch cancelled.';renderGame();return;}
+  syncUserDefAssignments();
+  const cpuA=line('cpu').find(p=>state.userDefAssignments[p.id]===a.id);
+  const cpuB=line('cpu').find(p=>state.userDefAssignments[p.id]===b.id);
+  if(!cpuA||!cpuB){state.targetMode=null;state.switchSourceId=null;renderGame();return;}
+  state.userDefAssignments[cpuA.id]=b.id;state.userDefAssignments[cpuB.id]=a.id;
+  state.targetMode=null;state.switchSourceId=null;state.selectedId=null;
+  const buzzerAction=state.shotClock<=2;
+  if(!advanceClocks(2,buzzerAction))return;
+  state.sequence.defense={action:'switch',defenderId:a.id};
+  state.situation=`${a.short} and ${b.short} switch assignments.`;
+  state.secondary=`${b.short} is now on ${cpuA.short}; ${a.short} takes ${cpuB.short}.`;
+  const primary=matchedDefender('cpu',currentBallhandler('cpu'));
+  cpuOffensiveRead('switch',primary);renderGame();
+}
+function matchedOffensivePlayer(defender){return matchedCpuPlayerForDefender(defender);}
 function moveCpuBall(to,from){state.sequence.lastPasser=from?.id||null;state.sequence.lastPassAge=0;state.ballhandlerId=to.id;}
 function chooseCpuShotType(p,defAction,onBall){
   if(p.zone==='paint'||p.zone==='rim')return 'rim';if(postZones.has(p.zone)&&p.post>=76)return chance(.5)?'hook':'fade';
@@ -407,6 +484,13 @@ function rotateTeam(team,force=false){
   const on=line(team),off=bench(team);if(!off.length)return;let tired=on.slice().sort((a,b)=>a.energy-b.energy)[0];
   if(!force&&tired.energy>62)return;const replacement=off.slice().sort((a,b)=>(b.energy+b.rating*.1)-(a.energy+a.rating*.1))[0];if(!replacement)return;
   tired.onCourt=false;replacement.onCourt=true;replacement.zone=tired.zone;pushFeed(replacement,'SUBSTITUTION',`${replacement.short} checks in for ${tired.short}.`);
+  if(team==='user'){
+    const cpuId=Object.keys(state.userDefAssignments).find(id=>state.userDefAssignments[id]===tired.id);
+    if(cpuId)state.userDefAssignments[cpuId]=replacement.id;
+  }else{
+    const oldDef=state.userDefAssignments[tired.id];delete state.userDefAssignments[tired.id];if(oldDef)state.userDefAssignments[replacement.id]=oldDef;
+  }
+  syncUserDefAssignments();
   if(state.ballhandlerId===tired.id){state.ballhandlerId=replacement.id;replacement.zone='top';}
 }
 
