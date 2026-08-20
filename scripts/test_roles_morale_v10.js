@@ -1,5 +1,5 @@
 const fs=require('fs'),vm=require('vm');
-const root='/mnt/data/NBA-Courtside-Roles-Morale-v0.10';
+const root='/mnt/data/NBA-Courtside-Smart-Front-Offices-v0.11';
 const data=fs.readFileSync(root+'/data/data.js','utf8'),sched=fs.readFileSync(root+'/data/schedule.js','utf8');
 let src=fs.readFileSync(root+'/app.js','utf8');
 src=src.replace(/\/\/ Initialise\.[\s\S]*?\}\)\(\);\s*$/m,`window.__test={getState:()=>state,getGames:()=>games,getPlayers:()=>players,teamPlayers,ensureAllRotations,ensureRotation,simulateGame,updateMoraleAll,expectedRole,expectedMinutes,actualMinutes,moraleBreakdown,moraleEntry,pendingMeetings,respondMeeting,playerMood};\n})();`)

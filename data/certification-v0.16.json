@@ -1,0 +1,136 @@
+{
+  "version": "v0.16",
+  "freeze_date": "2026-08-19",
+  "certification_scope": {
+    "structure_certified": "Internal schema, identity, roster, contract-year, stat-range and confidence invariants pass the automated audit.",
+    "model_ready": "392 stat-backed players plus projection handling can feed the v0.16 shrinkage/calibration model.",
+    "source_pending": [
+      "The bundled 2025\u201326 statistical seed is a near-final bootstrap, not yet the exact season-complete NBA.com bulk export.",
+      "Current roster/contract structure is internally audited, but every specialist contract/CBA edge and every external contract term has not been independently re-certified in this pass.",
+      "The 2026\u201327 game calendar remains NBA Courtside\u2019s deterministic 1,230-game scaffold rather than an exact official schedule import.",
+      "Complex future second-round conveyances and some linked future pick obligations remain explicitly audit-pending."
+    ]
+  },
+  "counts": {
+    "teams": 30,
+    "player_records": 442,
+    "rated_players": 392,
+    "stat_backed_players": 392,
+    "projection_or_no_baseline": 50,
+    "no_current_rating": 50,
+    "headshot_urls": 393,
+    "unsigned_rfas": 3,
+    "nba_ids_mapped": 393,
+    "confidence_tiers": {
+      "high": 279,
+      "medium": 70,
+      "low": 43,
+      "projection": 50
+    }
+  },
+  "bootstrap_2025_26_team_targets": {
+    "fgm": 41.91,
+    "fga": 89.0467,
+    "three_pm": 13.2833,
+    "three_pa": 36.9533,
+    "ftm": 18.4433,
+    "fta": 23.5567,
+    "oreb": 11.3633,
+    "dreb": 32.4033,
+    "reb": 43.7633,
+    "ast": 26.7167,
+    "stl": 8.41,
+    "blk": 4.85,
+    "tov": 14.5367,
+    "pf": 19.9167,
+    "pts": 115.5567,
+    "fg_pct": 0.4708,
+    "three_pct": 0.3594,
+    "ft_pct": 0.7829,
+    "possessions_proxy": 102.5849
+  },
+  "checks": [
+    {
+      "name": "30 unique NBA teams",
+      "status": "PASS",
+      "detail": "30 rows / 30 unique abbreviations"
+    },
+    {
+      "name": "442 player/right records",
+      "status": "PASS",
+      "detail": "442 records"
+    },
+    {
+      "name": "unique player ids",
+      "status": "PASS",
+      "detail": "0 duplicate IDs"
+    },
+    {
+      "name": "roster snapshot row parity",
+      "status": "PASS",
+      "detail": "442 TSV rows vs 442 JSON rows"
+    },
+    {
+      "name": "roster snapshot identity parity",
+      "status": "PASS",
+      "detail": "0 JSON-only / 0 TSV-only"
+    },
+    {
+      "name": "valid player team abbreviations",
+      "status": "PASS",
+      "detail": "all player snapshot teams resolve to a league team"
+    },
+    {
+      "name": "valid ages",
+      "status": "PASS",
+      "detail": "expected 18\u201350 range"
+    },
+    {
+      "name": "valid positions",
+      "status": "PASS",
+      "detail": "all position arrays nonempty and NBA-standard"
+    },
+    {
+      "name": "NBA IDs unique where present",
+      "status": "PASS",
+      "detail": "393 mapped NBA IDs"
+    },
+    {
+      "name": "contract-year structure",
+      "status": "PASS",
+      "detail": "0 structural issues"
+    },
+    {
+      "name": "unsigned RFA rights cases",
+      "status": "PASS",
+      "detail": "3 cases: Jalen Duren, Bennedict Mathurin, Peyton Watson"
+    },
+    {
+      "name": "2025\u201326 stat field ranges",
+      "status": "PASS",
+      "detail": "392 player baselines / 0 range issues"
+    },
+    {
+      "name": "confidence formula parity",
+      "status": "PASS",
+      "detail": "0 mismatches against min(1, total_minutes/1200)"
+    },
+    {
+      "name": "rating coverage",
+      "status": "PASS",
+      "detail": "392 rated / quality manifest says 392"
+    },
+    {
+      "name": "bootstrap team calibration rows",
+      "status": "PASS",
+      "detail": "30 Team Totals rows"
+    }
+  ],
+  "errors": [],
+  "warnings": [
+    "The bundled 2025\u201326 statistical seed is a near-final bootstrap, not yet the exact season-complete NBA.com bulk export.",
+    "Current roster/contract structure is internally audited, but every specialist contract/CBA edge and every external contract term has not been independently re-certified in this pass.",
+    "The 2026\u201327 game calendar remains NBA Courtside\u2019s deterministic 1,230-game scaffold rather than an exact official schedule import.",
+    "Complex future second-round conveyances and some linked future pick obligations remain explicitly audit-pending."
+  ]
+}

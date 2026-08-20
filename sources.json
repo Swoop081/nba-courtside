@@ -25,6 +25,11 @@
       "name": "NBA.com LeBron James to Philadelphia",
       "url": "https://www.nba.com/news/lebron-james-free-agency-sixers-2026",
       "purpose": "LeBron current-team and deal verification"
+    },
+    {
+      "name": "2023 NBA-NBPA Collective Bargaining Agreement",
+      "url": "https://nbpa.com/cba",
+      "purpose": "contract structure, cap exceptions, trade rules, apron restrictions, free agency and extensions"
     }
   ],
   "working_secondary": [
@@ -39,5 +44,14 @@
       "purpose": "season-complete sanity checks while exact NBA.com bulk import remains pending"
     }
   ],
-  "stat_seed_status": "near-final bootstrap; not final canonical NBA.com export"
+  "stat_seed_status": "near-final bootstrap; not final canonical NBA.com export",
+  "draft_assets_2027": {
+    "source": "RealGM NBA Future Draft Picks by Year",
+    "accessed": "2026-08-19",
+    "scope": "2027 first-round rights/protections used for the current pick-resolution scaffold"
+  },
+  "draft_lottery_2027": {
+    "source": "NBA.com Board of Governors 3-2-1 Lottery approval",
+    "date": "2026-05-28"
+  }
 }

@@ -1,5 +1,5 @@
 const fs=require('fs'),vm=require('vm');
-const root='/mnt/data/NBA-Courtside-Roles-Morale-v0.10';
+const root='/mnt/data/NBA-Courtside-Smart-Front-Offices-v0.11';
 const dataJs=fs.readFileSync(root+'/data/data.js','utf8'),schedJs=fs.readFileSync(root+'/data/schedule.js','utf8');
 const pre={console,structuredClone,Date,URLSearchParams};pre.window=pre;vm.createContext(pre);vm.runInContext(dataJs,pre);vm.runInContext(schedJs,pre);
 const D=pre.NBA_COURTSIDE_DATA,assignments={};for(const p of D.players)assignments[p.id]=p.roster_status==='restricted_free_agent_unsigned'?null:p.team;

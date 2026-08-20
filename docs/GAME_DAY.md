@@ -1,4 +1,4 @@
-# v0.7 — Game Day + Rotation Integration
+# Game Day — Current through v0.14
 
 ## Product direction
 NBA Courtside is a GM/franchise game. The former Exhibition page was a fast development harness used to validate the match presentation and simulation engine; it is not a separate player-facing mode.
@@ -35,3 +35,9 @@ CPU-vs-CPU games use the same persistent rosters, ratings and 240-minute rotatio
 
 ## Internal QA harness
 `exhibition.html` is retained only to rapidly test arbitrary 30-team matchups. It is deliberately unlinked from the product UI.
+
+## v0.14 postseason integration
+- Game Day accepts both regular-season schedule IDs and persistent v0.14 postseason game IDs.
+- Play-In, First Round, Conference Semifinal, Conference Final and NBA Finals games use the same Watch/Sim possession engine.
+- Postseason results write to separate playoff result/stat/game-log stores and do not contaminate regular-season statistics.
+- Series state is reconciled after the final buzzer so the bracket, next game and elimination/closeout stakes update immediately.

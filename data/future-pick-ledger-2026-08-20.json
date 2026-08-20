@@ -1,0 +1,4227 @@
+{
+  "source": "RealGM NBA Future Draft Picks By Team / detailed team ledger",
+  "as_of": "2026-08-20",
+  "scope": "Origin-pick rights safety ledger for 2027-2033. Complex chains are source-locked rather than falsely executable.",
+  "cells": [
+    {
+      "origin": "ATL",
+      "year": 2027,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "ATL 2027 first-round origin right currently belongs to SAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ATL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "BOS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2027,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "CLE 2027 second-round origin right currently belongs to CHI.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2027,
+      "round": 1,
+      "status": "protected",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "Charlotte receives Dallas if No. 3-30; Dallas retains No. 1-2.",
+      "source_status": "source_checked",
+      "protection": {
+        "type": "retain_top",
+        "max": 2,
+        "protectedOwner": "DAL"
+      }
+    },
+    {
+      "origin": "DAL",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DAL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2027,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "DEN 2027 second-round origin right currently belongs to UTA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "GSW",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "HOU",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "HOU",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "IND",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "IND",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2027,
+      "round": 1,
+      "status": "protected",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "Memphis receives Lakers if No. 5-30; Lakers retains No. 1-4.",
+      "source_status": "source_checked",
+      "protection": {
+        "type": "retain_top",
+        "max": 4,
+        "protectedOwner": "LAL"
+      }
+    },
+    {
+      "origin": "LAL",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2027,
+      "round": 1,
+      "status": "protected",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "Charlotte receives Miami if No. 15-30; Miami retains No. 1-14.",
+      "source_status": "source_checked",
+      "protection": {
+        "type": "retain_top",
+        "max": 14,
+        "protectedOwner": "MIA"
+      }
+    },
+    {
+      "origin": "MIA",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2027,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "MIN 2027 second-round origin right currently belongs to POR.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "NOP",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NOP",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2027,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "NYK 2027 first-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "ORL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "PHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2027,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "HOU",
+      "tradeable": true,
+      "summary": "PHX 2027 first-round origin right currently belongs to HOU.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2027,
+      "round": 1,
+      "status": "own",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2027,
+      "round": 1,
+      "status": "protected",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Sacramento receives San Antonio at No. 1-16; Oklahoma City receives No. 17-30.",
+      "source_status": "source_checked",
+      "protection": {
+        "type": "split",
+        "max": 16,
+        "fallbackOwner": "OKC"
+      }
+    },
+    {
+      "origin": "SAS",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "TOR",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "TOR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2027,
+      "round": 1,
+      "status": "complex",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2027,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "ATL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "ATL 2028 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "CLE 2028 second-round origin right currently belongs to UTA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "DAL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "DAL 2028 second-round origin right currently belongs to LAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DET",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "GSW",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "HOU",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "HOU 2028 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "IND",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "LAL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "MEM 2028 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "DEN",
+      "tradeable": true,
+      "summary": "MIN 2028 second-round origin right currently belongs to DEN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "NOP 2028 second-round origin right currently belongs to SAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2028,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "ORL 2028 first-round origin right currently belongs to POR.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "ORL 2028 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2028,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "SAC 2028 second-round origin right currently belongs to POR.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2028,
+      "round": 1,
+      "status": "own",
+      "owner": "TOR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "TOR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2028,
+      "round": 1,
+      "status": "complex",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2028,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ATL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "OKC",
+      "tradeable": true,
+      "summary": "BOS 2029 second-round origin right currently belongs to OKC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "CLE 2029 second-round origin right currently belongs to ATL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "DAL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "DAL 2029 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DET",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "GSW 2029 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "HOU",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "HOU 2029 second-round origin right currently belongs to MEM.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2029,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "IND 2029 first-round origin right currently belongs to LAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "LAC 2029 second-round origin right currently belongs to SAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2029,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "DAL",
+      "tradeable": true,
+      "summary": "LAL 2029 first-round origin right currently belongs to DAL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "LAL 2029 second-round origin right currently belongs to MEM.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "MEM 2029 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "MIA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "NOP 2029 second-round origin right currently belongs to SAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2029,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "NYK 2029 first-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "PHX 2029 second-round origin right currently belongs to NYK.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2029,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "SAC 2029 second-round origin right currently belongs to NYK.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2029,
+      "round": 1,
+      "status": "own",
+      "owner": "TOR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "TOR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2029,
+      "round": 1,
+      "status": "complex",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2029,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "OKC",
+      "tradeable": true,
+      "summary": "ATL 2030 second-round origin right currently belongs to OKC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "BOS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "CLE",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "CLE 2030 second-round origin right currently belongs to SAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "DAL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "DAL 2030 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DET",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "GSW",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "HOU",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "HOU",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "IND",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "IND",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "LAL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "LAL 2030 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "ORL",
+      "tradeable": true,
+      "summary": "MIL 2030 second-round origin right currently belongs to ORL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NOP",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2030,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "ORL 2030 first-round origin right currently belongs to MEM.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "PHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "PHI 2030 second-round origin right currently belongs to NYK.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "SAC 2030 second-round origin right currently belongs to SAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2030,
+      "round": 1,
+      "status": "own",
+      "owner": "TOR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2030,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "TOR 2030 second-round origin right currently belongs to LAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2030,
+      "round": 1,
+      "status": "complex",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2030,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "WAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ATL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "BOS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "CLE",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "DAL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "DAL 2031 second-round origin right currently belongs to DET.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "DEN",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DET",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "GSW",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "HOU",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "HOU",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "IND",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "IND",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "LAL 2031 first-round origin right currently belongs to UTA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "MIL",
+      "tradeable": true,
+      "summary": "MIA 2031 first-round origin right currently belongs to MIL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "MIL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "MIL 2031 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "MIN 2031 first-round origin right currently belongs to SAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NOP",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "NYK 2031 first-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "NYK 2031 second-round origin right currently belongs to CHI.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "OKC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "ORL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "BOS",
+      "tradeable": true,
+      "summary": "PHI 2031 first-round origin right currently belongs to BOS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "PHX 2031 first-round origin right currently belongs to MEM.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "PHX 2031 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2031,
+      "round": 1,
+      "status": "complex",
+      "owner": "SAC",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "DEN",
+      "tradeable": true,
+      "summary": "SAC 2031 second-round origin right currently belongs to DEN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2031,
+      "round": 1,
+      "status": "complex",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Linked swap/protection chain is source-identified but locked from trade until exact draft-year resolution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2031,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "TOR 2031 first-round origin right currently belongs to LAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "TOR 2031 second-round origin right currently belongs to NOP.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2031,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2031,
+      "round": 1,
+      "status": "own",
+      "owner": "WAS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2031,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "LAL",
+      "tradeable": true,
+      "summary": "WAS 2031 second-round origin right currently belongs to LAL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "OKC",
+      "tradeable": true,
+      "summary": "ATL 2032 second-round origin right currently belongs to OKC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2032,
+      "round": 1,
+      "status": "frozen",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-apron frozen-pick window through 2027-28.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "CLE",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "DAL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "DAL 2032 second-round origin right currently belongs to NYK.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2032,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "DEN 2032 first-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "DEN 2032 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "GSW",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "HOU",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "HOU",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "IND",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "IND",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "LAL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "MIA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "MIA 2032 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "MIL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "MIL 2032 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2032,
+      "round": 1,
+      "status": "frozen",
+      "owner": "MIN",
+      "tradeable": false,
+      "summary": "Second-apron frozen-pick window through 2027-28.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "MIN 2032 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NOP",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "OKC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "OKC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "ORL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "PHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2032,
+      "round": 1,
+      "status": "frozen",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Second-apron frozen-pick window through 2027-28.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHX",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "POR",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CLE",
+      "tradeable": true,
+      "summary": "SAC 2032 second-round origin right currently belongs to CLE.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "TOR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "TOR 2032 second-round origin right currently belongs to BKN.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2032,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2032,
+      "round": 1,
+      "status": "own",
+      "owner": "WAS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2032,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "LAL",
+      "tradeable": true,
+      "summary": "WAS 2032 second-round origin right currently belongs to LAL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ATL",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ATL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "BKN",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BKN",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BKN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "BOS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "BOS",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "BOS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHA",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "CHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "CHI",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2033,
+      "round": 1,
+      "status": "frozen",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Second-apron frozen-pick window through 2028-29.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "CLE",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "CLE",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "DAL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DAL",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "WAS",
+      "tradeable": true,
+      "summary": "DAL 2033 second-round origin right currently belongs to WAS.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "DEN",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DEN",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DEN",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "DET",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "DET",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "DET",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "DET",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "GSW",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "GSW",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "GSW",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "HOU",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "HOU",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "HOU 2033 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "IND",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "IND",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "IND",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAC",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAC",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2033,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "LAL 2033 first-round origin right currently belongs to UTA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "LAL",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "LAL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MEM",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MEM",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2033,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "MIL",
+      "tradeable": true,
+      "summary": "MIA 2033 first-round origin right currently belongs to MIL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIA",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "MIL",
+      "tradeable": true,
+      "summary": "MIA 2033 second-round origin right currently belongs to MIL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "MIL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIL",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "MIL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2033,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "MIN 2033 first-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "MIN",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "MIN 2033 second-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "NOP",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NOP",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NOP",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "NYK",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "NYK",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "OKC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "OKC",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "OKC 2033 second-round origin right currently belongs to MEM.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "ORL",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "ORL",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "ORL",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "PHI",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHI",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "PHI",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2033,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "CHA",
+      "tradeable": true,
+      "summary": "PHX 2033 first-round origin right currently belongs to CHA.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "PHX",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "NYK",
+      "tradeable": true,
+      "summary": "PHX 2033 second-round origin right currently belongs to NYK.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "POR",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "POR",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "POR",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "SAC",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAC",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "ATL",
+      "tradeable": true,
+      "summary": "SAC 2033 second-round origin right currently belongs to ATL.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "SAS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "SAS",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "SAS",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2033,
+      "round": 1,
+      "status": "outgoing",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "TOR 2033 first-round origin right currently belongs to LAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "TOR",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "LAC",
+      "tradeable": true,
+      "summary": "TOR 2033 second-round origin right currently belongs to LAC.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "UTA",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "UTA",
+      "year": 2033,
+      "round": 2,
+      "status": "source_locked",
+      "owner": "UTA",
+      "tradeable": false,
+      "summary": "Second-round origin right is source-indexed but locked pending exact chain execution.",
+      "source_status": "source_locked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2033,
+      "round": 1,
+      "status": "own",
+      "owner": "WAS",
+      "tradeable": true,
+      "summary": "Own first-round origin right in the source snapshot.",
+      "source_status": "source_checked"
+    },
+    {
+      "origin": "WAS",
+      "year": 2033,
+      "round": 2,
+      "status": "outgoing",
+      "owner": "MEM",
+      "tradeable": true,
+      "summary": "WAS 2033 second-round origin right currently belongs to MEM.",
+      "source_status": "source_checked"
+    }
+  ]
+}

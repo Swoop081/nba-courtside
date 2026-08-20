@@ -1,0 +1,20 @@
+const fs=require('fs'),vm=require('vm');
+const root='/mnt/data/NBA-Courtside-Postseason-v0.14';
+const dataJs=fs.readFileSync(root+'/data/data.js','utf8'),schedJs=fs.readFileSync(root+'/data/schedule.js','utf8');
+const pre={console,structuredClone,Date,URLSearchParams};pre.window=pre;vm.createContext(pre);vm.runInContext(dataJs,pre);vm.runInContext(schedJs,pre);
+const D=pre.NBA_COURTSIDE_DATA,assignments={};for(const p of D.players)assignments[p.id]=p.roster_status==='restricted_free_agent_unsigned'?null:p.team;
+const gid='PS-2026-R1-EAST-0-G1';
+const game={id:gid,kind:'series',conference:'east',round:1,seriesId:'PS-2026-R1-EAST-0',gameNo:1,label:'GAME 1',home:'TOR',away:'MIA',date:'2027-04-18'};
+const save={version:14,userTeam:'TOR',seasonYear:2026,date:'2027-04-18',phase:'playoffs',seasonStarted:true,seasonComplete:true,assignments,statusOverrides:{},salaryOverrides:{},results:{},seasonStats:{},gameLogs:{},playoffStats:{},playoffGameLogs:{},postseasonResults:{},rotations:{},generatedPlayers:[],playerOverrides:{},injuries:{},injuryHistory:[],injuryRotationBackups:{},transactions:[],rng:20260819,postseason:{formatVersion:14,stage:'playoffs',round:1,games:[game],rounds:[{id:'PS-2026-R1-EAST-0',conference:'east',round:1,slot:0,a:'TOR',b:'MIA',seedA:1,seedB:8,aWins:0,bWins:0,winner:null,games:[gid]}],east:{standings:['TOR','BOS','NYK','CLE','PHI','MIL','ATL','CHI'],seed7:'ATL',seed8:'CHI'},west:{standings:[],seed7:null,seed8:null}}};
+const store={'nbaCourtsideSaveV14':JSON.stringify(save),'nbaCourtsideTeam':'TOR'};
+let src=fs.readFileSync(root+'/gameday.js','utf8');
+src=src.replace(/function render\(scrollTop=false\)\{[^\n]*\}/,'function render(){}');
+src=src.replace(/function bind\(\)\{[^\n]*\}/,'function bind(){}');
+src=src.replace(/window\.addEventListener\('beforeunload',stopLive\);[\s\S]*?\}\)\(\);$/m,`window.__test={startGame,simGame,getGame:()=>game,getRotations:()=>rotations,getSave:()=>save,runtimeRotation,postseasonLabel,postseasonStakes,savedResult};\n})();`);
+const ctx={console,structuredClone,Date,URLSearchParams,setInterval:()=>0,clearInterval:()=>{},setTimeout:(f)=>f(),window:{},location:{search:'?game='+encodeURIComponent(gid)+'&mode=watch'},document:{documentElement:{style:{setProperty(){}}},querySelector(){return null},querySelectorAll(){return[]}},localStorage:{getItem(k){return store[k]||null},setItem(k,v){store[k]=v}},Math};ctx.window=ctx;vm.createContext(ctx);vm.runInContext(dataJs,ctx);vm.runInContext(schedJs,ctx);vm.runInContext(src,ctx);
+const t=ctx.__test;if(!t)throw new Error('hooks missing');
+if(!t.postseasonLabel().includes('FIRST ROUND'))throw new Error('missing postseason label');
+t.startGame(false);t.simGame();const g=t.getGame(),sv=t.getSave();
+if(!g.final)throw new Error('not final');if(!sv.postseasonResults[gid])throw new Error('postseason result missing');if(sv.results[gid])throw new Error('playoff result leaked into regular results');if(!Object.keys(sv.playoffStats).length)throw new Error('playoff stats missing');if(Object.keys(sv.seasonStats).length)throw new Error('regular season stats changed');if(sv.postseasonResults[gid].engine!=='courtside_v14_postseason_possession')throw new Error('wrong engine');
+for(const side of ['home','away']){const r=t.getRotations()[side],sum=r.players.reduce((s,p)=>s+g.stats[p.id].min,0),expected=g.period>4?240+(g.period-4)*25:240;if(Math.abs(sum-expected)>.15)throw new Error(side+' minutes '+sum+' expected '+expected)}
+console.log(JSON.stringify({label:t.postseasonLabel(),stakes:t.postseasonStakes(),score:`${g.awayScore}-${g.homeScore}`,periods:g.period,possessions:g.possessions,playoffPlayers:Object.keys(sv.playoffStats).length,regularPlayers:Object.keys(sv.seasonStats).length,engine:sv.postseasonResults[gid].engine},null,2));
