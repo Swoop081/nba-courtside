@@ -1,10 +1,10 @@
-# NBA Courtside — v0.27 Main Menu + Boot Recovery Hotfix
+# NBA Courtside — v0.28 Postgame Resume + Season-Started Boot Hotfix
 
 **Frozen:** 20 August 2026  
 **Baseline:** v0.26 Presentation Polish + Device QA  
 **Save schema:** 25 (`nbaCourtsideSaveV25`)
 
-## v0.27 hotfix
+## v0.28 hotfix
 
 - Boots to a real **Main Menu** instead of dropping directly into team selection.
 - Main Menu routes: **Continue Franchise**, **New Franchise**, and **Exhibition**.
@@ -60,3 +60,10 @@ v0.25 writes **`nbaCourtsideSaveV25` / schema 25**. Supported legacy saves are m
 - Modal sheets are inert/hidden to assistive tech when closed, trap keyboard focus while open, and restore focus to the invoking control when dismissed.
 - Game Day and Exhibition receive compact scoreboard, controls, rotation, box-score and matchup scaling.
 - New static device-layout and modal-focus audits are included in `scripts/`.
+
+
+## v0.28 hotfix
+- Fixes a release-blocking season-started boot crash caused by `ensureNBAProgress()` running before the NBA Cup constants were initialized.
+- After Game Day, RETURN TO GM OFFICE now routes to `index.html?continue=1` and re-enters the active franchise directly.
+- Main Menu Continue and New Franchise bindings remain functional after any completed game.
+- Fresh launch still opens the Main Menu; `?new=1` may open team selection directly.
