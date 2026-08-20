@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#070811" />
-<title>NBA Courtside — Game Day v0.18</title>
+<title>NBA Courtside — Game Day</title>
 <style>
 :root{--bg:#070811;--panel:#11131f;--panel2:#171a28;--panel3:#202437;--text:#f7f8ff;--muted:#9da2b8;--line:#2b2f43;--accent:#dfff31;--home:#ce1141;--home2:#000;--away:#006bb6;--away2:#ed174c;--good:#74f0aa;--warn:#ffb21c;--danger:#ff4d6d}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Arial,sans-serif;min-height:100%}body{overflow-x:hidden}button{font:inherit}.hidden{display:none!important}button:disabled{opacity:.45}.app{min-height:100vh;background:radial-gradient(circle at 100% -10%,color-mix(in srgb,var(--home) 30%,transparent),transparent 35%),radial-gradient(circle at -10% 35%,color-mix(in srgb,var(--away) 20%,transparent),transparent 38%),var(--bg)}
@@ -30,9 +30,49 @@
 .cupFinalBand{border-color:#dfff3155!important;background:linear-gradient(135deg,#38430e,#10121b)!important}.cupFinalBand span{color:#dfff31!important}
 </style>
 \n<style id="v14-postseason-gameday">\n.playoffGameBand{border:1px solid #ffffff20;border-radius:18px;padding:11px 13px;margin-bottom:10px;background:linear-gradient(135deg,color-mix(in srgb,var(--away) 35%,#171923),color-mix(in srgb,var(--home) 35%,#10121b));display:flex;justify-content:space-between;align-items:center;gap:10px}.playoffGameBand.finals{border-color:#e7ba4255;background:linear-gradient(135deg,#4e3d0d,#17151b)}.playoffGameBand span{font-size:8px;font-weight:1000;color:var(--accent);letter-spacing:.12em}.playoffGameBand strong{font-size:12px;text-align:right}.gameDayHero.postseason{border-color:#ffffff28;box-shadow:inset 0 0 55px #0005}.postseasonFinal{background:radial-gradient(circle at 80% 5%,#e7ba4233,transparent 37%),linear-gradient(125deg,color-mix(in srgb,var(--away) 68%,#11131f),#10111a 48%,color-mix(in srgb,var(--home) 68%,#11131f))}\n.cupFinalBand{border-color:#dfff3155!important;background:linear-gradient(135deg,#38430e,#10121b)!important}.cupFinalBand span{color:#dfff31!important}
-</style>\n</head>
+</style>\n
+<style id="v25-release-readiness">
+/* v0.25 — release readiness: keyboard, touch, motion, contrast and paint hardening */
+html{color-scheme:dark;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-bottom:96px}
+button,a,input,select{touch-action:manipulation}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.navBtn{min-height:46px}.confBtn,.linkBtn,.leagueTabs button,.simGrid button,.frontGrid button,.selectorHint button,.confTabs button,.rotationSwitch button,.gameControls button,.speedRow button,.boxTabs button{min-height:40px}
+.linkBtn{padding:7px 6px}.close{min-width:44px;min-height:44px}
+.skipLink{position:fixed;left:12px;top:calc(env(safe-area-inset-top) + 8px);z-index:400;transform:translateY(-160%);background:var(--accent);color:#071000;border-radius:12px;padding:10px 14px;font-size:12px;font-weight:1000;text-decoration:none}.skipLink:focus{transform:none}
+.sheet{overscroll-behavior:contain}.scrollRow,.yearScroll,.bracketRail,.playoffLeaderRail,.benchStrip,.leagueTabs{scroll-snap-type:x proximity}.scrollRow>*,.yearScroll>*,.bracketRail>*,.playoffLeaderRail>*,.benchStrip>*{scroll-snap-align:start}
+.playerCard,.contractPlayer,.scheduleRow,.txRow,.depthRow{contain:layout paint style}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}.teamPick:active{transform:none}.toast{transform:translate(-50%,0)!important}}
+@media(prefers-contrast:more){:root{--muted:#c5c9d7;--line:#596079}.panel,.playerCard,.depthRow,.contractPlayer,.scheduleRow,.txRow{border-width:2px}.navBtn.active,.confBtn.active{outline:2px solid currentColor}}
+@media(max-width:390px){.navBtn{font-size:10px}.clubMeta,.sectionHead span,.linkBtn{font-size:10px}.sourceCert p,.notice{font-size:10px}}
+</style>
+
+<style id="v26-device-polish">
+html,body,.app{min-height:100%;min-height:100dvh}
+.shell{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));padding-bottom:max(calc(env(safe-area-inset-bottom) + 30px),42px)}
+@media(max-width:430px){
+ .sectionHead{margin-top:20px}.sectionHead h2{font-size:28px}.sectionHead span{font-size:10px}
+ .matchHero{min-height:278px;border-radius:28px}.matchNames h1{font-size:25px}.selectorHint button,.confTabs button,.rotationSwitch button,.gameControls button,.speedRow button,.boxTabs button{font-size:10px}
+ .rotMeta,.rotMin span,.courtHead span,.liveMin,.benchChip span,.feedClock,.clock small{font-size:8px}.liveName,.benchChip b{font-size:9px}
+ .boxRow.head span,.boxRow.head{font-size:8px}.boxPlayer b,.boxRow span{font-size:9px}
+}
+@media(max-width:390px){
+ .shell{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+ .scoreboard{margin-left:calc(-1 * max(10px,env(safe-area-inset-left)));margin-right:calc(-1 * max(10px,env(safe-area-inset-right)));padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right))}
+ .scoreInner{grid-template-columns:1fr 78px 1fr}.scoreSide{gap:5px}.scoreSide img{width:34px;height:34px}.scoreSide b{font-size:39px}.clock strong{font-size:22px}
+ .matchHero{min-height:260px;padding:14px}.sideLogo{width:58px;height:58px;top:14px}.sideLogo.away{left:14px}.sideLogo.home{right:14px}.matchNames{top:80px;left:14px;right:14px;grid-template-columns:1fr 36px 1fr}.matchNames h1{font-size:22px}.heroFaces{height:135px}.faceSide img{width:108px;height:148px}.faceSide.away img:nth-child(2){left:62px}.faceSide.home img:nth-child(2){right:62px}
+ .fiveLive{gap:4px;padding-left:5px;padding-right:5px}.livePhoto{height:76px}.liveName{padding-left:4px;padding-right:4px}.liveOvr,.livePos{font-size:7px}
+ .gameControls{grid-template-columns:1fr 1fr}.gameControls .live{grid-column:1/-1}.gameControls button{min-height:44px}
+ .moment{grid-template-columns:50px 1fr auto;padding:10px}.moment img{width:50px;height:50px}.moment strong{font-size:15px}
+ .boxPanel{padding:10px}.boxRow{grid-template-columns:minmax(105px,1fr) repeat(5,30px);gap:2px}.boxRow img{width:28px;height:28px;margin-right:4px}
+ .rotationTeam{padding:11px}.rotRow{grid-template-columns:28px 46px minmax(0,1fr) auto;gap:7px}.rotRow img{width:46px;height:46px}.rotName{font-size:13px}
+}
+@media(max-width:350px){.logoGrid{grid-template-columns:repeat(4,1fr)}.boxRow{grid-template-columns:minmax(92px,1fr) repeat(5,27px)}.scoreSide span{display:none}}
+@media(orientation:landscape) and (max-height:520px){.shell{padding-top:max(7px,env(safe-area-inset-top))}.scoreboard{padding-top:max(4px,env(safe-area-inset-top))}.matchHero{min-height:225px}.heroFaces{height:112px}}
+</style>
+
+</head>
 <body>
-<div class="app"><main class="shell" id="app"></main></div>
+<div class="app"><a class="skipLink" href="#app">Skip to game content</a><main class="shell" id="app" tabindex="-1"></main></div>
 <script src="data/data.js"></script>
 <script src="data/schedule.js"></script>
 <script src="data/schedule-template.js"></script>

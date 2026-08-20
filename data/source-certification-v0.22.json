@@ -1,0 +1,258 @@
+{
+  "prior_season_records": {
+    "DET": {
+      "w": 60,
+      "l": 22
+    },
+    "BOS": {
+      "w": 56,
+      "l": 26
+    },
+    "NYK": {
+      "w": 53,
+      "l": 29
+    },
+    "CLE": {
+      "w": 52,
+      "l": 30
+    },
+    "TOR": {
+      "w": 46,
+      "l": 36
+    },
+    "ATL": {
+      "w": 46,
+      "l": 36
+    },
+    "PHI": {
+      "w": 45,
+      "l": 37
+    },
+    "ORL": {
+      "w": 45,
+      "l": 37
+    },
+    "CHA": {
+      "w": 44,
+      "l": 38
+    },
+    "MIA": {
+      "w": 43,
+      "l": 39
+    },
+    "MIL": {
+      "w": 32,
+      "l": 50
+    },
+    "CHI": {
+      "w": 31,
+      "l": 51
+    },
+    "BKN": {
+      "w": 20,
+      "l": 62
+    },
+    "IND": {
+      "w": 19,
+      "l": 63
+    },
+    "WAS": {
+      "w": 17,
+      "l": 65
+    },
+    "OKC": {
+      "w": 64,
+      "l": 18
+    },
+    "SAS": {
+      "w": 62,
+      "l": 20
+    },
+    "DEN": {
+      "w": 54,
+      "l": 28
+    },
+    "LAL": {
+      "w": 53,
+      "l": 29
+    },
+    "HOU": {
+      "w": 52,
+      "l": 30
+    },
+    "MIN": {
+      "w": 49,
+      "l": 33
+    },
+    "PHX": {
+      "w": 45,
+      "l": 37
+    },
+    "POR": {
+      "w": 42,
+      "l": 40
+    },
+    "LAC": {
+      "w": 42,
+      "l": 40
+    },
+    "GSW": {
+      "w": 37,
+      "l": 45
+    },
+    "NOP": {
+      "w": 26,
+      "l": 56
+    },
+    "DAL": {
+      "w": 26,
+      "l": 56
+    },
+    "MEM": {
+      "w": 25,
+      "l": 57
+    },
+    "SAC": {
+      "w": 22,
+      "l": 60
+    },
+    "UTA": {
+      "w": 22,
+      "l": 60
+    }
+  },
+  "player_stats": {
+    "total_players": 442,
+    "season_complete_verified": 392,
+    "bootstrap_hybrid": 0,
+    "projection": 50,
+    "rating_population": "complete_2025_26_final_population",
+    "source_population_rows": 582,
+    "source_stint_rows": 733,
+    "rating_model": "2025-26_final_box_score_model_v19",
+    "note": "All current players with 2025-26 NBA evidence use season-final aggregate rows and regenerated season-relative ratings; 50 no-baseline records remain projection-only."
+  },
+  "contracts": {
+    "snapshot_rows": 442,
+    "structure_certified": 442,
+    "bird_rights": {
+      "runtime": "continuity_ledger",
+      "exact_2027_seeds": 392,
+      "future_safe_floor_seeds": 50,
+      "first_actionable_exit_certified": 442,
+      "trade_preserves_clock": true,
+      "waiver_renounce_resets_clock": true
+    },
+    "note": "442/442 contract structures remain certified. Bird continuity is now separate from team tenure: 392 exact post-2026-27 seeds plus 50 conservative long-horizon floors certify every first executable exit without fabricated precision."
+  },
+  "simulation_calibration": {
+    "quick_sim_team_ppg": 116.092,
+    "final_2025_26_team_ppg_target": 115.6077,
+    "detailed_game_day_team_ppg": 115.578,
+    "detailed_max_abs_box_delta_pct": 2.34,
+    "box_score_point_errors": 0,
+    "rotation_minute_errors": 0
+  },
+  "version": "v0.22",
+  "freeze_date": "2026-08-20",
+  "draft_assets": {
+    "origin_cells": 420,
+    "years": "2027-2033",
+    "status_counts": {
+      "outgoing": 91,
+      "conditional": 175,
+      "own": 139,
+      "protected": 4,
+      "source_locked": 7,
+      "frozen": 4
+    },
+    "tradeable_atomic_cells": 230,
+    "nontradeable_cells": 190,
+    "certified_executable_linked_conditional": 175,
+    "certified_executable_protected": 4,
+    "cba_frozen": 4,
+    "source_locked_cells": 7,
+    "source_locked_origin_cells": [
+      "CHA 2029 R1",
+      "CLE 2029 R1",
+      "MIN 2029 R1",
+      "UTA 2029 R1",
+      "CLE 2031 R1",
+      "SAC 2032 R2",
+      "DET 2033 R2"
+    ],
+    "claim_level_unresolved": [
+      "PHX incoming 2029 first-round claim from layered CHA/CLE/MIN/UTA structure"
+    ],
+    "known_unresolved": [
+      "2029 CHA/CLE/MIN/UTA layered first-round ordering plus downstream PHX incoming claim",
+      "CLE 2031 R1 pending transfer to DEN in Cleveland-Denver-L.A. Clippers transaction",
+      "SAC 2032 R2 finalized to CLE but pending onward transfer to DEN in Cleveland-Denver-L.A. Clippers transaction",
+      "DET 2033 2nd exact protection range"
+    ],
+    "pending_transaction_locked_cells": 2
+  },
+  "transaction_rules": {
+    "rule_source": "NBA CBA 101 (2024-25) / 2023 NBA-NBPA CBA; system amounts scaled where the CBA specifies annual cap-rate growth",
+    "persistent_tpe": true,
+    "tpe_partial_use": true,
+    "tpe_expiry": "one year",
+    "post_first_apron_250k_allowance_removed": true,
+    "sign_and_trade": true,
+    "base_year_compensation": true,
+    "sign_and_trade_receiver_hard_cap": "first_apron",
+    "extension_and_trade": {
+      "max_first_year": "120% of greater of final original-term salary / estimated average player salary",
+      "max_raise": 0.05,
+      "max_total_contract_years": 4,
+      "rich_extension_trade_wait": "six months"
+    },
+    "timing_restrictions": {
+      "draft_rookie": "30 days",
+      "standard_free_agent": "later of three months / Dec. 15",
+      "large_bird_early_bird_raise": "later of three months / Jan. 15"
+    },
+    "one_year_bird_consent": true,
+    "reacquisition": true,
+    "high_salary_waived_player_first_apron_gate": true,
+    "second_round_exception": true,
+    "first_round_rookie_scale": "120% modeled rookie scale, two guaranteed seasons + two team options",
+    "minimum_salary_table": "2024-25 official table scaled with salary cap; generated players track exact in-save YOS",
+    "starting_timing_seed": "not certified: historical signing/trade dates for the frozen August 2026 roster are not fabricated; timing locks apply to in-save transactions",
+    "deliberate_boundaries": [
+      "current-player exact years-of-service seed",
+      "incentive and bonus cap accounting",
+      "partial guarantees and guarantee trigger dates",
+      "set-off and stretch elections",
+      "cash consideration ledgers",
+      "two-way / Exhibit 10 machinery",
+      "Disabled Player Exception",
+      "waiver-claim priority and assignment mechanics",
+      "designated veteran / rookie extension eligibility details",
+      "full Apron Team Salary adjustments beyond the current Courtside Team Salary proxy",
+      "minimum-exception trade provenance for unsourced starting contracts",
+      "direct same-season trade reacquisition beyond waiver/free-agent reacquisition logic"
+    ],
+    "exception_trade_acquisition": {
+      "non_taxpayer_mle": true,
+      "room_mle": true,
+      "biannual": true,
+      "minimum_generated_contracts": true,
+      "taxpayer_mle": false
+    },
+    "minimum_contract_table_terms": true,
+    "second_round_exception_team_salary_defer": "excluded before July 31; included July 31",
+    "contract_raise_math": "linear from first-year salary, not compounded",
+    "max_salary_105pct_prior": true,
+    "recently_acquired_aggregation_wait": "two months, with qualifying deadline carve-out",
+    "cpu_trade_cba_parity": true,
+    "first_apron_taxpayer_mle_mutual_exclusion": true
+  },
+  "notes": {
+    "save_schema": "No save-key churn: v0.22 retains nbaCourtsideSaveV18. A lazily initialized birdClock is derived from the certified starting ledger for old saves.",
+    "player_data": "The v0.18 34-row manual overlay is superseded by the complete season-final player table.",
+    "source_safety": "v0.18 contract structure and future-pick safety policy remain unchanged.",
+    "bird_rights": "v0.20 replaces engine-inferred team-tenure rights with a dedicated continuity clock and term/raise enforcement.",
+    "transaction_rules": "v0.22 executes the certified specialist transaction rules prospectively while exposing unsourced starting-history boundaries."
+  }
+}

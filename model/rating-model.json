@@ -1,5 +1,5 @@
 {
-  "version": "0.2",
+  "version": "0.23",
   "historical_portability": "core inputs are traditional box-score stats available across eras",
   "input_fields": [
     "GP",
@@ -27,8 +27,8 @@
     "three_point_attempt_prior": 100,
     "two_point_attempt_prior": 150,
     "free_throw_attempt_prior": 75,
-    "league_3p_pct": 0.3597,
-    "league_2p_pct": 0.5496,
+    "league_3p_pct": 0.3596,
+    "league_2p_pct": 0.5508,
     "league_ft_pct": 0.7831
   },
   "display_rating": "clip(round(50 + 49 * percentile_score), 35, 99)",
@@ -51,16 +51,17 @@
     "future": "blend low-sample season with prior established level"
   },
   "rookies": {
-    "no_nba_stats": "ratings remain null / projection_pending in this foundation",
-    "planned_projection_inputs": [
-      "pre-NBA stats",
+    "no_nba_stats": "keep stats_2025_26 null; generate a distinct source-backed projection_2026_27 layer",
+    "projection_inputs": [
+      "pre-NBA or prior-NBA/international source sample",
       "age",
-      "height/weight",
-      "competition level",
-      "draft/scouting tier"
+      "position",
+      "competition translation class",
+      "current rookie-scale/contract investment prior for true 2026 rookies"
     ],
-    "draft_position_rule": "potential signal > current ability",
-    "nba_takeover": "nba_weight=min(1, career_nba_minutes/1500)"
+    "translation": "source rates are competition-adjusted, then shrunk toward 2025-26 NBA position priors according to projection confidence",
+    "draft_position_rule": "rookie-scale investment is a modest current-ability prior; development profile still carries most future upside",
+    "nba_takeover": "future NBA evidence should replace projection influence as real career NBA minutes accumulate"
   },
   "development": {
     "display": "career stage + trend + broad prime window",
@@ -68,5 +69,18 @@
     "attribute_aging": "athletic traits decline earlier; shooting/playmaking/IQ can peak later and decline slower",
     "retirement": "probabilistic after late-career decline, not a fixed age"
   },
-  "overall": "72% position-weighted skill overall + 28% season-relative impact summary (PTS/36, AST/36, REB/36, STL/36, BLK/36, TS proxy)"
+  "overall": "72% position-weighted skill overall + 28% season-relative impact summary",
+  "impact": "36% PTS/36 + 19% AST/36 + 13% REB/36 + 8% STL/36 + 8% BLK/36 + 16% true-shooting proxy, all season-relative percentile scores",
+  "population": "Complete 2025-26 NBA regular-season player population; multi-team players use season-total aggregate rows.",
+  "projection_v0_23": {
+    "reference_population": "392 unchanged v0.19 season-complete NBA players",
+    "source_backed_players": 50,
+    "historical_stat_policy": "projection inputs never populate stats_2025_26",
+    "confidence_range": [
+      0.58,
+      0.86
+    ],
+    "simulation_policy": "synthetic NBA-like rates are uncertainty-shrunk before Game Day use",
+    "role_policy": "projected minutes are stored separately from historical MPG"
+  }
 }

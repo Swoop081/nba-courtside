@@ -1,3 +1,5 @@
 # NBA Courtside Validation
 
-Current prototype validation is documented in [`VALIDATION_V11.md`](VALIDATION_V11.md).
+Current release validation is documented in [`VALIDATION_V24.md`](VALIDATION_V24.md).
+
+Historical validation documents remain alongside it for subsystem provenance and regression history.

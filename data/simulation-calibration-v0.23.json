@@ -1,0 +1,53 @@
+{
+  "version": "v0.23",
+  "kind": "quick_sim_core",
+  "seasons": 10,
+  "team_games": 24000,
+  "metrics": {
+    "team_ppg": 116.30570833333333,
+    "home_win_pct": 0.5535833333333333,
+    "average_margin": 11.004416666666666,
+    "average_best_wins": 55.6,
+    "average_worst_wins": 19.7,
+    "average_team_ppg_low": 109.26463414634145,
+    "average_team_ppg_high": 117.53292682926829,
+    "box_score_point_errors": 0,
+    "rotation_minute_errors": 0
+  },
+  "sample_leaders": {
+    "scoring": [
+      {
+        "name": "Shai Gilgeous-Alexander",
+        "ppg": 29.8
+      },
+      {
+        "name": "Luka Doncic",
+        "ppg": 28.3
+      },
+      {
+        "name": "Kawhi Leonard",
+        "ppg": 27.4
+      },
+      {
+        "name": "Anthony Edwards",
+        "ppg": 25.8
+      },
+      {
+        "name": "Nikola Jokic",
+        "ppg": 25.3
+      }
+    ],
+    "assists": {
+      "name": "Nikola Jokic",
+      "apg": 10.6
+    },
+    "rebounds": {
+      "name": "Nikola Jokic",
+      "rpg": 12.7
+    },
+    "blocks": {
+      "name": "Victor Wembanyama",
+      "bpg": 3.1
+    }
+  }
+}

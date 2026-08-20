@@ -8,7 +8,7 @@ assert len(league['teams'])==30
 assert len({t['abbr'] for t in league['teams']})==30
 assert len(players)==442
 assert len({p['id'] for p in players})==len(players)
-assert q['rated_players']==392
+assert q['rated_players']==442
 assert q['established_with_2025_26_stats']==392
 assert q['unsigned_restricted_free_agents']==3
 lebron=next(p for p in players if p['name']=='LeBron James')
@@ -17,7 +17,7 @@ assert lebron['position_group']=='wing' and lebron['development_profile']['trend
 wemby=next(p for p in players if p['name']=='Victor Wembanyama')
 assert wemby['team']=='SAS' and wemby['age']==22 and wemby['ratings'] is not None
 aj=next(p for p in players if p['name']=='AJ Dybantsa')
-assert aj['team']=='WAS' and aj['age']==19 and aj['ratings'] is None and 'projection_pending' in aj['career_status']
+assert aj['team']=='WAS' and aj['age']==19 and aj['ratings'] is not None and aj['rating_source']=='projection_translation_model_v0.23' and aj['stats_2025_26'] is None
 for n in ('Jalen Duren','Bennedict Mathurin','Peyton Watson'):
     p=next(x for x in players if x['name']==n)
     assert p['roster_status']=='restricted_free_agent_unsigned'
@@ -25,4 +25,4 @@ for n in ('Jalen Duren','Bennedict Mathurin','Peyton Watson'):
 assert league['cap']['salary_cap']==164961000
 assert league['cap']['first_apron']==209015000
 assert league['cap']['second_apron']==221686000
-print(f"PASS — 30 teams / {len(players)} records / {q['rated_players']} rated / {q['projection_pending']} projection-pending / 3 unsigned RFAs / 0 duplicate identities")
+print(f"PASS — 30 teams / {len(players)} records / {q['rated_players']} rated / 50 source-backed projections / {q['projection_pending']} projection-pending / 3 unsigned RFAs / 0 duplicate identities")

@@ -1,0 +1,125 @@
+{
+  "version": "v0.21",
+  "as_of": "2026-08-20",
+  "source": "RealGM current NBA Future Drafts summary and detailed team ledgers",
+  "source_urls": [
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2027",
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2028",
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2029",
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2030",
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2031",
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2032",
+    "https://basketball.realgm.com/nba/draft/future_drafts/summary/2033"
+  ],
+  "execution": {
+    "first_round_years": [
+      2027,
+      2028,
+      2029,
+      2030,
+      2031,
+      2032,
+      2033
+    ],
+    "second_round_years": [
+      2027,
+      2028,
+      2029,
+      2030,
+      2031,
+      2032,
+      2033
+    ],
+    "non_severable_policy": "Conditional swap/protection claims execute at draft resolution but cannot be traded as whole origin picks until a claim-level trade representation exists."
+  },
+  "serial_conditions": [
+    "Denver 2027-2029 protected first obligation and conditional second protected first in 2029-2030",
+    "Miami 2027 top-14 protection rolling unprotected to 2028",
+    "Dallas 2027 top-2 protection with Miami 2028 second fallback",
+    "Minnesota 2029 first/second linkage",
+    "Golden State 2030 first/second linkage"
+  ],
+  "known_unresolved": [
+    {
+      "origins": [
+        "CHA",
+        "CLE",
+        "MIN",
+        "UTA"
+      ],
+      "downstream_claim_owner": "PHX",
+      "year": 2029,
+      "round": 1,
+      "reason": "Public sources document the layered Utah conveyance, Charlotte swap and Phoenix downstream incoming claim, but their overlapping final ordering is not expressed safely enough for a universal executable branch. PHX own-origin rights still execute separately in the certified HOU/DAL/PHX chain."
+    },
+    {
+      "origin": "DET",
+      "year": 2033,
+      "round": 2,
+      "reason": "RealGM describes a heavily protected obligation to LAC but does not specify the exact protection range."
+    },
+    {
+      "origin": "CLE",
+      "year": 2031,
+      "round": 1,
+      "reason": "RealGM lists transfer to Denver only inside a Cleveland-Denver-L.A. Clippers transaction explicitly marked pending; retain Cleveland as last finalized owner and lock until completion."
+    },
+    {
+      "origin": "SAC",
+      "year": 2032,
+      "round": 2,
+      "reason": "Sacramento-to-Cleveland is finalized; RealGM lists the onward Cleveland-to-Denver transfer only inside a transaction explicitly marked pending. Retain Cleveland as last finalized owner and lock until completion."
+    }
+  ],
+  "cba_frozen": [
+    {
+      "origin": "BOS",
+      "year": 2032,
+      "round": 1
+    },
+    {
+      "origin": "MIN",
+      "year": 2032,
+      "round": 1
+    },
+    {
+      "origin": "PHX",
+      "year": 2032,
+      "round": 1
+    },
+    {
+      "origin": "CLE",
+      "year": 2033,
+      "round": 1
+    }
+  ],
+  "secondary_sources": [
+    "https://www.salaryswish.com/draft/2029",
+    "https://www.salaryswish.com/draft/2030"
+  ],
+  "pending_transactions": [
+    {
+      "transaction": "Cleveland-Denver-L.A. Clippers",
+      "source_status": "pending",
+      "as_of": "2026-08-20",
+      "policy": "Do not execute pending ownership as final. Preserve the last finalized owner and source-lock the affected origin cell until the transaction closes.",
+      "affected_assets": [
+        {
+          "origin": "CLE",
+          "year": 2031,
+          "round": 1,
+          "last_finalized_owner": "CLE",
+          "pending_target": "DEN"
+        },
+        {
+          "origin": "SAC",
+          "year": 2032,
+          "round": 2,
+          "last_finalized_owner": "CLE",
+          "pending_target": "DEN",
+          "via": "CLE"
+        }
+      ]
+    }
+  ]
+}

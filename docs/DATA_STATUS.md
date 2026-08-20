@@ -1,54 +1,60 @@
-# NBA Courtside — 2026 Data Status
+# NBA Courtside — Current Data Status
 
-**Build:** v0.2  
-**Freeze date:** 19 August 2026  
+**Build:** v0.24  
+**Freeze date:** 20 August 2026  
 **Starting season:** 2026–27
 
-## Current snapshot
+## Current universe
 
-- 30 NBA teams
-- 442 player/rights records in the current GM pool
-- 439 signed standard/disabled/inactive player records
-- 3 unsigned restricted free agents retained as team-rights cases
-- 392 players joined to a 2025–26 statistical profile and given current ratings
-- 50 records without a current NBA-derived rating
-- 44 projection-pending rookies/newcomers
-- 393 records with a matched headshot reference
-- 0 duplicate player identities in the structural audit
+- 30 NBA teams.
+- 442 current player/right records.
+- 393 players with season-final 2025–26 NBA evidence.
+- 49 source-backed 2026–27 projection records with separate confidence/provenance and null historical 2025–26 NBA stat rows.
+- 442/442 players rated; 0 projection-pending and 0 bootstrap-hybrid rows.
+- 442/442 certified NBA Years of Service inputs; the former age proxy is removed.
+- 442/442 audited contract structures and first actionable Bird-right outcomes.
+- One current source-certified Two-Way record: Dillon Mitchell (BOS).
+- 420/420 2027–2033 draft origin cells source-mapped.
+- Official 2026–27 80-game assigned schedule plus dynamic NBA Cup completion to 82 games.
 
-Two missed statistical name joins from v0.1 are repaired:
+## Player evidence policy
 
-- Egor Demin
-- Yang Hansen
+The original 392-player v0.19 final-NBA evidence/rating/simulation core remains hash-identical. v0.24 repairs Yanic Niederhauser from projection-only to a verified 41-game 2025–26 NBA row, producing 393 final-NBA players. The other 49 retain `stats_2025_26 = null` and use the distinct source-backed projection layer rather than fabricated NBA history.
 
-## Restricted free-agent treatment
+Projection inputs now comprise 36 NCAA 2025–26, 2 NCAA bridge 2024–25, 6 international 2025–26 and 5 prior-NBA 2024–25 records. Projection confidence remains separate from NBA evidence confidence.
 
-The following players are intentionally **not** represented as having a signed 2026–27 salary:
+## CBA source status
 
-| Player | Rights team | Qualifying offer | Cap hold |
-|---|---:|---:|---:|
-| Jalen Duren | DET | $9,615,600 | $19,449,432 |
-| Bennedict Mathurin | LAC | $8,774,590 | $27,562,719 |
-| Peyton Watson | DEN | $6,534,714 | $13,069,428 |
+- Exact/explicit `years_service` now exists for 442/442 starting records.
+- Bird continuity remains separate from Years of Service and team loyalty/tenure.
+- Team Salary and Apron Team Salary are distinct runtime ledgers.
+- Prospectively created contracts can carry likely/unlikely incentives, signing-bonus allocation and protected salary.
+- Historical incentive/bonus/guarantee-trigger values remain zero when the frozen source cannot prove them.
+- Starting veteran extension anniversaries remain locked when an original signing date is not safely certified.
 
-The GM engine should carry the cap hold until the player signs, accepts the qualifying offer, or the team renounces rights.
+## Special roster / transaction systems
 
-## Statistical status
+- 48-hour waiver wire with competing claims and league priority.
+- Protected-salary dead cap, set-off relief and qualifying stretch elections.
+- Disabled Player Exception applications/use.
+- Up to three Two-Way slots; 50-game NBA eligibility counter; postseason exclusion.
+- Exhibit 10 signings and eligible Two-Way conversions during preseason.
+- Annual cash-paid/cash-received accounting; cash is not yet a selectable primary trade-builder asset.
+- v0.22 TPE, sign-and-trade/BYC, exception-acquisition, trade-wait, aggregation, one-year Bird-consent, reacquisition, SRPE and CPU CBA-parity mechanics remain active.
 
-The bundled `raw/nba_stats_2025_2026_bootstrap.csv` is a **near-final 2025–26 bootstrap**, not the exact season-complete NBA.com export. It is retained to develop and validate the importer, ratings formulas, simulation-rate profiles and UI while the exact canonical bulk replacement is prepared.
+## Restricted free agents
 
-Because the seed is not final, v0.2 must not be treated as the canonical launch ratings database. The import architecture is deliberately source-agnostic at this layer: replacing the seed with the completed NBA.com traditional-stat export should not require changing the player schema or formulas.
+Jalen Duren (DET), Bennedict Mathurin (LAC) and Peyton Watson (DEN) remain unsigned RFA rights cases with qualifying-offer/cap-hold treatment rather than fabricated signed 2026–27 salaries.
 
-## Still required before a canonical current-day v1.0
+## Draft rights
 
-1. Replace the near-final statistical seed with the exact completed 2025–26 NBA.com bulk season export.
-2. Populate the rookie/pre-NBA projection importer for all 2026 rookies and overseas/newcomer players with no NBA sample.
-3. Add prior-season carryover for established players with zero or tiny 2025–26 samples caused by injury or absence.
-4. Finish two-way, camp, free-agent-pool and roster-cut classifications for the opening offseason state.
-5. Add date of birth, exact height/weight, NBA experience and draft metadata as first-class player fields.
-6. Extend the financial layer beyond salary rows to cap holds, dead money, exceptions and draft-pick ownership where the eventual CBA simulation needs them.
-7. Verify all remaining year-by-year option/guarantee details against the final contract source set.
+v0.21 remains active: 175 executable linked conditional cells, 4 executable protected cells, 230 atomic tradeable cells, 4 CBA-frozen cells and 7 source-locked origin cells. Linked claims resolve at Draft Night but are not falsely severed into ordinary whole-pick trade assets.
 
-## Defensive-rating limitation
+## Remaining current-day priorities
 
-The historical-portable ratings model deliberately uses traditional box-score evidence as its required common denominator. This makes the model portable to early historical seasons, but it cannot fully isolate individual defense. Modern tracking/on-off data may later be used as an optional confidence-enhancing layer for modern seasons; it should never become a required input that breaks historical portability.
+1. Presentation/accessibility/performance/save-migration and long-horizon franchise QA.
+2. Resolve remaining public-source pick ambiguities/pending transfers when authoritative detail becomes available.
+3. Incrementally source historical incentive/bonus/guarantee and extension-date details where they materially improve gameplay; keep unresolved inputs explicit rather than guessed.
+4. Optional future transaction-depth work such as primary trade-builder cash assets and claim-level draft-right trading.
+
+Historical season universes remain a separate expansion track.

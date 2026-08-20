@@ -1,0 +1,25 @@
+const fs=require('fs'),vm=require('vm'),path=require('path');const root=path.resolve(__dirname,'..');
+const noop=()=>{},dummy=()=>({innerHTML:'',classList:{add:noop,remove:noop,toggle:noop,contains:()=>false},onclick:null,style:{},dataset:{},disabled:false,addEventListener:noop,setAttribute:noop,getAttribute:()=>null,removeAttribute:noop,hasAttribute:()=>false});const store={nbaCourtsideTeam:'PHI'};
+const ctx={console,structuredClone,Date,Math,URLSearchParams,setTimeout:()=>{},clearTimeout:()=>{},confirm:()=>true,scrollTo:noop,window:{},localStorage:{getItem:k=>store[k]??null,setItem:(k,v)=>store[k]=String(v),removeItem:k=>delete store[k]},document:{documentElement:{style:{setProperty:noop}},querySelectorAll(){return[]},querySelector(){return dummy()},getElementById(){return dummy()},createElement(){return dummy()},addEventListener:noop,body:{style:{},appendChild(){}}},location:{reload:noop,search:''},navigator:{}};ctx.window=ctx;vm.createContext(ctx);
+for(const f of ['data/data.js','data/source-certification.js','data/future-pick-ledger.js','data/schedule.js','data/schedule-template.js','cba.js'])vm.runInContext(fs.readFileSync(root+'/'+f,'utf8'),ctx,{filename:f});
+let code=fs.readFileSync(root+'/app.js','utf8');code=code.replace(' cpuFreeAgencyRound(true);',' /* long-horizon: full FA behavior certified separately */');code=code.replace(/\/\/ Initialise\.[\s\S]*?\}\)\(\);\s*$/m,`renderView=()=>{};setTop=()=>{};toast=()=>{};closeSheet=()=>{};refreshSeasonConfig();userTeam='PHI';state.userTeam='PHI';ensureAllProjectionRatings();autoTrimCpu();autoFillCpu();ensureAllRotations();window.__v25={state:()=>state,players:()=>players,teams,beginOffseason,lotteryRevealAll,startScoutingHub,startDraftNight,currentDraftTeam,userBoardAvailable,draftAvailable,userDraftPlayer,cpuDraftOne,finishDraft,advanceFreeAgencyDay,enterTrainingCamp,signedCount,twoWayCount,teamPlayers,currentStatus,assetScore,waivePlayer,freeAgents,overall,startNextSeason,ensureFuturePickHorizon,persist};\n})();`);vm.runInContext(code,ctx,{filename:'app-long-v25.js',timeout:120000});
+const T=ctx.__v25,assert=(x,m)=>{if(!x)throw new Error(m)},start=Date.now(),seasonRows=[];
+function finishOneSeason(){
+ const s=T.state();s.seasonComplete=true;s.awards={mvp:null};s.postseason={champion:'OKC',finalsMvp:null,finals:null};
+ T.beginOffseason();assert(s.phase==='lottery','lottery phase '+s.seasonYear);T.lotteryRevealAll();T.startScoutingHub();T.startDraftNight();
+ let guard=0;while(s.draft.pickIndex<60){if(++guard>200)throw new Error('draft loop stuck '+s.seasonYear+' '+s.draft.pickIndex);if(T.currentDraftTeam()==='PHI'){const p=T.userBoardAvailable()[0]||T.draftAvailable()[0];assert(p,'user draft candidate');T.userDraftPlayer(p.id)}else T.cpuDraftOne()}
+assert(s.draft.selections.length===60,'60 draft selections');T.finishDraft();assert(s.phase==='free_agency','FA phase');
+ // Full free-agency behavior is certified separately by test_offseason_bridge_v24.js. Long-horizon mode compresses the market to stress state durability.
+ s.freeAgency.complete=true;s.freeAgency.rfaMatches={};T.enterTrainingCamp();assert(s.phase==='training_camp','camp phase');
+ while(T.signedCount('PHI')>15){const cut=T.teamPlayers('PHI').filter(p=>T.currentStatus(p)!=='waivers'&&T.currentStatus(p)!=='two_way').sort((a,b)=>T.assetScore(a)-T.assetScore(b))[0];assert(cut&&T.waivePlayer(cut,'PHI',{cpu:true}),'user trim')}
+ while(T.signedCount('PHI')<15){const p=T.freeAgents().sort((a,b)=>T.overall(b)-T.overall(a))[0];assert(p,'user fill');s.assignments[p.id]='PHI';s.statusOverrides[p.id]='active'}
+ T.startNextSeason();assert(s.phase==='regular_season'&&s.seasonStarted,'next season start');
+ for(const tm of T.teams){assert(T.signedCount(tm.abbr)<=15,tm.abbr+' standard roster >15');assert(T.twoWayCount(tm.abbr)<=3,tm.abbr+' two-way >3')}
+ T.ensureFuturePickHorizon();const maxNeeded=s.seasonYear+7;assert(s.draftAssets.some(x=>x.year===maxNeeded),'future pick horizon '+maxNeeded);
+ const ids=T.players().map(p=>p.id);assert(new Set(ids).size===ids.length,'unique player ids');
+ T.persist();const raw=store.nbaCourtsideSaveV25;assert(raw,'save written');const parsed=JSON.parse(raw);assert(parsed.seasonYear===s.seasonYear&&parsed.version===25,'save roundtrip year');
+ seasonRows.push({year:s.seasonYear,players:T.players().length,generated:s.generatedPlayers.length,saveBytes:Buffer.byteLength(raw),draftAssets:s.draftAssets.length,history:s.history.length});
+}
+for(let i=0;i<10;i++)finishOneSeason();
+const s=T.state(),last=seasonRows.at(-1);assert(s.seasonYear===2036,'10-season horizon year');assert(last.saveBytes<4_500_000,'save size safety margin');assert(s.history.length===10,'history seasons');
+console.log(JSON.stringify({status:'PASS',seasons:10,endYear:s.seasonYear,elapsedMs:Date.now()-start,finalPlayers:last.players,generatedPlayers:last.generated,saveBytes:last.saveBytes,maxSaveBytes:Math.max(...seasonRows.map(x=>x.saveBytes)),draftAssets:last.draftAssets,history:last.history,seasonRows},null,2));

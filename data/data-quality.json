@@ -1,14 +1,14 @@
 {
-  "freeze_date": "2026-08-19",
-  "version": "v0.2",
+  "freeze_date": "2026-08-20",
+  "version": "v0.25",
   "player_rows": 442,
   "teams": 30,
-  "signed_standard_or_inactive": 439,
+  "signed_standard_or_inactive": 438,
   "unsigned_restricted_free_agents": 3,
-  "established_with_2025_26_stats": 392,
-  "rated_players": 392,
-  "projection_pending": 44,
-  "no_current_rating": 50,
+  "established_with_2025_26_stats": 393,
+  "rated_players": 442,
+  "projection_pending": 0,
+  "no_current_rating": 0,
   "headshot_matched": 393,
   "repaired_stat_matches": [
     "Yang Hansen",
@@ -35,8 +35,23 @@
     }
   },
   "warnings": [
-    "2025-26 statistical bulk seed is near-final and not yet the exact official NBA.com season-complete export.",
     "Historical-portable box-score ratings intentionally do not claim to capture every component of defense.",
-    "Rookies/newcomers without NBA evidence remain projection-pending until the pre-NBA translation layer is populated."
-  ]
+    "The 49 no-2025-26-NBA-baseline players use source-backed projections, not fabricated 2025-26 NBA statistics.",
+    "Projection confidence reflects source/sample/translation uncertainty; missing source fields fall back to NBA position priors and are not asserted as historical facts.",
+    "49 players without 2025-26 NBA evidence use source-backed projections; translated inputs are not historical NBA stats."
+  ],
+  "season_complete_verified": 393,
+  "bootstrap_hybrid": 0,
+  "source_population_rows": 582,
+  "source_stint_rows": 733,
+  "source": "Basketball-Reference 2025-26 final regular-season Player Per Game table via frozen public dataset mirror.",
+  "source_backed_projection_players": 49,
+  "projection_population": {
+    "rookie_2026_projected": 37,
+    "pre_nba_or_no_nba_sample_projected": 6,
+    "no_2025_26_nba_sample_projected": 6
+  },
+  "source_backed_projection": 49,
+  "signed_two_way": 1,
+  "release_readiness": "v0.25 changes delivery/runtime hardening only; certified player evidence/projection counts are unchanged from v0.24."
 }

@@ -1,17 +1,58 @@
-# Draft Assets — v0.11
+# Draft Assets — v0.21
 
 ## Persistent asset ledger
-First- and second-round draft assets exist independently from players. Each asset stores year, round, origin, current owner, protection metadata and whether the right is a complex linked entitlement.
 
-The trade window covers seven future drafts. When a future year enters the horizon, the engine creates that franchise's own future first and second so the universe can continue indefinitely.
+NBA Courtside stores 2027–2033 first- and second-round origin rights independently from players. The current certified ledger contains **420 origin cells** (30 teams × 2 rounds × 7 years).
 
-## 2027 starting rights
-The build seeds current publicly documented 2027 first-round rights, including simple protections such as Dallas 1–2 / Charlotte 3–30, Lakers 1–4 / Memphis 5–30, Miami lottery protection, San Antonio's Sacramento/Oklahoma City split, the Houston/Brooklyn swap, the Milwaukee/New Orleans chain, the Utah/Cleveland/Minnesota chain and the OKC/Clippers/Denver/Toronto chain.
+Each cell records origin, current source owner, status, protection/condition metadata, whether it is tradeable as an atomic pick, and its source-safety state.
 
-Complex linked 2027 rights are displayed but cannot be re-traded in v0.11. They resolve automatically after draft positions are known.
+## Executable rights
+
+Draft Night resolves source-certified:
+
+- direct transfers,
+- top-N protections,
+- favorable/less-favorable swaps,
+- multi-team ordering rights,
+- rollover protections that depend on prior draft outcomes,
+- first/second-round fallback linkage,
+- current CBA-frozen pick restrictions.
+
+Resolution uses the generated **origin draft order**. Historical serial conditions use `pickHistory`, which stores origin order rather than post-conveyance owners.
+
+## Trade representation
+
+Conditional rights are intentionally **non-severable** in the standard trade UI. A swap claim or “better of” entitlement is not represented as ownership of an entire origin pick. The claim executes at Draft Night, but its ledger cell cannot be re-traded as an atomic pick until Courtside gains a dedicated claim-level trade object.
+
+Current v0.21 totals:
+
+- 230 atomic tradeable cells.
+- 175 executable conditional, non-severable cells.
+- 4 executable protected cells.
+- 4 CBA-frozen cells.
+- 7 source-locked origin cells.
+
+## Remaining source locks
+
+Four 2029 first-round origin cells — CHA, CLE, MIN and UTA — remain source-locked because the combined Utah/Charlotte/Phoenix layered ordering cannot be safely reduced from the available public descriptions for every possible branch. Phoenix's **own** 2029 origin is separately executable in the certified HOU/DAL/PHX chain; only its downstream incoming claim from the layered structure remains unresolved.
+
+Detroit's 2033 second also remains source-locked because the public source states that it is heavily protected to the Clippers without publishing the exact protection range.
+
+Two current cells are source-locked for a different reason: CLE 2031 R1 and SAC 2032 R2. RealGM currently lists Denver as their destination only through a Cleveland–Denver–L.A. Clippers transaction explicitly marked pending. Courtside therefore keeps the last finalized owner (CLE for both), records Denver as the pending target, and prevents ordinary trading until the transaction closes.
+
+Courtside retains safe finalized ownership in unresolved or pending branches rather than inventing a condition or treating an unclosed transaction as settled.
+
+## CBA-frozen firsts
+
+- BOS 2032 R1
+- MIN 2032 R1
+- PHX 2032 R1
+- CLE 2033 R1
+
+These are known restrictions, not missing source data, and remain unavailable in ordinary pick trading while frozen.
 
 ## Stepien layer
-The prototype enforces the core consecutive-future-first concept: a proposed deal is blocked when trading the selected first-round assets would leave that team without any first-round pick in two consecutive future drafts. Full CBA exceptions and second-apron frozen-pick rules are reserved for the dedicated CBA pass.
 
-## Known data limitation
-2027 second-round chains and the full 2028–2033 inherited real-world pick ledger are not yet certified. Those years currently use a functional own-pick scaffold unless a right is explicitly seeded. This is marked in `data/draft-assets-2026-08-19.json` rather than being presented as exact.
+The trade engine continues to enforce the core consecutive-future-first rule against atomic first-round assets. Linked claims remain outside ordinary trade proposals, preventing the Stepien check from treating conditional rights as guaranteed whole picks.
+
+See `docs/FUTURE_PICK_TREES_V21.md` for the detailed resolver and certification boundary.
