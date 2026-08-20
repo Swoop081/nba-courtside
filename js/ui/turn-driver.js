@@ -1,0 +1,2 @@
+import { decisionOwner, cpuDecision, executeCpuDecision } from "../ai/WrestlingAI.js?v=0.13.72";
+export function advanceCpuUntilHuman(game,humanId="p1",cpuId="p2",limit=80){let steps=0;while(game&&game.state().phase!=="MATCH_OVER"&&decisionOwner(game.state())===cpuId&&steps<limit){const d=cpuDecision(game,cpuId);if(!executeCpuDecision(game,d,cpuId))break;steps++;}return {steps,limitReached:steps>=limit};}

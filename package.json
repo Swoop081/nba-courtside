@@ -1,0 +1,25 @@
+{
+  "name": "wwe-legacy-ccg",
+  "version": "0.13.72",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "flow": "node tools/flow-audit.mjs",
+    "economy": "node tools/economy-sim.mjs",
+    "economy-long": "node tools/long-term-economy-sim.mjs",
+    "balance": "node tools/balance-sim.mjs",
+    "art": "node tools/art-audit.mjs",
+    "stamp-cache": "node tools/stamp-cache-version.mjs",
+    "validate": "node tools/rebuild-validate.mjs",
+    "generate-studio": "node tools/generate-card-studio-data.mjs",
+    "card-ids": "node tools/card-id-audit.mjs",
+    "final-balance": "node tools/final-season1-sim.mjs",
+    "dead-turns": "node tools/dead-turn-audit.mjs",
+    "counter-states": "node tools/counter-state-audit.mjs",
+    "package-clean": "node tools/package-clean.mjs",
+    "launch-balance": "node tools/launch-roster-balance-sim.mjs",
+    "card-effects": "node tools/card-effect-audit.mjs",
+    "pre-release-balance": "node tools/pre-release-roster-sim.mjs"
+  }
+}

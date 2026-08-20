@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="1000" viewBox="0 0 680 1000">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#060606"/><stop offset=".52" stop-color="#17130b"/><stop offset="1" stop-color="#4b3710"/></linearGradient><radialGradient id="glow"><stop stop-color="#ffdc7d" stop-opacity=".25"/><stop offset=".45" stop-color="#c6922a" stop-opacity=".07"/><stop offset="1" stop-opacity="0"/></radialGradient><linearGradient id="frame" x1="0" x2="1"><stop stop-color="#f0cf76"/><stop offset=".5" stop-color="#fff" stop-opacity=".72"/><stop offset="1" stop-color="#8e6720"/></linearGradient><linearGradient id="nameFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff8cf"/><stop offset=".58" stop-color="#fff8cf"/><stop offset="1" stop-color="#c8972a"/></linearGradient></defs>
+  <rect width="680" height="1000" rx="28" fill="url(#bg)"/><ellipse cx="340" cy="280" rx="380" ry="430" fill="url(#glow)"/>
+  <g opacity=".15" fill="#e5bd55"><path d="M340 10L-20 1030H70L340 10Z"/><path d="M340 10L85 1030H165L340 10Z"/><path d="M340 10L190 1030H275L340 10Z"/><path d="M340 10L405 1030H490L340 10Z"/><path d="M340 10L510 1030H590L340 10Z"/><path d="M340 10L610 1030H700L340 10Z"/></g>
+  <g id="WRESTLER_ARTWORK"/>
+  <image id="SET_LOGO" href="../../art/hall-of-fame-series-1/hall-of-fame-logo.png" x="455" y="35" width="185" height="115" preserveAspectRatio="xMidYMid meet"/>
+  <text id="SUPERSTAR_NAME" x="340" y="935" text-anchor="middle" fill="url(#nameFill)" stroke="#07152d" stroke-width="8" paint-order="stroke fill" font-size="68" font-family="Arial Black, Impact, sans-serif" font-style="italic" font-weight="900">SUPERSTAR NAME</text>
+  <rect x="115" y="955" width="450" height="3" fill="#c8972a"/>
+  <rect x="8" y="8" width="664" height="984" rx="28" fill="none" stroke="url(#frame)" stroke-width="8"/><rect x="20" y="20" width="640" height="960" rx="21" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/>
+</svg>
