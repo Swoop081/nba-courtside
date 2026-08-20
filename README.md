@@ -1,8 +1,22 @@
-# NBA Courtside — v0.28 Postgame Resume + Season-Started Boot Hotfix
+# NBA Courtside — v0.29 Ratings Foundation Rebuild
 
-**Frozen:** 20 August 2026  
-**Baseline:** v0.26 Presentation Polish + Device QA  
+**Frozen:** 21 August 2026  
+**Baseline:** v0.28 Postgame Resume + Season-Started Boot Hotfix  
 **Save schema:** 25 (`nbaCourtsideSaveV25`)
+
+
+## v0.29 ratings foundation
+
+- Replaces the old 50–99 league-percentile Overall model with an NBA-calibrated **current-ability scale**.
+- Overall is now driven by per-game production/efficiency, real role/minutes and bounded low-sample protection for established players rather than unrestricted per-36 bench production.
+- Impact is now availability-sensitive season value; a 10–20 game sample can no longer post an unshrunk elite Impact score.
+- Defense summary uses position-adjusted box evidence plus bounded official recent All-Defensive recognition so elite perimeter defense is not reduced to steals/blocks alone.
+- Recent All-NBA/All-Star recognition is used as a validation floor, not as a substitute for statistical evaluation.
+- 393 certified 2025–26 NBA rows are exact-source audited; 49 no-NBA-sample players remain projection-only with no fabricated 2025–26 stats.
+- Granular simulation profiles/rates are intentionally unchanged from v0.28 to preserve Game Day calibration.
+- New distribution: **75 players 80+**, **29 players 86+**, **8 players 90+**, median **72**. v0.28 had 143 players at 80+.
+- Regression examples: Paul Reed 84→71, Kel'el Ware 85→76, Sandro Mamukelashvili 85→74; Giannis 85→91, Jayson Tatum 80→89, Lu Dort 67→80, Herb Jones 69→77.
+- Retained Cup regression also caught and fixes a misplaced v0.28 `ensureNBAProgress()` boot invocation that could recurse on season-started/Cup state; the initial call is now structurally outside the helper.
 
 ## v0.28 hotfix
 

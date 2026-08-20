@@ -1,6 +1,6 @@
 {
-  "freeze_date": "2026-08-20",
-  "version": "v0.25",
+  "freeze_date": "2026-08-21",
+  "version": "v0.29",
   "player_rows": 442,
   "teams": 30,
   "signed_standard_or_inactive": 438,
@@ -35,10 +35,9 @@
     }
   },
   "warnings": [
-    "Historical-portable box-score ratings intentionally do not claim to capture every component of defense.",
-    "The 49 no-2025-26-NBA-baseline players use source-backed projections, not fabricated 2025-26 NBA statistics.",
-    "Projection confidence reflects source/sample/translation uncertainty; missing source fields fall back to NBA position priors and are not asserted as historical facts.",
-    "49 players without 2025-26 NBA evidence use source-backed projections; translated inputs are not historical NBA stats."
+    "Display Overall is no longer a direct league-percentile transform.",
+    "Defense summary uses official recent All-Defensive recognition as a bounded prior because portable box scores do not capture matchup difficulty or deterrence.",
+    "Granular simulation rates remain the certified v0.28 rate evidence; v0.29 intentionally avoids destabilizing Game Day calibration."
   ],
   "season_complete_verified": 393,
   "bootstrap_hybrid": 0,
@@ -53,5 +52,6 @@
   },
   "source_backed_projection": 49,
   "signed_two_way": 1,
-  "release_readiness": "v0.25 changes delivery/runtime hardening only; certified player evidence/projection counts are unchanged from v0.24."
+  "release_readiness": "v0.25 changes delivery/runtime hardening only; certified player evidence/projection counts are unchanged from v0.24.",
+  "rating_warning": "Overall/Impact rebuilt in v0.29; certified 2025-26 stat rows and simulation profiles retained."
 }

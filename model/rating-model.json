@@ -1,5 +1,5 @@
 {
-  "version": "0.23",
+  "version": "0.29",
   "historical_portability": "core inputs are traditional box-score stats available across eras",
   "input_fields": [
     "GP",
@@ -22,7 +22,7 @@
     "age",
     "position"
   ],
-  "normalization": "per-36 volume + season-relative percentile normalization",
+  "normalization": "certified 2025-26 per-game production + role/sample controls; granular simulation rates remain per-36",
   "bayesian_shrinkage": {
     "three_point_attempt_prior": 100,
     "two_point_attempt_prior": 150,
@@ -31,7 +31,7 @@
     "league_2p_pct": 0.5508,
     "league_ft_pct": 0.7831
   },
-  "display_rating": "clip(round(50 + 49 * percentile_score), 35, 99)",
+  "display_rating": "piecewise NBA-calibrated current-ability scale; not a league percentile mapped to 50-99",
   "ratings": {
     "three_pt": "75% adjusted 3P% percentile + 25% 3PA/36 percentile",
     "finishing": "65% adjusted 2P% percentile + 25% 2PA/36 + 10% FTA/36",
@@ -69,8 +69,8 @@
     "attribute_aging": "athletic traits decline earlier; shooting/playmaking/IQ can peak later and decline slower",
     "retirement": "probabilistic after late-career decline, not a fixed age"
   },
-  "overall": "72% position-weighted skill overall + 28% season-relative impact summary",
-  "impact": "36% PTS/36 + 19% AST/36 + 13% REB/36 + 8% STL/36 + 8% BLK/36 + 16% true-shooting proxy, all season-relative percentile scores",
+  "overall": "expected 2026-27 current ability from per-game Game Score-style production, bounded low-sample established-player prior, and recent official honor validation floors",
+  "impact": "availability-sensitive 2025-26 season value; no unshrunk per-36 impact percentile",
   "population": "Complete 2025-26 NBA regular-season player population; multi-team players use season-total aggregate rows.",
   "projection_v0_23": {
     "reference_population": "392 unchanged v0.19 season-complete NBA players",
@@ -82,5 +82,24 @@
     ],
     "simulation_policy": "synthetic NBA-like rates are uncertainty-shrunk before Game Day use",
     "role_policy": "projected minutes are stored separately from historical MPG"
+  },
+  "defense_summary": "position-adjusted STL/36 + BLK/36 + DREB/36 with bounded recent All-Defensive recognition; granular defensive rate attributes remain simulation-safe box-score evidence",
+  "sample_control": "current-ability confidence = min(1,total minutes/1200); only established players below that threshold blend toward a restrained contract/recent-honor prior",
+  "projection_scale": "projection-only v0.23 source-backed ratings rebased to the v0.29 current-ability OVR scale without populating fake 2025-26 NBA stats",
+  "scale_bands": {
+    "94_99": "MVP/generational",
+    "90_93": "All-NBA superstar",
+    "86_89": "All-Star",
+    "82_85": "high-end starter",
+    "78_81": "solid starter",
+    "74_77": "rotation player",
+    "70_73": "bench player",
+    "65_69": "fringe/developmental",
+    "below_65": "deep reserve/raw prospect"
+  },
+  "official_validation_anchors": {
+    "2025_26": "All-NBA, All-Star and All-Defensive recognition",
+    "2024_25": "All-NBA and All-Defensive recent-prior protection",
+    "2023_24": "All-Defensive legacy defense floor only"
   }
 }

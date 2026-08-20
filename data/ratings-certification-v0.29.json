@@ -1,0 +1,408 @@
+{
+  "version": "v0.29",
+  "freeze_date": "2026-08-21",
+  "status": "PASS",
+  "players": 442,
+  "evidence_players": 393,
+  "projection_players": 49,
+  "distribution": {
+    "min": 60,
+    "median": 72.0,
+    "mean": 72.93,
+    "max": 96,
+    "80_plus": 75,
+    "86_plus": 29,
+    "90_plus": 8
+  },
+  "old_distribution": {
+    "80_plus": 143
+  },
+  "spot_checks": [
+    {
+      "name": "Nikola Jokic",
+      "overall": 96,
+      "impact": 94,
+      "offense": 96,
+      "defense": 75
+    },
+    {
+      "name": "Shai Gilgeous-Alexander",
+      "overall": 96,
+      "impact": 93,
+      "offense": 96,
+      "defense": 78
+    },
+    {
+      "name": "Luka Doncic",
+      "overall": 94,
+      "impact": 92,
+      "offense": 96,
+      "defense": 78
+    },
+    {
+      "name": "Victor Wembanyama",
+      "overall": 92,
+      "impact": 89,
+      "offense": 88,
+      "defense": 96
+    },
+    {
+      "name": "Giannis Antetokounmpo",
+      "overall": 91,
+      "impact": 85,
+      "offense": 92,
+      "defense": 75
+    },
+    {
+      "name": "Jayson Tatum",
+      "overall": 89,
+      "impact": 73,
+      "offense": 84,
+      "defense": 74
+    },
+    {
+      "name": "Trae Young",
+      "overall": 82,
+      "impact": 71,
+      "offense": 86,
+      "defense": 68
+    },
+    {
+      "name": "Ja Morant",
+      "overall": 81,
+      "impact": 72,
+      "offense": 83,
+      "defense": 72
+    },
+    {
+      "name": "Jalen Duren",
+      "overall": 86,
+      "impact": 84,
+      "offense": 84,
+      "defense": 72
+    },
+    {
+      "name": "Paul Reed",
+      "overall": 71,
+      "impact": 70,
+      "offense": 69,
+      "defense": 78
+    },
+    {
+      "name": "Herbert Jones",
+      "overall": 77,
+      "impact": 67,
+      "offense": 69,
+      "defense": 84
+    },
+    {
+      "name": "Lu Dort",
+      "overall": 80,
+      "impact": 66,
+      "offense": 67,
+      "defense": 88
+    },
+    {
+      "name": "Kel'el Ware",
+      "overall": 76,
+      "impact": 75,
+      "offense": 72,
+      "defense": 76
+    },
+    {
+      "name": "Sandro Mamukelashvili",
+      "overall": 74,
+      "impact": 74,
+      "offense": 74,
+      "defense": 71
+    }
+  ],
+  "largest_drops": [
+    {
+      "id": "joan-beringer",
+      "name": "Joan Beringer",
+      "old_overall": 78,
+      "new_overall": 64,
+      "delta": -14
+    },
+    {
+      "id": "bones-hyland",
+      "name": "Bones Hyland",
+      "old_overall": 82,
+      "new_overall": 68,
+      "delta": -14
+    },
+    {
+      "id": "thomas-bryant",
+      "name": "Thomas Bryant",
+      "old_overall": 80,
+      "new_overall": 67,
+      "delta": -13
+    },
+    {
+      "id": "paul-reed",
+      "name": "Paul Reed",
+      "old_overall": 84,
+      "new_overall": 71,
+      "delta": -13
+    },
+    {
+      "id": "myron-gardner",
+      "name": "Myron Gardner",
+      "old_overall": 77,
+      "new_overall": 64,
+      "delta": -13
+    },
+    {
+      "id": "johni-broome",
+      "name": "Johni Broome",
+      "old_overall": 73,
+      "new_overall": 60,
+      "delta": -13
+    },
+    {
+      "id": "quinten-post",
+      "name": "Quinten Post",
+      "old_overall": 80,
+      "new_overall": 67,
+      "delta": -13
+    },
+    {
+      "id": "branden-carlson",
+      "name": "Branden Carlson",
+      "old_overall": 79,
+      "new_overall": 66,
+      "delta": -13
+    },
+    {
+      "id": "tristan-vukcevic",
+      "name": "Tristan Vukcevic",
+      "old_overall": 81,
+      "new_overall": 68,
+      "delta": -13
+    },
+    {
+      "id": "trayce-jackson-davis",
+      "name": "Trayce Jackson-Davis",
+      "old_overall": 76,
+      "new_overall": 64,
+      "delta": -12
+    },
+    {
+      "id": "tyrese-proctor",
+      "name": "Tyrese Proctor",
+      "old_overall": 76,
+      "new_overall": 64,
+      "delta": -12
+    },
+    {
+      "id": "tolu-smith",
+      "name": "Tolu Smith III",
+      "old_overall": 76,
+      "new_overall": 64,
+      "delta": -12
+    },
+    {
+      "id": "yanic-niederhauser",
+      "name": "Yanic Niederhauser",
+      "old_overall": 76,
+      "new_overall": 64,
+      "delta": -12
+    },
+    {
+      "id": "daron-holmes",
+      "name": "DaRon Holmes",
+      "old_overall": 75,
+      "new_overall": 63,
+      "delta": -12
+    },
+    {
+      "id": "asa-newell",
+      "name": "Asa Newell",
+      "old_overall": 77,
+      "new_overall": 65,
+      "delta": -12
+    },
+    {
+      "id": "pacome-dadiet",
+      "name": "Pacôme Dadiet",
+      "old_overall": 72,
+      "new_overall": 61,
+      "delta": -11
+    },
+    {
+      "id": "tyler-kolek",
+      "name": "Tyler Kolek",
+      "old_overall": 75,
+      "new_overall": 64,
+      "delta": -11
+    },
+    {
+      "id": "alijah-martin",
+      "name": "Alijah Martin",
+      "old_overall": 73,
+      "new_overall": 62,
+      "delta": -11
+    },
+    {
+      "id": "goga-bitadze",
+      "name": "Goga Bitadze",
+      "old_overall": 81,
+      "new_overall": 70,
+      "delta": -11
+    },
+    {
+      "id": "marcus-sasser",
+      "name": "Marcus Sasser",
+      "old_overall": 75,
+      "new_overall": 64,
+      "delta": -11
+    }
+  ],
+  "largest_rises": [
+    {
+      "id": "lu-dort",
+      "name": "Lu Dort",
+      "old_overall": 67,
+      "new_overall": 80,
+      "delta": 13
+    },
+    {
+      "id": "jayson-tatum",
+      "name": "Jayson Tatum",
+      "old_overall": 80,
+      "new_overall": 89,
+      "delta": 9
+    },
+    {
+      "id": "cade-cunningham",
+      "name": "Cade Cunningham",
+      "old_overall": 84,
+      "new_overall": 92,
+      "delta": 8
+    },
+    {
+      "id": "draymond-green",
+      "name": "Draymond Green",
+      "old_overall": 72,
+      "new_overall": 80,
+      "delta": 8
+    },
+    {
+      "id": "herbert-jones",
+      "name": "Herbert Jones",
+      "old_overall": 69,
+      "new_overall": 77,
+      "delta": 8
+    },
+    {
+      "id": "jaylen-brown",
+      "name": "Jaylen Brown",
+      "old_overall": 82,
+      "new_overall": 89,
+      "delta": 7
+    },
+    {
+      "id": "giannis-antetokounmpo",
+      "name": "Giannis Antetokounmpo",
+      "old_overall": 85,
+      "new_overall": 91,
+      "delta": 6
+    },
+    {
+      "id": "devin-booker",
+      "name": "Devin Booker",
+      "old_overall": 80,
+      "new_overall": 86,
+      "delta": 6
+    },
+    {
+      "id": "amen-thompson",
+      "name": "Amen Thompson",
+      "old_overall": 80,
+      "new_overall": 86,
+      "delta": 6
+    },
+    {
+      "id": "cason-wallace",
+      "name": "Cason Wallace",
+      "old_overall": 74,
+      "new_overall": 80,
+      "delta": 6
+    },
+    {
+      "id": "joel-embiid",
+      "name": "Joel Embiid",
+      "old_overall": 84,
+      "new_overall": 89,
+      "delta": 5
+    },
+    {
+      "id": "ausar-thompson",
+      "name": "Ausar Thompson",
+      "old_overall": 77,
+      "new_overall": 82,
+      "delta": 5
+    },
+    {
+      "id": "paolo-banchero",
+      "name": "Paolo Banchero",
+      "old_overall": 79,
+      "new_overall": 84,
+      "delta": 5
+    },
+    {
+      "id": "keegan-murray",
+      "name": "Keegan Murray",
+      "old_overall": 71,
+      "new_overall": 76,
+      "delta": 5
+    },
+    {
+      "id": "deni-avdija",
+      "name": "Deni Avdija",
+      "old_overall": 82,
+      "new_overall": 87,
+      "delta": 5
+    },
+    {
+      "id": "lauri-markkanen",
+      "name": "Lauri Markkanen",
+      "old_overall": 83,
+      "new_overall": 88,
+      "delta": 5
+    },
+    {
+      "id": "jalen-brunson",
+      "name": "Jalen Brunson",
+      "old_overall": 85,
+      "new_overall": 89,
+      "delta": 4
+    },
+    {
+      "id": "shai-gilgeous-alexander",
+      "name": "Shai Gilgeous-Alexander",
+      "old_overall": 92,
+      "new_overall": 96,
+      "delta": 4
+    },
+    {
+      "id": "anthony-davis",
+      "name": "Anthony Davis",
+      "old_overall": 81,
+      "new_overall": 85,
+      "delta": 4
+    },
+    {
+      "id": "lebron-james",
+      "name": "LeBron James",
+      "old_overall": 83,
+      "new_overall": 86,
+      "delta": 3
+    }
+  ],
+  "simulation_profiles_changed": false,
+  "contracts_changed": false,
+  "rosters_changed": false,
+  "save_schema_changed": false
+}
