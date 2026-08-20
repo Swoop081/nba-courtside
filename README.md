@@ -1,4 +1,23 @@
-# NBA Courtside — v0.26 Presentation Polish + Device QA
+# NBA Courtside — v0.27 Main Menu + Boot Recovery Hotfix
+
+**Frozen:** 20 August 2026  
+**Baseline:** v0.26 Presentation Polish + Device QA  
+**Save schema:** 25 (`nbaCourtsideSaveV25`)
+
+## v0.27 hotfix
+
+- Boots to a real **Main Menu** instead of dropping directly into team selection.
+- Main Menu routes: **Continue Franchise**, **New Franchise**, and **Exhibition**.
+- Team selection is now a separate screen with a Back action.
+- The in-franchise top-right button now returns to Main Menu without deleting the save.
+- Starting a new franchise only replaces the current save after a team is chosen and confirmed.
+- Repairs the literal escaped `\n` markup that was visible above the app on iPhone Safari and could prematurely terminate the document head.
+- Storage reads/writes are guarded; unavailable local storage no longer aborts franchise boot, with session storage used where available.
+- Game Day now reads/writes schema-25 saves first; Exhibition also reads the current v25 franchise universe first.
+- No basketball data, ratings, simulation calibration, schedule, CBA, Bird-right, future-pick, or schema changes.
+
+## Retained v0.26 release notes
+
 
 NBA Courtside is an iPhone-first NBA franchise/GM simulator. **v0.25 supersedes v0.24 as the current working baseline.** This pass freezes the certified basketball/CBA model and hardens the app for a current-day 1.0 release candidate: accessibility, rendering performance, save migration and multi-season durability.
 

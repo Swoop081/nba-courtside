@@ -5,6 +5,7 @@ const basePlayers=[...D.players];
 const teams=[...D.league.teams].sort((a,b)=>a.name.localeCompare(b.name));
 const teamMap=new Map(teams.map(t=>[t.abbr,t]));
 const $=s=>document.querySelector(s);
+function storageGet(k){try{return window.localStorage?.getItem(k)??window.sessionStorage?.getItem(k)??null}catch(e){try{return window.sessionStorage?.getItem(k)??null}catch(_){return null}}}
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const initials=n=>(n||'?').split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 const team=a=>teamMap.get(a);
@@ -12,7 +13,7 @@ const prettyPeriod=n=>n===1?'1ST':n===2?'2ND':n===3?'3RD':n===4?'4TH':`OT${n===5
 const fmtClock=s=>`${Math.floor(Math.max(0,s)/60)}:${String(Math.floor(Math.max(0,s)%60)).padStart(2,'0')}`;
 const pct=v=>Math.round(clamp(v,0,100));
 
-function readSave(){for(const key of ['nbaCourtsideSaveV14','nbaCourtsideSaveV13','nbaCourtsideSaveV12','nbaCourtsideSaveV11','nbaCourtsideSaveV10','nbaCourtsideSaveV09','nbaCourtsideSaveV08','nbaCourtsideSaveV07','nbaCourtsideSaveV05','nbaCourtsideSaveV04']){try{const x=JSON.parse(localStorage.getItem(key)||'null');if(x)return x}catch(e){}}return null}
+function readSave(){for(const key of ['nbaCourtsideSaveV25','nbaCourtsideSaveV24','nbaCourtsideSaveV23','nbaCourtsideSaveV22','nbaCourtsideSaveV21','nbaCourtsideSaveV20','nbaCourtsideSaveV19','nbaCourtsideSaveV18','nbaCourtsideSaveV17','nbaCourtsideSaveV16','nbaCourtsideSaveV15','nbaCourtsideSaveV14','nbaCourtsideSaveV13','nbaCourtsideSaveV12','nbaCourtsideSaveV11','nbaCourtsideSaveV10','nbaCourtsideSaveV09','nbaCourtsideSaveV08','nbaCourtsideSaveV07','nbaCourtsideSaveV05','nbaCourtsideSaveV04']){try{const x=JSON.parse(storageGet(key)||'null');if(x)return x}catch(e){}}return null}
 const save=readSave();
 let players=[...basePlayers,...(save?.generatedPlayers||[])];
 if(save?.playerOverrides){for(const p of players){const o=save.playerOverrides[p.id];if(o){if(o.age!=null)p.age=o.age;if(o.ratings)p.ratings=structuredClone(o.ratings);if(o.development_profile)p.development_profile={...(p.development_profile||{}),...o.development_profile}}}}
@@ -30,7 +31,7 @@ function lastName(p){return p.name.split(' ').slice(-1)[0]}
 function setColors(){const h=team(homeTeam),a=team(awayTeam);document.documentElement.style.setProperty('--home',h.primary_color);document.documentElement.style.setProperty('--home2',h.secondary_color);document.documentElement.style.setProperty('--away',a.primary_color);document.documentElement.style.setProperty('--away2',a.secondary_color)}
 function topPlayers(a,n=2){return teamPlayers(a).sort((x,y)=>overall(y)-overall(x)).slice(0,n)}
 
-let homeTeam=localStorage.getItem('nbaCourtsideTeam')||'TOR';
+let homeTeam=storageGet('nbaCourtsideTeam')||save?.userTeam||'TOR';
 if(!teamMap.has(homeTeam))homeTeam='TOR';
 let awayTeam=homeTeam==='BOS'?'PHI':'BOS';
 let pickerSide='home';
