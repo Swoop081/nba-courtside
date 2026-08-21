@@ -1,3 +1,77 @@
+# NBA Courtside — v0.43 Franchise Direction + GM Evaluation
+
+**v0.43 supersedes v0.42 as the working baseline.** It retains the Navigation + Presentation consolidation and the complete Living League / Game Day stack, then gives the player a persistent strategic mandate and front-office accountability loop.
+
+## v0.43 headline changes
+
+- **Opening ownership brief:** every franchise gets a simulated organizational mandate built from competitive window, roster power, payroll, age curve and draft position. Real owner/governor identity is presentation data; management preferences are explicitly gameplay simulation, not factual claims.
+- **Five core season objectives + optional stretch goal:** results, development, financial discipline, roster building and player management are measured throughout the year.
+- **Dynamic expectations:** major long-duration injuries to high-value players can reduce the modeled win target without erasing accountability in other areas.
+- **GM Performance:** Results / Roster Building / Player Management / Financial / Organizational Direction roll into Excellent / Strong / Stable / Under Pressure / Critical status.
+- **Ownership confidence:** persistent within the season and updated at formal review checkpoints.
+- **Milestone reviews:** Opening Night, 20 Games, New Year, Trade Deadline, Regular-Season End and End of Season.
+- **Home Front Office Briefing:** season goal, GM standing, objective progress and biggest concern are visible without opening another workspace.
+- **Dedicated Franchise Direction screen:** full objectives, pillar scores, ownership brief, dynamic adjustment explanation and review history.
+- **GM career foundation:** completed season evaluations are archived for future firing, extension, reputation and multi-team career systems.
+- **Save compatibility:** formal save schema remains 25 (`nbaCourtsideSaveV25`); v0.43 stores the new layer additively.
+- **No simulation rewrite:** Game Day, ratings, CBA, contracts, health, staff, relationships, draft, G League and transaction engines retain v0.42 behavior.
+- **Release-specific v0.43 runtime URLs** preserve GitHub Pages / iPhone Safari cache coherence.
+
+See `docs/FRANCHISE_DIRECTION_GM_EVALUATION_V43.md`, `docs/VALIDATION_V43.md` and `data/franchise-direction-certification-v0.43.json`.
+
+---
+
+# NBA Courtside — v0.42 Navigation + Presentation Consolidation
+
+**v0.42 supersedes v0.41 as the working baseline.** It keeps the full Living League and Game Day feature stack intact, but reorganizes the product around five coherent destinations and one universal GM decision queue.
+
+## v0.42 headline changes
+
+- **Five-world navigation:** Home / Team / League / Deals / More replaces the old Home / Roster / League / Market / Trade bar.
+- **Persistent league context:** the sticky header carries team, record, date, today state and required-action count across the franchise app.
+- **Universal GM Inbox:** formal trades, blocking player conversations, staff vacancies and RFA match decisions are consolidated into one Action Center; medical return recommendations surface as review items.
+- **Team Workspace:** roster/rotation, Player Relations, Health + Performance, Staff + Organization and Contracts + Cap are grouped under one canonical Team destination.
+- **Deals Workspace:** Trade Center, Free Agency Live, Cap + Rights and the G League talent pipeline are grouped under one front-office destination.
+- **League World:** the existing NBA Pulse is paired with League Events, College + Draft and G League portals.
+- **Global search:** lazy search finds NBA players, NBA teams, draft prospects and staff without forcing a navigation reset.
+- **Mobile consolidation:** workspace cards collapse cleanly on compact phones, search results are scroll-contained, persistent context is compact, and existing safe-area behavior is retained.
+- **No simulation rewrite:** v0.41 coaching, v0.40 health, v0.39 contracts/agents, v0.38 staff careers, v0.37 events, v0.36 relationships, v0.35 College/Draft, v0.34 G League, v0.33 front offices, v0.32 broadcast presentation and v0.29 ratings remain intact.
+- **Save compatibility:** formal save schema remains 25 (`nbaCourtsideSaveV25`); v0.42 adds only additive UI preferences.
+- **Release-specific v0.42 runtime URLs** continue the iPhone Safari/GitHub Pages cache-coherence protection.
+
+See `docs/NAVIGATION_PRESENTATION_V42.md` and `docs/VALIDATION_V42.md`.
+
+---
+
+# NBA Courtside — v0.41 Deeper Game Day Coaching + Tactical Control
+
+**v0.41 supersedes v0.40 as the working baseline.** It preserves the certified Living League, ratings, CBA, active front offices, G League, College/Draft, Player Relations, League Events, Staff Careers, Contracts/Agents and Health + Performance foundations, then turns live Game Day into a real coaching layer without replacing the calibrated possession engine.
+
+## v0.41 headline changes
+
+- **Three coaching modes:** Full Auto preserves the hands-off experience; Assisted pauses for major coaching decisions; Manual gives direct timeout, substitution, matchup and tactical control.
+- **Persistent coaching preferences:** additive `save.gameDayCoaching.version = 41` stores coaching mode, rotation plan and recent tactical choices. Formal franchise save schema remains 25 (`nbaCourtsideSaveV25`), so existing v0.40 franchises migrate without reset.
+- **Pregame rotation plans:** Normal, Shortened, Protect Vets and Development reshape the planned 240 minutes while preserving starters, health restrictions, foul-outs and roster legality.
+- **Timeout management:** both teams begin with seven timeouts. Manual and CPU timeout logic responds to scoring runs and late-game context; timeouts provide only a small bounded energy reset and do not create artificial rating boosts.
+- **Live substitutions:** manual lineup changes are available in Manual/Assisted play, with Resume Auto Subs returning control to the rotation engine. Medical minute caps, rest designations, injuries and six-foul disqualifications remain authoritative.
+- **Foul-trouble coaching:** individual fouls are visible in the live cards; Full Auto protects players contextually, Assisted can stop for a decision, and a sixth foul automatically removes the player from the active lineup.
+- **Offensive tactics:** Balanced, Play Through Star, Attack Paint, More Threes, Push Tempo, Slow Pace, Feed Post and Pick + Roll.
+- **Defensive tactics:** Balanced, Drop, Switch, Blitz, Zone, Protect Paint and Stay Home on Shooters.
+- **Primary matchup assignments:** the user can assign an on-court defender to an opponent scorer. The effect is bounded, depends on the defender actually being on the floor and is scaled by the existing coach/staff model rather than overriding player ratings.
+- **Halftime Coach's Room:** Assisted and Manual modes stop at halftime with first-half shooting/turnover/foul context, an assistant-coach recommendation and selectable second-half adjustments. Full Auto makes its own bounded halftime response.
+- **Late-game strategy:** Auto, Foul, Protect Lead and No Foul settings add intentional-foul and clock-context behavior during the final possessions.
+- **Coach + assistant integration:** v0.38 Staff Careers head-coach game-management/rotation ratings and current assistant identities feed recommendations and tactical effectiveness. Generated coaching advice remains explicitly gameplay simulation, not a real quote or factual opinion about represented staff.
+- **TV-style live presentation:** Game Day adds a Coach Desk, timeout banners, foul-trouble alerts, matchup/substitution controls and halftime presentation while retaining the existing possession feed and box-score flow.
+- **Health integration retained:** v0.40 fatigue, rest decisions, return-to-play restrictions and injury metadata remain authoritative. Dedicated runtime certification confirms a 24-minute medical cap finishes at exactly 24.0 minutes and a rest-designated player is excluded.
+- **Result persistence:** completed games store `coaching_v41` context including final mode, tactics, timeouts used, matchup assignments and coaching log. Engine IDs are `courtside_v41_coaching_possession`, `courtside_v41_postseason_coaching_possession` and `courtside_v41_cup_coaching_possession`.
+- **Calibration:** a 100-game Full Auto live Game Day sample produced 114.89 team PPG, 14.92 average margin, two overtime games, minimum team score 79 and maximum 151, inside the retained broad calibration gates.
+- **Release-specific v0.41 runtime URLs** preserve iPhone Safari/GitHub Pages cache coherence across Franchise, Game Day and Exhibition entry points.
+- No roster, rating, contract, CBA, schedule, future-pick, College/Draft, G League or underlying player simulation-profile rewrite is part of this release.
+
+See `docs/GAME_DAY_COACHING_V41.md`, `docs/VALIDATION_V41.md` and `data/gameday-coaching-certification-v0.41.json`.
+
+---
+
 # NBA Courtside — v0.40 Injuries, Fatigue + Medical Staff
 
 **v0.40 supersedes v0.39 as the working baseline.** It preserves the certified Living League, ratings, CBA, active front offices, G League, College/Draft, Player Relations, League Events, Staff Careers and Contracts/Agents foundations, then makes availability, workload and return-to-play persistent franchise decisions.
