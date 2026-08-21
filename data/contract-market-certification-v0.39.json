@@ -1,0 +1,54 @@
+{
+  "version": 39,
+  "release": "Contracts, Agents + Free Agency Overhaul",
+  "freeze_date": "2026-08-21",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "simulation_boundary": "Agent identities, agencies, priorities, negotiation behavior, counters and generated comments are fictional NBA Courtside gameplay simulation, not factual representations or real quotes.",
+  "agents": {
+    "fictional_agents": 12,
+    "fictional_agencies": 6,
+    "archetypes": [
+      "MONEY FIRST",
+      "SECURITY FIRST",
+      "WINNING FIRST",
+      "ROLE FIRST",
+      "FLEXIBLE",
+      "MARKET MAKER"
+    ]
+  },
+  "contract_market_runtime": {
+    "status": "PASS",
+    "ask_day_1": 18000000,
+    "ask_day_6": 15030000,
+    "weak_offer_countered": true,
+    "accepted_counter_became_pending_offer": true,
+    "agreement_history": true,
+    "extension_framework_probe": {
+      "player": "Payton Pritchard",
+      "prospective_test_contract": true,
+      "max_new_years": 4,
+      "max_first_year": 24249267
+    }
+  },
+  "retained": {
+    "players": 442,
+    "nba_evidence": 393,
+    "projection_only": 49,
+    "median_ovr": 72,
+    "players_80_plus": 75,
+    "players_86_plus": 29,
+    "players_90_plus": 8,
+    "regular_season_results": 1230,
+    "max_player_gp": 82,
+    "find_me_trades_each_goal": 5,
+    "free_agency_scaling_end_year": 2031
+  },
+  "source_boundaries": [
+    "No real agent identity claims",
+    "No private player-priority claims",
+    "No fabricated historical original signing dates for starting-veteran extension anniversaries",
+    "No separate staged moratorium simulation"
+  ],
+  "status": "PASS"
+}

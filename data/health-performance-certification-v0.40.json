@@ -1,0 +1,41 @@
+{
+  "release": "v0.40",
+  "title": "Injuries, Fatigue + Medical Staff",
+  "frozen_date": "2026-08-21",
+  "save_schema": 25,
+  "health_state_version": 40,
+  "simulated_medical_departments": 30,
+  "simulated_medical_staff": 90,
+  "staff_roles_per_team": [
+    "Head Athletic Trainer",
+    "Director of Performance",
+    "Rehab Specialist"
+  ],
+  "medical_staff_boundary": "Fictional NBA Courtside gameplay identities and ratings; not claims about real NBA medical personnel or medical advice.",
+  "availability_states": [
+    "AVAILABLE",
+    "PROBABLE",
+    "QUESTIONABLE",
+    "DOUBTFUL",
+    "OUT",
+    "OUT · REST"
+  ],
+  "user_load_management": [
+    "REST",
+    "24 MIN",
+    "28 MIN",
+    "FULL GO"
+  ],
+  "season_calibration": {
+    "regular_season_games": 1230,
+    "injury_events": 83,
+    "major_injuries": 4,
+    "moderate_injuries": 19,
+    "peak_simultaneous_active_injuries": 11,
+    "final_sample_average_fatigue": 17.7,
+    "final_sample_heavy_load_players": 13,
+    "max_player_regular_season_gp": 82
+  },
+  "ratings_data_unchanged_from": "v0.39 / v0.29 ratings foundation",
+  "gameplay_note": "Counts and recurrence estimates are simulation calibration outputs, not factual predictions of future real-world injuries."
+}

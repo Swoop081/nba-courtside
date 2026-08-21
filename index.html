@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <meta name="theme-color" content="#070811" />
-<link rel="preload" href="data/data.js" as="script" />
-<link rel="preload" href="cba.js" as="script" />
-<link rel="preload" href="app.js" as="script" />
+<link rel="preload" href="data/data-v0.40.js" as="script" />
+<link rel="preload" href="cba-v0.40.js" as="script" />
+<link rel="preload" href="app-v0.40.js" as="script" />
 <title>NBA Courtside</title>
 <style>
 :root{--bg:#070811;--panel:#11131f;--panel2:#171a28;--panel3:#202437;--text:#f7f8ff;--muted:#9da2b8;--line:#2b2f43;--accent:#dfff31;--team:#006bb6;--team2:#ed174c;--warn:#ffb21c;--danger:#ff4d6d;--good:#74f0aa;--blue:#64a9ff}
@@ -216,17 +216,22 @@ button{cursor:pointer}.teamPick,.playerCard,.starter,.contractPlayer,.marketCard
 </head>
 <body>
 <div id="startScreen"><div class="startInner">
-<section id="mainMenuPanel" aria-label="NBA Courtside main menu"><div class="brand">NBA COURTSIDE</div><h1 class="startTitle">RUN<br>THE LEAGUE.</h1><div class="startSub">Run the real 2026–27 calendar. Build the roster, navigate the NBA Cup, survive Game Day, chase the playoffs and own every franchise decision.</div><div class="eraPill">2026–27 START · V0.29 RATINGS FOUNDATION</div><div class="mainMenu"><button class="menuAction continue hidden" id="continueFranchise"><div class="continueTeam" id="continueTeam"><div></div><div><strong>CONTINUE FRANCHISE</strong><span>LOADING SAVE…</span></div></div><b>›</b></button><button class="menuAction primary" id="newFranchise"><div><strong>NEW FRANCHISE</strong><span>CHOOSE ANY OF THE 30 NBA TEAMS</span></div><b>＋</b></button><a class="menuAction" href="exhibition.html"><div><strong>EXHIBITION</strong><span>ONE GAME · NO FRANCHISE SAVE REQUIRED</span></div><b>VS</b></a></div><div class="menuFoot">Your franchise only changes when you explicitly start a new save. Returning to this menu is non-destructive.</div></section>
+<section id="mainMenuPanel" aria-label="NBA Courtside main menu"><div class="brand">NBA COURTSIDE</div><h1 class="startTitle">RUN<br>THE LEAGUE.</h1><div class="startSub">Run the real 2026–27 calendar. Build the roster, navigate the NBA Cup, survive Game Day, chase the playoffs and own every franchise decision.</div><div class="eraPill">2026–27 START · V0.40 HEALTH + PERFORMANCE</div><div class="mainMenu"><button class="menuAction continue hidden" id="continueFranchise"><div class="continueTeam" id="continueTeam"><div></div><div><strong>CONTINUE FRANCHISE</strong><span>LOADING SAVE…</span></div></div><b>›</b></button><button class="menuAction primary" id="newFranchise"><div><strong>NEW FRANCHISE</strong><span>CHOOSE ANY OF THE 30 NBA TEAMS</span></div><b>＋</b></button><a class="menuAction" href="exhibition.html" onclick="location.href='exhibition.html?v=0.40';return false"><div><strong>EXHIBITION</strong><span>ONE GAME · NO FRANCHISE SAVE REQUIRED</span></div><b>VS</b></a></div><div class="menuFoot">Your franchise only changes when you explicitly start a new save. Returning to this menu is non-destructive.</div></section>
 <section id="teamSelectPanel" class="hidden" aria-label="Choose franchise team"><div class="teamSelectHead"><button class="menuBack" id="backMainMenu" aria-label="Back to main menu">‹</button><div class="teamSelectTitle"><strong>Choose Your Franchise</strong><span>2026–27 STARTING UNIVERSE</span></div></div><div class="conferenceTabs"><button class="confBtn active" data-conf="All">ALL TEAMS</button><button class="confBtn" data-conf="East">EAST</button><button class="confBtn" data-conf="West">WEST</button></div><div class="teamGrid" id="teamGrid"></div></section>
 </div></div>
 <div class="app hidden" id="gameApp"><a class="skipLink" href="#view">Skip to main content</a><main class="screen"><header class="topbar" id="topbar"></header><div id="view" tabindex="-1"></div></main><nav class="bottomNav" aria-label="Primary"><div class="bottomNavInner"><button class="navBtn active" data-view="home"><b>⌂</b>HOME</button><button class="navBtn" data-view="roster"><b>◉</b>ROSTER</button><button class="navBtn" data-view="league"><b>▦</b>LEAGUE</button><button class="navBtn" data-view="market"><b>＋</b>MARKET</button><button class="navBtn" data-view="trade"><b>⇄</b>TRADE</button></div></nav></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Player and transaction details" aria-hidden="true" inert><div class="sheetInner" id="sheetInner"></div></div>
-<script src="data/data.js"></script>
-<script src="data/source-certification.js"></script>
-<script src="data/future-pick-ledger.js"></script>
-<script src="data/schedule.js"></script>
-<script src="data/schedule-template.js"></script>
-<script src="cba.js"></script>
-<script src="app.js"></script>
+<script src="data/data-v0.40.js"></script>
+<script src="data/source-certification-v0.40.js"></script>
+<script src="data/future-pick-ledger-v0.40.js"></script>
+<script src="data/schedule-v0.40.js"></script>
+<script src="data/schedule-template-v0.40.js"></script>
+<script src="cba-v0.40.js"></script>
+<script src="data/organizations-v0.40.js"></script>
+<script src="data/staff-careers-v0.40.js"></script>
+<script src="data/g-league-v0.40.js"></script>
+<script src="data/college-draft-v0.40.js"></script>
+<script src="data/contract-market-v0.40.js"></script>
+<script src="app-v0.40.js"></script>
 </body>
 </html>

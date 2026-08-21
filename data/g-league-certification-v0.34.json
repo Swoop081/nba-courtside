@@ -1,0 +1,34 @@
+{
+  "version": "v0.34",
+  "status": "PASS",
+  "frozen": "2026-08-21",
+  "league": {
+    "teams": 31,
+    "nba_affiliates": 30,
+    "unaffiliated": 1,
+    "games_per_team_simulated": 50,
+    "tipoff_segment_model": 14,
+    "regular_segment_model": 36,
+    "official_schedule_claimed": false
+  },
+  "two_way": {
+    "nba_teams": 30,
+    "filled_slots": 75,
+    "slot_limit": 3,
+    "source": "https://gleague.nba.com/twowayplayers"
+  },
+  "callup_pool": {
+    "players": 12,
+    "ovr_min": 65,
+    "ovr_max": 73,
+    "source": "https://gleague.nba.com/news/2026-g-league-united-roster-announced",
+    "nba_stats_fabricated": false
+  },
+  "affiliations_source": "https://gleague.nba.com/about",
+  "source_boundary": "Complete 2026-27 club camp/opening rosters and exact schedule are not represented as official until published.",
+  "tests": [
+    "test_g_league_v34.py",
+    "test_g_league_runtime_v34.js",
+    "test_cache_coherence_v34.py"
+  ]
+}

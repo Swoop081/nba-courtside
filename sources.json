@@ -1,5 +1,5 @@
 {
-  "snapshot_date": "2026-08-20",
+  "snapshot_date": "2026-08-21",
   "primary": [
     {
       "name": "NBA.com 2026 offseason transactions",
@@ -47,7 +47,22 @@
   "stat_seed_status": "season-final 2025-26 NBA population for 392 current evidence players plus 50 separate source-backed v0.23 projection records; 442/442 rated",
   "draft_lottery_2027": {
     "source": "NBA.com Board of Governors 3-2-1 Lottery approval",
-    "date": "2026-05-28"
+    "url": "https://www.nba.com/news/nba-board-governors-approve-new-draft-lottery-system",
+    "date": "2026-05-28",
+    "effective": "2027 NBA Draft",
+    "rules": [
+      "16 lottery teams",
+      "3/2/1 lottery-ball allocation",
+      "three worst teams draft-relegated from 3 balls to 2",
+      "9/10 Play-In seeds receive 2 balls",
+      "7/8 Play-In losers receive 1 ball",
+      "all 16 lottery slots drawn",
+      "draft-relegated teams cannot fall below No. 12",
+      "own pick cannot be No. 1 in consecutive drafts",
+      "own pick cannot be top five in three consecutive drafts",
+      "new top-12 through top-15 protections prohibited"
+    ],
+    "implementation_boundary": "v0.37 presents the game-engine lottery probabilities and commissioner event while the existing certified future-pick ownership/protection ledger remains authoritative."
   },
   "bird_rights_v0_20": {
     "primary_rule_source": "2023 NBA-NBPA Collective Bargaining Agreement",
