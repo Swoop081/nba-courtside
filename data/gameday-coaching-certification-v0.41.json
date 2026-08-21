@@ -1,0 +1,39 @@
+{
+  "release": "v0.41",
+  "frozen": "2026-08-21",
+  "feature": "Deeper Game Day Coaching + Tactical Control",
+  "save_schema": 25,
+  "coaching_state_version": 41,
+  "runtime_probe": {
+    "status": "PASS",
+    "game": "G0088",
+    "mode": "assisted",
+    "coach": "Darko Rajakovic",
+    "rotation_players": 8,
+    "planned_minutes": 240,
+    "timeouts_used": 1,
+    "halftime_pause": true,
+    "engine": "courtside_v41_coaching_possession"
+  },
+  "health_probe": {
+    "status": "PASS",
+    "medical_cap_target_minutes": 24,
+    "medical_cap_actual_minutes": 24.0,
+    "rest_exclusion": true,
+    "fatigue_energy_effect": true,
+    "injury_body_area_persisted": true
+  },
+  "calibration_100_games": {
+    "status": "PASS",
+    "team_ppg": 114.89,
+    "average_margin": 14.92,
+    "overtime_games": 2,
+    "minimum_team_score": 79,
+    "maximum_team_score": 151
+  },
+  "retained_full_season": {
+    "status": "PASS",
+    "regular_season_results": 1230,
+    "maximum_player_games_played": 82
+  }
+}
