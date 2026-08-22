@@ -1,3 +1,49 @@
+# NBA Courtside — v0.44.1 Primary Action Hierarchy Hotfix
+
+**v0.44.1 supersedes v0.44 as the working baseline.** This is a presentation/interaction hierarchy hotfix: it preserves the v0.44 Trade Deadline systems and moves primary next-step controls ahead of informational content.
+
+## v0.44.1 headline changes
+
+- **Primary Action Zone:** the first actionable block under the persistent franchise header now contains the current must-do / can-do controls.
+- **Start Season at the top:** Opening Night no longer makes the player scroll through presentation modules before finding the season-start CTA.
+- **Game actions at the top:** Watch Game / Sim Game are promoted from the buried game card into the first action area.
+- **Calendar actions at the top:** Advance Day, Sim To Next Game and Sim 7 Days are promoted above news, ownership, roster and league context.
+- **Blocking decisions win priority:** required GM Action Center decisions are promoted before optional progression controls.
+- **Offseason/transaction progression:** major phase actions such as Begin Postseason, Draft/FA advancement and Propose Trade are promoted when present.
+- **Game Day pregame hierarchy:** Watch Game / Sim Game now appears immediately after the matchup hero, before availability, coaching setup and depth charts.
+- **Live Game Day hierarchy:** Watch Live / Sim 1 Min / To Quarter / Sim Final and speed controls now sit immediately under the scoreboard.
+- **No duplicate actions:** the existing DOM controls are physically moved into the Primary Action Zone, retaining their original IDs and handlers.
+- **Save compatibility:** no save schema or simulation changes; schema remains 25 (`nbaCourtsideSaveV25`).
+
+---
+
+# NBA Courtside — v0.44 Trade Deadline + Transaction Presentation
+
+**v0.44 supersedes v0.43 as the working baseline.** It preserves Franchise Direction + GM Evaluation and the full existing basketball/CBA stack, then turns the trade deadline into a playable league event with richer transaction context and presentation.
+
+## v0.44 headline changes
+
+- **Trade Deadline Command Center:** activates during the final 30 days with market heat, franchise stance, needs, payroll, incoming calls and simulated league intelligence.
+- **Playable Deadline Day:** 11 February 2027 in the starting universe runs through Morning Calls / Midday Market / Final Calls / Closing Bell before the date can advance.
+- **No accidental deadline skips:** Sim 7 Days and Sim To Next Game stop on Deadline Day when they would otherwise cross it.
+- **Dynamic trade stances:** Buyer / Seller / Re-tooling / Standing Pat respond to current record, roster power, age curve, payroll and franchise direction.
+- **CPU trade philosophies:** Contender / Asset Collector / Cap Manager / Core Protector provide readable transaction priorities without hard-coding permanent real-world executive personalities.
+- **Market interest:** Cold / Exploratory / Interested / Motivated / Aggressive reacts to team need, fit, front-office aggression and deadline pressure.
+- **Richer incoming GM calls:** formal offers explain why the team called, why assets are included, its biggest resistance and its modeled value read.
+- **Negotiation rounds:** repeated rejected legal frameworks can cool a CPU team's talks for the remainder of the league day.
+- **Bounded deadline pressure:** final-14-day valuation movement slightly reflects buyer/seller urgency without bypassing the retained trade-value or CBA engines.
+- **Transaction ticker:** league moves and deadline activity surface as one persistent transaction wire.
+- **Trade Completed presentation:** successful user deals receive a dedicated official screen with assets, salary, roster/draft before-and-after context and four contextual impact dimensions rather than simplistic letter grades.
+- **Post-deadline report:** the final seven-day market window is summarized with user deals, league activity, franchise stance and current GM standing.
+- **v0.43 integration:** trades re-sync Franchise Direction + GM Evaluation after completion.
+- **Save compatibility:** formal save schema remains 25 (`nbaCourtsideSaveV25`); `state.tradeDeadlineV44` is additive and lazy.
+- **No simulation rewrite:** ratings, certified source data, CBA legality, Game Day, schedule, contracts, player relations, health, staff, G League and draft foundations remain intact.
+- **Release-specific v0.44 runtime URLs** preserve GitHub Pages / iPhone Safari cache coherence.
+
+See `docs/TRADE_DEADLINE_TRANSACTION_PRESENTATION_V44.md`, `docs/VALIDATION_V44.md` and `data/trade-deadline-certification-v0.44.json`.
+
+---
+
 # NBA Courtside — v0.43 Franchise Direction + GM Evaluation
 
 **v0.43 supersedes v0.42 as the working baseline.** It retains the Navigation + Presentation consolidation and the complete Living League / Game Day stack, then gives the player a persistent strategic mandate and front-office accountability loop.

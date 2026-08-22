@@ -1,0 +1,23 @@
+{
+  "version": "0.44.1",
+  "name": "Primary Action Hierarchy Hotfix",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "simulation_changes": false,
+  "locked_rule": "Immediate consequential actions appear before informational content.",
+  "promoted_actions": [
+    "blocking GM decisions",
+    "Start Season",
+    "Watch Game",
+    "Sim Game",
+    "Advance Day",
+    "Sim To Next Game",
+    "Sim 7 Days",
+    "postseason/offseason progression",
+    "Propose Trade"
+  ],
+  "gameday": {
+    "pregame_controls": "immediately after matchup hero",
+    "live_controls": "immediately below scoreboard"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "release": "v0.44",
+  "title": "Trade Deadline + Transaction Presentation",
+  "date": "2026-08-21",
+  "save_key": "nbaCourtsideSaveV25",
+  "save_schema": 25,
+  "additive_state": "tradeDeadlineV44",
+  "starting_universe_trade_deadline": "2027-02-11",
+  "deadline_windows": ["MORNING CALLS", "MIDDAY MARKET", "FINAL CALLS", "CLOSING BELL"],
+  "trade_stances": ["BUYER", "SELLER", "RE-TOOLING", "STANDING PAT"],
+  "trade_philosophies": ["CONTENDER", "ASSET COLLECTOR", "CAP MANAGER", "CORE PROTECTOR"],
+  "interest_bands": ["COLD", "EXPLORATORY", "INTERESTED", "MOTIVATED", "AGGRESSIVE"],
+  "impact_dimensions": ["IMMEDIATE VALUE", "LONG-TERM VALUE", "FINANCIAL IMPACT", "FRANCHISE DIRECTION FIT"],
+  "simulation_disclosure": true,
+  "cba_engine_replaced": false,
+  "ratings_rebuilt": false,
+  "game_day_engine_rebuilt": false
+}
