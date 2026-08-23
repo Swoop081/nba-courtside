@@ -1,3 +1,19 @@
+# NBA Courtside — v0.58 Incoming Trade Proposal Review
+
+**v0.58 supersedes v0.57 as the working development baseline.** It retains the v0.57 casual-first hierarchy and the full v0.56 continuous real draft pipeline. The unfinished v0.53 long-save certification branch remains separate and unpromoted.
+
+## v0.58 trade-proposal fix
+
+- Clicking a required **Formal trade offer** in the Universal GM Inbox now opens a dedicated **Incoming Trade Offer** review screen instead of dumping the player into the generic Trade Center.
+- The review screen shows the exact assets on both sides, player OVR / position / age / salary, draft-pick details, incoming/outgoing salary, the other front office's simulated reason for calling, stance/philosophy, interest level, and a fresh CBA legality check.
+- **Accept Trade**, **Counter Offer**, and **Decline** are available directly on the proposal screen. Counter carries the exact offer into the full Trade Center for editing.
+- The Home/Deals inbox row now summarizes the actual package (`you get … · they get …`) so the blocking action is understandable before opening it.
+- The Deals tab remains active while reviewing an offer, preserving navigation context.
+
+---
+
+## Retained v0.57 / v0.56 baseline notes
+
 # NBA Courtside — v0.57 Casual-First Information Hierarchy + Advance Clarity
 
 **v0.57 supersedes v0.56 as the working development baseline.** It retains the full v0.56 continuous real draft pipeline. The unfinished v0.53 long-save certification branch remains separate and is not folded into this release.
