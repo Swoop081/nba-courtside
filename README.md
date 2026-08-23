@@ -1,6 +1,16 @@
-# NBA Courtside — v0.56 Continuous Real Draft Pipeline 2019–2026
+# NBA Courtside — v0.57 Casual-First Information Hierarchy + Advance Clarity
 
-**v0.56 supersedes v0.55 as the working development baseline.** The unfinished v0.53 long-save certification branch remains separate and is not folded into this release.
+**v0.57 supersedes v0.56 as the working development baseline.** It retains the full v0.56 continuous real draft pipeline. The unfinished v0.53 long-save certification branch remains separate and is not folded into this release.
+
+
+## v0.57 presentation / progression pass
+
+- Home now follows a **casual-first hierarchy**: primary progression action → essential team/day context → broad league context → optional deep-dive systems.
+- On off days, a compact **Next Game** card sits near the top so the player immediately understands what they are advancing toward.
+- **Advance 1 Day** is now a large, high-contrast full-width CTA on mobile. It remains disabled only for real blocking GM decisions.
+- Off-day training is explicitly labelled **optional**. A player can advance without choosing a training plan.
+- Development Watch, GM/career detail, G League, draft watch, staff and other specialist systems are deliberately demoted below the casual information layer.
+- The Home screen now records the presentation contract `primary-action-essential-context-broad-context-deep-dive` for regression testing.
 
 ## Headline change
 
