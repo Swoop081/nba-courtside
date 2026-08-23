@@ -1,0 +1,76 @@
+from pathlib import Path
+import json,re,subprocess,sys
+root=Path(__file__).resolve().parents[1]
+checks=[]
+def ck(name,cond):
+    checks.append((name,bool(cond)))
+    if not cond: print('FAIL',name)
+idx=(root/'index.html').read_text()
+app=(root/'app-v0.55.js').read_text()
+raw=(root/'data/historical-universes-v0.55.js').read_text().strip()
+first=raw.split('\nwindow.NBA_COURTSIDE_HISTORICAL_V54 =',1)[0]
+prefix='window.NBA_COURTSIDE_HISTORICAL_V55 = '
+H=json.loads(first[len(prefix):].rstrip(';'))
+h=H['historical_2018_19']; d=H['realDraftClasses']['2019']['prospects']
+ck('v055 universe data version',H.get('version')=='v0.55')
+ck('universe selector panel','universeSelectPanel' in idx)
+ck('current universe card','current-2026-27' in idx)
+ck('2018 opening-night card','historical-2018-19-opening-night' in idx)
+ck('2025 postseason card retained','historical-2025-26-postseason' in idx)
+ck('history diverges copy','HISTORY DIVERGES FROM HERE' in idx)
+ck('v055 historical data loaded','data/historical-universes-v0.55.js' in idx)
+ck('v055 app loaded','app-v0.55.js' in idx)
+ck('v055 app preload','href="app-v0.55.js"' in idx)
+ck('schema remains 25','const SAVE_SCHEMA=25' in app)
+ck('save key remains v25','nbaCourtsideSaveV25' in app)
+ck('historical selector generalized','function historicalPackV54' in app and 'historical-2018-19-opening-night' in app)
+ck('historical constructor retained','function createHistoricalStateV54' in app)
+ck('historical schedule calendar shifted','delta=H.seasonYear-2026' in app and '...(H.dates||{})' in app)
+ck('historical future pick horizon','v0.55 historical pick horizon' in app)
+ck('real draft generator generalized','real-${year}-' in app and 'realDraftClassV54' in app)
+ck('real destination is metadata','officialHistoricalTeam' in app)
+ck('opening-night date',h['date']=='2018-10-16')
+ck('opening-night season',h['seasonYear']==2018 and h['seasonStarted'] and not h['seasonComplete'])
+ck('2017 CBA ruleset',h['cbaRuleset']=='CBA_2017')
+ck('2018 salary cap',h['cap']['salary_cap']==101869000)
+ck('2018 luxury tax',h['cap']['luxury_tax']==123733000)
+ck('2018 floor',h['cap']['salary_floor']==91682000)
+ck('2018 tax apron',h['cap']['first_apron']==129817000)
+ck('modern second apron disabled',h['cap']['modern_second_apron'] is False and h['cap']['second_apron']>500000000)
+ck('2019 cap timeline',h['capTimeline']['2019']['salary_cap']==109140000)
+ck('1230 schedule games',len(h['scheduleGames'])==1230)
+ck('no historical results seeded',len(h['seedGames'])==0)
+ck('unique game ids',len({g['id'] for g in h['scheduleGames']})==1230)
+ck('first game date',h['scheduleGames'][0]['date']=='2018-10-16')
+ck('last game date',h['scheduleGames'][-1]['date']=='2019-04-10')
+counts={}
+for g in h['scheduleGames']:
+    counts[g['home']]=counts.get(g['home'],0)+1;counts[g['away']]=counts.get(g['away'],0)+1
+ck('30 teams in schedule',len(counts)==30)
+ck('all teams 82 games',all(x==82 for x in counts.values()))
+ck('494 opening roster identities',h['coverage']['openingRosterPlayers']==494 and len(h['assignments'])==494 and len(h['historicalPlayers'])==494)
+ck('day-one ratings coverage',h['coverage']['dayOneRatingMatches']==478)
+ck('salary coverage',h['coverage']['salaryMatches']==447)
+byname={p['name']:p for p in h['historicalPlayers']}
+ck('LeBron opens with Lakers',byname.get('LeBron James',{}).get('team')=='LAL')
+ck('Luka opens with Dallas',byname.get('Luka Doncic',{}).get('team')=='DAL')
+ck('Kawhi opens with Toronto',byname.get('Kawhi Leonard',{}).get('team')=='TOR')
+ck('DeRozan opens with Spurs',byname.get('DeMar DeRozan',{}).get('team')=='SAS')
+ck('opening ratings not hindsight',byname.get('Luka Doncic',{}).get('ratings',{}).get('overall',99)<80 and byname.get('LeBron James',{}).get('ratings',{}).get('overall',0)>=90)
+ck('60 real 2019 draft identities',len(d)==60)
+ck('unique 2019 draft picks',sorted(x['pick'] for x in d)==list(range(1,61)))
+ck('top 3 2019 identities',[x['name'] for x in d[:3]]==['Zion Williamson','Ja Morant','RJ Barrett'])
+ck('historical Zion destination metadata',d[0]['historical_drafted_by']=='NOP')
+ck('historical Ja destination metadata',d[1]['historical_drafted_by']=='MEM')
+ck('historical RJ destination metadata',d[2]['historical_drafted_by']=='NYK')
+ck('certified draft years explicit',H.get('realDraftYears')==[2019,2026])
+ck('source boundaries explicit',all(k in h['sourceBoundary'] for k in ['rosters','ratings','schedule','results','contracts','picks','staff','availability','cba','start_point']))
+ck('modeled pick boundary explicit','pickOwnershipBoundary' in app)
+scripts=re.findall(r'<script src="([^"]+)"',idx)
+ck('all index scripts resolve',all((root/x).exists() for x in scripts))
+r=subprocess.run(['node','--check',str(root/'app-v0.55.js')],capture_output=True,text=True)
+ck('app syntax',r.returncode==0)
+failed=[n for n,v in checks if not v]
+print(f'{len(checks)-len(failed)}/{len(checks)} checks passed')
+if failed:
+    print('\n'.join(' - '+x for x in failed));sys.exit(1)

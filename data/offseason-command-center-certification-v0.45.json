@@ -1,0 +1,21 @@
+{
+  "version": "0.45",
+  "release": "Offseason Command Center",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "offseason_phases": [
+    "Options",
+    "Lottery",
+    "Scout + Combine",
+    "Draft",
+    "Rights + QO",
+    "Free Agency",
+    "Summer League",
+    "Training Camp"
+  ],
+  "focused_checks": {"passed": 74, "total": 74},
+  "retained_trade_deadline_checks": {"passed": 66, "total": 66},
+  "full_offseason_runtime": "PASS",
+  "syntax": "PASS",
+  "save_compatibility": "PASS"
+}

@@ -88,7 +88,7 @@
     "safety_boundary": "Do not infer unresolved overlapping claim order or unspecified protection ranges."
   },
   "cba_transactions_v0_22": {
-    "primary_rule_source": "NBA.com CBA 101 — Highlights of the Collective Bargaining Agreement (2024-25)",
+    "primary_rule_source": "NBA.com CBA 101 \u2014 Highlights of the Collective Bargaining Agreement (2024-25)",
     "url": "https://cms.nba.com/wp-content/uploads/sites/4/2024/11/2024-25-CBA-101.pdf",
     "financial_source": "NBA.com 2026-27 salary cap release",
     "financial_url": "https://www.nba.com/news/nba-salary-cap-2026-27-season",
@@ -133,6 +133,49 @@
       "acb.com",
       "nbl.com.au",
       "aba-liga.com"
+    ]
+  },
+  "historical_v0_55": {
+    "start": "2018-19 Opening Night \u2014 October 16, 2018",
+    "rosters": {
+      "source": "NBA Communications \u2014 NBA opening-night rosters set for 2018-19 season",
+      "url": "https://pr.nba.com/nba-opening-night-rosters-2018-19-season/",
+      "date": "2018-10-15",
+      "coverage": "30 teams / 494 opening-roster identities"
+    },
+    "schedule": {
+      "source": "NBA Communications \u2014 NBA unveils 2018-19 game and broadcast schedules",
+      "url": "https://pr.nba.com/2018-19-nba-schedule/",
+      "date": "2018-08-10",
+      "coverage": "1,230-game regular season / Oct. 16 2018 to Apr. 10 2019"
+    },
+    "cap": {
+      "source": "NBA.com \u2014 NBA salary cap set for 2018-19 season at $101.869 million",
+      "url": "https://www.nba.com/news/nba-salary-cap-set-2018-19-season",
+      "values": {
+        "salary_cap": 101869000,
+        "luxury_tax": 123733000,
+        "salary_floor": 91682000
+      }
+    },
+    "draft_2019": {
+      "source": "NBA.com \u2014 2019 NBA Draft results: Picks 1-60",
+      "url": "https://www.nba.com/news/2019-nba-draft-results-picks-1-60",
+      "coverage": "60 official drafted identities; historical destination stored as metadata only"
+    },
+    "ratings": {
+      "source": "Day-one 2018-19 DARKO evidence / Andrew Patton public tutorial data",
+      "url": "https://github.com/anpatton/basic-nba-tutorials/blob/main/team_ratings/how_to_make_team_ratings.md",
+      "coverage": "478/494 opening-roster identity matches",
+      "policy": "no-hindsight opening-date rating backbone"
+    },
+    "modeled_boundaries": [
+      "unresolved multi-year contracts",
+      "pre-divergence traded future picks",
+      "exact opening-day injury durations",
+      "historical staff identities",
+      "some deep 2017-CBA transaction edge cases",
+      "era-specific visual branding"
     ]
   }
 }

@@ -1,0 +1,42 @@
+{
+  "release": "v0.47",
+  "name": "League History + Long-Term World Persistence",
+  "date": "2026-08-23",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "additive_state": "leagueHistoryV47",
+  "focused_checks": {
+    "passed": 30,
+    "total": 30
+  },
+  "retained_gm_career_checks": {
+    "passed": 48,
+    "total": 48
+  },
+  "retained_trade_deadline_checks": {
+    "passed": 66,
+    "total": 66
+  },
+  "runtime": {
+    "season_archive": true,
+    "standings_rows": 30,
+    "player_totals": true,
+    "team_snapshots": true,
+    "retirements": true,
+    "draft_history": true,
+    "team_switch_history_preserved": true,
+    "gm_career_transition": true,
+    "full_offseason_to_opening_night": true,
+    "opening_roster": 15,
+    "rotation_minutes": 240
+  },
+  "syntax": {
+    "app_v047": true,
+    "gameday_v047": true,
+    "exhibition_v047": true
+  },
+  "notes": [
+    "Legacy pre-v0.47 seasons import only detail still available in state.history; missing granular history is not fabricated.",
+    "Physical iPhone Safari touch/layout smoke testing remains recommended."
+  ]
+}

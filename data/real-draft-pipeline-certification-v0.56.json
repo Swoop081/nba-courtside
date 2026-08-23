@@ -1,0 +1,83 @@
+{
+  "version": "v0.56",
+  "feature": "Continuous Real Draft Pipeline 2019-2026",
+  "years": {
+    "2019": {
+      "pool": 60,
+      "official_drafted": 60,
+      "real_undrafted_fill": 0,
+      "first": "Zion Williamson",
+      "last": "Vanja Marinkovic"
+    },
+    "2020": {
+      "pool": 60,
+      "official_drafted": 60,
+      "real_undrafted_fill": 0,
+      "first": "Anthony Edwards",
+      "last": "Sam Merrill"
+    },
+    "2021": {
+      "pool": 60,
+      "official_drafted": 60,
+      "real_undrafted_fill": 0,
+      "first": "Cade Cunningham",
+      "last": "Georgios Kalaitzakis"
+    },
+    "2022": {
+      "pool": 60,
+      "official_drafted": 58,
+      "real_undrafted_fill": 2,
+      "first": "Paolo Banchero",
+      "last": "AJ Green"
+    },
+    "2023": {
+      "pool": 60,
+      "official_drafted": 58,
+      "real_undrafted_fill": 2,
+      "first": "Victor Wembanyama",
+      "last": "Colin Castleton"
+    },
+    "2024": {
+      "pool": 60,
+      "official_drafted": 58,
+      "real_undrafted_fill": 2,
+      "first": "Zaccharie Risacher",
+      "last": "N'Faly Dante"
+    },
+    "2025": {
+      "pool": 60,
+      "official_drafted": 59,
+      "real_undrafted_fill": 1,
+      "first": "Cooper Flagg",
+      "last": "Dink Pate"
+    },
+    "2026": {
+      "pool": 60,
+      "official_drafted": 60,
+      "real_undrafted_fill": 0,
+      "first": "AJ Dybantsa",
+      "last": "Malique Lewis"
+    }
+  },
+  "historical_rule": "History diverges in 2018. Official real-world draft destination/order is metadata only; alternate lottery/trades/selections control actual destination.",
+  "forfeiture_rule": "Real-world forfeitures occurring after the divergence point are not scripted. Missing official selections are filled with real undrafted entrants from the same year so the alternate NBA retains 60 draft slots.",
+  "sources": {
+    "2020": "https://www.nba.com/news/2020-nba-draft-results-picks-1-60",
+    "2021": "https://www.nba.com/news/2021-nba-draft-results-picks-1-60",
+    "2022": "https://www.nba.com/news/2022-nba-draft-order/",
+    "2023": "https://www.nba.com/news/2023-nba-draft-order",
+    "2024": "https://www.nba.com/news/2024-nba-draft-order",
+    "2025": "https://www.nba.com/news/2025-nba-draft-order"
+  },
+  "validation": {
+    "focused_checks": "80/80 PASS",
+    "runtime_all_classes": "PASS — generateDraftClass produced 60 real entrants for every year 2019–2026",
+    "alternate_destination": "PASS — Victor Wembanyama drafted to BOS while SAS remained historical metadata",
+    "historical_full_season": "PASS — retained 2018–19 runtime simulated 1,230 games, postseason and advanced to real 2019 draft",
+    "historical_gameday": "PASS — H18-0001 resolved PHI at BOS on 2018-10-16",
+    "league_ai": "PASS — retained 30-team v0.52 planning/draft/extension runtime on app-v0.56.js",
+    "save_migration": "PASS — schema 25, legacy migration and corrupt newest-save fallback",
+    "javascript_syntax": "PASS",
+    "current_offseason_note": "Full current-era offseason harness exceeded the build execution window; v0.56 does not alter the current-era offseason path, whose v0.55 certification remains retained evidence."
+  }
+}

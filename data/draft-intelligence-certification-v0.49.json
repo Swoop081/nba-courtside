@@ -1,0 +1,34 @@
+{
+  "version": "0.49",
+  "title": "Advanced Scouting + Draft Intelligence",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "additive_state": "state.draftIntelligenceV49",
+  "features": {
+    "ranged_scouting": true,
+    "exact_hidden_potential_reveal": false,
+    "college_scouting_carryover": true,
+    "private_workouts": true,
+    "simulated_interviews": true,
+    "scouting_plans": ["board", "need", "upside", "value"],
+    "team_fit": true,
+    "development_volatility": true,
+    "consensus_range": true,
+    "market_intelligence": true,
+    "front_office_recommendations": 3,
+    "decision_snapshots": true,
+    "college_intel_tab": true
+  },
+  "validation": {
+    "v049_focused": "51/51",
+    "gm_career_retained": "48/48",
+    "league_history_retained": "30/30",
+    "trade_deadline_retained": "66/66",
+    "offseason_retained": "74/74",
+    "draft_intelligence_runtime": "PASS",
+    "save_migration_runtime": "PASS",
+    "gameday_coaching_runtime": "PASS",
+    "javascript_syntax": "PASS"
+  },
+  "device_note": "Physical iPhone Safari smoke testing remains recommended."
+}

@@ -1,0 +1,29 @@
+{
+  "version": "0.50",
+  "release": "Staff, Coaching + Organizational Identity",
+  "date": "2026-08-23",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "additive_state": "state.staffCoachingV50",
+  "focused_checks": {"passed": 59, "total": 59},
+  "retained_checks": {
+    "draft_intelligence_v049": "51/51",
+    "playability_mobile_v048": "64/64",
+    "league_history_v047": "30/30",
+    "gm_career_v046": "48/48",
+    "offseason_command_center_v045": "74/74",
+    "trade_deadline_v044": "66/66"
+  },
+  "runtime": {
+    "staff_coaching": "PASS",
+    "gameday_delegate": "PASS",
+    "draft_intelligence": "PASS",
+    "league_history_team_switch": "PASS",
+    "gm_career_team_switch": "PASS",
+    "offseason_to_opening_night": "PASS",
+    "save_migration": "PASS"
+  },
+  "syntax": "PASS",
+  "runtime_references": "PASS",
+  "physical_iphone_safari_smoke_test": "RECOMMENDED_NOT_PERFORMED_IN_BUILD_ENVIRONMENT"
+}

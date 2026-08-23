@@ -1,0 +1,37 @@
+{
+  "version": "v0.55",
+  "title": "2018-19 Opening Night + Real 2019 Draft",
+  "date": "2026-08-23",
+  "save_schema": 25,
+  "save_key": "nbaCourtsideSaveV25",
+  "historical_start": {
+    "id": "historical-2018-19-opening-night",
+    "date": "2018-10-16",
+    "players": 494,
+    "schedule_games": 1230,
+    "day_one_rating_matches": 478,
+    "salary_matches": 447,
+    "cba_ruleset": "CBA_2017"
+  },
+  "real_draft_2019": {
+    "prospects": 60,
+    "top_three": [
+      "Zion Williamson",
+      "Ja Morant",
+      "RJ Barrett"
+    ],
+    "destination_behavior": "metadata_only_alternate_draft"
+  },
+  "validation": {
+    "focused_checks": "52/52 PASS",
+    "historical_regular_season": "1230/1230 games simulated",
+    "historical_postseason_offseason": "PASS",
+    "historical_gameday": "PASS H18-0001",
+    "retained_current_offseason": "PASS 15 players / 240 minutes",
+    "retained_league_ai": "PASS 30 teams",
+    "save_migration": "PASS",
+    "app_syntax": "PASS",
+    "gameday_syntax": "PASS"
+  },
+  "separate_unmerged_work": "v0.53 long-save certification remains separate/unpromoted"
+}
