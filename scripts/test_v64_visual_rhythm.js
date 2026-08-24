@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..');
+const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const game=fs.readFileSync(path.join(root,'gameday.html'),'utf8');
+const ex=fs.readFileSync(path.join(root,'exhibition.html'),'utf8');
+const app=fs.readFileSync(path.join(root,'app-v0.64.js'),'utf8');
+const requiredIndex=['app-v0.64.js','v64-visual-rhythm-system','v64Chapter','bcPerformanceLead','bcHeadlineList','bcSocialFeed','v42DestinationGrid','playerCard'];
+for(const x of requiredIndex)if(!index.includes(x))throw new Error('index missing '+x);
+for(const x of ['v0.64 — Visual Rhythm + Large Imagery System','RESULTS + STATS','LEAGUE NEWS','COURTSIDE SOCIAL','v64ApplyVisualRhythm'])if(!app.includes(x))throw new Error('app missing '+x);
+for(const [name,html] of [['gameday',game],['exhibition',ex]])for(const x of ['v64-game-surface-rhythm','rotRow','liveCard','matchHero'])if(!html.includes(x))throw new Error(name+' missing '+x);
+for(const x of ['apple-touch-icon.png','manifest.webmanifest'])if(!index.includes(x))throw new Error('v0.63 app integration missing '+x);
+console.log(JSON.stringify({status:'PASS',version:'0.64',chapters:true,largeImagery:true,horizontalNewsRails:true,gameday:true,exhibition:true,iconIntegration:true},null,2));
