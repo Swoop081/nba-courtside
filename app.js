@@ -1,28 +1,30 @@
 const STAT_LABELS={scoring:'Scoring',rebounding:'Rebounding',passing:'Passing',three:'3PT',dunks:'Dunks',steals:'Steals',blocks:'Blocks',freeThrows:'Free Throws'};
 const STAT_KEYS=Object.keys(STAT_LABELS);
 const TEAM_THEMES={'1610612747':{a:'#552583',b:'#FDB927',c:'#1d0f33'},'1610612744':{a:'#1D428A',b:'#FFC72C',c:'#07192f'},'1610612749':{a:'#00471B',b:'#EEE1C6',c:'#001e0e'},'1610612738':{a:'#007A33',b:'#BA9653',c:'#022d18'},'1610612759':{a:'#C4CED4',b:'#ffffff',c:'#242b31'},'1610612743':{a:'#0E2240',b:'#FEC524',c:'#081426'},'1610612760':{a:'#007AC1',b:'#EF3B24',c:'#10264b'},'1610612750':{a:'#0C2340',b:'#78BE20',c:'#071524'},'1610612745':{a:'#CE1141',b:'#C4CED4',c:'#3b0714'}};
+const CUTOUT=id=>`https://uniqrenders.com/download/transparent/${id}`;
 const RAW_PLAYERS=[
-['LeBron James','Los Angeles Lakers','2025–26','1610612747','2544','Legend',[29,25,29,23,28,22,20,21],'https://cdn.nba.com/manage/2025/02/lebron-driving.jpg',{x:'54%',y:'46%',s:1.02}],
-['Stephen Curry','Golden State Warriors','2025–26','1610612744','201939','Legend',[29,17,27,30,8,23,8,30]],
-['Giannis Antetokounmpo','Milwaukee Bucks','2025–26','1610612749','203507','Legend',[30,29,25,15,30,23,26,19]],
-['Jayson Tatum','Boston Celtics','2024–25','1610612738','1628369','Elite',[28,25,24,27,24,22,17,27]],
-['Victor Wembanyama','San Antonio Spurs','2025–26','1610612759','1641705','Legend',[28,28,22,25,29,22,30,26]],
-['Nikola Jokić','Denver Nuggets','2025–26','1610612743','203999','Legend',[29,29,30,26,20,22,18,27]],
-['Shai Gilgeous-Alexander','Oklahoma City Thunder','2025–26','1610612760','1628983','Legend',[30,20,26,24,25,28,19,29]],
-['Anthony Edwards','Minnesota Timberwolves','2025–26','1610612750','1630162','Elite',[28,22,23,27,29,24,18,25]],
-['Kevin Durant','Houston Rockets','2025–26','1610612745','201142','Legend',[29,23,24,28,25,20,23,29]],
-['Luka Dončić','Los Angeles Lakers','2025–26','1610612747','1629029','Legend',[29,26,30,27,18,22,12,25]]];
-const players=RAW_PLAYERS.map((p,i)=>({id:'p'+i,name:p[0],team:p[1],season:p[2],teamId:p[3],playerId:p[4],tier:p[5],stats:Object.fromEntries(STAT_KEYS.map((k,j)=>[k,p[6][j]])),artUrl:p[7]||null,art:p[8]||{x:'50%',y:'50%',s:1},theme:TEAM_THEMES[p[3]]||{a:'#384154',b:'#f5f7fb',c:'#0f131b'}}));
+['LeBron James','Los Angeles Lakers','2025–26','1610612747','2544','Legend',[29,25,29,23,28,22,20,21],CUTOUT(8261),'cutout',{x:'56%',y:'48%',s:1.10}],
+['Stephen Curry','Golden State Warriors','2025–26','1610612744','201939','Legend',[29,17,27,30,8,23,8,30],CUTOUT(8241),'cutout',{x:'57%',y:'48%',s:1.12}],
+['Giannis Antetokounmpo','Milwaukee Bucks','2025–26','1610612749','203507','Legend',[30,29,25,15,30,23,26,19],CUTOUT(7050),'cutout',{x:'57%',y:'48%',s:1.10}],
+['Jayson Tatum','Boston Celtics','2024–25','1610612738','1628369','Elite',[28,25,24,27,24,22,17,27],CUTOUT(1248),'cutout',{x:'57%',y:'49%',s:1.08}],
+['Victor Wembanyama','San Antonio Spurs','2025–26','1610612759','1641705','Legend',[28,28,22,25,29,22,30,26],null,'portrait',{x:'54%',y:'50%',s:1}],
+['Nikola Jokić','Denver Nuggets','2025–26','1610612743','203999','Legend',[29,29,30,26,20,22,18,27],CUTOUT(6978),'cutout',{x:'57%',y:'49%',s:1.07}],
+['Shai Gilgeous-Alexander','Oklahoma City Thunder','2025–26','1610612760','1628983','Legend',[30,20,26,24,25,28,19,29],CUTOUT(7413),'cutout',{x:'58%',y:'48%',s:1.10}],
+['Anthony Edwards','Minnesota Timberwolves','2025–26','1610612750','1630162','Elite',[28,22,23,27,29,24,18,25],CUTOUT(7173),'cutout',{x:'57%',y:'49%',s:1.09}],
+['Kevin Durant','Houston Rockets','2025–26','1610612745','201142','Legend',[29,23,24,28,25,20,23,29],CUTOUT(8264),'cutout',{x:'57%',y:'49%',s:1.08}],
+['Luka Dončić','Los Angeles Lakers','2025–26','1610612747','1629029','Legend',[29,26,30,27,18,22,12,25],CUTOUT(8434),'cutout',{x:'57%',y:'49%',s:1.09}]];
+const players=RAW_PLAYERS.map((p,i)=>({id:'p'+i,name:p[0],team:p[1],season:p[2],teamId:p[3],playerId:p[4],tier:p[5],stats:Object.fromEntries(STAT_KEYS.map((k,j)=>[k,p[6][j]])),artUrl:p[7]||null,artMode:p[8]||'portrait',art:p[9]||{x:'50%',y:'50%',s:1},theme:TEAM_THEMES[p[3]]||{a:'#384154',b:'#f5f7fb',c:'#0f131b'}}));
 const userTeam=players.slice(0,5),cpuTeam=players.slice(5);let state;const $=s=>document.querySelector(s);
 function portraitUrl(p){return `https://cdn.nba.com/headshots/nba/latest/1040x760/${p.playerId}.png`}
 function logoUrl(p){return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`}
-function cardMarkup(p,o={}){const {activeStat=null,used=false}=o;const art=p.artUrl||portraitUrl(p),artClass=p.artUrl?'action-art':'portrait-art';const style=`--team-a:${p.theme.a};--team-b:${p.theme.b};--team-c:${p.theme.c};--art-x:${p.art.x};--art-y:${p.art.y};--art-scale:${p.art.s}`;return `<article class="player-card tier-${p.tier.toLowerCase()} ${used?'used':''}" data-id="${p.id}" style="${style}">
+function artClass(p){return p.artMode==='cutout'?'cutout-art':p.artMode==='action'?'action-art':'portrait-art'}
+function cardMarkup(p,o={}){const {activeStat=null,used=false}=o;const art=p.artUrl||portraitUrl(p),klass=artClass(p);const style=`--team-a:${p.theme.a};--team-b:${p.theme.b};--team-c:${p.theme.c};--art-x:${p.art.x};--art-y:${p.art.y};--art-scale:${p.art.s}`;return `<article class="player-card tier-${p.tier.toLowerCase()} ${used?'used':''}" data-id="${p.id}" style="${style}">
 <div class="card-backdrop"></div><div class="holo-grid"></div><div class="rarity-burst"></div><div class="prism prism-a"></div><div class="prism prism-b"></div><div class="beam beam-one"></div><div class="beam beam-two"></div><div class="team-mark"><img src="${logoUrl(p)}" alt=""></div><div class="player-aura"></div>
-<div class="art-stage"><img class="photo ${artClass}" src="${art}" alt="${p.name}" onerror="this.onerror=null;this.src='${portraitUrl(p)}';this.classList.remove('action-art');this.classList.add('portrait-art')"><div class="art-vignette"></div></div>
+<div class="art-stage"><img class="photo ${klass}" src="${art}" alt="${p.name}" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${portraitUrl(p)}';this.className='photo portrait-art'"><div class="art-vignette"></div></div>
 <div class="foreground-energy energy-a"></div><div class="foreground-energy energy-b"></div><div class="foil-field"></div><div class="spark spark-a"></div><div class="spark spark-b"></div><div class="spark spark-c"></div><div class="frame frame-outer"></div><div class="frame frame-mid"></div><div class="frame frame-inner"></div><div class="edge-glow"></div><div class="tier-name">${p.tier}</div>
 <div class="stats">${STAT_KEYS.map(k=>`<div class="stat ${activeStat===k?'active':''}"><span class="stat-circle"><b>${p.stats[k]}</b></span><span class="stat-label">${STAT_LABELS[k]}</span></div>`).join('')}</div>
 <div class="identity"><span class="identity-kicker">NBA COURTSIDE · ${p.tier}</span><h3>${p.name}</h3><p>${p.team} · ${p.season}</p></div><img class="team-logo" src="${logoUrl(p)}" alt="${p.team}"></article>`}
-function renderStarterFive(){$('#starterFive').innerHTML=userTeam.map(p=>`<div class="mini-card" style="--team-a:${p.theme.a};--team-b:${p.theme.b}"><img src="${p.artUrl||portraitUrl(p)}" alt="${p.name}"><span>${p.name}</span></div>`).join('')}
+function renderStarterFive(){$('#starterFive').innerHTML=userTeam.map(p=>`<div class="mini-card" style="--team-a:${p.theme.a};--team-b:${p.theme.b}"><img src="${p.artUrl||portraitUrl(p)}" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='${portraitUrl(p)}'" alt="${p.name}"><span>${p.name}</span></div>`).join('')}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$('#'+id).classList.add('active')}
 function resetGame(){state={quarter:1,userScore:0,cpuScore:0,usedUser:new Set(),usedCpu:new Set(),category:null,history:[]};showScreen('game');beginQuarter()}
 function beginQuarter(){state.category=STAT_KEYS[Math.floor(Math.random()*STAT_KEYS.length)];$('#quarterLabel').textContent='Q'+state.quarter;$('#categoryLabel').textContent=STAT_LABELS[state.category].toUpperCase();$('#userScore').textContent=state.userScore;$('#cpuScore').textContent=state.cpuScore;$('#instruction').textContent='Choose one unused player for '+STAT_LABELS[state.category];$('#revealPanel').classList.add('hidden');$('#lineup').innerHTML=userTeam.map(p=>cardMarkup(p,{activeStat:state.category,used:state.usedUser.has(p.id)})).join('');document.querySelectorAll('#lineup .player-card').forEach(c=>{if(!state.usedUser.has(c.dataset.id))c.onclick=()=>playQuarter(c.dataset.id)})}
