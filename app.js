@@ -2,7 +2,7 @@ const STAT_LABELS={scoring:'Scoring',rebounding:'Rebounding',passing:'Passing',t
 const STAT_KEYS=Object.keys(STAT_LABELS);
 const TEAM_THEMES={'1610612747':{a:'#552583',b:'#FDB927',c:'#1d0f33'},'1610612744':{a:'#1D428A',b:'#FFC72C',c:'#07192f'},'1610612749':{a:'#00471B',b:'#EEE1C6',c:'#001e0e'},'1610612738':{a:'#007A33',b:'#BA9653',c:'#022d18'},'1610612759':{a:'#C4CED4',b:'#ffffff',c:'#242b31'},'1610612743':{a:'#0E2240',b:'#FEC524',c:'#081426'},'1610612760':{a:'#007AC1',b:'#EF3B24',c:'#10264b'},'1610612750':{a:'#0C2340',b:'#78BE20',c:'#071524'},'1610612745':{a:'#CE1141',b:'#C4CED4',c:'#3b0714'}};
 const RAW_PLAYERS=[
-['LeBron James','Los Angeles Lakers','2025–26','1610612747','2544','Legend',[29,25,29,23,28,22,20,21],'https://cdn.nba.com/manage/2025/02/lebron-driving.jpg',{x:'54%',y:'46%',s:.92}],
+['LeBron James','Los Angeles Lakers','2025–26','1610612747','2544','Legend',[29,25,29,23,28,22,20,21],'https://cdn.nba.com/manage/2025/02/lebron-driving.jpg',{x:'54%',y:'46%',s:1.02}],
 ['Stephen Curry','Golden State Warriors','2025–26','1610612744','201939','Legend',[29,17,27,30,8,23,8,30]],
 ['Giannis Antetokounmpo','Milwaukee Bucks','2025–26','1610612749','203507','Legend',[30,29,25,15,30,23,26,19]],
 ['Jayson Tatum','Boston Celtics','2024–25','1610612738','1628369','Elite',[28,25,24,27,24,22,17,27]],
@@ -17,11 +17,11 @@ const userTeam=players.slice(0,5),cpuTeam=players.slice(5);let state;const $=s=>
 function portraitUrl(p){return `https://cdn.nba.com/headshots/nba/latest/1040x760/${p.playerId}.png`}
 function logoUrl(p){return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`}
 function cardMarkup(p,o={}){const {activeStat=null,used=false}=o;const art=p.artUrl||portraitUrl(p),artClass=p.artUrl?'action-art':'portrait-art';const style=`--team-a:${p.theme.a};--team-b:${p.theme.b};--team-c:${p.theme.c};--art-x:${p.art.x};--art-y:${p.art.y};--art-scale:${p.art.s}`;return `<article class="player-card tier-${p.tier.toLowerCase()} ${used?'used':''}" data-id="${p.id}" style="${style}">
-<div class="card-backdrop"></div><div class="holo-grid"></div><div class="prism prism-a"></div><div class="prism prism-b"></div><div class="beam beam-one"></div><div class="beam beam-two"></div><div class="team-mark"><img src="${logoUrl(p)}" alt=""></div><div class="player-aura"></div>
+<div class="card-backdrop"></div><div class="holo-grid"></div><div class="rarity-burst"></div><div class="prism prism-a"></div><div class="prism prism-b"></div><div class="beam beam-one"></div><div class="beam beam-two"></div><div class="team-mark"><img src="${logoUrl(p)}" alt=""></div><div class="player-aura"></div>
 <div class="art-stage"><img class="photo ${artClass}" src="${art}" alt="${p.name}" onerror="this.onerror=null;this.src='${portraitUrl(p)}';this.classList.remove('action-art');this.classList.add('portrait-art')"><div class="art-vignette"></div></div>
-<div class="foil-field"></div><div class="spark spark-a"></div><div class="spark spark-b"></div><div class="spark spark-c"></div><div class="frame frame-outer"></div><div class="frame frame-mid"></div><div class="frame frame-inner"></div><div class="edge-glow"></div><div class="tier-name">${p.tier}</div>
+<div class="foreground-energy energy-a"></div><div class="foreground-energy energy-b"></div><div class="foil-field"></div><div class="spark spark-a"></div><div class="spark spark-b"></div><div class="spark spark-c"></div><div class="frame frame-outer"></div><div class="frame frame-mid"></div><div class="frame frame-inner"></div><div class="edge-glow"></div><div class="tier-name">${p.tier}</div>
 <div class="stats">${STAT_KEYS.map(k=>`<div class="stat ${activeStat===k?'active':''}"><span class="stat-circle"><b>${p.stats[k]}</b></span><span class="stat-label">${STAT_LABELS[k]}</span></div>`).join('')}</div>
-<div class="nameplate"><div class="name-shine"></div><div class="player-meta"><h3>${p.name}</h3><p>${p.team} · ${p.season}</p></div><img class="team-logo" src="${logoUrl(p)}" alt="${p.team}"></div></article>`}
+<div class="identity"><span class="identity-kicker">NBA COURTSIDE · ${p.tier}</span><h3>${p.name}</h3><p>${p.team} · ${p.season}</p></div><img class="team-logo" src="${logoUrl(p)}" alt="${p.team}"></article>`}
 function renderStarterFive(){$('#starterFive').innerHTML=userTeam.map(p=>`<div class="mini-card" style="--team-a:${p.theme.a};--team-b:${p.theme.b}"><img src="${p.artUrl||portraitUrl(p)}" alt="${p.name}"><span>${p.name}</span></div>`).join('')}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$('#'+id).classList.add('active')}
 function resetGame(){state={quarter:1,userScore:0,cpuScore:0,usedUser:new Set(),usedCpu:new Set(),category:null,history:[]};showScreen('game');beginQuarter()}
