@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.60 — single-position cards + balanced teams + compact finals + forced Thunder framing */
+/* NBA Courtside v0.8.61 — single-position cards + balanced teams + compact finals + stronger Thunder framing */
 (() => {
   const POSITION_BY_SLUG={
     'derrick-white':'SG','michael-porter-jr':'SF','josh-hart':'SF','vj-edgecombe':'SG','jakobe-walter':'SG','josh-giddey':'PG','jarrett-allen':'C','cade-cunningham':'PG','obi-toppin':'PF','kyle-kuzma':'PF','jalen-johnson':'PF','kon-knueppel':'SG','bam-adebayo':'C','jalen-suggs':'PG','bub-carrington':'PG','nikola-jokic':'C','rudy-gobert':'C','shai-gilgeous-alexander':'PG','scoot-henderson':'PG','keyonte-george':'PG','brandin-podziemski':'SG','brook-lopez':'C','luka-doncic':'PG','dillon-brooks':'SF','zach-lavine':'SG','cooper-flagg':'PF','reed-sheppard':'SG','gg-jackson':'PF','jeremiah-fears':'PG','victor-wembanyama':'C',
@@ -9,11 +9,11 @@
   players.forEach(p=>{p.position=POSITION_BY_SLUG[p.artSlug]||'SF';});
 
   const THUNDER_RENDER={
-    'kenny-anderson':{top:28,left:57,scale:1.30},
-    'julius-erving':{top:32,left:56,scale:1.28},
-    'michael-jordan':{top:30,left:56,scale:1.30},
-    'lonzo-ball':{top:30,left:56,scale:1.28},
-    'deaaron-fox':{top:30,left:56,scale:1.30}
+    'kenny-anderson':{top:36,left:57,scale:1.42},
+    'julius-erving':{top:42,left:56,scale:1.48},
+    'michael-jordan':{top:40,left:56,scale:1.48},
+    'lonzo-ball':{top:42,left:56,scale:1.46},
+    'deaaron-fox':{top:42,left:56,scale:1.48}
   };
 
   const shuffle=a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;};
@@ -41,7 +41,7 @@
   };
 
   const style=document.createElement('style');
-  style.id='courtside-position-style-v0860';
+  style.id='courtside-position-style-v0861';
   style.textContent=`
     .player-card .card-position{position:absolute;top:12px;right:13px;z-index:39;color:#fff;font-size:15px;line-height:1;font-weight:1000;letter-spacing:.045em;text-shadow:0 2px 5px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.7);pointer-events:none}
     .catalogue-grid .player-card .card-position{top:7px;right:8px;font-size:8px;letter-spacing:.03em}
