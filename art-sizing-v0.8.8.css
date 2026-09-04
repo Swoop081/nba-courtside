@@ -1,9 +1,11 @@
-/* NBA Courtside v0.8.40 — per-player composition tuning + Thunder & Lightning depth fix */
+/* NBA Courtside v0.8.48 — per-player composition tuning + Thunder & Lightning depth fix */
 .player-card[data-id="p1"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.28)!important;transform-origin:center top!important}
+.player-card[data-id="p2"] .cutout-art{left:61%!important;transform:translateX(-50%) scale(1.06)!important;transform-origin:center top!important}
 .player-card[data-id="p3"] .cutout-art{left:57%!important;top:-7px!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
 .player-card[data-id="p4"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.40)!important;transform-origin:center top!important}
+.player-card[data-id="p8"] .cutout-art{left:61%!important;transform:translateX(-50%) scale(1.00)!important;transform-origin:center top!important}
 .player-card[data-id="p9"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.34)!important;transform-origin:center top!important}
-.player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.05)!important;transform-origin:center top!important}
+.player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.22)!important;transform-origin:center top!important}
 .player-card[data-id="p11"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(2.25)!important;transform-origin:center top!important}
 .player-card[data-id="p13"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.92)!important;transform-origin:center top!important}
 .player-card[data-id="p16"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.68)!important;transform-origin:center top!important}
@@ -14,6 +16,38 @@
 .player-card[data-id="p27"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.04)!important;transform-origin:center top!important}
 .player-card[data-id="p28"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.84)!important;transform-origin:center top!important}
 .player-card[data-id="p29"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.82)!important;transform-origin:center top!important}
+
+/* Thunder & Lightning composition pass — source cutouts have very different canvas padding. */
+.player-card[data-id="p30"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
+.player-card[data-id="p31"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.20)!important;transform-origin:center top!important}
+.player-card[data-id="p32"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
+.player-card[data-id="p33"] .cutout-art{left:58%!important;top:-4px!important;transform:translateX(-50%) scale(1.58)!important;transform-origin:center top!important}
+.player-card[data-id="p34"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.20)!important;transform-origin:center top!important}
+.player-card[data-id="p35"] .cutout-art{left:58%!important;top:-3px!important;transform:translateX(-50%) scale(1.46)!important;transform-origin:center top!important}
+.player-card[data-id="p36"] .cutout-art{left:58%!important;top:-4px!important;transform:translateX(-50%) scale(1.54)!important;transform-origin:center top!important}
+.player-card[data-id="p37"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.22)!important;transform-origin:center top!important}
+.player-card[data-id="p38"] .cutout-art{left:58%!important;top:-2px!important;transform:translateX(-50%) scale(1.36)!important;transform-origin:center top!important}
+.player-card[data-id="p39"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
+.player-card[data-id="p40"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.28)!important;transform-origin:center top!important}
+.player-card[data-id="p41"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.22)!important;transform-origin:center top!important}
+.player-card[data-id="p42"] .cutout-art{left:58%!important;top:-4px!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
+.player-card[data-id="p43"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.22)!important;transform-origin:center top!important}
+.player-card[data-id="p44"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.24)!important;transform-origin:center top!important}
+.player-card[data-id="p45"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.34)!important;transform-origin:center top!important}
+.player-card[data-id="p46"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.28)!important;transform-origin:center top!important}
+.player-card[data-id="p47"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
+.player-card[data-id="p48"] .cutout-art{left:58%!important;top:-3px!important;transform:translateX(-50%) scale(1.40)!important;transform-origin:center top!important}
+.player-card[data-id="p49"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.24)!important;transform-origin:center top!important}
+.player-card[data-id="p50"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.26)!important;transform-origin:center top!important}
+.player-card[data-id="p51"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.30)!important;transform-origin:center top!important}
+.player-card[data-id="p52"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.20)!important;transform-origin:center top!important}
+.player-card[data-id="p53"] .cutout-art{left:58%!important;top:-4px!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
+.player-card[data-id="p54"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.30)!important;transform-origin:center top!important}
+.player-card[data-id="p55"] .cutout-art{left:58%!important;top:-4px!important;transform:translateX(-50%) scale(1.52)!important;transform-origin:center top!important}
+.player-card[data-id="p56"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.22)!important;transform-origin:center top!important}
+.player-card[data-id="p57"] .cutout-art{left:58%!important;top:-3px!important;transform:translateX(-50%) scale(1.38)!important;transform-origin:center top!important}
+.player-card[data-id="p58"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.34)!important;transform-origin:center top!important}
+.player-card[data-id="p59"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.28)!important;transform-origin:center top!important}
 
 /* Thunder & Lightning is a backdrop treatment, never a foreground overlay. */
 .player-card.thunder-lightning .card-backdrop{z-index:0!important}
