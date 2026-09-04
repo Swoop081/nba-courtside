@@ -1,4 +1,4 @@
-/* NBA Courtside v0.6.2 — headroom, left identity, full-frame edge */
+/* NBA Courtside v0.7.1 — compact card frame + five-card swipe rail */
 .player-card{aspect-ratio:.68;border-radius:20px;background:linear-gradient(155deg,var(--team-a),var(--team-c) 58%,#010203)}
 .card-backdrop{inset:0!important}
 .frame-outer{inset:0;border-radius:20px;border:2px solid rgba(255,230,138,.88);box-shadow:inset 0 0 18px rgba(255,222,105,.10),0 0 12px rgba(232,183,45,.35);z-index:40!important;pointer-events:none}
@@ -17,4 +17,14 @@
 .identity.name-long h3{font-size:10.5px;line-height:.9}
 .identity p{font-size:6.2px;line-height:1;margin:0;letter-spacing:.07em;color:#f1f3f6;overflow:visible;text-overflow:clip;text-align:left;width:100%}
 .team-logo{right:8px;bottom:6px;width:31px;height:31px;z-index:29}
-@media(max-width:430px){.player-card{aspect-ratio:.68}.art-stage{inset:0 0 38px}.cutout-art{width:100%!important;height:calc(100% - 4px)!important;top:4px!important}.stats{bottom:43px}.identity{height:42px;padding:6px 39px 5px 9px}.identity h3{font-size:13px}.identity.name-long h3{font-size:9.5px}.identity p{font-size:5.8px}.team-logo{width:29px;height:29px}}
+
+/* Five choices are always one horizontal swipe rail. */
+.card-row{display:flex!important;grid-template-columns:none!important;gap:10px;overflow-x:auto;overflow-y:hidden;padding:2px 14px 10px 2px;margin-right:-14px;scroll-snap-type:x mandatory;scroll-padding-left:2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none}
+.card-row::-webkit-scrollbar{display:none}
+.card-row>.player-card{flex:0 0 min(43vw,210px);width:min(43vw,210px);scroll-snap-align:start;box-shadow:0 14px 28px rgba(0,0,0,.5)}
+
+@media(max-width:430px){
+.player-card{aspect-ratio:.68}.art-stage{inset:0 0 38px}.cutout-art{width:100%!important;height:calc(100% - 4px)!important;top:4px!important}.stats{bottom:43px}.identity{height:42px;padding:6px 39px 5px 9px}.identity h3{font-size:13px}.identity.name-long h3{font-size:9.5px}.identity p{font-size:5.8px}.team-logo{width:29px;height:29px}
+.app-shell{padding-left:12px;padding-right:12px}.topbar{margin-bottom:16px}.instruction{margin:13px 0 9px}.card-row{gap:9px;padding-bottom:7px;margin-right:-12px}.card-row>.player-card{flex-basis:45vw;width:45vw;max-width:185px}
+.reveal-panel{margin-top:10px;padding:10px;border-radius:18px}.quarter-result{margin:10px 0 9px}.quarter-result .big{font-size:28px}.reveal-panel .primary-btn{padding:13px}
+}
