@@ -1,20 +1,20 @@
-/* NBA Courtside v0.6 — compact single-tier card presentation */
-.player-card{aspect-ratio:.68;border-radius:24px}
-.frame-outer{border-radius:24px;border-color:#ffe68a;box-shadow:inset 0 0 0 2px #8d6510,inset 0 0 28px rgba(255,222,105,.18),0 0 18px #e8b72d,0 0 30px color-mix(in srgb,var(--team-b) 42%,transparent)}
-.frame-mid{border-radius:18px;border-color:#fff1b2;box-shadow:0 0 8px rgba(255,224,119,.45)}
-.frame-inner{border-radius:14px}.edge-glow{border-radius:22px}
+/* NBA Courtside v0.6.1 — corrected player framing, single edge, compact identity */
+.player-card{aspect-ratio:.68;border-radius:20px;background:linear-gradient(155deg,var(--team-a),var(--team-c) 58%,#010203)}
+.card-backdrop{inset:0!important}
+.frame-outer{inset:0;border-radius:20px;border:2px solid rgba(255,230,138,.82);box-shadow:inset 0 0 18px rgba(255,222,105,.10),0 0 12px rgba(232,183,45,.35)}
+.frame-mid,.frame-inner{display:none!important}.edge-glow{inset:0;border-radius:20px;opacity:.72}
 .tier-name{display:none!important}
-.rarity-burst{opacity:.68;background:repeating-conic-gradient(from 0deg,rgba(255,229,125,.26) 0 2deg,transparent 2deg 11deg)}
-.foil-field{opacity:.88}
-.art-stage{inset:3px 3px 36px 3px;border-radius:20px;overflow:hidden}
-.cutout-art{width:106%!important;height:110%!important;left:50%!important;bottom:-7%!important;object-fit:contain!important;object-position:center bottom!important;transform:translateX(-50%) scale(var(--art-scale)) rotate(var(--art-rotation,0deg))!important;transform-origin:center bottom!important}
-.stats{left:6px;top:10px;bottom:50px;width:62px;gap:1px}
-.stat{gap:4px}.stat-circle{width:27px;height:27px;flex-basis:27px}.stat-circle b{font-size:10px}.stat-label{font-size:6.2px;max-width:28px;letter-spacing:.055em}
-.identity{left:48px;right:46px;bottom:8px;text-align:left;text-shadow:0 3px 8px #000}
-.identity:before{left:-10px;right:-10px;top:-9px;bottom:-6px;background:linear-gradient(90deg,rgba(2,4,7,.92),rgba(2,4,7,.5) 64%,transparent)}
-.identity-kicker{display:none!important}
-.identity h3{font-size:14px;line-height:.9;margin:0 0 3px;letter-spacing:-.045em;white-space:normal}
+.rarity-burst{opacity:.58;background:repeating-conic-gradient(from 0deg,rgba(255,229,125,.22) 0 2deg,transparent 2deg 11deg)}
+.foil-field{opacity:.78}
+.art-stage{inset:0 0 39px 0;border-radius:18px 18px 0 0;overflow:hidden}
+.cutout-art{width:100%!important;height:100%!important;left:50%!important;top:0!important;bottom:auto!important;object-fit:contain!important;object-position:center top!important;transform:translateX(-50%) scale(var(--art-scale)) rotate(var(--art-rotation,0deg))!important;transform-origin:center top!important}
+.art-vignette{background:linear-gradient(90deg,rgba(1,2,4,.67),rgba(1,2,4,.12) 34%,transparent 63%),linear-gradient(0deg,rgba(1,2,4,.78),transparent 27%)}
+.stats{left:6px;top:9px;bottom:44px;width:59px;gap:1px}
+.stat{gap:4px}.stat-circle{width:27px;height:27px;flex-basis:27px}.stat-circle b{font-size:10px}.stat-label{font-size:6.2px;max-width:27px;letter-spacing:.055em}
+.identity{left:0;right:0;bottom:0;height:43px;padding:7px 43px 6px 50px;text-align:left;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(90deg,rgba(2,4,7,.97),rgba(2,4,7,.88) 62%,rgba(2,4,7,.68));border-top:1px solid rgba(255,255,255,.14);text-shadow:0 2px 6px #000}
+.identity:before{display:none!important}.identity-kicker{display:none!important}
+.identity h3{font-size:14px;line-height:.9;margin:0 0 4px;letter-spacing:-.035em;white-space:normal}
 .identity.name-long h3{font-size:10.5px;line-height:.9}
-.identity p{font-size:6.2px;letter-spacing:.055em;color:#f1f3f6;overflow:visible;text-overflow:clip}
-.team-logo{right:8px;bottom:7px;width:32px;height:32px}
-@media(max-width:430px){.player-card{aspect-ratio:.68}.art-stage{inset:3px 3px 34px}.cutout-art{width:108%!important;height:112%!important}.stats{bottom:48px}.identity{left:46px;right:40px;bottom:7px}.identity h3{font-size:13px}.identity.name-long h3{font-size:9.6px}.identity p{font-size:5.8px}.team-logo{width:30px;height:30px}}
+.identity p{font-size:6.2px;line-height:1;margin:0;letter-spacing:.07em;color:#f1f3f6;overflow:visible;text-overflow:clip}
+.team-logo{right:8px;bottom:6px;width:31px;height:31px}
+@media(max-width:430px){.player-card{aspect-ratio:.68}.art-stage{inset:0 0 38px}.cutout-art{width:100%!important;height:100%!important}.stats{bottom:43px}.identity{height:42px;padding:6px 39px 5px 47px}.identity h3{font-size:13px}.identity.name-long h3{font-size:9.5px}.identity p{font-size:5.8px}.team-logo{width:29px;height:29px}}
