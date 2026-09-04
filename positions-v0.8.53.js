@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.53 — single-position cards + position-balanced random teams */
+/* NBA Courtside v0.8.57 — single-position cards + position-balanced random teams + compact finals */
 (() => {
   const POSITION_BY_SLUG={
     'derrick-white':'SG','michael-porter-jr':'SF','josh-hart':'SF','vj-edgecombe':'SG','jakobe-walter':'SG','josh-giddey':'PG','jarrett-allen':'C','cade-cunningham':'PG','obi-toppin':'PF','kyle-kuzma':'PF','jalen-johnson':'PF','kon-knueppel':'SG','bam-adebayo':'C','jalen-suggs':'PG','bub-carrington':'PG','nikola-jokic':'C','rudy-gobert':'C','shai-gilgeous-alexander':'PG','scoot-henderson':'PG','keyonte-george':'PG','brandin-podziemski':'SG','brook-lopez':'C','luka-doncic':'PG','dillon-brooks':'SF','zach-lavine':'SG','cooper-flagg':'PF','reed-sheppard':'SG','gg-jackson':'PF','jeremiah-fears':'PG','victor-wembanyama':'C',
@@ -29,13 +29,39 @@
   };
 
   const style=document.createElement('style');
-  style.id='courtside-position-style-v0853';
+  style.id='courtside-position-style-v0857';
   style.textContent=`
     .player-card .card-position{position:absolute;top:12px;right:13px;z-index:39;color:#fff;font-size:15px;line-height:1;font-weight:1000;letter-spacing:.045em;text-shadow:0 2px 5px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.7);pointer-events:none}
     .catalogue-grid .player-card .card-position{top:7px;right:8px;font-size:8px;letter-spacing:.03em}
-    @media(max-width:430px){.player-card .card-position{top:10px;right:11px;font-size:13px}.catalogue-grid .player-card .card-position{top:6px;right:7px;font-size:7.5px}}
+    @media(max-width:430px){
+      .player-card .card-position{top:10px;right:11px;font-size:13px}.catalogue-grid .player-card .card-position{top:6px;right:7px;font-size:7.5px}
+      #final .final-card{padding:8px 8px 8px!important;gap:5px!important}
+      #final .story-summary{gap:4px!important;margin-top:0!important}
+      #final .story-row{padding:8px 10px!important;gap:9px!important}
+      #final .story-row small{margin-top:3px!important}
+      #final .final-winner{margin:0 0 2px!important}
+    }
   `;
   document.head.appendChild(style);
 
   if(typeof dealTeams==='function'){dealTeams();if(typeof renderStarterFive==='function')renderStarterFive();}
 })();
+
+/* Final-screen tie copy: never describe an equal stat matchup as a win. */
+window.addEventListener('load',()=>setTimeout(()=>{
+  if(typeof finishGame!=='function'||window.__courtsideTieCopyInstalled)return;
+  window.__courtsideTieCopyInstalled=true;
+  const beforeFinish=finishGame;
+  finishGame=function(){
+    beforeFinish();
+    requestAnimationFrame(()=>{
+      if(!state?.history)return;
+      const rows=[...document.querySelectorAll('#final .story-row')];
+      state.history.forEach((h,i)=>{
+        if(h.userPts!==h.cpuPts)return;
+        const strong=rows[i]?.querySelector('strong');
+        if(strong)strong.textContent=`${h.user.name} and ${h.cpu.name} went head to head`;
+      });
+    });
+  };
+},0));
