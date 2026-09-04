@@ -3,32 +3,34 @@ name: Import uploaded player art
 on:
   push:
     paths:
-      - 'art-import/*.json'
+      - 'art-import/**'
 
 permissions:
   contents: write
 
 jobs:
   import-art:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Decode player art manifests
+      - name: Decode player art chunks
         shell: python
         run: |
-          import base64, json
+          import base64
           from pathlib import Path
+          source = Path('art-import/chunks')
           out = Path('assets/player-art')
           out.mkdir(parents=True, exist_ok=True)
-          manifests = sorted(Path('art-import').glob('*.json'))
-          for manifest in manifests:
-              data = json.loads(manifest.read_text())
-              for slug, payload in data.items():
-                  target = out / f'{slug}.webp'
-                  target.write_bytes(base64.b64decode(payload))
-                  print('wrote', target, target.stat().st_size)
+          slugs = sorted({p.name.split('.part')[0] for p in source.glob('*.part*.txt')})
+          for slug in slugs:
+              parts = sorted(source.glob(f'{slug}.part*.txt'))
+              payload = ''.join(p.read_text().strip() for p in parts)
+              target = out / f'{slug}.webp'
+              target.write_bytes(base64.b64decode(payload))
+              print('wrote', target, target.stat().st_size, 'from', len(parts), 'parts')
       - name: Commit decoded artwork
         run: |
           git config user.name "github-actions[bot]"
