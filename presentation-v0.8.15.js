@@ -1,10 +1,9 @@
-/* NBA Courtside v0.8.50 — scoreboard recovery + opponent-aware final recap */
+/* NBA Courtside v0.8.51 — scoreboard recovery + current-game final recap */
 (() => {
   logoUrl=function(p){return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`;};
 
   const originalResetGame=resetGame;
   const originalBeginQuarter=beginQuarter;
-  const originalFinishGame=finishGame;
   let homeTeam=null,awayTeam=null;
 
   function teamFromCard(p){
@@ -48,7 +47,10 @@
     return categoryVerb(h);
   }
   function renderFinalPresentation(){
-    if(!homeTeam||!awayTeam||!state)return;
+    if(!state)return;
+    homeTeam=teamFromCard(userTeam[0]);
+    awayTeam=teamFromCard(cpuTeam[0]);
+    if(!homeTeam||!awayTeam)return;
     const userWon=state.userScore>state.cpuScore,tied=state.userScore===state.cpuScore,winner=userWon?homeTeam:awayTeam,margin=Math.abs(state.userScore-state.cpuScore),final=document.querySelector('.final-card');
     if(!final)return;
     const title=tied?'Deadlocked':`${winner.name} Win!`;
@@ -87,8 +89,9 @@
   finishGame=function(){
     if(state?.finished)return;
     state.finished=true;
-    originalFinishGame();
+    showScreen('final');
     renderFinalPresentation();
+    window.scrollTo({top:0});
   };
 
   const originalPlayQuarter=playQuarter;
