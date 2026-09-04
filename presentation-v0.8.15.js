@@ -17,9 +17,39 @@
   }
   function categoryVerb(h){const winner=h.userPts>=h.cpuPts?h.user:h.cpu,loser=h.userPts>=h.cpuPts?h.cpu:h.user,diff=Math.abs(h.userPts-h.cpuPts);switch(h.category){case'rebounding':return`${winner.name} outrebounded ${loser.name}`;case'passing':return`${winner.name} found the better passing lanes against ${loser.name}`;case'blocks':return`${winner.name} protected the rim against ${loser.name}`;case'steals':return`${winner.name} stole the ball at a crucial time`;case'dunks':return`${winner.name} dominated above the rim against ${loser.name}`;case'three':return`${winner.name} won the battle from beyond the arc`;case'freeThrows':return`${winner.name} was steadier at the free throw line`;case'scoring':return diff<=2?`${winner.name} hit the decisive bucket`:`${winner.name} took over as a scorer`;default:return`${winner.name} won the matchup`;}}
   function finalQuarterLine(h,margin){const winner=h.userPts>=h.cpuPts?h.user:h.cpu;if(margin<=2&&h.category==='scoring')return`${winner.name} wins it at the buzzer`;if(h.category==='freeThrows')return`The game was won at the free throw line`;if(h.category==='three')return margin<=3?`${winner.name} wins it from downtown`:`The game was decided from beyond the arc`;if(h.category==='steals')return`${winner.name} sealed it with a crucial steal`;if(h.category==='blocks')return`${winner.name} shut the door at the rim`;if(h.category==='rebounding')return`${winner.name} secured the game on the glass`;if(h.category==='passing')return`${winner.name} made the winning play`;if(h.category==='dunks')return`${winner.name} finished the game above the rim`;return categoryVerb(h);}
-  function renderFinalPresentation(){if(!homeTeam||!awayTeam||!state)return;const userWon=state.userScore>state.cpuScore,tied=state.userScore===state.cpuScore,winner=userWon?homeTeam:awayTeam,loser=userWon?awayTeam:homeTeam,margin=Math.abs(state.userScore-state.cpuScore),final=document.querySelector('.final-card');if(!final)return;const resultTitle=tied?'Deadlocked':`${winner.name} Win!`,resultSub=tied?'Nothing separated the two teams':`${winner.name} win, ${loser.name} lose!`,rows=state.history.map((h,i)=>{const line=i===state.history.length-1?finalQuarterLine(h,margin):categoryVerb(h);return`<div class="story-row"><span class="story-q">Q${h.quarter}</span><div><strong>${line}</strong><small>${STAT_LABELS[h.category]} · ${h.userPts}–${h.cpuPts}</small></div></div>`;}).join('');final.innerHTML=`<span class="kicker">FINAL</span><div class="final-matchup"><div class="final-team"><img src="${homeTeam.logo}" alt="${homeTeam.name}"><span>${homeTeam.name}</span><strong>${state.userScore}</strong></div><div class="final-center"><b>FINAL</b><span>—</span></div><div class="final-team"><img src="${awayTeam.logo}" alt="${awayTeam.name}"><span>${awayTeam.name}</span><strong>${state.cpuScore}</strong></div></div><h2 class="final-winner">${resultTitle}</h2><p class="final-subline">${resultSub}</p><div class="story-summary">${rows}</div><button id="playAgainBtn" class="primary-btn">Play Again</button>`;document.querySelector('#playAgainBtn').onclick=resetGame;}
-  resetGame=function(){originalResetGame();homeTeam=teamFromCard(userTeam[0]);awayTeam=teamFromCard(cpuTeam[0]);ensureScoreboardTeams();const q=document.querySelector('#quarterLabel'),cat=document.querySelector('#categoryLabel');if(q)q.textContent='Q'+state.quarter;if(cat)cat.textContent=STAT_LABELS[state.category].toUpperCase();};
-  beginQuarter=function(){originalBeginQuarter();ensureScoreboardTeams();const q=document.querySelector('#quarterLabel'),cat=document.querySelector('#categoryLabel');if(q)q.textContent='Q'+state.quarter;if(cat)cat.textContent=STAT_LABELS[state.category].toUpperCase();};
+  function renderFinalPresentation(){if(!homeTeam||!awayTeam||!state)return;const userWon=state.userScore>state.cpuScore,tied=state.userScore===state.cpuScore,winner=userWon?homeTeam:awayTeam,loser=userWon?awayTeam:homeTeam,margin=Math.abs(state.userScore-state.cpuScore),final=document.querySelector('.final-card');if(!final)return;const resultTitle=tied?'Deadlocked':`${winner.name} Win!`,resultSub=tied?'Nothing separated the two teams':`${winner.name} win, ${loser.name} lose!`,rows=state.history.map((h,i)=>{const line=i===state.history.length-1?finalQuarterLine(h,margin):categoryVerb(h);return`<div class="story-row"><span class="story-q">${h.quarter==='OT'?'OT':'Q'+h.quarter}</span><div><strong>${line}</strong><small>${STAT_LABELS[h.category]} · ${h.userPts}–${h.cpuPts}</small></div></div>`;}).join('');final.innerHTML=`<span class="kicker">FINAL</span><div class="final-matchup"><div class="final-team"><img src="${homeTeam.logo}" alt="${homeTeam.name}"><span>${homeTeam.name}</span><strong>${state.userScore}</strong></div><div class="final-center"><b>FINAL</b><span>—</span></div><div class="final-team"><img src="${awayTeam.logo}" alt="${awayTeam.name}"><span>${awayTeam.name}</span><strong>${state.cpuScore}</strong></div></div><h2 class="final-winner">${resultTitle}</h2><p class="final-subline">${resultSub}</p><div class="story-summary">${rows}</div><button id="playAgainBtn" class="primary-btn">Play Again</button>`;document.querySelector('#playAgainBtn').onclick=resetGame;}
+  resetGame=function(){originalResetGame();homeTeam=teamFromCard(userTeam[0]);awayTeam=teamFromCard(cpuTeam[0]);ensureScoreboardTeams();const q=document.querySelector('#quarterLabel'),cat=document.querySelector('#categoryLabel');if(q)q.textContent=state.overtime?'OT':'Q'+state.quarter;if(cat)cat.textContent=STAT_LABELS[state.category].toUpperCase();};
+  beginQuarter=function(){originalBeginQuarter();ensureScoreboardTeams();const q=document.querySelector('#quarterLabel'),cat=document.querySelector('#categoryLabel');if(q)q.textContent=state.overtime?'OT':'Q'+state.quarter;if(cat)cat.textContent=STAT_LABELS[state.category].toUpperCase();};
   finishGame=function(){originalFinishGame();renderFinalPresentation();};
   const start=document.querySelector('#startBtn'),replay=document.querySelector('#playAgainBtn');if(start)start.onclick=resetGame;if(replay)replay.onclick=resetGame;
+
+  const CURRENT_BUILD='0.8.28';
+  function installUpdateButton(){
+    const host=document.querySelector('.brand-launch-actions')||document.querySelector('.topbar');
+    if(!host||document.querySelector('#checkUpdateBtn'))return;
+    const btn=document.createElement('button');
+    btn.id='checkUpdateBtn';
+    btn.className='ghost-btn';
+    btn.textContent='Check for Updates';
+    btn.addEventListener('click',async()=>{
+      const original=btn.textContent;
+      btn.disabled=true;btn.textContent='Checking GitHub…';
+      try{
+        const url='https://raw.githubusercontent.com/Swoop081/nba-courtside/main/build.json?t='+Date.now();
+        const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error('update check failed');
+        const build=await r.json();
+        if(build.version&&build.version!==CURRENT_BUILD){
+          btn.textContent='Update '+build.version;
+          setTimeout(()=>location.replace('./?update='+encodeURIComponent(build.version)+'&t='+Date.now()),250);
+        }else{
+          btn.textContent='Up to Date · v'+CURRENT_BUILD;
+          setTimeout(()=>{btn.textContent=original;btn.disabled=false},1800);
+        }
+      }catch(e){
+        btn.textContent='Try Again';btn.disabled=false;
+      }
+    });
+    host.appendChild(btn);
+  }
+  installUpdateButton();
 })();
