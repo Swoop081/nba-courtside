@@ -1,0 +1,26 @@
+/* NBA Courtside v0.8.23 — exact user-supplied NBA logoman + fitted Courtside wordmark */
+.app-shell:has(#intro.active) .topbar{display:none!important}
+.topbar{align-items:center!important}
+.courtside-wordmark{display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.courtside-wordmark .nba-official-logo{display:block;flex:0 0 auto;object-fit:contain}
+.courtside-wordmark .courtside-type{display:block;color:#fff;font-family:Impact,Haettenschweiler,'Arial Narrow Bold','Arial Narrow',sans-serif;font-weight:900;line-height:.82;letter-spacing:-.045em;text-transform:uppercase}
+.topbar-wordmark{justify-content:flex-start;gap:5px}
+.topbar-wordmark .nba-official-logo{height:34px;width:auto}
+.topbar-wordmark .courtside-type{font-size:30px}
+#intro.brand-intro{padding:0!important;margin:0!important}
+#intro.brand-intro.active{position:fixed!important;inset:0!important;z-index:100!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;min-height:100svh!important;width:100vw!important;padding:max(18px,env(safe-area-inset-top)) 10px max(20px,env(safe-area-inset-bottom))!important;background:#000!important;overflow:hidden!important}
+.brand-launch-wordmark{box-sizing:border-box;width:94vw;max-width:760px;gap:8px;margin:0 auto 10vh;overflow:visible}
+.brand-launch-wordmark .nba-official-logo{height:clamp(76px,22vw,150px);width:auto}
+.brand-launch-wordmark .courtside-type{font-size:clamp(66px,16.8vw,132px)}
+.brand-launch-actions{width:min(92vw,520px);display:flex;flex-direction:column;align-items:center;gap:13px}
+.brand-start-btn{width:100%!important;min-height:58px!important;margin:0!important;border-radius:18px!important;font-size:18px!important;font-weight:950!important;letter-spacing:.04em!important;text-transform:uppercase!important}
+.brand-version{font-size:11px;font-weight:800;letter-spacing:.16em;color:#777;text-transform:uppercase}
+@media(max-width:430px){
+ .brand-launch-wordmark{width:92vw;gap:7px;margin-bottom:11vh}
+ .brand-launch-wordmark .nba-official-logo{height:21vw;max-height:92px}
+ .brand-launch-wordmark .courtside-type{font-size:16.2vw;letter-spacing:-.055em}
+ .brand-launch-actions{width:calc(100vw - 36px)}
+ .brand-start-btn{min-height:56px!important}
+ .topbar-wordmark .nba-official-logo{height:30px}
+ .topbar-wordmark .courtside-type{font-size:27px}
+}
