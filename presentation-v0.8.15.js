@@ -23,7 +23,7 @@
   finishGame=function(){originalFinishGame();renderFinalPresentation();};
   const start=document.querySelector('#startBtn'),replay=document.querySelector('#playAgainBtn');if(start)start.onclick=resetGame;if(replay)replay.onclick=resetGame;
 
-  const CURRENT_BUILD='0.8.36';
+  const CURRENT_BUILD='0.8.37';
   function installUpdateButton(){
     const host=document.querySelector('.brand-launch-actions')||document.querySelector('.topbar');
     if(!host||document.querySelector('#checkUpdateBtn'))return;
@@ -104,4 +104,63 @@ window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
   const openClone=launch.cloneNode(true);launch.replaceWith(openClone);openClone.addEventListener('click',()=>{showScreen('catalogue');renderFilters();render();window.scrollTo({top:0});});
   if(back){const backClone=back.cloneNode(true);back.replaceWith(backClone);backClone.addEventListener('click',()=>{showScreen('intro');window.scrollTo({top:0});});}
   renderFilters();render();
+},0));
+
+/* v0.8.37 — in-game main menu: Play / Catalogue / Options. */
+window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
+  const intro=document.getElementById('intro');
+  const actions=intro?.querySelector('.brand-launch-actions');
+  const play=document.getElementById('startBtn');
+  const catalogue=document.getElementById('catalogueBtn');
+  const topbar=document.querySelector('.topbar');
+  const topOptions=document.getElementById('optionsBtn');
+  const topNewGame=document.getElementById('newGameBtn');
+  const version=actions?.querySelector('.brand-version');
+  const update=document.getElementById('checkUpdatesBtn')||document.getElementById('checkUpdateBtn');
+  if(!intro||!actions||!play||!catalogue)return;
+
+  play.textContent='Play';
+  play.classList.add('main-menu-btn','main-menu-play');
+  catalogue.classList.add('main-menu-btn');
+
+  let menuOptions=document.getElementById('mainMenuOptionsBtn');
+  if(!menuOptions){
+    menuOptions=document.createElement('button');
+    menuOptions.id='mainMenuOptionsBtn';
+    menuOptions.type='button';
+    menuOptions.className='catalogue-launch-btn main-menu-btn';
+    menuOptions.textContent='Options';
+    catalogue.insertAdjacentElement('afterend',menuOptions);
+  }
+  menuOptions.onclick=()=>topOptions?.click();
+
+  const style=document.createElement('style');
+  style.id='courtside-main-menu-v0837';
+  style.textContent=`
+    #intro.brand-intro{min-height:calc(100dvh - 96px);display:none;flex-direction:column;justify-content:center;padding:16px 0 28px}
+    #intro.brand-intro.active{display:flex}
+    #intro .brand-launch-wordmark{margin-bottom:34px}
+    #intro .brand-launch-actions{width:min(100%,420px);margin:0 auto;display:grid!important;grid-template-columns:1fr;gap:12px}
+    #intro .main-menu-btn{width:100%;min-height:58px;margin:0!important;border-radius:17px!important;font-size:17px!important;font-weight:1000!important;letter-spacing:.035em!important}
+    #intro .main-menu-play{background:linear-gradient(180deg,#ffd45c,#f7b928)!important;color:#080a0d!important;border-color:#ffe287!important;box-shadow:0 12px 28px rgba(247,185,40,.18)}
+    #intro .brand-version{margin-top:10px;text-align:center}
+    #intro #checkUpdatesBtn,#intro #checkUpdateBtn{justify-self:center;margin-top:0}
+    body.courtside-main-menu .topbar{display:none!important}
+    body.courtside-main-menu .app-shell{padding-top:max(18px,env(safe-area-inset-top))}
+  `;
+  document.head.appendChild(style);
+
+  const syncMenuChrome=()=>{
+    const active=intro.classList.contains('active');
+    document.body.classList.toggle('courtside-main-menu',active);
+  };
+  syncMenuChrome();
+  new MutationObserver(syncMenuChrome).observe(intro,{attributes:true,attributeFilter:['class']});
+
+  if(topNewGame){
+    topNewGame.textContent='Menu';
+    topNewGame.onclick=()=>{showScreen('intro');window.scrollTo({top:0});};
+  }
+
+  if(version)version.textContent='v0.8.37';
 },0));
