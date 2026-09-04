@@ -1,9 +1,11 @@
-/* NBA Courtside v0.8.40 — per-player composition tuning + Thunder & Lightning depth fix */
+/* NBA Courtside v0.8.44 — per-player composition tuning + Thunder & Lightning depth fix */
 .player-card[data-id="p1"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.28)!important;transform-origin:center top!important}
+.player-card[data-id="p2"] .cutout-art{left:61%!important;transform:translateX(-50%) scale(1.06)!important;transform-origin:center top!important}
 .player-card[data-id="p3"] .cutout-art{left:57%!important;top:-7px!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
 .player-card[data-id="p4"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.40)!important;transform-origin:center top!important}
+.player-card[data-id="p8"] .cutout-art{left:61%!important;transform:translateX(-50%) scale(1.00)!important;transform-origin:center top!important}
 .player-card[data-id="p9"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.34)!important;transform-origin:center top!important}
-.player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.05)!important;transform-origin:center top!important}
+.player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.22)!important;transform-origin:center top!important}
 .player-card[data-id="p11"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(2.25)!important;transform-origin:center top!important}
 .player-card[data-id="p13"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.92)!important;transform-origin:center top!important}
 .player-card[data-id="p16"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.68)!important;transform-origin:center top!important}
