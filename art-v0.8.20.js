@@ -1,7 +1,7 @@
-/* NBA Courtside v0.8.30 — seven-stat gameplay + local Tip-Off 27 artwork authority */
+/* NBA Courtside v0.8.31 — seven-stat spacing + local Tip-Off 27 artwork authority */
 const artUrlBeforeV088=artUrl;
 artUrl=function(p){
-  return `assets/player-art/${p.artSlug}.png?v=0.8.30`;
+  return `assets/player-art/${p.artSlug}.png?v=0.8.31`;
 };
 
 /* Free Throws retired: gameplay now draws from seven categories only. */
@@ -21,14 +21,23 @@ beginQuarter=function(){
   }
 };
 
-/* Keep only seven visible card stats and distribute them evenly down the rail. */
+/* Exactly seven equal-height stat rows from the top of the rail to the bottom. */
 (function applySevenStatCardLayout(){
   const style=document.createElement('style');
   style.id='courtside-seven-stat-layout';
   style.textContent=`
     .player-card .stats .stat:nth-child(4){display:none!important}
-    .player-card .stats{justify-content:space-between!important;gap:0!important}
-    .player-card .stats .stat{flex:0 0 auto!important}
+    .player-card .stats{
+      display:grid!important;
+      grid-template-rows:repeat(7,minmax(0,1fr))!important;
+      align-items:center!important;
+      justify-content:stretch!important;
+      gap:0!important;
+    }
+    .player-card .stats .stat{
+      min-height:0!important;
+      align-self:center!important;
+    }
   `;
   document.head.appendChild(style);
 })();
