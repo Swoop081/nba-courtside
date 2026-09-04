@@ -23,7 +23,7 @@
   finishGame=function(){originalFinishGame();renderFinalPresentation();};
   const start=document.querySelector('#startBtn'),replay=document.querySelector('#playAgainBtn');if(start)start.onclick=resetGame;if(replay)replay.onclick=resetGame;
 
-  const CURRENT_BUILD='0.8.28';
+  const CURRENT_BUILD='0.8.36';
   function installUpdateButton(){
     const host=document.querySelector('.brand-launch-actions')||document.querySelector('.topbar');
     if(!host||document.querySelector('#checkUpdateBtn'))return;
@@ -53,3 +53,55 @@
   }
   installUpdateButton();
 })();
+
+/* v0.8.36 — catalogue mode correction: selected set = whole set; All Sets = team browser. */
+window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
+  const screen=document.getElementById('catalogue'),launch=document.getElementById('catalogueBtn'),back=document.getElementById('closeCatalogueBtn'),filter=document.getElementById('catalogueSetFilter'),browser=document.querySelector('.catalogue-team-browser'),grid=document.getElementById('catalogueGrid');
+  if(!screen||!launch||!filter||!browser||!grid)return;
+  const oldPrev=document.getElementById('cataloguePrevTeam'),oldNext=document.getElementById('catalogueNextTeam');
+  if(oldPrev)oldPrev.replaceWith(oldPrev.cloneNode(true));
+  if(oldNext)oldNext.replaceWith(oldNext.cloneNode(true));
+  const prev=document.getElementById('cataloguePrevTeam'),next=document.getElementById('catalogueNextTeam');
+  const logo=document.getElementById('catalogueTeamLogo'),name=document.getElementById('catalogueTeamName'),meta=document.getElementById('catalogueTeamMeta'),focus=document.querySelector('.catalogue-team-focus');
+  const teams=[...new Map(players.map(p=>[p.teamId,{id:p.teamId,name:p.teamShort}])).values()].sort((a,b)=>a.name.localeCompare(b.name));
+  const sets=[...new Set(players.map(p=>p.set))];
+  let teamIndex=0,activeSet='ALL';
+  let badge=focus.querySelector('.catalogue-set-logo');
+  if(!badge){badge=document.createElement('div');badge.className='catalogue-set-logo';badge.innerHTML='<span>NBA</span><strong>TIP-OFF</strong><b>27</b>';focus.prepend(badge);}
+  const style=document.createElement('style');
+  style.textContent=`
+    .catalogue-set-logo{display:none;width:104px;height:104px;margin:0 auto 9px;border-radius:50%;position:relative;place-items:center;background:radial-gradient(circle at 36% 28%,#fff6be 0 5%,#f7b928 6% 31%,#121821 32% 66%,#05070a 67%);border:3px solid #f7b928;box-shadow:0 0 0 3px #111821,0 10px 24px rgba(0,0,0,.48),inset 0 0 20px rgba(247,185,40,.24);text-align:center;color:#fff;line-height:.82}
+    .catalogue-set-logo span{position:absolute;top:18px;font-size:9px;font-weight:1000;letter-spacing:.24em;color:#f7b928}
+    .catalogue-set-logo strong{font-size:18px;letter-spacing:-.05em;font-weight:1000}
+    .catalogue-set-logo b{position:absolute;bottom:15px;font-size:15px;color:#f7b928}
+    .catalogue-team-browser.set-mode{grid-template-columns:1fr;padding:14px 8px 16px}
+    .catalogue-team-browser.set-mode .catalogue-arrow,.catalogue-team-browser.set-mode .catalogue-team-logo{display:none!important}
+    .catalogue-team-browser.set-mode .catalogue-set-logo{display:grid}
+    .catalogue-grid.set-mode{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  `;
+  document.head.appendChild(style);
+  function renderFilters(){filter.innerHTML=['ALL',...sets].map(s=>`<button class="catalogue-set-btn ${activeSet===s?'active':''}" data-set="${s}">${s==='ALL'?'All Sets':s}</button>`).join('');filter.querySelectorAll('[data-set]').forEach(b=>b.addEventListener('click',()=>{activeSet=b.dataset.set;renderFilters();render();}));}
+  function render(){
+    if(activeSet!=='ALL'){
+      const cards=players.filter(p=>p.set===activeSet);
+      browser.classList.add('set-mode');grid.classList.add('set-mode');
+      if(logo)logo.style.display='none';
+      name.textContent=activeSet;
+      meta.textContent=`${cards.length} CARDS · COMPLETE SET`;
+      grid.innerHTML=cards.map(p=>cardMarkup(p,{})).join('');
+    }else{
+      browser.classList.remove('set-mode');grid.classList.remove('set-mode');
+      if(logo)logo.style.display='block';
+      const team=teams[teamIndex],cards=players.filter(p=>p.teamId===team.id);
+      logo.src=`https://cdn.nba.com/logos/nba/${team.id}/global/L/logo.svg`;logo.alt=team.name;name.textContent=team.name;meta.textContent=`${cards.length} ${cards.length===1?'CARD':'CARDS'} · ALL SETS`;
+      const slots=Math.max(9,cards.length);
+      grid.innerHTML=Array.from({length:slots},(_,i)=>cards[i]?cardMarkup(cards[i],{}):`<div class="catalogue-empty"><img src="https://cdn.nba.com/logos/nba/${team.id}/global/L/logo.svg" alt=""></div>`).join('');
+    }
+    window.scrollTo({top:0});
+  }
+  prev?.addEventListener('click',()=>{if(activeSet!=='ALL')return;teamIndex=(teamIndex-1+teams.length)%teams.length;render();});
+  next?.addEventListener('click',()=>{if(activeSet!=='ALL')return;teamIndex=(teamIndex+1)%teams.length;render();});
+  const openClone=launch.cloneNode(true);launch.replaceWith(openClone);openClone.addEventListener('click',()=>{showScreen('catalogue');renderFilters();render();window.scrollTo({top:0});});
+  if(back){const backClone=back.cloneNode(true);back.replaceWith(backClone);backClone.addEventListener('click',()=>{showScreen('intro');window.scrollTo({top:0});});}
+  renderFilters();render();
+},0));
