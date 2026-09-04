@@ -1,18 +1,19 @@
-/* NBA Courtside v0.8.73 — single-position cards + balanced teams + content-sized quarter recap boxes */
+/* NBA Courtside v0.8.80 — single-position cards + balanced teams + Inceptors */
 (() => {
   const POSITION_BY_SLUG={
     'derrick-white':'SG','michael-porter-jr':'SF','josh-hart':'SF','vj-edgecombe':'SG','jakobe-walter':'SG','josh-giddey':'PG','jarrett-allen':'C','cade-cunningham':'PG','obi-toppin':'PF','kyle-kuzma':'PF','jalen-johnson':'PF','kon-knueppel':'SG','bam-adebayo':'C','jalen-suggs':'PG','bub-carrington':'PG','nikola-jokic':'C','rudy-gobert':'C','shai-gilgeous-alexander':'PG','scoot-henderson':'PG','keyonte-george':'PG','brandin-podziemski':'SG','brook-lopez':'C','luka-doncic':'PG','dillon-brooks':'SF','zach-lavine':'SG','cooper-flagg':'PF','reed-sheppard':'SG','gg-jackson':'PF','jeremiah-fears':'PG','victor-wembanyama':'C',
     'antoine-walker':'PF','kenny-anderson':'PG','nate-robinson':'PG','julius-erving':'SF','vince-carter':'SG','michael-jordan':'SG','bob-sura':'SG','grant-hill':'SF','jamaal-tinsley':'PG','tj-ford':'PG','doc-rivers':'PG','kendall-gill':'SG','harold-miner':'SG','shaquille-oneal':'C','caron-butler':'SF','laphonso-ellis':'PF','jr-rider':'SG','serge-ibaka':'PF','arvydas-sabonis':'C','jeff-hornacek':'SG','jason-richardson':'SG','deandre-jordan':'C','lonzo-ball':'PG','dan-majerle':'SG','deaaron-fox':'PG','jason-kidd':'PG','kenny-smith':'PG','shareef-abdur-rahim':'PF','zion-williamson':'PF','tony-parker':'PG',
-    'jayson-tatum':'SF','kenyon-martin':'PF','jalen-brunson':'PG','allen-iverson':'SG','rj-barrett':'SF','joakim-noah':'C','donovan-mitchell':'SG','tayshaun-prince':'SF','danny-granger':'SF','giannis-antetokounmpo':'PF','josh-smith':'PF','brandon-miller':'SF','alonzo-mourning':'C','nick-anderson':'SG','john-wall':'PG','jamal-murray':'PG','anthony-edwards':'SG','jalen-williams':'SF','shaedon-sharpe':'SG','andrei-kirilenko':'SF','steph-curry':'PG','jamal-crawford':'SG','lamar-odom':'PF','kevin-durant':'SF','malik-monk':'SG','jamal-mashburn':'SF','robert-horry':'PF','jason-williams':'PG','brandon-ingram':'SF','demar-derozan':'SF'
+    'jayson-tatum':'SF','kenyon-martin':'PF','jalen-brunson':'PG','allen-iverson':'SG','rj-barrett':'SF','joakim-noah':'C','donovan-mitchell':'SG','tayshaun-prince':'SF','danny-granger':'SF','giannis-antetokounmpo':'PF','josh-smith':'PF','brandon-miller':'SF','alonzo-mourning':'C','nick-anderson':'SG','john-wall':'PG','jamal-murray':'PG','anthony-edwards':'SG','jalen-williams':'SF','shaedon-sharpe':'SG','andrei-kirilenko':'SF','steph-curry':'PG','jamal-crawford':'SG','lamar-odom':'PF','kevin-durant':'SF','malik-monk':'SG','jamal-mashburn':'SF','robert-horry':'PF','jason-williams':'PG','brandon-ingram':'SF','demar-derozan':'SF',
+    'al-horford':'C','yi-jianlian':'PF','patrick-ewing':'C','moses-malone':'C','marc-gasol':'C','dennis-rodman':'PF','lebron-james':'SF','jalen-duren':'C','rik-smits':'C','glenn-robinson':'SF','steve-smith':'SG','larry-johnson':'PF','udonis-haslem':'PF','jameer-nelson':'PG','rod-strickland':'PG','dikembe-mutombo':'C','kevin-garnett':'PF','alex-caruso':'SG','brandon-roy':'SG','lauri-markkanen':'PF','draymond-green':'PF','chris-paul':'PG','metta-world-peace':'SF','shawn-marion':'SF','chris-webber':'PF','jason-terry':'SG','hakeem-olajuwon':'C','shane-battier':'SF','derik-queen':'C','bruce-bowen':'SF'
   };
   const POSITIONS=['PG','SG','SF','PF','C'];
-  players.forEach(p=>{p.position=POSITION_BY_SLUG[p.artSlug]||'SF';});
+  players.forEach(p=>{p.position=POSITION_BY_SLUG[p.artSlug]||p.position||'SF';});
   const shuffle=a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;};
   dealTeams=function(){const used=new Set();const build=()=>POSITIONS.map(pos=>{const eligible=shuffle(players.filter(p=>p.position===pos&&!used.has(p.id)));const pick=eligible[0];if(pick)used.add(pick.id);return pick;}).filter(Boolean);userTeam=build();cpuTeam=build();};
   const before=cardMarkup;
   cardMarkup=function(p,o={}){let html=before(p,o);if(p.position)html=html.replace('<div class="team-mark">',`<div class="card-position">${p.position}</div><div class="team-mark">`);return html;};
   const style=document.createElement('style');
-  style.id='courtside-position-style-v0873';
+  style.id='courtside-position-style-v0880';
   style.textContent=`
     .player-card .card-position{position:absolute;top:12px;right:13px;z-index:39;color:#fff;font-size:15px;line-height:1;font-weight:1000;letter-spacing:.045em;text-shadow:0 2px 5px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.7);pointer-events:none}
     .catalogue-grid .player-card .card-position{top:7px;right:8px;font-size:8px;letter-spacing:.03em}
