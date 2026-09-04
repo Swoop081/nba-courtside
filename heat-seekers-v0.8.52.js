@@ -54,3 +54,6 @@ cardMarkup=function(p,o={}){let html=originalCardMarkupHeat(p,o);if(p.set!=='Hea
 `;document.head.appendChild(style);})();
 
 window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const sync=()=>{const n=document.getElementById('catalogueTeamName'),b=document.querySelector('.catalogue-set-logo');if(!n||!b)return;if(n.textContent==='Heat Seekers'){b.className='catalogue-set-logo heat-set-logo';b.innerHTML='<span>NBA</span><strong>HEAT</strong><b>SEEKERS</b>';}else if(n.textContent==='Thunder & Lightning'){b.className='catalogue-set-logo thunder-set-logo';b.innerHTML='<span>NBA</span><strong>THUNDER</strong><b>& LIGHTNING</b>';}else if(n.textContent==='NBA Tip-Off 27'){b.className='catalogue-set-logo';b.innerHTML='<span>NBA</span><strong>TIP-OFF</strong><b>27</b>';}};const n=document.getElementById('catalogueTeamName');if(n)new MutationObserver(sync).observe(n,{childList:true,subtree:true,characterData:true});sync();},120));
+
+/* Load the position layer after all three sets have been registered. */
+(()=>{const s=document.createElement('script');s.src='positions-v0.8.53.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());s.async=false;document.head.appendChild(s);})();
