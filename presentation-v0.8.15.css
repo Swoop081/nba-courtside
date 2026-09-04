@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.42 — broadcast scoreboard + full-height final recap */
+/* NBA Courtside v0.8.46 — broadcast scoreboard + full-height final recap */
 .scoreboard{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;padding:0!important;overflow:hidden;border-radius:18px!important;border:1px solid rgba(255,255,255,.12)!important;background:#06080c!important;box-shadow:0 12px 30px rgba(0,0,0,.44);position:sticky;top:8px;z-index:40}
 .scoreboard:before{display:none!important;content:none!important}
 .score-side{display:block!important;min-height:112px!important;padding:0!important;background:linear-gradient(180deg,var(--score-primary),var(--score-dark))!important;position:relative!important;overflow:hidden!important}
@@ -17,60 +17,60 @@
 .quarter-badge strong{font-size:7px!important;line-height:1!important;margin:3px 0 0!important;color:#fff!important;letter-spacing:.06em!important}
 .quarter-badge:after{display:none!important;content:none!important}
 
-/* Full-height final: bigger logos/scores, vertical quarter story, play again at bottom. */
 #final{padding:8px 0 10px!important;min-height:calc(100dvh - 92px)!important;box-sizing:border-box!important}
-#final .final-card{width:100%!important;max-width:none!important;margin:0!important;padding:16px 14px 16px!important;border-radius:20px!important;display:flex!important;flex-direction:column!important;gap:10px!important;box-sizing:border-box!important;min-height:calc(100dvh - 112px)!important}
-#final .final-card>.kicker{display:block!important;text-align:center!important;margin:0!important;font-size:11px!important;letter-spacing:.24em!important;line-height:1!important}
-#final .final-matchup{display:grid!important;grid-template-columns:1fr 42px 1fr!important;align-items:center!important;gap:8px!important;padding:2px 0 4px!important;margin:0!important}
-#final .final-team{display:grid!important;grid-template-columns:74px 1fr!important;grid-template-rows:auto auto!important;align-items:center!important;column-gap:10px!important;min-width:0!important}
-#final .final-team:last-child{grid-template-columns:1fr 74px!important;text-align:right!important}
+#final .final-card{width:100%!important;max-width:none!important;margin:0!important;padding:18px 16px 16px!important;border-radius:20px!important;display:flex!important;flex-direction:column!important;gap:12px!important;box-sizing:border-box!important;min-height:calc(100dvh - 112px)!important}
+#final .final-card>.kicker{display:block!important;text-align:center!important;margin:0!important;font-size:12px!important;letter-spacing:.24em!important;line-height:1!important}
+#final .final-matchup{display:grid!important;grid-template-columns:1fr 46px 1fr!important;align-items:center!important;gap:9px!important;padding:2px 0 4px!important;margin:0!important}
+#final .final-team{display:grid!important;grid-template-columns:92px 1fr!important;grid-template-rows:auto auto!important;align-items:center!important;column-gap:12px!important;min-width:0!important}
+#final .final-team:last-child{grid-template-columns:1fr 92px!important;text-align:right!important}
 #final .final-team:last-child img{grid-column:2!important;grid-row:1/3!important}
 #final .final-team:last-child span,#final .final-team:last-child strong{grid-column:1!important}
-#final .final-team img{width:74px!important;height:74px!important;object-fit:contain!important;grid-row:1/3!important;filter:drop-shadow(0 5px 10px rgba(0,0,0,.42))!important}
-#final .final-team span{font-size:12px!important;line-height:1.05!important;font-weight:950!important;letter-spacing:.06em!important;text-transform:uppercase!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-#final .final-team strong{font-size:46px!important;line-height:.9!important;letter-spacing:-.055em!important}
+#final .final-team img{width:92px!important;height:92px!important;object-fit:contain!important;grid-row:1/3!important;filter:drop-shadow(0 6px 12px rgba(0,0,0,.46))!important}
+#final .final-team span{font-size:13px!important;line-height:1.05!important;font-weight:950!important;letter-spacing:.06em!important;text-transform:uppercase!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#final .final-team strong{font-size:58px!important;line-height:.9!important;letter-spacing:-.06em!important}
 #final .final-center{display:flex!important;flex-direction:column!important;align-items:center!important;gap:1px!important;line-height:1!important}
-#final .final-center b{font-size:8px!important;letter-spacing:.14em!important}
-#final .final-center span{font-size:18px!important;line-height:1!important}
-#final .final-winner{font-size:31px!important;line-height:.95!important;text-align:center!important;margin:2px 0 4px!important;letter-spacing:-.035em!important}
+#final .final-center b{font-size:9px!important;letter-spacing:.14em!important}
+#final .final-center span{font-size:20px!important;line-height:1!important}
+#final .final-winner{font-size:35px!important;line-height:.95!important;text-align:center!important;margin:2px 0 4px!important;letter-spacing:-.035em!important}
 #final .final-subline{display:none!important}
-#final .story-summary{display:grid!important;grid-template-columns:1fr!important;gap:7px!important;margin:2px 0 0!important}
-#final .story-row{display:grid!important;grid-template-columns:38px 1fr!important;gap:10px!important;align-items:center!important;padding:10px 12px!important;border-radius:12px!important;min-width:0!important;background:rgba(255,255,255,.035)!important;border:1px solid rgba(255,255,255,.07)!important}
-#final .story-q{font-size:11px!important;font-weight:1000!important;line-height:1!important;color:#f7b928!important;letter-spacing:.05em!important}
-#final .story-row strong{display:block!important;font-size:11px!important;line-height:1.12!important;margin:0!important;text-align:left!important}
-#final .story-row small{display:block!important;margin-top:3px!important;font-size:8px!important;line-height:1.05!important;letter-spacing:.04em!important;text-align:left!important}
-#final .primary-btn{margin-top:auto!important;margin-bottom:0!important;padding:14px 16px!important;min-height:50px!important;font-size:17px!important}
+#final .story-summary{display:grid!important;grid-template-columns:1fr!important;grid-auto-rows:minmax(84px,1fr)!important;gap:10px!important;margin:2px 0 0!important;flex:1 1 auto!important;min-height:0!important}
+#final .story-row{display:grid!important;grid-template-columns:48px 1fr!important;gap:14px!important;align-items:center!important;padding:14px 16px!important;border-radius:14px!important;min-width:0!important;min-height:0!important;background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.085)!important}
+#final .story-q{font-size:14px!important;font-weight:1000!important;line-height:1!important;color:#f7b928!important;letter-spacing:.05em!important}
+#final .story-row strong{display:block!important;font-size:15px!important;line-height:1.16!important;margin:0!important;text-align:left!important}
+#final .story-row small{display:block!important;margin-top:5px!important;font-size:11px!important;line-height:1.1!important;letter-spacing:.035em!important;text-align:left!important}
+#final .primary-btn{margin-top:0!important;margin-bottom:0!important;padding:16px!important;min-height:54px!important;font-size:18px!important;flex:0 0 auto!important}
 
 @media(max-width:430px){
 .score-side{min-height:100px!important}.score-team{grid-template-columns:78px 1fr!important;grid-template-rows:67px 33px!important;height:100px!important}.score-team.away-team{grid-template-columns:1fr 78px!important}.score-logo-wrap{height:67px!important}.score-logo-wrap img{width:67px!important;height:62px!important}.score-number{height:67px!important}.score-number strong{font-size:48px!important}.score-name{height:33px!important;font-size:10px!important;border-top-width:2px!important}.quarter-badge{top:6px!important;padding:3px 7px!important}.quarter-badge span{font-size:5.4px!important}.quarter-badge strong{font-size:6.4px!important;margin-top:2px!important}
 #final{padding:4px 0 8px!important;min-height:calc(100dvh - 86px)!important}
-#final .final-card{padding:12px 11px 13px!important;gap:8px!important;border-radius:18px!important;min-height:calc(100dvh - 102px)!important}
-#final .final-matchup{grid-template-columns:1fr 32px 1fr!important;gap:5px!important}
-#final .final-team{grid-template-columns:62px 1fr!important;column-gap:7px!important}
-#final .final-team:last-child{grid-template-columns:1fr 62px!important}
-#final .final-team img{width:62px!important;height:62px!important}
-#final .final-team span{font-size:9px!important}
-#final .final-team strong{font-size:42px!important}
+#final .final-card{padding:14px 12px 13px!important;gap:9px!important;border-radius:18px!important;min-height:calc(100dvh - 102px)!important}
+#final .final-matchup{grid-template-columns:1fr 34px 1fr!important;gap:5px!important}
+#final .final-team{grid-template-columns:78px 1fr!important;column-gap:8px!important}
+#final .final-team:last-child{grid-template-columns:1fr 78px!important}
+#final .final-team img{width:78px!important;height:78px!important}
+#final .final-team span{font-size:10px!important}
+#final .final-team strong{font-size:52px!important}
 #final .final-center b{font-size:7px!important}
-#final .final-center span{font-size:16px!important}
-#final .final-winner{font-size:27px!important;margin:1px 0 3px!important}
-#final .story-summary{gap:6px!important}
-#final .story-row{grid-template-columns:32px 1fr!important;padding:8px 9px!important;gap:8px!important}
-#final .story-q{font-size:9px!important}
-#final .story-row strong{font-size:9.5px!important;line-height:1.08!important}
-#final .story-row small{font-size:7px!important}
-#final .primary-btn{padding:12px 14px!important;min-height:46px!important;font-size:16px!important}
+#final .final-center span{font-size:17px!important}
+#final .final-winner{font-size:31px!important;margin:1px 0 3px!important}
+#final .story-summary{grid-auto-rows:minmax(78px,1fr)!important;gap:8px!important}
+#final .story-row{grid-template-columns:38px 1fr!important;padding:12px 12px!important;gap:10px!important}
+#final .story-q{font-size:11px!important}
+#final .story-row strong{font-size:12.5px!important;line-height:1.12!important}
+#final .story-row small{font-size:9px!important;margin-top:4px!important}
+#final .primary-btn{padding:13px 14px!important;min-height:48px!important;font-size:17px!important}
 }
 
 @media(max-height:760px) and (max-width:430px){
 #final .final-card{padding:9px 9px 10px!important;gap:6px!important;min-height:calc(100dvh - 96px)!important}
 #final .final-card>.kicker{font-size:8px!important}
-#final .final-team img{width:52px!important;height:52px!important}
-#final .final-team{grid-template-columns:52px 1fr!important}.final-team:last-child{grid-template-columns:1fr 52px!important}
-#final .final-team strong{font-size:37px!important}
-#final .final-winner{font-size:23px!important}
-#final .story-row{padding:6px 8px!important}
-#final .story-row strong{font-size:8.5px!important}
-#final .story-row small{font-size:6.5px!important}
+#final .final-team img{width:62px!important;height:62px!important}
+#final .final-team{grid-template-columns:62px 1fr!important}.final-team:last-child{grid-template-columns:1fr 62px!important}
+#final .final-team strong{font-size:44px!important}
+#final .final-winner{font-size:25px!important}
+#final .story-summary{grid-auto-rows:minmax(58px,1fr)!important;gap:5px!important}
+#final .story-row{padding:8px 9px!important}
+#final .story-row strong{font-size:10px!important}
+#final .story-row small{font-size:7.5px!important}
 #final .primary-btn{min-height:42px!important;padding:9px 12px!important;font-size:15px!important}
 }
