@@ -1,14 +1,19 @@
-/* NBA Courtside v0.8.3 — scoreboard + final presentation upgrade */
-.scoreboard{grid-template-columns:1fr 1.12fr 1fr!important}
-.score-side{display:flex!important;align-items:center!important;justify-content:center!important;padding:15px 9px 8px!important}
-.score-team{display:flex;align-items:center;gap:8px;width:100%;min-width:0}
-.score-team.away-team{justify-content:flex-end;text-align:right}
-.score-team img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
-.score-team>div{display:flex;flex-direction:column;min-width:0}
-.score-team span{font-size:6.5px!important;line-height:1.1;letter-spacing:.1em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#aeb7c6!important}
-.score-team strong{font-size:35px!important;line-height:.92!important;margin-top:3px}
+/* NBA Courtside v0.8.5 — compact matchup scoreboard with dominant team logos */
+.scoreboard{grid-template-columns:1.35fr .72fr 1.35fr!important}
+.scoreboard:before{display:none!important;content:none!important}
+.score-side{display:flex!important;align-items:stretch!important;justify-content:stretch!important;padding:0!important;min-height:82px!important;overflow:hidden}
+.score-team{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:8px;width:100%;min-width:0;height:82px}
+.score-team.away-team{grid-template-columns:1fr 62px;text-align:right;gap:8px}
+.score-team img{width:58px;height:72px;object-fit:contain;align-self:center;justify-self:start;filter:drop-shadow(0 3px 8px rgba(0,0,0,.48))}
+.score-team.away-team img{justify-self:end}
+.score-team>div{display:flex;flex-direction:column;justify-content:center;min-width:0;height:100%}
+.score-team span{font-size:6px!important;line-height:1.05;letter-spacing:.11em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#aeb7c6!important;margin:0 0 3px!important}
+.score-team strong{font-size:42px!important;line-height:.82!important;margin:0!important;letter-spacing:-.06em!important}
 .score-side:after{display:none!important}
-.quarter-badge{padding-left:6px!important;padding-right:6px!important}
+.quarter-badge{min-height:82px!important;padding:12px 4px 7px!important;justify-content:center!important}
+.quarter-badge span{margin-top:0!important;font-size:7px!important}
+.quarter-badge strong{font-size:10px!important;line-height:1.05!important;margin-top:6px!important}
+.quarter-badge:after{font-size:4.8px!important;bottom:5px!important;letter-spacing:.08em!important}
 
 .final-card{max-width:700px;margin:0 auto;padding:28px 22px 24px!important;border-radius:28px!important;background:radial-gradient(circle at 50% 0,rgba(247,185,40,.09),transparent 30%),linear-gradient(180deg,#141b26,#090d13 68%,#06080c)!important;border:1px solid rgba(255,214,86,.22)!important;box-shadow:0 24px 55px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.04)}
 .final-card>.kicker{display:block;text-align:center;margin-bottom:12px}
@@ -29,6 +34,8 @@
 .final-card .primary-btn{margin-top:4px}
 
 @media(max-width:430px){
-.score-team{gap:5px}.score-team img{width:27px;height:27px}.score-team span{font-size:5.5px!important}.score-team strong{font-size:31px!important}.score-side{padding-left:7px!important;padding-right:7px!important}
+.scoreboard{grid-template-columns:1.4fr .68fr 1.4fr!important}
+.score-side,.quarter-badge{min-height:76px!important}
+.score-team{grid-template-columns:54px 1fr;height:76px;gap:5px}.score-team.away-team{grid-template-columns:1fr 54px;gap:5px}.score-team img{width:52px;height:68px}.score-team span{font-size:5.2px!important}.score-team strong{font-size:39px!important}.quarter-badge{padding:10px 2px 6px!important}.quarter-badge span{font-size:6.4px!important}.quarter-badge strong{font-size:9px!important}.quarter-badge:after{font-size:4.2px!important}
 .final-card{padding:22px 14px 18px!important;border-radius:24px!important}.final-matchup{gap:8px;padding:10px 0 14px}.final-team{grid-template-columns:38px 1fr;column-gap:7px}.final-team:last-child{grid-template-columns:1fr 38px}.final-team img{width:38px;height:38px}.final-team span{font-size:9px}.final-team strong{font-size:41px}.final-winner{font-size:31px!important}.final-subline{font-size:12px;margin-bottom:15px}.story-row{padding:10px 10px;grid-template-columns:30px 1fr;gap:7px}.story-row strong{font-size:11px}.story-row small{font-size:7px}
 }
