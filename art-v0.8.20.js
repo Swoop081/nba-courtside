@@ -1,7 +1,7 @@
-/* NBA Courtside v0.8.33 — 2025-26 statistical rating engine + local Tip-Off 27 artwork authority */
+/* NBA Courtside v0.8.34 — 2025-26 statistical rating engine + curated dunk reputation + local Tip-Off 27 artwork authority */
 const artUrlBeforeV088=artUrl;
 artUrl=function(p){
-  return `assets/player-art/${p.artSlug}.png?v=0.8.33`;
+  return `assets/player-art/${p.artSlug}.png?v=0.8.34`;
 };
 
 /*
@@ -15,8 +15,8 @@ artUrl=function(p){
     Steals     = 30 * STL / 2.0 (2025-26 league-leading rate)
     3PT impact = 3PM * sqrt(3P% / .360), normalized to Luka Doncic's 4.0 3PM at .366.
   All results are rounded to the nearest integer and clamped to 1–30.
-  Dunking is intentionally NOT regenerated here until the complete 2025-26 actual-dunks table is
-  available for all 30 players; the game will not fabricate dunk ratings from position or reputation.
+  Dunking is the one curated category: it represents reputation for in-game dunking,
+  explosiveness and above-the-rim finishing rather than a box-score average.
 */
 const COURTSIDE_2025_26={
   'derrick-white':[16.5,4.4,5.4,1.1,1.3,2.7,.327],
@@ -50,6 +50,48 @@ const COURTSIDE_2025_26={
   'jeremiah-fears':[14.3,3.7,3.4,1.2,.4,1.2,.330],
   'victor-wembanyama':[25.0,11.5,3.1,1.0,3.1,1.9,.349]
 };
+
+/*
+  Curated Dunking scale:
+  27–30 = elite / identity-level dunker
+  23–26 = strong frequent dunker
+  18–22 = capable occasional dunker
+  13–17 = limited dunker
+   1–12 = rarely known for dunking
+*/
+const COURTSIDE_DUNK_REPUTATION={
+  'derrick-white':10,
+  'michael-porter-jr':22,
+  'josh-hart':18,
+  'vj-edgecombe':26,
+  'jakobe-walter':17,
+  'josh-giddey':14,
+  'jarrett-allen':27,
+  'cade-cunningham':18,
+  'obi-toppin':30,
+  'kyle-kuzma':20,
+  'jalen-johnson':29,
+  'kon-knueppel':15,
+  'bam-adebayo':25,
+  'jalen-suggs':19,
+  'bub-carrington':13,
+  'nikola-jokic':18,
+  'rudy-gobert':27,
+  'shai-gilgeous-alexander':20,
+  'scoot-henderson':22,
+  'keyonte-george':13,
+  'brandin-podziemski':12,
+  'brook-lopez':14,
+  'luka-doncic':16,
+  'dillon-brooks':15,
+  'zach-lavine':28,
+  'cooper-flagg':28,
+  'reed-sheppard':12,
+  'gg-jackson':25,
+  'jeremiah-fears':18,
+  'victor-wembanyama':29
+};
+
 const courtsideScale=(value,leader)=>Math.max(1,Math.min(30,Math.round(30*value/leader)));
 const COURTSIDE_3PT_LEADER=4.0*Math.sqrt(.366/.360);
 const courtsideThreeRating=(made,pct)=>made<=0?1:Math.max(1,Math.min(30,Math.round(30*(made*Math.sqrt(pct/.360))/COURTSIDE_3PT_LEADER)));
@@ -64,6 +106,7 @@ players.forEach(p=>{
   p.stats.passing=courtsideScale(ast,10.7);
   p.stats.blocks=courtsideScale(blk,3.1);
   p.stats.steals=courtsideScale(stl,2.0);
+  if(Number.isFinite(COURTSIDE_DUNK_REPUTATION[p.artSlug]))p.stats.dunks=COURTSIDE_DUNK_REPUTATION[p.artSlug];
 });
 
 /* Free Throws retired: gameplay now draws from seven categories only. */
