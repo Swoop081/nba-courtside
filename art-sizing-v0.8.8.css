@@ -1,5 +1,8 @@
-/* NBA Courtside v0.8.9 — per-player composition tuning */
+/* NBA Courtside v0.8.10 — per-player composition tuning */
+.player-card[data-id="p1"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.56)!important;transform-origin:center top!important}
 .player-card[data-id="p4"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.40)!important;transform-origin:center top!important}
 .player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.52)!important;transform-origin:center top!important}
 .player-card[data-id="p11"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(2.25)!important;transform-origin:center top!important}
+.player-card[data-id="p16"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.58)!important;transform-origin:center top!important}
+.player-card[data-id="p25"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.62)!important;transform-origin:center top!important}
 .player-card[data-id="p27"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.62)!important;transform-origin:center top!important}
