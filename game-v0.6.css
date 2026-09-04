@@ -1,4 +1,4 @@
-/* NBA Courtside v0.7.3 — responsive touch interactions + persistent five-card rail */
+/* NBA Courtside v0.8.0 — responsive touch interactions + persistent five-card rail + courtside scoreboard */
 .player-card{aspect-ratio:.68;border-radius:20px;background:linear-gradient(155deg,var(--team-a),var(--team-c) 58%,#010203);touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
 .player-card:active{transform:scale(.985)}
 .card-backdrop{inset:0!important}
@@ -22,6 +22,21 @@
 button,.primary-btn,.ghost-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}
 button:active,.primary-btn:active,.ghost-btn:active{transform:scale(.985)}
 
+/* Connected arena-style scoreboard. */
+.scoreboard{display:grid!important;grid-template-columns:1fr 1.15fr 1fr!important;gap:0!important;padding:0!important;overflow:hidden;border-radius:18px!important;border:1px solid rgba(255,208,76,.34)!important;background:#05070a!important;box-shadow:0 10px 24px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.05);position:sticky;top:8px;z-index:40;backdrop-filter:blur(14px)}
+.scoreboard:before{content:'NBA COURTSIDE  •  TIP-OFF 27';position:absolute;top:5px;left:50%;transform:translateX(-50%);font-size:6.5px;font-weight:950;letter-spacing:.18em;color:#f7b928;white-space:nowrap;z-index:2}
+.score-side,.quarter-badge{min-height:94px!important;border-radius:0!important;background:linear-gradient(180deg,#151a23,#0a0d12)!important;padding:18px 12px 8px!important;position:relative}
+.score-side:first-child{border-right:1px solid rgba(255,255,255,.08)}
+.score-side.away{border-left:1px solid rgba(255,255,255,.08)}
+.score-side span,.quarter-badge span{font-size:8px!important;letter-spacing:.18em!important;color:#aab2c0!important;font-weight:950!important}
+.score-side strong{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:43px!important;line-height:.9;letter-spacing:-.06em;color:#fff;text-shadow:0 0 12px rgba(255,255,255,.12)}
+.score-side:after{content:'PLAYER';font-size:6px;font-weight:900;letter-spacing:.14em;color:#636d7b;position:absolute;bottom:7px;left:12px}
+.score-side.away:after{content:'CPU';left:auto;right:12px}
+.quarter-badge{align-items:center!important;text-align:center;background:radial-gradient(circle at 50% 70%,rgba(247,185,40,.12),transparent 48%),linear-gradient(180deg,#111722,#070a0e)!important}
+.quarter-badge span{margin-top:5px;color:#f7b928!important}
+.quarter-badge strong{font-size:11px!important;line-height:1.05;margin-top:7px!important;letter-spacing:.035em;max-width:100%;color:#fff}
+.quarter-badge:after{content:'MATCHUP CATEGORY';font-size:5.5px;font-weight:900;letter-spacing:.12em;color:#687181;position:absolute;bottom:7px;left:0;right:0}
+
 /* Five choices always remain one horizontal swipe rail before and after selection. */
 .card-row{display:flex!important;grid-template-columns:none!important;gap:10px;overflow-x:auto;overflow-y:hidden;padding:2px 14px 10px 2px;margin-right:-14px;scroll-snap-type:x mandatory;scroll-padding-left:2px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-width:none}
 .card-row::-webkit-scrollbar{display:none}
@@ -38,6 +53,7 @@ button:active,.primary-btn:active,.ghost-btn:active{transform:scale(.985)}
 
 @media(max-width:430px){
 .player-card{aspect-ratio:.68}.art-stage{inset:0 0 38px}.cutout-art{width:100%!important;height:calc(100% - 4px)!important;top:4px!important}.stats{bottom:43px}.identity{height:42px;padding:6px 39px 5px 9px}.identity h3{font-size:13px}.identity.name-long h3{font-size:9.5px}.identity p{font-size:5.8px}.team-logo{width:29px;height:29px}
-.app-shell{padding-left:12px;padding-right:12px}.topbar{margin-bottom:16px}.instruction{margin:13px 0 9px}.card-row{gap:9px;padding-bottom:7px;margin-right:-12px}.card-row>.player-card{flex-basis:45vw;width:45vw;max-width:185px}
+.app-shell{padding-left:12px;padding-right:12px}.topbar{margin-bottom:12px}.instruction{margin:11px 0 8px}.card-row{gap:9px;padding-bottom:7px;margin-right:-12px}.card-row>.player-card{flex-basis:45vw;width:45vw;max-width:185px}
+.score-side,.quarter-badge{min-height:88px!important;padding:17px 9px 8px!important}.score-side strong{font-size:40px!important}.scoreboard:before{font-size:6px;top:5px}.quarter-badge strong{font-size:10px!important}.score-side:after,.quarter-badge:after{bottom:6px}
 .reveal-panel{margin-top:8px;padding:9px 10px}.quarter-result{margin:0 0 8px}.quarter-result .big{font-size:26px}.reveal-panel .primary-btn{padding:12px;min-height:46px}
 }
