@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.4 — team scoreboard + narrative recap layer */
+/* NBA Courtside v0.8.14 — team-colour broadcast scoreboard + narrative recap layer */
 (() => {
   const originalResetGame = resetGame;
   const originalBeginQuarter = beginQuarter;
@@ -8,7 +8,7 @@
   let awayTeam = null;
 
   function teamFromCard(p){
-    return p ? {name:p.teamShort, full:p.team, id:p.teamId, logo:logoUrl(p)} : null;
+    return p ? {name:p.teamShort, full:p.team, id:p.teamId, logo:logoUrl(p), primary:p.theme.a, secondary:p.theme.b, dark:p.theme.c} : null;
   }
 
   function ensureScoreboardTeams(){
@@ -16,8 +16,14 @@
     if(!board) return;
     const sides=board.querySelectorAll('.score-side');
     if(sides.length<2 || !homeTeam || !awayTeam) return;
-    sides[0].innerHTML=`<div class="score-team"><img src="${homeTeam.logo}" alt="${homeTeam.name}"><div><span>${homeTeam.name.toUpperCase()}</span><strong id="userScore">${state?.userScore||0}</strong></div></div>`;
-    sides[1].innerHTML=`<div class="score-team away-team"><div><span>${awayTeam.name.toUpperCase()}</span><strong id="cpuScore">${state?.cpuScore||0}</strong></div><img src="${awayTeam.logo}" alt="${awayTeam.name}"></div>`;
+    sides[0].style.setProperty('--score-primary',homeTeam.primary);
+    sides[0].style.setProperty('--score-secondary',homeTeam.secondary);
+    sides[0].style.setProperty('--score-dark',homeTeam.dark);
+    sides[1].style.setProperty('--score-primary',awayTeam.primary);
+    sides[1].style.setProperty('--score-secondary',awayTeam.secondary);
+    sides[1].style.setProperty('--score-dark',awayTeam.dark);
+    sides[0].innerHTML=`<div class="score-team"><div class="score-logo-wrap"><img src="${homeTeam.logo}" alt="${homeTeam.name}"></div><div class="score-number"><strong id="userScore">${state?.userScore||0}</strong></div><div class="score-name">${homeTeam.name.toUpperCase()}</div></div>`;
+    sides[1].innerHTML=`<div class="score-team away-team"><div class="score-number"><strong id="cpuScore">${state?.cpuScore||0}</strong></div><div class="score-logo-wrap"><img src="${awayTeam.logo}" alt="${awayTeam.name}"></div><div class="score-name">${awayTeam.name.toUpperCase()}</div></div>`;
   }
 
   function categoryVerb(h){
@@ -106,8 +112,6 @@
     renderFinalPresentation();
   };
 
-  /* app.js binds button handlers before this enhancement loads. Rebind them to
-     the enhanced functions so the very first exhibition initializes team state. */
   const start=document.querySelector('#startBtn');
   const replay=document.querySelector('#playAgainBtn');
   if(start) start.onclick=resetGame;
