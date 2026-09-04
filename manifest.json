@@ -1,1 +1,1 @@
-{"name":"NBA Courtside","short_name":"Courtside","start_url":"./","scope":"./","display":"standalone","background_color":"#000000","theme_color":"#000000","icons":[{"src":"assets/brand/nba-courtside-icon-v0.8.20.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{"name":"NBA Courtside","short_name":"Courtside","start_url":"./","scope":"./","display":"standalone","background_color":"#000000","theme_color":"#000000","icons":[{"src":"https://cdn.nba.com/logos/leagues/logo-nba.svg","sizes":"any","type":"image/svg+xml","purpose":"any"}]}
