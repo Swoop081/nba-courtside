@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.59 — single-position cards + balanced teams + compact finals + corrected Thunder framing */
+/* NBA Courtside v0.8.60 — single-position cards + balanced teams + compact finals + forced Thunder framing */
 (() => {
   const POSITION_BY_SLUG={
     'derrick-white':'SG','michael-porter-jr':'SF','josh-hart':'SF','vj-edgecombe':'SG','jakobe-walter':'SG','josh-giddey':'PG','jarrett-allen':'C','cade-cunningham':'PG','obi-toppin':'PF','kyle-kuzma':'PF','jalen-johnson':'PF','kon-knueppel':'SG','bam-adebayo':'C','jalen-suggs':'PG','bub-carrington':'PG','nikola-jokic':'C','rudy-gobert':'C','shai-gilgeous-alexander':'PG','scoot-henderson':'PG','keyonte-george':'PG','brandin-podziemski':'SG','brook-lopez':'C','luka-doncic':'PG','dillon-brooks':'SF','zach-lavine':'SG','cooper-flagg':'PF','reed-sheppard':'SG','gg-jackson':'PF','jeremiah-fears':'PG','victor-wembanyama':'C',
@@ -7,6 +7,14 @@
   };
   const POSITIONS=['PG','SG','SF','PF','C'];
   players.forEach(p=>{p.position=POSITION_BY_SLUG[p.artSlug]||'SF';});
+
+  const THUNDER_RENDER={
+    'kenny-anderson':{top:28,left:57,scale:1.30},
+    'julius-erving':{top:32,left:56,scale:1.28},
+    'michael-jordan':{top:30,left:56,scale:1.30},
+    'lonzo-ball':{top:30,left:56,scale:1.28},
+    'deaaron-fox':{top:30,left:56,scale:1.30}
+  };
 
   const shuffle=a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;};
   dealTeams=function(){
@@ -24,26 +32,20 @@
   const before=cardMarkup;
   cardMarkup=function(p,o={}){
     let html=before(p,o);
-    if(!p.position)return html;
-    return html.replace('<div class="team-mark">',`<div class="card-position">${p.position}</div><div class="team-mark">`);
+    if(p.position)html=html.replace('<div class="team-mark">',`<div class="card-position">${p.position}</div><div class="team-mark">`);
+    const f=THUNDER_RENDER[p.artSlug];
+    if(f){
+      html=html.replace('class="photo cutout-art"',`class="photo cutout-art" style="top:${f.top}px!important;left:${f.left}%!important;transform:translateX(-50%) scale(${f.scale})!important;transform-origin:center top!important"`);
+    }
+    return html;
   };
 
   const style=document.createElement('style');
-  style.id='courtside-position-style-v0859';
+  style.id='courtside-position-style-v0860';
   style.textContent=`
     .player-card .card-position{position:absolute;top:12px;right:13px;z-index:39;color:#fff;font-size:15px;line-height:1;font-weight:1000;letter-spacing:.045em;text-shadow:0 2px 5px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.7);pointer-events:none}
     .catalogue-grid .player-card .card-position{top:7px;right:8px;font-size:8px;letter-spacing:.03em}
-
-    /* These five cards were not responding to p.art because game-v0.6.css hard-codes .cutout-art transforms.
-       Override the actual rendered image selectors here so the catalogue and gameplay cards both move. */
-    .player-card[data-id="p31"] .cutout-art{top:14px!important;left:57%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
-    .player-card[data-id="p33"] .cutout-art{top:16px!important;left:56%!important;transform:translateX(-50%) scale(1.17)!important;transform-origin:center top!important}
-    .player-card[data-id="p35"] .cutout-art{top:15px!important;left:56%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
-    .player-card[data-id="p52"] .cutout-art{top:15px!important;left:56%!important;transform:translateX(-50%) scale(1.17)!important;transform-origin:center top!important}
-    .player-card[data-id="p54"] .cutout-art{top:15px!important;left:56%!important;transform:translateX(-50%) scale(1.18)!important;transform-origin:center top!important}
-
     #final .final-team strong.final-score-three{font-size:54px!important;letter-spacing:-.075em!important}
-
     @media(max-width:430px){
       .player-card .card-position{top:10px;right:11px;font-size:13px}.catalogue-grid .player-card .card-position{top:6px;right:7px;font-size:7.5px}
       #final .final-card{padding:8px 8px 8px!important;gap:5px!important}
