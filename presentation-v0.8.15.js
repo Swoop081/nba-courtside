@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.46 — scoreboard recovery + reliable transparent logo pass */
+/* NBA Courtside v0.8.50 — scoreboard recovery + opponent-aware final recap */
 (() => {
   logoUrl=function(p){return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`;};
 
@@ -29,22 +29,22 @@
       case'rebounding':return`${winner.name} outrebounded ${loser.name}`;
       case'passing':return`${winner.name} found the better passing lanes against ${loser.name}`;
       case'blocks':return`${winner.name} protected the rim against ${loser.name}`;
-      case'steals':return`${winner.name} stole the ball at a crucial time`;
+      case'steals':return`${winner.name} stole the ball away from ${loser.name}`;
       case'dunks':return`${winner.name} dominated above the rim against ${loser.name}`;
-      case'three':return`${winner.name} won the battle from beyond the arc`;
-      case'scoring':return diff<=2?`${winner.name} hit the decisive bucket`:`${winner.name} took over as a scorer`;
-      default:return`${winner.name} won the matchup`;
+      case'three':return`${winner.name} beat ${loser.name} from beyond the arc`;
+      case'scoring':return diff<=2?`${winner.name} hit the decisive bucket over ${loser.name}`:`${winner.name} took over as a scorer against ${loser.name}`;
+      default:return`${winner.name} won the matchup against ${loser.name}`;
     }
   }
   function finalQuarterLine(h,margin){
-    const winner=h.userPts>=h.cpuPts?h.user:h.cpu;
-    if(margin<=2&&h.category==='scoring')return`${winner.name} wins it at the buzzer`;
-    if(h.category==='three')return margin<=3?`${winner.name} wins it from downtown`:`The game was decided from beyond the arc`;
-    if(h.category==='steals')return`${winner.name} sealed it with a crucial steal`;
-    if(h.category==='blocks')return`${winner.name} shut the door at the rim`;
-    if(h.category==='rebounding')return`${winner.name} secured the game on the glass`;
-    if(h.category==='passing')return`${winner.name} made the winning play`;
-    if(h.category==='dunks')return`${winner.name} finished the game above the rim`;
+    const winner=h.userPts>=h.cpuPts?h.user:h.cpu,loser=h.userPts>=h.cpuPts?h.cpu:h.user;
+    if(margin<=2&&h.category==='scoring')return`${winner.name} wins it at the buzzer over ${loser.name}`;
+    if(h.category==='three')return margin<=3?`${winner.name} wins it from downtown against ${loser.name}`:`${winner.name} decided it from beyond the arc against ${loser.name}`;
+    if(h.category==='steals')return`${winner.name} sealed it with a crucial steal from ${loser.name}`;
+    if(h.category==='blocks')return`${winner.name} shut the door at the rim against ${loser.name}`;
+    if(h.category==='rebounding')return`${winner.name} secured the game on the glass against ${loser.name}`;
+    if(h.category==='passing')return`${winner.name} made the winning play against ${loser.name}`;
+    if(h.category==='dunks')return`${winner.name} finished the game above the rim against ${loser.name}`;
     return categoryVerb(h);
   }
   function renderFinalPresentation(){
@@ -52,7 +52,7 @@
     const userWon=state.userScore>state.cpuScore,tied=state.userScore===state.cpuScore,winner=userWon?homeTeam:awayTeam,margin=Math.abs(state.userScore-state.cpuScore),final=document.querySelector('.final-card');
     if(!final)return;
     const title=tied?'Deadlocked':`${winner.name} Win!`;
-    const rows=state.history.map((h,i)=>`<div class="story-row"><span class="story-q">${h.quarter==='OT'?'OT':'Q'+h.quarter}</span><div><strong>${i===state.history.length-1?finalQuarterLine(h,margin):categoryVerb(h)}</strong><small>${STAT_LABELS[h.category]} · ${h.userPts}–${h.cpuPts}</small></div></div>`).join('');
+    const rows=state.history.map((h,i)=>`<div class="story-row"><span class="story-q">${h.quarter==='OT'?'OT':'Q'+h.quarter}</span><div><strong>${i===state.history.length-1?finalQuarterLine(h,margin):categoryVerb(h)}</strong><small>${STAT_LABELS[h.category]} · ${h.user.name} ${h.userPts}–${h.cpuPts} ${h.cpu.name}</small></div></div>`).join('');
     final.innerHTML=`<span class="kicker">FINAL</span><div class="final-matchup"><div class="final-team"><img src="${homeTeam.logo}" alt="${homeTeam.name}"><span>${homeTeam.name}</span><strong>${state.userScore}</strong></div><div class="final-center"><b>FINAL</b><span>—</span></div><div class="final-team"><img src="${awayTeam.logo}" alt="${awayTeam.name}"><span>${awayTeam.name}</span><strong>${state.cpuScore}</strong></div></div><h2 class="final-winner">${title}</h2><div class="story-summary">${rows}</div><button id="playAgainBtn" class="primary-btn" type="button">Play Again</button>`;
     const again=document.getElementById('playAgainBtn');
     if(again)again.onclick=()=>resetGame();

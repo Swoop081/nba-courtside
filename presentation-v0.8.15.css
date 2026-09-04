@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.47 — broadcast scoreboard + screen-filling final recap */
+/* NBA Courtside v0.8.50 — broadcast scoreboard + larger opponent-aware final recap */
 .scoreboard{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0!important;padding:0!important;overflow:hidden;border-radius:18px!important;border:1px solid rgba(255,255,255,.12)!important;background:#06080c!important;box-shadow:0 12px 30px rgba(0,0,0,.44);position:sticky;top:8px;z-index:40}
 .scoreboard:before{display:none!important;content:none!important}
 .score-side{display:block!important;min-height:112px!important;padding:0!important;background:linear-gradient(180deg,var(--score-primary),var(--score-dark))!important;position:relative!important;overflow:hidden!important}
@@ -9,13 +9,10 @@
 .score-logo-wrap{height:76px!important;display:flex!important;align-items:center!important;justify-content:center!important;background:rgba(0,0,0,.10)!important}
 .score-logo-wrap img{width:78px!important;height:72px!important;object-fit:contain!important;filter:drop-shadow(0 4px 9px rgba(0,0,0,.45))!important}
 .score-number{height:76px!important;display:flex!important;align-items:center!important;justify-content:center!important}
-.score-number strong{font-size:54px!important;line-height:1!important;letter-spacing:-.055em!important;color:#fff!important;text-shadow:0 3px 9px rgba(0,0,0,.38))!important}
+.score-number strong{font-size:54px!important;line-height:1!important;letter-spacing:-.055em!important;color:#fff!important;text-shadow:0 3px 9px rgba(0,0,0,.38)!important}
 .score-name{grid-column:1 / -1!important;height:36px!important;display:flex!important;align-items:center!important;justify-content:center!important;border-top:3px solid var(--score-secondary)!important;background:rgba(0,0,0,.10)!important;color:#fff!important;font-size:13px!important;font-weight:950!important;letter-spacing:.06em!important;text-transform:uppercase!important;text-shadow:0 2px 5px rgba(0,0,0,.35)!important}
 .score-team.away-team .score-number{grid-column:1;grid-row:1}.score-team.away-team .score-logo-wrap{grid-column:2;grid-row:1}
-.quarter-badge{position:absolute!important;left:50%!important;top:8px!important;transform:translateX(-50%)!important;z-index:3!important;min-height:0!important;width:auto!important;padding:4px 9px!important;border-radius:10px!important;background:rgba(2,4,8,.72)!important;border:1px solid rgba(255,255,255,.14)!important;box-shadow:0 4px 10px rgba(0,0,0,.3)!important;pointer-events:none!important}
-.quarter-badge span{font-size:6px!important;line-height:1!important;margin:0!important;color:#f7b928!important;font-weight:950!important;letter-spacing:.14em!important}
-.quarter-badge strong{font-size:7px!important;line-height:1!important;margin:3px 0 0!important;color:#fff!important;letter-spacing:.06em!important}
-.quarter-badge:after{display:none!important;content:none!important}
+.quarter-badge{display:none!important}
 
 #final{padding:6px 0 8px!important;min-height:calc(100dvh - 82px)!important;box-sizing:border-box!important}
 #final .final-card{width:100%!important;max-width:none!important;margin:0!important;padding:18px 16px 16px!important;border-radius:20px!important;display:flex!important;flex-direction:column!important;gap:12px!important;box-sizing:border-box!important;min-height:calc(100dvh - 94px)!important}
@@ -34,16 +31,15 @@
 #final .final-winner{font-size:40px!important;line-height:.94!important;text-align:center!important;margin:3px 0 5px!important;letter-spacing:-.04em!important}
 #final .final-subline{display:none!important}
 #final .story-summary{display:grid!important;grid-template-columns:1fr!important;grid-template-rows:repeat(4,minmax(0,1fr))!important;gap:11px!important;margin:2px 0 0!important;flex:1 1 auto!important;min-height:0!important}
-#final .story-row{display:grid!important;grid-template-columns:60px 1fr!important;gap:16px!important;align-items:center!important;padding:16px 18px!important;border-radius:16px!important;min-width:0!important;min-height:0!important;background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.10)!important}
-#final .story-q{font-size:17px!important;font-weight:1000!important;line-height:1!important;color:#f7b928!important;letter-spacing:.06em!important}
-#final .story-row strong{display:block!important;font-size:17px!important;line-height:1.18!important;margin:0!important;text-align:left!important}
-#final .story-row small{display:block!important;margin-top:6px!important;font-size:12px!important;line-height:1.12!important;letter-spacing:.035em!important;text-align:left!important}
+#final .story-row{display:grid!important;grid-template-columns:64px 1fr!important;gap:18px!important;align-items:center!important;padding:18px 20px!important;border-radius:16px!important;min-width:0!important;min-height:0!important;background:rgba(255,255,255,.045)!important;border:1px solid rgba(255,255,255,.10)!important}
+#final .story-q{font-size:19px!important;font-weight:1000!important;line-height:1!important;color:#f7b928!important;letter-spacing:.06em!important}
+#final .story-row strong{display:block!important;font-size:20px!important;line-height:1.16!important;margin:0!important;text-align:left!important}
+#final .story-row small{display:block!important;margin-top:7px!important;font-size:14px!important;line-height:1.14!important;letter-spacing:.025em!important;text-align:left!important;color:#d7dce5!important}
 #final .primary-btn{margin-top:0!important;margin-bottom:0!important;padding:18px 18px!important;min-height:62px!important;font-size:21px!important;flex:0 0 auto!important;border-radius:18px!important}
-#final~*{}
 .topbar-actions .ghost-btn{min-height:50px!important;padding:0 19px!important;font-size:15px!important;border-radius:18px!important}
 
 @media(max-width:430px){
-.score-side{min-height:100px!important}.score-team{grid-template-columns:78px 1fr!important;grid-template-rows:67px 33px!important;height:100px!important}.score-team.away-team{grid-template-columns:1fr 78px!important}.score-logo-wrap{height:67px!important}.score-logo-wrap img{width:67px!important;height:62px!important}.score-number{height:67px!important}.score-number strong{font-size:48px!important}.score-name{height:33px!important;font-size:10px!important;border-top-width:2px!important}.quarter-badge{top:6px!important;padding:3px 7px!important}.quarter-badge span{font-size:5.4px!important}.quarter-badge strong{font-size:6.4px!important;margin-top:2px!important}
+.score-side{min-height:100px!important}.score-team{grid-template-columns:78px 1fr!important;grid-template-rows:67px 33px!important;height:100px!important}.score-team.away-team{grid-template-columns:1fr 78px!important}.score-logo-wrap{height:67px!important}.score-logo-wrap img{width:67px!important;height:62px!important}.score-number{height:67px!important}.score-number strong{font-size:48px!important}.score-name{height:33px!important;font-size:10px!important;border-top-width:2px!important}
 #final{padding:2px 0 6px!important;min-height:calc(100dvh - 78px)!important}
 #final .final-card{padding:14px 11px 12px!important;gap:8px!important;border-radius:18px!important;min-height:calc(100dvh - 88px)!important}
 #final .final-card>.kicker{font-size:12px!important}
@@ -57,10 +53,10 @@
 #final .final-center span{font-size:18px!important}
 #final .final-winner{font-size:36px!important;margin:1px 0 4px!important}
 #final .story-summary{grid-template-rows:repeat(4,minmax(0,1fr))!important;gap:7px!important}
-#final .story-row{grid-template-columns:48px 1fr!important;padding:13px 13px!important;gap:11px!important;border-radius:14px!important}
-#final .story-q{font-size:14px!important}
-#final .story-row strong{font-size:14.5px!important;line-height:1.15!important}
-#final .story-row small{font-size:10.5px!important;margin-top:5px!important}
+#final .story-row{grid-template-columns:52px 1fr!important;padding:15px 14px!important;gap:12px!important;border-radius:14px!important}
+#final .story-q{font-size:16px!important}
+#final .story-row strong{font-size:17px!important;line-height:1.15!important}
+#final .story-row small{font-size:12.5px!important;margin-top:6px!important;line-height:1.14!important}
 #final .primary-btn{padding:15px!important;min-height:58px!important;font-size:20px!important;border-radius:17px!important}
 .topbar-actions .ghost-btn{min-height:48px!important;padding:0 16px!important;font-size:14.5px!important}
 }
@@ -73,9 +69,9 @@
 #final .final-team strong{font-size:50px!important}
 #final .final-winner{font-size:28px!important}
 #final .story-summary{gap:5px!important}
-#final .story-row{padding:9px 10px!important}
-#final .story-q{font-size:11px!important}
-#final .story-row strong{font-size:11.5px!important}
-#final .story-row small{font-size:8.5px!important}
+#final .story-row{padding:10px 10px!important;grid-template-columns:42px 1fr!important;gap:9px!important}
+#final .story-q{font-size:13px!important}
+#final .story-row strong{font-size:13.5px!important}
+#final .story-row small{font-size:10px!important;margin-top:4px!important}
 #final .primary-btn{min-height:48px!important;padding:11px 12px!important;font-size:17px!important}
 }
