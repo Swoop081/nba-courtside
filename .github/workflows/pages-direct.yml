@@ -1,0 +1,39 @@
+name: Direct Pages Publish
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '.github/workflows/pages-direct.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload repository directly
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy exact repository artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
