@@ -1,0 +1,39 @@
+const STORAGE_KEY='nbaCourtsideArtStudioV1';
+const STAT_LABELS={scoring:'Scoring',rebounding:'Rebounding',passing:'Passing',three:'3PT',dunks:'Dunks',steals:'Steals',blocks:'Blocks',freeThrows:'Free Throws'};
+const STAT_KEYS=Object.keys(STAT_LABELS);
+const TEAM_THEMES={'1610612747':{a:'#552583',b:'#FDB927',c:'#1d0f33'},'1610612744':{a:'#1D428A',b:'#FFC72C',c:'#07192f'},'1610612749':{a:'#00471B',b:'#EEE1C6',c:'#001e0e'},'1610612738':{a:'#007A33',b:'#BA9653',c:'#022d18'},'1610612759':{a:'#C4CED4',b:'#ffffff',c:'#242b31'},'1610612743':{a:'#0E2240',b:'#FEC524',c:'#081426'},'1610612760':{a:'#007AC1',b:'#EF3B24',c:'#10264b'},'1610612750':{a:'#0C2340',b:'#78BE20',c:'#071524'},'1610612745':{a:'#CE1141',b:'#C4CED4',c:'#3b0714'}};
+const RAW=[
+['LeBron James','Los Angeles Lakers','2025–26','1610612747','Legend',[29,25,29,23,28,22,20,21],'lebron-james',{x:58,y:100,s:.72,r:0}],
+['Stephen Curry','Golden State Warriors','2025–26','1610612744','Legend',[29,17,27,30,8,23,8,30],'stephen-curry',{x:58,y:100,s:.70,r:0}],
+['Giannis Antetokounmpo','Milwaukee Bucks','2025–26','1610612749','Legend',[30,29,25,15,30,23,26,19],'giannis-antetokounmpo',{x:58,y:100,s:.72,r:0}],
+['Jayson Tatum','Boston Celtics','2024–25','1610612738','Elite',[28,25,24,27,24,22,17,27],'jayson-tatum',{x:58,y:100,s:.78,r:0}],
+['Victor Wembanyama','San Antonio Spurs','2025–26','1610612759','Legend',[28,28,22,25,29,22,30,26],'victor-wembanyama',{x:59,y:100,s:.76,r:0}],
+['Nikola Jokić','Denver Nuggets','2025–26','1610612743','Legend',[29,29,30,26,20,22,18,27],'nikola-jokic',{x:58,y:100,s:.78,r:0}],
+['Shai Gilgeous-Alexander','Oklahoma City Thunder','2025–26','1610612760','Legend',[30,20,26,24,25,28,19,29],'shai-gilgeous-alexander',{x:59,y:100,s:.76,r:0}],
+['Anthony Edwards','Minnesota Timberwolves','2025–26','1610612750','Elite',[28,22,23,27,29,24,18,25],'anthony-edwards',{x:58,y:100,s:.76,r:0}],
+['Kevin Durant','Houston Rockets','2025–26','1610612745','Legend',[29,23,24,28,25,20,23,29],'kevin-durant',{x:59,y:100,s:.76,r:0}],
+['Luka Dončić','Los Angeles Lakers','2025–26','1610612747','Legend',[29,26,30,27,18,22,12,25],'luka-doncic',{x:58,y:100,s:.77,r:0}]
+];
+const players=RAW.map((p,i)=>({id:'p'+i,name:p[0],team:p[1],season:p[2],teamId:p[3],tier:p[4],stats:Object.fromEntries(STAT_KEYS.map((k,j)=>[k,p[5][j]])),slug:p[6],base:p[7],theme:TEAM_THEMES[p[3]]}));
+const $=s=>document.querySelector(s);let current=players[0],previewObjectUrl=null;
+function readStore(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch{return {}}}
+function writeStore(v){localStorage.setItem(STORAGE_KEY,JSON.stringify(v))}
+function savedFor(p){return readStore()[p.slug]||{}}
+function configFor(p){const s=savedFor(p);return{x:Number.isFinite(+s.x)?+s.x:p.base.x,y:Number.isFinite(+s.y)?+s.y:p.base.y,s:Number.isFinite(+s.scale)?+s.scale:p.base.s,r:Number.isFinite(+s.rotation)?+s.rotation:p.base.r,url:s.url||''}}
+function logoUrl(p){return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`}
+function defaultArt(p){return `assets/player-art/${p.slug}.png?v=0.5.0`}
+function artSrc(p,c){return previewObjectUrl||c.url||defaultArt(p)}
+function artFail(p){return `if(!this.dataset.webp&&!this.src.includes('blob:')){this.dataset.webp='1';this.src='assets/player-art/${p.slug}.webp?v=0.5.0'}else{this.onerror=null;this.style.display='none';this.parentElement.classList.add('art-missing')}`}
+function cardMarkup(p,c){const long=p.name.length>18?' name-long':'';const style=`--team-a:${p.theme.a};--team-b:${p.theme.b};--team-c:${p.theme.c};--art-x:${c.x}%;--art-y:${c.y}%;--art-scale:${c.s};--art-rotation:${c.r}deg`;return `<article class="player-card tier-${p.tier.toLowerCase()}" style="${style}"><div class="card-backdrop"></div><div class="holo-grid"></div><div class="rarity-burst"></div><div class="prism prism-a"></div><div class="prism prism-b"></div><div class="beam beam-one"></div><div class="beam beam-two"></div><div class="team-mark"><img src="${logoUrl(p)}" alt=""></div><div class="player-aura"></div><div class="art-stage"><img class="photo cutout-art" src="${artSrc(p,c)}" alt="${p.name}" onerror="${artFail(p)}"><div class="art-vignette"></div></div><div class="foreground-energy energy-a"></div><div class="foreground-energy energy-b"></div><div class="foil-field"></div><div class="spark spark-a"></div><div class="spark spark-b"></div><div class="spark spark-c"></div><div class="frame frame-outer"></div><div class="frame frame-mid"></div><div class="frame frame-inner"></div><div class="edge-glow"></div><div class="tier-name">${p.tier}</div><div class="stats">${STAT_KEYS.map(k=>`<div class="stat"><span class="stat-circle"><b>${p.stats[k]}</b></span><span class="stat-label">${STAT_LABELS[k]}</span></div>`).join('')}</div><div class="identity${long}"><span class="identity-kicker">NBA COURTSIDE · ${p.tier}</span><h3>${p.name}</h3><p>${p.team} · ${p.season}</p></div><img class="team-logo" src="${logoUrl(p)}" alt="${p.team}"></article>`}
+function uiConfig(){return{x:+$('#xRange').value,y:+$('#yRange').value,s:+$('#scaleRange').value,r:+$('#rotationRange').value,url:$('#artUrlInput').value.trim()}}
+function render(){const c=uiConfig();$('#studioCard').innerHTML=cardMarkup(current,c);$('#xValue').textContent=c.x+'%';$('#yValue').textContent=c.y+'%';$('#scaleValue').textContent=c.s.toFixed(2)+'×';$('#rotationValue').textContent=c.r+'°';$('#studioCard').classList.toggle('hide-safe',!$('#safeToggle').checked);$('#studioCard').classList.toggle('hide-effects',!$('#effectsToggle').checked)}
+function loadPlayer(){if(previewObjectUrl){URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=null}current=players.find(p=>p.slug===$('#playerSelect').value)||players[0];const c=configFor(current);$('#xRange').value=c.x;$('#yRange').value=c.y;$('#scaleRange').value=c.s;$('#rotationRange').value=c.r;$('#artUrlInput').value=c.url;render();setStatus(c.url?'Saved custom URL loaded.':'Using repository artwork.')}
+function setStatus(t,cls=''){const el=$('#status');el.textContent=t;el.className='status '+cls}
+$('#playerSelect').innerHTML=players.map(p=>`<option value="${p.slug}">${p.name} — ${p.team}</option>`).join('');
+$('#playerSelect').addEventListener('change',loadPlayer);['xRange','yRange','scaleRange','rotationRange'].forEach(id=>$('#'+id).addEventListener('input',render));['effectsToggle','safeToggle'].forEach(id=>$('#'+id).addEventListener('change',render));
+$('#loadUrlBtn').onclick=()=>{if(previewObjectUrl){URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=null}render();setStatus($('#artUrlInput').value.trim()?'URL loaded in preview. Save to use it in the game.':'Repository artwork restored in preview.','success')};
+$('#fileInput').onchange=e=>{const f=e.target.files?.[0];if(!f)return;if(previewObjectUrl)URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=URL.createObjectURL(f);render();setStatus('Local file loaded for preview only. Position it, then use Copy Composition JSON after adding the final asset to the repo.','warn')};
+$('#saveBtn').onclick=()=>{const c=uiConfig(),store=readStore();store[current.slug]={x:c.x,y:c.y,scale:c.s,rotation:c.r,url:c.url};writeStore(store);setStatus('Saved. NBA Courtside will use this composition on this device.','success')};
+$('#resetBtn').onclick=()=>{const store=readStore();delete store[current.slug];writeStore(store);if(previewObjectUrl){URL.revokeObjectURL(previewObjectUrl);previewObjectUrl=null}loadPlayer();setStatus('Player reset to production defaults.','success')};
+$('#copyBtn').onclick=async()=>{const c=uiConfig(),payload={slug:current.slug,art:{x:c.x+'%',y:c.y+'%',s:c.s,r:c.r},url:c.url||`assets/player-art/${current.slug}.png`};try{await navigator.clipboard.writeText(JSON.stringify(payload,null,2));setStatus('Composition JSON copied.','success')}catch{setStatus(JSON.stringify(payload),'warn')}};
+loadPlayer();
