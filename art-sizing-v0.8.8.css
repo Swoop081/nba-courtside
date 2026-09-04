@@ -1,16 +1,44 @@
-/* NBA Courtside v0.8.16 — per-player composition tuning */
+/* NBA Courtside v0.8.40 — per-player composition tuning + Thunder & Lightning depth fix */
 .player-card[data-id="p1"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.28)!important;transform-origin:center top!important}
-.player-card[data-id="p3"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
+.player-card[data-id="p3"] .cutout-art{left:57%!important;top:-7px!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
 .player-card[data-id="p4"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.40)!important;transform-origin:center top!important}
 .player-card[data-id="p9"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.34)!important;transform-origin:center top!important}
-.player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.86)!important;transform-origin:center top!important}
+.player-card[data-id="p10"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.05)!important;transform-origin:center top!important}
 .player-card[data-id="p11"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(2.25)!important;transform-origin:center top!important}
 .player-card[data-id="p13"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.92)!important;transform-origin:center top!important}
-.player-card[data-id="p16"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.58)!important;transform-origin:center top!important}
+.player-card[data-id="p16"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.68)!important;transform-origin:center top!important}
 .player-card[data-id="p18"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.48)!important;transform-origin:center top!important}
 .player-card[data-id="p20"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.98)!important;transform-origin:center top!important}
 .player-card[data-id="p25"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.22)!important;transform-origin:center top!important}
 .player-card[data-id="p26"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.82)!important;transform-origin:center top!important}
-.player-card[data-id="p27"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.92)!important;transform-origin:center top!important}
-.player-card[data-id="p28"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.72)!important;transform-origin:center top!important}
+.player-card[data-id="p27"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(2.04)!important;transform-origin:center top!important}
+.player-card[data-id="p28"] .cutout-art{left:58%!important;transform:translateX(-50%) scale(1.84)!important;transform-origin:center top!important}
 .player-card[data-id="p29"] .cutout-art{left:57%!important;transform:translateX(-50%) scale(1.82)!important;transform-origin:center top!important}
+
+/* Thunder & Lightning is a backdrop treatment, never a foreground overlay. */
+.player-card.thunder-lightning .card-backdrop{z-index:0!important}
+.player-card.thunder-lightning .holo-grid{z-index:1!important}
+.player-card.thunder-lightning .storm-lightning{z-index:2!important;opacity:.82!important;mix-blend-mode:screen!important}
+.player-card.thunder-lightning .team-mark{z-index:4!important}
+.player-card.thunder-lightning .player-aura{z-index:5!important}
+.player-card.thunder-lightning .art-stage{z-index:12!important}
+.player-card.thunder-lightning .foreground-energy,.player-card.thunder-lightning .foil-field{z-index:14!important}
+.player-card.thunder-lightning .stats{z-index:30!important}
+.player-card.thunder-lightning .identity{z-index:31!important}
+.player-card.thunder-lightning .team-logo{z-index:33!important}
+.player-card.thunder-lightning .frame-outer{z-index:40!important}
+.player-card.thunder-lightning .edge-glow{z-index:39!important}
+
+/* Narrow, branching electrical strikes instead of broad spotlight beams. */
+.player-card.thunder-lightning .bolt{width:5%!important;height:58%!important;opacity:.72!important;filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #ffe440) drop-shadow(0 0 9px #398cff)!important}
+.player-card.thunder-lightning .bolt-a{left:67%!important;top:-4%!important;width:5.5%!important;height:63%!important;transform:rotate(13deg) scaleX(.7)!important}
+.player-card.thunder-lightning .bolt-b{left:30%!important;top:8%!important;width:4%!important;height:47%!important;transform:rotate(-23deg) scaleX(.68)!important;opacity:.52!important}
+.player-card.thunder-lightning .bolt-c{right:9%!important;top:35%!important;width:3.5%!important;height:42%!important;transform:rotate(27deg) scaleX(.62)!important;opacity:.45!important}
+.player-card.thunder-lightning .storm-flash{opacity:.42!important;filter:blur(9px)!important}
+.player-card.thunder-lightning .foil-field{opacity:.24!important}
+.player-card.thunder-lightning .holo-grid{opacity:.42!important}
+.player-card.thunder-lightning .rarity-burst{opacity:.08!important}
+
+/* Keep the player cutout cleanly above all weather effects. */
+.player-card.thunder-lightning .cutout-art{position:relative!important;z-index:2!important;filter:none!important}
+.player-card.thunder-lightning .art-vignette{z-index:3!important;background:linear-gradient(90deg,rgba(1,8,18,.48),rgba(1,8,18,.08) 32%,transparent 64%),linear-gradient(0deg,rgba(1,7,16,.72),transparent 24%)!important}
