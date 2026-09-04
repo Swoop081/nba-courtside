@@ -2,21 +2,21 @@ const STAT_LABELS={scoring:'Scoring',rebounding:'Rebounding',passing:'Passing',t
 const STAT_KEYS=Object.keys(STAT_LABELS);
 const TEAM_THEMES={'1610612747':{a:'#552583',b:'#FDB927',c:'#1d0f33'},'1610612744':{a:'#1D428A',b:'#FFC72C',c:'#07192f'},'1610612749':{a:'#00471B',b:'#EEE1C6',c:'#001e0e'},'1610612738':{a:'#007A33',b:'#BA9653',c:'#022d18'},'1610612759':{a:'#C4CED4',b:'#ffffff',c:'#242b31'},'1610612743':{a:'#0E2240',b:'#FEC524',c:'#081426'},'1610612760':{a:'#007AC1',b:'#EF3B24',c:'#10264b'},'1610612750':{a:'#0C2340',b:'#78BE20',c:'#071524'},'1610612745':{a:'#CE1141',b:'#C4CED4',c:'#3b0714'}};
 const RAW_PLAYERS=[
-['LeBron James','Los Angeles Lakers','2025–26','1610612747','2544','Legend',[29,25,29,23,28,22,20,21],'lebron-james',{x:'58%',y:'50%',s:1.08}],
-['Stephen Curry','Golden State Warriors','2025–26','1610612744','201939','Legend',[29,17,27,30,8,23,8,30],'stephen-curry',{x:'58%',y:'51%',s:1.10}],
-['Giannis Antetokounmpo','Milwaukee Bucks','2025–26','1610612749','203507','Legend',[30,29,25,15,30,23,26,19],'giannis-antetokounmpo',{x:'58%',y:'50%',s:1.07}],
-['Jayson Tatum','Boston Celtics','2024–25','1610612738','1628369','Elite',[28,25,24,27,24,22,17,27],'jayson-tatum',{x:'58%',y:'51%',s:1.07}],
-['Victor Wembanyama','San Antonio Spurs','2025–26','1610612759','1641705','Legend',[28,28,22,25,29,22,30,26],'victor-wembanyama',{x:'59%',y:'51%',s:1.00}],
-['Nikola Jokić','Denver Nuggets','2025–26','1610612743','203999','Legend',[29,29,30,26,20,22,18,27],'nikola-jokic',{x:'58%',y:'51%',s:1.07}],
-['Shai Gilgeous-Alexander','Oklahoma City Thunder','2025–26','1610612760','1628983','Legend',[30,20,26,24,25,28,19,29],'shai-gilgeous-alexander',{x:'59%',y:'50%',s:1.08}],
-['Anthony Edwards','Minnesota Timberwolves','2025–26','1610612750','1630162','Elite',[28,22,23,27,29,24,18,25],'anthony-edwards',{x:'58%',y:'51%',s:1.08}],
-['Kevin Durant','Houston Rockets','2025–26','1610612745','201142','Legend',[29,23,24,28,25,20,23,29],'kevin-durant',{x:'59%',y:'50%',s:1.05}],
-['Luka Dončić','Los Angeles Lakers','2025–26','1610612747','1629029','Legend',[29,26,30,27,18,22,12,25],'luka-doncic',{x:'58%',y:'51%',s:1.07}]];
+['LeBron James','Los Angeles Lakers','2025–26','1610612747','2544','Legend',[29,25,29,23,28,22,20,21],'lebron-james',{x:'58%',y:'100%',s:.72}],
+['Stephen Curry','Golden State Warriors','2025–26','1610612744','201939','Legend',[29,17,27,30,8,23,8,30],'stephen-curry',{x:'58%',y:'100%',s:.70}],
+['Giannis Antetokounmpo','Milwaukee Bucks','2025–26','1610612749','203507','Legend',[30,29,25,15,30,23,26,19],'giannis-antetokounmpo',{x:'58%',y:'100%',s:.72}],
+['Jayson Tatum','Boston Celtics','2024–25','1610612738','1628369','Elite',[28,25,24,27,24,22,17,27],'jayson-tatum',{x:'58%',y:'100%',s:.78}],
+['Victor Wembanyama','San Antonio Spurs','2025–26','1610612759','1641705','Legend',[28,28,22,25,29,22,30,26],'victor-wembanyama',{x:'59%',y:'100%',s:.76}],
+['Nikola Jokić','Denver Nuggets','2025–26','1610612743','203999','Legend',[29,29,30,26,20,22,18,27],'nikola-jokic',{x:'58%',y:'100%',s:.78}],
+['Shai Gilgeous-Alexander','Oklahoma City Thunder','2025–26','1610612760','1628983','Legend',[30,20,26,24,25,28,19,29],'shai-gilgeous-alexander',{x:'59%',y:'100%',s:.76}],
+['Anthony Edwards','Minnesota Timberwolves','2025–26','1610612750','1630162','Elite',[28,22,23,27,29,24,18,25],'anthony-edwards',{x:'58%',y:'100%',s:.76}],
+['Kevin Durant','Houston Rockets','2025–26','1610612745','201142','Legend',[29,23,24,28,25,20,23,29],'kevin-durant',{x:'59%',y:'100%',s:.76}],
+['Luka Dončić','Los Angeles Lakers','2025–26','1610612747','1629029','Legend',[29,26,30,27,18,22,12,25],'luka-doncic',{x:'58%',y:'100%',s:.77}]];
 const players=RAW_PLAYERS.map((p,i)=>({id:'p'+i,name:p[0],team:p[1],season:p[2],teamId:p[3],playerId:p[4],tier:p[5],stats:Object.fromEntries(STAT_KEYS.map((k,j)=>[k,p[6][j]])),artSlug:p[7],art:p[8],theme:TEAM_THEMES[p[3]]||{a:'#384154',b:'#f5f7fb',c:'#0f131b'}}));
 const userTeam=players.slice(0,5),cpuTeam=players.slice(5);let state;const $=s=>document.querySelector(s);
 function logoUrl(p){return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`}
-function artUrl(p,ext='png'){return `assets/player-art/${p.artSlug}.${ext}?v=0.4.0`}
-function artError(slug){return `if(!this.dataset.webp){this.dataset.webp='1';this.src='assets/player-art/${slug}.webp?v=0.4.0'}else{this.onerror=null;this.style.display='none';this.parentElement.classList.add('art-missing')}`}
+function artUrl(p,ext='png'){return `assets/player-art/${p.artSlug}.${ext}?v=0.4.1`}
+function artError(slug){return `if(!this.dataset.webp){this.dataset.webp='1';this.src='assets/player-art/${slug}.webp?v=0.4.1'}else{this.onerror=null;this.style.display='none';this.parentElement.classList.add('art-missing')}`}
 function cardMarkup(p,o={}){const {activeStat=null,used=false}=o;const style=`--team-a:${p.theme.a};--team-b:${p.theme.b};--team-c:${p.theme.c};--art-x:${p.art.x};--art-y:${p.art.y};--art-scale:${p.art.s}`;const long=p.name.length>18?' name-long':'';return `<article class="player-card tier-${p.tier.toLowerCase()} ${used?'used':''}" data-id="${p.id}" style="${style}">
 <div class="card-backdrop"></div><div class="holo-grid"></div><div class="rarity-burst"></div><div class="prism prism-a"></div><div class="prism prism-b"></div><div class="beam beam-one"></div><div class="beam beam-two"></div><div class="team-mark"><img src="${logoUrl(p)}" alt=""></div><div class="player-aura"></div>
 <div class="art-stage"><img class="photo cutout-art" src="${artUrl(p)}" alt="${p.name}" onerror="${artError(p.artSlug)}"><div class="art-vignette"></div></div>
