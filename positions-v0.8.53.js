@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.62 — single-position cards + balanced teams + compact finals + stage-level Thunder framing */
+/* NBA Courtside v0.8.63 — single-position cards + balanced teams + compact finals + corrected Thunder image framing */
 (() => {
   const POSITION_BY_SLUG={
     'derrick-white':'SG','michael-porter-jr':'SF','josh-hart':'SF','vj-edgecombe':'SG','jakobe-walter':'SG','josh-giddey':'PG','jarrett-allen':'C','cade-cunningham':'PG','obi-toppin':'PF','kyle-kuzma':'PF','jalen-johnson':'PF','kon-knueppel':'SG','bam-adebayo':'C','jalen-suggs':'PG','bub-carrington':'PG','nikola-jokic':'C','rudy-gobert':'C','shai-gilgeous-alexander':'PG','scoot-henderson':'PG','keyonte-george':'PG','brandin-podziemski':'SG','brook-lopez':'C','luka-doncic':'PG','dillon-brooks':'SF','zach-lavine':'SG','cooper-flagg':'PF','reed-sheppard':'SG','gg-jackson':'PF','jeremiah-fears':'PG','victor-wembanyama':'C',
@@ -8,12 +8,12 @@
   const POSITIONS=['PG','SG','SF','PF','C'];
   players.forEach(p=>{p.position=POSITION_BY_SLUG[p.artSlug]||'SF';});
 
-  const THUNDER_STAGE={
-    'kenny-anderson':{y:9,scale:1.16},
-    'julius-erving':{y:12,scale:1.30},
-    'michael-jordan':{y:12,scale:1.30},
-    'lonzo-ball':{y:12,scale:1.30},
-    'deaaron-fox':{y:12,scale:1.30}
+  const THUNDER_FRAME={
+    'kenny-anderson':{shift:8,scale:1.16},
+    'julius-erving':{shift:10,scale:1.22},
+    'michael-jordan':{shift:10,scale:1.22},
+    'lonzo-ball':{shift:10,scale:1.20},
+    'deaaron-fox':{shift:10,scale:1.20}
   };
 
   const shuffle=a=>{const x=[...a];for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];}return x;};
@@ -33,27 +33,23 @@
   cardMarkup=function(p,o={}){
     let html=before(p,o);
     if(p.position)html=html.replace('<div class="team-mark">',`<div class="card-position">${p.position}</div><div class="team-mark">`);
-    const f=THUNDER_STAGE[p.artSlug];
-    if(f){
-      const cls=` thunder-stage-${p.artSlug}`;
-      html=html.replace('class="player-card ',`class="player-card${cls} `);
-    }
+    if(THUNDER_FRAME[p.artSlug])html=html.replace('class="player-card ',`class="player-card thunder-frame-${p.artSlug} `);
     return html;
   };
 
   const style=document.createElement('style');
-  style.id='courtside-position-style-v0862';
+  style.id='courtside-position-style-v0863';
   style.textContent=`
     .player-card .card-position{position:absolute;top:12px;right:13px;z-index:39;color:#fff;font-size:15px;line-height:1;font-weight:1000;letter-spacing:.045em;text-shadow:0 2px 5px rgba(0,0,0,.9),0 0 8px rgba(0,0,0,.7);pointer-events:none}
     .catalogue-grid .player-card .card-position{top:7px;right:8px;font-size:8px;letter-spacing:.03em}
 
-    /* Apply framing to the complete art stage, not the image itself. This bypasses the old
-       .cutout-art transform rules and makes the size/vertical change unambiguous. */
-    .player-card.thunder-stage-kenny-anderson .art-stage{transform:translateY(9%) scale(1.16)!important;transform-origin:center bottom!important}
-    .player-card.thunder-stage-julius-erving .art-stage,
-    .player-card.thunder-stage-michael-jordan .art-stage,
-    .player-card.thunder-stage-lonzo-ball .art-stage,
-    .player-card.thunder-stage-deaaron-fox .art-stage{transform:translateY(12%) scale(1.30)!important;transform-origin:center bottom!important}
+    /* Keep the art stage in its normal card bounds. Only reposition the player cutout itself,
+       so there is no artificial horizontal crop through the torso. */
+    .player-card.thunder-frame-kenny-anderson .cutout-art{top:6px!important;left:56%!important;transform:translateX(-50%) translateY(8%) scale(1.16)!important;transform-origin:center top!important}
+    .player-card.thunder-frame-julius-erving .cutout-art{top:6px!important;left:56%!important;transform:translateX(-50%) translateY(10%) scale(1.22)!important;transform-origin:center top!important}
+    .player-card.thunder-frame-michael-jordan .cutout-art{top:6px!important;left:56%!important;transform:translateX(-50%) translateY(10%) scale(1.22)!important;transform-origin:center top!important}
+    .player-card.thunder-frame-lonzo-ball .cutout-art{top:6px!important;left:56%!important;transform:translateX(-50%) translateY(10%) scale(1.20)!important;transform-origin:center top!important}
+    .player-card.thunder-frame-deaaron-fox .cutout-art{top:6px!important;left:56%!important;transform:translateX(-50%) translateY(10%) scale(1.20)!important;transform-origin:center top!important}
 
     #final .final-team strong.final-score-three{font-size:54px!important;letter-spacing:-.075em!important}
     @media(max-width:430px){
