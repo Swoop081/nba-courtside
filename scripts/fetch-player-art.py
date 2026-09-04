@@ -20,7 +20,7 @@ RENDERS={
     'jayson-tatum':8384,
     'nikola-jokic':357,
     'shai-gilgeous-alexander':6465,
-    'anthony-edwards':7173,
+    'anthony-edwards':2972,
     'kevin-durant':8264,
     'luka-doncic':8434,
 }
@@ -34,20 +34,17 @@ def discover(render_id:int)->str:
     page=f'{BASE}/download/transparent/{render_id}'
     raw,_=get(page)
     text=raw.decode('utf-8','ignore')
-    # Prefer an actual transparent image referenced by the download page.
     candidates=[]
     for attr in re.findall(r'(?:src|href)=[\"\']([^\"\']+)[\"\']',text,re.I):
         u=urljoin(page,html.unescape(attr))
         low=u.lower()
         if any(low.endswith(ext) or ext+'?' in low for ext in ('.png','.webp')):
             candidates.append(u)
-    # Some pages expose the full render in a data-* attribute.
     for attr in re.findall(r'data-[\w-]+=[\"\']([^\"\']+)[\"\']',text,re.I):
         u=urljoin(page,html.unescape(attr))
         low=u.lower()
         if '.png' in low or '.webp' in low:
             candidates.append(u)
-    # Avoid flags/logos/site chrome; the render URL normally contains the id.
     candidates=sorted(set(candidates),key=lambda u:(str(render_id) not in u, 'preview' in u.lower(), len(u)))
     if not candidates:
         raise RuntimeError(f'No transparent image URL found for render {render_id}')
@@ -61,7 +58,6 @@ def save(slug:str,render_id:int)->bool:
             raise RuntimeError(f'asset too small ({len(data)} bytes)')
         ext='.webp' if 'webp' in ctype.lower() or url.lower().split('?')[0].endswith('.webp') else '.png'
         target=OUT/f'{slug}{ext}'
-        # Remove alternate extension left by an earlier run.
         for old in (OUT/f'{slug}.png',OUT/f'{slug}.webp'):
             if old!=target and old.exists(): old.unlink()
         target.write_bytes(data)
@@ -75,5 +71,3 @@ ok=0
 for slug,rid in RENDERS.items():
     ok+=int(save(slug,rid))
 print(f'Cached {ok}/{len(RENDERS)} player renders')
-# Do not fail the whole deployment for one host-side asset failure; the app has a
-# deliberate ART PENDING state instead of a portrait fallback.
