@@ -17,9 +17,19 @@ jobs:
           python-version: '3.12'
       - name: Generate 175-player rebounding audit
         run: python scripts/audit-rebounding.py
-      - name: Commit audit output
+      - name: Generate approved gameplay ratings
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('rebounding-audit-v0.10.21.json').read_text())
+          payload=json.dumps(data['players'],ensure_ascii=False,separators=(',',':'))
+          js=f'''/* NBA Courtside v0.10.21 — approved 175-player RPG-based Rebounding ratings. */\n(()=>{{\n  if(window.__courtsideReboundingRatingsV01021)return;\n  window.__courtsideReboundingRatingsV01021=true;\n  const rows={payload};\n  const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();\n  const classicKey=p=>`${{norm(p.name)}}|${{String(p.season||'')}}`;\n  const modern=new Map(),classic=new Map();\n  rows.forEach(r=>{{ if(r.classic) classic.set(`${{norm(r.name)}}|${{String(r.season)}}`,r.rating); else modern.set(norm(r.name),r.rating); }});\n  let applied=0;\n  (players||[]).forEach(p=>{{\n    const v=p.classicTeam?classic.get(classicKey(p)):modern.get(norm(p.name));\n    if(Number.isFinite(v)){{p.stats.rebounding=v;applied++;}}\n  }});\n  window.COURTSIDE_REBOUNDING_RATINGS_V01021=rows;\n  window.COURTSIDE_REBOUNDING_RATINGS_APPLIED=applied;\n}})();\n'''
+          Path('rebounding-ratings-v0.10.21.js').write_text(js,encoding='utf-8')
+          PY
+      - name: Commit audit and gameplay output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add rebounding-audit-v0.10.21.json
-          if git diff --cached --quiet; then echo "No changes"; else git commit -m "v0.10.21: generate 175-player rebounding audit" && git push; fi
+          git add rebounding-audit-v0.10.21.json REBOUNDING-AUDIT-v0.10.21.md rebounding-ratings-v0.10.21.js
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "v0.10.21: publish approved rebounding ratings" && git push; fi
