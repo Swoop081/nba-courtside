@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.2 — NBA Cup schedule resolver + oversized borderless team picker + current 30 + Classic Teams + canonical art + default player glow */
+/* NBA Courtside v0.10.4 — gameplay card-size override + NBA Cup resolver + current 30 + Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -33,4 +33,5 @@
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
+  document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
 })();
