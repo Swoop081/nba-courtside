@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.10 — hard runtime Foundation glowing corner rating + gameplay rail bumper + safe card sizing + NBA Cup resolver */
+/* NBA Courtside v0.10.11 — tighter global Foundation glowing rating + gameplay rail bumper + safe card sizing + NBA Cup resolver */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
