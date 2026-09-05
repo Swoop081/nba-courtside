@@ -1,0 +1,10 @@
+/* NBA Courtside v0.9.14 — allow player artwork to reach the top edge */
+.player-card.foundation-card .foundation-art,
+.player-card.foundation-card .foundation-art.art-stage,
+.art-editor-preview .foundation-card .foundation-art,
+.art-editor-preview .foundation-card .foundation-art.art-stage,
+.foundation-face.front .foundation-card .foundation-art,
+.catalogue-grid .foundation-card .foundation-art,
+#lineup .foundation-card .foundation-art{
+  top:0!important;
+}

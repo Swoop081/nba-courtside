@@ -1,0 +1,28 @@
+/* NBA Courtside v0.9.13 — centre rating inside quarter-circle */
+.player-card.foundation-card .foundation-rating{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0!important;
+}
+.player-card.foundation-card .foundation-rating span{
+  display:block!important;
+  position:relative!important;
+  z-index:2!important;
+  margin:0!important;
+  transform:translate(-7%,-7%)!important;
+  text-align:center!important;
+  line-height:1!important;
+}
+.catalogue-grid .foundation-card .foundation-rating{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:0!important;
+}
+.catalogue-grid .foundation-card .foundation-rating span{
+  margin:0!important;
+  transform:translate(-7%,-7%)!important;
+  text-align:center!important;
+  line-height:1!important;
+}
