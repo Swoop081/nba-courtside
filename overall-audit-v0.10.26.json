@@ -1,0 +1,3610 @@
+{
+  "status": "AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY",
+  "formula": {
+    "coreWeights": {
+      "scoring": 0.3,
+      "passing": 0.15,
+      "rebounding": 0.15,
+      "three": 0.12,
+      "steals": 0.11,
+      "blocks": 0.11,
+      "dunks": 0.06
+    },
+    "overallRaw": "0.80 * Core Impact + 0.20 * average(best 3 category ratings)"
+  },
+  "curve": [
+    {
+      "overall": 30,
+      "players": 3,
+      "percent": 1.7
+    },
+    {
+      "overall": 29,
+      "players": 7,
+      "percent": 4.0
+    },
+    {
+      "overall": 28,
+      "players": 10,
+      "percent": 5.7
+    },
+    {
+      "overall": 27,
+      "players": 12,
+      "percent": 6.9
+    },
+    {
+      "overall": 26,
+      "players": 14,
+      "percent": 8.0
+    },
+    {
+      "overall": 25,
+      "players": 16,
+      "percent": 9.1
+    },
+    {
+      "overall": 24,
+      "players": 17,
+      "percent": 9.7
+    },
+    {
+      "overall": 23,
+      "players": 17,
+      "percent": 9.7
+    },
+    {
+      "overall": 22,
+      "players": 16,
+      "percent": 9.1
+    },
+    {
+      "overall": 21,
+      "players": 14,
+      "percent": 8.0
+    },
+    {
+      "overall": 20,
+      "players": 12,
+      "percent": 6.9
+    },
+    {
+      "overall": 19,
+      "players": 10,
+      "percent": 5.7
+    },
+    {
+      "overall": 18,
+      "players": 8,
+      "percent": 4.6
+    },
+    {
+      "overall": 17,
+      "players": 6,
+      "percent": 3.4
+    },
+    {
+      "overall": 16,
+      "players": 5,
+      "percent": 2.9
+    },
+    {
+      "overall": 15,
+      "players": 4,
+      "percent": 2.3
+    },
+    {
+      "overall": 14,
+      "players": 3,
+      "percent": 1.7
+    },
+    {
+      "overall": 13,
+      "players": 1,
+      "percent": 0.6
+    }
+  ],
+  "count": 175,
+  "players": [
+    {
+      "name": "Nikola Jokić",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 28,
+        "passing": 30,
+        "rebounding": 30,
+        "three": 19,
+        "steals": 24,
+        "blocks": 15,
+        "dunks": 15
+      },
+      "core": 24.87,
+      "starImpact": 29.333,
+      "raw": 25.763,
+      "rank": 1,
+      "overall": 30
+    },
+    {
+      "name": "Luka Dončić",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 30,
+        "passing": 25,
+        "rebounding": 18,
+        "three": 28,
+        "steals": 26,
+        "blocks": 12,
+        "dunks": 11
+      },
+      "core": 23.65,
+      "starImpact": 28.0,
+      "raw": 24.52,
+      "rank": 2,
+      "overall": 30
+    },
+    {
+      "name": "Hakeem Olajuwon",
+      "position": "C",
+      "classic": true,
+      "season": "1995",
+      "stats": {
+        "scoring": 28,
+        "passing": 13,
+        "rebounding": 25,
+        "three": 9,
+        "steals": 28,
+        "blocks": 30,
+        "dunks": 26
+      },
+      "core": 23.12,
+      "starImpact": 28.667,
+      "raw": 24.229,
+      "rank": 3,
+      "overall": 30
+    },
+    {
+      "name": "Victor Wembanyama",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 25,
+        "passing": 12,
+        "rebounding": 27,
+        "three": 17,
+        "steals": 20,
+        "blocks": 30,
+        "dunks": 27
+      },
+      "core": 22.51,
+      "starImpact": 28.0,
+      "raw": 23.608,
+      "rank": 4,
+      "overall": 29
+    },
+    {
+      "name": "Anthony Edwards",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 29,
+        "passing": 14,
+        "rebounding": 12,
+        "three": 29,
+        "steals": 24,
+        "blocks": 15,
+        "dunks": 30
+      },
+      "core": 22.17,
+      "starImpact": 29.333,
+      "raw": 23.603,
+      "rank": 5,
+      "overall": 29
+    },
+    {
+      "name": "Giannis Antetokounmpo",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 28,
+        "passing": 18,
+        "rebounding": 23,
+        "three": 12,
+        "steals": 19,
+        "blocks": 14,
+        "dunks": 30
+      },
+      "core": 21.42,
+      "starImpact": 27.0,
+      "raw": 22.536,
+      "rank": 6,
+      "overall": 29
+    },
+    {
+      "name": "Tyrese Maxey",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 28,
+        "passing": 21,
+        "rebounding": 9,
+        "three": 23,
+        "steals": 29,
+        "blocks": 15,
+        "dunks": 13
+      },
+      "core": 21.28,
+      "starImpact": 26.667,
+      "raw": 22.357,
+      "rank": 7,
+      "overall": 29
+    },
+    {
+      "name": "Donovan Mitchell",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 28,
+        "passing": 19,
+        "rebounding": 10,
+        "three": 24,
+        "steals": 25,
+        "blocks": 9,
+        "dunks": 29
+      },
+      "core": 21.11,
+      "starImpact": 27.333,
+      "raw": 22.355,
+      "rank": 8,
+      "overall": 29
+    },
+    {
+      "name": "Shai Gilgeous-Alexander",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 30,
+        "passing": 21,
+        "rebounding": 10,
+        "three": 19,
+        "steals": 24,
+        "blocks": 15,
+        "dunks": 22
+      },
+      "core": 21.54,
+      "starImpact": 25.333,
+      "raw": 22.299,
+      "rank": 9,
+      "overall": 29
+    },
+    {
+      "name": "Kawhi Leonard",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 28,
+        "passing": 13,
+        "rebounding": 15,
+        "three": 24,
+        "steals": 29,
+        "blocks": 11,
+        "dunks": 20
+      },
+      "core": 21.08,
+      "starImpact": 27.0,
+      "raw": 22.264,
+      "rank": 10,
+      "overall": 29
+    },
+    {
+      "name": "Jalen Johnson",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 23,
+        "passing": 24,
+        "rebounding": 24,
+        "three": 16,
+        "steals": 22,
+        "blocks": 11,
+        "dunks": 29
+      },
+      "core": 21.39,
+      "starImpact": 25.667,
+      "raw": 22.245,
+      "rank": 11,
+      "overall": 28
+    },
+    {
+      "name": "Shaquille O'Neal",
+      "position": "C",
+      "classic": true,
+      "season": "2002",
+      "stats": {
+        "scoring": 27,
+        "passing": 12,
+        "rebounding": 25,
+        "three": 7,
+        "steals": 15,
+        "blocks": 24,
+        "dunks": 30
+      },
+      "core": 20.58,
+      "starImpact": 27.333,
+      "raw": 21.931,
+      "rank": 12,
+      "overall": 28
+    },
+    {
+      "name": "Cade Cunningham",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 29,
+        "rebounding": 13,
+        "three": 17,
+        "steals": 24,
+        "blocks": 15,
+        "dunks": 18
+      },
+      "core": 20.91,
+      "starImpact": 25.667,
+      "raw": 21.861,
+      "rank": 13,
+      "overall": 28
+    },
+    {
+      "name": "Jaylen Brown",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 29,
+        "passing": 17,
+        "rebounding": 16,
+        "three": 17,
+        "steals": 20,
+        "blocks": 11,
+        "dunks": 28
+      },
+      "core": 20.78,
+      "starImpact": 25.667,
+      "raw": 21.757,
+      "rank": 14,
+      "overall": 28
+    },
+    {
+      "name": "Michael Jordan",
+      "position": "SG",
+      "classic": true,
+      "season": "1998",
+      "stats": {
+        "scoring": 29,
+        "passing": 13,
+        "rebounding": 13,
+        "three": 11,
+        "steals": 27,
+        "blocks": 12,
+        "dunks": 30
+      },
+      "core": 20.01,
+      "starImpact": 28.667,
+      "raw": 21.741,
+      "rank": 15,
+      "overall": 28
+    },
+    {
+      "name": "Cameron Boozer",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 23,
+        "passing": 15,
+        "rebounding": 23,
+        "three": 19,
+        "steals": 27,
+        "blocks": 15,
+        "dunks": 23
+      },
+      "core": 20.88,
+      "starImpact": 24.333,
+      "raw": 21.571,
+      "rank": 16,
+      "overall": 28
+    },
+    {
+      "name": "Kevin Durant",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 26,
+        "passing": 17,
+        "rebounding": 13,
+        "three": 27,
+        "steals": 17,
+        "blocks": 16,
+        "dunks": 22
+      },
+      "core": 20.49,
+      "starImpact": 25.0,
+      "raw": 21.392,
+      "rank": 17,
+      "overall": 28
+    },
+    {
+      "name": "Clyde Drexler",
+      "position": "SG",
+      "classic": true,
+      "season": "1995",
+      "stats": {
+        "scoring": 21,
+        "passing": 16,
+        "rebounding": 16,
+        "three": 20,
+        "steals": 28,
+        "blocks": 14,
+        "dunks": 29
+      },
+      "core": 19.86,
+      "starImpact": 26.0,
+      "raw": 21.088,
+      "rank": 18,
+      "overall": 28
+    },
+    {
+      "name": "Damian Lillard",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 25,
+        "passing": 22,
+        "rebounding": 11,
+        "three": 27,
+        "steals": 22,
+        "blocks": 8,
+        "dunks": 20
+      },
+      "core": 20.19,
+      "starImpact": 24.667,
+      "raw": 21.085,
+      "rank": 19,
+      "overall": 28
+    },
+    {
+      "name": "Jamal Murray",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 25,
+        "passing": 22,
+        "rebounding": 10,
+        "three": 30,
+        "steals": 19,
+        "blocks": 11,
+        "dunks": 11
+      },
+      "core": 19.86,
+      "starImpact": 25.667,
+      "raw": 21.021,
+      "rank": 20,
+      "overall": 28
+    },
+    {
+      "name": "Trey Murphy III",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 22,
+        "passing": 14,
+        "rebounding": 13,
+        "three": 26,
+        "steals": 25,
+        "blocks": 11,
+        "dunks": 27
+      },
+      "core": 19.35,
+      "starImpact": 26.0,
+      "raw": 20.68,
+      "rank": 21,
+      "overall": 27
+    },
+    {
+      "name": "Anthony Davis",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 11,
+        "rebounding": 26,
+        "three": 11,
+        "steals": 21,
+        "blocks": 23,
+        "dunks": 28
+      },
+      "core": 19.39,
+      "starImpact": 25.667,
+      "raw": 20.645,
+      "rank": 22,
+      "overall": 27
+    },
+    {
+      "name": "Jayson Tatum",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 22,
+        "passing": 18,
+        "rebounding": 23,
+        "three": 18,
+        "steals": 24,
+        "blocks": 8,
+        "dunks": 24
+      },
+      "core": 19.87,
+      "starImpact": 23.667,
+      "raw": 20.629,
+      "rank": 23,
+      "overall": 27
+    },
+    {
+      "name": "Kobe Bryant",
+      "position": "SG",
+      "classic": true,
+      "season": "2002",
+      "stats": {
+        "scoring": 25,
+        "passing": 18,
+        "rebounding": 13,
+        "three": 11,
+        "steals": 25,
+        "blocks": 11,
+        "dunks": 29
+      },
+      "core": 19.17,
+      "starImpact": 26.333,
+      "raw": 20.603,
+      "rank": 24,
+      "overall": 27
+    },
+    {
+      "name": "Stephen Curry",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 27,
+        "passing": 16,
+        "rebounding": 8,
+        "three": 30,
+        "steals": 21,
+        "blocks": 11,
+        "dunks": 4
+      },
+      "core": 19.06,
+      "starImpact": 26.0,
+      "raw": 20.448,
+      "rank": 25,
+      "overall": 27
+    },
+    {
+      "name": "Kyrie Irving",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 25,
+        "passing": 16,
+        "rebounding": 11,
+        "three": 27,
+        "steals": 23,
+        "blocks": 12,
+        "dunks": 10
+      },
+      "core": 19.24,
+      "starImpact": 25.0,
+      "raw": 20.392,
+      "rank": 26,
+      "overall": 27
+    },
+    {
+      "name": "Joel Embiid",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 27,
+        "passing": 14,
+        "rebounding": 18,
+        "three": 15,
+        "steals": 15,
+        "blocks": 19,
+        "dunks": 22
+      },
+      "core": 19.76,
+      "starImpact": 22.667,
+      "raw": 20.341,
+      "rank": 27,
+      "overall": 27
+    },
+    {
+      "name": "AJ Dybantsa",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 26,
+        "passing": 11,
+        "rebounding": 17,
+        "three": 14,
+        "steals": 20,
+        "blocks": 14,
+        "dunks": 29
+      },
+      "core": 19.16,
+      "starImpact": 25.0,
+      "raw": 20.328,
+      "rank": 28,
+      "overall": 27
+    },
+    {
+      "name": "Scottie Pippen",
+      "position": "SF",
+      "classic": true,
+      "season": "1998",
+      "stats": {
+        "scoring": 19,
+        "passing": 19,
+        "rebounding": 12,
+        "three": 17,
+        "steals": 28,
+        "blocks": 17,
+        "dunks": 28
+      },
+      "core": 19.02,
+      "starImpact": 25.0,
+      "raw": 20.216,
+      "rank": 29,
+      "overall": 27
+    },
+    {
+      "name": "Tyrese Haliburton",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 27,
+        "rebounding": 8,
+        "three": 26,
+        "steals": 24,
+        "blocks": 14,
+        "dunks": 9
+      },
+      "core": 18.79,
+      "starImpact": 25.667,
+      "raw": 20.165,
+      "rank": 30,
+      "overall": 27
+    },
+    {
+      "name": "James Harden",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 24,
+        "rebounding": 11,
+        "three": 25,
+        "steals": 17,
+        "blocks": 12,
+        "dunks": 8
+      },
+      "core": 19.12,
+      "starImpact": 24.333,
+      "raw": 20.163,
+      "rank": 31,
+      "overall": 27
+    },
+    {
+      "name": "LeBron James",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 23,
+        "rebounding": 14,
+        "three": 13,
+        "steals": 22,
+        "blocks": 13,
+        "dunks": 29
+      },
+      "core": 19.0,
+      "starImpact": 24.667,
+      "raw": 20.133,
+      "rank": 32,
+      "overall": 27
+    },
+    {
+      "name": "Tim Duncan",
+      "position": "PF",
+      "classic": true,
+      "season": "2005",
+      "stats": {
+        "scoring": 20,
+        "passing": 11,
+        "rebounding": 26,
+        "three": 9,
+        "steals": 16,
+        "blocks": 28,
+        "dunks": 22
+      },
+      "core": 18.79,
+      "starImpact": 25.333,
+      "raw": 20.099,
+      "rank": 33,
+      "overall": 26
+    },
+    {
+      "name": "Lauri Markkanen",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 27,
+        "passing": 9,
+        "rebounding": 16,
+        "three": 20,
+        "steals": 20,
+        "blocks": 12,
+        "dunks": 22
+      },
+      "core": 19.09,
+      "starImpact": 23.0,
+      "raw": 19.872,
+      "rank": 34,
+      "overall": 26
+    },
+    {
+      "name": "Deni Avdija",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 21,
+        "rebounding": 16,
+        "three": 15,
+        "steals": 17,
+        "blocks": 13,
+        "dunks": 22
+      },
+      "core": 19.17,
+      "starImpact": 22.333,
+      "raw": 19.803,
+      "rank": 35,
+      "overall": 26
+    },
+    {
+      "name": "Darius Acuff Jr.",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 14,
+        "rebounding": 9,
+        "three": 29,
+        "steals": 24,
+        "blocks": 8,
+        "dunks": 9
+      },
+      "core": 18.19,
+      "starImpact": 25.667,
+      "raw": 19.685,
+      "rank": 36,
+      "overall": 26
+    },
+    {
+      "name": "Michael Porter Jr.",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 12,
+        "rebounding": 16,
+        "three": 24,
+        "steals": 21,
+        "blocks": 9,
+        "dunks": 20
+      },
+      "core": 18.78,
+      "starImpact": 23.0,
+      "raw": 19.624,
+      "rank": 37,
+      "overall": 26
+    },
+    {
+      "name": "LaMelo Ball",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 22,
+        "rebounding": 11,
+        "three": 28,
+        "steals": 22,
+        "blocks": 8,
+        "dunks": 15
+      },
+      "core": 18.51,
+      "starImpact": 24.0,
+      "raw": 19.608,
+      "rank": 38,
+      "overall": 26
+    },
+    {
+      "name": "Alperen Şengün",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 20,
+        "rebounding": 21,
+        "three": 12,
+        "steals": 22,
+        "blocks": 18,
+        "dunks": 20
+      },
+      "core": 19.19,
+      "starImpact": 21.0,
+      "raw": 19.552,
+      "rank": 39,
+      "overall": 26
+    },
+    {
+      "name": "Walker Kessler",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 12,
+        "rebounding": 25,
+        "three": 15,
+        "steals": 24,
+        "blocks": 23,
+        "dunks": 25
+      },
+      "core": 18.22,
+      "starImpact": 24.667,
+      "raw": 19.509,
+      "rank": 40,
+      "overall": 26
+    },
+    {
+      "name": "Scottie Barnes",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 19,
+        "rebounding": 17,
+        "three": 12,
+        "steals": 24,
+        "blocks": 21,
+        "dunks": 24
+      },
+      "core": 18.63,
+      "starImpact": 23.0,
+      "raw": 19.504,
+      "rank": 41,
+      "overall": 26
+    },
+    {
+      "name": "Karl-Anthony Towns",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 12,
+        "rebounding": 27,
+        "three": 17,
+        "steals": 19,
+        "blocks": 12,
+        "dunks": 22
+      },
+      "core": 18.62,
+      "starImpact": 23.0,
+      "raw": 19.496,
+      "rank": 42,
+      "overall": 26
+    },
+    {
+      "name": "Pascal Siakam",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 14,
+        "rebounding": 15,
+        "three": 17,
+        "steals": 21,
+        "blocks": 11,
+        "dunks": 24
+      },
+      "core": 18.55,
+      "starImpact": 23.0,
+      "raw": 19.44,
+      "rank": 43,
+      "overall": 26
+    },
+    {
+      "name": "Amen Thompson",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 18,
+        "rebounding": 18,
+        "three": 11,
+        "steals": 25,
+        "blocks": 13,
+        "dunks": 30
+      },
+      "core": 18.1,
+      "starImpact": 24.333,
+      "raw": 19.347,
+      "rank": 44,
+      "overall": 26
+    },
+    {
+      "name": "Bam Adebayo",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 12,
+        "rebounding": 23,
+        "three": 14,
+        "steals": 22,
+        "blocks": 14,
+        "dunks": 24
+      },
+      "core": 18.33,
+      "starImpact": 23.0,
+      "raw": 19.264,
+      "rank": 45,
+      "overall": 26
+    },
+    {
+      "name": "Cooper Flagg",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 16,
+        "rebounding": 15,
+        "three": 12,
+        "steals": 22,
+        "blocks": 16,
+        "dunks": 27
+      },
+      "core": 18.19,
+      "starImpact": 23.333,
+      "raw": 19.219,
+      "rank": 46,
+      "overall": 26
+    },
+    {
+      "name": "Caleb Wilson",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 11,
+        "rebounding": 22,
+        "three": 10,
+        "steals": 21,
+        "blocks": 20,
+        "dunks": 26
+      },
+      "core": 18.22,
+      "starImpact": 23.0,
+      "raw": 19.176,
+      "rank": 47,
+      "overall": 25
+    },
+    {
+      "name": "Paolo Banchero",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 22,
+        "passing": 18,
+        "rebounding": 19,
+        "three": 13,
+        "steals": 16,
+        "blocks": 13,
+        "dunks": 25
+      },
+      "core": 18.4,
+      "starImpact": 22.0,
+      "raw": 19.12,
+      "rank": 48,
+      "overall": 25
+    },
+    {
+      "name": "Josh Giddey",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 27,
+        "rebounding": 19,
+        "three": 18,
+        "steals": 20,
+        "blocks": 12,
+        "dunks": 9
+      },
+      "core": 18.22,
+      "starImpact": 22.0,
+      "raw": 18.976,
+      "rank": 49,
+      "overall": 25
+    },
+    {
+      "name": "Vince Carter",
+      "position": "SG",
+      "classic": true,
+      "season": "2003",
+      "stats": {
+        "scoring": 21,
+        "passing": 13,
+        "rebounding": 10,
+        "three": 16,
+        "steals": 21,
+        "blocks": 17,
+        "dunks": 30
+      },
+      "core": 17.65,
+      "starImpact": 24.0,
+      "raw": 18.92,
+      "rank": 50,
+      "overall": 25
+    },
+    {
+      "name": "Evan Mobley",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 13,
+        "rebounding": 21,
+        "three": 12,
+        "steals": 16,
+        "blocks": 23,
+        "dunks": 25
+      },
+      "core": 17.73,
+      "starImpact": 23.0,
+      "raw": 18.784,
+      "rank": 51,
+      "overall": 25
+    },
+    {
+      "name": "Nickeil Alexander-Walker",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 14,
+        "rebounding": 8,
+        "three": 28,
+        "steals": 23,
+        "blocks": 12,
+        "dunks": 11
+      },
+      "core": 17.47,
+      "starImpact": 24.0,
+      "raw": 18.776,
+      "rank": 52,
+      "overall": 25
+    },
+    {
+      "name": "Brandon Miller",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 13,
+        "rebounding": 11,
+        "three": 26,
+        "steals": 20,
+        "blocks": 14,
+        "dunks": 22
+      },
+      "core": 17.78,
+      "starImpact": 22.667,
+      "raw": 18.757,
+      "rank": 53,
+      "overall": 25
+    },
+    {
+      "name": "Darryn Peterson",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 12,
+        "rebounding": 12,
+        "three": 23,
+        "steals": 21,
+        "blocks": 11,
+        "dunks": 27
+      },
+      "core": 17.5,
+      "starImpact": 23.667,
+      "raw": 18.733,
+      "rank": 54,
+      "overall": 25
+    },
+    {
+      "name": "Ja Morant",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 25,
+        "rebounding": 8,
+        "three": 12,
+        "steals": 20,
+        "blocks": 9,
+        "dunks": 30
+      },
+      "core": 17.08,
+      "starImpact": 25.0,
+      "raw": 18.664,
+      "rank": 55,
+      "overall": 25
+    },
+    {
+      "name": "Jalen Brunson",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 26,
+        "passing": 22,
+        "rebounding": 8,
+        "three": 21,
+        "steals": 17,
+        "blocks": 5,
+        "dunks": 3
+      },
+      "core": 17.42,
+      "starImpact": 23.0,
+      "raw": 18.536,
+      "rank": 56,
+      "overall": 25
+    },
+    {
+      "name": "Keyonte George",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 24,
+        "passing": 20,
+        "rebounding": 9,
+        "three": 20,
+        "steals": 21,
+        "blocks": 9,
+        "dunks": 8
+      },
+      "core": 17.73,
+      "starImpact": 21.667,
+      "raw": 18.517,
+      "rank": 57,
+      "overall": 25
+    },
+    {
+      "name": "Chet Holmgren",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 8,
+        "rebounding": 21,
+        "three": 16,
+        "steals": 15,
+        "blocks": 24,
+        "dunks": 26
+      },
+      "core": 17.22,
+      "starImpact": 23.667,
+      "raw": 18.509,
+      "rank": 58,
+      "overall": 25
+    },
+    {
+      "name": "Paul George",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 13,
+        "rebounding": 12,
+        "three": 25,
+        "steals": 27,
+        "blocks": 11,
+        "dunks": 17
+      },
+      "core": 17.05,
+      "starImpact": 23.0,
+      "raw": 18.24,
+      "rank": 59,
+      "overall": 25
+    },
+    {
+      "name": "Devin Booker",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 26,
+        "passing": 20,
+        "rebounding": 9,
+        "three": 16,
+        "steals": 17,
+        "blocks": 9,
+        "dunks": 10
+      },
+      "core": 17.53,
+      "starImpact": 21.0,
+      "raw": 18.224,
+      "rank": 60,
+      "overall": 25
+    },
+    {
+      "name": "Austin Reaves",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 23,
+        "passing": 18,
+        "rebounding": 11,
+        "three": 19,
+        "steals": 21,
+        "blocks": 11,
+        "dunks": 8
+      },
+      "core": 17.53,
+      "starImpact": 21.0,
+      "raw": 18.224,
+      "rank": 61,
+      "overall": 25
+    },
+    {
+      "name": "Ryan Rollins",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 19,
+        "rebounding": 11,
+        "three": 25,
+        "steals": 25,
+        "blocks": 11,
+        "dunks": 7
+      },
+      "core": 16.98,
+      "starImpact": 23.0,
+      "raw": 18.184,
+      "rank": 62,
+      "overall": 25
+    },
+    {
+      "name": "De'Aaron Fox",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 20,
+        "rebounding": 9,
+        "three": 16,
+        "steals": 22,
+        "blocks": 9,
+        "dunks": 26
+      },
+      "core": 16.94,
+      "starImpact": 22.667,
+      "raw": 18.085,
+      "rank": 63,
+      "overall": 24
+    },
+    {
+      "name": "OG Anunoby",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 9,
+        "rebounding": 12,
+        "three": 22,
+        "steals": 26,
+        "blocks": 14,
+        "dunks": 23
+      },
+      "core": 16.67,
+      "starImpact": 23.667,
+      "raw": 18.069,
+      "rank": 64,
+      "overall": 24
+    },
+    {
+      "name": "Jalen Duren",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 9,
+        "rebounding": 24,
+        "three": 6,
+        "steals": 17,
+        "blocks": 15,
+        "dunks": 26
+      },
+      "core": 16.75,
+      "starImpact": 23.333,
+      "raw": 18.067,
+      "rank": 65,
+      "overall": 24
+    },
+    {
+      "name": "Jaren Jackson Jr.",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 11,
+        "rebounding": 13,
+        "three": 17,
+        "steals": 30,
+        "blocks": 9,
+        "dunks": 20
+      },
+      "core": 16.83,
+      "starImpact": 23.0,
+      "raw": 18.064,
+      "rank": 66,
+      "overall": 24
+    },
+    {
+      "name": "Stephon Castle",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 23,
+        "rebounding": 12,
+        "three": 14,
+        "steals": 21,
+        "blocks": 9,
+        "dunks": 25
+      },
+      "core": 16.83,
+      "starImpact": 23.0,
+      "raw": 18.064,
+      "rank": 67,
+      "overall": 24
+    },
+    {
+      "name": "Onyeka Okongwu",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 15,
+        "passing": 12,
+        "rebounding": 18,
+        "three": 19,
+        "steals": 21,
+        "blocks": 18,
+        "dunks": 25
+      },
+      "core": 17.07,
+      "starImpact": 21.667,
+      "raw": 17.989,
+      "rank": 68,
+      "overall": 24
+    },
+    {
+      "name": "Julius Randle",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 17,
+        "rebounding": 15,
+        "three": 13,
+        "steals": 21,
+        "blocks": 8,
+        "dunks": 21
+      },
+      "core": 17.11,
+      "starImpact": 21.0,
+      "raw": 17.888,
+      "rank": 69,
+      "overall": 24
+    },
+    {
+      "name": "Andrew Wiggins",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 15,
+        "passing": 11,
+        "rebounding": 11,
+        "three": 24,
+        "steals": 21,
+        "blocks": 17,
+        "dunks": 26
+      },
+      "core": 16.42,
+      "starImpact": 23.667,
+      "raw": 17.869,
+      "rank": 70,
+      "overall": 24
+    },
+    {
+      "name": "Donovan Clingan",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 9,
+        "rebounding": 27,
+        "three": 14,
+        "steals": 15,
+        "blocks": 23,
+        "dunks": 23
+      },
+      "core": 16.24,
+      "starImpact": 24.333,
+      "raw": 17.859,
+      "rank": 71,
+      "overall": 24
+    },
+    {
+      "name": "VJ Edgecombe",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 15,
+        "rebounding": 13,
+        "three": 17,
+        "steals": 24,
+        "blocks": 12,
+        "dunks": 27
+      },
+      "core": 16.62,
+      "starImpact": 22.667,
+      "raw": 17.829,
+      "rank": 72,
+      "overall": 24
+    },
+    {
+      "name": "Zion Williamson",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 12,
+        "rebounding": 13,
+        "three": 8,
+        "steals": 20,
+        "blocks": 12,
+        "dunks": 30
+      },
+      "core": 16.33,
+      "starImpact": 23.667,
+      "raw": 17.797,
+      "rank": 73,
+      "overall": 24
+    },
+    {
+      "name": "Darius Garland",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 21,
+        "rebounding": 6,
+        "three": 25,
+        "steals": 22,
+        "blocks": 9,
+        "dunks": 5
+      },
+      "core": 16.46,
+      "starImpact": 22.667,
+      "raw": 17.701,
+      "rank": 74,
+      "overall": 24
+    },
+    {
+      "name": "Keaton Wagler",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 15,
+        "rebounding": 14,
+        "three": 24,
+        "steals": 22,
+        "blocks": 9,
+        "dunks": 12
+      },
+      "core": 16.76,
+      "starImpact": 21.333,
+      "raw": 17.675,
+      "rank": 75,
+      "overall": 24
+    },
+    {
+      "name": "Manu Ginóbili",
+      "position": "SG",
+      "classic": true,
+      "season": "2005",
+      "stats": {
+        "scoring": 16,
+        "passing": 14,
+        "rebounding": 10,
+        "three": 20,
+        "steals": 26,
+        "blocks": 11,
+        "dunks": 23
+      },
+      "core": 16.25,
+      "starImpact": 23.0,
+      "raw": 17.6,
+      "rank": 76,
+      "overall": 24
+    },
+    {
+      "name": "Jimmy Butler",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 17,
+        "rebounding": 13,
+        "three": 14,
+        "steals": 24,
+        "blocks": 8,
+        "dunks": 18
+      },
+      "core": 16.78,
+      "starImpact": 20.667,
+      "raw": 17.557,
+      "rank": 77,
+      "overall": 24
+    },
+    {
+      "name": "Domantas Sabonis",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 15,
+        "rebounding": 26,
+        "three": 11,
+        "steals": 19,
+        "blocks": 8,
+        "dunks": 20
+      },
+      "core": 16.44,
+      "starImpact": 21.667,
+      "raw": 17.485,
+      "rank": 78,
+      "overall": 24
+    },
+    {
+      "name": "Dejounte Murray",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 21,
+        "rebounding": 12,
+        "three": 13,
+        "steals": 26,
+        "blocks": 8,
+        "dunks": 18
+      },
+      "core": 16.43,
+      "starImpact": 21.667,
+      "raw": 17.477,
+      "rank": 79,
+      "overall": 24
+    },
+    {
+      "name": "Brandon Ingram",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 14,
+        "rebounding": 13,
+        "three": 19,
+        "steals": 17,
+        "blocks": 14,
+        "dunks": 16
+      },
+      "core": 17.0,
+      "starImpact": 19.0,
+      "raw": 17.4,
+      "rank": 80,
+      "overall": 23
+    },
+    {
+      "name": "Zach Edey",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 6,
+        "rebounding": 26,
+        "three": 9,
+        "steals": 15,
+        "blocks": 24,
+        "dunks": 22
+      },
+      "core": 15.69,
+      "starImpact": 24.0,
+      "raw": 17.352,
+      "rank": 81,
+      "overall": 23
+    },
+    {
+      "name": "Norman Powell",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 22,
+        "passing": 10,
+        "rebounding": 8,
+        "three": 23,
+        "steals": 21,
+        "blocks": 8,
+        "dunks": 14
+      },
+      "core": 16.09,
+      "starImpact": 22.0,
+      "raw": 17.272,
+      "rank": 82,
+      "overall": 23
+    },
+    {
+      "name": "Franz Wagner",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 13,
+        "rebounding": 12,
+        "three": 15,
+        "steals": 19,
+        "blocks": 9,
+        "dunks": 23
+      },
+      "core": 16.31,
+      "starImpact": 21.0,
+      "raw": 17.248,
+      "rank": 83,
+      "overall": 23
+    },
+    {
+      "name": "Alex Sarr",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 11,
+        "rebounding": 17,
+        "three": 13,
+        "steals": 17,
+        "blocks": 24,
+        "dunks": 21
+      },
+      "core": 16.33,
+      "starImpact": 20.667,
+      "raw": 17.197,
+      "rank": 84,
+      "overall": 23
+    },
+    {
+      "name": "Kon Knueppel",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 13,
+        "rebounding": 12,
+        "three": 30,
+        "steals": 16,
+        "blocks": 8,
+        "dunks": 12
+      },
+      "core": 16.11,
+      "starImpact": 21.333,
+      "raw": 17.155,
+      "rank": 85,
+      "overall": 23
+    },
+    {
+      "name": "Zach LaVine",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 10,
+        "rebounding": 6,
+        "three": 23,
+        "steals": 16,
+        "blocks": 9,
+        "dunks": 30
+      },
+      "core": 15.41,
+      "starImpact": 24.0,
+      "raw": 17.128,
+      "rank": 86,
+      "overall": 23
+    },
+    {
+      "name": "Desmond Bane",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 15,
+        "rebounding": 9,
+        "three": 21,
+        "steals": 20,
+        "blocks": 12,
+        "dunks": 11
+      },
+      "core": 16.3,
+      "starImpact": 20.333,
+      "raw": 17.107,
+      "rank": 87,
+      "overall": 23
+    },
+    {
+      "name": "Dyson Daniels",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 19,
+        "rebounding": 16,
+        "three": 11,
+        "steals": 30,
+        "blocks": 11,
+        "dunks": 18
+      },
+      "core": 15.76,
+      "starImpact": 22.333,
+      "raw": 17.075,
+      "rank": 88,
+      "overall": 23
+    },
+    {
+      "name": "Matas Buzelis",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 9,
+        "rebounding": 13,
+        "three": 18,
+        "steals": 16,
+        "blocks": 21,
+        "dunks": 26
+      },
+      "core": 15.89,
+      "starImpact": 21.667,
+      "raw": 17.045,
+      "rank": 89,
+      "overall": 23
+    },
+    {
+      "name": "Tyler Herro",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 21,
+        "passing": 15,
+        "rebounding": 11,
+        "three": 22,
+        "steals": 16,
+        "blocks": 11,
+        "dunks": 9
+      },
+      "core": 16.35,
+      "starImpact": 19.667,
+      "raw": 17.013,
+      "rank": 90,
+      "overall": 23
+    },
+    {
+      "name": "Rudy Gobert",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 11,
+        "passing": 8,
+        "rebounding": 27,
+        "three": 7,
+        "steals": 17,
+        "blocks": 22,
+        "dunks": 24
+      },
+      "core": 15.12,
+      "starImpact": 24.333,
+      "raw": 16.963,
+      "rank": 91,
+      "overall": 23
+    },
+    {
+      "name": "Jerami Grant",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 9,
+        "rebounding": 8,
+        "three": 23,
+        "steals": 16,
+        "blocks": 13,
+        "dunks": 24
+      },
+      "core": 15.64,
+      "starImpact": 22.0,
+      "raw": 16.912,
+      "rank": 92,
+      "overall": 23
+    },
+    {
+      "name": "Jalen Williams",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 18,
+        "rebounding": 11,
+        "three": 12,
+        "steals": 22,
+        "blocks": 9,
+        "dunks": 24
+      },
+      "core": 15.74,
+      "starImpact": 21.333,
+      "raw": 16.859,
+      "rank": 93,
+      "overall": 23
+    },
+    {
+      "name": "Derrick White",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 18,
+        "rebounding": 10,
+        "three": 18,
+        "steals": 21,
+        "blocks": 20,
+        "dunks": 8
+      },
+      "core": 16.15,
+      "starImpact": 19.667,
+      "raw": 16.853,
+      "rank": 94,
+      "overall": 23
+    },
+    {
+      "name": "Peyton Watson",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 15,
+        "passing": 9,
+        "rebounding": 11,
+        "three": 21,
+        "steals": 19,
+        "blocks": 18,
+        "dunks": 25
+      },
+      "core": 15.59,
+      "starImpact": 21.667,
+      "raw": 16.805,
+      "rank": 95,
+      "overall": 23
+    },
+    {
+      "name": "Robert Horry",
+      "position": "SF",
+      "classic": true,
+      "season": "1995",
+      "stats": {
+        "scoring": 10,
+        "passing": 13,
+        "rebounding": 12,
+        "three": 20,
+        "steals": 25,
+        "blocks": 19,
+        "dunks": 22
+      },
+      "core": 15.31,
+      "starImpact": 22.333,
+      "raw": 16.715,
+      "rank": 96,
+      "overall": 23
+    },
+    {
+      "name": "Ausar Thompson",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 10,
+        "passing": 12,
+        "rebounding": 13,
+        "three": 9,
+        "steals": 30,
+        "blocks": 16,
+        "dunks": 29
+      },
+      "core": 14.63,
+      "starImpact": 25.0,
+      "raw": 16.704,
+      "rank": 97,
+      "overall": 22
+    },
+    {
+      "name": "Jalen Suggs",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 18,
+        "rebounding": 9,
+        "three": 17,
+        "steals": 28,
+        "blocks": 14,
+        "dunks": 11
+      },
+      "core": 15.57,
+      "starImpact": 21.0,
+      "raw": 16.656,
+      "rank": 98,
+      "overall": 22
+    },
+    {
+      "name": "Jalen Green",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 11,
+        "rebounding": 8,
+        "three": 15,
+        "steals": 21,
+        "blocks": 9,
+        "dunks": 29
+      },
+      "core": 15.09,
+      "starImpact": 22.667,
+      "raw": 16.605,
+      "rank": 99,
+      "overall": 22
+    },
+    {
+      "name": "Aaron Gordon",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 11,
+        "rebounding": 13,
+        "three": 20,
+        "steals": 15,
+        "blocks": 9,
+        "dunks": 30
+      },
+      "core": 15.24,
+      "starImpact": 22.0,
+      "raw": 16.592,
+      "rank": 100,
+      "overall": 22
+    },
+    {
+      "name": "Mikal Bridges",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 14,
+        "rebounding": 9,
+        "three": 19,
+        "steals": 23,
+        "blocks": 15,
+        "dunks": 21
+      },
+      "core": 15.37,
+      "starImpact": 21.0,
+      "raw": 16.496,
+      "rank": 101,
+      "overall": 22
+    },
+    {
+      "name": "CJ McCollum",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 15,
+        "rebounding": 8,
+        "three": 21,
+        "steals": 20,
+        "blocks": 13,
+        "dunks": 5
+      },
+      "core": 15.6,
+      "starImpact": 20.0,
+      "raw": 16.48,
+      "rank": 102,
+      "overall": 22
+    },
+    {
+      "name": "Josh Hart",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 17,
+        "rebounding": 17,
+        "three": 22,
+        "steals": 21,
+        "blocks": 9,
+        "dunks": 16
+      },
+      "core": 15.6,
+      "starImpact": 20.0,
+      "raw": 16.48,
+      "rank": 103,
+      "overall": 22
+    },
+    {
+      "name": "Jarrett Allen",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 15,
+        "passing": 8,
+        "rebounding": 20,
+        "three": 8,
+        "steals": 20,
+        "blocks": 15,
+        "dunks": 25
+      },
+      "core": 15.01,
+      "starImpact": 21.667,
+      "raw": 16.341,
+      "rank": 104,
+      "overall": 22
+    },
+    {
+      "name": "Miles Bridges",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 12,
+        "rebounding": 13,
+        "three": 16,
+        "steals": 15,
+        "blocks": 11,
+        "dunks": 28
+      },
+      "core": 15.31,
+      "starImpact": 20.333,
+      "raw": 16.315,
+      "rank": 105,
+      "overall": 22
+    },
+    {
+      "name": "RJ Barrett",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 19,
+        "passing": 13,
+        "rebounding": 12,
+        "three": 16,
+        "steals": 16,
+        "blocks": 9,
+        "dunks": 23
+      },
+      "core": 15.5,
+      "starImpact": 19.333,
+      "raw": 16.267,
+      "rank": 106,
+      "overall": 22
+    },
+    {
+      "name": "Jaden McDaniels",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 15,
+        "passing": 11,
+        "rebounding": 10,
+        "three": 20,
+        "steals": 21,
+        "blocks": 17,
+        "dunks": 18
+      },
+      "core": 15.31,
+      "starImpact": 19.667,
+      "raw": 16.181,
+      "rank": 107,
+      "overall": 22
+    },
+    {
+      "name": "Immanuel Quickley",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 19,
+        "rebounding": 9,
+        "three": 21,
+        "steals": 23,
+        "blocks": 5,
+        "dunks": 6
+      },
+      "core": 14.96,
+      "starImpact": 21.0,
+      "raw": 16.168,
+      "rank": 108,
+      "overall": 22
+    },
+    {
+      "name": "Fred VanVleet",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 19,
+        "rebounding": 9,
+        "three": 19,
+        "steals": 26,
+        "blocks": 11,
+        "dunks": 2
+      },
+      "core": 14.87,
+      "starImpact": 21.333,
+      "raw": 16.163,
+      "rank": 109,
+      "overall": 22
+    },
+    {
+      "name": "Jabari Smith Jr.",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 16,
+        "passing": 8,
+        "rebounding": 16,
+        "three": 19,
+        "steals": 16,
+        "blocks": 16,
+        "dunks": 20
+      },
+      "core": 15.4,
+      "starImpact": 18.333,
+      "raw": 15.987,
+      "rank": 110,
+      "overall": 22
+    },
+    {
+      "name": "Andrew Nembhard",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 24,
+        "rebounding": 6,
+        "three": 18,
+        "steals": 19,
+        "blocks": 5,
+        "dunks": 8
+      },
+      "core": 14.88,
+      "starImpact": 20.333,
+      "raw": 15.971,
+      "rank": 111,
+      "overall": 22
+    },
+    {
+      "name": "Naz Reid",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 9,
+        "rebounding": 14,
+        "three": 18,
+        "steals": 20,
+        "blocks": 17,
+        "dunks": 20
+      },
+      "core": 15.08,
+      "starImpact": 19.333,
+      "raw": 15.931,
+      "rank": 112,
+      "overall": 22
+    },
+    {
+      "name": "Kristaps Porziņģis",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 10,
+        "rebounding": 12,
+        "three": 16,
+        "steals": 15,
+        "blocks": 18,
+        "dunks": 21
+      },
+      "core": 15.21,
+      "starImpact": 18.667,
+      "raw": 15.901,
+      "rank": 113,
+      "overall": 21
+    },
+    {
+      "name": "P.J. Washington",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 8,
+        "rebounding": 16,
+        "three": 14,
+        "steals": 20,
+        "blocks": 18,
+        "dunks": 20
+      },
+      "core": 14.86,
+      "starImpact": 19.333,
+      "raw": 15.755,
+      "rank": 114,
+      "overall": 21
+    },
+    {
+      "name": "Toumani Camara",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 13,
+        "passing": 10,
+        "rebounding": 12,
+        "three": 22,
+        "steals": 21,
+        "blocks": 11,
+        "dunks": 19
+      },
+      "core": 14.5,
+      "starImpact": 20.667,
+      "raw": 15.733,
+      "rank": 115,
+      "overall": 21
+    },
+    {
+      "name": "John Collins",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 5,
+        "rebounding": 12,
+        "three": 20,
+        "steals": 19,
+        "blocks": 14,
+        "dunks": 25
+      },
+      "core": 14.28,
+      "starImpact": 21.333,
+      "raw": 15.691,
+      "rank": 116,
+      "overall": 21
+    },
+    {
+      "name": "Myles Turner",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 7,
+        "rebounding": 12,
+        "three": 20,
+        "steals": 16,
+        "blocks": 22,
+        "dunks": 21
+      },
+      "core": 14.29,
+      "starImpact": 21.0,
+      "raw": 15.632,
+      "rank": 117,
+      "overall": 21
+    },
+    {
+      "name": "Tony Parker",
+      "position": "PG",
+      "classic": true,
+      "season": "2005",
+      "stats": {
+        "scoring": 17,
+        "passing": 20,
+        "rebounding": 9,
+        "three": 11,
+        "steals": 22,
+        "blocks": 5,
+        "dunks": 14
+      },
+      "core": 14.58,
+      "starImpact": 19.667,
+      "raw": 15.597,
+      "rank": 118,
+      "overall": 21
+    },
+    {
+      "name": "Keegan Murray",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 8,
+        "rebounding": 13,
+        "three": 12,
+        "steals": 20,
+        "blocks": 22,
+        "dunks": 17
+      },
+      "core": 14.43,
+      "starImpact": 19.667,
+      "raw": 15.477,
+      "rank": 119,
+      "overall": 21
+    },
+    {
+      "name": "Nic Claxton",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 14,
+        "rebounding": 16,
+        "three": 9,
+        "steals": 16,
+        "blocks": 18,
+        "dunks": 25
+      },
+      "core": 14.42,
+      "starImpact": 19.667,
+      "raw": 15.469,
+      "rank": 120,
+      "overall": 21
+    },
+    {
+      "name": "Dillon Brooks",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 20,
+        "passing": 8,
+        "rebounding": 8,
+        "three": 18,
+        "steals": 20,
+        "blocks": 8,
+        "dunks": 14
+      },
+      "core": 14.48,
+      "starImpact": 19.333,
+      "raw": 15.451,
+      "rank": 121,
+      "overall": 21
+    },
+    {
+      "name": "Payton Pritchard",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 18,
+        "rebounding": 9,
+        "three": 23,
+        "steals": 16,
+        "blocks": 5,
+        "dunks": 4
+      },
+      "core": 14.46,
+      "starImpact": 19.333,
+      "raw": 15.435,
+      "rank": 122,
+      "overall": 21
+    },
+    {
+      "name": "Ivica Zubac",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 8,
+        "rebounding": 24,
+        "three": 6,
+        "steals": 11,
+        "blocks": 15,
+        "dunks": 23
+      },
+      "core": 13.96,
+      "starImpact": 20.667,
+      "raw": 15.301,
+      "rank": 123,
+      "overall": 21
+    },
+    {
+      "name": "Derik Queen",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 14,
+        "rebounding": 16,
+        "three": 10,
+        "steals": 20,
+        "blocks": 16,
+        "dunks": 19
+      },
+      "core": 14.4,
+      "starImpact": 18.333,
+      "raw": 15.187,
+      "rank": 124,
+      "overall": 21
+    },
+    {
+      "name": "Isaiah Hartenstein",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 9,
+        "passing": 13,
+        "rebounding": 22,
+        "three": 7,
+        "steals": 20,
+        "blocks": 15,
+        "dunks": 19
+      },
+      "core": 13.78,
+      "starImpact": 20.333,
+      "raw": 15.091,
+      "rank": 125,
+      "overall": 21
+    },
+    {
+      "name": "Robert Horry",
+      "position": "PF",
+      "classic": true,
+      "season": "2002",
+      "stats": {
+        "scoring": 7,
+        "passing": 11,
+        "rebounding": 14,
+        "three": 20,
+        "steals": 20,
+        "blocks": 18,
+        "dunks": 20
+      },
+      "core": 13.63,
+      "starImpact": 20.0,
+      "raw": 14.904,
+      "rank": 126,
+      "overall": 21
+    },
+    {
+      "name": "Neemias Queta",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 10,
+        "passing": 8,
+        "rebounding": 19,
+        "three": 8,
+        "steals": 17,
+        "blocks": 20,
+        "dunks": 23
+      },
+      "core": 13.46,
+      "starImpact": 20.667,
+      "raw": 14.901,
+      "rank": 127,
+      "overall": 20
+    },
+    {
+      "name": "Ace Bailey",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 8,
+        "rebounding": 10,
+        "three": 16,
+        "steals": 17,
+        "blocks": 14,
+        "dunks": 25
+      },
+      "core": 13.73,
+      "starImpact": 19.333,
+      "raw": 14.851,
+      "rank": 128,
+      "overall": 20
+    },
+    {
+      "name": "Cedric Coward",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 11,
+        "rebounding": 14,
+        "three": 15,
+        "steals": 15,
+        "blocks": 11,
+        "dunks": 24
+      },
+      "core": 14.05,
+      "starImpact": 18.0,
+      "raw": 14.84,
+      "rank": 129,
+      "overall": 20
+    },
+    {
+      "name": "Antonio Davis",
+      "position": "C",
+      "classic": true,
+      "season": "2003",
+      "stats": {
+        "scoring": 14,
+        "passing": 10,
+        "rebounding": 19,
+        "three": 4,
+        "steals": 11,
+        "blocks": 19,
+        "dunks": 21
+      },
+      "core": 13.59,
+      "starImpact": 19.667,
+      "raw": 14.805,
+      "rank": 130,
+      "overall": 20
+    },
+    {
+      "name": "Brandin Podziemski",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 14,
+        "rebounding": 12,
+        "three": 18,
+        "steals": 21,
+        "blocks": 8,
+        "dunks": 10
+      },
+      "core": 14.05,
+      "starImpact": 17.667,
+      "raw": 14.773,
+      "rank": 131,
+      "overall": 20
+    },
+    {
+      "name": "Mark Williams",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 5,
+        "rebounding": 18,
+        "three": 7,
+        "steals": 19,
+        "blocks": 16,
+        "dunks": 25
+      },
+      "core": 13.24,
+      "starImpact": 20.667,
+      "raw": 14.725,
+      "rank": 132,
+      "overall": 20
+    },
+    {
+      "name": "Jerome Williams",
+      "position": "PF",
+      "classic": true,
+      "season": "2003",
+      "stats": {
+        "scoring": 10,
+        "passing": 6,
+        "rebounding": 19,
+        "three": 8,
+        "steals": 26,
+        "blocks": 11,
+        "dunks": 20
+      },
+      "core": 12.98,
+      "starImpact": 21.667,
+      "raw": 14.717,
+      "rank": 133,
+      "overall": 20
+    },
+    {
+      "name": "Jonathan Kuminga",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 9,
+        "rebounding": 13,
+        "three": 13,
+        "steals": 19,
+        "blocks": 9,
+        "dunks": 29
+      },
+      "core": 13.28,
+      "starImpact": 20.333,
+      "raw": 14.691,
+      "rank": 134,
+      "overall": 20
+    },
+    {
+      "name": "Cameron Johnson",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 10,
+        "rebounding": 9,
+        "three": 27,
+        "steals": 16,
+        "blocks": 11,
+        "dunks": 14
+      },
+      "core": 13.5,
+      "starImpact": 19.0,
+      "raw": 14.6,
+      "rank": 135,
+      "overall": 20
+    },
+    {
+      "name": "Trae Young",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 18,
+        "passing": 20,
+        "rebounding": 5,
+        "three": 16,
+        "steals": 15,
+        "blocks": 8,
+        "dunks": 1
+      },
+      "core": 13.66,
+      "starImpact": 18.0,
+      "raw": 14.528,
+      "rank": 136,
+      "overall": 20
+    },
+    {
+      "name": "Morris Peterson",
+      "position": "SF",
+      "classic": true,
+      "season": "2003",
+      "stats": {
+        "scoring": 14,
+        "passing": 9,
+        "rebounding": 10,
+        "three": 18,
+        "steals": 20,
+        "blocks": 11,
+        "dunks": 16
+      },
+      "core": 13.58,
+      "starImpact": 18.0,
+      "raw": 14.464,
+      "rank": 137,
+      "overall": 20
+    },
+    {
+      "name": "Alvin Williams",
+      "position": "PG",
+      "classic": true,
+      "season": "2003",
+      "stats": {
+        "scoring": 13,
+        "passing": 18,
+        "rebounding": 7,
+        "three": 14,
+        "steals": 24,
+        "blocks": 9,
+        "dunks": 7
+      },
+      "core": 13.38,
+      "starImpact": 18.667,
+      "raw": 14.437,
+      "rank": 138,
+      "overall": 20
+    },
+    {
+      "name": "Jaime Jaquez Jr.",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 15,
+        "passing": 16,
+        "rebounding": 12,
+        "three": 12,
+        "steals": 16,
+        "blocks": 9,
+        "dunks": 17
+      },
+      "core": 13.91,
+      "starImpact": 16.333,
+      "raw": 14.395,
+      "rank": 139,
+      "overall": 19
+    },
+    {
+      "name": "Aaron Nesmith",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 8,
+        "rebounding": 10,
+        "three": 21,
+        "steals": 15,
+        "blocks": 12,
+        "dunks": 18
+      },
+      "core": 13.47,
+      "starImpact": 18.0,
+      "raw": 14.376,
+      "rank": 140,
+      "overall": 19
+    },
+    {
+      "name": "Jeremiah Fears",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 13,
+        "rebounding": 9,
+        "three": 14,
+        "steals": 22,
+        "blocks": 11,
+        "dunks": 15
+      },
+      "core": 13.71,
+      "starImpact": 17.0,
+      "raw": 14.368,
+      "rank": 141,
+      "overall": 19
+    },
+    {
+      "name": "Wendell Carter Jr.",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 9,
+        "rebounding": 17,
+        "three": 13,
+        "steals": 17,
+        "blocks": 13,
+        "dunks": 19
+      },
+      "core": 13.5,
+      "starImpact": 17.667,
+      "raw": 14.333,
+      "rank": 142,
+      "overall": 19
+    },
+    {
+      "name": "Daniel Gafford",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 10,
+        "passing": 6,
+        "rebounding": 16,
+        "three": 6,
+        "steals": 17,
+        "blocks": 20,
+        "dunks": 26
+      },
+      "core": 12.65,
+      "starImpact": 21.0,
+      "raw": 14.32,
+      "rank": 143,
+      "overall": 19
+    },
+    {
+      "name": "Tobias Harris",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 13,
+        "passing": 10,
+        "rebounding": 12,
+        "three": 17,
+        "steals": 19,
+        "blocks": 11,
+        "dunks": 16
+      },
+      "core": 13.5,
+      "starImpact": 17.333,
+      "raw": 14.267,
+      "rank": 144,
+      "overall": 19
+    },
+    {
+      "name": "Kenny Smith",
+      "position": "PG",
+      "classic": true,
+      "season": "1995",
+      "stats": {
+        "scoring": 10,
+        "passing": 15,
+        "rebounding": 4,
+        "three": 29,
+        "steals": 19,
+        "blocks": 5,
+        "dunks": 8
+      },
+      "core": 12.45,
+      "starImpact": 21.0,
+      "raw": 14.16,
+      "rank": 145,
+      "overall": 19
+    },
+    {
+      "name": "Egor Demin",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 10,
+        "passing": 13,
+        "rebounding": 7,
+        "three": 22,
+        "steals": 22,
+        "blocks": 11,
+        "dunks": 9
+      },
+      "core": 12.81,
+      "starImpact": 19.0,
+      "raw": 14.048,
+      "rank": 146,
+      "overall": 19
+    },
+    {
+      "name": "Moussa Diabaté",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 8,
+        "passing": 8,
+        "rebounding": 20,
+        "three": 7,
+        "steals": 17,
+        "blocks": 17,
+        "dunks": 23
+      },
+      "core": 12.56,
+      "starImpact": 20.0,
+      "raw": 14.048,
+      "rank": 147,
+      "overall": 19
+    },
+    {
+      "name": "Day'Ron Sharpe",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 9,
+        "passing": 10,
+        "rebounding": 15,
+        "three": 10,
+        "steals": 21,
+        "blocks": 11,
+        "dunks": 23
+      },
+      "core": 12.55,
+      "starImpact": 19.667,
+      "raw": 13.973,
+      "rank": 148,
+      "overall": 19
+    },
+    {
+      "name": "Davion Mitchell",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 9,
+        "passing": 21,
+        "rebounding": 6,
+        "three": 19,
+        "steals": 20,
+        "blocks": 8,
+        "dunks": 5
+      },
+      "core": 12.41,
+      "starImpact": 20.0,
+      "raw": 13.928,
+      "rank": 149,
+      "overall": 18
+    },
+    {
+      "name": "Dennis Rodman",
+      "position": "PF",
+      "classic": true,
+      "season": "1998",
+      "stats": {
+        "scoring": 5,
+        "passing": 11,
+        "rebounding": 30,
+        "three": 10,
+        "steals": 15,
+        "blocks": 8,
+        "dunks": 15
+      },
+      "core": 12.28,
+      "starImpact": 20.0,
+      "raw": 13.824,
+      "rank": 150,
+      "overall": 18
+    },
+    {
+      "name": "Kyle Kuzma",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 13,
+        "passing": 11,
+        "rebounding": 10,
+        "three": 15,
+        "steals": 16,
+        "blocks": 11,
+        "dunks": 20
+      },
+      "core": 13.02,
+      "starImpact": 17.0,
+      "raw": 13.816,
+      "rank": 151,
+      "overall": 18
+    },
+    {
+      "name": "Draymond Green",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 8,
+        "passing": 18,
+        "rebounding": 13,
+        "three": 14,
+        "steals": 19,
+        "blocks": 13,
+        "dunks": 12
+      },
+      "core": 12.97,
+      "starImpact": 17.0,
+      "raw": 13.776,
+      "rank": 152,
+      "overall": 18
+    },
+    {
+      "name": "Rui Hachimura",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 11,
+        "passing": 4,
+        "rebounding": 8,
+        "three": 26,
+        "steals": 15,
+        "blocks": 9,
+        "dunks": 20
+      },
+      "core": 12.06,
+      "starImpact": 20.333,
+      "raw": 13.715,
+      "rank": 153,
+      "overall": 18
+    },
+    {
+      "name": "Derek Fisher",
+      "position": "PG",
+      "classic": true,
+      "season": "2002",
+      "stats": {
+        "scoring": 11,
+        "passing": 11,
+        "rebounding": 5,
+        "three": 29,
+        "steals": 19,
+        "blocks": 5,
+        "dunks": 6
+      },
+      "core": 12.18,
+      "starImpact": 19.667,
+      "raw": 13.677,
+      "rank": 154,
+      "overall": 18
+    },
+    {
+      "name": "Dylan Harper",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 14,
+        "rebounding": 8,
+        "three": 13,
+        "steals": 17,
+        "blocks": 9,
+        "dunks": 22
+      },
+      "core": 12.64,
+      "starImpact": 17.667,
+      "raw": 13.645,
+      "rank": 155,
+      "overall": 18
+    },
+    {
+      "name": "Christian Braun",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 11,
+        "rebounding": 11,
+        "three": 12,
+        "steals": 16,
+        "blocks": 9,
+        "dunks": 25
+      },
+      "core": 12.59,
+      "starImpact": 17.667,
+      "raw": 13.605,
+      "rank": 156,
+      "overall": 18
+    },
+    {
+      "name": "Max Christie",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 9,
+        "rebounding": 7,
+        "three": 24,
+        "steals": 15,
+        "blocks": 11,
+        "dunks": 13
+      },
+      "core": 12.52,
+      "starImpact": 17.333,
+      "raw": 13.483,
+      "rank": 157,
+      "overall": 17
+    },
+    {
+      "name": "Cason Wallace",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 9,
+        "passing": 11,
+        "rebounding": 7,
+        "three": 15,
+        "steals": 29,
+        "blocks": 11,
+        "dunks": 9
+      },
+      "core": 12.14,
+      "starImpact": 18.333,
+      "raw": 13.379,
+      "rank": 158,
+      "overall": 17
+    },
+    {
+      "name": "Duncan Robinson",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 9,
+        "rebounding": 6,
+        "three": 28,
+        "steals": 15,
+        "blocks": 9,
+        "dunks": 2
+      },
+      "core": 11.97,
+      "starImpact": 18.333,
+      "raw": 13.243,
+      "rank": 159,
+      "overall": 17
+    },
+    {
+      "name": "Collin Murray-Boyles",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 8,
+        "passing": 8,
+        "rebounding": 12,
+        "three": 11,
+        "steals": 19,
+        "blocks": 16,
+        "dunks": 21
+      },
+      "core": 11.83,
+      "starImpact": 18.667,
+      "raw": 13.197,
+      "rank": 160,
+      "overall": 17
+    },
+    {
+      "name": "Ziaire Williams",
+      "position": "SF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 10,
+        "passing": 6,
+        "rebounding": 6,
+        "three": 15,
+        "steals": 24,
+        "blocks": 11,
+        "dunks": 19
+      },
+      "core": 11.59,
+      "starImpact": 19.333,
+      "raw": 13.139,
+      "rank": 161,
+      "overall": 17
+    },
+    {
+      "name": "Ron Harper",
+      "position": "PG",
+      "classic": true,
+      "season": "1998",
+      "stats": {
+        "scoring": 9,
+        "passing": 11,
+        "rebounding": 8,
+        "three": 11,
+        "steals": 23,
+        "blocks": 13,
+        "dunks": 18
+      },
+      "core": 11.91,
+      "starImpact": 18.0,
+      "raw": 13.128,
+      "rank": 162,
+      "overall": 17
+    },
+    {
+      "name": "Coby White",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 17,
+        "passing": 12,
+        "rebounding": 8,
+        "three": 19,
+        "steals": 8,
+        "blocks": 5,
+        "dunks": 7
+      },
+      "core": 12.23,
+      "starImpact": 16.0,
+      "raw": 12.984,
+      "rank": 163,
+      "overall": 16
+    },
+    {
+      "name": "Rick Fox",
+      "position": "SF",
+      "classic": true,
+      "season": "2002",
+      "stats": {
+        "scoring": 13,
+        "passing": 13,
+        "rebounding": 11,
+        "three": 13,
+        "steals": 17,
+        "blocks": 9,
+        "dunks": 12
+      },
+      "core": 12.64,
+      "starImpact": 14.333,
+      "raw": 12.979,
+      "rank": 164,
+      "overall": 16
+    },
+    {
+      "name": "Luc Longley",
+      "position": "C",
+      "classic": true,
+      "season": "1998",
+      "stats": {
+        "scoring": 11,
+        "passing": 11,
+        "rebounding": 14,
+        "three": 6,
+        "steals": 15,
+        "blocks": 18,
+        "dunks": 14
+      },
+      "core": 12.24,
+      "starImpact": 15.667,
+      "raw": 12.925,
+      "rank": 165,
+      "overall": 16
+    },
+    {
+      "name": "Tre Johnson",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 9,
+        "rebounding": 6,
+        "three": 18,
+        "steals": 15,
+        "blocks": 9,
+        "dunks": 14
+      },
+      "core": 11.49,
+      "starImpact": 15.667,
+      "raw": 12.325,
+      "rank": 166,
+      "overall": 16
+    },
+    {
+      "name": "Klay Thompson",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 12,
+        "passing": 7,
+        "rebounding": 5,
+        "three": 25,
+        "steals": 13,
+        "blocks": 9,
+        "dunks": 6
+      },
+      "core": 11.18,
+      "starImpact": 16.667,
+      "raw": 12.277,
+      "rank": 167,
+      "overall": 16
+    },
+    {
+      "name": "Jaylen Wells",
+      "position": "PG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 13,
+        "passing": 7,
+        "rebounding": 7,
+        "three": 17,
+        "steals": 19,
+        "blocks": 5,
+        "dunks": 9
+      },
+      "core": 11.22,
+      "starImpact": 16.333,
+      "raw": 12.243,
+      "rank": 168,
+      "overall": 15
+    },
+    {
+      "name": "Brook Lopez",
+      "position": "C",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 8,
+        "passing": 6,
+        "rebounding": 8,
+        "three": 16,
+        "steals": 15,
+        "blocks": 19,
+        "dunks": 15
+      },
+      "core": 11.06,
+      "starImpact": 16.667,
+      "raw": 12.181,
+      "rank": 169,
+      "overall": 15
+    },
+    {
+      "name": "Bruce Bowen",
+      "position": "SF",
+      "classic": true,
+      "season": "2005",
+      "stats": {
+        "scoring": 8,
+        "passing": 7,
+        "rebounding": 8,
+        "three": 22,
+        "steals": 16,
+        "blocks": 12,
+        "dunks": 7
+      },
+      "core": 10.79,
+      "starImpact": 16.667,
+      "raw": 11.965,
+      "rank": 170,
+      "overall": 15
+    },
+    {
+      "name": "Rasho Nesterović",
+      "position": "C",
+      "classic": true,
+      "season": "2005",
+      "stats": {
+        "scoring": 6,
+        "passing": 5,
+        "rebounding": 15,
+        "three": 6,
+        "steals": 11,
+        "blocks": 23,
+        "dunks": 15
+      },
+      "core": 10.16,
+      "starImpact": 17.667,
+      "raw": 11.661,
+      "rank": 171,
+      "overall": 15
+    },
+    {
+      "name": "Terance Mann",
+      "position": "SG",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 7,
+        "passing": 12,
+        "rebounding": 7,
+        "three": 14,
+        "steals": 16,
+        "blocks": 8,
+        "dunks": 14
+      },
+      "core": 10.11,
+      "starImpact": 14.667,
+      "raw": 11.021,
+      "rank": 172,
+      "overall": 14
+    },
+    {
+      "name": "Jarred Vanderbilt",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 4,
+        "passing": 6,
+        "rebounding": 10,
+        "three": 11,
+        "steals": 17,
+        "blocks": 9,
+        "dunks": 19
+      },
+      "core": 8.92,
+      "starImpact": 15.667,
+      "raw": 10.269,
+      "rank": 173,
+      "overall": 14
+    },
+    {
+      "name": "Carl Herrera",
+      "position": "PF",
+      "classic": true,
+      "season": "1995",
+      "stats": {
+        "scoring": 7,
+        "passing": 4,
+        "rebounding": 11,
+        "three": 5,
+        "steals": 15,
+        "blocks": 13,
+        "dunks": 17
+      },
+      "core": 9.05,
+      "starImpact": 15.0,
+      "raw": 10.24,
+      "rank": 174,
+      "overall": 14
+    },
+    {
+      "name": "De'Andre Hunter",
+      "position": "PF",
+      "classic": false,
+      "season": "current",
+      "stats": {
+        "scoring": 14,
+        "passing": 3,
+        "rebounding": 9,
+        "three": 13,
+        "steals": 1,
+        "blocks": 1,
+        "dunks": 19
+      },
+      "core": 8.92,
+      "starImpact": 15.333,
+      "raw": 10.203,
+      "rank": 175,
+      "overall": 13
+    }
+  ]
+}
