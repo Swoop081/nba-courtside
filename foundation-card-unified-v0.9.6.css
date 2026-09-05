@@ -1,0 +1,80 @@
+/* NBA Courtside v0.9.6 — one canonical Foundation card presentation everywhere */
+.player-card.foundation-card{
+  container-type:inline-size!important;
+}
+
+/* One card geometry for gameplay, inspector, catalogue and editor previews. */
+.player-card.foundation-card .foundation-rating{
+  top:0!important;
+  left:0!important;
+  width:27%!important;
+  height:14.5%!important;
+  padding:0 2.2% .8% 1.5%!important;
+  border-radius:0 0 100% 0!important;
+}
+.player-card.foundation-card .foundation-rating span{
+  font-size:13.2cqw!important;
+  line-height:1!important;
+}
+.player-card.foundation-card .foundation-plaque{
+  left:2.5%!important;
+  right:2.5%!important;
+  bottom:2.5%!important;
+  height:18%!important;
+  grid-template-columns:17% 1fr 18%!important;
+  gap:2%!important;
+  padding:0 3%!important;
+}
+.player-card.foundation-card .foundation-position{
+  font-size:7.2cqw!important;
+  line-height:1!important;
+  padding-right:6px!important;
+}
+.player-card.foundation-card .foundation-name{
+  font-size:5.2cqw!important;
+  line-height:.95!important;
+}
+.player-card.foundation-card .foundation-team-logo{
+  width:100%!important;
+  height:70%!important;
+}
+.player-card.foundation-card .foundation-art{
+  top:4%!important;
+  bottom:18%!important;
+}
+
+/* Remove all context-specific card-face scaling so the same card simply scales as a whole. */
+#lineup .foundation-card .foundation-rating,
+.catalogue-grid .foundation-card .foundation-rating,
+.art-editor-preview .foundation-card .foundation-rating,
+.foundation-face.front .foundation-card .foundation-rating{
+  top:0!important;
+  left:0!important;
+  width:27%!important;
+  height:14.5%!important;
+  padding:0 2.2% .8% 1.5%!important;
+}
+#lineup .foundation-card .foundation-rating span,
+.catalogue-grid .foundation-card .foundation-rating span,
+.art-editor-preview .foundation-card .foundation-rating span,
+.foundation-face.front .foundation-card .foundation-rating span{
+  font-size:13.2cqw!important;
+}
+#lineup .foundation-position,
+.catalogue-grid .foundation-position,
+.art-editor-preview .foundation-position,
+.foundation-face.front .foundation-position{
+  font-size:7.2cqw!important;
+}
+#lineup .foundation-name,
+.catalogue-grid .foundation-name,
+.art-editor-preview .foundation-name,
+.foundation-face.front .foundation-name{
+  font-size:5.2cqw!important;
+}
+#lineup .foundation-plaque,
+.catalogue-grid .foundation-plaque,
+.art-editor-preview .foundation-plaque,
+.foundation-face.front .foundation-plaque{
+  height:18%!important;
+}
