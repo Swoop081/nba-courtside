@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.32 — clean Play Again reset + larger final team logos + larger POTG card + transparent automatic quarter transitions + audited local team logos + approved Overall hierarchy + 175-player ratings + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.33 — deterministic classic team logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 175-player ratings + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
