@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.4 — gameplay card-size override + NBA Cup resolver + current 30 + Classic Teams */
+/* NBA Courtside v0.10.5 — runtime gameplay card sizing + NBA Cup resolver + current 30 + Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -34,4 +34,5 @@
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
+  document.write('<script src="game-card-size-runtime-v0.10.5.js?t='+t+'"><\/script>');
 })();
