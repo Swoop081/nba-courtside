@@ -1,0 +1,75 @@
+name: Cache NBA team logos
+
+on:
+  push:
+    paths:
+      - '.github/workflows/cache-team-logos.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cache-team-logos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download current and classic team logos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/team-logos/current assets/team-logos/classic
+
+          ids=(
+            1610612737 1610612738 1610612751 1610612766 1610612741 1610612739
+            1610612742 1610612743 1610612765 1610612744 1610612745 1610612754
+            1610612746 1610612747 1610612763 1610612748 1610612749 1610612750
+            1610612740 1610612752 1610612760 1610612753 1610612755 1610612756
+            1610612757 1610612758 1610612759 1610612761 1610612762 1610612764
+          )
+          for id in "${ids[@]}"; do
+            curl --fail --location --retry 3 --silent --show-error \
+              "https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg" \
+              -o "assets/team-logos/current/${id}.svg"
+          done
+
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://seeklogo.com/images/T/toronto-raptors-1995-2008-logo-CD4B4C2685-seeklogo.com.png' \
+            -o assets/team-logos/classic/toronto-raptors-2003.png
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://w7.pngwing.com/pngs/436/225/png-transparent-san-antonio-spurs-2013u201314-nba-season-cleveland-cavaliers-houston-rockets-the-nba-finals-spurs-nba-emblem-label-text.png' \
+            -o assets/team-logos/classic/san-antonio-spurs-2005.png
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg' \
+            -o assets/team-logos/classic/chicago-bulls-1998.svg
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://cdn.nba.com/logos/nba/1610612747/global/L/logo.svg' \
+            -o assets/team-logos/classic/los-angeles-lakers-2002.svg
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://www.kindpng.com/picc/m/148-1486257_houston-rockets-logo-1994-hd-png-download.png' \
+            -o assets/team-logos/classic/houston-rockets-1995.png
+
+      - name: Verify logo inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find assets/team-logos/current -type f | wc -l)" -eq 30
+          test "$(find assets/team-logos/classic -type f | wc -l)" -eq 5
+          test -s assets/team-logos/current/1610612759.svg
+          test -s assets/team-logos/current/1610612762.svg
+          test -s assets/team-logos/current/1610612745.svg
+          test -s assets/team-logos/classic/houston-rockets-1995.png
+
+      - name: Commit cached logos
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- assets/team-logos; then
+            echo 'No team-logo changes to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/team-logos
+          git commit -m 'Cache audited NBA team logos locally'
+          git push
