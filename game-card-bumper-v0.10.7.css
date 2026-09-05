@@ -1,0 +1,7 @@
+/* NBA Courtside v0.10.7 — hard left bumper for gameplay card rail */
+#game #lineup.card-row{
+  scroll-padding-left:10px!important;
+}
+#game #lineup.card-row>.player-card:first-child{
+  margin-left:10px!important;
+}
