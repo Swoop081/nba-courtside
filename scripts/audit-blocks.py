@@ -28,19 +28,16 @@ for r in rows:
  val=r.get('BLK') or r.get('blk_per_g') or r.get('BLK_per_game') or ''
  try: by[norm(name)]=float(val)
  except: pass
-# Cards absent from the completed 2025-26 NBA feed use the same fallback-season policy
-# as Scoring/3PT/Rebounding. NCAA values are for 2025-26 rookies; veterans use 2024-25 NBA.
 fallback={
  'Egor Demin':0.4,'Kyrie Irving':0.5,'Fred VanVleet':0.4,'Tyrese Haliburton':0.7,'Damian Lillard':0.2,
  'Darius Acuff Jr.':0.2,'Cameron Boozer':0.8,'Keaton Wagler':0.3,'Darryn Peterson':0.4,'AJ Dybantsa':0.7,'Caleb Wilson':1.4
 }
-# Classic Team depicted-season BPG.
 cb={
  ('Alvin Williams','2003'):0.3,('Vince Carter','2003'):1.0,('Morris Peterson','2003'):0.4,('Jerome Williams','2003'):0.4,('Antonio Davis','2003'):1.2,
  ('Tony Parker','2005'):0.1,('Manu Ginóbili','2005'):0.4,('Bruce Bowen','2005'):0.5,('Tim Duncan','2005'):2.6,('Rasho Nesterović','2005'):1.7,
  ('Ron Harper','1998'):0.6,('Michael Jordan','1998'):0.5,('Scottie Pippen','1998'):1.0,('Dennis Rodman','1998'):0.2,('Luc Longley','1998'):1.1,
  ('Derek Fisher','2002'):0.1,('Kobe Bryant','2002'):0.4,('Rick Fox','2002'):0.3,('Robert Horry','2002'):1.1,("Shaquille O'Neal",'2002'):2.0,
- ('Kenny Smith','1995'):0.1,('Clyde Drexler','1995'):0.7,('Mario Elie','1995'):0.1,('Robert Horry','1995'):1.2,('Hakeem Olajuwon','1995'):3.4
+ ('Kenny Smith','1995'):0.1,('Clyde Drexler','1995'):0.7,('Carl Herrera','1995'):0.6,('Robert Horry','1995'):1.2,('Hakeem Olajuwon','1995'):3.4
 }
 out=[]; missing=[]
 for n in modern:
