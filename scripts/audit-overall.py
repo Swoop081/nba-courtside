@@ -79,6 +79,33 @@ for i,x in enumerate(rows): x['rank']=i+1; x['overall']=slots[i]
 
 distribution=[]
 for rating,count in curve: distribution.append({'overall':rating,'players':count,'percent':round(count/175*100,1)})
-result={'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY','formula':{'coreWeights':weights,'overallRaw':'0.65 * Core Impact + 0.35 * average(best 3 category ratings)'},'curve':distribution,'count':175,'players':rows}
+result={'status':'APPROVED_FOR_GAMEPLAY','formula':{'coreWeights':weights,'overallRaw':'0.65 * Core Impact + 0.35 * average(best 3 category ratings)'},'curve':distribution,'count':175,'players':rows}
 (ROOT/'overall-audit-v0.10.26.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-print(json.dumps({'count':175,'top30':rows[:30],'distribution':distribution},ensure_ascii=False,indent=2))
+
+runtime_rows=[{'name':r['name'],'season':r['season'],'classic':r['classic'],'overall':r['overall']} for r in rows]
+js_rows=json.dumps(runtime_rows,ensure_ascii=False,separators=(',',':'))
+js=f'''/* NBA Courtside v0.10.26 — approved 175-player Overall hierarchy runtime. */
+(()=>{{
+if(window.__courtsideOverallRatingsV01026)return;
+window.__courtsideOverallRatingsV01026=true;
+const rows={js_rows};
+const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]+/gi,' ').trim().toLowerCase();
+const modern=new Map(),classic=new Map();
+rows.forEach(r=>{{const k=norm(r.name)+(r.classic?'|'+r.season:'');(r.classic?classic:modern).set(k,Number(r.overall));}});
+const previous=window.courtsideOverall;
+const get=p=>{{
+  if(!p)return null;
+  const isClassic=!!p.classicTeam;
+  const k=norm(p.name)+(isClassic?'|'+String(p.season||''):'');
+  const v=(isClassic?classic:modern).get(k);
+  return Number.isFinite(v)?v:null;
+}};
+window.courtsideOverall=function(p){{const v=get(p);return v??(typeof previous==='function'?previous(p):0);}};
+let applied=0;
+try{{(players||[]).forEach(p=>{{const v=get(p);if(v!=null){{p.overall=v;applied++;}}}});}}catch{{}}
+window.COURTSIDE_OVERALL_RATINGS_APPLIED=applied;
+window.COURTSIDE_OVERALL_RATINGS_COUNT=rows.length;
+}})();
+'''
+(ROOT/'overall-ratings-v0.10.26.js').write_text(js,encoding='utf-8')
+print(json.dumps({'count':175,'top30':rows[:30],'distribution':distribution,'runtime':'overall-ratings-v0.10.26.js'},ensure_ascii=False,indent=2))
