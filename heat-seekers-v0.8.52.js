@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.47 — quarter + category persistent information ticker, duplicate lower result bar removed + persistent canonical Foundation art sizing after reset + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
+/* NBA Courtside v0.10.48 — season picker 3-wide + Awards tab + season Continue flow + season scoreboard identity repair + quarter/category ticker + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -54,6 +54,7 @@
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
+  document.write('<link rel="stylesheet" href="season-ui-polish-v0.10.48.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-bumper-v0.10.7.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-stat-number-v0.10.8.css?t='+t+'">');
@@ -73,4 +74,5 @@
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
+  document.write('<script src="season-ui-polish-v0.10.48.js?t='+t+'"><\/script>');
 })();
