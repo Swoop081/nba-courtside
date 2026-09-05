@@ -1,9 +1,10 @@
-/* NBA Courtside v0.9.10 — Foundation + PNG-only art pass + 20% smaller gameplay rail + unslashed zero numerals */
+/* NBA Courtside v0.9.11 — Foundation + PNG-only art pass + 20% smaller gameplay rail + unslashed zero numerals + Detroit position swap */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
   document.write('<script src="foundation-v0.9.0.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
+  document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-rail-v0.9.9.css?t='+t+'">');
   document.write('<script src="foundation-team-deal-v0.9.2.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-card-corner-v0.9.4.css?t='+t+'">');
