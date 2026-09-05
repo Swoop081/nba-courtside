@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.20 — approved 175-player 3PT ratings + PPG scoring + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.21 — approved 175-player Rebounding + 3PT ratings + PPG scoring + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -9,6 +9,7 @@
   document.write('<script src="scoring-egor-hotfix-v0.10.19.js?t='+t+'"><\/script>');
   document.write('<script src="three-point-ratings-data-v0.10.20.js?t='+t+'"><\/script>');
   document.write('<script src="three-point-ratings-v0.10.20.js?t='+t+'"><\/script>');
+  document.write('<script src="rebounding-ratings-v0.10.21.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-rail-v0.9.9.css?t='+t+'">');
