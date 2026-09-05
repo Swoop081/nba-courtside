@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.51 — exact active Season game persistence + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
+/* NBA Courtside v0.10.52 — authoritative Season Mode finish flow + exact season progression + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -53,8 +53,6 @@
   document.write('<script src="classic-logo-path-hotfix-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
-  document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
-  document.write('<script src="season-finish-bridge-v0.10.49.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="season-ui-polish-v0.10.48.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-bumper-v0.10.7.css?t='+t+'">');
@@ -74,9 +72,10 @@
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
+  /* Season Mode must load after every gameplay/presentation finishGame wrapper so its own
+     seasonGame-aware finishGame remains authoritative and saves the exact game result. */
+  document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
   document.write('<script src="season-ui-polish-v0.10.48.js?t='+t+'"><\/script>');
-  document.write('<script src="season-runtime-v0.10.49.js?t='+t+'"><\/script>');
-  document.write('<script src="season-persistence-v0.10.51.js?t='+t+'"><\/script>');
 })();
