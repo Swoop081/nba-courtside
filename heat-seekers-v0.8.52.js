@@ -1,10 +1,11 @@
-/* NBA Courtside v0.10.17 — full season awards + All-Star Weekend + Season Rewards MVP ladder + gold quarter transitions + automatic quarter flow hotfix + interaction restore + live matchup ledger + compact POTG final + tighter global Foundation rating */
+/* NBA Courtside v0.10.18 — PPG-based scoring audit for all 175 players + full season awards + All-Star Weekend + Season Rewards MVP ladder + gold quarter transitions + automatic quarter flow hotfix + interaction restore + live matchup ledger + compact POTG final + tighter global Foundation rating */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
   document.write('<script src="foundation-v0.9.0.js?t='+t+'"><\/script>');
   document.write('<script src="classic-teams-v0.9.30.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
+  document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-rail-v0.9.9.css?t='+t+'">');
