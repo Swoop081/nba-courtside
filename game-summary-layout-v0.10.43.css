@@ -1,17 +1,17 @@
-/* NBA Courtside v0.10.43 — cleaner quarter summaries + final result spacing */
-.quarter-history-strip{gap:8px!important;margin:10px 0 12px!important}
-.quarter-history-item{display:grid!important;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:'meta home away'!important;gap:8px!important;min-height:72px!important;padding:9px 10px!important;border-radius:14px!important}
-.quarter-history-q{grid-area:meta!important;align-self:start!important;font-size:14px!important;line-height:1!important;margin-top:3px!important}
+/* NBA Courtside v0.10.44 — category bar placement + cleaner quarter summaries + final result spacing */
+.game-category-bar-host{margin:12px 0 12px;padding:0 0 2px}.game-category-bar-host.hidden{display:none!important}.game-category-bar-host #nextQuarterBtn{display:block;width:100%!important;margin:0!important;min-height:58px!important;border-radius:18px!important;font-size:22px!important;font-weight:1000!important;letter-spacing:.02em!important}
+.quarter-history-strip{gap:9px!important;margin:10px 0 12px!important}
+.quarter-history-item{display:grid!important;grid-template-columns:44px minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:'meta home away'!important;gap:9px!important;min-height:76px!important;padding:10px 11px!important;border-radius:14px!important}
+.quarter-history-q{grid-area:meta!important;align-self:start!important;font-size:15px!important;line-height:1!important;margin-top:3px!important}
 .quarter-history-vs{grid-area:meta!important;align-self:end!important;font-size:8px!important;line-height:1.05!important;white-space:normal!important;letter-spacing:.08em!important;color:#8f99aa!important;max-width:44px!important}
-.quarter-history-side:first-of-type{grid-area:home!important}
-.quarter-history-side.away{grid-area:away!important}
-.quarter-history-side{display:grid!important;grid-template-columns:26px minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:7px!important;row-gap:1px!important;align-items:center!important;min-width:0!important}
-.quarter-history-side.away{grid-template-columns:minmax(0,1fr) 26px!important;text-align:right!important}
-.quarter-history-side img{width:26px!important;height:26px!important;grid-row:1 / span 2!important;object-fit:contain!important}
+.quarter-history-side:first-of-type{grid-area:home!important}.quarter-history-side.away{grid-area:away!important}
+.quarter-history-side{display:grid!important;grid-template-columns:28px minmax(0,1fr)!important;grid-template-rows:auto auto!important;column-gap:8px!important;row-gap:3px!important;align-items:center!important;min-width:0!important}
+.quarter-history-side.away{grid-template-columns:minmax(0,1fr) 28px!important;text-align:right!important}
+.quarter-history-side img{width:28px!important;height:28px!important;grid-row:1 / span 2!important;object-fit:contain!important}
 .quarter-history-side:first-of-type img{grid-column:1!important}.quarter-history-side.away img{grid-column:2!important}
-.quarter-history-side span{font-size:10px!important;line-height:1.08!important;font-weight:900!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;min-height:21px!important}
+.quarter-history-side span{font-size:10px!important;line-height:1.08!important;font-weight:950!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;display:-webkit-box!important;-webkit-line-clamp:2!important;-webkit-box-orient:vertical!important;min-height:22px!important}
 .quarter-history-side:first-of-type span{grid-column:2!important;grid-row:1!important}.quarter-history-side.away span{grid-column:1!important;grid-row:1!important}
-.quarter-history-side b{font-size:24px!important;line-height:.95!important;font-weight:1000!important;letter-spacing:-.03em!important;color:#fff!important}
+.quarter-history-side b{font-size:28px!important;line-height:.9!important;font-weight:1000!important;letter-spacing:-.035em!important;color:#fff!important}
 .quarter-history-side:first-of-type b{grid-column:2!important;grid-row:2!important;justify-self:start!important}.quarter-history-side.away b{grid-column:1!important;grid-row:2!important;justify-self:end!important}
-.compact-final-card h2{margin:16px 0 18px!important;padding:0 8px!important;line-height:1.08!important}
-@media(max-width:430px){.quarter-history-item{grid-template-columns:40px minmax(0,1fr) minmax(0,1fr)!important;min-height:70px!important;padding:8px 9px!important}.quarter-history-vs{max-width:40px!important}.quarter-history-side b{font-size:23px!important}.compact-final-card h2{margin:15px 0 17px!important}}
+.compact-final-card h2{margin:20px 0 20px!important;padding:0 12px!important;line-height:1.08!important}
+@media(max-width:430px){.game-category-bar-host{margin:11px 0 11px}.game-category-bar-host #nextQuarterBtn{min-height:56px!important;font-size:21px!important}.quarter-history-item{grid-template-columns:40px minmax(0,1fr) minmax(0,1fr)!important;min-height:74px!important;padding:9px 10px!important}.quarter-history-vs{max-width:40px!important}.quarter-history-side b{font-size:27px!important}.compact-final-card h2{margin:19px 0 19px!important;padding:0 10px!important}}
