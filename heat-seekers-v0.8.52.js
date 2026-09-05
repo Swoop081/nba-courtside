@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.26 — approved Overall hierarchy + 175-player Dunking + Assists + Steals + Blocks + Rebounding + 3PT ratings + PPG scoring + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.27 — final scoreboard presentation + approved Overall hierarchy + 175-player Dunking + Assists + Steals + Blocks + Rebounding + 3PT ratings + PPG scoring + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
