@@ -1,0 +1,28 @@
+/* NBA Courtside v0.9.24 — push clockwise team watermark higher/right */
+.player-card.foundation-card .foundation-bg-team-logo{
+  width:112%!important;
+  height:112%!important;
+  top:-23%!important;
+  right:-23%!important;
+  transform:rotate(45deg)!important;
+  transform-origin:center center!important;
+  object-fit:contain!important;
+  opacity:.16!important;
+  filter:saturate(.85) brightness(1.12)!important;
+  mix-blend-mode:screen!important;
+}
+.catalogue-grid .player-card.foundation-card .foundation-bg-team-logo{
+  width:118%!important;
+  height:118%!important;
+  top:-23%!important;
+  right:-23%!important;
+  transform:rotate(45deg)!important;
+  opacity:.15!important;
+}
+.art-editor-preview .player-card.foundation-card .foundation-bg-team-logo{
+  width:112%!important;
+  height:112%!important;
+  top:-23%!important;
+  right:-23%!important;
+  transform:rotate(45deg)!important;
+}
