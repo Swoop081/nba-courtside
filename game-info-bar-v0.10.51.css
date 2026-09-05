@@ -1,0 +1,4 @@
+/* NBA Courtside v0.10.51 — information ticker spacing */
+#game .scoreboard{margin-bottom:0!important}
+#gameInfoBar{margin:14px 0 18px!important}
+@media(max-width:430px){#gameInfoBar{margin:13px 0 16px!important}}
