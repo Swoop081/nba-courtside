@@ -33,6 +33,7 @@ if len(modern_names)!=150:
 
 # 2024-25 NBA fallbacks for players who did not play in 2025-26, plus 2025-26 NCAA for 2026 rookies.
 fallback={
+ 'Egor Demin': {'three_pm':2.4,'three_pa':6.2,'three_pct':0.385,'source':'2025-26 NBA'},
  'Kyrie Irving': {'three_pm':2.9,'three_pa':7.2,'three_pct':0.401,'source':'2024-25 NBA'},
  'Fred VanVleet': {'three_pm':2.7,'three_pa':7.7,'three_pct':0.345,'source':'2024-25 NBA'},
  'Tyrese Haliburton': {'three_pm':2.7,'three_pa':6.9,'three_pct':0.388,'source':'2024-25 NBA'},
