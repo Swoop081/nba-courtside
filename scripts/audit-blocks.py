@@ -17,10 +17,6 @@ for n,p in re.findall(r"\['([^']*(?:\\'[^']*)*)','(PG|SG|SF|PF|C)',\[",foundatio
  n=n.replace("\\'", "'")
  if n not in modern: modern.append(n)
 if len(modern)!=150: raise SystemExit(f'Expected 150 modern players, got {len(modern)}')
-classic=(ROOT/'classic-teams-v0.9.30.js').read_text(encoding='utf-8')
-classic_rows=[]
-for season,body in re.findall(r"season:'(\d+)'[\s\S]*?rows:\[([\s\S]*?)\]\s*\}",classic):
- for n,p in re.findall(r"\[['\"]([^'\"]+)['\"],'(PG|SG|SF|PF|C)'",body): classic_rows.append((n,season))
 raw=urllib.request.urlopen(URL,timeout=30).read().decode('utf-8-sig'); rows=list(csv.DictReader(io.StringIO(raw)))
 by={}
 for r in rows:
@@ -39,6 +35,7 @@ cb={
  ('Derek Fisher','2002'):0.1,('Kobe Bryant','2002'):0.4,('Rick Fox','2002'):0.3,('Robert Horry','2002'):1.1,("Shaquille O'Neal",'2002'):2.0,
  ('Kenny Smith','1995'):0.1,('Clyde Drexler','1995'):0.7,('Carl Herrera','1995'):0.6,('Robert Horry','1995'):1.2,('Hakeem Olajuwon','1995'):3.4
 }
+classic_rows=list(cb.keys())
 out=[]; missing=[]
 for n in modern:
  b=by.get(norm(n),fallback.get(n))
