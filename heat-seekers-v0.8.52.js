@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.44 — category bar above cards + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
+/* NBA Courtside v0.10.45 — persistent canonical Foundation art sizing after reset + category bar above cards + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
