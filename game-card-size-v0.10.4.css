@@ -1,0 +1,13 @@
+/* NBA Courtside v0.10.4 — gameplay lineup cards 20% smaller, contents unchanged */
+#game .card-row>.player-card{
+  flex:0 0 min(34.4vw,168px)!important;
+  width:min(34.4vw,168px)!important;
+  max-width:168px!important;
+}
+@media(max-width:430px){
+  #game .card-row>.player-card{
+    flex-basis:36vw!important;
+    width:36vw!important;
+    max-width:148px!important;
+  }
+}
