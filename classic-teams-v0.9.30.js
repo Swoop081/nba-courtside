@@ -1,15 +1,15 @@
-/* NBA Courtside v0.9.30 — five Classic Teams / year suffix only for duplicate player names */
+/* NBA Courtside v0.10.33 — five Classic Teams with deterministic local logos */
 (()=>{
   if(window.__courtsideClassicTeamsV0930)return;
   window.__courtsideClassicTeamsV0930=true;
   const keys=['scoring','dunks','three','rebounding','passing','blocks','steals'];
   const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
   const LOGOS={
-    tor2003:'https://seeklogo.com/images/T/toronto-raptors-1995-2008-logo-CD4B4C2685-seeklogo.com.png',
-    sas2005:'https://w7.pngwing.com/pngs/436/225/png-transparent-san-antonio-spurs-2013u201314-nba-season-cleveland-cavaliers-houston-rockets-the-nba-finals-spurs-nba-emblem-label-text.png',
-    chi1998:'https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg',
-    lal2002:'https://cdn.nba.com/logos/nba/1610612747/global/L/logo.svg',
-    hou1995:'https://www.kindpng.com/picc/m/148-1486257_houston-rockets-logo-1994-hd-png-download.png'
+    tor2003:'assets/team-logos/classic/toronto-raptors-2003.svg',
+    sas2005:'assets/team-logos/classic/san-antonio-spurs-2005.svg',
+    chi1998:'assets/team-logos/classic/chicago-bulls-1998.svg',
+    lal2002:'assets/team-logos/classic/los-angeles-lakers-2002.svg',
+    hou1995:'assets/team-logos/classic/houston-rockets-1995.svg'
   };
   const teams=[
     {id:'classic-tor-2003',team:'Toronto Raptors 2003',short:'Raptors 2003',season:'2003',logo:LOGOS.tor2003,theme:{a:'#753BBD',b:'#CE1141',c:'#111111'},rows:[
@@ -28,12 +28,9 @@
       ['Kenny Smith','PG',[19,9,26,7,23,2,12]],['Clyde Drexler','SG',[27,29,20,21,23,9,23]],['Robert Horry','SF',[19,23,23,22,14,24,20]],['Carl Herrera','PF',[13,18,2,21,8,15,10]],['Hakeem Olajuwon','C',[30,28,10,30,20,30,25]]
     ]}
   ];
-
-  /* Only duplicate names get the year suffix. This keeps already-uploaded filenames intact. */
   const nameCounts={};
   (players||[]).forEach(p=>{nameCounts[p.name]=(nameCounts[p.name]||0)+1;});
   teams.forEach(t=>t.rows.forEach(([name])=>{nameCounts[name]=(nameCounts[name]||0)+1;}));
-
   const classic=[];
   teams.forEach(t=>t.rows.forEach(([name,position,r])=>{
     const baseSlug=slug(name);
@@ -45,12 +42,10 @@
   window.COURTSIDE_CLASSIC_PLAYERS=classic;
   window.COURTSIDE_CLASSIC_TEAMS=teams;
   if(Array.isArray(window.COURTSIDE_FOUNDATION_PLAYERS))window.COURTSIDE_FOUNDATION_PLAYERS.push(...classic);
-
   const fallbackLogo=typeof logoUrl==='function'?logoUrl:null;
   const classicLogoUrl=p=>p?.classicLogo||(fallbackLogo?fallbackLogo(p):'');
   try{logoUrl=classicLogoUrl;}catch{}
   window.logoUrl=classicLogoUrl;
-
   if(typeof cardMarkup==='function'){
     const before=cardMarkup;
     cardMarkup=function(p,o={}){
@@ -62,7 +57,6 @@
       return html;
     };
   }
-
   const fixInspector=()=>{
     const front=document.querySelector('#foundationInspectFront .foundation-card');if(!front)return;
     const p=classic.find(x=>x.id===front.dataset.id);if(!p)return;
