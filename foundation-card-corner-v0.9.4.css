@@ -1,16 +1,16 @@
-/* NBA Courtside v0.9.4 — integrated corner rating + edge-to-edge cards */
+/* NBA Courtside v0.9.5 — tighter integrated corner rating + edge-to-edge cards */
 
-/* The rating is now part of the card corner: no diamond, no protruding badge. */
+/* The rating is part of the card corner: compact, even spacing around the number. */
 .player-card.foundation-card .foundation-rating{
   top:0!important;
   left:0!important;
-  width:31%!important;
-  height:17%!important;
+  width:25%!important;
+  height:14%!important;
   aspect-ratio:auto!important;
   display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  padding:0 5% 1% 1%!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  padding:2.4% 2.4% 0 2.4%!important;
   box-sizing:border-box!important;
   background:linear-gradient(145deg,var(--team-c) 0%,var(--team-a) 72%,var(--team-b) 100%)!important;
   clip-path:none!important;
@@ -29,7 +29,7 @@
   position:relative!important;
   z-index:2!important;
   font-size:clamp(24px,8.6vw,44px)!important;
-  line-height:1!important;
+  line-height:.86!important;
 }
 
 /* Remove the outer card border/frame so artwork and surfaces run directly to the card edge. */
@@ -58,12 +58,13 @@
   scroll-snap-align:start!important;
 }
 
-/* Catalogue keeps compact typography but uses the same integrated corner. */
+/* Catalogue keeps compact typography with the same tighter integrated corner. */
 .catalogue-grid .foundation-card .foundation-rating{
-  width:32%!important;
-  height:17%!important;
-  padding-right:5%!important;
+  width:25%!important;
+  height:14%!important;
+  padding:2.4% 2.4% 0 2.4%!important;
 }
 .catalogue-grid .foundation-card .foundation-rating span{
   font-size:16px!important;
+  line-height:.86!important;
 }
