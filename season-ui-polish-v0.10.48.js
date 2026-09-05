@@ -1,16 +1,17 @@
-/* NBA Courtside v0.10.48 — season picker polish, Awards tab, correct season scoreboard identity, Continue-to-hub final */
+/* NBA Courtside v0.10.53 — season picker polish, Awards tab, authoritative season scoreboard identity, Continue-to-hub final */
 (()=>{
-  if(window.__courtsideSeasonUiPolishV01048)return;
-  window.__courtsideSeasonUiPolishV01048=true;
+  if(window.__courtsideSeasonUiPolishV01053)return;
+  window.__courtsideSeasonUiPolishV01053=true;
   const SAVE_KEY='nbaCourtsideSeasonModeV1';
   const RETURN_KEY='nbaCourtsideSeasonReturnPendingV1';
 
   const readSave=()=>{try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'null')}catch{return null}};
   const logoFor=p=>{
     try{if(typeof window.logoUrl==='function'){const u=window.logoUrl(p);if(u)return u;}}catch{}
-    return p?.teamId?`https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`:'';
+    return p?.teamId?`assets/team-logos/current/${p.teamId}.svg`:'';
   };
   const short=p=>p?.teamShort||p?.team||'Team';
+  const currentState=()=>{try{return typeof state!=='undefined'?state:null}catch{return null}};
 
   const renameAwards=()=>{
     document.querySelectorAll('#seasonTabs .season-tab').forEach(b=>{
@@ -24,17 +25,25 @@
     if(!game?.classList.contains('active'))return;
     let home=null,away=null;
     try{home=userTeam?.[0]||null;away=cpuTeam?.[0]||null}catch{}
-    if(!home||!away)return;
+    const gs=currentState();
+    if(!home||!away||!gs)return;
     const sides=[...game.querySelectorAll('.score-side')];
-    [home,away].forEach((p,i)=>{
-      const side=sides[i];if(!side)return;
-      const span=side.querySelector('span');if(span)span.textContent=short(p).replace(/^Toronto /,'').replace(/^Brooklyn /,'');
-      const imgs=[...side.querySelectorAll('img')];
-      imgs.forEach(img=>{const u=logoFor(p);if(u&&img.getAttribute('src')!==u)img.src=u;});
-      const a=p.theme?.a||'#18202c',b=p.theme?.b||'#313b49';
-      side.style.background=`linear-gradient(135deg,${a},${b})`;
-      side.style.setProperty('--team-a',a);side.style.setProperty('--team-b',b);
-    });
+    if(sides.length<2)return;
+
+    const renderSide=(side,p,score,isAway)=>{
+      const a=p.theme?.a||'#18202c',b=p.theme?.b||'#f7b928',c=p.theme?.c||'#080b10';
+      side.style.setProperty('--score-primary',a);
+      side.style.setProperty('--score-secondary',b);
+      side.style.setProperty('--score-dark',c);
+      const name=short(p).toUpperCase();
+      const logo=logoFor(p);
+      side.innerHTML=isAway
+        ?`<div class="score-team away-team"><div class="score-number"><strong id="cpuScore">${score}</strong></div><div class="score-logo-wrap"><img src="${logo}" alt="${name}"></div><div class="score-name">${name}</div></div>`
+        :`<div class="score-team"><div class="score-logo-wrap"><img src="${logo}" alt="${name}"></div><div class="score-number"><strong id="userScore">${score}</strong></div><div class="score-name">${name}</div></div>`;
+    };
+
+    renderSide(sides[0],home,gs.userScore||0,false);
+    renderSide(sides[1],away,gs.cpuScore||0,true);
   };
 
   const goSeasonHub=e=>{
@@ -64,12 +73,13 @@
     if(e.target.closest('[data-play-season],.season-play-btn')){
       sessionStorage.setItem(RETURN_KEY,'1');
       setTimeout(repairSeasonScoreboard,0);
-      setTimeout(repairSeasonScoreboard,120);
+      setTimeout(repairSeasonScoreboard,80);
+      setTimeout(repairSeasonScoreboard,220);
     }
   },true);
 
   const sync=()=>{renameAwards();repairSeasonScoreboard();polishFinal();};
   const observer=new MutationObserver(()=>requestAnimationFrame(sync));
-  const start=()=>{observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','src']});sync();setInterval(sync,180);};
+  const start=()=>{observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','src']});sync();setInterval(sync,140);};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
