@@ -1,6 +1,6 @@
 # NBA Courtside v0.10.20 — 3PT Audit (NOT APPLIED TO GAMEPLAY)
 
-**Formula:** 50% era-relative efficiency + 30% era-adjusted makes + 20% era-adjusted attempts. Low-volume percentages are sample-shrunk. Ratings are rank-calibrated to the same broad 1–30 population shape as Scoring.
+**Formula:** 50% era-relative efficiency + 30% era-adjusted makes + 20% era-adjusted attempts. Classic volume uses a tempered square-root era adjustment. Low-volume percentages are sample-shrunk. Ratings are rank-calibrated to the same broad 1–30 population shape as Scoring.
 
 ## Distribution
 
@@ -33,10 +33,10 @@
 | 14 | Damian Lillard | 27 | 3.4 | 9.0 | 37.6% | 1.00 |
 | 15 | Kevin Durant | 27 | 2.4 | 5.8 | 41.3% | 1.00 |
 | 16 | Rui Hachimura | 26 | 1.7 | 3.9 | 44.3% | 1.00 |
-| 17 | Trey Murphy III | 26 | 3.2 | 8.6 | 37.9% | 1.00 |
-| 18 | Brandon Miller | 26 | 3.1 | 8.2 | 38.3% | 1.00 |
-| 19 | Ryan Rollins | 26 | 2.5 | 6.1 | 40.6% | 1.00 |
-| 20 | Darius Garland | 25 | 2.7 | 6.8 | 39.6% | 1.00 |
+| 17 | Tyrese Haliburton | 26 | 3.0 | 7.7 | 38.8% | 1.00 |
+| 18 | Trey Murphy III | 26 | 3.2 | 8.6 | 37.9% | 1.00 |
+| 19 | Brandon Miller | 26 | 3.1 | 8.2 | 38.3% | 1.00 |
+| 20 | Ryan Rollins | 25 | 2.5 | 6.1 | 40.6% | 1.00 |
 
 ## Bottom 10
 

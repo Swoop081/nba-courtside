@@ -7,7 +7,7 @@
       "attempts": 0.2
     },
     "efficiency": "season-relative 3P% with low-volume sample shrink",
-    "classic_volume": "3PM/3PA scaled by 2025-26 league 3PA divided by depicted-season league 3PA",
+    "classic_volume": "3PM/3PA scaled by square-root era factor sqrt(2025-26 league 3PA / depicted-season league 3PA)",
     "modern_league": {
       "three_pa": 37.0,
       "three_pct": 0.36
@@ -263,6 +263,18 @@
     },
     {
       "rank": 17,
+      "name": "Tyrese Haliburton",
+      "season": "2025-26",
+      "classic": false,
+      "rating": 26,
+      "raw": 0.6833333333333335,
+      "three_pm": 3.0,
+      "three_pa": 7.7,
+      "three_pct": 0.388,
+      "era_factor": 1.0
+    },
+    {
+      "rank": 18,
       "name": "Trey Murphy III",
       "season": "2025-26",
       "classic": false,
@@ -274,7 +286,7 @@
       "era_factor": 1.0
     },
     {
-      "rank": 18,
+      "rank": 19,
       "name": "Brandon Miller",
       "season": "2025-26",
       "classic": false,
@@ -286,27 +298,15 @@
       "era_factor": 1.0
     },
     {
-      "rank": 19,
+      "rank": 20,
       "name": "Ryan Rollins",
       "season": "2025-26",
       "classic": false,
-      "rating": 26,
+      "rating": 25,
       "raw": 0.6809090909090911,
       "three_pm": 2.5,
       "three_pa": 6.1,
       "three_pct": 0.406,
-      "era_factor": 1.0
-    },
-    {
-      "rank": 20,
-      "name": "Darius Garland",
-      "season": "2025-26",
-      "classic": false,
-      "rating": 25,
-      "raw": 0.6736363636363638,
-      "three_pm": 2.7,
-      "three_pa": 6.8,
-      "three_pct": 0.396,
       "era_factor": 1.0
     }
   ],
@@ -727,6 +727,24 @@
       "rank": 16
     },
     {
+      "name": "Tyrese Haliburton",
+      "season": "2025-26",
+      "classic": false,
+      "three_pm": 3.0,
+      "three_pa": 7.7,
+      "three_pct": 0.388,
+      "era_factor": 1.0,
+      "adj_three_pm": 3.0,
+      "adj_three_pa": 7.7,
+      "efficiency_component": 0.6866666666666669,
+      "makes_component": 0.6666666666666666,
+      "attempts_component": 0.7000000000000001,
+      "raw": 0.6833333333333335,
+      "source": "2024-25 NBA",
+      "rating": 26,
+      "rank": 17
+    },
+    {
       "name": "Trey Murphy III",
       "season": "2025-26",
       "classic": false,
@@ -742,7 +760,7 @@
       "raw": 0.6830303030303031,
       "source": "2025-26 NBA",
       "rating": 26,
-      "rank": 17
+      "rank": 18
     },
     {
       "name": "Brandon Miller",
@@ -760,7 +778,7 @@
       "raw": 0.6824242424242425,
       "source": "2025-26 NBA",
       "rating": 26,
-      "rank": 18
+      "rank": 19
     },
     {
       "name": "Ryan Rollins",
@@ -777,8 +795,8 @@
       "attempts_component": 0.5545454545454546,
       "raw": 0.6809090909090911,
       "source": "2025-26 NBA",
-      "rating": 26,
-      "rank": 19
+      "rating": 25,
+      "rank": 20
     },
     {
       "name": "Darius Garland",
@@ -796,7 +814,7 @@
       "raw": 0.6736363636363638,
       "source": "2025-26 NBA",
       "rating": 25,
-      "rank": 20
+      "rank": 21
     },
     {
       "name": "Paul George",
@@ -814,7 +832,7 @@
       "raw": 0.6621212121212123,
       "source": "2025-26 NBA",
       "rating": 25,
-      "rank": 21
+      "rank": 22
     },
     {
       "name": "Klay Thompson",
@@ -832,7 +850,7 @@
       "raw": 0.6581818181818182,
       "source": "2025-26 NBA",
       "rating": 25,
-      "rank": 22
+      "rank": 23
     },
     {
       "name": "James Harden",
@@ -850,7 +868,7 @@
       "raw": 0.6557575757575758,
       "source": "2025-26 NBA",
       "rating": 25,
-      "rank": 23
+      "rank": 24
     },
     {
       "name": "Michael Porter Jr.",
@@ -867,8 +885,8 @@
       "attempts_component": 0.8454545454545456,
       "raw": 0.6557575757575758,
       "source": "2025-26 NBA",
-      "rating": 25,
-      "rank": 24
+      "rating": 24,
+      "rank": 25
     },
     {
       "name": "Max Christie",
@@ -886,7 +904,7 @@
       "raw": 0.6554545454545456,
       "source": "2025-26 NBA",
       "rating": 24,
-      "rank": 25
+      "rank": 26
     },
     {
       "name": "Andrew Wiggins",
@@ -903,24 +921,6 @@
       "attempts_component": 0.4454545454545455,
       "raw": 0.6524242424242425,
       "source": "2025-26 NBA",
-      "rating": 24,
-      "rank": 26
-    },
-    {
-      "name": "Tyrese Haliburton",
-      "season": "2025-26",
-      "classic": false,
-      "three_pm": 2.7,
-      "three_pa": 6.9,
-      "three_pct": 0.388,
-      "era_factor": 1.0,
-      "adj_three_pm": 2.7,
-      "adj_three_pa": 6.9,
-      "efficiency_component": 0.6866666666666669,
-      "makes_component": 0.6000000000000001,
-      "attempts_component": 0.6272727272727273,
-      "raw": 0.6487878787878789,
-      "source": "2024-25 NBA",
       "rating": 24,
       "rank": 27
     },
