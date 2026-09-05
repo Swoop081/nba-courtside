@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.47 — persistent quarter + category information ticker */
+/* NBA Courtside v0.10.49 — persistent quarter + category information ticker */
 (()=>{
   if(window.__courtsideGameInfoBarV01047)return;
   window.__courtsideGameInfoBarV01047=true;
@@ -14,6 +14,7 @@
     steals:'STEALS'
   };
   const label=k=>labels[k]||String(k||'MATCHUP').toUpperCase();
+  const gameState=()=>{try{return typeof state!=='undefined'?state:null}catch{return null}};
 
   const ensureBar=()=>{
     const game=document.getElementById('game');
@@ -32,9 +33,10 @@
   };
 
   const currentText=()=>{
-    if(!window.state)return 'MATCHUP';
-    if(state.overtime)return `OT ${label(state.category)}`;
-    return `Q${state.quarter} ${label(state.category)}`;
+    const s=gameState();
+    if(!s)return 'MATCHUP';
+    if(s.overtime)return `OT ${label(s.category)}`;
+    return `Q${s.quarter} ${label(s.category)}`;
   };
 
   const showCurrent=()=>{
@@ -78,7 +80,7 @@
   };
 
   const wrap=name=>{
-    const original=window[name];
+    let original=null;try{original=window[name]||eval(name)}catch{}
     if(typeof original!=='function'||original.__gameInfoV01047)return;
     const wrapped=function(){const r=original.apply(this,arguments);requestAnimationFrame(showCurrent);return r;};
     wrapped.__gameInfoV01047=true;
