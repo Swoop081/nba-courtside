@@ -1,0 +1,30 @@
+/* NBA Courtside v0.9.19 — oversized cropped team identity watermark */
+.player-card.foundation-card .foundation-bg-team-logo{
+  position:absolute!important;
+  z-index:3!important;
+  top:-13%!important;
+  right:-22%!important;
+  width:78%!important;
+  height:78%!important;
+  object-fit:contain!important;
+  opacity:.085!important;
+  filter:saturate(.8) brightness(1.18)!important;
+  mix-blend-mode:screen!important;
+  pointer-events:none!important;
+  user-select:none!important;
+}
+.catalogue-grid .player-card.foundation-card .foundation-bg-team-logo{
+  top:-15%!important;
+  right:-24%!important;
+  width:82%!important;
+  height:82%!important;
+  opacity:.08!important;
+}
+.art-editor-preview .player-card.foundation-card .foundation-bg-team-logo,
+.inspect-card .player-card.foundation-card .foundation-bg-team-logo{
+  top:-13%!important;
+  right:-22%!important;
+  width:78%!important;
+  height:78%!important;
+  opacity:.085!important;
+}
