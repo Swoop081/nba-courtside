@@ -1,0 +1,10 @@
+/* NBA Courtside v0.10.48 — 3-wide centered season picker + larger team marks */
+#seasonTeamSelect .season-team-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px 10px!important;align-items:stretch!important}
+#seasonTeamSelect .season-team-pick{min-height:126px!important;padding:12px 6px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:8px!important;text-align:center!important;border:0!important;background:transparent!important;border-radius:18px!important}
+#seasonTeamSelect .season-team-pick img{width:84px!important;height:84px!important;object-fit:contain!important;margin:0 auto!important}
+#seasonTeamSelect .season-team-pick strong{font-size:11px!important;line-height:1.08!important;text-align:center!important;max-width:100%!important}
+#seasonTeamSelect .season-team-pick small{display:none!important}
+#seasonTeamSelect .season-head{margin-bottom:22px!important}
+#seasonTabs{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;overflow:visible!important}
+#seasonTabs .season-tab{width:100%!important;text-align:center!important;padding:10px 6px!important}
+@media(max-width:430px){#seasonTeamSelect .season-team-pick{min-height:118px!important;padding:10px 4px!important}#seasonTeamSelect .season-team-pick img{width:78px!important;height:78px!important}#seasonTeamSelect .season-team-pick strong{font-size:10px!important}}
