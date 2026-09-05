@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.14 — automatic quarter flow hotfix + interaction restore + live matchup ledger + compact POTG final + tighter global Foundation rating */
+/* NBA Courtside v0.10.15 — gold quarter transitions + automatic quarter flow hotfix + interaction restore + live matchup ledger + compact POTG final + tighter global Foundation rating */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
