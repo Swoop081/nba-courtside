@@ -1,0 +1,8 @@
+/* NBA Courtside v0.10.47 — one persistent game information ticker; no duplicate lower result bar */
+#game #gameCategoryBarHost,
+#game #nextQuarterBtn,
+#game #revealPanel{display:none!important}
+#gameInfoBar{margin:10px 0 18px!important;min-height:66px!important}
+#gameInfoBar strong{font-size:27px!important;letter-spacing:.01em!important}
+#gameInfoBar.is-transition strong{font-size:31px!important}
+@media(max-width:430px){#gameInfoBar{min-height:62px!important;margin:9px 0 16px!important}#gameInfoBar strong{font-size:25px!important}#gameInfoBar.is-transition strong{font-size:29px!important}}
