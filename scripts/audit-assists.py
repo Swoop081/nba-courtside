@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# NBA Courtside v0.10.24 — 175-player Assists audit.
+# NBA Courtside v0.10.24 — 175-player Assists audit + approved gameplay ratings.
 # Rating = round(30 * (APG / 10.5)^0.75), capped 1..30.
 import csv,io,json,math,re,unicodedata,urllib.request
 from pathlib import Path
@@ -27,13 +27,7 @@ for r in rows:
  try: by[norm(name)]=float(val)
  except: pass
 fallback={'Egor Demin':3.4,'Kyrie Irving':4.7,'Fred VanVleet':5.6,'Tyrese Haliburton':9.2,'Damian Lillard':7.1,'Darius Acuff Jr.':3.8,'Cameron Boozer':4.1,'Keaton Wagler':4.2,'Darryn Peterson':3.1,'AJ Dybantsa':2.9,'Caleb Wilson':2.6}
-ca={
- ('Alvin Williams','2003'):5.3,('Vince Carter','2003'):3.3,('Morris Peterson','2003'):2.0,('Jerome Williams','2003'):1.3,('Antonio Davis','2003'):2.5,
- ('Tony Parker','2005'):6.1,('Manu Ginóbili','2005'):3.9,('Bruce Bowen','2005'):1.5,('Tim Duncan','2005'):2.7,('Rasho Nesterović','2005'):1.0,
- ('Ron Harper','1998'):2.9,('Michael Jordan','1998'):3.5,('Scottie Pippen','1998'):5.8,('Dennis Rodman','1998'):2.9,('Luc Longley','1998'):2.8,
- ('Derek Fisher','2002'):2.6,('Kobe Bryant','2002'):5.5,('Rick Fox','2002'):3.5,('Robert Horry','2002'):2.9,("Shaquille O'Neal",'2002'):3.0,
- ('Kenny Smith','1995'):4.0,('Clyde Drexler','1995'):4.4,('Carl Herrera','1995'):0.7,('Robert Horry','1995'):3.5,('Hakeem Olajuwon','1995'):3.5
-}
+ca={('Alvin Williams','2003'):5.3,('Vince Carter','2003'):3.3,('Morris Peterson','2003'):2.0,('Jerome Williams','2003'):1.3,('Antonio Davis','2003'):2.5,('Tony Parker','2005'):6.1,('Manu Ginóbili','2005'):3.9,('Bruce Bowen','2005'):1.5,('Tim Duncan','2005'):2.7,('Rasho Nesterović','2005'):1.0,('Ron Harper','1998'):2.9,('Michael Jordan','1998'):3.5,('Scottie Pippen','1998'):5.8,('Dennis Rodman','1998'):2.9,('Luc Longley','1998'):2.8,('Derek Fisher','2002'):2.6,('Kobe Bryant','2002'):5.5,('Rick Fox','2002'):3.5,('Robert Horry','2002'):2.9,("Shaquille O'Neal",'2002'):3.0,('Kenny Smith','1995'):4.0,('Clyde Drexler','1995'):4.4,('Carl Herrera','1995'):0.7,('Robert Horry','1995'):3.5,('Hakeem Olajuwon','1995'):3.5}
 out=[]; missing=[]
 for n in modern:
  a=by.get(norm(n),fallback.get(n))
@@ -51,6 +45,8 @@ for i,x in enumerate(out,1): x['rank']=i
 bands=[]
 for lo in range(1,30,5):
  hi=min(30,lo+4); c=sum(lo<=x['rating']<=hi for x in out); bands.append({'range':f'{lo}-{hi}','players':c,'percent':round(c/175*100,1)})
-result={'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY','formula':'round(30 * (APG / 10.5)^0.75), capped 1..30','count':175,'distribution':bands,'players':out}
+result={'status':'APPROVED_FOR_GAMEPLAY','formula':'round(30 * (APG / 10.5)^0.75), capped 1..30','count':175,'distribution':bands,'players':out}
 (ROOT/'assists-audit-v0.10.24.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+js='/* NBA Courtside v0.10.24 — approved 175-player APG-based Assists ratings. */\n(()=>{\nif(window.__courtsideAssistsRatingsV01024)return;\nwindow.__courtsideAssistsRatingsV01024=true;\nconst rows='+json.dumps(out,ensure_ascii=False,separators=(',',':'))+';\nconst byName=new Map(rows.map(r=>[r.name,r.rating]));\n(players||[]).forEach(p=>{const v=byName.get(p.name);if(v!=null)p.stats.passing=v;});\n})();\n'
+(ROOT/'assists-ratings-v0.10.24.js').write_text(js,encoding='utf-8')
 print(json.dumps({'count':175,'distribution':bands,'top20':out[:20],'bottom10':out[-10:]},ensure_ascii=False,indent=2))
