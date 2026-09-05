@@ -24,8 +24,20 @@ jobs:
           from pathlib import Path
           data=json.loads(Path('rebounding-audit-v0.10.21.json').read_text())
           payload=json.dumps(data['players'],ensure_ascii=False,separators=(',',':'))
-          js=f'''/* NBA Courtside v0.10.21 — approved 175-player RPG-based Rebounding ratings. */\n(()=>{{\n  if(window.__courtsideReboundingRatingsV01021)return;\n  window.__courtsideReboundingRatingsV01021=true;\n  const rows={payload};\n  const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();\n  const classicKey=p=>`${{norm(p.name)}}|${{String(p.season||'')}}`;\n  const modern=new Map(),classic=new Map();\n  rows.forEach(r=>{{ if(r.classic) classic.set(`${{norm(r.name)}}|${{String(r.season)}}`,r.rating); else modern.set(norm(r.name),r.rating); }});\n  let applied=0;\n  (players||[]).forEach(p=>{{\n    const v=p.classicTeam?classic.get(classicKey(p)):modern.get(norm(p.name));\n    if(Number.isFinite(v)){{p.stats.rebounding=v;applied++;}}\n  }});\n  window.COURTSIDE_REBOUNDING_RATINGS_V01021=rows;\n  window.COURTSIDE_REBOUNDING_RATINGS_APPLIED=applied;\n}})();\n'''
-          Path('rebounding-ratings-v0.10.21.js').write_text(js,encoding='utf-8')
+          parts=[]
+          parts.append('/* NBA Courtside v0.10.21 — approved 175-player RPG-based Rebounding ratings. */')
+          parts.append('(()=>{')
+          parts.append('if(window.__courtsideReboundingRatingsV01021)return;')
+          parts.append('window.__courtsideReboundingRatingsV01021=true;')
+          parts.append('const rows='+payload+';')
+          parts.append("const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();")
+          parts.append("const modern=new Map(),classic=new Map();")
+          parts.append("rows.forEach(r=>{if(r.classic)classic.set(norm(r.name)+'|'+String(r.season),r.rating);else modern.set(norm(r.name),r.rating);});")
+          parts.append("let applied=0;(players||[]).forEach(p=>{const v=p.classicTeam?classic.get(norm(p.name)+'|'+String(p.season||'')):modern.get(norm(p.name));if(Number.isFinite(v)){p.stats.rebounding=v;applied++;}});")
+          parts.append('window.COURTSIDE_REBOUNDING_RATINGS_V01021=rows;')
+          parts.append('window.COURTSIDE_REBOUNDING_RATINGS_APPLIED=applied;')
+          parts.append('})();')
+          Path('rebounding-ratings-v0.10.21.js').write_text('\n'.join(parts)+'\n',encoding='utf-8')
           PY
       - name: Commit audit and gameplay output
         run: |
