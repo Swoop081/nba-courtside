@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.41 — Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 220-player pool + 14 Classic Teams + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.42 — Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 225-player pool + 15 Classic Teams + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -12,6 +12,7 @@
   document.write('<script src="classic-utah-1997-v0.10.39.js?t='+t+'"><\/script>');
   document.write('<script src="classic-miami-2013-v0.10.40.js?t='+t+'"><\/script>');
   document.write('<script src="classic-seattle-1996-v0.10.41.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-vancouver-1997-v0.10.42.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-egor-hotfix-v0.10.19.js?t='+t+'"><\/script>');
