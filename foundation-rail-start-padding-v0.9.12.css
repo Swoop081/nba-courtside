@@ -1,0 +1,14 @@
+/* NBA Courtside v0.9.12 — protect the first gameplay card from the left screen edge */
+#lineup.card-row{
+  padding-left:18px!important;
+  scroll-padding-left:18px!important;
+}
+#lineup.card-row>.foundation-card:first-child{
+  margin-left:0!important;
+}
+@media(max-width:430px){
+  #lineup.card-row{
+    padding-left:18px!important;
+    scroll-padding-left:18px!important;
+  }
+}
