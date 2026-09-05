@@ -1,0 +1,26 @@
+name: Audit Assists Ratings
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/audit-assists.py'
+      - '.github/workflows/audit-assists.yml'
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate 175-player Assists audit
+        run: python scripts/audit-assists.py
+      - name: Commit Assists audit output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assists-audit-v0.10.24.json
+          git diff --cached --quiet || git commit -m "v0.10.24: generate 175-player Assists audit"
+          git push
