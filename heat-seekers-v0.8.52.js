@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.23 — approved 175-player Steals + Blocks + Rebounding + 3PT ratings + PPG scoring + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.24 — approved 175-player Assists + Steals + Blocks + Rebounding + 3PT ratings + PPG scoring + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -12,6 +12,7 @@
   document.write('<script src="rebounding-ratings-v0.10.21.js?t='+t+'"><\/script>');
   document.write('<script src="blocks-ratings-v0.10.22.js?t='+t+'"><\/script>');
   document.write('<script src="steals-ratings-v0.10.23.js?t='+t+'"><\/script>');
+  document.write('<script src="assists-ratings-v0.10.24.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-rail-v0.9.9.css?t='+t+'">');
