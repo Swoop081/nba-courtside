@@ -1,9 +1,29 @@
-/* NBA Courtside v0.9.30 — Foundation + five Classic Teams + duplicate-only classic art suffixes + canonical art layout + editable background watermark */
+/* NBA Courtside v0.10.46 — persistent scoreboard information bar for category and quarter transitions + persistent canonical Foundation art sizing after reset + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
   document.write('<script src="foundation-v0.9.0.js?t='+t+'"><\/script>');
   document.write('<script src="classic-teams-v0.9.30.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-detroit-2004-v0.10.34.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-phoenix-2007-dallas-1995-v0.10.35.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-lakers-1987-v0.10.36.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-boston-1986-v0.10.37.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-charlotte-1993-v0.10.38.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-utah-1997-v0.10.39.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-miami-2013-v0.10.40.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-seattle-1996-v0.10.41.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-vancouver-1997-v0.10.42.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
+  document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
+  document.write('<script src="scoring-egor-hotfix-v0.10.19.js?t='+t+'"><\/script>');
+  document.write('<script src="three-point-ratings-data-v0.10.20.js?t='+t+'"><\/script>');
+  document.write('<script src="three-point-ratings-v0.10.20.js?t='+t+'"><\/script>');
+  document.write('<script src="rebounding-ratings-v0.10.21.js?t='+t+'"><\/script>');
+  document.write('<script src="blocks-ratings-v0.10.22.js?t='+t+'"><\/script>');
+  document.write('<script src="steals-ratings-v0.10.23.js?t='+t+'"><\/script>');
+  document.write('<script src="assists-ratings-v0.10.24.js?t='+t+'"><\/script>');
+  document.write('<script src="dunking-ratings-v0.10.25.js?t='+t+'"><\/script>');
+  document.write('<script src="overall-ratings-v0.10.26.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-rail-v0.9.9.css?t='+t+'">');
@@ -29,4 +49,26 @@
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.24.css?t='+t+'">');
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
+  document.write('<script src="team-logo-audit-v0.10.28.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-logo-path-hotfix-v0.10.44.js?t='+t+'"><\/script>');
+  document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
+  document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
+  document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
+  document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="game-card-bumper-v0.10.7.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="game-stat-number-v0.10.8.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="foundation-rating-glow-v0.10.9.css?t='+t+'">');
+  document.write('<script src="game-card-size-runtime-v0.10.5.js?t='+t+'"><\/script>');
+  document.write('<script src="foundation-rating-runtime-v0.10.10.js?t='+t+'"><\/script>');
+  document.write('<link rel="stylesheet" href="game-flow-v0.10.12.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="game-summary-layout-v0.10.43.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="game-info-bar-v0.10.46.css?t='+t+'">');
+  document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
+  document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
+  document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
+  document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
+  document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
+  document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
+  document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
+  document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
 })();

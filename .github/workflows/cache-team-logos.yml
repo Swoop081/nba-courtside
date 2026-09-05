@@ -1,0 +1,61 @@
+name: Cache NBA team logos
+
+on:
+  push:
+    paths:
+      - '.github/workflows/cache-team-logos.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cache-team-logos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download current team logos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/team-logos/current assets/team-logos/classic
+          ids=(
+            1610612737 1610612738 1610612751 1610612766 1610612741 1610612739
+            1610612742 1610612743 1610612765 1610612744 1610612745 1610612754
+            1610612746 1610612747 1610612763 1610612748 1610612749 1610612750
+            1610612740 1610612752 1610612760 1610612753 1610612755 1610612756
+            1610612757 1610612758 1610612759 1610612761 1610612762 1610612764
+          )
+          for id in "${ids[@]}"; do
+            curl --fail --location --retry 3 --silent --show-error \
+              "https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg" \
+              -o "assets/team-logos/current/${id}.svg"
+          done
+          cp assets/team-logos/current/1610612741.svg assets/team-logos/classic/chicago-bulls-1998.svg
+          cp assets/team-logos/current/1610612747.svg assets/team-logos/classic/los-angeles-lakers-2002.svg
+
+      - name: Verify current inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find assets/team-logos/current -type f | wc -l)" -eq 30
+          test -s assets/team-logos/current/1610612759.svg
+          test -s assets/team-logos/current/1610612762.svg
+          test -s assets/team-logos/current/1610612745.svg
+          test -s assets/team-logos/classic/chicago-bulls-1998.svg
+          test -s assets/team-logos/classic/los-angeles-lakers-2002.svg
+
+      - name: Commit cached logos
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/team-logos
+          if git diff --cached --quiet; then
+            echo 'No team-logo changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Cache current NBA team logos locally'
+          git pull --rebase origin main
+          git push

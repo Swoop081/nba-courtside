@@ -1,0 +1,1789 @@
+{
+  "status": "APPROVED_APPLIED_TO_GAMEPLAY",
+  "method": "existing dunk baseline + stronger positional compression + curated scouting overrides for reputation, dunk-contest pedigree, vertical explosiveness, size and practical dunk capability",
+  "count": 175,
+  "distribution": [
+    {
+      "range": "1-5",
+      "players": 9,
+      "percent": 5.1
+    },
+    {
+      "range": "6-10",
+      "players": 23,
+      "percent": 13.1
+    },
+    {
+      "range": "11-15",
+      "players": 24,
+      "percent": 13.7
+    },
+    {
+      "range": "16-20",
+      "players": 35,
+      "percent": 20.0
+    },
+    {
+      "range": "21-25",
+      "players": 48,
+      "percent": 27.4
+    },
+    {
+      "range": "26-30",
+      "players": 36,
+      "percent": 20.6
+    }
+  ],
+  "players": [
+    {
+      "name": "Aaron Gordon",
+      "position": "PF",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 1
+    },
+    {
+      "name": "Amen Thompson",
+      "position": "SG",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 2
+    },
+    {
+      "name": "Anthony Edwards",
+      "position": "SG",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 3
+    },
+    {
+      "name": "Giannis Antetokounmpo",
+      "position": "PF",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 4
+    },
+    {
+      "name": "Ja Morant",
+      "position": "PG",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 5
+    },
+    {
+      "name": "Michael Jordan",
+      "position": "SG",
+      "old": null,
+      "classic": true,
+      "season": "1998",
+      "rating": 30,
+      "note": "curated classic-era scouting rating",
+      "rank": 6
+    },
+    {
+      "name": "Shaquille O'Neal",
+      "position": "C",
+      "old": null,
+      "classic": true,
+      "season": "2002",
+      "rating": 30,
+      "note": "curated classic-era scouting rating",
+      "rank": 7
+    },
+    {
+      "name": "Vince Carter",
+      "position": "SG",
+      "old": null,
+      "classic": true,
+      "season": "2003",
+      "rating": 30,
+      "note": "curated classic-era scouting rating",
+      "rank": 8
+    },
+    {
+      "name": "Zach LaVine",
+      "position": "SG",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 9
+    },
+    {
+      "name": "Zion Williamson",
+      "position": "PF",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 30,
+      "note": "curated scouting override",
+      "rank": 10
+    },
+    {
+      "name": "AJ Dybantsa",
+      "position": "SF",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 11
+    },
+    {
+      "name": "Ausar Thompson",
+      "position": "SF",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 12
+    },
+    {
+      "name": "Clyde Drexler",
+      "position": "SG",
+      "old": null,
+      "classic": true,
+      "season": "1995",
+      "rating": 29,
+      "note": "curated classic-era scouting rating",
+      "rank": 13
+    },
+    {
+      "name": "Donovan Mitchell",
+      "position": "SG",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 14
+    },
+    {
+      "name": "Jalen Green",
+      "position": "SG",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 15
+    },
+    {
+      "name": "Jalen Johnson",
+      "position": "PF",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 16
+    },
+    {
+      "name": "Jonathan Kuminga",
+      "position": "PF",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 17
+    },
+    {
+      "name": "Kobe Bryant",
+      "position": "SG",
+      "old": null,
+      "classic": true,
+      "season": "2002",
+      "rating": 29,
+      "note": "curated classic-era scouting rating",
+      "rank": 18
+    },
+    {
+      "name": "LeBron James",
+      "position": "PF",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 29,
+      "note": "curated scouting override",
+      "rank": 19
+    },
+    {
+      "name": "Anthony Davis",
+      "position": "PF",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 28,
+      "note": "curated scouting override",
+      "rank": 20
+    },
+    {
+      "name": "Jaylen Brown",
+      "position": "SF",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 28,
+      "note": "curated scouting override",
+      "rank": 21
+    },
+    {
+      "name": "Miles Bridges",
+      "position": "PF",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 28,
+      "note": "curated scouting override",
+      "rank": 22
+    },
+    {
+      "name": "Scottie Pippen",
+      "position": "SF",
+      "old": null,
+      "classic": true,
+      "season": "1998",
+      "rating": 28,
+      "note": "curated classic-era scouting rating",
+      "rank": 23
+    },
+    {
+      "name": "Cooper Flagg",
+      "position": "SF",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 27,
+      "note": "curated scouting override",
+      "rank": 24
+    },
+    {
+      "name": "Darryn Peterson",
+      "position": "SG",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 27,
+      "note": "curated scouting override",
+      "rank": 25
+    },
+    {
+      "name": "Trey Murphy III",
+      "position": "SF",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 27,
+      "note": "curated scouting override",
+      "rank": 26
+    },
+    {
+      "name": "VJ Edgecombe",
+      "position": "SG",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 27,
+      "note": "curated scouting override",
+      "rank": 27
+    },
+    {
+      "name": "Victor Wembanyama",
+      "position": "C",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 27,
+      "note": "curated scouting override",
+      "rank": 28
+    },
+    {
+      "name": "Andrew Wiggins",
+      "position": "SF",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 29
+    },
+    {
+      "name": "Caleb Wilson",
+      "position": "PF",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 30
+    },
+    {
+      "name": "Chet Holmgren",
+      "position": "PF",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 31
+    },
+    {
+      "name": "Daniel Gafford",
+      "position": "C",
+      "old": 30,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 32
+    },
+    {
+      "name": "De'Aaron Fox",
+      "position": "PG",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 33
+    },
+    {
+      "name": "Hakeem Olajuwon",
+      "position": "C",
+      "old": null,
+      "classic": true,
+      "season": "1995",
+      "rating": 26,
+      "note": "curated classic-era scouting rating",
+      "rank": 34
+    },
+    {
+      "name": "Jalen Duren",
+      "position": "C",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 35
+    },
+    {
+      "name": "Matas Buzelis",
+      "position": "SF",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 26,
+      "note": "curated scouting override",
+      "rank": 36
+    },
+    {
+      "name": "Ace Bailey",
+      "position": "SF",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 37
+    },
+    {
+      "name": "Christian Braun",
+      "position": "SG",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 38
+    },
+    {
+      "name": "Evan Mobley",
+      "position": "PF",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 39
+    },
+    {
+      "name": "Jarrett Allen",
+      "position": "C",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 40
+    },
+    {
+      "name": "John Collins",
+      "position": "PF",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 41
+    },
+    {
+      "name": "Mark Williams",
+      "position": "C",
+      "old": 29,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 42
+    },
+    {
+      "name": "Nic Claxton",
+      "position": "C",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 43
+    },
+    {
+      "name": "Onyeka Okongwu",
+      "position": "C",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 44
+    },
+    {
+      "name": "Paolo Banchero",
+      "position": "PF",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 45
+    },
+    {
+      "name": "Peyton Watson",
+      "position": "SF",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 46
+    },
+    {
+      "name": "Stephon Castle",
+      "position": "SF",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 47
+    },
+    {
+      "name": "Walker Kessler",
+      "position": "C",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 25,
+      "note": "curated scouting override",
+      "rank": 48
+    },
+    {
+      "name": "Bam Adebayo",
+      "position": "C",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 49
+    },
+    {
+      "name": "Cedric Coward",
+      "position": "SG",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 50
+    },
+    {
+      "name": "Jalen Williams",
+      "position": "SF",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 51
+    },
+    {
+      "name": "Jayson Tatum",
+      "position": "PF",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 52
+    },
+    {
+      "name": "Jerami Grant",
+      "position": "SF",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 53
+    },
+    {
+      "name": "Pascal Siakam",
+      "position": "PF",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 54
+    },
+    {
+      "name": "Rudy Gobert",
+      "position": "C",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 55
+    },
+    {
+      "name": "Scottie Barnes",
+      "position": "PF",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 24,
+      "note": "curated scouting override",
+      "rank": 56
+    },
+    {
+      "name": "Cameron Boozer",
+      "position": "PF",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "position-adjusted subjective baseline",
+      "rank": 57
+    },
+    {
+      "name": "Day'Ron Sharpe",
+      "position": "C",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "position-adjusted subjective baseline",
+      "rank": 58
+    },
+    {
+      "name": "Donovan Clingan",
+      "position": "C",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "curated scouting override",
+      "rank": 59
+    },
+    {
+      "name": "Franz Wagner",
+      "position": "SF",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "curated scouting override",
+      "rank": 60
+    },
+    {
+      "name": "Ivica Zubac",
+      "position": "C",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "curated scouting override",
+      "rank": 61
+    },
+    {
+      "name": "Manu Ginóbili",
+      "position": "SG",
+      "old": null,
+      "classic": true,
+      "season": "2005",
+      "rating": 23,
+      "note": "curated classic-era scouting rating",
+      "rank": 62
+    },
+    {
+      "name": "Moussa Diabaté",
+      "position": "C",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "position-adjusted subjective baseline",
+      "rank": 63
+    },
+    {
+      "name": "Neemias Queta",
+      "position": "C",
+      "old": 27,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "position-adjusted subjective baseline",
+      "rank": 64
+    },
+    {
+      "name": "OG Anunoby",
+      "position": "PF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "curated scouting override",
+      "rank": 65
+    },
+    {
+      "name": "RJ Barrett",
+      "position": "SG",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 23,
+      "note": "curated scouting override",
+      "rank": 66
+    },
+    {
+      "name": "Brandon Miller",
+      "position": "SG",
+      "old": 23,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 67
+    },
+    {
+      "name": "Deni Avdija",
+      "position": "PF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 68
+    },
+    {
+      "name": "Dylan Harper",
+      "position": "SG",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 69
+    },
+    {
+      "name": "Joel Embiid",
+      "position": "C",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 70
+    },
+    {
+      "name": "Karl-Anthony Towns",
+      "position": "C",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 71
+    },
+    {
+      "name": "Kevin Durant",
+      "position": "SF",
+      "old": 23,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 72
+    },
+    {
+      "name": "Lauri Markkanen",
+      "position": "PF",
+      "old": 26,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "position-adjusted subjective baseline",
+      "rank": 73
+    },
+    {
+      "name": "Robert Horry",
+      "position": "SF",
+      "old": null,
+      "classic": true,
+      "season": "1995",
+      "rating": 22,
+      "note": "curated classic-era scouting rating",
+      "rank": 74
+    },
+    {
+      "name": "Shai Gilgeous-Alexander",
+      "position": "PG",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 75
+    },
+    {
+      "name": "Tim Duncan",
+      "position": "PF",
+      "old": null,
+      "classic": true,
+      "season": "2005",
+      "rating": 22,
+      "note": "curated classic-era scouting rating",
+      "rank": 76
+    },
+    {
+      "name": "Zach Edey",
+      "position": "C",
+      "old": 28,
+      "classic": false,
+      "season": "current",
+      "rating": 22,
+      "note": "curated scouting override",
+      "rank": 77
+    },
+    {
+      "name": "Alex Sarr",
+      "position": "C",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 21,
+      "note": "position-adjusted subjective baseline",
+      "rank": 78
+    },
+    {
+      "name": "Antonio Davis",
+      "position": "C",
+      "old": null,
+      "classic": true,
+      "season": "2003",
+      "rating": 21,
+      "note": "curated classic-era scouting rating",
+      "rank": 79
+    },
+    {
+      "name": "Collin Murray-Boyles",
+      "position": "C",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 21,
+      "note": "position-adjusted subjective baseline",
+      "rank": 80
+    },
+    {
+      "name": "Julius Randle",
+      "position": "PF",
+      "old": 25,
+      "classic": false,
+      "season": "current",
+      "rating": 21,
+      "note": "position-adjusted subjective baseline",
+      "rank": 81
+    },
+    {
+      "name": "Kristaps Porziņģis",
+      "position": "C",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 21,
+      "note": "curated scouting override",
+      "rank": 82
+    },
+    {
+      "name": "Mikal Bridges",
+      "position": "SG",
+      "old": 21,
+      "classic": false,
+      "season": "current",
+      "rating": 21,
+      "note": "curated scouting override",
+      "rank": 83
+    },
+    {
+      "name": "Myles Turner",
+      "position": "C",
+      "old": 20,
+      "classic": false,
+      "season": "current",
+      "rating": 21,
+      "note": "curated scouting override",
+      "rank": 84
+    },
+    {
+      "name": "Alperen Şengün",
+      "position": "C",
+      "old": 23,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "curated scouting override",
+      "rank": 85
+    },
+    {
+      "name": "Damian Lillard",
+      "position": "SG",
+      "old": 13,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "curated scouting override",
+      "rank": 86
+    },
+    {
+      "name": "Domantas Sabonis",
+      "position": "C",
+      "old": 21,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "curated scouting override",
+      "rank": 87
+    },
+    {
+      "name": "Jabari Smith Jr.",
+      "position": "PF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 88
+    },
+    {
+      "name": "Jaren Jackson Jr.",
+      "position": "C",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 89
+    },
+    {
+      "name": "Jerome Williams",
+      "position": "PF",
+      "old": null,
+      "classic": true,
+      "season": "2003",
+      "rating": 20,
+      "note": "curated classic-era scouting rating",
+      "rank": 90
+    },
+    {
+      "name": "Kawhi Leonard",
+      "position": "SF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 91
+    },
+    {
+      "name": "Kyle Kuzma",
+      "position": "PF",
+      "old": 23,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 92
+    },
+    {
+      "name": "Michael Porter Jr.",
+      "position": "SF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 93
+    },
+    {
+      "name": "Naz Reid",
+      "position": "PF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 94
+    },
+    {
+      "name": "P.J. Washington",
+      "position": "PF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 95
+    },
+    {
+      "name": "Robert Horry",
+      "position": "PF",
+      "old": null,
+      "classic": true,
+      "season": "2002",
+      "rating": 20,
+      "note": "curated classic-era scouting rating",
+      "rank": 96
+    },
+    {
+      "name": "Rui Hachimura",
+      "position": "PF",
+      "old": 24,
+      "classic": false,
+      "season": "current",
+      "rating": 20,
+      "note": "position-adjusted subjective baseline",
+      "rank": 97
+    },
+    {
+      "name": "De'Andre Hunter",
+      "position": "PF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "position-adjusted subjective baseline",
+      "rank": 98
+    },
+    {
+      "name": "Derik Queen",
+      "position": "C",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "position-adjusted subjective baseline",
+      "rank": 99
+    },
+    {
+      "name": "Isaiah Hartenstein",
+      "position": "C",
+      "old": 21,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "curated scouting override",
+      "rank": 100
+    },
+    {
+      "name": "Jarred Vanderbilt",
+      "position": "PF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "position-adjusted subjective baseline",
+      "rank": 101
+    },
+    {
+      "name": "Toumani Camara",
+      "position": "SF",
+      "old": 23,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "position-adjusted subjective baseline",
+      "rank": 102
+    },
+    {
+      "name": "Wendell Carter Jr.",
+      "position": "C",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "position-adjusted subjective baseline",
+      "rank": 103
+    },
+    {
+      "name": "Ziaire Williams",
+      "position": "SF",
+      "old": 23,
+      "classic": false,
+      "season": "current",
+      "rating": 19,
+      "note": "position-adjusted subjective baseline",
+      "rank": 104
+    },
+    {
+      "name": "Aaron Nesmith",
+      "position": "SF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 18,
+      "note": "position-adjusted subjective baseline",
+      "rank": 105
+    },
+    {
+      "name": "Cade Cunningham",
+      "position": "PG",
+      "old": 19,
+      "classic": false,
+      "season": "current",
+      "rating": 18,
+      "note": "curated scouting override",
+      "rank": 106
+    },
+    {
+      "name": "Dejounte Murray",
+      "position": "PG",
+      "old": 18,
+      "classic": false,
+      "season": "current",
+      "rating": 18,
+      "note": "curated scouting override",
+      "rank": 107
+    },
+    {
+      "name": "Dyson Daniels",
+      "position": "SF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 18,
+      "note": "position-adjusted subjective baseline",
+      "rank": 108
+    },
+    {
+      "name": "Jaden McDaniels",
+      "position": "SF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 18,
+      "note": "position-adjusted subjective baseline",
+      "rank": 109
+    },
+    {
+      "name": "Jimmy Butler",
+      "position": "SF",
+      "old": 22,
+      "classic": false,
+      "season": "current",
+      "rating": 18,
+      "note": "position-adjusted subjective baseline",
+      "rank": 110
+    },
+    {
+      "name": "Ron Harper",
+      "position": "PG",
+      "old": null,
+      "classic": true,
+      "season": "1998",
+      "rating": 18,
+      "note": "curated classic-era scouting rating",
+      "rank": 111
+    },
+    {
+      "name": "Carl Herrera",
+      "position": "PF",
+      "old": null,
+      "classic": true,
+      "season": "1995",
+      "rating": 17,
+      "note": "curated classic-era scouting rating",
+      "rank": 112
+    },
+    {
+      "name": "Jaime Jaquez Jr.",
+      "position": "SF",
+      "old": 21,
+      "classic": false,
+      "season": "current",
+      "rating": 17,
+      "note": "position-adjusted subjective baseline",
+      "rank": 113
+    },
+    {
+      "name": "Keegan Murray",
+      "position": "SF",
+      "old": 21,
+      "classic": false,
+      "season": "current",
+      "rating": 17,
+      "note": "position-adjusted subjective baseline",
+      "rank": 114
+    },
+    {
+      "name": "Paul George",
+      "position": "SF",
+      "old": 21,
+      "classic": false,
+      "season": "current",
+      "rating": 17,
+      "note": "position-adjusted subjective baseline",
+      "rank": 115
+    },
+    {
+      "name": "Brandon Ingram",
+      "position": "SF",
+      "old": 19,
+      "classic": false,
+      "season": "current",
+      "rating": 16,
+      "note": "position-adjusted subjective baseline",
+      "rank": 116
+    },
+    {
+      "name": "Josh Hart",
+      "position": "SF",
+      "old": 20,
+      "classic": false,
+      "season": "current",
+      "rating": 16,
+      "note": "position-adjusted subjective baseline",
+      "rank": 117
+    },
+    {
+      "name": "Morris Peterson",
+      "position": "SF",
+      "old": null,
+      "classic": true,
+      "season": "2003",
+      "rating": 16,
+      "note": "curated classic-era scouting rating",
+      "rank": 118
+    },
+    {
+      "name": "Tobias Harris",
+      "position": "PF",
+      "old": 19,
+      "classic": false,
+      "season": "current",
+      "rating": 16,
+      "note": "position-adjusted subjective baseline",
+      "rank": 119
+    },
+    {
+      "name": "Brook Lopez",
+      "position": "C",
+      "old": 12,
+      "classic": false,
+      "season": "current",
+      "rating": 15,
+      "note": "curated scouting override",
+      "rank": 120
+    },
+    {
+      "name": "Dennis Rodman",
+      "position": "PF",
+      "old": null,
+      "classic": true,
+      "season": "1998",
+      "rating": 15,
+      "note": "curated classic-era scouting rating",
+      "rank": 121
+    },
+    {
+      "name": "Jeremiah Fears",
+      "position": "SG",
+      "old": 20,
+      "classic": false,
+      "season": "current",
+      "rating": 15,
+      "note": "position-adjusted subjective baseline",
+      "rank": 122
+    },
+    {
+      "name": "LaMelo Ball",
+      "position": "PG",
+      "old": 15,
+      "classic": false,
+      "season": "current",
+      "rating": 15,
+      "note": "curated scouting override",
+      "rank": 123
+    },
+    {
+      "name": "Nikola Jokić",
+      "position": "C",
+      "old": 19,
+      "classic": false,
+      "season": "current",
+      "rating": 15,
+      "note": "curated scouting override",
+      "rank": 124
+    },
+    {
+      "name": "Rasho Nesterović",
+      "position": "C",
+      "old": null,
+      "classic": true,
+      "season": "2005",
+      "rating": 15,
+      "note": "curated classic-era scouting rating",
+      "rank": 125
+    },
+    {
+      "name": "Cameron Johnson",
+      "position": "SF",
+      "old": 17,
+      "classic": false,
+      "season": "current",
+      "rating": 14,
+      "note": "position-adjusted subjective baseline",
+      "rank": 126
+    },
+    {
+      "name": "Dillon Brooks",
+      "position": "SF",
+      "old": 17,
+      "classic": false,
+      "season": "current",
+      "rating": 14,
+      "note": "position-adjusted subjective baseline",
+      "rank": 127
+    },
+    {
+      "name": "Luc Longley",
+      "position": "C",
+      "old": null,
+      "classic": true,
+      "season": "1998",
+      "rating": 14,
+      "note": "curated classic-era scouting rating",
+      "rank": 128
+    },
+    {
+      "name": "Norman Powell",
+      "position": "SG",
+      "old": 18,
+      "classic": false,
+      "season": "current",
+      "rating": 14,
+      "note": "position-adjusted subjective baseline",
+      "rank": 129
+    },
+    {
+      "name": "Terance Mann",
+      "position": "SG",
+      "old": 18,
+      "classic": false,
+      "season": "current",
+      "rating": 14,
+      "note": "position-adjusted subjective baseline",
+      "rank": 130
+    },
+    {
+      "name": "Tony Parker",
+      "position": "PG",
+      "old": null,
+      "classic": true,
+      "season": "2005",
+      "rating": 14,
+      "note": "curated classic-era scouting rating",
+      "rank": 131
+    },
+    {
+      "name": "Tre Johnson",
+      "position": "SG",
+      "old": 18,
+      "classic": false,
+      "season": "current",
+      "rating": 14,
+      "note": "position-adjusted subjective baseline",
+      "rank": 132
+    },
+    {
+      "name": "Max Christie",
+      "position": "SG",
+      "old": 17,
+      "classic": false,
+      "season": "current",
+      "rating": 13,
+      "note": "position-adjusted subjective baseline",
+      "rank": 133
+    },
+    {
+      "name": "Tyrese Maxey",
+      "position": "PG",
+      "old": 17,
+      "classic": false,
+      "season": "current",
+      "rating": 13,
+      "note": "curated scouting override",
+      "rank": 134
+    },
+    {
+      "name": "Draymond Green",
+      "position": "PF",
+      "old": 14,
+      "classic": false,
+      "season": "current",
+      "rating": 12,
+      "note": "position-adjusted subjective baseline",
+      "rank": 135
+    },
+    {
+      "name": "Keaton Wagler",
+      "position": "SG",
+      "old": 16,
+      "classic": false,
+      "season": "current",
+      "rating": 12,
+      "note": "position-adjusted subjective baseline",
+      "rank": 136
+    },
+    {
+      "name": "Kon Knueppel",
+      "position": "SF",
+      "old": 15,
+      "classic": false,
+      "season": "current",
+      "rating": 12,
+      "note": "position-adjusted subjective baseline",
+      "rank": 137
+    },
+    {
+      "name": "Rick Fox",
+      "position": "SF",
+      "old": null,
+      "classic": true,
+      "season": "2002",
+      "rating": 12,
+      "note": "curated classic-era scouting rating",
+      "rank": 138
+    },
+    {
+      "name": "Desmond Bane",
+      "position": "SG",
+      "old": 15,
+      "classic": false,
+      "season": "current",
+      "rating": 11,
+      "note": "position-adjusted subjective baseline",
+      "rank": 139
+    },
+    {
+      "name": "Jalen Suggs",
+      "position": "PG",
+      "old": 20,
+      "classic": false,
+      "season": "current",
+      "rating": 11,
+      "note": "position-adjusted subjective baseline",
+      "rank": 140
+    },
+    {
+      "name": "Jamal Murray",
+      "position": "PG",
+      "old": 15,
+      "classic": false,
+      "season": "current",
+      "rating": 11,
+      "note": "curated scouting override",
+      "rank": 141
+    },
+    {
+      "name": "Luka Dončić",
+      "position": "PG",
+      "old": 18,
+      "classic": false,
+      "season": "current",
+      "rating": 11,
+      "note": "curated scouting override",
+      "rank": 142
+    },
+    {
+      "name": "Nickeil Alexander-Walker",
+      "position": "SG",
+      "old": 15,
+      "classic": false,
+      "season": "current",
+      "rating": 11,
+      "note": "position-adjusted subjective baseline",
+      "rank": 143
+    },
+    {
+      "name": "Brandin Podziemski",
+      "position": "SG",
+      "old": 13,
+      "classic": false,
+      "season": "current",
+      "rating": 10,
+      "note": "position-adjusted subjective baseline",
+      "rank": 144
+    },
+    {
+      "name": "Devin Booker",
+      "position": "PG",
+      "old": 18,
+      "classic": false,
+      "season": "current",
+      "rating": 10,
+      "note": "position-adjusted subjective baseline",
+      "rank": 145
+    },
+    {
+      "name": "Kyrie Irving",
+      "position": "PG",
+      "old": 16,
+      "classic": false,
+      "season": "current",
+      "rating": 10,
+      "note": "curated scouting override",
+      "rank": 146
+    },
+    {
+      "name": "Cason Wallace",
+      "position": "SG",
+      "old": 13,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "curated scouting override",
+      "rank": 147
+    },
+    {
+      "name": "Darius Acuff Jr.",
+      "position": "PG",
+      "old": 17,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "position-adjusted subjective baseline",
+      "rank": 148
+    },
+    {
+      "name": "Egor Demin",
+      "position": "PG",
+      "old": 16,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "position-adjusted subjective baseline",
+      "rank": 149
+    },
+    {
+      "name": "Jaylen Wells",
+      "position": "PG",
+      "old": 16,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "position-adjusted subjective baseline",
+      "rank": 150
+    },
+    {
+      "name": "Josh Giddey",
+      "position": "PG",
+      "old": 16,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "position-adjusted subjective baseline",
+      "rank": 151
+    },
+    {
+      "name": "Tyler Herro",
+      "position": "SG",
+      "old": 12,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "position-adjusted subjective baseline",
+      "rank": 152
+    },
+    {
+      "name": "Tyrese Haliburton",
+      "position": "PG",
+      "old": 11,
+      "classic": false,
+      "season": "current",
+      "rating": 9,
+      "note": "curated scouting override",
+      "rank": 153
+    },
+    {
+      "name": "Andrew Nembhard",
+      "position": "SG",
+      "old": 12,
+      "classic": false,
+      "season": "current",
+      "rating": 8,
+      "note": "curated scouting override",
+      "rank": 154
+    },
+    {
+      "name": "Austin Reaves",
+      "position": "SG",
+      "old": 14,
+      "classic": false,
+      "season": "current",
+      "rating": 8,
+      "note": "curated scouting override",
+      "rank": 155
+    },
+    {
+      "name": "Derrick White",
+      "position": "SG",
+      "old": 12,
+      "classic": false,
+      "season": "current",
+      "rating": 8,
+      "note": "curated scouting override",
+      "rank": 156
+    },
+    {
+      "name": "James Harden",
+      "position": "PG",
+      "old": 10,
+      "classic": false,
+      "season": "current",
+      "rating": 8,
+      "note": "curated scouting override",
+      "rank": 157
+    },
+    {
+      "name": "Kenny Smith",
+      "position": "PG",
+      "old": null,
+      "classic": true,
+      "season": "1995",
+      "rating": 8,
+      "note": "curated classic-era scouting rating",
+      "rank": 158
+    },
+    {
+      "name": "Keyonte George",
+      "position": "PG",
+      "old": 12,
+      "classic": false,
+      "season": "current",
+      "rating": 8,
+      "note": "curated scouting override",
+      "rank": 159
+    },
+    {
+      "name": "Alvin Williams",
+      "position": "PG",
+      "old": null,
+      "classic": true,
+      "season": "2003",
+      "rating": 7,
+      "note": "curated classic-era scouting rating",
+      "rank": 160
+    },
+    {
+      "name": "Bruce Bowen",
+      "position": "SF",
+      "old": null,
+      "classic": true,
+      "season": "2005",
+      "rating": 7,
+      "note": "curated classic-era scouting rating",
+      "rank": 161
+    },
+    {
+      "name": "Coby White",
+      "position": "PG",
+      "old": 13,
+      "classic": false,
+      "season": "current",
+      "rating": 7,
+      "note": "position-adjusted subjective baseline",
+      "rank": 162
+    },
+    {
+      "name": "Ryan Rollins",
+      "position": "PG",
+      "old": 11,
+      "classic": false,
+      "season": "current",
+      "rating": 7,
+      "note": "curated scouting override",
+      "rank": 163
+    },
+    {
+      "name": "Derek Fisher",
+      "position": "PG",
+      "old": null,
+      "classic": true,
+      "season": "2002",
+      "rating": 6,
+      "note": "curated classic-era scouting rating",
+      "rank": 164
+    },
+    {
+      "name": "Immanuel Quickley",
+      "position": "PG",
+      "old": 10,
+      "classic": false,
+      "season": "current",
+      "rating": 6,
+      "note": "curated scouting override",
+      "rank": 165
+    },
+    {
+      "name": "Klay Thompson",
+      "position": "SG",
+      "old": 8,
+      "classic": false,
+      "season": "current",
+      "rating": 6,
+      "note": "curated scouting override",
+      "rank": 166
+    },
+    {
+      "name": "CJ McCollum",
+      "position": "PG",
+      "old": 10,
+      "classic": false,
+      "season": "current",
+      "rating": 5,
+      "note": "curated scouting override",
+      "rank": 167
+    },
+    {
+      "name": "Darius Garland",
+      "position": "PG",
+      "old": 9,
+      "classic": false,
+      "season": "current",
+      "rating": 5,
+      "note": "curated scouting override",
+      "rank": 168
+    },
+    {
+      "name": "Davion Mitchell",
+      "position": "PG",
+      "old": 7,
+      "classic": false,
+      "season": "current",
+      "rating": 5,
+      "note": "curated scouting override",
+      "rank": 169
+    },
+    {
+      "name": "Payton Pritchard",
+      "position": "PG",
+      "old": 8,
+      "classic": false,
+      "season": "current",
+      "rating": 4,
+      "note": "curated scouting override",
+      "rank": 170
+    },
+    {
+      "name": "Stephen Curry",
+      "position": "PG",
+      "old": 10,
+      "classic": false,
+      "season": "current",
+      "rating": 4,
+      "note": "curated scouting override",
+      "rank": 171
+    },
+    {
+      "name": "Jalen Brunson",
+      "position": "PG",
+      "old": 8,
+      "classic": false,
+      "season": "current",
+      "rating": 3,
+      "note": "curated scouting override",
+      "rank": 172
+    },
+    {
+      "name": "Duncan Robinson",
+      "position": "SG",
+      "old": 5,
+      "classic": false,
+      "season": "current",
+      "rating": 2,
+      "note": "curated scouting override",
+      "rank": 173
+    },
+    {
+      "name": "Fred VanVleet",
+      "position": "PG",
+      "old": 5,
+      "classic": false,
+      "season": "current",
+      "rating": 2,
+      "note": "curated scouting override",
+      "rank": 174
+    },
+    {
+      "name": "Trae Young",
+      "position": "PG",
+      "old": 6,
+      "classic": false,
+      "season": "current",
+      "rating": 1,
+      "note": "curated scouting override",
+      "rank": 175
+    }
+  ]
+}

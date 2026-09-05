@@ -1,0 +1,1439 @@
+{
+  "status": "APPROVED_FOR_GAMEPLAY",
+  "formula": "round(30 * sqrt(BPG / 3.0)), capped 1..30",
+  "count": 175,
+  "distribution": [
+    {
+      "range": "1-5",
+      "players": 10,
+      "percent": 5.7
+    },
+    {
+      "range": "6-10",
+      "players": 44,
+      "percent": 25.1
+    },
+    {
+      "range": "11-15",
+      "players": 75,
+      "percent": 42.9
+    },
+    {
+      "range": "16-20",
+      "players": 29,
+      "percent": 16.6
+    },
+    {
+      "range": "21-25",
+      "players": 14,
+      "percent": 8.0
+    },
+    {
+      "range": "26-30",
+      "players": 3,
+      "percent": 1.7
+    }
+  ],
+  "players": [
+    {
+      "name": "Hakeem Olajuwon",
+      "season": "1995",
+      "classic": true,
+      "bpg": 3.4,
+      "rating": 30,
+      "rank": 1
+    },
+    {
+      "name": "Victor Wembanyama",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 3.1,
+      "rating": 30,
+      "rank": 2
+    },
+    {
+      "name": "Tim Duncan",
+      "season": "2005",
+      "classic": true,
+      "bpg": 2.6,
+      "rating": 28,
+      "rank": 3
+    },
+    {
+      "name": "Alex Sarr",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 2.0,
+      "rating": 24,
+      "rank": 4
+    },
+    {
+      "name": "Shaquille O'Neal",
+      "season": "2002",
+      "classic": true,
+      "bpg": 2.0,
+      "rating": 24,
+      "rank": 5
+    },
+    {
+      "name": "Chet Holmgren",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.9,
+      "rating": 24,
+      "rank": 6
+    },
+    {
+      "name": "Zach Edey",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.9,
+      "rating": 24,
+      "rank": 7
+    },
+    {
+      "name": "Walker Kessler",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.8,
+      "rating": 23,
+      "rank": 8
+    },
+    {
+      "name": "Anthony Davis",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.7,
+      "rating": 23,
+      "rank": 9
+    },
+    {
+      "name": "Donovan Clingan",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.7,
+      "rating": 23,
+      "rank": 10
+    },
+    {
+      "name": "Evan Mobley",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.7,
+      "rating": 23,
+      "rank": 11
+    },
+    {
+      "name": "Rasho Nesterović",
+      "season": "2005",
+      "classic": true,
+      "bpg": 1.7,
+      "rating": 23,
+      "rank": 12
+    },
+    {
+      "name": "Keegan Murray",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.6,
+      "rating": 22,
+      "rank": 13
+    },
+    {
+      "name": "Myles Turner",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.6,
+      "rating": 22,
+      "rank": 14
+    },
+    {
+      "name": "Rudy Gobert",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.6,
+      "rating": 22,
+      "rank": 15
+    },
+    {
+      "name": "Matas Buzelis",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.5,
+      "rating": 21,
+      "rank": 16
+    },
+    {
+      "name": "Scottie Barnes",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.5,
+      "rating": 21,
+      "rank": 17
+    },
+    {
+      "name": "Caleb Wilson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.4,
+      "rating": 20,
+      "rank": 18
+    },
+    {
+      "name": "Daniel Gafford",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.3,
+      "rating": 20,
+      "rank": 19
+    },
+    {
+      "name": "Derrick White",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.3,
+      "rating": 20,
+      "rank": 20
+    },
+    {
+      "name": "Neemias Queta",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.3,
+      "rating": 20,
+      "rank": 21
+    },
+    {
+      "name": "Antonio Davis",
+      "season": "2003",
+      "classic": true,
+      "bpg": 1.2,
+      "rating": 19,
+      "rank": 22
+    },
+    {
+      "name": "Brook Lopez",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.2,
+      "rating": 19,
+      "rank": 23
+    },
+    {
+      "name": "Joel Embiid",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.2,
+      "rating": 19,
+      "rank": 24
+    },
+    {
+      "name": "Robert Horry",
+      "season": "1995",
+      "classic": true,
+      "bpg": 1.2,
+      "rating": 19,
+      "rank": 25
+    },
+    {
+      "name": "Alperen Şengün",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 26
+    },
+    {
+      "name": "Kristaps Porziņģis",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 27
+    },
+    {
+      "name": "Luc Longley",
+      "season": "1998",
+      "classic": true,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 28
+    },
+    {
+      "name": "Nic Claxton",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 29
+    },
+    {
+      "name": "Onyeka Okongwu",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 30
+    },
+    {
+      "name": "P.J. Washington",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 31
+    },
+    {
+      "name": "Peyton Watson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 32
+    },
+    {
+      "name": "Robert Horry",
+      "season": "2002",
+      "classic": true,
+      "bpg": 1.1,
+      "rating": 18,
+      "rank": 33
+    },
+    {
+      "name": "Andrew Wiggins",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.0,
+      "rating": 17,
+      "rank": 34
+    },
+    {
+      "name": "Jaden McDaniels",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.0,
+      "rating": 17,
+      "rank": 35
+    },
+    {
+      "name": "Moussa Diabaté",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.0,
+      "rating": 17,
+      "rank": 36
+    },
+    {
+      "name": "Naz Reid",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 1.0,
+      "rating": 17,
+      "rank": 37
+    },
+    {
+      "name": "Scottie Pippen",
+      "season": "1998",
+      "classic": true,
+      "bpg": 1.0,
+      "rating": 17,
+      "rank": 38
+    },
+    {
+      "name": "Vince Carter",
+      "season": "2003",
+      "classic": true,
+      "bpg": 1.0,
+      "rating": 17,
+      "rank": 39
+    },
+    {
+      "name": "Ausar Thompson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 40
+    },
+    {
+      "name": "Collin Murray-Boyles",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 41
+    },
+    {
+      "name": "Cooper Flagg",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 42
+    },
+    {
+      "name": "Derik Queen",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 43
+    },
+    {
+      "name": "Jabari Smith Jr.",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 44
+    },
+    {
+      "name": "Kevin Durant",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 45
+    },
+    {
+      "name": "Mark Williams",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.9,
+      "rating": 16,
+      "rank": 46
+    },
+    {
+      "name": "Anthony Edwards",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 47
+    },
+    {
+      "name": "Cade Cunningham",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 48
+    },
+    {
+      "name": "Cameron Boozer",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 49
+    },
+    {
+      "name": "Isaiah Hartenstein",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 50
+    },
+    {
+      "name": "Ivica Zubac",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 51
+    },
+    {
+      "name": "Jalen Duren",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 52
+    },
+    {
+      "name": "Jarrett Allen",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 53
+    },
+    {
+      "name": "Mikal Bridges",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 54
+    },
+    {
+      "name": "Nikola Jokić",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 55
+    },
+    {
+      "name": "Shai Gilgeous-Alexander",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 56
+    },
+    {
+      "name": "Tyrese Maxey",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.8,
+      "rating": 15,
+      "rank": 57
+    },
+    {
+      "name": "AJ Dybantsa",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 58
+    },
+    {
+      "name": "Ace Bailey",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 59
+    },
+    {
+      "name": "Bam Adebayo",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 60
+    },
+    {
+      "name": "Brandon Ingram",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 61
+    },
+    {
+      "name": "Brandon Miller",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 62
+    },
+    {
+      "name": "Clyde Drexler",
+      "season": "1995",
+      "classic": true,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 63
+    },
+    {
+      "name": "Giannis Antetokounmpo",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 64
+    },
+    {
+      "name": "Jalen Suggs",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 65
+    },
+    {
+      "name": "John Collins",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 66
+    },
+    {
+      "name": "OG Anunoby",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 67
+    },
+    {
+      "name": "Tyrese Haliburton",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.7,
+      "rating": 14,
+      "rank": 68
+    },
+    {
+      "name": "Amen Thompson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 69
+    },
+    {
+      "name": "CJ McCollum",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 70
+    },
+    {
+      "name": "Carl Herrera",
+      "season": "1995",
+      "classic": true,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 71
+    },
+    {
+      "name": "Deni Avdija",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 72
+    },
+    {
+      "name": "Draymond Green",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 73
+    },
+    {
+      "name": "Jerami Grant",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 74
+    },
+    {
+      "name": "LeBron James",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 75
+    },
+    {
+      "name": "Paolo Banchero",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 76
+    },
+    {
+      "name": "Ron Harper",
+      "season": "1998",
+      "classic": true,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 77
+    },
+    {
+      "name": "Wendell Carter Jr.",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.6,
+      "rating": 13,
+      "rank": 78
+    },
+    {
+      "name": "Aaron Nesmith",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 79
+    },
+    {
+      "name": "Bruce Bowen",
+      "season": "2005",
+      "classic": true,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 80
+    },
+    {
+      "name": "Desmond Bane",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 81
+    },
+    {
+      "name": "James Harden",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 82
+    },
+    {
+      "name": "Josh Giddey",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 83
+    },
+    {
+      "name": "Karl-Anthony Towns",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 84
+    },
+    {
+      "name": "Kyrie Irving",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 85
+    },
+    {
+      "name": "Lauri Markkanen",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 86
+    },
+    {
+      "name": "Luka Dončić",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 87
+    },
+    {
+      "name": "Michael Jordan",
+      "season": "1998",
+      "classic": true,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 88
+    },
+    {
+      "name": "Nickeil Alexander-Walker",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 89
+    },
+    {
+      "name": "VJ Edgecombe",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 90
+    },
+    {
+      "name": "Zion Williamson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.5,
+      "rating": 12,
+      "rank": 91
+    },
+    {
+      "name": "Austin Reaves",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 92
+    },
+    {
+      "name": "Cameron Johnson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 93
+    },
+    {
+      "name": "Cason Wallace",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 94
+    },
+    {
+      "name": "Cedric Coward",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 95
+    },
+    {
+      "name": "Darryn Peterson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 96
+    },
+    {
+      "name": "Day'Ron Sharpe",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 97
+    },
+    {
+      "name": "Dyson Daniels",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 98
+    },
+    {
+      "name": "Egor Demin",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 99
+    },
+    {
+      "name": "Fred VanVleet",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 100
+    },
+    {
+      "name": "Jalen Johnson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 101
+    },
+    {
+      "name": "Jamal Murray",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 102
+    },
+    {
+      "name": "Jaylen Brown",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 103
+    },
+    {
+      "name": "Jeremiah Fears",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 104
+    },
+    {
+      "name": "Jerome Williams",
+      "season": "2003",
+      "classic": true,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 105
+    },
+    {
+      "name": "Kawhi Leonard",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 106
+    },
+    {
+      "name": "Kobe Bryant",
+      "season": "2002",
+      "classic": true,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 107
+    },
+    {
+      "name": "Kyle Kuzma",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 108
+    },
+    {
+      "name": "Manu Ginóbili",
+      "season": "2005",
+      "classic": true,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 109
+    },
+    {
+      "name": "Max Christie",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 110
+    },
+    {
+      "name": "Miles Bridges",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 111
+    },
+    {
+      "name": "Morris Peterson",
+      "season": "2003",
+      "classic": true,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 112
+    },
+    {
+      "name": "Pascal Siakam",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 113
+    },
+    {
+      "name": "Paul George",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 114
+    },
+    {
+      "name": "Ryan Rollins",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 115
+    },
+    {
+      "name": "Stephen Curry",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 116
+    },
+    {
+      "name": "Tobias Harris",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 117
+    },
+    {
+      "name": "Toumani Camara",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 118
+    },
+    {
+      "name": "Trey Murphy III",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 119
+    },
+    {
+      "name": "Tyler Herro",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 120
+    },
+    {
+      "name": "Ziaire Williams",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.4,
+      "rating": 11,
+      "rank": 121
+    },
+    {
+      "name": "Aaron Gordon",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 122
+    },
+    {
+      "name": "Alvin Williams",
+      "season": "2003",
+      "classic": true,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 123
+    },
+    {
+      "name": "Christian Braun",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 124
+    },
+    {
+      "name": "Darius Garland",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 125
+    },
+    {
+      "name": "De'Aaron Fox",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 126
+    },
+    {
+      "name": "Devin Booker",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 127
+    },
+    {
+      "name": "Donovan Mitchell",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 128
+    },
+    {
+      "name": "Duncan Robinson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 129
+    },
+    {
+      "name": "Dylan Harper",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 130
+    },
+    {
+      "name": "Franz Wagner",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 131
+    },
+    {
+      "name": "Ja Morant",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 132
+    },
+    {
+      "name": "Jaime Jaquez Jr.",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 133
+    },
+    {
+      "name": "Jalen Green",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 134
+    },
+    {
+      "name": "Jalen Williams",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 135
+    },
+    {
+      "name": "Jaren Jackson Jr.",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 136
+    },
+    {
+      "name": "Jarred Vanderbilt",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 137
+    },
+    {
+      "name": "Jonathan Kuminga",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 138
+    },
+    {
+      "name": "Josh Hart",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 139
+    },
+    {
+      "name": "Keaton Wagler",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 140
+    },
+    {
+      "name": "Keyonte George",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 141
+    },
+    {
+      "name": "Klay Thompson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 142
+    },
+    {
+      "name": "Michael Porter Jr.",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 143
+    },
+    {
+      "name": "RJ Barrett",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 144
+    },
+    {
+      "name": "Rick Fox",
+      "season": "2002",
+      "classic": true,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 145
+    },
+    {
+      "name": "Rui Hachimura",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 146
+    },
+    {
+      "name": "Stephon Castle",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 147
+    },
+    {
+      "name": "Tre Johnson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 148
+    },
+    {
+      "name": "Zach LaVine",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.3,
+      "rating": 9,
+      "rank": 149
+    },
+    {
+      "name": "Brandin Podziemski",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 150
+    },
+    {
+      "name": "Damian Lillard",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 151
+    },
+    {
+      "name": "Darius Acuff Jr.",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 152
+    },
+    {
+      "name": "Davion Mitchell",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 153
+    },
+    {
+      "name": "Dejounte Murray",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 154
+    },
+    {
+      "name": "Dennis Rodman",
+      "season": "1998",
+      "classic": true,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 155
+    },
+    {
+      "name": "Dillon Brooks",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 156
+    },
+    {
+      "name": "Domantas Sabonis",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 157
+    },
+    {
+      "name": "Jayson Tatum",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 158
+    },
+    {
+      "name": "Jimmy Butler",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 159
+    },
+    {
+      "name": "Julius Randle",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 160
+    },
+    {
+      "name": "Kon Knueppel",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 161
+    },
+    {
+      "name": "LaMelo Ball",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 162
+    },
+    {
+      "name": "Norman Powell",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 163
+    },
+    {
+      "name": "Terance Mann",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 164
+    },
+    {
+      "name": "Trae Young",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.2,
+      "rating": 8,
+      "rank": 165
+    },
+    {
+      "name": "Andrew Nembhard",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 166
+    },
+    {
+      "name": "Coby White",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 167
+    },
+    {
+      "name": "Derek Fisher",
+      "season": "2002",
+      "classic": true,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 168
+    },
+    {
+      "name": "Immanuel Quickley",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 169
+    },
+    {
+      "name": "Jalen Brunson",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 170
+    },
+    {
+      "name": "Jaylen Wells",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 171
+    },
+    {
+      "name": "Kenny Smith",
+      "season": "1995",
+      "classic": true,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 172
+    },
+    {
+      "name": "Payton Pritchard",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 173
+    },
+    {
+      "name": "Tony Parker",
+      "season": "2005",
+      "classic": true,
+      "bpg": 0.1,
+      "rating": 5,
+      "rank": 174
+    },
+    {
+      "name": "De'Andre Hunter",
+      "season": "2025-26/fallback",
+      "classic": false,
+      "bpg": 0.0,
+      "rating": 1,
+      "rank": 175
+    }
+  ]
+}

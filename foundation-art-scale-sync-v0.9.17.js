@@ -1,15 +1,20 @@
-/* NBA Courtside v0.9.17 — scale saved editor Y offsets to each rendered card size */
+/* NBA Courtside v0.10.45 — persistent canonical Foundation art sizing after reset */
 (()=>{
   const KEY='nbaCourtsideArtEditorV1';
   const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
+  const configFor=slug=>{
+    const saved=read()[slug];
+    if(saved)return saved;
+    return window.COURTSIDE_FOUNDATION_ART_LAYOUT?.[slug]||null;
+  };
   const canonicalWidth=()=>Math.min(window.innerWidth*.72,290);
 
   function applyCard(card){
     if(!card?.classList?.contains('foundation-card'))return;
-    if(card.closest('.art-editor-preview'))return; // editor stays in its native coordinate system
+    if(card.closest('.art-editor-preview'))return;
     const slug=card.dataset.artSlug;
     if(!slug)return;
-    const c=read()[slug];
+    const c=configFor(slug);
     if(!c)return;
     const img=card.querySelector('.cutout-art,.foundation-art img,.photo');
     if(!img)return;

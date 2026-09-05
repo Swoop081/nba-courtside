@@ -1,0 +1,52 @@
+name: Audit 3PT Ratings
+
+on:
+  push:
+    paths:
+      - 'scripts/audit-three-point.py'
+      - '.github/workflows/audit-three-point.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ensure audit source corrections
+        run: |
+          grep -q "'Egor Demin':" scripts/audit-three-point.py || sed -i "/fallback={/a\\ 'Egor Demin': {'three_pm':2.4,'three_pa':6.2,'three_pct':0.385,'source':'2025-26 NBA'}," scripts/audit-three-point.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/audit-three-point.py')
+          s=p.read_text()
+          s=s.replace("era_factor=MODERN_LEAGUE['three_pa']/league_pa", "era_factor=math.sqrt(MODERN_LEAGUE['three_pa']/league_pa)")
+          p.write_text(s)
+          PY
+      - name: Generate 175-player audit
+        run: python scripts/audit-three-point.py
+      - name: Generate gameplay ratings data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('three-point-audit-v0.10.20.json').read_text())
+          payload={'players':d['players']}
+          Path('three-point-ratings-data-v0.10.20.js').write_text('window.__COURTSIDE_THREE_POINT_AUDIT__='+json.dumps(payload,ensure_ascii=False,separators=(',',':'))+';\n')
+          PY
+      - name: Commit audit output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/audit-three-point.py three-point-audit-v0.10.20.json THREE-POINT-AUDIT-v0.10.20.md three-point-ratings-data-v0.10.20.js
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+          else
+            git commit -m "v0.10.20: publish approved 175-player 3PT ratings data"
+            git push
+          fi

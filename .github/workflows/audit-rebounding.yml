@@ -1,0 +1,47 @@
+name: Audit Rebounding Ratings
+on:
+  push:
+    paths:
+      - 'scripts/audit-rebounding.py'
+      - '.github/workflows/audit-rebounding.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate 175-player rebounding audit
+        run: python scripts/audit-rebounding.py
+      - name: Generate approved gameplay ratings
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('rebounding-audit-v0.10.21.json').read_text())
+          payload=json.dumps(data['players'],ensure_ascii=False,separators=(',',':'))
+          parts=[]
+          parts.append('/* NBA Courtside v0.10.21 — approved 175-player RPG-based Rebounding ratings. */')
+          parts.append('(()=>{')
+          parts.append('if(window.__courtsideReboundingRatingsV01021)return;')
+          parts.append('window.__courtsideReboundingRatingsV01021=true;')
+          parts.append('const rows='+payload+';')
+          parts.append("const norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();")
+          parts.append("const modern=new Map(),classic=new Map();")
+          parts.append("rows.forEach(r=>{if(r.classic)classic.set(norm(r.name)+'|'+String(r.season),r.rating);else modern.set(norm(r.name),r.rating);});")
+          parts.append("let applied=0;(players||[]).forEach(p=>{const v=p.classicTeam?classic.get(norm(p.name)+'|'+String(p.season||'')):modern.get(norm(p.name));if(Number.isFinite(v)){p.stats.rebounding=v;applied++;}});")
+          parts.append('window.COURTSIDE_REBOUNDING_RATINGS_V01021=rows;')
+          parts.append('window.COURTSIDE_REBOUNDING_RATINGS_APPLIED=applied;')
+          parts.append('})();')
+          Path('rebounding-ratings-v0.10.21.js').write_text('\n'.join(parts)+'\n',encoding='utf-8')
+          PY
+      - name: Commit audit and gameplay output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rebounding-audit-v0.10.21.json REBOUNDING-AUDIT-v0.10.21.md rebounding-ratings-v0.10.21.js
+          if git diff --cached --quiet; then echo "No changes"; else git commit -m "v0.10.21: publish approved rebounding ratings" && git push; fi

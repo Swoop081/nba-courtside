@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Detroit Pistons 2004 classic mark">
+  <defs>
+    <linearGradient id="ball" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c8102e"/><stop offset="1" stop-color="#8b0d22"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1d428a"/><stop offset="1" stop-color="#0b255b"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="214" fill="#fff" stroke="#b3b2b1" stroke-width="16"/>
+  <circle cx="256" cy="256" r="194" fill="url(#ball)" stroke="#1d428a" stroke-width="18"/>
+  <path d="M105 192c46-54 108-86 178-82 38 2 77 16 112 42-44-10-82-8-111 5 38 2 73 14 103 35-59-11-103-2-135 27-25 23-48 34-79 34-29 0-54-10-68-28 28 3 52-1 70-12-24-2-48-9-70-21z" fill="#fff" opacity=".96"/>
+  <path d="M164 176c28-43 75-66 124-59 31 5 61 20 82 43-27-8-54-7-78 3 22 7 42 18 58 34-42-8-74 1-97 27-19 21-40 30-65 27-22-2-39-12-50-27 24 2 44-3 60-15-18-3-30-14-34-33z" fill="url(#blue)" stroke="#b3b2b1" stroke-width="8"/>
+  <path d="M217 160c28-8 55-4 79 11l-36 11 34 16-40 4-12 31-14-27-34 8 21-27z" fill="#b3b2b1"/>
+  <path d="M103 143c43 9 73 1 92-24-3 25 7 42 31 52-38-4-73 6-105 31 14-25 8-45-18-59zm291 10c-35 4-58-3-70-22 0 20-9 35-28 45 33-5 60 1 83 19-10-18-5-32 15-42z" fill="#c8102e"/>
+  <g transform="rotate(-4 256 302)">
+    <path d="M58 258h396l-37 105H95z" fill="#071a42" stroke="#fff" stroke-width="10"/>
+    <path d="M82 275h348l-18 57H100z" fill="#1d428a"/>
+    <text x="256" y="325" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-size="72" font-weight="900" fill="#fff" stroke="#071a42" stroke-width="5" paint-order="stroke">PISTONS</text>
+  </g>
+  <path d="M145 394h222" stroke="#fff" stroke-width="4" opacity=".9"/>
+  <text x="256" y="424" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-size="30" letter-spacing="8" fill="#fff">DETROIT</text>
+</svg>
