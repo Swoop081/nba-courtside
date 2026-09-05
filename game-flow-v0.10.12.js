@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.12 — automatic quarter flow, live matchup ledger, compact POTG final */
+/* NBA Courtside v0.10.27 — automatic quarter flow, live matchup ledger, compact POTG final */
 (()=>{
   if(window.__courtsideGameFlowV01012)return;
   window.__courtsideGameFlowV01012=true;
@@ -130,7 +130,6 @@
       <h2>${esc(winner==='TIE'?'Game Tied':winner+' Win!')}</h2>
       <div class="potg-label">PLAYER OF THE GAME</div>
       <div class="potg-card-wrap">${card}</div>
-      <div class="potg-name">${esc(playerName(potg))}</div>
       <div class="compact-final-actions"><button type="button" class="primary-btn" id="compactPlayAgain">Play Again</button><button type="button" class="ghost-btn" id="compactMenu">Menu</button></div>
     </section>`;
     const again=document.getElementById('compactPlayAgain');
@@ -141,7 +140,6 @@
     window.scrollTo({top:0,behavior:'instant'});
   };
 
-  // Expose the existing functions through window in case they were lexical globals in older Safari builds.
   window.nextQuarter=window.nextQuarter||nextQuarter;
   window.startOvertime=window.startOvertime||startOvertime;
   window.resetGame=window.resetGame||resetGame;
