@@ -1,4 +1,4 @@
-/* NBA Courtside v0.9.22 — Foundation + PNG-only art pass + runtime PNG authority + cross-size art sync + top-right rotated team watermark */
+/* NBA Courtside v0.9.23 — Foundation + PNG-only art pass + runtime PNG authority + cross-size art sync + top-right clockwise team watermark */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -23,5 +23,6 @@
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.20.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.21.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.22.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.23.css?t='+t+'">');
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
 })();
