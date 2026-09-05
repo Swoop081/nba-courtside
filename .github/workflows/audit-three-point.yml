@@ -30,14 +30,23 @@ jobs:
           PY
       - name: Generate 175-player audit
         run: python scripts/audit-three-point.py
+      - name: Generate gameplay ratings data
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('three-point-audit-v0.10.20.json').read_text())
+          payload={'players':d['players']}
+          Path('three-point-ratings-data-v0.10.20.js').write_text('window.__COURTSIDE_THREE_POINT_AUDIT__='+json.dumps(payload,ensure_ascii=False,separators=(',',':'))+';\n')
+          PY
       - name: Commit audit output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/audit-three-point.py three-point-audit-v0.10.20.json THREE-POINT-AUDIT-v0.10.20.md
+          git add scripts/audit-three-point.py three-point-audit-v0.10.20.json THREE-POINT-AUDIT-v0.10.20.md three-point-ratings-data-v0.10.20.js
           if git diff --cached --quiet; then
             echo "No audit changes"
           else
-            git commit -m "v0.10.20: tune and regenerate 175-player 3PT audit"
+            git commit -m "v0.10.20: publish approved 175-player 3PT ratings data"
             git push
           fi
