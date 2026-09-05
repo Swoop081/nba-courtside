@@ -1,4 +1,4 @@
-/* NBA Courtside v0.9.31 — current 30 first + Classic Teams alphabetically + canonical art layout + editable background watermark */
+/* NBA Courtside v0.9.32 — current 30 first + Classic Teams alphabetically + canonical art layout + editable background watermark + per-player PNG glow */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -30,4 +30,5 @@
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.24.css?t='+t+'">');
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
+  document.write('<script src="player-glow-editor-v0.9.32.js?t='+t+'"><\/script>');
 })();
