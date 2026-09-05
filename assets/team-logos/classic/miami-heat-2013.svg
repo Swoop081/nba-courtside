@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Miami Heat 2013 classic team logo">
+  <rect width="512" height="512" fill="none"/>
+  <circle cx="256" cy="282" r="146" fill="#98002E" stroke="#000000" stroke-width="18"/>
+  <circle cx="256" cy="282" r="106" fill="#FFFFFF" stroke="#F9A01B" stroke-width="14"/>
+  <path d="M256 78c28 46 37 79 20 105 36-18 60-5 72 17-28 8-45 28-50 61-8-31-24-53-49-65 20-33 19-69 7-118z" fill="#F9A01B" stroke="#98002E" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M220 182c14 23 21 44 12 63 21-12 39-5 50 12-20 8-32 22-36 44-6-23-17-39-35-49 14-22 16-46 9-70z" fill="#98002E"/>
+  <path d="M191 281h130" stroke="#000000" stroke-width="18" stroke-linecap="round"/>
+  <path d="M202 316h108" stroke="#000000" stroke-width="18" stroke-linecap="round"/>
+  <text x="256" y="452" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="54" font-weight="900" fill="#98002E" letter-spacing="2">MIAMI</text>
+</svg>
