@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.34 — deterministic local team logos + six-team classic logo audit repair */
+/* NBA Courtside v0.10.35 — deterministic local team logos + eight-team classic logo audit repair */
 (()=>{
   if(window.__courtsideTeamLogoAuditV01028)return;
   window.__courtsideTeamLogoAuditV01028=true;
@@ -9,7 +9,9 @@
     'classic-chi-1998':'assets/team-logos/classic/chicago-bulls-1998.svg',
     'classic-lal-2002':'assets/team-logos/classic/los-angeles-lakers-2002.svg',
     'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995.svg',
-    'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004.svg'
+    'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004.svg',
+    'classic-phx-2007':'assets/team-logos/classic/phoenix-suns-2007.svg',
+    'classic-dal-1995':'assets/team-logos/classic/dallas-mavericks-1995.svg'
   };
   const CURRENT_IDS=new Set([
     '1610612737','1610612738','1610612751','1610612766','1610612741','1610612739','1610612742','1610612743','1610612765','1610612744',
