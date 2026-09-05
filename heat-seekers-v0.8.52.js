@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.31 — larger final team logos + larger POTG card + transparent automatic quarter transitions + audited local team logos + approved Overall hierarchy + 175-player ratings + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.32 — clean Play Again reset + larger final team logos + larger POTG card + transparent automatic quarter transitions + audited local team logos + approved Overall hierarchy + 175-player ratings + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -54,6 +54,7 @@
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
+  document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
 })();
