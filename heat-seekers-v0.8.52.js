@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.53 — authoritative Season Mode team identity + finish flow + exact season progression + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
+/* NBA Courtside v0.10.54 — era-accurate Classic Team logos + authoritative Season Mode team identity + finish flow + exact season progression + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -51,6 +51,7 @@
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
   document.write('<script src="team-logo-audit-v0.10.28.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-path-hotfix-v0.10.44.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-era-logos-v0.10.54.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="season-ui-polish-v0.10.48.css?t='+t+'">');
