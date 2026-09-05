@@ -1,0 +1,10 @@
+/* NBA Courtside v0.9.10 — unslashed zero numerals */
+#userScore,#cpuScore,#finalUser,#finalCpu,
+.quarter-result .big,.final-score strong,
+.foundation-rating span,.foundation-back-stat b,
+.foundation-back-foot,
+.score-side strong{
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-variant-numeric:normal!important;
+  font-feature-settings:"zero" 0!important;
+}
