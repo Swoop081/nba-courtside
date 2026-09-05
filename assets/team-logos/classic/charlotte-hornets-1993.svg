@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Charlotte Hornets 1993 classic logo">
+  <defs>
+    <linearGradient id="ball" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#F7A823"/><stop offset="1" stop-color="#E87824"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="232" fill="#fff" stroke="#00788C" stroke-width="18"/>
+  <circle cx="256" cy="256" r="202" fill="#6A2C91" stroke="#00788C" stroke-width="10"/>
+  <ellipse cx="256" cy="288" rx="105" ry="92" fill="url(#ball)" stroke="#111" stroke-width="10"/>
+  <path d="M157 280c47-30 151-30 198 0M256 197c-23 49-23 131 0 182M199 211c15 35 15 122 0 154M313 211c-15 35-15 122 0 154" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+  <path d="M166 237c-53-18-91-2-111 39 42-8 76 4 101 36M346 237c53-18 91-2 111 39-42-8-76 4-101 36" fill="#00788C" stroke="#111" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M196 178c-40-43-68-49-92-24 30 11 54 31 74 61M316 178c40-43 68-49 92-24-30 11-54 31-74 61" fill="#00788C" stroke="#111" stroke-width="9" stroke-linejoin="round"/>
+  <path d="M213 158l18-47 25 34 25-34 18 47-43 31z" fill="#00788C" stroke="#111" stroke-width="9" stroke-linejoin="round"/>
+  <circle cx="226" cy="185" r="11" fill="#fff" stroke="#111" stroke-width="6"/><circle cx="286" cy="185" r="11" fill="#fff" stroke="#111" stroke-width="6"/>
+  <circle cx="229" cy="187" r="4" fill="#111"/><circle cx="283" cy="187" r="4" fill="#111"/>
+  <path d="M225 216c20 13 42 13 62 0" fill="none" stroke="#111" stroke-width="8" stroke-linecap="round"/>
+  <text x="256" y="445" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="52" font-weight="900" fill="#fff" stroke="#111" stroke-width="3" paint-order="stroke">HORNETS</text>
+</svg>
