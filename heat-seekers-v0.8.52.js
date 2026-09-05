@@ -1,4 +1,4 @@
-/* NBA Courtside v0.9.27 — Foundation + PNG-only art pass + runtime PNG authority + cross-size art sync + editable background team watermark size/position/rotation */
+/* NBA Courtside v0.9.28 — Foundation + canonical 150-card artwork layout + editable background watermark */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -13,6 +13,7 @@
   document.write('<link rel="stylesheet" href="foundation-rating-center-v0.9.13.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="foundation-art-edge-v0.9.14.css?t='+t+'">');
   document.write('<script src="foundation-art-editor-compat-v0.9.3.js?t='+t+'"><\/script>');
+  document.write('<script src="foundation-art-layout-v0.9.28.js?t='+t+'"><\/script>');
   document.write('<script src="art-editor-v0.8.64.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-editor-plaque-v0.9.7.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="unslashed-zero-v0.9.10.css?t='+t+'">');
