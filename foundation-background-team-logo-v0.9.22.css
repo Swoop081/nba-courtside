@@ -1,0 +1,26 @@
+/* NBA Courtside v0.9.22 — restore oversized watermark to true top-right */
+.player-card.foundation-card .foundation-bg-team-logo{
+  width:90%!important;
+  height:90%!important;
+  top:-9%!important;
+  right:-9%!important;
+  transform:rotate(-45deg)!important;
+  transform-origin:center center!important;
+  object-fit:contain!important;
+  opacity:.16!important;
+}
+.catalogue-grid .player-card.foundation-card .foundation-bg-team-logo{
+  width:96%!important;
+  height:96%!important;
+  top:-9.6%!important;
+  right:-9.6%!important;
+  transform:rotate(-45deg)!important;
+  opacity:.15!important;
+}
+.art-editor-preview .player-card.foundation-card .foundation-bg-team-logo{
+  width:90%!important;
+  height:90%!important;
+  top:-9%!important;
+  right:-9%!important;
+  transform:rotate(-45deg)!important;
+}

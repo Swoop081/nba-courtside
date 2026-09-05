@@ -1,0 +1,28 @@
+/* NBA Courtside v0.9.18 — team identity watermark in spotlight background */
+.player-card.foundation-card .foundation-bg-team-logo{
+  position:absolute!important;
+  z-index:3!important;
+  top:5.5%!important;
+  right:4.5%!important;
+  width:31%!important;
+  height:31%!important;
+  object-fit:contain!important;
+  opacity:.16!important;
+  filter:saturate(.85) brightness(1.12)!important;
+  mix-blend-mode:screen!important;
+  pointer-events:none!important;
+  user-select:none!important;
+}
+.catalogue-grid .player-card.foundation-card .foundation-bg-team-logo{
+  width:34%!important;
+  height:34%!important;
+  top:4%!important;
+  right:3.5%!important;
+  opacity:.15!important;
+}
+.art-editor-preview .player-card.foundation-card .foundation-bg-team-logo{
+  width:31%!important;
+  height:31%!important;
+  top:5.5%!important;
+  right:4.5%!important;
+}
