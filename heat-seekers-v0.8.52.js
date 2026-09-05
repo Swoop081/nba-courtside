@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.42 — Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 225-player pool + 15 Classic Teams + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.44 — category bar above cards + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -50,6 +50,7 @@
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
   document.write('<script src="team-logo-audit-v0.10.28.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-logo-path-hotfix-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
@@ -60,10 +61,12 @@
   document.write('<script src="game-card-size-runtime-v0.10.5.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-rating-runtime-v0.10.10.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="game-flow-v0.10.12.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="game-summary-layout-v0.10.43.css?t='+t+'">');
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
+  document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
 })();
