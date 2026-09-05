@@ -22,7 +22,6 @@ def nfloat(x, default=0.0):
     try:return float(x)
     except:return default
 
-# Source roster directly from the game files.
 foundation=(ROOT/'foundation-v0.9.0.js').read_text(encoding='utf-8')
 modern_names=[]
 for name,pos in re.findall(r"\['([^']*(?:\\'[^']*)*)','(PG|SG|SF|PF|C)',\[", foundation):
@@ -31,12 +30,11 @@ for name,pos in re.findall(r"\['([^']*(?:\\'[^']*)*)','(PG|SG|SF|PF|C)',\[", fou
 if len(modern_names)!=150:
     raise RuntimeError(f'Expected 150 Foundation players, found {len(modern_names)}')
 
-# 2024-25 NBA fallbacks for players who did not play in 2025-26, plus 2025-26 NCAA for 2026 rookies.
 fallback={
  'Egor Demin': {'three_pm':2.4,'three_pa':6.2,'three_pct':0.385,'source':'2025-26 NBA'},
  'Kyrie Irving': {'three_pm':2.9,'three_pa':7.2,'three_pct':0.401,'source':'2024-25 NBA'},
  'Fred VanVleet': {'three_pm':2.7,'three_pa':7.7,'three_pct':0.345,'source':'2024-25 NBA'},
- 'Tyrese Haliburton': {'three_pm':2.7,'three_pa':6.9,'three_pct':0.388,'source':'2024-25 NBA'},
+ 'Tyrese Haliburton': {'three_pm':3.0,'three_pa':7.7,'three_pct':0.388,'source':'2024-25 NBA'},
  'Damian Lillard': {'three_pm':3.4,'three_pa':9.0,'three_pct':0.376,'source':'2024-25 NBA'},
  'Darius Acuff Jr.': {'three_pm':2.5,'three_pa':5.8,'three_pct':0.440,'source':'2025-26 NCAA'},
  'Cameron Boozer': {'three_pm':1.4,'three_pa':3.6,'three_pct':0.391,'source':'2025-26 NCAA'},
@@ -46,7 +44,6 @@ fallback={
  'Caleb Wilson': {'three_pm':0.3,'three_pa':1.1,'three_pct':0.259,'source':'2025-26 NCAA'},
 }
 
-# Classic-team regular-season data. Volume is era-adjusted later; percentages remain season-relative.
 classic={
  'Alvin Williams|2003':(.6,1.9,.329),'Vince Carter|2003':(1.0,3.0,.344),'Morris Peterson|2003':(1.4,4.2,.337),'Jerome Williams|2003':(0.0,.1,.167),'Antonio Davis|2003':(0.0,0.0,0.0),
  'Tony Parker|2005':(.5,2.0,.276),'Manu Ginóbili|2005':(1.3,3.5,.376),'Bruce Bowen|2005':(1.2,3.1,.403),'Tim Duncan|2005':(0.0,.1,.333),'Rasho Nesterović|2005':(0.0,0.0,0.0),
@@ -62,13 +59,11 @@ for line in classic_source.splitlines():
     if m: season=m.group(1)
     for name,pos in re.findall(r"\['([^']*(?:\\'[^']*)*)','(PG|SG|SF|PF|C)',\[", line):
         classic_rows.append((name.replace("\\'", "'"),season))
-    # handle Shaq's double-quoted name
     for name,pos in re.findall(r'\["([^"]+)",\'(PG|SG|SF|PF|C)\',\[', line):
         classic_rows.append((name,season))
 if len(classic_rows)!=25:
     raise RuntimeError(f'Expected 25 Classic players, found {len(classic_rows)}')
 
-# Load completed 2025-26 NBA per-game dataset.
 with urllib.request.urlopen(MODERN_URL, timeout=30) as r:
     txt=r.read().decode('utf-8-sig')
 rows=list(csv.DictReader(io.StringIO(txt)))
@@ -81,7 +76,6 @@ for row in rows:
 def pick_row(name):
     rr=by_name.get(norm(name),[])
     if not rr:return None
-    # Prefer a combined multi-team row if available; otherwise highest games played.
     combined=[r for r in rr if re.fullmatch(r'\dTM|TOT',r.get('Team','') or '')]
     return max(combined or rr,key=lambda r:nfloat(r.get('G')))
 
@@ -90,7 +84,6 @@ def clamp(x,a=0.0,b=1.0):return max(a,min(b,x))
 def score_components(pm,pa,pct,league_pa,league_pct):
     era_factor=math.sqrt(MODERN_LEAGUE['three_pa']/league_pa)
     adj_pm=pm*era_factor; adj_pa=pa*era_factor
-    # Efficiency is relative to that season's league. Tiny samples lose efficiency credit.
     sample=clamp(adj_pa/3.0)
     eff=clamp(0.5+(pct-league_pct)/0.15)*sample if pa>0 else 0.0
     makes=clamp(adj_pm/4.5)
@@ -121,8 +114,6 @@ for name,season in classic_rows:
 if missing or len(records)!=175:
     raise RuntimeError(f'3PT audit incomplete: {len(records)} records; missing={missing}')
 
-# Calibrate to the same broad population shape as Scoring: 2 / 23 / 49 / 53 / 29 / 19.
-# Within each band, ratings are spread evenly; the raw composite determines every player's ordering.
 bands=[(2,[4,5]),(23,[6,7,8,9,10]),(49,[11,12,13,14,15]),(53,[16,17,18,19,20]),(29,[21,22,23,24,25]),(19,[26,27,28,29,30])]
 ordered=sorted(records,key=lambda x:(x['raw'],x['three_pct'],x['adj_three_pm'],x['name']))
 pos=0
@@ -144,7 +135,7 @@ for lo,hi in bucket_labels:
 
 out={
  'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY',
- 'formula':{'weights':{'efficiency':0.50,'makes':0.30,'attempts':0.20},'efficiency':'season-relative 3P% with low-volume sample shrink','classic_volume':'3PM/3PA scaled by 2025-26 league 3PA divided by depicted-season league 3PA','modern_league':MODERN_LEAGUE,'era':ERA,'calibration':'rank-preserving distribution matched to Scoring broad bands'},
+ 'formula':{'weights':{'efficiency':0.50,'makes':0.30,'attempts':0.20},'efficiency':'season-relative 3P% with low-volume sample shrink','classic_volume':'3PM/3PA scaled by square-root era factor sqrt(2025-26 league 3PA / depicted-season league 3PA)','modern_league':MODERN_LEAGUE,'era':ERA,'calibration':'rank-preserving distribution matched to Scoring broad bands'},
  'distribution':distribution,
  'top20':[{k:r[k] for k in ('rank','name','season','classic','rating','raw','three_pm','three_pa','three_pct','era_factor')} for r in ranked[:20]],
  'bottom10':[{k:r[k] for k in ('rank','name','season','classic','rating','raw','three_pm','three_pa','three_pct','era_factor')} for r in ranked[-10:]],
@@ -154,7 +145,7 @@ out={
 (ROOT/'three-point-audit-v0.10.20.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 
 lines=['# NBA Courtside v0.10.20 — 3PT Audit (NOT APPLIED TO GAMEPLAY)','',
-       '**Formula:** 50% era-relative efficiency + 30% era-adjusted makes + 20% era-adjusted attempts. Low-volume percentages are sample-shrunk. Ratings are rank-calibrated to the same broad 1–30 population shape as Scoring.','',
+       '**Formula:** 50% era-relative efficiency + 30% era-adjusted makes + 20% era-adjusted attempts. Classic volume uses a tempered square-root era adjustment. Low-volume percentages are sample-shrunk. Ratings are rank-calibrated to the same broad 1–30 population shape as Scoring.','',
        '## Distribution','', '| Range | Players | % |','|---|---:|---:|']
 for d in distribution:lines.append(f"| {d['range']} | {d['players']} | {d['percent']:.1f}% |")
 lines+=['','## Top 20','', '| Rank | Player | Rating | 3PM | 3PA | 3P% | Era factor |','|---:|---|---:|---:|---:|---:|---:|']
