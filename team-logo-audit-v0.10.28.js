@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.36 — deterministic local team logos + nine-team classic logo audit repair */
+/* NBA Courtside v0.10.37 — deterministic local team logos + ten-team classic logo audit repair */
 (()=>{
   if(window.__courtsideTeamLogoAuditV01028)return;
   window.__courtsideTeamLogoAuditV01028=true;
@@ -12,7 +12,8 @@
     'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995.svg',
     'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004.svg',
     'classic-phx-2007':'assets/team-logos/classic/phoenix-suns-2007.svg',
-    'classic-dal-1995':'assets/team-logos/classic/dallas-mavericks-1995.svg'
+    'classic-dal-1995':'assets/team-logos/classic/dallas-mavericks-1995.svg',
+    'classic-bos-1986':'assets/team-logos/classic/boston-celtics-1986.svg'
   };
   const CURRENT_IDS=new Set([
     '1610612737','1610612738','1610612751','1610612766','1610612741','1610612739','1610612742','1610612743','1610612765','1610612744',
@@ -29,6 +30,7 @@
     if(!p)return '';
     if(p.teamId==='classic-chi-1998')return 'https://cdn.nba.com/logos/nba/1610612741/global/L/logo.svg';
     if(p.teamId==='classic-lal-1987'||p.teamId==='classic-lal-2002')return 'https://cdn.nba.com/logos/nba/1610612747/global/L/logo.svg';
+    if(p.teamId==='classic-bos-1986')return 'https://cdn.nba.com/logos/nba/1610612738/global/L/logo.svg';
     if(p.teamId==='classic-det-2004')return 'https://content.sportslogos.net/logos/6/223/full/detroit_pistons_logo_primary_20029975.png';
     if(CURRENT_IDS.has(String(p.teamId)))return `https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`;
     return p.classicLogo||'';
