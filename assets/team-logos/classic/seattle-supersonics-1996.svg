@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Seattle SuperSonics 1996 classic team mark">
+  <circle cx="256" cy="256" r="224" fill="#00653A" stroke="#FFC200" stroke-width="18"/>
+  <circle cx="256" cy="256" r="166" fill="#FFC200" stroke="#D31245" stroke-width="10"/>
+  <path d="M104 282c74-85 231-118 304-42-87-31-191-4-261 68z" fill="#00653A"/>
+  <path d="M142 236c57-53 151-73 230-44-78 0-149 27-201 76z" fill="#D31245"/>
+  <text x="256" y="146" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="31" font-weight="900" fill="#00653A" letter-spacing="3">SEATTLE</text>
+  <text x="256" y="354" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="48" font-style="italic" font-weight="900" fill="#00653A">SONICS</text>
+  <text x="256" y="397" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="24" font-weight="800" fill="#D31245" letter-spacing="4">1996</text>
+</svg>
