@@ -15,12 +15,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Generate 175-player Overall audit
+      - name: Generate 175-player Overall audit and gameplay runtime
         run: python scripts/audit-overall.py
-      - name: Commit Overall audit output
+      - name: Commit Overall audit and gameplay output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add overall-audit-v0.10.26.json
-          git diff --cached --quiet || git commit -m "v0.10.26: generate 175-player Overall hierarchy audit"
+          git add overall-audit-v0.10.26.json overall-ratings-v0.10.26.js
+          git diff --cached --quiet || git commit -m "v0.10.26: generate approved 175-player Overall gameplay ratings"
           git push
