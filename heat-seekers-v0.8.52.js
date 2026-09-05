@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.49 — Season Mode result persistence + restored broadcast scoreboard + live quarter/category ticker + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
+/* NBA Courtside v0.10.50 — guaranteed Season Mode result persistence + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
