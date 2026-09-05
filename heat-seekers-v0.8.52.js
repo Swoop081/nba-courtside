@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.11 — tighter global Foundation glowing rating + gameplay rail bumper + safe card sizing + NBA Cup resolver */
+/* NBA Courtside v0.10.12 — automatic quarter flow + live matchup ledger + compact POTG final + tighter global Foundation rating */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -39,4 +39,6 @@
   document.write('<link rel="stylesheet" href="foundation-rating-glow-v0.10.9.css?t='+t+'">');
   document.write('<script src="game-card-size-runtime-v0.10.5.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-rating-runtime-v0.10.10.js?t='+t+'"><\/script>');
+  document.write('<link rel="stylesheet" href="game-flow-v0.10.12.css?t='+t+'">');
+  document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
 })();
