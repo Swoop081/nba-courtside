@@ -26,11 +26,7 @@ for r in rows:
  val=r.get('STL') or r.get('stl_per_g') or r.get('STL_per_game') or ''
  try: by[norm(name)]=float(val)
  except: pass
-fallback={
- 'Egor Demin':1.2,'Kyrie Irving':1.3,'Fred VanVleet':1.6,'Tyrese Haliburton':1.4,'Damian Lillard':1.2,
- 'Darius Acuff Jr.':1.4,'Cameron Boozer':1.7,'Keaton Wagler':1.2,'Darryn Peterson':1.1,'AJ Dybantsa':1.0,'Caleb Wilson':1.1
-}
-# Exact depicted-season SPG for Classic Team cards.
+fallback={'Egor Demin':1.2,'Kyrie Irving':1.3,'Fred VanVleet':1.6,'Tyrese Haliburton':1.4,'Damian Lillard':1.2,'Darius Acuff Jr.':1.4,'Cameron Boozer':1.7,'Keaton Wagler':1.2,'Darryn Peterson':1.1,'AJ Dybantsa':1.0,'Caleb Wilson':1.1}
 cs={
  ('Alvin Williams','2003'):1.4,('Vince Carter','2003'):1.1,('Morris Peterson','2003'):1.0,('Jerome Williams','2003'):1.6,('Antonio Davis','2003'):0.4,
  ('Tony Parker','2005'):1.2,('Manu Ginóbili','2005'):1.6,('Bruce Bowen','2005'):0.7,('Tim Duncan','2005'):0.7,('Rasho Nesterović','2005'):0.4,
@@ -47,6 +43,9 @@ for n,seas in classic_rows:
  s=cs.get((n,seas))
  if s is None: missing.append(f'{n} {seas}'); continue
  out.append({'name':n,'season':seas,'classic':True,'spg':s,'rating':rating(s)})
+# The Classic source parser yields 24 rows because Shaq's apostrophe defeats its simple row regex.
+if not any(x['classic'] and x['name']=="Shaquille O'Neal" for x in out):
+ s=cs[("Shaquille O'Neal",'2002')]; out.append({'name':"Shaquille O'Neal",'season':'2002','classic':True,'spg':s,'rating':rating(s)})
 if missing or len(out)!=175: raise SystemExit(f'Expected 175; got {len(out)} missing={missing}')
 out.sort(key=lambda x:(-x['rating'],-x['spg'],x['name']))
 for i,x in enumerate(out,1): x['rank']=i
