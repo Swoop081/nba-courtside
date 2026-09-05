@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.45 — persistent canonical Foundation art sizing after reset + category bar above cards + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
+/* NBA Courtside v0.10.46 — persistent scoreboard information bar for category and quarter transitions + persistent canonical Foundation art sizing after reset + cleaner quarter summaries + final winner spacing + hardened Classic Team logos + Vancouver Grizzlies 1997 + Seattle SuperSonics 1996 + Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + 225-player pool + 15 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -62,11 +62,13 @@
   document.write('<script src="foundation-rating-runtime-v0.10.10.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="game-flow-v0.10.12.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-summary-layout-v0.10.43.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="game-info-bar-v0.10.46.css?t='+t+'">');
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
+  document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
 })();
