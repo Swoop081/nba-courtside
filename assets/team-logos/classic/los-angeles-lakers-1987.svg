@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Los Angeles Lakers 1987">
+  <ellipse cx="300" cy="180" rx="218" ry="128" fill="#FDB927" stroke="#552583" stroke-width="18"/>
+  <g fill="#552583" font-family="Arial Black,Arial,sans-serif" font-weight="900" text-anchor="middle" font-style="italic">
+    <text x="300" y="145" font-size="56">LOS ANGELES</text>
+    <text x="300" y="228" font-size="104">LAKERS</text>
+  </g>
+  <g stroke="#552583" stroke-width="8" opacity=".9">
+    <path d="M52 124h132"/><path d="M38 158h122"/><path d="M32 194h118"/><path d="M48 228h122"/>
+  </g>
+</svg>
