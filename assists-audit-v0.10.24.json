@@ -1,5 +1,5 @@
 {
-  "status": "AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY",
+  "status": "APPROVED_FOR_GAMEPLAY",
   "formula": "round(30 * (APG / 10.5)^0.75), capped 1..30",
   "count": 175,
   "distribution": [
