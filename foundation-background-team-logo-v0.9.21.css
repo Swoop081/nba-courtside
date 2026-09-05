@@ -1,0 +1,26 @@
+/* NBA Courtside v0.9.21 — lowered, 45deg CCW oversized team watermark */
+.player-card.foundation-card .foundation-bg-team-logo{
+  width:124%!important;
+  height:124%!important;
+  top:-10%!important;
+  right:-10%!important;
+  transform:rotate(-45deg)!important;
+  transform-origin:center center!important;
+  object-fit:contain!important;
+  opacity:.16!important;
+}
+.catalogue-grid .player-card.foundation-card .foundation-bg-team-logo{
+  width:136%!important;
+  height:136%!important;
+  top:-10%!important;
+  right:-10%!important;
+  transform:rotate(-45deg)!important;
+  opacity:.15!important;
+}
+.art-editor-preview .player-card.foundation-card .foundation-bg-team-logo{
+  width:124%!important;
+  height:124%!important;
+  top:-10%!important;
+  right:-10%!important;
+  transform:rotate(-45deg)!important;
+}
