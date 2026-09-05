@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# NBA Courtside v0.10.23 — 175-player Steals audit.
+# NBA Courtside v0.10.23 — 175-player Steals audit/gameplay generator.
 # Rating = round(30 * (SPG / 2.0)^0.60), capped 1..30.
 import csv,io,json,math,re,unicodedata,urllib.request
 from pathlib import Path
@@ -51,6 +51,9 @@ for i,x in enumerate(out,1): x['rank']=i
 bands=[]
 for lo in range(1,30,5):
  hi=min(30,lo+4); c=sum(lo<=x['rating']<=hi for x in out); bands.append({'range':f'{lo}-{hi}','players':c,'percent':round(c/175*100,1)})
-result={'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY','formula':'round(30 * (SPG / 2.0)^0.60), capped 1..30','count':175,'distribution':bands,'players':out}
+result={'status':'APPROVED_FOR_GAMEPLAY','formula':'round(30 * (SPG / 2.0)^0.60), capped 1..30','count':175,'distribution':bands,'players':out}
 (ROOT/'steals-audit-v0.10.23.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+payload=json.dumps(out,ensure_ascii=False,separators=(',',':'))
+js=f'''/* NBA Courtside v0.10.23 — approved 175-player SPG-based Steals ratings. */\n(()=>{{\nif(window.__courtsideStealsRatingsV01023)return;\nwindow.__courtsideStealsRatingsV01023=true;\nconst rows={payload};\nconst norm=s=>String(s||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();\nconst modern=new Map(),classic=new Map();\nrows.forEach(r=>{{if(r.classic)classic.set(`${{norm(r.name)}}|${{String(r.season)}}`,r.rating);else modern.set(norm(r.name),r.rating);}});\nlet applied=0;\n(players||[]).forEach(p=>{{const v=p.classicTeam?classic.get(`${{norm(p.name)}}|${{String(p.season||'')}}`):modern.get(norm(p.name));if(Number.isFinite(v)){{p.stats.steals=v;applied++;}}}});\nwindow.COURTSIDE_STEALS_RATINGS_V01023=rows;\nwindow.COURTSIDE_STEALS_RATINGS_APPLIED=applied;\n}})();\n'''
+(ROOT/'steals-ratings-v0.10.23.js').write_text(js,encoding='utf-8')
 print(json.dumps({'count':175,'distribution':bands,'top20':out[:20],'bottom10':out[-10:]},ensure_ascii=False,indent=2))
