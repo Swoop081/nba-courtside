@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.12 — automatic quarter flow + live matchup ledger + compact POTG final + tighter global Foundation rating */
+/* NBA Courtside v0.10.13 — automatic quarter flow hotfix + live matchup ledger + compact POTG final + tighter global Foundation rating */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -41,4 +41,5 @@
   document.write('<script src="foundation-rating-runtime-v0.10.10.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="game-flow-v0.10.12.css?t='+t+'">');
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
+  document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
 })();
