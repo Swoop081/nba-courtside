@@ -33,11 +33,11 @@ jobs:
             get "https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg" "assets/team-logos/current/${id}.svg"
           done
 
-          get 'https://seeklogo.com/images/T/toronto-raptors-1995-2008-logo-CD4B4C2685-seeklogo.com.png' assets/team-logos/classic/toronto-raptors-2003.png
-          get 'https://w7.pngwing.com/pngs/436/225/png-transparent-san-antonio-spurs-2013u201314-nba-season-cleveland-cavaliers-houston-rockets-the-nba-finals-spurs-nba-emblem-label-text.png' assets/team-logos/classic/san-antonio-spurs-2005.png
+          get 'https://content.sportslogos.net/logos/6/227/full/kqmesaae0efg3atwugmeohxga.png' assets/team-logos/classic/toronto-raptors-2003.png
+          get 'https://content.sportslogos.net/logos/6/233/full/827.png' assets/team-logos/classic/san-antonio-spurs-2005.png
           cp assets/team-logos/current/1610612741.svg assets/team-logos/classic/chicago-bulls-1998.svg
           cp assets/team-logos/current/1610612747.svg assets/team-logos/classic/los-angeles-lakers-2002.svg
-          get 'https://www.kindpng.com/picc/m/148-1486257_houston-rockets-logo-1994-hd-png-download.png' assets/team-logos/classic/houston-rockets-1995.png
+          get 'https://content.sportslogos.net/logos/6/230/full/eigv3ra8cjkojrywrgcvy6z29.png' assets/team-logos/classic/houston-rockets-1995.png
 
       - name: Verify logo inventory
         shell: bash
