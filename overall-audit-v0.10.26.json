@@ -1,5 +1,5 @@
 {
-  "status": "AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY",
+  "status": "APPROVED_FOR_GAMEPLAY",
   "formula": {
     "coreWeights": {
       "scoring": 0.3,
