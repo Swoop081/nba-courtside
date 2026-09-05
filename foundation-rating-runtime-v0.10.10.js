@@ -1,14 +1,14 @@
-/* NBA Courtside v0.10.10 — hard runtime replacement of Foundation quarter-circle rating */
+/* NBA Courtside v0.10.11 — tighter glowing Foundation rating in gameplay and full-card preview */
 (()=>{
-  if(window.__courtsideFoundationRatingRuntimeV01010)return;
-  window.__courtsideFoundationRatingRuntimeV01010=true;
+  if(window.__courtsideFoundationRatingRuntimeV01011)return;
+  window.__courtsideFoundationRatingRuntimeV01011=true;
 
   const apply=()=>{
-    document.querySelectorAll('#game .player-card.foundation-card .foundation-rating').forEach(r=>{
+    document.querySelectorAll('.player-card.foundation-card .foundation-rating').forEach(r=>{
       const s=r.querySelector('span');
       const css={
         top:'0',left:'0',right:'auto',bottom:'auto',width:'auto',height:'auto',minWidth:'0',minHeight:'0',
-        padding:'9px 0 0 10px',margin:'0',display:'block',background:'none',backgroundColor:'transparent',backgroundImage:'none',
+        padding:'4px 0 0 5px',margin:'0',display:'block',background:'none',backgroundColor:'transparent',backgroundImage:'none',
         border:'0',borderRadius:'0',boxShadow:'none',clipPath:'none',webkitClipPath:'none',overflow:'visible',
         backdropFilter:'none',webkitBackdropFilter:'none',filter:'none',color:'#fff',textShadow:'none',zIndex:'40',boxSizing:'border-box'
       };
@@ -22,8 +22,7 @@
 
   const start=()=>{
     apply();
-    const lineup=document.getElementById('lineup');
-    if(lineup)new MutationObserver(()=>requestAnimationFrame(apply)).observe(lineup,{childList:true});
+    if(document.body)new MutationObserver(()=>requestAnimationFrame(apply)).observe(document.body,{childList:true,subtree:true});
     setTimeout(apply,0);setTimeout(apply,120);setTimeout(apply,400);
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
