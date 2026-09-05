@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # NBA Courtside v0.10.26 — 175-player Overall hierarchy audit.
-# Overall Raw = 80% Core Impact + 20% average of best 3 category ratings.
+# Overall Raw = 65% Core Impact + 35% average of best 3 category ratings.
 # Core Impact = 30% Scoring + 15% Passing + 15% Rebounding + 12% 3PT + 11% Steals + 11% Blocks + 6% Dunking.
 import json,re,unicodedata
 from pathlib import Path
@@ -19,7 +19,6 @@ def load_audit(path):
         out[key]=int(r['rating'])
     return out
 
-# Latest approved category audits.
 three=load_audit('three-point-audit-v0.10.20.json')
 reb=load_audit('rebounding-audit-v0.10.21.json')
 blk=load_audit('blocks-audit-v0.10.22.json')
@@ -27,14 +26,12 @@ stl=load_audit('steals-audit-v0.10.23.json')
 ast=load_audit('assists-audit-v0.10.24.json')
 dnk=load_audit('dunking-audit-v0.10.25.json')
 
-# Modern scoring comes from the approved scoring runtime audit. Egor's later hotfix is explicitly retained.
 scoring_js=(ROOT/'scoring-audit-v0.10.18.js').read_text(encoding='utf-8')
 score_modern={}
 for name,rating in re.findall(r'"([^"]+)":\{"ppg":[^}]*?"rating":(\d+)',scoring_js):
     score_modern[norm(name)]=int(rating)
 score_modern[norm('Egor Demin')]=10
 
-# Represented-season classic scoring, using the same nearest-integer PPG policy as v0.10.18.
 score_classic={
 (norm('Alvin Williams'),'2003'):13,(norm('Vince Carter'),'2003'):21,(norm('Morris Peterson'),'2003'):14,(norm('Jerome Williams'),'2003'):10,(norm('Antonio Davis'),'2003'):14,
 (norm('Tony Parker'),'2005'):17,(norm('Manu Ginóbili'),'2005'):16,(norm('Bruce Bowen'),'2005'):8,(norm('Tim Duncan'),'2005'):20,(norm('Rasho Nesterović'),'2005'):6,
@@ -63,25 +60,16 @@ rows=[]; missing=[]
 for p in modern+classic:
     key=(norm(p['name']),p['season'] if p['classic'] else 'current')
     scoring=score_classic.get(key) if p['classic'] else score_modern.get(key[0])
-    vals={
-      'scoring':scoring,
-      'passing':ast.get(key),
-      'rebounding':reb.get(key),
-      'three':three.get(key),
-      'steals':stl.get(key),
-      'blocks':blk.get(key),
-      'dunks':dnk.get(key)
-    }
+    vals={'scoring':scoring,'passing':ast.get(key),'rebounding':reb.get(key),'three':three.get(key),'steals':stl.get(key),'blocks':blk.get(key),'dunks':dnk.get(key)}
     absent=[k for k,v in vals.items() if v is None]
     if absent: missing.append((p['name'],p['season'],absent)); continue
     core=sum(vals[k]*weights[k] for k in weights)
     best3=sorted(vals.values(),reverse=True)[:3]
     star=sum(best3)/3
-    raw=.80*core+.20*star
+    raw=.65*core+.35*star
     rows.append({**p,'stats':vals,'core':round(core,3),'starImpact':round(star,3),'raw':round(raw,3)})
 if missing or len(rows)!=175: raise SystemExit(f'Expected 175 complete rows, got {len(rows)} missing={missing}')
 
-# Rank-based display curve: deliberately scarce superstar ratings and a broad starter/rotation middle.
 curve=[(30,3),(29,7),(28,10),(27,12),(26,14),(25,16),(24,17),(23,17),(22,16),(21,14),(20,12),(19,10),(18,8),(17,6),(16,5),(15,4),(14,3),(13,1)]
 slots=[]
 for rating,count in curve: slots += [rating]*count
@@ -91,10 +79,6 @@ for i,x in enumerate(rows): x['rank']=i+1; x['overall']=slots[i]
 
 distribution=[]
 for rating,count in curve: distribution.append({'overall':rating,'players':count,'percent':round(count/175*100,1)})
-result={
- 'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY',
- 'formula':{'coreWeights':weights,'overallRaw':'0.80 * Core Impact + 0.20 * average(best 3 category ratings)'},
- 'curve':distribution,'count':175,'players':rows
-}
+result={'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY','formula':{'coreWeights':weights,'overallRaw':'0.65 * Core Impact + 0.35 * average(best 3 category ratings)'},'curve':distribution,'count':175,'players':rows}
 (ROOT/'overall-audit-v0.10.26.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'count':175,'top30':rows[:30],'distribution':distribution},ensure_ascii=False,indent=2))
