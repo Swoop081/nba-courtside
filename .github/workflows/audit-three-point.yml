@@ -18,9 +18,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ensure Egor Demin 3PT source row
+      - name: Ensure audit source corrections
         run: |
           grep -q "'Egor Demin':" scripts/audit-three-point.py || sed -i "/fallback={/a\\ 'Egor Demin': {'three_pm':2.4,'three_pa':6.2,'three_pct':0.385,'source':'2025-26 NBA'}," scripts/audit-three-point.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/audit-three-point.py')
+          s=p.read_text()
+          s=s.replace("era_factor=MODERN_LEAGUE['three_pa']/league_pa", "era_factor=math.sqrt(MODERN_LEAGUE['three_pa']/league_pa)")
+          p.write_text(s)
+          PY
       - name: Generate 175-player audit
         run: python scripts/audit-three-point.py
       - name: Commit audit output
@@ -31,6 +38,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No audit changes"
           else
-            git commit -m "v0.10.20: generate 175-player 3PT audit"
+            git commit -m "v0.10.20: tune and regenerate 175-player 3PT audit"
             git push
           fi
