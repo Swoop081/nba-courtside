@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.27 — automatic quarter flow, live matchup ledger, compact POTG final */
+/* NBA Courtside v0.10.29 — automatic quarter flow, live matchup ledger, larger POTG final */
 (()=>{
   if(window.__courtsideGameFlowV01012)return;
   window.__courtsideGameFlowV01012=true;
@@ -132,6 +132,18 @@
       <div class="potg-card-wrap">${card}</div>
       <div class="compact-final-actions"><button type="button" class="primary-btn" id="compactPlayAgain">Play Again</button><button type="button" class="ghost-btn" id="compactMenu">Menu</button></div>
     </section>`;
+
+    const shell=final.querySelector('.compact-final-card');
+    const wrap=final.querySelector('.potg-card-wrap');
+    const actions=final.querySelector('.compact-final-actions');
+    if(shell&&wrap&&actions){
+      [...shell.childNodes].forEach(n=>{
+        if(n===wrap||n===actions)return;
+        if(n.nodeType===3&&n.textContent.trim()===playerName(potg))n.remove();
+        if(n.nodeType===1&&n!==wrap&&n!==actions&&n.textContent?.trim()===playerName(potg))n.remove();
+      });
+    }
+
     const again=document.getElementById('compactPlayAgain');
     const menu=document.getElementById('compactMenu');
     if(again)again.onclick=()=>window.resetGame();
