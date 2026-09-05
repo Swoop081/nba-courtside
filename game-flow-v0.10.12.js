@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.29 — automatic quarter flow, live matchup ledger, larger POTG final */
+/* NBA Courtside v0.10.30 — automatic quarter flow, transparent quarter-band transitions, live matchup ledger, larger POTG final */
 (()=>{
   if(window.__courtsideGameFlowV01012)return;
   window.__courtsideGameFlowV01012=true;
@@ -50,8 +50,8 @@
     strong.textContent=text;
     t.classList.remove('hidden','out');
     requestAnimationFrame(()=>t.classList.add('in'));
-    setTimeout(()=>t.classList.add('out'),520);
-    setTimeout(()=>{t.classList.add('hidden');t.classList.remove('in','out');done?.();},760);
+    setTimeout(()=>t.classList.add('out'),1120);
+    setTimeout(()=>{t.classList.add('hidden');t.classList.remove('in','out');done?.();},1520);
   };
 
   const originalBegin=window.beginQuarter;
