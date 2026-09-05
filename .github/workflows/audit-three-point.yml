@@ -1,0 +1,33 @@
+name: Audit 3PT Ratings
+
+on:
+  push:
+    paths:
+      - 'scripts/audit-three-point.py'
+      - '.github/workflows/audit-three-point.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate 175-player audit
+        run: python scripts/audit-three-point.py
+      - name: Commit audit output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add three-point-audit-v0.10.20.json THREE-POINT-AUDIT-v0.10.20.md
+          if git diff --cached --quiet; then
+            echo "No audit changes"
+          else
+            git commit -m "v0.10.20: generate 175-player 3PT audit"
+            git push
+          fi
