@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.16 — Season Rewards MVP ladder + gold quarter transitions + automatic quarter flow hotfix + interaction restore + live matchup ledger + compact POTG final + tighter global Foundation rating */
+/* NBA Courtside v0.10.17 — full season awards + All-Star Weekend + Season Rewards MVP ladder + gold quarter transitions + automatic quarter flow hotfix + interaction restore + live matchup ledger + compact POTG final + tighter global Foundation rating */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -44,4 +44,5 @@
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
+  document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
 })();
