@@ -1,11 +1,15 @@
-/* NBA Courtside v0.10.30 — automatic quarter flow, transparent quarter-band transitions, live matchup ledger, larger POTG final */
+/* NBA Courtside v0.10.33 — automatic quarter flow, audited team logos, transparent quarter-band transitions, live matchup ledger, larger POTG final */
 (()=>{
   if(window.__courtsideGameFlowV01012)return;
   window.__courtsideGameFlowV01012=true;
 
   const label=k=>(window.STAT_LABELS&&STAT_LABELS[k])||({scoring:'Scoring',dunks:'Dunking',three:'3PT',freeThrows:'Free Throws',rebounding:'Rebounding',passing:'Passing',blocks:'Blocks',steals:'Steals'}[k]||k||'Matchup');
-  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  const playerLogo=p=>p?.teamId?`https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`:'';
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[m]));
+  const playerLogo=p=>{
+    try{if(typeof window.logoUrl==='function'){const u=window.logoUrl(p);if(u)return u;}}catch{}
+    if(p?.classicLogo)return p.classicLogo;
+    return p?.teamId?`assets/team-logos/current/${p.teamId}.svg`:'';
+  };
   const playerName=p=>p?.name||'Player';
   const teamName=p=>p?.teamShort||p?.team||'Team';
 
@@ -75,9 +79,8 @@
       if(!window.state)return;
       if(state.overtime){window.finishGame();return;}
       if(state.quarter===4){
-        if(state.userScore===state.cpuScore){
-          showTransition('OVERTIME',()=>window.startOvertime());
-        }else window.finishGame();
+        if(state.userScore===state.cpuScore){showTransition('OVERTIME',()=>window.startOvertime());}
+        else window.finishGame();
         return;
       }
       const nextQ=state.quarter+1;
@@ -132,18 +135,10 @@
       <div class="potg-card-wrap">${card}</div>
       <div class="compact-final-actions"><button type="button" class="primary-btn" id="compactPlayAgain">Play Again</button><button type="button" class="ghost-btn" id="compactMenu">Menu</button></div>
     </section>`;
-
     const shell=final.querySelector('.compact-final-card');
     const wrap=final.querySelector('.potg-card-wrap');
     const actions=final.querySelector('.compact-final-actions');
-    if(shell&&wrap&&actions){
-      [...shell.childNodes].forEach(n=>{
-        if(n===wrap||n===actions)return;
-        if(n.nodeType===3&&n.textContent.trim()===playerName(potg))n.remove();
-        if(n.nodeType===1&&n!==wrap&&n!==actions&&n.textContent?.trim()===playerName(potg))n.remove();
-      });
-    }
-
+    if(shell&&wrap&&actions){[...shell.childNodes].forEach(n=>{if(n===wrap||n===actions)return;if(n.nodeType===3&&n.textContent.trim()===playerName(potg))n.remove();if(n.nodeType===1&&n!==wrap&&n!==actions&&n.textContent?.trim()===playerName(potg))n.remove();});}
     const again=document.getElementById('compactPlayAgain');
     const menu=document.getElementById('compactMenu');
     if(again)again.onclick=()=>window.resetGame();
@@ -151,10 +146,8 @@
     if(typeof window.__courtsideFoundationRatingApply==='function')requestAnimationFrame(window.__courtsideFoundationRatingApply);
     window.scrollTo({top:0,behavior:'instant'});
   };
-
   window.nextQuarter=window.nextQuarter||nextQuarter;
   window.startOvertime=window.startOvertime||startOvertime;
   window.resetGame=window.resetGame||resetGame;
-
   ensureUI();renderHistory();
 })();
