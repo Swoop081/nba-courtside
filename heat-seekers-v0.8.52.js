@@ -1,4 +1,4 @@
-/* NBA Courtside v0.9.14 — Foundation + PNG-only art pass + 20% smaller gameplay rail + unslashed zero numerals + Detroit position swap + first-card rail padding + centred rating + artwork top-edge access */
+/* NBA Courtside v0.9.15 — Foundation + PNG-only art pass + dynamic art cache busting + current card/UI fixes */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
