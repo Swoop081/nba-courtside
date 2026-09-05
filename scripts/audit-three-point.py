@@ -88,7 +88,7 @@ def pick_row(name):
 def clamp(x,a=0.0,b=1.0):return max(a,min(b,x))
 
 def score_components(pm,pa,pct,league_pa,league_pct):
-    era_factor=MODERN_LEAGUE['three_pa']/league_pa
+    era_factor=math.sqrt(MODERN_LEAGUE['three_pa']/league_pa)
     adj_pm=pm*era_factor; adj_pa=pa*era_factor
     # Efficiency is relative to that season's league. Tiny samples lose efficiency credit.
     sample=clamp(adj_pa/3.0)
