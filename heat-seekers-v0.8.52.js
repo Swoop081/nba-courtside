@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.40 — Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 215-player pool + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.40 — Miami Heat 2013 + Utah Jazz 1997 + Charlotte Hornets 1993 + Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 215-player pool + 13 Classic Teams + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
