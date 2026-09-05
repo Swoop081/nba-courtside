@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.36 — Los Angeles Lakers 1987 Classic Team + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 195-player pool + season awards + All-Star Weekend */
+/* NBA Courtside v0.10.37 — Boston Celtics 1986 + Los Angeles Lakers 1987 + Phoenix Suns 2007 + Dallas Mavericks 1995 + Detroit Pistons 2004 + deterministic classic logos + clean Play Again reset + larger final presentation + transparent automatic quarter transitions + approved Overall hierarchy + 200-player pool + season awards + All-Star Weekend */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -7,6 +7,7 @@
   document.write('<script src="classic-detroit-2004-v0.10.34.js?t='+t+'"><\/script>');
   document.write('<script src="classic-phoenix-2007-dallas-1995-v0.10.35.js?t='+t+'"><\/script>');
   document.write('<script src="classic-lakers-1987-v0.10.36.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-boston-1986-v0.10.37.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-egor-hotfix-v0.10.19.js?t='+t+'"><\/script>');
