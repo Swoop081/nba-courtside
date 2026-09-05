@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # NBA Courtside v0.10.23 — 175-player Steals audit.
-# Rating = round(30 * (SPG / 2.5)^0.60), capped 1..30.
+# Rating = round(30 * (SPG / 2.0)^0.60), capped 1..30.
 import csv,io,json,math,re,unicodedata,urllib.request
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -8,7 +8,7 @@ URL='https://raw.githubusercontent.com/miamiasheep/nba_analysis/main/bbr_per_gam
 def norm(s):
  s=unicodedata.normalize('NFD',str(s)).encode('ascii','ignore').decode().lower(); return re.sub(r'[^a-z0-9]+',' ',s).strip()
 def rating(spg):
- s=max(0.0,float(spg)); return max(1,min(30,int(math.floor(30*((s/2.5)**0.60)+0.5)))) if s>0 else 1
+ s=max(0.0,float(spg)); return max(1,min(30,int(math.floor(30*((s/2.0)**0.60)+0.5)))) if s>0 else 1
 foundation=(ROOT/'foundation-v0.9.0.js').read_text(encoding='utf-8')
 modern=[]
 for n,p in re.findall(r"\['([^']*(?:\\'[^']*)*)','(PG|SG|SF|PF|C)',\[",foundation):
@@ -43,7 +43,6 @@ for n,seas in classic_rows:
  s=cs.get((n,seas))
  if s is None: missing.append(f'{n} {seas}'); continue
  out.append({'name':n,'season':seas,'classic':True,'spg':s,'rating':rating(s)})
-# The Classic source parser yields 24 rows because Shaq's apostrophe defeats its simple row regex.
 if not any(x['classic'] and x['name']=="Shaquille O'Neal" for x in out):
  s=cs[("Shaquille O'Neal",'2002')]; out.append({'name':"Shaquille O'Neal",'season':'2002','classic':True,'spg':s,'rating':rating(s)})
 if missing or len(out)!=175: raise SystemExit(f'Expected 175; got {len(out)} missing={missing}')
@@ -52,6 +51,6 @@ for i,x in enumerate(out,1): x['rank']=i
 bands=[]
 for lo in range(1,30,5):
  hi=min(30,lo+4); c=sum(lo<=x['rating']<=hi for x in out); bands.append({'range':f'{lo}-{hi}','players':c,'percent':round(c/175*100,1)})
-result={'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY','formula':'round(30 * (SPG / 2.5)^0.60), capped 1..30','count':175,'distribution':bands,'players':out}
+result={'status':'AUDIT_ONLY_NOT_APPLIED_TO_GAMEPLAY','formula':'round(30 * (SPG / 2.0)^0.60), capped 1..30','count':175,'distribution':bands,'players':out}
 (ROOT/'steals-audit-v0.10.23.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print(json.dumps({'count':175,'distribution':bands,'top20':out[:20],'bottom10':out[-10:]},ensure_ascii=False,indent=2))
