@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.12 — authoritative matchup category ticker */
+/* NBA Starting5 v0.11.13 — authoritative matchup ticker + team-colour scoreboard */
 (()=>{
-  if(window.__courtsideGameInfoBarV01112)return;
-  window.__courtsideGameInfoBarV01112=true;
+  if(window.__courtsideGameInfoBarV01113)return;
+  window.__courtsideGameInfoBarV01113=true;
 
   const labels={
     scoring:'SCORING',
@@ -49,8 +49,6 @@
 
   const showTransition=text=>{
     const raw=String(text||'').trim().toUpperCase();
-    // Old quarter-transition code emits generic MATCHUP between rounds. Never let
-    // that overwrite the authoritative category ticker.
     if(!raw||raw==='MATCHUP'||raw==='NEXT MATCHUP'){
       showCurrent();
       return;
@@ -86,25 +84,54 @@
     sync();
   };
 
+  const teamPlayer=side=>{
+    try{
+      const arr=side==='home'?userTeam:cpuTeam;
+      return Array.isArray(arr)&&arr.length?arr[0]:null;
+    }catch{return null}
+  };
+
+  const paintScoreboard=()=>{
+    const sb=document.querySelector('#game .scoreboard');
+    if(!sb)return;
+    let sides=[...sb.querySelectorAll('.score-side')];
+    if(sides.length<2){
+      sides=[...sb.children].filter(el=>!el.classList.contains('quarter-badge'));
+    }
+    if(sides.length<2)return;
+    const apply=(el,p)=>{
+      if(!el||!p)return;
+      const a=p?.theme?.a||'#1d428a';
+      const b=p?.theme?.b||'#ffffff';
+      const c=p?.theme?.c||'#07111d';
+      el.style.setProperty('background',`linear-gradient(135deg, ${a} 0%, ${a} 58%, ${c} 100%)`,'important');
+      el.style.setProperty('border-color',b,'important');
+    };
+    apply(sides[0],teamPlayer('home'));
+    apply(sides[sides.length-1],teamPlayer('away'));
+  };
+
   const wrap=name=>{
     let original=null;try{original=window[name]||eval(name)}catch{}
-    if(typeof original!=='function'||original.__gameInfoV01112)return;
+    if(typeof original!=='function'||original.__gameInfoV01113)return;
     const wrapped=function(){
       const r=original.apply(this,arguments);
-      requestAnimationFrame(showCurrent);
-      setTimeout(showCurrent,40);
+      requestAnimationFrame(()=>{showCurrent();paintScoreboard();});
+      setTimeout(()=>{showCurrent();paintScoreboard();},40);
       return r;
     };
-    wrapped.__gameInfoV01112=true;
+    wrapped.__gameInfoV01113=true;
     window[name]=wrapped;
     try{eval(`${name}=window[name]`);}catch{}
   };
 
   const start=()=>{
-    ensureBar();showCurrent();mirrorQuarterTransition();
+    ensureBar();showCurrent();mirrorQuarterTransition();paintScoreboard();
     ['beginQuarter','playQuarter','resetGame','nextQuarter','startOvertime'].forEach(wrap);
     const cat=document.getElementById('categoryLabel');
     if(cat)new MutationObserver(showCurrent).observe(cat,{childList:true,subtree:true,characterData:true});
+    const sb=document.querySelector('#game .scoreboard');
+    if(sb)new MutationObserver(()=>requestAnimationFrame(paintScoreboard)).observe(sb,{childList:true,subtree:true});
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
