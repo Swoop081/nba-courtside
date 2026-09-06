@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.15 — single authoritative matchup ticker + stable gameplay systems */
+/* NBA Starting5 v0.11.16 — Season matchup records + full standings columns */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -87,6 +87,7 @@
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v1.0.0.js?t='+t+'"><\/script>');
+  document.write('<script src="season-hub-standings-v0.11.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-core-ui-v0.11.1.js?t='+t+'"><\/script>');
   document.write('<script src="season-presentation-reset-v0.11.5.js?t='+t+'"><\/script>');
   document.write('<script src="update-check-stability-v0.11.7.js?t='+t+'"><\/script>');
