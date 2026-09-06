@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.32 — unified 330-card V2 ratings + full-pool audit */
+/* NBA Starting5 v0.11.33 — V2 ratings + Free Throws matchup removal */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -84,6 +84,7 @@
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
+  document.write('<script src="matchup-category-hotfix-v0.11.33.js?t='+t+'"><\/script>');
   document.write('<script src="game-card-inspect-v0.11.6.js?t='+t+'"><\/script>');
   document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
