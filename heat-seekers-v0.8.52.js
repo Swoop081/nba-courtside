@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.64 — true visual centering + global NBA Starting5 rebrand + compact Classic years + reliable Classic logo fallbacks + played cards move to end of rail + 250-player pool + 20 Classic Teams */
+/* NBA Starting5 v0.10.65 — user-edited art layouts + true visual centering + global NBA Starting5 rebrand + compact Classic years + reliable Classic logo fallbacks + played cards move to end of rail + 250-player pool + 20 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -41,6 +41,7 @@
   document.write('<link rel="stylesheet" href="foundation-art-edge-v0.9.14.css?t='+t+'">');
   document.write('<script src="foundation-art-editor-compat-v0.9.3.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-art-layout-v0.9.28.js?t='+t+'"><\/script>');
+  document.write('<script src="art-layout-edits-v0.10.65.js?t='+t+'"><\/script>');
   document.write('<script src="art-editor-v0.8.64.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-editor-plaque-v0.9.7.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="unslashed-zero-v0.9.10.css?t='+t+'">');
