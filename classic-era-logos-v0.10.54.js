@@ -1,7 +1,7 @@
-/* NBA Courtside v0.10.58 — era-accurate Classic Team primary-logo resolver */
+/* NBA Courtside v0.10.59 — stable era-accurate Classic Team logo resolver; no cross-team header mutation loop */
 (()=>{
-  if(window.__courtsideClassicEraLogosV01054)return;
-  window.__courtsideClassicEraLogosV01054=true;
+  if(window.__courtsideClassicEraLogosV01059)return;
+  window.__courtsideClassicEraLogosV01059=true;
 
   const ERA={
     'classic-tor-2003':'https://content.sportslogos.net/logos/6/227/full/toronto_raptors_logo_primary_19961665.png',
@@ -27,7 +27,7 @@
   };
 
   const allPlayers=()=>{
-    try{return Array.isArray(window.COURTSIDE_FOUNDATION_PLAYERS)?window.COURTSIDE_FOUNDATION_PLAYERS:players||[];}catch{return window.COURTSIDE_FOUNDATION_PLAYERS||[];}
+    try{return players||[];}catch{return window.COURTSIDE_FOUNDATION_PLAYERS||[];}
   };
   const playerById=id=>allPlayers().find(p=>String(p.id)===String(id));
   const eraFor=p=>p&&ERA[p.teamId]||'';
@@ -41,45 +41,50 @@
   window.logoUrl=resolver;
   window.COURTSIDE_CLASSIC_ERA_LOGOS={...ERA};
 
+  function setSrc(img,u){
+    if(img&&u&&img.getAttribute('src')!==u)img.setAttribute('src',u);
+  }
   function repairCard(card){
     const p=playerById(card?.dataset?.id);const u=eraFor(p);if(!u)return;
-    card.querySelectorAll('.foundation-team-logo,.foundation-bg-team-logo,.team-logo,.team-mark img').forEach(img=>{if(img.getAttribute('src')!==u)img.src=u;});
+    card.querySelectorAll('.foundation-team-logo,.foundation-bg-team-logo,.team-logo,.team-mark img').forEach(img=>setSrc(img,u));
   }
-  function repairClassicHeader(){
-    const teams=window.COURTSIDE_CLASSIC_TEAMS||[];
-    teams.forEach(t=>{
-      const u=ERA[t.id];if(!u)return;
-      document.querySelectorAll('img').forEach(img=>{
-        const box=img.closest('section,article,div');
-        const txt=(box?.textContent||'').replace(/\s+/g,' ').trim();
-        if((txt.includes(t.short)||txt.includes(t.team)) && img.width<220 && img.height<220){
-          if(img.getAttribute('src')!==u)img.src=u;
-        }
-      });
-    });
+  function teamFromSide(side){
+    const name=(side.textContent||'').toLowerCase();
+    return (window.COURTSIDE_CLASSIC_TEAMS||[]).find(t=>
+      name.includes(String(t.short||'').toLowerCase())||name.includes(String(t.team||'').toLowerCase())
+    );
   }
   function repairScoreboard(){
     document.querySelectorAll('#game .score-side').forEach(side=>{
-      const name=(side.textContent||'').toLowerCase();
-      const team=(window.COURTSIDE_CLASSIC_TEAMS||[]).find(t=>name.includes(String(t.short||'').toLowerCase())||name.includes(String(t.team||'').toLowerCase()));
-      if(!team||!ERA[team.id])return;
-      side.querySelectorAll('img').forEach(img=>img.src=ERA[team.id]);
+      const team=teamFromSide(side);const u=team&&ERA[team.id];if(!u)return;
+      side.querySelectorAll('img').forEach(img=>setSrc(img,u));
     });
   }
   function repairFinal(){
     document.querySelectorAll('#final img').forEach(img=>{
       const parent=img.closest('div,section,article');const txt=(parent?.textContent||'').toLowerCase();
-      const team=(window.COURTSIDE_CLASSIC_TEAMS||[]).find(t=>txt.includes(String(t.short||'').toLowerCase())||txt.includes(String(t.team||'').toLowerCase()));
-      if(team&&ERA[team.id])img.src=ERA[team.id];
+      const team=(window.COURTSIDE_CLASSIC_TEAMS||[]).find(t=>
+        txt.includes(String(t.short||'').toLowerCase())||txt.includes(String(t.team||'').toLowerCase())
+      );
+      if(team&&ERA[team.id])setSrc(img,ERA[team.id]);
     });
   }
+
+  /* Intentionally do NOT scan generic catalogue/header containers by text.
+     That old repair path could match several teams in one parent and repeatedly
+     overwrite the same image, causing the visible Pistons/Vancouver flicker. */
   const sync=()=>{
     document.querySelectorAll('.foundation-card,.player-card').forEach(repairCard);
-    repairClassicHeader();repairScoreboard();repairFinal();
+    repairScoreboard();repairFinal();
+  };
+  let queued=false;
+  const queueSync=()=>{
+    if(queued)return;queued=true;
+    requestAnimationFrame(()=>{queued=false;sync();});
   };
   const start=()=>{
     sync();
-    new MutationObserver(()=>requestAnimationFrame(sync)).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','src']});
+    new MutationObserver(queueSync).observe(document.body,{childList:true,subtree:true});
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
