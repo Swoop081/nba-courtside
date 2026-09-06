@@ -1,7 +1,7 @@
-/* NBA Courtside v0.10.14 — restore reliable gameplay card selection */
+/* NBA Starting5 v0.11.6 — reliable gameplay selection with nameplate inspection split */
 (()=>{
-  if(window.__courtsideGameInteractionHotfixV01014)return;
-  window.__courtsideGameInteractionHotfixV01014=true;
+  if(window.__courtsideGameInteractionHotfixV0116)return;
+  window.__courtsideGameInteractionHotfixV0116=true;
 
   const canPick=card=>{
     if(!card||card.classList.contains('used'))return false;
@@ -28,29 +28,25 @@
   document.addEventListener('click',e=>{
     const card=e.target.closest('#lineup .player-card');
     if(!canPick(card))return;
+
+    // The plaque/nameplate is the inspection target. Everything else on the card
+    // remains the immediate Play Card target.
+    if(e.target.closest('.identity'))return;
+
     const rail=document.getElementById('lineup');
     if(!rail)return;
-
     const last=state.history?.[state.history.length-1];
     const hasResultForCurrent=!!last && last.quarter===state.quarter;
-    if(rail.classList.contains('result-open')&&!hasResultForCurrent){
-      rail.classList.remove('result-open');
-    }
+    if(rail.classList.contains('result-open')&&!hasResultForCurrent)rail.classList.remove('result-open');
     if(rail.classList.contains('result-open'))return;
 
     const before=state.history?.length||0;
-    try{playQuarter(card.dataset.id);}catch(err){console.error('Courtside v0.10.14 pick failed',err);return;}
+    try{playQuarter(card.dataset.id);}catch(err){console.error('Starting5 v0.11.6 pick failed',err);return;}
     const after=state.history?.length||0;
-    if(after>before){
-      e.preventDefault();
-      e.stopImmediatePropagation();
-    }
+    if(after>before){e.preventDefault();e.stopImmediatePropagation();}
   },true);
 
-  const sync=()=>{
-    unlockFreshQuarter();
-    requestAnimationFrame(unlockFreshQuarter);
-  };
+  const sync=()=>{unlockFreshQuarter();requestAnimationFrame(unlockFreshQuarter);};
   document.addEventListener('DOMContentLoaded',sync,{once:true});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync();});
   setInterval(unlockFreshQuarter,150);
