@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.57 — era-accurate Classic Team primary-logo resolver */
+/* NBA Courtside v0.10.58 — era-accurate Classic Team primary-logo resolver */
 (()=>{
   if(window.__courtsideClassicEraLogosV01054)return;
   window.__courtsideClassicEraLogosV01054=true;
@@ -16,6 +16,7 @@
     'classic-dal-1995':'https://content.sportslogos.net/logos/6/228/full/dallas_mavericks_logo_primary_19945760.png',
     'classic-dal-2011':'https://content.sportslogos.net/logos/6/228/full/ifk08eam05rwxr3yhol3whdcm.png',
     'classic-bos-1986':'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19759952.png',
+    'classic-bos-2008':'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19979720.png',
     'classic-cha-1993':'https://content.sportslogos.net/logos/6/256/full/charlotte_hornets_logo_primary_19896932.png',
     'classic-uta-1997':'https://content.sportslogos.net/logos/6/234/full/utah_jazz_logo_primary_19973688.png',
     'classic-mia-2013':'https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg',
