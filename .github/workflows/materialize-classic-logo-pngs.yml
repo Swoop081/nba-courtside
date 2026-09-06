@@ -26,7 +26,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from io import BytesIO
-          import requests, cairosvg
+          import html, re, requests, cairosvg
           from PIL import Image
 
           root=Path('assets/team-logos/classic')
@@ -53,14 +53,18 @@ jobs:
             raw=cairosvg.svg2png(bytestring=src.read_bytes(),output_width=1024,output_height=1024)
             normalize(Image.open(BytesIO(raw)),root/f'{stem}.png')
 
-          # Exact historical marks for the five teams without a local source file.
           png_sources={
             'boston-celtics-2008':'https://brandlogos.net/wp-content/uploads/2014/11/boston_celtics-logo_brandlogos.net_n6sec-512x567.png',
             'dallas-mavericks-2011':'https://brandlogos.net/wp-content/uploads/2014/12/dallas_mavericks_2001-2017-logo_brandlogos.net_gucmb-512x534.png',
-            'detroit-pistons-1989':'https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_of_the_Detroit_Pistons_%281978%E2%80%931996%29.png',
             'indiana-pacers-2000':'https://i.logos-download.com/4116/31571-s640-0f5a88a5a6c0f71275089fee4472a665.png/Indiana_Pacers_Logo_1990-s640.png?dl=',
             'sacramento-kings-2002':'https://brandlogos.net/wp-content/uploads/2014/12/sacramento_kings_1994-2016-logo_brandlogos.net_3qkxb-512x637.png'
           }
+          # Resolve the 1978-96 Pistons primary mark from the historical logo page to avoid Wikimedia rate limiting.
+          page=session.get('https://logos-download.com/brands/detroit-pistons',timeout=30); page.raise_for_status()
+          matches=re.findall(r'https://i\.logos-download\.com/[^\"\'<> ]*Detroit_Pistons_Logo_1978-s640\.png[^\"\'<> ]*',html.unescape(page.text))
+          if not matches: raise SystemExit('Could not resolve Detroit Pistons 1978 PNG')
+          png_sources['detroit-pistons-1989']=matches[0]
+
           for stem,url in png_sources.items():
             r=session.get(url,timeout=30); r.raise_for_status()
             normalize(Image.open(BytesIO(r.content)),root/f'{stem}.png')
