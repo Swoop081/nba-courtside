@@ -1,5 +1,8 @@
 name: Activate Classic Expansion v0.10.83
 on:
+  push:
+    paths:
+      - '.github/workflows/activate-classic-expansion-v0.10.83.yml'
   workflow_run:
     workflows: ['Materialize Classic Expansion Logos v0.10.83']
     types: [completed]
@@ -7,7 +10,7 @@ permissions:
   contents: write
 jobs:
   activate:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
