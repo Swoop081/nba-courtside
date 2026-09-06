@@ -1,0 +1,46 @@
+name: Activate Classic Logo Transparency v0.10.81
+
+on:
+  push:
+    paths:
+      - '.github/workflows/activate-classic-logo-transparency-v0.10.81.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Activate persistent logo runtime and bump build
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path('heat-seekers-v0.8.52.js')
+          s=p.read_text()
+          s=s.replace('/* NBA Starting5 v0.10.80 — runtime Classic transparency enforcement + single Classic logo authority + preserved art layouts + Starting5 presentation */','/* NBA Starting5 v0.10.81 — persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */')
+          s=s.replace("classic-logo-runtime-transparency-v0.10.80.js","classic-logo-runtime-transparency-v0.10.81.js")
+          p.write_text(s)
+          Path('build.json').write_text(json.dumps({"version":"0.10.81","build":"20260906-0500","commit":"pending"},separators=(',',':'))+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add heat-seekers-v0.8.52.js build.json
+          git commit -m 'Activate v0.10.81 persistent Classic logo transparency'
+          git pull --rebase origin main
+          git push origin HEAD:main
+          SHA=$(git rev-parse HEAD)
+          python - <<PY
+          import json
+          from pathlib import Path
+          p=Path('build.json'); d=json.loads(p.read_text()); d['commit']='$SHA'; p.write_text(json.dumps(d,separators=(',',':'))+'\n')
+          PY
+          git add build.json
+          git commit -m 'Set NBA Starting5 v0.10.81 build metadata'
+          git pull --rebase origin main
+          git push origin HEAD:main
