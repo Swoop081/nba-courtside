@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.21 — large winner banner + reliable final Menu */
+/* NBA Starting5 v0.11.22 — large winner banner + reliable final Menu + POTG score spacing */
 (()=>{
-  if(window.__starting5FinalUiV01121)return;
-  window.__starting5FinalUiV01121=true;
+  if(window.__starting5FinalUiV01122)return;
+  window.__starting5FinalUiV01122=true;
 
   let syncing=false;
   const enhanceFinal=()=>{
@@ -52,7 +52,13 @@
       letter-spacing:-.035em!important;text-transform:uppercase!important;color:#fff!important;
     }
     #final .compact-final-card>h2.s5-final-old-winner,#final .final-card>#finalResult{display:none!important}
-    @media(max-width:430px){#final>.s5-final-winner-banner,#final>.s5-final-winner-headline{font-size:56px!important;margin-bottom:9px!important}}
+    #final .compact-final-scoreboard{margin-bottom:26px!important}
+    #final .compact-final-scoreboard + h2.s5-final-old-winner + .potg-label,
+    #final .compact-final-scoreboard + .potg-label{margin-top:0!important}
+    @media(max-width:430px){
+      #final>.s5-final-winner-banner,#final>.s5-final-winner-headline{font-size:56px!important;margin-bottom:9px!important}
+      #final .compact-final-scoreboard{margin-bottom:24px!important}
+    }
     @media(max-width:370px){#final>.s5-final-winner-banner,#final>.s5-final-winner-headline{font-size:50px!important}}
   `;
   document.head.appendChild(style);
