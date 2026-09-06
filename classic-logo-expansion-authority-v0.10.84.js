@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.29 — complete Classic Team logo authority + Bulls 2011 / Magic 2009 */
+/* NBA Starting5 v0.11.30 — complete Classic Team logo authority + Cavaliers 1993 / Spurs 1999 */
 (()=>{
-  if(window.__starting5ClassicLogoAuthorityV01129)return;
-  window.__starting5ClassicLogoAuthorityV01129=true;
+  if(window.__starting5ClassicLogoAuthorityV01130)return;
+  window.__starting5ClassicLogoAuthorityV01130=true;
 
   const CANDIDATES={
     'classic-bos-1986':['assets/team-logos/classic/boston-celtics-1986-alpha-v3.png','assets/team-logos/classic/boston-celtics-1986.png','assets/team-logos/classic/boston-celtics-1986.svg'],
@@ -9,6 +9,8 @@
     'classic-cha-1993':['assets/team-logos/classic/charlotte-hornets-1993-alpha-v3.png','assets/team-logos/classic/charlotte-hornets-1993.png','assets/team-logos/classic/charlotte-hornets-1993.svg'],
     'classic-chi-1998':['assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png','assets/team-logos/classic/chicago-bulls-1998.png','assets/team-logos/classic/chicago-bulls-1998.svg'],
     'classic-chi-2011':['assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png','assets/team-logos/classic/chicago-bulls-1998.png','assets/team-logos/classic/chicago-bulls-1998.svg'],
+    'classic-cle-1993':['https://content.sportslogos.net/logos/6/222/full/cleveland_cavaliers_logo_primary_19846739.png'],
+    'classic-cle-2004':['https://content.sportslogos.net/logos/6/222/full/cleveland_cavaliers_logo_primary_20046125.png'],
     'classic-dal-1995':['assets/team-logos/classic/dallas-mavericks-1995-alpha-v3.png','assets/team-logos/classic/dallas-mavericks-1995.png','assets/team-logos/classic/dallas-mavericks-1995.svg'],
     'classic-dal-2011':['assets/team-logos/classic/dallas-mavericks-2011-alpha-v3.png','assets/team-logos/classic/dallas-mavericks-2011.png'],
     'classic-det-1989':['assets/team-logos/classic/detroit-pistons-1989-alpha-v3.png','assets/team-logos/classic/detroit-pistons-1989.png'],
@@ -20,6 +22,7 @@
     'classic-mia-2013':['assets/team-logos/classic/miami-heat-2013-alpha-v3.png','assets/team-logos/classic/miami-heat-2013.png','assets/team-logos/classic/miami-heat-2013.svg'],
     'classic-phx-2007':['assets/team-logos/classic/phoenix-suns-2007-alpha-v3.png','assets/team-logos/classic/phoenix-suns-2007.png','assets/team-logos/classic/phoenix-suns-2007.svg'],
     'classic-sac-2002':['assets/team-logos/classic/sacramento-kings-2002-alpha-v5.png','assets/team-logos/classic/sacramento-kings-2002-alpha-v4.png','assets/team-logos/classic/sacramento-kings-2002-alpha-v3.png','assets/team-logos/classic/sacramento-kings-2002.png'],
+    'classic-sas-1999':['https://content.sportslogos.net/logos/6/233/full/e04ylwkfdofkr2ctlerjov26s.png'],
     'classic-sas-2005':['assets/team-logos/classic/san-antonio-spurs-2005-alpha-v5.png','assets/team-logos/classic/san-antonio-spurs-2005-alpha-v4.png','assets/team-logos/classic/san-antonio-spurs-2005-alpha-v3.png','assets/team-logos/classic/san-antonio-spurs-2005.png','assets/team-logos/classic/san-antonio-spurs-2005.svg'],
     'classic-sea-1996':['assets/team-logos/classic/seattle-supersonics-1996-alpha-v3.png','assets/team-logos/classic/seattle-supersonics-1996.png','assets/team-logos/classic/seattle-supersonics-1996.svg'],
     'classic-tor-2003':['assets/team-logos/classic/toronto-raptors-2003-alpha-v3.png','assets/team-logos/classic/toronto-raptors-2003.png','assets/team-logos/classic/toronto-raptors-2003.svg'],
@@ -36,8 +39,7 @@
     'classic-nyk-1994':['assets/team-logos/classic/new-york-knicks-1994.png'],
     'classic-atl-1993':['assets/team-logos/classic/atlanta-hawks-1993.png'],
     'classic-phi-2001':['https://flyclipart.com/thumb2/philadelphia-logo-141042.png'],
-    'classic-nyk-2012':['https://content.sportslogos.net/logos/6/216/full/new_york_knicks_logo_primary_20129558.png'],
-    'classic-cle-2004':['https://content.sportslogos.net/logos/6/222/full/cleveland_cavaliers_logo_primary_20046125.png']
+    'classic-nyk-2012':['https://content.sportslogos.net/logos/6/216/full/new_york_knicks_logo_primary_20129558.png']
   };
 
   const firstMap=Object.fromEntries(Object.entries(CANDIDATES).map(([id,a])=>[id,a[0]]));
