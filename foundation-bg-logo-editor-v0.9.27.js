@@ -1,9 +1,9 @@
-/* NBA Starting5 v0.11.46 — universal top-anchored full-width background team-logo layout */
+/* NBA Starting5 v0.11.47 — true top-anchored full-width background team-logo layout */
 (()=>{
   const SIZE_KEY='nbaCourtsideBgLogoSizeV1';
   const POS_KEY='nbaCourtsideBgLogoPositionV1';
   const ROT_KEY='nbaCourtsideBgLogoRotationV1';
-  const MIGRATION_KEY='nbaStarting5BgLogoUniversalV01146';
+  const MIGRATION_KEY='nbaStarting5BgLogoUniversalV01147';
   const players=()=>{
     const pools=[];
     ['COURTSIDE_FOUNDATION_PLAYERS','FOUNDATION_PLAYERS','foundationPlayers','COURTSIDE_CLASSIC_PLAYERS'].forEach(k=>{if(Array.isArray(window[k]))pools.push(window[k])});
@@ -20,11 +20,11 @@
   const playerBySlug=slug=>players().find(p=>p.artSlug===slug)||null;
   const playerForCard=card=>players().find(p=>String(p.id)===String(card?.dataset?.id))||null;
 
-  /* Every team watermark starts at the top of the card, is unrotated and deliberately
-     oversized so the visible logo reaches/crops into both side edges instead of floating
-     low in the centre. Width is the authority; height stays intrinsic so object-fit does
-     not vertically centre the logo inside an oversized square box. */
+  /* The image element itself is lifted by 32% of its own rendered height. This removes
+     the visual dead space that kept tall logos like Chicago's centred too low even when
+     CSS top was 0. Width is deliberately oversized so the visible mark reaches both sides. */
   const STANDARD={scale:1.60,x:0,y:0,rotation:0};
+  const VISUAL_TOP_LIFT=32;
   const factorFor=p=>{const v=read(SIZE_KEY)[p?.teamId];return Number.isFinite(Number(v))?Number(v):STANDARD.scale;};
   const posFor=p=>{const v=read(POS_KEY)[p?.teamId]||{};return{x:Number.isFinite(Number(v.x))?Number(v.x):STANDARD.x,y:Number.isFinite(Number(v.y))?Number(v.y):STANDARD.y};};
   const rotFor=p=>{const v=read(ROT_KEY)[p?.teamId];return Number.isFinite(Number(v))?Number(v):STANDARD.rotation;};
@@ -45,11 +45,12 @@
     logo.style.setProperty('width',`${w}%`,'important');
     logo.style.setProperty('height','auto','important');
     logo.style.setProperty('max-width','none','important');
+    logo.style.setProperty('max-height','none','important');
     logo.style.setProperty('left',`calc(50% + ${pos.x}%)`,'important');
     logo.style.setProperty('right','auto','important');
     logo.style.setProperty('top',`${pos.y}%`,'important');
     logo.style.setProperty('bottom','auto','important');
-    logo.style.setProperty('transform',`translateX(-50%) rotate(${rot}deg)`,'important');
+    logo.style.setProperty('transform',`translate(-50%,-${VISUAL_TOP_LIFT}%) rotate(${rot}deg)`,'important');
     logo.style.setProperty('transform-origin','center top','important');
     logo.style.setProperty('object-fit','contain','important');
     logo.style.setProperty('object-position','center top','important');
