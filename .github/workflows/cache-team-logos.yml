@@ -14,11 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download current team logos
+      - name: Download current and Classic Team logos
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p assets/team-logos/current assets/team-logos/classic
+          mkdir -p assets/team-logos/current assets/team-logos/classic/official
+
           ids=(
             1610612737 1610612738 1610612751 1610612766 1610612741 1610612739
             1610612742 1610612743 1610612765 1610612744 1610612745 1610612754
@@ -31,19 +32,42 @@ jobs:
               "https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg" \
               -o "assets/team-logos/current/${id}.svg"
           done
-          cp assets/team-logos/current/1610612741.svg assets/team-logos/classic/chicago-bulls-1998.svg
-          cp assets/team-logos/current/1610612747.svg assets/team-logos/classic/los-angeles-lakers-2002.svg
 
-      - name: Verify current inventory
+          get_logo(){
+            local url="$1" out="$2"
+            curl --fail --location --retry 3 --retry-delay 1 --silent --show-error "$url" -o "assets/team-logos/classic/official/$out"
+          }
+
+          get_logo 'https://content.sportslogos.net/logos/6/227/full/toronto_raptors_logo_primary_19961665.png' 'toronto-raptors-2003.png'
+          get_logo 'https://content.sportslogos.net/logos/6/221/full/chicago_bulls_logo_primary_19672598.png' 'chicago-bulls-1998.png'
+          get_logo 'https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg' 'los-angeles-lakers-1987.svg'
+          get_logo 'https://cdn.nba.com/logos/nba/1610612747/primary/L/logo.svg' 'los-angeles-lakers-2002.svg'
+          get_logo 'https://content.sportslogos.net/logos/6/223/full/lgv5ssjmmchyoe66kkvh0tlzd.png' 'detroit-pistons-1989.png'
+          get_logo 'https://content.sportslogos.net/logos/6/223/full/detroit_pistons_logo_primary_20029975.png' 'detroit-pistons-2004.png'
+          get_logo 'https://content.sportslogos.net/logos/6/238/full/phoenix_suns_logo_primary_20016802.png' 'phoenix-suns-2007.png'
+          get_logo 'https://content.sportslogos.net/logos/6/228/full/dallas_mavericks_logo_primary_19945760.png' 'dallas-mavericks-1995.png'
+          get_logo 'https://content.sportslogos.net/logos/6/228/full/ifk08eam05rwxr3yhol3whdcm.png' 'dallas-mavericks-2011.png'
+          get_logo 'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19759952.png' 'boston-celtics-1986.png'
+          get_logo 'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19979720.png' 'boston-celtics-2008.png'
+          get_logo 'https://content.sportslogos.net/logos/6/256/full/charlotte_hornets_logo_primary_19896932.png' 'charlotte-hornets-1993.png'
+          get_logo 'https://content.sportslogos.net/logos/6/234/full/utah_jazz_logo_primary_19973688.png' 'utah-jazz-1997.png'
+          get_logo 'https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg' 'miami-heat-2013.svg'
+          get_logo 'https://content.sportslogos.net/logos/6/241/full/seattle_supersonics_logo_primary_19967583.png' 'seattle-supersonics-1996.png'
+          get_logo 'https://content.sportslogos.net/logos/6/257/full/7hc558rh9vls8j6fam4hly46n.gif' 'vancouver-grizzlies-1997.gif'
+          get_logo 'https://content.sportslogos.net/logos/6/240/full/832.png' 'sacramento-kings-2002.png'
+          get_logo 'https://content.sportslogos.net/logos/6/224/full/oj83q73haoquhxqfiurpfhsgf.png' 'indiana-pacers-2000.png'
+
+      - name: Verify logo inventory
         shell: bash
         run: |
           set -euo pipefail
           test "$(find assets/team-logos/current -type f | wc -l)" -eq 30
           test -s assets/team-logos/current/1610612759.svg
-          test -s assets/team-logos/current/1610612762.svg
-          test -s assets/team-logos/current/1610612745.svg
-          test -s assets/team-logos/classic/chicago-bulls-1998.svg
-          test -s assets/team-logos/classic/los-angeles-lakers-2002.svg
+          test -s assets/team-logos/classic/official/phoenix-suns-2007.png
+          test -s assets/team-logos/classic/official/utah-jazz-1997.png
+          test -s assets/team-logos/classic/official/vancouver-grizzlies-1997.gif
+          test -s assets/team-logos/classic/official/detroit-pistons-1989.png
+          test -s assets/team-logos/classic/official/boston-celtics-2008.png
 
       - name: Commit cached logos
         shell: bash
@@ -56,6 +80,6 @@ jobs:
             echo 'No team-logo changes to commit.'
             exit 0
           fi
-          git commit -m 'Cache current NBA team logos locally'
+          git commit -m 'Cache NBA team logos locally'
           git pull --rebase origin main
           git push
