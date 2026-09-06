@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.5 — Season presentation reset + clean carry-over + image memory manager + Classic expansion */
+/* NBA Starting5 v0.11.6 — gameplay nameplate inspector + Season presentation reset + image memory manager + Classic expansion */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -81,6 +81,7 @@
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
+  document.write('<script src="game-card-inspect-v0.11.6.js?t='+t+'"><\/script>');
   document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
