@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.36 — in-game Card Art Editor with team filtering */
+/* NBA Starting5 v0.11.42 — in-game Card Art Editor with resilient Options launcher */
 (() => {
   const KEY='nbaCourtsideArtEditorV1';
   const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
@@ -9,6 +9,19 @@
   const baseFor=p=>({x:parseFloat(p?.art?.x)||50,y:6,scale:round((Number(p?.art?.s)||.76)*1.30,2)});
   const teamKey=p=>String(p?.teamId||p?.teamShort||p?.team||'Unknown');
   const teamLabel=p=>String(p?.team||p?.teamShort||'Unknown Team');
+
+  function allPlayers(){
+    const pools=[];
+    try{if(typeof players!=='undefined'&&Array.isArray(players))pools.push(players)}catch{}
+    ['COURTSIDE_FOUNDATION_PLAYERS','FOUNDATION_PLAYERS','foundationPlayers','COURTSIDE_CLASSIC_PLAYERS'].forEach(k=>{if(Array.isArray(window[k]))pools.push(window[k])});
+    const out=[],seen=new Set();
+    for(const pool of pools)for(const p of pool||[]){
+      if(!p?.artSlug)continue;
+      const key=String(p.id||`${p.teamId||p.team||''}|${p.artSlug}`);
+      if(seen.has(key))continue;seen.add(key);out.push(p);
+    }
+    return out;
+  }
 
   function overrideImageMarkup(html,p){
     const c=savedFor(p.artSlug);
@@ -38,19 +51,11 @@
     img.style.setProperty('transform',`translateX(-50%) scale(${c.scale})`,'important');
     img.style.setProperty('transform-origin','center top','important');
   }
-
-  function syncVisible(slug,c){
-    document.querySelectorAll(`.player-card[data-art-slug="${slug}"] .cutout-art`).forEach(img=>applyConfigToImage(img,c));
-  }
-
+  function syncVisible(slug,c){document.querySelectorAll(`.player-card[data-art-slug="${slug}"] .cutout-art`).forEach(img=>applyConfigToImage(img,c));}
   function effectiveFromPreview(img,stage,p){
-    const fallback=baseFor(p);
-    if(!img||!stage)return fallback;
-    const cs=getComputedStyle(img),ss=getComputedStyle(stage);
-    let x=fallback.x,y=parseFloat(cs.top),scale=fallback.scale;
-    const left=parseFloat(cs.left),w=parseFloat(ss.width)||stage.clientWidth;
-    if(Number.isFinite(left)&&w>0)x=left/w*100;
-    if(!Number.isFinite(y))y=fallback.y;
+    const fallback=baseFor(p);if(!img||!stage)return fallback;
+    const cs=getComputedStyle(img),ss=getComputedStyle(stage);let x=fallback.x,y=parseFloat(cs.top),scale=fallback.scale;
+    const left=parseFloat(cs.left),w=parseFloat(ss.width)||stage.clientWidth;if(Number.isFinite(left)&&w>0)x=left/w*100;if(!Number.isFinite(y))y=fallback.y;
     try{const m=new DOMMatrixReadOnly(cs.transform);if(Number.isFinite(m.a)&&m.a>0)scale=m.a;}catch{}
     return {x:round(x,1),y:round(y,1),scale:round(scale,2)};
   }
@@ -69,55 +74,46 @@
   function installUI(){
     installCardAuthority();
     const options=document.querySelector('.options-card');
-    if(!options||document.getElementById('cardArtEditorBtn'))return;
-    const style=document.createElement('style');style.id='card-art-editor-style-v01136';style.textContent=css;document.head.appendChild(style);
-    const btn=document.createElement('button');btn.id='cardArtEditorBtn';btn.type='button';btn.className='art-editor-launch';btn.textContent='Card Art Editor';options.appendChild(btn);
+    if(!options)return false;
+    const pool=allPlayers();
+    if(!pool.length)return false;
 
+    let btn=document.getElementById('cardArtEditorBtn');
+    if(!btn){btn=document.createElement('button');btn.id='cardArtEditorBtn';btn.type='button';btn.className='art-editor-launch';btn.textContent='Card Art Editor';options.appendChild(btn);}
+    if(document.getElementById('cardArtEditor')){
+      const ed=document.getElementById('cardArtEditor');
+      btn.onclick=()=>{document.getElementById('optionsSheet')?.classList.add('hidden');ed.classList.remove('hidden');window.applyStarting5PlayerGlow?.();};
+      return true;
+    }
+
+    if(!document.getElementById('card-art-editor-style-v01142')){const style=document.createElement('style');style.id='card-art-editor-style-v01142';style.textContent=css;document.head.appendChild(style);}
     const ed=document.createElement('section');ed.id='cardArtEditor';ed.className='art-editor hidden';ed.innerHTML=`<div class="art-editor-body"><div class="art-editor-head"><div><h2>Card Art Editor</h2></div><button id="artEditorClose" class="ghost-btn art-editor-close" type="button">Done</button></div><div class="art-editor-selectors"><select id="artSetSelect" aria-label="Set"></select><select id="artTeamSelect" aria-label="Team"></select><select id="artPlayerSelect" aria-label="Player"></select></div><div class="art-editor-nav"><button id="artPrev" type="button">‹</button><div id="artPlayerName" class="art-editor-player"></div><button id="artNext" type="button">›</button></div><div id="artPreview" class="art-editor-preview"></div><div class="art-editor-controls"><div class="art-control"><label>X position <output id="artXOut"></output></label><input id="artX" type="range" min="-25" max="125" step="0.5"></div><div class="art-control"><label>Y position <output id="artYOut"></output></label><input id="artY" type="range" min="-150" max="300" step="1"></div><div class="art-control"><label>Size <output id="artScaleOut"></output></label><input id="artScale" type="range" min="0.50" max="4.00" step="0.01"></div></div><div class="art-editor-actions"><button id="artReset" type="button">Reset This Card</button><button id="artCopy" type="button">Copy JSON</button><button id="artExport" class="primary" type="button">Export Art Layout</button><button id="artClearAll" type="button">Clear All Edits</button></div><div id="artProgress" class="art-editor-progress"></div><p class="art-editor-note">Drag the player directly on the card to move them. Use Size for precise scaling. Changes save immediately on this device and apply to Catalogue and gameplay.</p></div>`;document.body.appendChild(ed);
 
     const setSel=ed.querySelector('#artSetSelect'),teamSel=ed.querySelector('#artTeamSelect'),playerSel=ed.querySelector('#artPlayerSelect'),preview=ed.querySelector('#artPreview'),nameEl=ed.querySelector('#artPlayerName'),x=ed.querySelector('#artX'),y=ed.querySelector('#artY'),sc=ed.querySelector('#artScale'),xo=ed.querySelector('#artXOut'),yo=ed.querySelector('#artYOut'),so=ed.querySelector('#artScaleOut'),progress=ed.querySelector('#artProgress');
-    let list=[...players],idx=0,draft=null,drag=null;
-    const sets=['All Sets',...new Set(players.map(p=>p.set).filter(Boolean))];setSel.innerHTML=sets.map(s=>`<option value="${s}">${s}</option>`).join('');
-    const current=()=>list[idx]||players[0];
-    const setPool=()=>setSel.value==='All Sets'?[...players]:players.filter(p=>p.set===setSel.value);
+    const all=pool;let list=[...all],idx=0,draft=null,drag=null;
+    const sets=['All Sets',...new Set(all.map(p=>p.set).filter(Boolean))];setSel.innerHTML=sets.map(s=>`<option value="${s}">${s}</option>`).join('');
+    const current=()=>list[idx]||all[0];
+    const setPool=()=>setSel.value==='All Sets'?[...all]:all.filter(p=>p.set===setSel.value);
     const filteredPool=()=>{const base=setPool(),team=teamSel.value;return team==='All Teams'?base:base.filter(p=>teamKey(p)===team)};
-    const updateProgress=()=>{const count=Object.keys(read()).length;progress.textContent=`${count} of ${players.length} cards edited`};
+    const updateProgress=()=>{progress.textContent=`${Object.keys(read()).length} of ${all.length} cards edited`};
     const updateOutputs=()=>{xo.textContent=`${draft.x.toFixed(1)}%`;yo.textContent=`${draft.y.toFixed(0)}px`;so.textContent=`${draft.scale.toFixed(2)}×`;x.value=draft.x;y.value=draft.y;sc.value=draft.scale;};
     const save=()=>{const p=current(),store=read();store[p.artSlug]={x:round(draft.x,1),y:round(draft.y,0),scale:round(draft.scale,2)};write(store);syncVisible(p.artSlug,store[p.artSlug]);updateProgress();};
-    const renderPreview=()=>{
-      const p=current();if(!p)return;nameEl.innerHTML=`${p.name}<small>${p.set} · ${p.teamShort||p.team}</small>`;
-      playerSel.value=p.artSlug;preview.innerHTML=cardMarkup(p,{eager:true});
-      requestAnimationFrame(()=>{const img=preview.querySelector('.cutout-art'),stage=preview.querySelector('.art-stage');draft=savedFor(p.artSlug)||effectiveFromPreview(img,stage,p);updateOutputs();if(savedFor(p.artSlug))applyConfigToImage(img,draft);bindDrag(img,stage);});
-    };
-    const rebuildTeams=(keepTeam='All Teams')=>{
-      const byKey=new Map();
-      setPool().forEach(p=>{const k=teamKey(p);if(!byKey.has(k))byKey.set(k,teamLabel(p));});
-      const options=[['All Teams','All Teams'],...[...byKey.entries()].sort((a,b)=>a[1].localeCompare(b[1]))]];
-      teamSel.innerHTML=options.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');
-      teamSel.value=byKey.has(keepTeam)?keepTeam:'All Teams';
-    };
-    const rebuildPlayers=(keepSlug)=>{
-      list=filteredPool();
-      playerSel.innerHTML=list.map(p=>`<option value="${p.artSlug}">${p.name}</option>`).join('');
-      let found=list.findIndex(p=>p.artSlug===keepSlug);if(found<0)found=0;idx=found;
-      if(list.length)renderPreview();else{preview.innerHTML='';nameEl.textContent='No players';}
-    };
+    const renderPreview=()=>{const p=current();if(!p)return;nameEl.innerHTML=`${p.name}<small>${p.set||''} · ${p.teamShort||p.team||''}</small>`;playerSel.value=p.artSlug;preview.innerHTML=cardMarkup(p,{eager:true});requestAnimationFrame(()=>{const img=preview.querySelector('.cutout-art'),stage=preview.querySelector('.art-stage');draft=savedFor(p.artSlug)||effectiveFromPreview(img,stage,p);updateOutputs();if(savedFor(p.artSlug))applyConfigToImage(img,draft);bindDrag(img,stage);window.applyStarting5PlayerGlow?.();});};
+    const rebuildTeams=(keepTeam='All Teams')=>{const byKey=new Map();setPool().forEach(p=>{const k=teamKey(p);if(!byKey.has(k))byKey.set(k,teamLabel(p));});const opts=[['All Teams','All Teams'],...[...byKey.entries()].sort((a,b)=>a[1].localeCompare(b[1]))]];teamSel.innerHTML=opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');teamSel.value=byKey.has(keepTeam)?keepTeam:'All Teams';};
+    const rebuildPlayers=keepSlug=>{list=filteredPool();playerSel.innerHTML=list.map(p=>`<option value="${p.artSlug}">${p.name}</option>`).join('');let found=list.findIndex(p=>p.artSlug===keepSlug);if(found<0)found=0;idx=found;if(list.length)renderPreview();else{preview.innerHTML='';nameEl.textContent='No players';}};
     function bindDrag(img,stage){if(!img||!stage)return;img.onpointerdown=e=>{e.preventDefault();img.setPointerCapture?.(e.pointerId);drag={sx:e.clientX,sy:e.clientY,x:draft.x,y:draft.y,w:stage.clientWidth||1};};img.onpointermove=e=>{if(!drag)return;draft.x=clamp(drag.x+(e.clientX-drag.sx)/drag.w*100,-25,125);draft.y=clamp(drag.y+(e.clientY-drag.sy),-150,300);applyConfigToImage(img,draft);updateOutputs();};img.onpointerup=img.onpointercancel=()=>{if(drag){drag=null;save();}};}
-    const sliderChanged=()=>{draft={x:+x.value,y:+y.value,scale:+sc.value};const img=preview.querySelector('.cutout-art');applyConfigToImage(img,draft);updateOutputs();save();};[x,y,sc].forEach(el=>el.addEventListener('input',sliderChanged));
-    setSel.onchange=()=>{const keep=current()?.artSlug;rebuildTeams();rebuildPlayers(keep);};
-    teamSel.onchange=()=>rebuildPlayers(current()?.artSlug);
-    playerSel.onchange=()=>{idx=list.findIndex(p=>p.artSlug===playerSel.value);renderPreview();};
-    ed.querySelector('#artPrev').onclick=()=>{if(!list.length)return;idx=(idx-1+list.length)%list.length;renderPreview();};
-    ed.querySelector('#artNext').onclick=()=>{if(!list.length)return;idx=(idx+1)%list.length;renderPreview();};
+    const sliderChanged=()=>{draft={x:+x.value,y:+y.value,scale:+sc.value};applyConfigToImage(preview.querySelector('.cutout-art'),draft);updateOutputs();save();};[x,y,sc].forEach(el=>el.addEventListener('input',sliderChanged));
+    setSel.onchange=()=>{const keep=current()?.artSlug;rebuildTeams();rebuildPlayers(keep);};teamSel.onchange=()=>rebuildPlayers(current()?.artSlug);playerSel.onchange=()=>{idx=list.findIndex(p=>p.artSlug===playerSel.value);renderPreview();};
+    ed.querySelector('#artPrev').onclick=()=>{if(list.length){idx=(idx-1+list.length)%list.length;renderPreview();}};ed.querySelector('#artNext').onclick=()=>{if(list.length){idx=(idx+1)%list.length;renderPreview();}};
     ed.querySelector('#artReset').onclick=()=>{const p=current(),store=read();delete store[p.artSlug];write(store);renderPreview();updateProgress();};
-    const exportData=()=>{const store=read(),cards={};players.forEach(p=>{cards[p.artSlug]={...(store[p.artSlug]||baseFor(p)),edited:!!store[p.artSlug],name:p.name,set:p.set,team:p.teamShort};});return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.11.36',exportedAt:new Date().toISOString(),cards};};
+    const exportData=()=>{const store=read(),cards={};all.forEach(p=>{cards[p.artSlug]={...(store[p.artSlug]||baseFor(p)),edited:!!store[p.artSlug],name:p.name,set:p.set,team:p.teamShort};});return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.11.42',exportedAt:new Date().toISOString(),cards};};
     ed.querySelector('#artExport').onclick=()=>{const data=JSON.stringify(exportData(),null,2),blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='nba-starting5-art-layout.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);};
-    ed.querySelector('#artCopy').onclick=async()=>{const text=JSON.stringify(exportData(),null,2);try{await navigator.clipboard.writeText(text);ed.querySelector('#artCopy').textContent='Copied';setTimeout(()=>ed.querySelector('#artCopy').textContent='Copy JSON',1200)}catch{}};
+    ed.querySelector('#artCopy').onclick=async()=>{const b=ed.querySelector('#artCopy');try{await navigator.clipboard.writeText(JSON.stringify(exportData(),null,2));b.textContent='Copied';setTimeout(()=>b.textContent='Copy JSON',1200)}catch{}};
     ed.querySelector('#artClearAll').onclick=()=>{if(confirm('Clear every Card Art Editor adjustment on this device?')){localStorage.removeItem(KEY);renderPreview();updateProgress();}};
-    btn.onclick=()=>{document.getElementById('optionsSheet')?.classList.add('hidden');ed.classList.remove('hidden');const p=current();rebuildTeams(p?teamKey(p):'All Teams');rebuildPlayers(p?.artSlug);updateProgress();};
-    ed.querySelector('#artEditorClose').onclick=()=>ed.classList.add('hidden');
-    rebuildTeams();rebuildPlayers();updateProgress();
+    btn.onclick=()=>{document.getElementById('optionsSheet')?.classList.add('hidden');ed.classList.remove('hidden');const p=current();rebuildTeams(p?teamKey(p):'All Teams');rebuildPlayers(p?.artSlug);updateProgress();window.applyStarting5PlayerGlow?.();};
+    ed.querySelector('#artEditorClose').onclick=()=>ed.classList.add('hidden');rebuildTeams();rebuildPlayers();updateProgress();return true;
   }
 
-  if(document.readyState==='loading')window.addEventListener('DOMContentLoaded',()=>setTimeout(installUI,80));else setTimeout(installUI,80);
+  const boot=()=>{let tries=0;const go=()=>{if(installUI()||++tries>40)return;setTimeout(go,125)};go();};
+  if(document.readyState==='loading')window.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
