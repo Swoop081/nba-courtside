@@ -1,0 +1,68 @@
+name: Fix Classic Logo Alpha v0.10.77
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-classic-logo-alpha-v0.10.77.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild-classic-alpha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Rebuild all Classic logos with transparent outer mattes
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          from collections import deque
+          root=Path('assets/team-logos/classic')
+          for src in sorted(root.glob('*.png')):
+            if '-transparent-v' in src.stem: continue
+            out=src.with_name(src.stem+'-alpha-v3.png')
+            im=Image.open(src).convert('RGBA'); px=im.load(); w,h=im.size
+            border=[]
+            for x in range(w): border += [px[x,0],px[x,h-1]]
+            for y in range(h): border += [px[0,y],px[w-1,y]]
+            opaque=[c for c in border if c[3]>0]
+            if not opaque:
+              im.save(out,'PNG',optimize=True); continue
+            bg=tuple(sum(c[i] for c in opaque)//len(opaque) for i in range(3))
+            def matte(c):
+              r,g,b,a=c
+              if a==0:return True
+              d=((r-bg[0])**2+(g-bg[1])**2+(b-bg[2])**2)**0.5
+              neutral=max(r,g,b)-min(r,g,b)<=42
+              return d<=105 or (neutral and r>=205 and g>=205 and b>=205)
+            q=deque()
+            for x in range(w): q.extend(((x,0),(x,h-1)))
+            for y in range(h): q.extend(((0,y),(w-1,y)))
+            seen=set()
+            while q:
+              x,y=q.popleft()
+              if x<0 or y<0 or x>=w or y>=h or (x,y) in seen:continue
+              seen.add((x,y))
+              if not matte(px[x,y]):continue
+              r,g,b,a=px[x,y]; px[x,y]=(r,g,b,0)
+              q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1)))
+            im.save(out,'PNG',optimize=True)
+            print(src.name,'->',out.name)
+          PY
+      - name: Commit transparent Classic logo set
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/team-logos/classic/*-alpha-v3.png
+          git commit -m 'Add transparent Classic logo set v0.10.77'
+          git pull --rebase origin main
+          git push origin HEAD:main
