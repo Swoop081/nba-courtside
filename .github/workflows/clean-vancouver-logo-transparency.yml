@@ -1,0 +1,54 @@
+name: Clean Vancouver Classic Logo Transparency
+
+on:
+  push:
+    paths:
+      - '.github/workflows/clean-vancouver-logo-transparency.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean-logo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Remove connected white background
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from collections import deque
+          p='assets/team-logos/classic/vancouver-grizzlies-1997.png'
+          im=Image.open(p).convert('RGBA')
+          px=im.load(); w,h=im.size
+          seen=set(); q=deque()
+          for x in range(w): q.append((x,0)); q.append((x,h-1))
+          for y in range(h): q.append((0,y)); q.append((w-1,y))
+          def bg(c):
+              r,g,b,a=c
+              return a>0 and r>=238 and g>=238 and b>=238 and max(r,g,b)-min(r,g,b)<=18
+          while q:
+              x,y=q.popleft()
+              if (x,y) in seen or x<0 or y<0 or x>=w or y>=h: continue
+              seen.add((x,y))
+              if not bg(px[x,y]): continue
+              r,g,b,a=px[x,y]; px[x,y]=(r,g,b,0)
+              q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1)))
+          im.save(p,'PNG',optimize=True)
+          PY
+      - name: Commit transparent Vancouver logo
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/team-logos/classic/vancouver-grizzlies-1997.png
+          if git diff --cached --quiet; then
+            echo 'No transparency change required.'
+          else
+            git commit -m 'Remove white background from Vancouver 1997 logo'
+            git push
+          fi
