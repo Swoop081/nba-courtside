@@ -141,11 +141,20 @@
   `;
   document.head.appendChild(style);
 
-  // Loaded before Season Core UI so this capture handler gets first refusal on Continue.
+  // If this handler wins the Continue event directly, show the award immediately.
   window.addEventListener('click',e=>{
     const btn=e.target?.closest?.('#playAgainBtn,#compactPlayAgain');if(!btn)return;
     if(sessionStorage.getItem(ACTIVE_KEY)!=='1')return;
     processCompletedRounds();
+    const s=read();if(!s?.playerOfWeek?.pending)return;
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+    showAward();
+  },true);
+
+  // Season Core's Continue handler clicks Season Mode after committing/clearing the game.
+  // Catch that navigation when a weekly award is pending and route to the award screen instead.
+  document.addEventListener('click',e=>{
+    const btn=e.target?.closest?.('#seasonModeBtn');if(!btn)return;
     const s=read();if(!s?.playerOfWeek?.pending)return;
     e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
     showAward();
