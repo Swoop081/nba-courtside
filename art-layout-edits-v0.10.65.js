@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.65 — user-exported edited art layouts only */
+/* NBA Starting5 v0.11.37 — user-exported edited art layouts */
 (()=>{
   if(window.__starting5ArtLayoutEditsV01065)return;
   window.__starting5ArtLayoutEditsV01065=true;
@@ -53,7 +53,12 @@
     'anthony-peeler':{x:45,y:-31,scale:2.2},
     'shareef-abdur-rahim':{x:54.5,y:-62,scale:1.26},
     'george-lynch':{x:49.3,y:-24,scale:1.26},
-    'bryant-reeves':{x:39,y:-28,scale:1.7}
+    'bryant-reeves':{x:39,y:-28,scale:1.7},
+    'payton-pritchard':{x:55,y:-552,scale:3.39},
+    'egor-demin':{x:43,y:-303,scale:1.94},
+    'mookie-blaylock-1993':{x:112,y:-10,scale:4.12},
+    'mikki-moore':{x:48.9,y:6,scale:1.06},
+    'chauncey-billups':{x:73.5,y:90,scale:3.85}
   };
 
   window.STARTING5_ART_LAYOUT_EDITS=Object.assign({},window.STARTING5_ART_LAYOUT_EDITS||{},E);
