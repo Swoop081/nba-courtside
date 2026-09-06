@@ -1,12 +1,13 @@
-/* NBA Starting5 v0.11.25 — manual overtime card selection + clean quarter transition */
+/* NBA Starting5 v0.11.33 — manual overtime pick + seven-category matchup rotation */
 (()=>{
-  if(window.__s5OvertimeManualPickV01125)return;
-  window.__s5OvertimeManualPickV01125=true;
+  if(window.__s5OvertimeManualPickV01133)return;
+  window.__s5OvertimeManualPickV01133=true;
 
-  const labels={scoring:'Scoring',dunks:'Dunking',three:'3PT',freeThrows:'Free Throws',rebounding:'Rebounding',passing:'Passing',blocks:'Blocks',steals:'Steals'};
+  const allowed=['scoring','dunks','three','rebounding','passing','blocks','steals'];
+  const labels={scoring:'Scoring',dunks:'Dunking',three:'3PT',rebounding:'Rebounding',passing:'Passing',blocks:'Blocks',steals:'Steals'};
   const manualBegin=function(){
     if(typeof state==='undefined'||!state)return;
-    state.category=(window.STAT_KEYS||['scoring','dunks','three','freeThrows','rebounding','passing','blocks','steals'])[Math.floor(Math.random()*8)];
+    state.category=allowed[Math.floor(Math.random()*allowed.length)];
     const q=document.getElementById('quarterLabel'),c=document.getElementById('categoryLabel'),us=document.getElementById('userScore'),cs=document.getElementById('cpuScore'),ins=document.getElementById('instruction'),panel=document.getElementById('revealPanel');
     if(q)q.textContent=state.overtime?'OT':'Q'+state.quarter;
     if(c)c.textContent=(labels[state.category]||state.category).toUpperCase();
