@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.72 — Classic Team logo integrity: card background uses the exact plaque logo */
+/* NBA Starting5 v0.10.73 — Classic Team logo integrity + background placement persistence loader */
 (()=>{
   if(window.__starting5ClassicLogoIntegrityV01072)return;
   window.__starting5ClassicLogoIntegrityV01072=true;
@@ -15,8 +15,15 @@
     if(root?.matches?.('.foundation-card,.player-card'))syncCard(root);
     root?.querySelectorAll?.('.foundation-card,.player-card').forEach(syncCard);
   };
+  const loadPersistence=()=>{
+    if(window.__starting5BgLayoutPersistenceV01073||document.querySelector('script[data-starting5-bg-layout-v01073]'))return;
+    const s=document.createElement('script');
+    s.dataset.starting5BgLayoutV01073='1';
+    s.src='art-layout-bg-persistence-v0.10.73.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(s);
+  };
   const start=()=>{
-    scan(document);
+    scan(document);loadPersistence();
     new MutationObserver(ms=>{
       for(const m of ms){
         if(m.type==='attributes')syncCard(m.target.closest?.('.foundation-card,.player-card'));
