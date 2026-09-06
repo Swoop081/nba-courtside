@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.58 — Boston Celtics 2008 + Detroit Pistons 1989 + Sacramento Kings 2002 + Indiana Pacers 2000 + Dallas Mavericks 2011 + duplicate Classic player season identity + era-accurate Classic Team logos + authoritative Season Mode team identity + finish flow + exact season progression + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 250-player pool + 20 Classic Teams */
+/* NBA Courtside v0.10.60 — played cards move to end of game rail + 250-player pool + 20 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -73,6 +73,7 @@
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
+  document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
