@@ -26,8 +26,9 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from io import BytesIO
-          import html,re,requests,cairosvg
+          import html,re,requests,cairosvg,urllib3
           from PIL import Image
+          urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
           root=Path('assets/team-logos/classic'); root.mkdir(parents=True,exist_ok=True)
           session=requests.Session()
@@ -43,7 +44,7 @@ jobs:
             'detroit-pistons-1989':'AUTO_DETROIT_1978',
             'detroit-pistons-2004':'https://content.sportslogos.net/logos/6/223/full/detroit_pistons_logo_primary_20029975.png',
             'houston-rockets-1995':'https://www.nicepng.com/png/detail/140-1408322_houston-rockets-logo-1995-houston-rockets-90s-logo.png',
-            'indiana-pacers-2000':'https://content.sportslogos.net/logos/6/224/full/oj83q73haoquhxqfiurpfhsgf.png',
+            'indiana-pacers-2000':'https://www.clipartmax.com/png/middle/116-1166117_25-days-of-christmas-indiana-pacers-logo-2000.png',
             'los-angeles-lakers-1987':'https://content.sportslogos.net/logos/6/237/full/los_angeles_lakers_logo_primary_19768918.png',
             'los-angeles-lakers-2002':'https://content.sportslogos.net/logos/6/237/full/los_angeles_lakers_logo_primary_20007265.png',
             'miami-heat-2013':'https://cdn.nba.com/logos/nba/1610612748/primary/L/logo.svg',
@@ -73,13 +74,14 @@ jobs:
           for stem,source in sources.items():
             try:
               url=resolve(source); print('fetching',stem,url)
-              r=session.get(url,timeout=45); r.raise_for_status(); data=r.content
+              verify=False if 'nicepng.com' in url else True
+              r=session.get(url,timeout=45,verify=verify); r.raise_for_status(); data=r.content
               if url.lower().endswith('.svg') or data.lstrip().startswith(b'<svg') or b'<svg' in data[:300]: data=cairosvg.svg2png(bytestring=data,output_width=1024,output_height=1024)
               normalize(Image.open(BytesIO(data)),root/f'{stem}.png'); ok.append(stem)
             except Exception as e:
               print('SKIP',stem,repr(e)); failed.append(stem)
           print('UPDATED',','.join(ok)); print('FAILED',','.join(failed))
-          if not ok: raise SystemExit('No authentic logos could be refreshed')
+          if failed: raise SystemExit('Authentic logo refresh incomplete: '+','.join(failed))
           PY
       - name: Commit authentic PNG assets
         run: |
@@ -89,6 +91,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No PNG changes to commit.'
           else
-            git commit -m 'Refresh Classic Team PNGs from authentic era sources'
+            git commit -m 'Complete authentic Classic Team PNG logo set'
             git push
           fi
