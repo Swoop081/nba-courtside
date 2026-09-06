@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.11 — matchup category information ticker, event-driven */
+/* NBA Starting5 v0.11.12 — authoritative matchup category ticker */
 (()=>{
-  if(window.__courtsideGameInfoBarV01111)return;
-  window.__courtsideGameInfoBarV01111=true;
+  if(window.__courtsideGameInfoBarV01112)return;
+  window.__courtsideGameInfoBarV01112=true;
 
   const labels={
     scoring:'SCORING',
@@ -48,6 +48,13 @@
   };
 
   const showTransition=text=>{
+    const raw=String(text||'').trim().toUpperCase();
+    // Old quarter-transition code emits generic MATCHUP between rounds. Never let
+    // that overwrite the authoritative category ticker.
+    if(!raw||raw==='MATCHUP'||raw==='NEXT MATCHUP'){
+      showCurrent();
+      return;
+    }
     const bar=ensureBar();if(!bar)return;
     const strong=bar.querySelector('strong');
     bar.classList.remove('is-category');
@@ -56,7 +63,7 @@
       strong.style.animation='none';
       void strong.offsetWidth;
       strong.style.animation='';
-      strong.textContent=text||'';
+      strong.textContent=text;
     }
   };
 
@@ -71,7 +78,7 @@
         const text=(strong?.textContent||'').trim();
         if(text)showTransition(text);
       }else if(!wasHidden){
-        setTimeout(showCurrent,30);
+        requestAnimationFrame(showCurrent);
       }
       wasHidden=hidden;
     };
@@ -81,9 +88,14 @@
 
   const wrap=name=>{
     let original=null;try{original=window[name]||eval(name)}catch{}
-    if(typeof original!=='function'||original.__gameInfoV01111)return;
-    const wrapped=function(){const r=original.apply(this,arguments);requestAnimationFrame(showCurrent);return r;};
-    wrapped.__gameInfoV01111=true;
+    if(typeof original!=='function'||original.__gameInfoV01112)return;
+    const wrapped=function(){
+      const r=original.apply(this,arguments);
+      requestAnimationFrame(showCurrent);
+      setTimeout(showCurrent,40);
+      return r;
+    };
+    wrapped.__gameInfoV01112=true;
     window[name]=wrapped;
     try{eval(`${name}=window[name]`);}catch{}
   };
