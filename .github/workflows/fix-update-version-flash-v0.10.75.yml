@@ -1,0 +1,57 @@
+name: Fix Starting5 Update Version Flash v0.10.75
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-update-version-flash-v0.10.75.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-version-flash:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove stale hardcoded version flash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='<span class="brand-version" data-build-version="0.8.52">v0.8.52</span>'
+          new='<span class="brand-version" data-build-version="">v…</span>'
+          if old not in s:
+              raise SystemExit('Expected old version label not found')
+          s=s.replace(old,new,1)
+          old_sync="window.addEventListener('DOMContentLoaded',()=>setTimeout(sync,350));"
+          new_sync="try{const pending=sessionStorage.getItem('starting5PendingVersion');if(label&&pending){label.textContent='v'+pending;label.dataset.buildVersion=pending}}catch{}window.addEventListener('DOMContentLoaded',sync);"
+          if old_sync not in s:
+              raise SystemExit('Expected delayed sync not found')
+          s=s.replace(old_sync,new_sync,1)
+          old_load="btn.textContent='Loading v'+b.version+'…';try{if('serviceWorker'in navigator)"
+          new_load="btn.textContent='Loading v'+b.version+'…';try{sessionStorage.setItem('starting5PendingVersion',b.version)}catch{}try{if('serviceWorker'in navigator)"
+          if old_load not in s:
+              raise SystemExit('Expected loading handler not found')
+          s=s.replace(old_load,new_load,1)
+          p.write_text(s)
+          PY
+      - name: Set v0.10.75 build metadata
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          Path('build.json').write_text(json.dumps({
+            'version':'0.10.75',
+            'build':'20260906-1415',
+            'commit':'update-version-flash-v0.10.75'
+          },separators=(',',':')))
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html build.json
+          git commit -m 'Fix update screen stale version flash v0.10.75'
+          git push
