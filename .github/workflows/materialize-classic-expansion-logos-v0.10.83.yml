@@ -13,58 +13,25 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests pillow beautifulsoup4
+      - run: pip install requests pillow
       - name: Download transparent era-correct logos
         run: |
           python - <<'PY'
           import io, os, requests
-          from bs4 import BeautifulSoup
           from PIL import Image
           os.makedirs('assets/team-logos/classic',exist_ok=True)
-          pages={
-            'orlando-magic-1995.png':'https://www.sportslogos.net/logos/list_by_team/217/Orlando-Magic-Logos/',
-            'charlotte-bobcats-2007.png':'https://www.sportslogos.net/logos/view/8qy7zreof44lznm0kfwvjmvge/Charlotte-Bobcats-Logo/2005/Primary-Logo',
-            'los-angeles-clippers-2014.png':'https://www.sportslogos.net/logos/view/bvv028jd1hhr8ee8ii7a0fg4i/Los-Angeles-Clippers-Logo/2011/Primary-Logo'
+          sources={
+            'orlando-magic-1995.png':'https://content.sportslogos.net/logos/6/217/full/orlando_magic_logo_primary_19905119.png',
+            'charlotte-bobcats-2007.png':'https://content.sportslogos.net/logos/6/258/full/8qy7zreof44lznm0kfwvjmvge.gif',
+            'los-angeles-clippers-2014.png':'https://content.sportslogos.net/logos/6/236/full/los_angeles_clippers_logo_primary_20117648.png'
           }
           sess=requests.Session(); sess.headers['User-Agent']='Mozilla/5.0'
-          for out,page in pages.items():
-            html=sess.get(page,timeout=30).text
-            soup=BeautifulSoup(html,'html.parser')
-            candidates=[]
-            for tag in soup.find_all(['meta','img']):
-              u=tag.get('content') if tag.name=='meta' and tag.get('property') in ('og:image','twitter:image') else tag.get('src') if tag.name=='img' else None
-              if u and 'sportslogos' in u and any(x in u.lower() for x in ('.png','.webp','.jpg','.jpeg')): candidates.append(u)
-            if out=='orlando-magic-1995.png':
-              # Primary Orlando logo was used 1989/90-1997/98; prefer a candidate whose alt/title identifies Primary.
-              for img in soup.find_all('img'):
-                txt=' '.join([img.get('alt',''),img.get('title','')]).lower(); u=img.get('src','')
-                if 'primary' in txt and u: candidates.insert(0,u)
-            if not candidates: raise RuntimeError(f'No image candidates for {page}')
-            data=None
-            for u in candidates:
-              if u.startswith('//'): u='https:'+u
-              elif u.startswith('/'): u='https://www.sportslogos.net'+u
-              try:
-                r=sess.get(u,timeout=30); r.raise_for_status(); im=Image.open(io.BytesIO(r.content)).convert('RGBA')
-                if im.width>150 and im.height>100:
-                  data=im; print(out,u,im.size); break
-              except Exception: pass
-            if data is None: raise RuntimeError(f'Could not download {out}')
-            # Preserve source alpha; if source is opaque with white outer matte, flood transparent only edge-connected near-white pixels.
-            px=data.load(); w,h=data.size
-            if min(p[3] for p in data.getdata())==255:
-              from collections import deque
-              q=deque(); seen=set()
-              for x in range(w): q.extend([(x,0),(x,h-1)])
-              for y in range(h): q.extend([(0,y),(w-1,y)])
-              while q:
-                x,y=q.popleft()
-                if (x,y) in seen or x<0 or y<0 or x>=w or y>=h: continue
-                seen.add((x,y)); r,g,b,a=px[x,y]
-                if min(r,g,b)<225 or max(r,g,b)-min(r,g,b)>35: continue
-                px[x,y]=(r,g,b,0)
-                q.extend([(x+1,y),(x-1,y),(x,y+1),(x,y-1)])
-            data.save('assets/team-logos/classic/'+out,'PNG')
+          for out,url in sources.items():
+            r=sess.get(url,timeout=30); r.raise_for_status()
+            im=Image.open(io.BytesIO(r.content)).convert('RGBA')
+            if im.width<150 or im.height<100: raise RuntimeError(f'Unexpected image size for {out}: {im.size}')
+            im.save('assets/team-logos/classic/'+out,'PNG')
+            print(out,im.size,min(p[3] for p in im.getdata()),max(p[3] for p in im.getdata()))
           PY
       - name: Commit logos
         run: |
