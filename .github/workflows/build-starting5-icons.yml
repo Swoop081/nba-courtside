@@ -1,0 +1,85 @@
+name: Build NBA Starting5 App Icons
+
+on:
+  push:
+    paths:
+      - '.github/workflows/build-starting5-icons.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-icons:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: pip install pillow
+      - name: Build Starting5 icons
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageDraw, ImageFont
+          from pathlib import Path
+
+          brand=Path('assets/brand')
+          nba=Image.open(brand/'nba-logoman-v0.8.23.png').convert('RGBA')
+          font_candidates=[
+            '/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed-Bold.ttf',
+            '/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf'
+          ]
+          font_path=next(p for p in font_candidates if Path(p).exists())
+
+          def fit_font(draw,text,max_width,start_size):
+            size=start_size
+            while size>10:
+              f=ImageFont.truetype(font_path,size)
+              if draw.textbbox((0,0),text,font=f)[2] <= max_width:
+                return f
+              size-=1
+            return ImageFont.truetype(font_path,10)
+
+          def make(size,out):
+            im=Image.new('RGBA',(size,size),(7,9,13,255))
+            draw=ImageDraw.Draw(im)
+            pad=int(size*.09)
+            # NBA logoman centered in the upper section
+            target_h=int(size*.50)
+            logo=nba.copy()
+            logo.thumbnail((int(size*.34),target_h),Image.Resampling.LANCZOS)
+            lx=(size-logo.width)//2
+            ly=int(size*.10)
+            im.alpha_composite(logo,(lx,ly))
+
+            # STARTING5 lockup beneath the NBA mark
+            y=int(size*.67)
+            maxw=size-2*pad
+            f=fit_font(draw,'STARTING5',maxw,int(size*.155))
+            w=draw.textbbox((0,0),'STARTING5',font=f)[2]
+            x=(size-w)//2
+            # draw STARTING then red 5 so it matches the in-game wordmark
+            left='STARTING'
+            left_w=draw.textbbox((0,0),left,font=f)[2]
+            draw.text((x,y),left,font=f,fill=(255,255,255,255),stroke_width=max(1,size//180),stroke_fill=(255,255,255,255))
+            draw.text((x+left_w,y),'5',font=f,fill=(207,31,44,255),stroke_width=max(1,size//180),stroke_fill=(207,31,44,255))
+            im.convert('RGB').save(out,'PNG',optimize=True)
+
+          make(180,brand/'nba-starting5-icon-180.png')
+          make(512,brand/'nba-starting5-icon-512.png')
+          PY
+      - name: Commit Starting5 icons
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/brand/nba-starting5-icon-180.png assets/brand/nba-starting5-icon-512.png
+          if git diff --cached --quiet; then
+            echo 'No icon changes to commit.'
+          else
+            git commit -m 'Add NBA Starting5 home screen icons'
+            git push
+          fi
