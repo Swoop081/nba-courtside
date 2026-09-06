@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.7 — stable update check + gameplay inspector + Season presentation reset + image memory manager + Classic expansion */
+/* NBA Starting5 v0.11.15 — single authoritative matchup ticker + stable gameplay systems */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -85,7 +85,6 @@
   document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
-  document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v1.0.0.js?t='+t+'"><\/script>');
   document.write('<script src="season-core-ui-v0.11.1.js?t='+t+'"><\/script>');
