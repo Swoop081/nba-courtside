@@ -1,0 +1,45 @@
+name: Activate Classic Expansion v0.10.84
+on:
+  workflow_run:
+    workflows: ['Materialize Classic Expansion Logos v0.10.84']
+    types: [completed]
+permissions:
+  contents: write
+jobs:
+  activate:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Load Knicks 1994 and Hawks 1993
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('heat-seekers-v0.8.52.js')
+          s=p.read_text()
+          s=s.replace('/* NBA Starting5 v0.10.83 — seven-team Classic expansion + persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */','/* NBA Starting5 v0.10.84 — nine-team Classic expansion + persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */')
+          needle='document.write(\'<script src="classic-expansion-v0.10.83.js?t=\'+t+\'"><\\/script>\');'
+          add=needle+'\n  document.write(\'<script src="classic-expansion-v0.10.84.js?t=\'+t+\'"><\\/script>\');'
+          if 'classic-expansion-v0.10.84.js' not in s:s=s.replace(needle,add)
+          needle2='document.write(\'<script src="classic-logo-expansion-authority-v0.10.83.js?t=\'+t+\'"><\\/script>\');'
+          add2=needle2+'\n  document.write(\'<script src="classic-logo-expansion-authority-v0.10.84.js?t=\'+t+\'"><\\/script>\');'
+          if 'classic-logo-expansion-authority-v0.10.84.js' not in s:s=s.replace(needle2,add2)
+          p.write_text(s)
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add heat-seekers-v0.8.52.js
+          git commit -m 'Load Knicks 1994 and Hawks 1993 in v0.10.84' || true
+          git push
+          git pull --rebase
+          python - <<'PY'
+          import json, subprocess, datetime
+          sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          now=datetime.datetime.utcnow().strftime('%Y%m%d-%H%M')
+          open('build.json','w').write(json.dumps({'version':'0.10.84','build':now,'commit':sha},separators=(',',':'))+'\n')
+          PY
+          git add build.json
+          git commit -m 'Set NBA Starting5 v0.10.84 build metadata' || true
+          git push
