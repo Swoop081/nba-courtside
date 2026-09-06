@@ -1,7 +1,14 @@
-/* NBA Starting5 v0.11.22 — large winner banner + reliable final Menu + POTG score spacing */
+/* NBA Starting5 v0.11.23 — final screen + Player of the Week loader */
 (()=>{
-  if(window.__starting5FinalUiV01122)return;
-  window.__starting5FinalUiV01122=true;
+  if(window.__starting5FinalUiV01123)return;
+  window.__starting5FinalUiV01123=true;
+
+  if(!document.querySelector('script[data-s5-potw]')){
+    const s=document.createElement('script');
+    s.dataset.s5Potw='1';
+    s.src='season-player-of-week-v0.11.23.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(s);
+  }
 
   let syncing=false;
   const enhanceFinal=()=>{
