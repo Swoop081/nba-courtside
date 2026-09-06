@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.26 — Knicks 1994, Hawks 1993 + 76ers 2001, Knicks 2012, Cavaliers 2004 */
+/* NBA Starting5 v0.11.29 — Classic expansion through Bulls 2011 + Magic 2009 */
 (()=>{
   if(window.__starting5ClassicExpansionV01084)return;
   window.__starting5ClassicExpansionV01084=true;
@@ -52,21 +52,35 @@
     ['Carlos Boozer','PF',[19,21,2,28,10,14,13],25,'carlos-boozer','2430'],
     ['Zydrunas Ilgauskas','C',[19,18,2,24,8,27,10],25,'zydrunas-ilgauskas','980']
   ]});
+  const bulls2011=makeTeam({id:'classic-chi-2011',team:'Chicago Bulls 2011',short:'Bulls 2011',season:'2011',logo:'assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png',theme:{a:'#CE1141',b:'#000000',c:'#FFFFFF'},rows:[
+    ['Derrick Rose','PG',[30,28,19,10,27,5,22],30,'derrick-rose','201565'],
+    ['Keith Bogans','SG',[9,7,20,7,8,5,16],18,'keith-bogans','1903'],
+    ['Luol Deng','SF',[21,19,18,17,11,12,21],25,'luol-deng','2736'],
+    ['Carlos Boozer','PF',[20,20,2,27,10,13,12],25,'carlos-boozer','2430'],
+    ['Joakim Noah','C',[12,20,0,29,12,27,18],27,'joakim-noah','201149']
+  ]});
+  const magic2009=makeTeam({id:'classic-orl-2009',team:'Orlando Magic 2009',short:'Magic 2009',season:'2009',logo:'https://content.sportslogos.net/logos/6/217/full/orlando_magic_logo_primary_20017625.png',theme:{a:'#0077C0',b:'#C4CED4',c:'#000000'},rows:[
+    ['Jameer Nelson','PG',[20,9,24,6,24,3,17],24,'jameer-nelson','2749'],
+    ['Courtney Lee','SG',[13,16,20,8,8,8,17],20,'courtney-lee','201584'],
+    ['Hedo Turkoglu','SF',[20,11,25,11,22,6,10],25,'hedo-turkoglu','2045'],
+    ['Rashard Lewis','PF',[21,16,28,17,10,9,13],26,'rashard-lewis','1740'],
+    ['Dwight Howard','C',[25,30,0,30,8,30,20],30,'dwight-howard','2730']
+  ]});
 
-  const all=[...knicks.added,...hawks.added,...sixers.added,...knicks2012.added,...cavs.added];
+  const all=[...knicks.added,...hawks.added,...sixers.added,...knicks2012.added,...cavs.added,...bulls2011.added,...magic2009.added];
   const overallMap=new Map(all.map(p=>[`${p.teamId}|${p.name}`,p.overall]));
   const prevOverall=window.courtsideOverall;
   window.courtsideOverall=p=>overallMap.get(`${p?.teamId||''}|${p?.name||''}`) ?? (typeof prevOverall==='function'?prevOverall(p):p?.overall||0);
-  const logoMap=new Map([[knicks.team.id,knicks.team.logo],[hawks.team.id,hawks.team.logo],[sixers.team.id,sixers.team.logo],[knicks2012.team.id,knicks2012.team.logo],[cavs.team.id,cavs.team.logo]]);
+  const logoMap=new Map([knicks,hawks,sixers,knicks2012,cavs,bulls2011,magic2009].map(x=>[x.team.id,x.team.logo]));
   const prevLogo=window.logoUrl;
   const resolveLogo=p=>logoMap.get(p?.teamId)||(typeof prevLogo==='function'?prevLogo(p):(p?.classicLogo||''));
   try{logoUrl=resolveLogo}catch{} window.logoUrl=resolveLogo;
 
-  const newPlayers=[...sixers.added,...knicks2012.added,...cavs.added];
+  const newPlayers=[...sixers.added,...knicks2012.added,...cavs.added,...bulls2011.added,...magic2009.added];
   const artMap=new Map(newPlayers.map(p=>[p.artSlug,`https://cdn.nba.com/headshots/nba/latest/1040x760/${p.playerId}.png`]));
   const previousArt=window.artUrl;
   const resolveArt=p=>artMap.get(p?.artSlug)||(typeof previousArt==='function'?previousArt(p):'');
   window.artUrl=resolveArt;try{artUrl=resolveArt}catch{}
 
-  window.COURTSIDE_CLASSIC_EXPANSION_V01084={teams:[knicks.team,hawks.team,sixers.team,knicks2012.team,cavs.team],players:all};
+  window.COURTSIDE_CLASSIC_EXPANSION_V01084={teams:[knicks.team,hawks.team,sixers.team,knicks2012.team,cavs.team,bulls2011.team,magic2009.team],players:all};
 })();
