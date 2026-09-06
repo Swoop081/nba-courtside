@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pillow requests
-      - name: Download clean historical PNGs directly
+      - name: Download and verify four clean historical PNGs
         run: |
           python - <<'PY'
           import requests
@@ -34,7 +34,7 @@ jobs:
           targets={
             'sacramento-kings-2002-source-v6.png':'https://content.sportslogos.net/logos/6/240/full/832.png',
             'indiana-pacers-2000-source-v6.png':'https://content.sportslogos.net/logos/6/224/full/indiana-pacers-logo-primary-1991-2451.png',
-            'houston-rockets-1995-source-v6.png':'https://content.sportslogos.net/logos/6/230/full/eigv3ra8cjkojrywrgcvy6z29.png',
+            'houston-rockets-1995-source-v6.png':'https://www.kindpng.com/picc/m/148-1486257_houston-rockets-logo-1994-hd-png-download.png',
             'san-antonio-spurs-2005-source-v6.png':'https://content.sportslogos.net/logos/6/233/full/827.png',
           }
           sess=requests.Session(); sess.headers.update({'User-Agent':'Mozilla/5.0'})
@@ -42,10 +42,11 @@ jobs:
             r=sess.get(url,timeout=30); print(outname, r.status_code, r.headers.get('content-type'), len(r.content))
             r.raise_for_status()
             im=Image.open(BytesIO(r.content)).convert('RGBA'); px=im.load(); w,h=im.size
-            # Remove only an edge-connected pale matte if the downloaded PNG contains one.
+
+            # If a download has a pale edge-connected matte, strip only that matte.
             def pale(c):
               rr,gg,bb,a=c
-              return a>0 and max(rr,gg,bb)-min(rr,gg,bb)<=45 and (rr+gg+bb)/3>=205
+              return a>0 and max(rr,gg,bb)-min(rr,gg,bb)<=48 and (rr+gg+bb)/3>=205
             q=deque()
             for x in range(w): q.extend(((x,0),(x,h-1)))
             for y in range(h): q.extend(((0,y),(w-1,y)))
@@ -59,9 +60,13 @@ jobs:
               if not pale(c): continue
               px[x,y]=(c[0],c[1],c[2],0)
               q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1)))
-            lo,hi=im.getchannel('A').getextrema()
-            print('alpha',lo,hi,'size',im.size)
-            if lo==255: raise RuntimeError(outname+' has no transparency')
+
+            alpha=im.getchannel('A'); lo,hi=alpha.getextrema()
+            transparent=sum(1 for a in alpha.getdata() if a<8)
+            ratio=transparent/(w*h)
+            print('verified',outname,'size',im.size,'alpha',(lo,hi),'transparent_ratio',round(ratio,4))
+            if lo==255 or ratio<0.05:
+              raise RuntimeError(outname+' failed transparency verification')
             im.save(root/outname,'PNG',optimize=True)
           PY
       - name: Commit clean source logos
@@ -69,6 +74,6 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add assets/team-logos/classic/*-source-v6.png
-          git commit -m 'Replace four Classic logos with clean historical source PNGs v0.10.80'
+          git commit -m 'Replace four Classic logos with verified clean PNGs v0.10.80'
           git pull --rebase origin main
           git push origin HEAD:main
