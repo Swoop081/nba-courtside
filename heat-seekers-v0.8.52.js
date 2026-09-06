@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.60 — played cards move to end of game rail + 250-player pool + 20 Classic Teams */
+/* NBA Courtside v0.10.61 — compact Classic Team years + reliable Classic logo fallbacks + played cards move to end of rail + 250-player pool + 20 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -18,6 +18,7 @@
   document.write('<script src="classic-detroit-1989-v0.10.57.js?t='+t+'"><\/script>');
   document.write('<script src="classic-boston-2008-v0.10.58.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-year-display-v0.10.61.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-egor-hotfix-v0.10.19.js?t='+t+'"><\/script>');
   document.write('<script src="three-point-ratings-data-v0.10.20.js?t='+t+'"><\/script>');
