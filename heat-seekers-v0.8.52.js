@@ -1,4 +1,4 @@
-/* NBA Courtside v0.10.56 — Sacramento Kings 2002 + Indiana Pacers 2000 + Dallas Mavericks 2011 + duplicate Classic player season identity + era-accurate Classic Team logos + authoritative Season Mode team identity + finish flow + exact season progression + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 240-player pool + 18 Classic Teams */
+/* NBA Courtside v0.10.57 — Detroit Pistons 1989 + Sacramento Kings 2002 + Indiana Pacers 2000 + Dallas Mavericks 2011 + duplicate Classic player season identity + era-accurate Classic Team logos + authoritative Season Mode team identity + finish flow + exact season progression + ticker spacing + scoreboard/ticker polish + season picker 3-wide + Awards tab + Continue flow + persistent Foundation art sizing + 245-player pool + 19 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -15,6 +15,7 @@
   document.write('<script src="classic-vancouver-1997-v0.10.42.js?t='+t+'"><\/script>');
   document.write('<script src="classic-dallas-2011-v0.10.55.js?t='+t+'"><\/script>');
   document.write('<script src="classic-sacramento-2002-indiana-2000-v0.10.56.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-detroit-1989-v0.10.57.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-egor-hotfix-v0.10.19.js?t='+t+'"><\/script>');
