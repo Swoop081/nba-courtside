@@ -1,29 +1,29 @@
-/* NBA Starting5 v0.10.76 — single authority for authentic Classic Team logos */
+/* NBA Starting5 v0.10.77 — single authority for authentic transparent Classic Team logos */
 (()=>{
-  if(window.__starting5ClassicLogoAuthorityV01076)return;
-  window.__starting5ClassicLogoAuthorityV01076=true;
+  if(window.__starting5ClassicLogoAuthorityV01077)return;
+  window.__starting5ClassicLogoAuthorityV01077=true;
 
   const LOGOS={
-    'classic-bos-1986':'assets/team-logos/classic/boston-celtics-1986.png',
-    'classic-bos-2008':'assets/team-logos/classic/boston-celtics-2008.png',
-    'classic-cha-1993':'assets/team-logos/classic/charlotte-hornets-1993.png',
-    'classic-chi-1998':'assets/team-logos/classic/chicago-bulls-1998.png',
-    'classic-dal-1995':'assets/team-logos/classic/dallas-mavericks-1995.png',
-    'classic-dal-2011':'assets/team-logos/classic/dallas-mavericks-2011.png',
-    'classic-det-1989':'assets/team-logos/classic/detroit-pistons-1989.png',
-    'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004.png',
-    'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995.png',
-    'classic-ind-2000':'assets/team-logos/classic/indiana-pacers-2000.png',
-    'classic-lal-1987':'assets/team-logos/classic/los-angeles-lakers-1987.png',
-    'classic-lal-2002':'assets/team-logos/classic/los-angeles-lakers-2002.png',
-    'classic-mia-2013':'assets/team-logos/classic/miami-heat-2013.png',
-    'classic-phx-2007':'assets/team-logos/classic/phoenix-suns-2007.png',
-    'classic-sac-2002':'assets/team-logos/classic/sacramento-kings-2002.png',
-    'classic-sas-2005':'assets/team-logos/classic/san-antonio-spurs-2005.png',
-    'classic-sea-1996':'assets/team-logos/classic/seattle-supersonics-1996.png',
-    'classic-tor-2003':'assets/team-logos/classic/toronto-raptors-2003.png',
-    'classic-uta-1997':'assets/team-logos/classic/utah-jazz-1997.png',
-    'classic-van-1997':'assets/team-logos/classic/vancouver-grizzlies-1997-transparent-v2.png'
+    'classic-bos-1986':'assets/team-logos/classic/boston-celtics-1986-alpha-v3.png',
+    'classic-bos-2008':'assets/team-logos/classic/boston-celtics-2008-alpha-v3.png',
+    'classic-cha-1993':'assets/team-logos/classic/charlotte-hornets-1993-alpha-v3.png',
+    'classic-chi-1998':'assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png',
+    'classic-dal-1995':'assets/team-logos/classic/dallas-mavericks-1995-alpha-v3.png',
+    'classic-dal-2011':'assets/team-logos/classic/dallas-mavericks-2011-alpha-v3.png',
+    'classic-det-1989':'assets/team-logos/classic/detroit-pistons-1989-alpha-v3.png',
+    'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004-alpha-v3.png',
+    'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995-alpha-v3.png',
+    'classic-ind-2000':'assets/team-logos/classic/indiana-pacers-2000-alpha-v3.png',
+    'classic-lal-1987':'assets/team-logos/classic/los-angeles-lakers-1987-alpha-v3.png',
+    'classic-lal-2002':'assets/team-logos/classic/los-angeles-lakers-2002-alpha-v3.png',
+    'classic-mia-2013':'assets/team-logos/classic/miami-heat-2013-alpha-v3.png',
+    'classic-phx-2007':'assets/team-logos/classic/phoenix-suns-2007-alpha-v3.png',
+    'classic-sac-2002':'assets/team-logos/classic/sacramento-kings-2002-alpha-v3.png',
+    'classic-sas-2005':'assets/team-logos/classic/san-antonio-spurs-2005-alpha-v3.png',
+    'classic-sea-1996':'assets/team-logos/classic/seattle-supersonics-1996-alpha-v3.png',
+    'classic-tor-2003':'assets/team-logos/classic/toronto-raptors-2003-alpha-v3.png',
+    'classic-uta-1997':'assets/team-logos/classic/utah-jazz-1997-alpha-v3.png',
+    'classic-van-1997':'assets/team-logos/classic/vancouver-grizzlies-1997-alpha-v3.png'
   };
 
   const pools=()=>{
