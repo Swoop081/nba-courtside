@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.41 — editor/glow recovery authority */
+/* NBA Starting5 v0.11.50 — steals scale + editor/glow recovery authority */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -31,6 +31,7 @@
   document.write('<script src="rebounding-ratings-v0.10.21.js?t='+t+'"><\/script>');
   document.write('<script src="blocks-ratings-v0.10.22.js?t='+t+'"><\/script>');
   document.write('<script src="steals-ratings-v0.10.23.js?t='+t+'"><\/script>');
+  document.write('<script src="steals-scale-v0.11.50.js?t='+t+'"><\/script>');
   document.write('<script src="assists-ratings-v0.10.24.js?t='+t+'"><\/script>');
   document.write('<script src="dunking-ratings-v0.10.25.js?t='+t+'"><\/script>');
   document.write('<script src="overall-ratings-v0.10.26.js?t='+t+'"><\/script>');
