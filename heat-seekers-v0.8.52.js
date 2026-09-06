@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.72 — Classic exact-logo backgrounds + Vancouver transparency + topbar controls hit-target fix + Classic logo isolation + local authentic Classic logos + user-edited art layouts + true visual centering + global NBA Starting5 rebrand + compact Classic years + played cards move to end of rail + 250-player pool + 20 Classic Teams */
+/* NBA Starting5 v0.10.76 — single Classic logo authority + true Vancouver transparency + preserved art layouts + Starting5 presentation */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -56,11 +56,7 @@
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.24.css?t='+t+'">');
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
-  document.write('<script src="team-logo-audit-v0.10.28.js?t='+t+'"><\/script>');
-  document.write('<script src="classic-logo-path-hotfix-v0.10.44.js?t='+t+'"><\/script>');
-  document.write('<script src="classic-era-logos-v0.10.54.js?t='+t+'"><\/script>');
-  document.write('<script src="classic-local-png-logos-v0.10.66.js?t='+t+'"><\/script>');
-  document.write('<script src="classic-logo-integrity-v0.10.72.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-logo-authority-v0.10.76.js?t='+t+'"><\/script>');
   document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
