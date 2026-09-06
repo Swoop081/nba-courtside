@@ -1,119 +1,93 @@
-/* NBA Starting5 v0.11.42 — in-game Card Art Editor with resilient Options launcher */
-(() => {
+/* NBA Starting5 v0.11.44 — standalone resilient Card Art Editor. */
+(()=>{
   const KEY='nbaCourtsideArtEditorV1';
   const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
   const write=v=>localStorage.setItem(KEY,JSON.stringify(v));
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
   const round=(v,n=2)=>+Number(v).toFixed(n);
-  const savedFor=slug=>read()[slug]||null;
+  const teamKey=p=>String(p?.teamId||p?.classicTeam||p?.teamShort||p?.team||'Unknown');
+  const teamLabel=p=>String(p?.teamShort||p?.team||'Unknown Team');
   const baseFor=p=>({x:parseFloat(p?.art?.x)||50,y:6,scale:round((Number(p?.art?.s)||.76)*1.30,2)});
-  const teamKey=p=>String(p?.teamId||p?.teamShort||p?.team||'Unknown');
-  const teamLabel=p=>String(p?.team||p?.teamShort||'Unknown Team');
 
-  function allPlayers(){
-    const pools=[];
-    try{if(typeof players!=='undefined'&&Array.isArray(players))pools.push(players)}catch{}
-    ['COURTSIDE_FOUNDATION_PLAYERS','FOUNDATION_PLAYERS','foundationPlayers','COURTSIDE_CLASSIC_PLAYERS'].forEach(k=>{if(Array.isArray(window[k]))pools.push(window[k])});
+  function pool(){
+    const src=[];
+    try{if(typeof players!=='undefined'&&Array.isArray(players))src.push(...players)}catch{}
+    for(const k of ['COURTSIDE_FOUNDATION_PLAYERS','FOUNDATION_PLAYERS','foundationPlayers','COURTSIDE_CLASSIC_PLAYERS']){
+      if(Array.isArray(window[k]))src.push(...window[k]);
+    }
     const out=[],seen=new Set();
-    for(const pool of pools)for(const p of pool||[]){
-      if(!p?.artSlug)continue;
-      const key=String(p.id||`${p.teamId||p.team||''}|${p.artSlug}`);
+    for(const p of src){
+      if(!p||!p.artSlug)continue;
+      const key=String(p.id||`${teamKey(p)}|${p.artSlug}`);
       if(seen.has(key))continue;seen.add(key);out.push(p);
     }
     return out;
   }
 
-  function overrideImageMarkup(html,p){
-    const c=savedFor(p.artSlug);
-    if(!c)return html;
-    html=html.replace('<article class="player-card ',`<article data-art-slug="${p.artSlug}" class="player-card `);
-    return html.replace(/<img class="photo cutout-art"([^>]*)>/,(_,attrs)=>{
-      attrs=attrs.replace(/\sstyle="[^"]*"/g,'');
-      return `<img class="photo cutout-art"${attrs} style="top:${c.y}px!important;left:${c.x}%!important;transform:translateX(-50%) scale(${c.scale})!important;transform-origin:center top!important">`;
-    });
-  }
-
-  const installCardAuthority=()=>{
-    if(window.__courtsideArtEditorAuthority||typeof cardMarkup!=='function')return;
-    window.__courtsideArtEditorAuthority=true;
-    const before=cardMarkup;
-    cardMarkup=function(p,o={}){
-      let html=before(p,o);
-      if(!html.includes('data-art-slug='))html=html.replace('<article class="player-card ',`<article data-art-slug="${p.artSlug}" class="player-card `);
-      return overrideImageMarkup(html,p);
-    };
-  };
-
-  function applyConfigToImage(img,c){
+  function applyImg(img,c){
     if(!img||!c)return;
     img.style.setProperty('top',`${c.y}px`,'important');
     img.style.setProperty('left',`${c.x}%`,'important');
     img.style.setProperty('transform',`translateX(-50%) scale(${c.scale})`,'important');
     img.style.setProperty('transform-origin','center top','important');
   }
-  function syncVisible(slug,c){document.querySelectorAll(`.player-card[data-art-slug="${slug}"] .cutout-art`).forEach(img=>applyConfigToImage(img,c));}
-  function effectiveFromPreview(img,stage,p){
-    const fallback=baseFor(p);if(!img||!stage)return fallback;
-    const cs=getComputedStyle(img),ss=getComputedStyle(stage);let x=fallback.x,y=parseFloat(cs.top),scale=fallback.scale;
-    const left=parseFloat(cs.left),w=parseFloat(ss.width)||stage.clientWidth;if(Number.isFinite(left)&&w>0)x=left/w*100;if(!Number.isFinite(y))y=fallback.y;
-    try{const m=new DOMMatrixReadOnly(cs.transform);if(Number.isFinite(m.a)&&m.a>0)scale=m.a;}catch{}
-    return {x:round(x,1),y:round(y,1),scale:round(scale,2)};
+
+  function ensureStyle(){
+    if(document.getElementById('card-art-editor-style-v01144'))return;
+    const s=document.createElement('style');s.id='card-art-editor-style-v01144';s.textContent=`
+      .art-editor-launch{width:100%;margin-top:10px;min-height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:#101720;color:#fff;font-size:15px;font-weight:950}
+      .art-editor{position:fixed;inset:0;z-index:10000;background:#07090d;overflow:auto;padding:max(14px,env(safe-area-inset-top)) 14px calc(24px + env(safe-area-inset-bottom));color:#fff}
+      .art-editor.hidden{display:none!important}.art-editor-body{max-width:560px;margin:0 auto}.art-editor-head{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5;background:#07090d;padding:4px 0 12px}.art-editor-head h2{margin:0;font-size:20px}.art-editor-close{min-width:52px;height:44px}
+      .art-editor-selectors{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.art-editor-selectors #artPlayerSelect{grid-column:1/-1}.art-editor select{width:100%;min-height:44px;border-radius:12px;background:#151b25;color:#fff;border:1px solid rgba(255,255,255,.14);padding:0 10px;font-weight:850}
+      .art-editor-nav{display:grid;grid-template-columns:54px 1fr 54px;gap:8px;align-items:center;margin-bottom:12px}.art-editor-nav button{height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#151b25;color:#fff;font-size:25px}.art-editor-player{text-align:center;font-size:16px;font-weight:950}.art-editor-player small{display:block;margin-top:3px;color:#9da6b4;font-size:10px}
+      .art-editor-preview{width:min(72vw,290px);margin:0 auto 16px}.art-editor-preview .player-card{width:100%!important;pointer-events:none!important}.art-editor-preview .foundation-art img,.art-editor-preview .cutout-art{pointer-events:auto!important;touch-action:none!important}
+      .art-editor-controls{display:grid;gap:12px;background:#10151d;border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:14px}.art-control label{display:flex;justify-content:space-between;font-size:13px;font-weight:900;margin-bottom:6px}.art-control output{color:#f7b928}.art-control input[type=range]{width:100%;accent-color:#f7b928}
+      .art-editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.art-editor-actions button{min-height:46px;border-radius:13px;border:1px solid rgba(255,255,255,.16);background:#171e29;color:#fff;font-weight:900}.art-editor-actions .primary{background:#f7b928;color:#080a0d;border-color:#f7b928}.art-editor-progress{text-align:center;margin:10px 0 0;color:#9da6b4;font-size:11px}.art-editor-note{font-size:11px;color:#adb5c2;text-align:center;line-height:1.4}
+    `;document.head.appendChild(s);
   }
 
-  const css=`
-  .art-editor-launch{width:100%;margin-top:10px;min-height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background:#101720;color:#fff;font-size:15px;font-weight:950}
-  .art-editor{position:fixed;inset:0;z-index:400;background:#07090d;overflow:auto;padding:max(14px,env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom));color:#fff}
-  .art-editor.hidden{display:none!important}.art-editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;position:sticky;top:0;z-index:5;background:rgba(7,9,13,.96);padding:4px 0 12px}.art-editor-head h2{font-size:20px;margin:0}.art-editor-close{min-width:48px;height:44px}
-  .art-editor-selectors{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.art-editor select{width:100%;min-height:44px;border-radius:12px;background:#151b25;color:#fff;border:1px solid rgba(255,255,255,.14);padding:0 10px;font-weight:850}.art-editor-selectors #artPlayerSelect{grid-column:1/-1}
-  .art-editor-nav{display:grid;grid-template-columns:54px 1fr 54px;align-items:center;gap:8px;margin-bottom:12px}.art-editor-nav button{height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#151b25;color:#fff;font-size:25px}.art-editor-player{text-align:center;font-weight:950;font-size:16px}.art-editor-player small{display:block;color:#9da6b4;font-size:10px;margin-top:3px}
-  .art-editor-preview{width:min(72vw,290px);margin:0 auto 16px}.art-editor-preview .player-card{width:100%!important;pointer-events:none!important}.art-editor-preview .cutout-art{pointer-events:auto!important;touch-action:none!important;cursor:grab}.art-editor-preview .cutout-art:active{cursor:grabbing}
-  .art-editor-controls{display:grid;gap:12px;background:#10151d;border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:14px}.art-control label{display:flex;justify-content:space-between;font-size:13px;font-weight:900;margin-bottom:6px}.art-control output{color:#f7b928}.art-control input[type=range]{width:100%;accent-color:#f7b928}.art-editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.art-editor-actions button{min-height:46px;border-radius:13px;border:1px solid rgba(255,255,255,.16);background:#171e29;color:#fff;font-weight:900}.art-editor-actions .primary{background:#f7b928;color:#080a0d;border-color:#f7b928}.art-editor-progress{text-align:center;margin:10px 0 0;color:#9da6b4;font-size:11px}.art-editor-note{font-size:11px;line-height:1.4;color:#adb5c2;margin:10px 2px 0;text-align:center}
-  @media(min-width:700px){.art-editor-body{max-width:560px;margin:auto}}
-  `;
-
-  function installUI(){
-    installCardAuthority();
-    const options=document.querySelector('.options-card');
-    if(!options)return false;
-    const pool=allPlayers();
-    if(!pool.length)return false;
-
+  function buildEditor(){
+    const all=pool();
+    if(!all.length||typeof cardMarkup!=='function')return false;
+    ensureStyle();
     let btn=document.getElementById('cardArtEditorBtn');
-    if(!btn){btn=document.createElement('button');btn.id='cardArtEditorBtn';btn.type='button';btn.className='art-editor-launch';btn.textContent='Card Art Editor';options.appendChild(btn);}
-    if(document.getElementById('cardArtEditor')){
-      const ed=document.getElementById('cardArtEditor');
-      btn.onclick=()=>{document.getElementById('optionsSheet')?.classList.add('hidden');ed.classList.remove('hidden');window.applyStarting5PlayerGlow?.();};
-      return true;
+    const options=document.querySelector('.options-card');
+    if(!btn&&options){btn=document.createElement('button');btn.id='cardArtEditorBtn';btn.type='button';btn.className='art-editor-launch';btn.textContent='Card Art Editor';options.appendChild(btn);}
+    let ed=document.getElementById('cardArtEditor');
+    if(!ed){
+      ed=document.createElement('section');ed.id='cardArtEditor';ed.className='art-editor hidden';ed.innerHTML=`<div class="art-editor-body"><div class="art-editor-head"><h2>Card Art Editor</h2><button id="artEditorClose" class="ghost-btn art-editor-close" type="button">Done</button></div><div class="art-editor-selectors"><select id="artSetSelect"></select><select id="artTeamSelect"></select><select id="artPlayerSelect"></select></div><div class="art-editor-nav"><button id="artPrev" type="button">‹</button><div id="artPlayerName" class="art-editor-player"></div><button id="artNext" type="button">›</button></div><div id="artPreview" class="art-editor-preview"></div><div class="art-editor-controls"><div class="art-control"><label>X position <output id="artXOut"></output></label><input id="artX" type="range" min="-25" max="125" step="0.5"></div><div class="art-control"><label>Y position <output id="artYOut"></output></label><input id="artY" type="range" min="-300" max="300" step="1"></div><div class="art-control"><label>Size <output id="artScaleOut"></output></label><input id="artScale" type="range" min="0.50" max="4.50" step="0.01"></div></div><div class="art-editor-actions"><button id="artReset" type="button">Reset This Card</button><button id="artCopy" type="button">Copy JSON</button><button id="artExport" class="primary" type="button">Export Art Layout</button><button id="artClearAll" type="button">Clear All Edits</button></div><div id="artProgress" class="art-editor-progress"></div><p class="art-editor-note">Drag the player directly on the card or use the sliders. Changes save immediately.</p></div>`;document.body.appendChild(ed);
+
+      const setSel=ed.querySelector('#artSetSelect'),teamSel=ed.querySelector('#artTeamSelect'),playerSel=ed.querySelector('#artPlayerSelect');
+      const preview=ed.querySelector('#artPreview'),nameEl=ed.querySelector('#artPlayerName'),progress=ed.querySelector('#artProgress');
+      const x=ed.querySelector('#artX'),y=ed.querySelector('#artY'),sc=ed.querySelector('#artScale'),xo=ed.querySelector('#artXOut'),yo=ed.querySelector('#artYOut'),so=ed.querySelector('#artScaleOut');
+      let list=[...all],idx=0,draft=null,drag=null;
+      const sets=['All Sets',...new Set(all.map(p=>p.set||'Classic Teams'))];setSel.innerHTML=sets.map(v=>`<option value="${v}">${v}</option>`).join('');
+      const current=()=>list[idx]||all[0];
+      const setPool=()=>setSel.value==='All Sets'?[...all]:all.filter(p=>(p.set||'Classic Teams')===setSel.value);
+      const filtered=()=>teamSel.value==='All Teams'?setPool():setPool().filter(p=>teamKey(p)===teamSel.value);
+      const saved=p=>read()[p.artSlug]||baseFor(p);
+      const syncOut=()=>{x.value=draft.x;y.value=draft.y;sc.value=draft.scale;xo.textContent=`${draft.x.toFixed(1)}%`;yo.textContent=`${draft.y.toFixed(0)}px`;so.textContent=`${draft.scale.toFixed(2)}×`;};
+      const save=()=>{const p=current(),store=read();store[p.artSlug]={x:round(draft.x,1),y:round(draft.y,0),scale:round(draft.scale,2)};write(store);progress.textContent=`${Object.keys(store).length} of ${all.length} cards edited`;document.querySelectorAll(`.player-card[data-art-slug="${p.artSlug}"] .cutout-art,.player-card[data-art-slug="${p.artSlug}"] .foundation-art img`).forEach(img=>applyImg(img,store[p.artSlug]));};
+      function bindDrag(img,stage){if(!img||!stage)return;img.onpointerdown=e=>{e.preventDefault();img.setPointerCapture?.(e.pointerId);drag={sx:e.clientX,sy:e.clientY,x:draft.x,y:draft.y,w:stage.clientWidth||1};};img.onpointermove=e=>{if(!drag)return;draft.x=clamp(drag.x+(e.clientX-drag.sx)/drag.w*100,-25,125);draft.y=clamp(drag.y+(e.clientY-drag.sy),-300,300);applyImg(img,draft);syncOut();};img.onpointerup=img.onpointercancel=()=>{if(drag){drag=null;save();}};}
+      const render=()=>{const p=current();if(!p)return;playerSel.value=p.artSlug;nameEl.innerHTML=`${p.name}<small>${p.set||'Classic Teams'} · ${p.teamShort||p.team||''}</small>`;preview.innerHTML=cardMarkup(p,{eager:true});draft=saved(p);syncOut();requestAnimationFrame(()=>{const img=preview.querySelector('.foundation-art img,.cutout-art'),stage=preview.querySelector('.foundation-art,.art-stage');applyImg(img,draft);bindDrag(img,stage);window.applyStarting5PlayerGlow?.();});};
+      const rebuildTeams=()=>{const m=new Map();setPool().forEach(p=>m.set(teamKey(p),teamLabel(p)));teamSel.innerHTML='<option value="All Teams">All Teams</option>'+[...m].sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');};
+      const rebuildPlayers=keep=>{list=filtered();playerSel.innerHTML=list.map(p=>`<option value="${p.artSlug}">${p.name}</option>`).join('');idx=Math.max(0,list.findIndex(p=>p.artSlug===keep));render();};
+      [x,y,sc].forEach(el=>el.addEventListener('input',()=>{draft={x:+x.value,y:+y.value,scale:+sc.value};applyImg(preview.querySelector('.foundation-art img,.cutout-art'),draft);syncOut();save();}));
+      setSel.onchange=()=>{const keep=current()?.artSlug;rebuildTeams();rebuildPlayers(keep)};teamSel.onchange=()=>rebuildPlayers(current()?.artSlug);playerSel.onchange=()=>{idx=list.findIndex(p=>p.artSlug===playerSel.value);render();};
+      ed.querySelector('#artPrev').onclick=()=>{if(list.length){idx=(idx-1+list.length)%list.length;render();}};ed.querySelector('#artNext').onclick=()=>{if(list.length){idx=(idx+1)%list.length;render();}};
+      ed.querySelector('#artReset').onclick=()=>{const p=current(),store=read();delete store[p.artSlug];write(store);render();progress.textContent=`${Object.keys(store).length} of ${all.length} cards edited`;};
+      const exportData=()=>{const store=read(),cards={};all.forEach(p=>cards[p.artSlug]={...(store[p.artSlug]||baseFor(p)),edited:!!store[p.artSlug],name:p.name,set:p.set||'Classic Teams',team:p.teamShort||p.team});return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.11.44',exportedAt:new Date().toISOString(),cards};};
+      ed.querySelector('#artCopy').onclick=async()=>{try{await navigator.clipboard.writeText(JSON.stringify(exportData(),null,2));}catch{}};
+      ed.querySelector('#artExport').onclick=()=>{const blob=new Blob([JSON.stringify(exportData(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='nba-starting5-art-layout.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+      ed.querySelector('#artClearAll').onclick=()=>{if(confirm('Clear every Card Art Editor adjustment on this device?')){localStorage.removeItem(KEY);render();}};
+      ed.querySelector('#artEditorClose').onclick=()=>ed.classList.add('hidden');
+      rebuildTeams();rebuildPlayers();progress.textContent=`${Object.keys(read()).length} of ${all.length} cards edited`;
     }
-
-    if(!document.getElementById('card-art-editor-style-v01142')){const style=document.createElement('style');style.id='card-art-editor-style-v01142';style.textContent=css;document.head.appendChild(style);}
-    const ed=document.createElement('section');ed.id='cardArtEditor';ed.className='art-editor hidden';ed.innerHTML=`<div class="art-editor-body"><div class="art-editor-head"><div><h2>Card Art Editor</h2></div><button id="artEditorClose" class="ghost-btn art-editor-close" type="button">Done</button></div><div class="art-editor-selectors"><select id="artSetSelect" aria-label="Set"></select><select id="artTeamSelect" aria-label="Team"></select><select id="artPlayerSelect" aria-label="Player"></select></div><div class="art-editor-nav"><button id="artPrev" type="button">‹</button><div id="artPlayerName" class="art-editor-player"></div><button id="artNext" type="button">›</button></div><div id="artPreview" class="art-editor-preview"></div><div class="art-editor-controls"><div class="art-control"><label>X position <output id="artXOut"></output></label><input id="artX" type="range" min="-25" max="125" step="0.5"></div><div class="art-control"><label>Y position <output id="artYOut"></output></label><input id="artY" type="range" min="-150" max="300" step="1"></div><div class="art-control"><label>Size <output id="artScaleOut"></output></label><input id="artScale" type="range" min="0.50" max="4.00" step="0.01"></div></div><div class="art-editor-actions"><button id="artReset" type="button">Reset This Card</button><button id="artCopy" type="button">Copy JSON</button><button id="artExport" class="primary" type="button">Export Art Layout</button><button id="artClearAll" type="button">Clear All Edits</button></div><div id="artProgress" class="art-editor-progress"></div><p class="art-editor-note">Drag the player directly on the card to move them. Use Size for precise scaling. Changes save immediately on this device and apply to Catalogue and gameplay.</p></div>`;document.body.appendChild(ed);
-
-    const setSel=ed.querySelector('#artSetSelect'),teamSel=ed.querySelector('#artTeamSelect'),playerSel=ed.querySelector('#artPlayerSelect'),preview=ed.querySelector('#artPreview'),nameEl=ed.querySelector('#artPlayerName'),x=ed.querySelector('#artX'),y=ed.querySelector('#artY'),sc=ed.querySelector('#artScale'),xo=ed.querySelector('#artXOut'),yo=ed.querySelector('#artYOut'),so=ed.querySelector('#artScaleOut'),progress=ed.querySelector('#artProgress');
-    const all=pool;let list=[...all],idx=0,draft=null,drag=null;
-    const sets=['All Sets',...new Set(all.map(p=>p.set).filter(Boolean))];setSel.innerHTML=sets.map(s=>`<option value="${s}">${s}</option>`).join('');
-    const current=()=>list[idx]||all[0];
-    const setPool=()=>setSel.value==='All Sets'?[...all]:all.filter(p=>p.set===setSel.value);
-    const filteredPool=()=>{const base=setPool(),team=teamSel.value;return team==='All Teams'?base:base.filter(p=>teamKey(p)===team)};
-    const updateProgress=()=>{progress.textContent=`${Object.keys(read()).length} of ${all.length} cards edited`};
-    const updateOutputs=()=>{xo.textContent=`${draft.x.toFixed(1)}%`;yo.textContent=`${draft.y.toFixed(0)}px`;so.textContent=`${draft.scale.toFixed(2)}×`;x.value=draft.x;y.value=draft.y;sc.value=draft.scale;};
-    const save=()=>{const p=current(),store=read();store[p.artSlug]={x:round(draft.x,1),y:round(draft.y,0),scale:round(draft.scale,2)};write(store);syncVisible(p.artSlug,store[p.artSlug]);updateProgress();};
-    const renderPreview=()=>{const p=current();if(!p)return;nameEl.innerHTML=`${p.name}<small>${p.set||''} · ${p.teamShort||p.team||''}</small>`;playerSel.value=p.artSlug;preview.innerHTML=cardMarkup(p,{eager:true});requestAnimationFrame(()=>{const img=preview.querySelector('.cutout-art'),stage=preview.querySelector('.art-stage');draft=savedFor(p.artSlug)||effectiveFromPreview(img,stage,p);updateOutputs();if(savedFor(p.artSlug))applyConfigToImage(img,draft);bindDrag(img,stage);window.applyStarting5PlayerGlow?.();});};
-    const rebuildTeams=(keepTeam='All Teams')=>{const byKey=new Map();setPool().forEach(p=>{const k=teamKey(p);if(!byKey.has(k))byKey.set(k,teamLabel(p));});const opts=[['All Teams','All Teams'],...[...byKey.entries()].sort((a,b)=>a[1].localeCompare(b[1]))]];teamSel.innerHTML=opts.map(([v,l])=>`<option value="${v}">${l}</option>`).join('');teamSel.value=byKey.has(keepTeam)?keepTeam:'All Teams';};
-    const rebuildPlayers=keepSlug=>{list=filteredPool();playerSel.innerHTML=list.map(p=>`<option value="${p.artSlug}">${p.name}</option>`).join('');let found=list.findIndex(p=>p.artSlug===keepSlug);if(found<0)found=0;idx=found;if(list.length)renderPreview();else{preview.innerHTML='';nameEl.textContent='No players';}};
-    function bindDrag(img,stage){if(!img||!stage)return;img.onpointerdown=e=>{e.preventDefault();img.setPointerCapture?.(e.pointerId);drag={sx:e.clientX,sy:e.clientY,x:draft.x,y:draft.y,w:stage.clientWidth||1};};img.onpointermove=e=>{if(!drag)return;draft.x=clamp(drag.x+(e.clientX-drag.sx)/drag.w*100,-25,125);draft.y=clamp(drag.y+(e.clientY-drag.sy),-150,300);applyConfigToImage(img,draft);updateOutputs();};img.onpointerup=img.onpointercancel=()=>{if(drag){drag=null;save();}};}
-    const sliderChanged=()=>{draft={x:+x.value,y:+y.value,scale:+sc.value};applyConfigToImage(preview.querySelector('.cutout-art'),draft);updateOutputs();save();};[x,y,sc].forEach(el=>el.addEventListener('input',sliderChanged));
-    setSel.onchange=()=>{const keep=current()?.artSlug;rebuildTeams();rebuildPlayers(keep);};teamSel.onchange=()=>rebuildPlayers(current()?.artSlug);playerSel.onchange=()=>{idx=list.findIndex(p=>p.artSlug===playerSel.value);renderPreview();};
-    ed.querySelector('#artPrev').onclick=()=>{if(list.length){idx=(idx-1+list.length)%list.length;renderPreview();}};ed.querySelector('#artNext').onclick=()=>{if(list.length){idx=(idx+1)%list.length;renderPreview();}};
-    ed.querySelector('#artReset').onclick=()=>{const p=current(),store=read();delete store[p.artSlug];write(store);renderPreview();updateProgress();};
-    const exportData=()=>{const store=read(),cards={};all.forEach(p=>{cards[p.artSlug]={...(store[p.artSlug]||baseFor(p)),edited:!!store[p.artSlug],name:p.name,set:p.set,team:p.teamShort};});return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.11.42',exportedAt:new Date().toISOString(),cards};};
-    ed.querySelector('#artExport').onclick=()=>{const data=JSON.stringify(exportData(),null,2),blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='nba-starting5-art-layout.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);};
-    ed.querySelector('#artCopy').onclick=async()=>{const b=ed.querySelector('#artCopy');try{await navigator.clipboard.writeText(JSON.stringify(exportData(),null,2));b.textContent='Copied';setTimeout(()=>b.textContent='Copy JSON',1200)}catch{}};
-    ed.querySelector('#artClearAll').onclick=()=>{if(confirm('Clear every Card Art Editor adjustment on this device?')){localStorage.removeItem(KEY);renderPreview();updateProgress();}};
-    btn.onclick=()=>{document.getElementById('optionsSheet')?.classList.add('hidden');ed.classList.remove('hidden');const p=current();rebuildTeams(p?teamKey(p):'All Teams');rebuildPlayers(p?.artSlug);updateProgress();window.applyStarting5PlayerGlow?.();};
-    ed.querySelector('#artEditorClose').onclick=()=>ed.classList.add('hidden');rebuildTeams();rebuildPlayers();updateProgress();return true;
+    if(btn){btn.textContent='Card Art Editor';btn.onclick=()=>{document.getElementById('optionsSheet')?.classList.add('hidden');ed.classList.remove('hidden');window.applyStarting5PlayerGlow?.();};}
+    window.openStarting5CardEditor=()=>{ed.classList.remove('hidden');window.applyStarting5PlayerGlow?.();};
+    return true;
   }
 
-  const boot=()=>{let tries=0;const go=()=>{if(installUI()||++tries>40)return;setTimeout(go,125)};go();};
-  if(document.readyState==='loading')window.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+  function boot(){let n=0;const run=()=>{if(buildEditor()||++n>80)return;setTimeout(run,100)};run();}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
