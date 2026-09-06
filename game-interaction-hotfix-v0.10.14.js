@@ -1,9 +1,11 @@
-/* NBA Starting5 v0.11.9 — CPU choice reveal flow + matched lineup card size + nameplate inspection split */
+/* NBA Starting5 v0.11.10 — CPU choice reveal flow + matchup label + nameplate inspection split */
 (()=>{
-  if(window.__courtsideGameInteractionHotfixV0119)return;
-  window.__courtsideGameInteractionHotfixV0119=true;
+  if(window.__courtsideGameInteractionHotfixV01110)return;
+  window.__courtsideGameInteractionHotfixV01110=true;
 
   let busy=false,choiceTimer=0,resultTimer=0;
+  const CPU_REVEAL_MS=1500;
+  const RESULT_REVEAL_MS=1500;
 
   const canPick=card=>{
     if(busy||!card||card.classList.contains('used'))return false;
@@ -43,6 +45,12 @@
     stage.querySelector('.s5-cpu-choice-ticker')?.classList.remove('hidden');
     stage.querySelector('.s5-cpu-result-ticker')?.classList.add('hidden');
     const host=stage.querySelector('.s5-cpu-choice-card');if(host)host.innerHTML='';
+  };
+
+  const setMatchupLabel=()=>{
+    const q=document.getElementById('quarterLabel');
+    if(!q||typeof state==='undefined'||!state)return;
+    q.textContent=state.overtime?'OVERTIME':'MATCHUP IS';
   };
 
   const showCpuChoice=p=>{
@@ -97,19 +105,25 @@
 
     choiceTimer=setTimeout(()=>{
       const before=state?.history?.length||0;
-      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.9 pick failed',err);busy=false;return}
+      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.10 pick failed',err);busy=false;return}
       const after=state?.history?.length||0;
       if(after>before){
         showResult();
-        resultTimer=setTimeout(()=>{const s=ensureStage();if(s)s.classList.add('hidden');busy=false;},620);
+        resultTimer=setTimeout(()=>{const s=ensureStage();if(s)s.classList.add('hidden');busy=false;},RESULT_REVEAL_MS);
       }else busy=false;
-    },650);
+    },CPU_REVEAL_MS);
   },true);
 
   const wrapBegin=()=>{
     let fn=null;try{fn=window.beginQuarter||beginQuarter}catch{}
     if(typeof fn!=='function'||fn.__s5CpuRevealWrapped)return;
-    const wrapped=function(){clearStage();const r=fn.apply(this,arguments);requestAnimationFrame(unlockFreshQuarter);return r};
+    const wrapped=function(){
+      clearStage();
+      const r=fn.apply(this,arguments);
+      setMatchupLabel();
+      requestAnimationFrame(()=>{setMatchupLabel();unlockFreshQuarter();});
+      return r
+    };
     wrapped.__s5CpuRevealWrapped=true;window.beginQuarter=wrapped;try{beginQuarter=wrapped}catch{}
   };
 
@@ -126,7 +140,7 @@
   `;
   document.head.appendChild(style);
 
-  const start=()=>{ensureStage();wrapBegin();unlockFreshQuarter();};
+  const start=()=>{ensureStage();wrapBegin();setMatchupLabel();unlockFreshQuarter();};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)unlockFreshQuarter()});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){setMatchupLabel();unlockFreshQuarter()}});
 })();
