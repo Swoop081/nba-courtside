@@ -1,8 +1,8 @@
-/* NBA Starting5 v0.10.69 — Classic logo isolation hotfix + local authentic Classic logos + user-edited art layouts + true visual centering + global NBA Starting5 rebrand + compact Classic years + played cards move to end of rail + 250-player pool + 20 Classic Teams */
+/* NBA Starting5 v0.10.70 — topbar controls hit-target fix + Classic logo isolation + local authentic Classic logos + user-edited art layouts + true visual centering + global NBA Starting5 rebrand + compact Classic years + played cards move to end of rail + 250-player pool + 20 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
-  document.write('<link rel="stylesheet" href="nba-starting5-brand-v0.10.64.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="nba-starting5-brand-v0.10.70.css?t='+t+'">');
   document.write('<script src="foundation-v0.9.0.js?t='+t+'"><\/script>');
   document.write('<script src="classic-teams-v0.9.30.js?t='+t+'"><\/script>');
   document.write('<script src="classic-detroit-2004-v0.10.34.js?t='+t+'"><\/script>');
