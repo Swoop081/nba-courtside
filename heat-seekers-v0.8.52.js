@@ -1,7 +1,8 @@
-/* NBA Courtside v0.10.61 — compact Classic Team years + reliable Classic logo fallbacks + played cards move to end of rail + 250-player pool + 20 Classic Teams */
+/* NBA Starting5 v0.10.62 — global NBA Starting5 rebrand + compact Classic years + reliable Classic logo fallbacks + played cards move to end of rail + 250-player pool + 20 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
+  document.write('<link rel="stylesheet" href="nba-starting5-brand-v0.10.62.css?t='+t+'">');
   document.write('<script src="foundation-v0.9.0.js?t='+t+'"><\/script>');
   document.write('<script src="classic-teams-v0.9.30.js?t='+t+'"><\/script>');
   document.write('<script src="classic-detroit-2004-v0.10.34.js?t='+t+'"><\/script>');
@@ -57,6 +58,7 @@
   document.write('<script src="team-logo-audit-v0.10.28.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-path-hotfix-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="classic-era-logos-v0.10.54.js?t='+t+'"><\/script>');
+  document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="season-ui-polish-v0.10.48.css?t='+t+'">');
