@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pillow
-      - name: Remove connected white background
+      - name: Remove connected light background robustly
         run: |
           python - <<'PY'
           from PIL import Image
@@ -31,14 +31,21 @@ jobs:
           for y in range(h): q.append((0,y)); q.append((w-1,y))
           def bg(c):
               r,g,b,a=c
-              return a>0 and r>=238 and g>=238 and b>=238 and max(r,g,b)-min(r,g,b)<=18
+              if a==0: return True
+              # Treat white/off-white/very-light gray border pixels as background,
+              # but preserve the internal white details of the logo because only
+              # pixels connected to the image edges are removed.
+              return r>=220 and g>=220 and b>=220 and max(r,g,b)-min(r,g,b)<=35
           while q:
               x,y=q.popleft()
               if (x,y) in seen or x<0 or y<0 or x>=w or y>=h: continue
               seen.add((x,y))
               if not bg(px[x,y]): continue
               r,g,b,a=px[x,y]; px[x,y]=(r,g,b,0)
-              q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1)))
+              q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1),(x+1,y+1),(x-1,y-1),(x+1,y-1),(x-1,y+1)))
+          # Crop away any transparent padding left from the old rectangular source.
+          box=im.getbbox()
+          if box: im=im.crop(box)
           im.save(p,'PNG',optimize=True)
           PY
       - name: Commit transparent Vancouver logo
