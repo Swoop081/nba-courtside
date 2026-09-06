@@ -1,0 +1,80 @@
+name: Materialize Classic Team PNG Logos
+
+on:
+  push:
+    paths:
+      - '.github/workflows/materialize-classic-logo-pngs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-logos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install converters
+        run: pip install cairosvg pillow requests
+      - name: Build transparent era-specific PNGs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from io import BytesIO
+          import requests
+          import cairosvg
+          from PIL import Image
+
+          root=Path('assets/team-logos/classic')
+          root.mkdir(parents=True,exist_ok=True)
+
+          local=[
+            'boston-celtics-1986','charlotte-hornets-1993','chicago-bulls-1998','dallas-mavericks-1995',
+            'detroit-pistons-2004','houston-rockets-1995','los-angeles-lakers-1987','los-angeles-lakers-2002',
+            'miami-heat-2013','phoenix-suns-2007','san-antonio-spurs-2005','seattle-supersonics-1996',
+            'toronto-raptors-2003','utah-jazz-1997','vancouver-grizzlies-1997'
+          ]
+          remote={
+            'boston-celtics-2008':'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19979720.png',
+            'dallas-mavericks-2011':'https://content.sportslogos.net/logos/6/228/full/ifk08eam05rwxr3yhol3whdcm.png',
+            'detroit-pistons-1989':'https://content.sportslogos.net/logos/6/223/full/lgv5ssjmmchyoe66kkvh0tlzd.png',
+            'indiana-pacers-2000':'https://content.sportslogos.net/logos/6/224/full/oj83q73haoquhxqfiurpfhsgf.png',
+            'sacramento-kings-2002':'https://content.sportslogos.net/logos/6/240/full/832.png',
+          }
+
+          def normalize(img,out):
+            img=img.convert('RGBA')
+            img.thumbnail((1024,1024),Image.Resampling.LANCZOS)
+            canvas=Image.new('RGBA',(1024,1024),(0,0,0,0))
+            canvas.alpha_composite(img,((1024-img.width)//2,(1024-img.height)//2))
+            canvas.save(out,'PNG',optimize=True)
+
+          for stem in local:
+            src=root/f'{stem}.svg'
+            if not src.exists():
+              raise SystemExit(f'Missing source SVG: {src}')
+            raw=cairosvg.svg2png(bytestring=src.read_bytes(),output_width=1024,output_height=1024)
+            normalize(Image.open(BytesIO(raw)),root/f'{stem}.png')
+
+          headers={'User-Agent':'Mozilla/5.0'}
+          for stem,url in remote.items():
+            r=requests.get(url,headers=headers,timeout=30)
+            r.raise_for_status()
+            normalize(Image.open(BytesIO(r.content)),root/f'{stem}.png')
+          PY
+      - name: Commit PNG assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/team-logos/classic/*.png
+          if git diff --cached --quiet; then
+            echo 'No PNG changes to commit.'
+          else
+            git commit -m 'Add local transparent PNG logos for all Classic Teams'
+            git push
+          fi
