@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.32 — unified full-pool V2 rating authority for all current + Classic cards. */
+/* NBA Starting5 v0.11.39 — unified full-pool V2 rating authority + passing hierarchy correction. */
 (()=>{
   if(window.__starting5UnifiedRatingsV01132)return;
   window.__starting5UnifiedRatingsV01132=true;
@@ -34,6 +34,10 @@
   const anchor=p=>4+26*Math.pow(Math.max(0,Math.min(1,p)),.88);
   const posKey=p=>String(p?.position||'').toUpperCase()||'UNK';
   const keyOf=p=>String(p.id||`${p.teamId||p.team||''}|${norm(p.name)}|${p.season||'current'}|${posKey(p)}`);
+  const CURRENT_PASSING_OVERRIDES=new Map([
+    ['lamelo ball',27],
+    ['stephon castle',23]
+  ]);
 
   function apply(){
     const ps=collect();if(ps.length<10)return false;
@@ -59,15 +63,17 @@
         else if(k==='blocks')n=.72*v+.18*g+.10*q;
         else if(k==='steals')n=.72*v+.18*g+.10*q;
         else if(k==='dunks')n=.78*v+.14*g+.08*q;
-        /* Preserve genuine absence while reducing accidental floor/ceiling compression. */
         if(v===0)n=0;
         if(v===30&&n>=28.5)n=30;
         r[k]=clamp(n);
       }
+      if(!p?.classicTeam){
+        const fixed=CURRENT_PASSING_OVERRIDES.get(norm(p.name));
+        if(Number.isFinite(fixed))r.passing=fixed;
+      }
       next.set(keyOf(p),r);
     }
 
-    /* Overall: broad quality, star impact and versatility, then full-pool anchoring. */
     const raw=[];
     for(const p of ps){
       const r=next.get(keyOf(p)),vals=CATS.map(k=>r[k]),sorted=[...vals].sort((a,b)=>b-a);
@@ -112,12 +118,12 @@
 
     const distribution={};for(let i=13;i<=30;i++)distribution[i]=0;for(const v of overallMap.values())distribution[v]=(distribution[v]||0)+1;
     window.STARTING5_RATING_AUTHORITY_V2={
-      version:'0.11.32',mode:'ACTIVE',players:ps.length,
+      version:'0.11.39',mode:'ACTIVE',players:ps.length,
       methodology:{
         scoring:'80% researched production baseline + 20% full-pool strength anchoring',
         three:'82% existing era/volume-aware shooting baseline + 18% full-pool anchoring',
         rebounding:'68% production baseline + 17% global + 15% position-context anchoring',
-        passing:'68% creation baseline + 17% global + 15% position-context anchoring',
+        passing:'Creation baseline + global/position context, with curated current-player hierarchy corrections where percentile anchoring distorts obvious playmaking order',
         blocks:'72% production baseline + 18% global + 10% position-context anchoring',
         steals:'72% production baseline + 18% global + 10% position-context anchoring',
         dunks:'78% dunk-threat baseline + 14% global + 8% position-context anchoring',
