@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.80 — runtime Classic transparency enforcement + single Classic logo authority + preserved art layouts + Starting5 presentation */
+/* NBA Starting5 v0.10.81 — persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -57,7 +57,7 @@
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-authority-v0.10.76.js?t='+t+'"><\/script>');
-  document.write('<script src="classic-logo-runtime-transparency-v0.10.80.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-logo-runtime-transparency-v0.10.81.js?t='+t+'"><\/script>');
   document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
