@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.33 — V2 ratings + Free Throws matchup removal */
+/* NBA Starting5 v0.11.41 — editor/glow recovery authority */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -70,6 +70,7 @@
   document.write('<script src="classic-logo-runtime-transparency-v0.10.81.js?t='+t+'"><\/script>');
   document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
+  document.write('<script src="editor-glow-recovery-v0.11.41.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-bumper-v0.10.7.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-stat-number-v0.10.8.css?t='+t+'">');
