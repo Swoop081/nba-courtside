@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.83 — seven-team Classic expansion + persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */
+/* NBA Starting5 v0.11.33 — V2 ratings + Free Throws matchup removal */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -20,6 +20,8 @@
   document.write('<script src="classic-boston-2008-v0.10.58.js?t='+t+'"><\/script>');
   document.write('<script src="classic-expansion-v0.10.82.js?t='+t+'"><\/script>');
   document.write('<script src="classic-expansion-v0.10.83.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-expansion-v0.10.84.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-expansion-v0.11.30.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
   document.write('<script src="classic-year-display-v0.10.61.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
@@ -32,6 +34,8 @@
   document.write('<script src="assists-ratings-v0.10.24.js?t='+t+'"><\/script>');
   document.write('<script src="dunking-ratings-v0.10.25.js?t='+t+'"><\/script>');
   document.write('<script src="overall-ratings-v0.10.26.js?t='+t+'"><\/script>');
+  document.write('<script src="ratings-v2-unified-v0.11.32.js?t='+t+'"><\/script>');
+  document.write('<script src="stat-system-audit-v0.11.31.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-rail-v0.9.9.css?t='+t+'">');
@@ -48,6 +52,7 @@
   document.write('<script src="foundation-editor-plaque-v0.9.7.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="unslashed-zero-v0.9.10.css?t='+t+'">');
   document.write('<script src="foundation-art-runtime-v0.9.16.js?t='+t+'"><\/script>');
+  document.write('<script src="image-memory-manager-v0.10.85.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-art-scale-sync-v0.9.17.js?t='+t+'"><\/script>');
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.18.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="foundation-background-team-logo-v0.9.19.css?t='+t+'">');
@@ -61,11 +66,10 @@
   document.write('<script src="classic-logo-authority-v0.10.76.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-expansion-authority-v0.10.82.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-expansion-authority-v0.10.83.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-logo-expansion-authority-v0.10.84.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-runtime-transparency-v0.10.81.js?t='+t+'"><\/script>');
   document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
-  document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
-  document.write('<link rel="stylesheet" href="season-ui-polish-v0.10.48.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-bumper-v0.10.7.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-stat-number-v0.10.8.css?t='+t+'">');
@@ -80,13 +84,16 @@
   document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
+  document.write('<script src="matchup-category-hotfix-v0.11.33.js?t='+t+'"><\/script>');
+  document.write('<script src="game-card-inspect-v0.11.6.js?t='+t+'"><\/script>');
   document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
-  document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
-  document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
-  document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
-  document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
-  document.write('<script src="season-ui-polish-v0.10.48.js?t='+t+'"><\/script>');
+  document.write('<script src="season-mode-v1.0.0.js?t='+t+'"><\/script>');
+  document.write('<script src="season-core-ui-v0.11.1.js?t='+t+'"><\/script>');
+  document.write('<script src="season-hub-standings-v0.11.20.js?t='+t+'"><\/script>');
+  document.write('<script src="season-presentation-reset-v0.11.5.js?t='+t+'"><\/script>');
+  document.write('<script src="final-screen-ui-v0.11.17.js?t='+t+'"><\/script>');
+  document.write('<script src="update-check-stability-v0.11.7.js?t='+t+'"><\/script>');
 })();

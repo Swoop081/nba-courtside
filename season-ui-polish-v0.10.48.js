@@ -1,7 +1,7 @@
-/* NBA Courtside v0.10.53 — season picker polish, Awards tab, authoritative season scoreboard identity, Continue-to-hub final */
+/* NBA Starting5 v0.10.87 — season UI polish without continuous game-DOM polling */
 (()=>{
-  if(window.__courtsideSeasonUiPolishV01053)return;
-  window.__courtsideSeasonUiPolishV01053=true;
+  if(window.__courtsideSeasonUiPolishV01087)return;
+  window.__courtsideSeasonUiPolishV01087=true;
   const SAVE_KEY='nbaCourtsideSeasonModeV1';
   const RETURN_KEY='nbaCourtsideSeasonReturnPendingV1';
 
@@ -19,6 +19,9 @@
     });
   };
 
+  // IMPORTANT: this is intentionally one-shot. The previous implementation rebuilt
+  // both scoreboard sides every 140ms for the entire Season game, which caused the
+  // season-only tap/input lag on iPhone and also generated a mutation feedback loop.
   const repairSeasonScoreboard=()=>{
     if(sessionStorage.getItem(RETURN_KEY)!=='1')return;
     const game=document.getElementById('game');
@@ -35,8 +38,10 @@
       side.style.setProperty('--score-primary',a);
       side.style.setProperty('--score-secondary',b);
       side.style.setProperty('--score-dark',c);
-      const name=short(p).toUpperCase();
-      const logo=logoFor(p);
+      const name=short(p).toUpperCase(),logo=logoFor(p);
+      const key=`${p.teamId||name}|${isAway?'A':'H'}`;
+      if(side.dataset.seasonIdentity===key)return;
+      side.dataset.seasonIdentity=key;
       side.innerHTML=isAway
         ?`<div class="score-team away-team"><div class="score-number"><strong id="cpuScore">${score}</strong></div><div class="score-logo-wrap"><img src="${logo}" alt="${name}"></div><div class="score-name">${name}</div></div>`
         :`<div class="score-team"><div class="score-logo-wrap"><img src="${logo}" alt="${name}"></div><div class="score-number"><strong id="userScore">${score}</strong></div><div class="score-name">${name}</div></div>`;
@@ -72,14 +77,18 @@
   document.addEventListener('click',e=>{
     if(e.target.closest('[data-play-season],.season-play-btn')){
       sessionStorage.setItem(RETURN_KEY,'1');
-      setTimeout(repairSeasonScoreboard,0);
-      setTimeout(repairSeasonScoreboard,80);
-      setTimeout(repairSeasonScoreboard,220);
+      requestAnimationFrame(()=>requestAnimationFrame(repairSeasonScoreboard));
     }
   },true);
 
-  const sync=()=>{renameAwards();repairSeasonScoreboard();polishFinal();};
-  const observer=new MutationObserver(()=>requestAnimationFrame(sync));
-  const start=()=>{observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','src']});sync();setInterval(sync,140);};
+  const start=()=>{
+    renameAwards();
+    const final=document.getElementById('final');
+    if(final)new MutationObserver(()=>{if(final.classList.contains('active'))requestAnimationFrame(polishFinal)}).observe(final,{attributes:true,attributeFilter:['class']});
+    const hub=document.getElementById('seasonHub');
+    if(hub)new MutationObserver(renameAwards).observe(hub,{childList:true,subtree:true});
+    if(document.getElementById('game')?.classList.contains('active'))repairSeasonScoreboard();
+    if(final?.classList.contains('active'))polishFinal();
+  };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

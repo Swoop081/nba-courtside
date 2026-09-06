@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.73 — persist/export/import background team-logo placement */
+/* NBA Starting5 v0.11.37 — persist/export/import Hawks-standard background team-logo placement */
 (()=>{
   if(window.__starting5BgLayoutPersistenceV01073)return;
   window.__starting5BgLayoutPersistenceV01073=true;
@@ -12,7 +12,8 @@
   const playerForCard=card=>players().find(p=>String(p.id)===String(card?.dataset?.id))||null;
   const baseWidthFor=card=>card.closest('.catalogue-grid')?118:112;
   const BASE_TOP=-23,BASE_RIGHT=-23;
-  const bgFor=p=>{const size=Number(read(SIZE_KEY)[p?.teamId])||1,pos=read(POS_KEY)[p?.teamId]||{},rot=read(ROT_KEY)[p?.teamId];return {x:Number(pos.x)||0,y:Number(pos.y)||0,scale:size,rotation:Number.isFinite(Number(rot))?Number(rot):45};};
+  const STANDARD={scale:1.30,x:0,y:0,rotation:45};
+  const bgFor=p=>{const rawSize=read(SIZE_KEY)[p?.teamId],size=Number.isFinite(Number(rawSize))?Number(rawSize):STANDARD.scale,pos=read(POS_KEY)[p?.teamId]||{},rot=read(ROT_KEY)[p?.teamId];return {x:Number.isFinite(Number(pos.x))?Number(pos.x):STANDARD.x,y:Number.isFinite(Number(pos.y))?Number(pos.y):STANDARD.y,scale:size,rotation:Number.isFinite(Number(rot))?Number(rot):STANDARD.rotation};};
   const applyCard=card=>{
     const p=playerForCard(card);if(!p)return;
     const bg=card.querySelector('.foundation-bg-team-logo');if(!bg)return;
@@ -35,7 +36,7 @@
       cards[p.artSlug]={...(art[p.artSlug]||base),edited:!!art[p.artSlug],name:p.name,set:p.set,team:p.teamShort,bgLogo:{...bg,edited:editedBg}};
       if(!teamLogos[p.teamId])teamLogos[p.teamId]={...bg,edited:editedBg,team:p.teamShort};
     });
-    return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.10.73',exportedAt:new Date().toISOString(),cards,teamLogos};
+    return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.11.37',exportedAt:new Date().toISOString(),cards,teamLogos};
   };
   const download=data=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='nba-starting5-art-layout.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);};
   const importData=data=>{
@@ -45,9 +46,9 @@
     Object.entries(data.cards||{}).forEach(([slug,c])=>{
       const p=bySlug.get(slug);if(!p||!c)return;
       if(c.edited)art[slug]={x:Number(c.x),y:Number(c.y),scale:Number(c.scale)};
-      const b=c.bgLogo;if(b&&b.edited){size[p.teamId]=Number(b.scale)||1;pos[p.teamId]={x:Number(b.x)||0,y:Number(b.y)||0};rot[p.teamId]=Number.isFinite(Number(b.rotation))?Number(b.rotation):45;}
+      const b=c.bgLogo;if(b&&b.edited){size[p.teamId]=Number(b.scale)||STANDARD.scale;pos[p.teamId]={x:Number(b.x)||0,y:Number(b.y)||0};rot[p.teamId]=Number.isFinite(Number(b.rotation))?Number(b.rotation):STANDARD.rotation;}
     });
-    Object.entries(data.teamLogos||{}).forEach(([teamId,b])=>{if(!b||!b.edited)return;size[teamId]=Number(b.scale)||1;pos[teamId]={x:Number(b.x)||0,y:Number(b.y)||0};rot[teamId]=Number.isFinite(Number(b.rotation))?Number(b.rotation):45;});
+    Object.entries(data.teamLogos||{}).forEach(([teamId,b])=>{if(!b||!b.edited)return;size[teamId]=Number(b.scale)||STANDARD.scale;pos[teamId]={x:Number(b.x)||0,y:Number(b.y)||0};rot[teamId]=Number.isFinite(Number(b.rotation))?Number(b.rotation):STANDARD.rotation;});
     write(ART_KEY,art);write(SIZE_KEY,size);write(POS_KEY,pos);write(ROT_KEY,rot);applyAll();
   };
   const installEditorIO=()=>{

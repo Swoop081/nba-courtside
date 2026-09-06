@@ -1,7 +1,7 @@
-/* NBA Courtside v0.10.49 — persistent quarter + category information ticker */
+/* NBA Starting5 v0.11.13 — authoritative matchup ticker + team-colour scoreboard */
 (()=>{
-  if(window.__courtsideGameInfoBarV01047)return;
-  window.__courtsideGameInfoBarV01047=true;
+  if(window.__courtsideGameInfoBarV01113)return;
+  window.__courtsideGameInfoBarV01113=true;
 
   const labels={
     scoring:'SCORING',
@@ -35,8 +35,8 @@
   const currentText=()=>{
     const s=gameState();
     if(!s)return 'MATCHUP';
-    if(s.overtime)return `OT ${label(s.category)}`;
-    return `Q${s.quarter} ${label(s.category)}`;
+    if(s.overtime)return `OVERTIME · ${label(s.category)}`;
+    return `MATCHUP IS ${label(s.category)}`;
   };
 
   const showCurrent=()=>{
@@ -48,6 +48,11 @@
   };
 
   const showTransition=text=>{
+    const raw=String(text||'').trim().toUpperCase();
+    if(!raw||raw==='MATCHUP'||raw==='NEXT MATCHUP'){
+      showCurrent();
+      return;
+    }
     const bar=ensureBar();if(!bar)return;
     const strong=bar.querySelector('strong');
     bar.classList.remove('is-category');
@@ -56,7 +61,7 @@
       strong.style.animation='none';
       void strong.offsetWidth;
       strong.style.animation='';
-      strong.textContent=text||'';
+      strong.textContent=text;
     }
   };
 
@@ -71,7 +76,7 @@
         const text=(strong?.textContent||'').trim();
         if(text)showTransition(text);
       }else if(!wasHidden){
-        setTimeout(showCurrent,30);
+        requestAnimationFrame(showCurrent);
       }
       wasHidden=hidden;
     };
@@ -79,24 +84,54 @@
     sync();
   };
 
+  const teamPlayer=side=>{
+    try{
+      const arr=side==='home'?userTeam:cpuTeam;
+      return Array.isArray(arr)&&arr.length?arr[0]:null;
+    }catch{return null}
+  };
+
+  const paintScoreboard=()=>{
+    const sb=document.querySelector('#game .scoreboard');
+    if(!sb)return;
+    let sides=[...sb.querySelectorAll('.score-side')];
+    if(sides.length<2){
+      sides=[...sb.children].filter(el=>!el.classList.contains('quarter-badge'));
+    }
+    if(sides.length<2)return;
+    const apply=(el,p)=>{
+      if(!el||!p)return;
+      const a=p?.theme?.a||'#1d428a';
+      const b=p?.theme?.b||'#ffffff';
+      const c=p?.theme?.c||'#07111d';
+      el.style.setProperty('background',`linear-gradient(135deg, ${a} 0%, ${a} 58%, ${c} 100%)`,'important');
+      el.style.setProperty('border-color',b,'important');
+    };
+    apply(sides[0],teamPlayer('home'));
+    apply(sides[sides.length-1],teamPlayer('away'));
+  };
+
   const wrap=name=>{
     let original=null;try{original=window[name]||eval(name)}catch{}
-    if(typeof original!=='function'||original.__gameInfoV01047)return;
-    const wrapped=function(){const r=original.apply(this,arguments);requestAnimationFrame(showCurrent);return r;};
-    wrapped.__gameInfoV01047=true;
+    if(typeof original!=='function'||original.__gameInfoV01113)return;
+    const wrapped=function(){
+      const r=original.apply(this,arguments);
+      requestAnimationFrame(()=>{showCurrent();paintScoreboard();});
+      setTimeout(()=>{showCurrent();paintScoreboard();},40);
+      return r;
+    };
+    wrapped.__gameInfoV01113=true;
     window[name]=wrapped;
     try{eval(`${name}=window[name]`);}catch{}
   };
 
   const start=()=>{
-    ensureBar();showCurrent();mirrorQuarterTransition();
+    ensureBar();showCurrent();mirrorQuarterTransition();paintScoreboard();
     ['beginQuarter','playQuarter','resetGame','nextQuarter','startOvertime'].forEach(wrap);
     const cat=document.getElementById('categoryLabel');
     if(cat)new MutationObserver(showCurrent).observe(cat,{childList:true,subtree:true,characterData:true});
-    setInterval(()=>{
-      const bar=document.getElementById('gameInfoBar');
-      if(bar&&!bar.classList.contains('is-transition'))showCurrent();
-    },180);
+    const sb=document.querySelector('#game .scoreboard');
+    if(sb)new MutationObserver(()=>requestAnimationFrame(paintScoreboard)).observe(sb,{childList:true,subtree:true});
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();

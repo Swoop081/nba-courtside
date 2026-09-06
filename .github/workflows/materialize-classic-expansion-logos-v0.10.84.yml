@@ -1,0 +1,42 @@
+name: Materialize Classic Expansion Logos v0.10.84
+on:
+  push:
+    paths:
+      - '.github/workflows/materialize-classic-expansion-logos-v0.10.84.yml'
+permissions:
+  contents: write
+jobs:
+  logos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests pillow
+      - name: Download transparent era-correct logos
+        run: |
+          python - <<'PY'
+          import io, os, requests
+          from PIL import Image
+          os.makedirs('assets/team-logos/classic',exist_ok=True)
+          sources={
+            'new-york-knicks-1994.png':'https://content.sportslogos.net/logos/6/216/full/new_york_knicks_logo_primary_19938358.png',
+            'atlanta-hawks-1993.png':'https://content.sportslogos.net/logos/6/220/full/au67znem99jyg6d7esach62e4.png'
+          }
+          sess=requests.Session(); sess.headers['User-Agent']='Mozilla/5.0'
+          for out,url in sources.items():
+            r=sess.get(url,timeout=30); r.raise_for_status()
+            im=Image.open(io.BytesIO(r.content)).convert('RGBA')
+            if im.width<120 or im.height<100: raise RuntimeError(f'Unexpected image size for {out}: {im.size}')
+            im.save('assets/team-logos/classic/'+out,'PNG')
+            print(out,im.size,min(p[3] for p in im.getdata()),max(p[3] for p in im.getdata()))
+          PY
+      - name: Commit logos
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add assets/team-logos/classic/new-york-knicks-1994.png assets/team-logos/classic/atlanta-hawks-1993.png
+          git commit -m 'Add Knicks 1994 and Hawks 1993 Classic logos v0.10.84' || exit 0
+          git pull --rebase origin main
+          git push origin HEAD:main
