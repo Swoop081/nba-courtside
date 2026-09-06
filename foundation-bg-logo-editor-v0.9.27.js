@@ -1,28 +1,33 @@
-/* NBA Starting5 v0.11.37 — Card Art Editor controls + Hawks-standard background logo placement */
+/* NBA Starting5 v0.11.38 — preserve custom team background-logo placement; Hawks-style fallback only */
 (()=>{
   const SIZE_KEY='nbaCourtsideBgLogoSizeV1';
   const POS_KEY='nbaCourtsideBgLogoPositionV1';
   const ROT_KEY='nbaCourtsideBgLogoRotationV1';
-  const MIGRATION_KEY='nbaStarting5BgLogoHawksStandardV01137';
   const players=()=>window.COURTSIDE_FOUNDATION_PLAYERS||[];
   const read=(key)=>{try{return JSON.parse(localStorage.getItem(key)||'{}')}catch{return {}}};
   const write=(key,v)=>localStorage.setItem(key,JSON.stringify(v));
   const playerBySlug=slug=>players().find(p=>p.artSlug===slug)||null;
   const playerForCard=card=>players().find(p=>String(p.id)===String(card?.dataset?.id))||null;
+  // This is only the fallback for teams with no saved background-logo layout.
+  // Existing per-team settings must always win and are never normalised/overwritten.
   const STANDARD={scale:1.30,x:0,y:0,rotation:45};
-  const factorFor=p=>Number(read(SIZE_KEY)[p?.teamId])||STANDARD.scale;
-  const posFor=p=>{const v=read(POS_KEY)[p?.teamId]||{};return {x:Number.isFinite(Number(v.x))?Number(v.x):STANDARD.x,y:Number.isFinite(Number(v.y))?Number(v.y):STANDARD.y};};
-  const rotFor=p=>{const v=read(ROT_KEY)[p?.teamId];return Number.isFinite(Number(v))?Number(v):STANDARD.rotation;};
+  const factorFor=p=>{
+    const v=read(SIZE_KEY)[p?.teamId];
+    return Number.isFinite(Number(v))?Number(v):STANDARD.scale;
+  };
+  const posFor=p=>{
+    const v=read(POS_KEY)[p?.teamId]||{};
+    return {
+      x:Number.isFinite(Number(v.x))?Number(v.x):STANDARD.x,
+      y:Number.isFinite(Number(v.y))?Number(v.y):STANDARD.y
+    };
+  };
+  const rotFor=p=>{
+    const v=read(ROT_KEY)[p?.teamId];
+    return Number.isFinite(Number(v))?Number(v):STANDARD.rotation;
+  };
   const baseWidthFor=card=>card.closest('.catalogue-grid')?118:112;
   const BASE_TOP=-23, BASE_RIGHT=-23;
-
-  const normalizeAllTeams=()=>{
-    if(localStorage.getItem(MIGRATION_KEY)==='1')return;
-    const size=read(SIZE_KEY),pos=read(POS_KEY),rot=read(ROT_KEY);
-    const ids=new Set(players().map(p=>String(p?.teamId||'')).filter(Boolean));
-    ids.forEach(id=>{size[id]=STANDARD.scale;pos[id]={x:STANDARD.x,y:STANDARD.y};rot[id]=STANDARD.rotation;});
-    write(SIZE_KEY,size);write(POS_KEY,pos);write(ROT_KEY,rot);localStorage.setItem(MIGRATION_KEY,'1');
-  };
 
   const applyCard=card=>{
     const p=playerForCard(card); if(!p)return;
@@ -75,6 +80,8 @@
       store[p.teamId]=r;write(ROT_KEY,store);rotOut.textContent=`${r}°`;applyAll();
     });
     select.addEventListener('change',()=>setTimeout(sync,0));
+    ed.querySelector('#artTeamSelect')?.addEventListener('change',()=>setTimeout(sync,0));
+    ed.querySelector('#artSetSelect')?.addEventListener('change',()=>setTimeout(sync,0));
     ed.querySelector('#artPrev')?.addEventListener('click',()=>setTimeout(sync,0));
     ed.querySelector('#artNext')?.addEventListener('click',()=>setTimeout(sync,0));
     ed.querySelector('#artReset')?.addEventListener('click',()=>setTimeout(sync,0));
@@ -83,7 +90,7 @@
   }
 
   const start=()=>{
-    normalizeAllTeams();applyAll();let tries=0;const timer=setInterval(()=>{if(installControls()||++tries>80)clearInterval(timer)},100);
+    applyAll();let tries=0;const timer=setInterval(()=>{if(installControls()||++tries>80)clearInterval(timer)},100);
     new MutationObserver(ms=>{ms.forEach(m=>m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches?.('.foundation-card'))applyCard(n);n.querySelectorAll?.('.foundation-card').forEach(applyCard)}}));installControls();}).observe(document.documentElement,{childList:true,subtree:true});
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
