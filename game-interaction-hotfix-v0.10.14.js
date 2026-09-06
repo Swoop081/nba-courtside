@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.8 — CPU choice reveal flow + nameplate inspection split */
+/* NBA Starting5 v0.11.9 — CPU choice reveal flow + matched lineup card size + nameplate inspection split */
 (()=>{
-  if(window.__courtsideGameInteractionHotfixV0118)return;
-  window.__courtsideGameInteractionHotfixV0118=true;
+  if(window.__courtsideGameInteractionHotfixV0119)return;
+  window.__courtsideGameInteractionHotfixV0119=true;
 
   let busy=false,choiceTimer=0,resultTimer=0;
 
@@ -97,7 +97,7 @@
 
     choiceTimer=setTimeout(()=>{
       const before=state?.history?.length||0;
-      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.8 pick failed',err);busy=false;return}
+      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.9 pick failed',err);busy=false;return}
       const after=state?.history?.length||0;
       if(after>before){
         showResult();
@@ -119,10 +119,10 @@
     .s5-cpu-choice-stage{margin:14px 0 0;display:flex;flex-direction:column;align-items:center;gap:12px}.s5-cpu-choice-stage.hidden{display:none!important}
     .s5-cpu-choice-ticker,.s5-cpu-result-ticker{width:100%;min-height:64px;box-sizing:border-box;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:linear-gradient(180deg,#171f2b,#0d1219);display:flex;align-items:center;justify-content:center;padding:12px 16px;font-size:24px;font-weight:1000;letter-spacing:.02em;color:#f7b928;text-align:center}
     .s5-cpu-result-ticker{color:#fff}.s5-cpu-choice-ticker.hidden,.s5-cpu-result-ticker.hidden{display:none!important}
-    .s5-cpu-choice-card{width:min(47vw,220px);aspect-ratio:2.5/3.5;display:flex;align-items:stretch;justify-content:center}
+    .s5-cpu-choice-card{width:min(34.4vw,168px);aspect-ratio:2.5/3.5;display:flex;align-items:stretch;justify-content:center}
     .s5-cpu-choice-card>.player-card{width:100%!important;height:100%!important;min-width:0!important;max-width:none!important;margin:0!important;transform:none!important;pointer-events:none!important}
     .s5-cpu-choice-card .stat-circle{position:relative!important}.s5-cpu-choice-card .stat-circle b{visibility:hidden!important}.s5-cpu-choice-card .stat-circle:after{content:'?';position:absolute;inset:0;display:grid;place-items:center;font:1000 1em/1 inherit;color:#fff}
-    @media(max-width:430px){.s5-cpu-choice-ticker,.s5-cpu-result-ticker{min-height:60px;font-size:22px}.s5-cpu-choice-card{width:min(48vw,210px)}}
+    @media(max-width:430px){.s5-cpu-choice-ticker,.s5-cpu-result-ticker{min-height:60px;font-size:22px}.s5-cpu-choice-card{width:36vw;max-width:148px}}
   `;
   document.head.appendChild(style);
 
