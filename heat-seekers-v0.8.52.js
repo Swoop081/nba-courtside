@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.85 — image memory manager + nine-team Classic expansion + persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */
+/* NBA Starting5 v0.10.86 — performance hotfix + progression-first Season Mode + image memory manager + nine-team Classic expansion */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -92,4 +92,5 @@
   document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
   document.write('<script src="season-ui-polish-v0.10.48.js?t='+t+'"><\/script>');
+  document.write('<script src="season-progression-v0.10.86.js?t='+t+'"><\/script>');
 })();
