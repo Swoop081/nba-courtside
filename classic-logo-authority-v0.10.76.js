@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.10.78 — single authority for authentic transparent Classic Team logos */
+/* NBA Starting5 v0.10.79 — single authority for authentic transparent Classic Team logos */
 (()=>{
-  if(window.__starting5ClassicLogoAuthorityV01078)return;
-  window.__starting5ClassicLogoAuthorityV01078=true;
+  if(window.__starting5ClassicLogoAuthorityV01079)return;
+  window.__starting5ClassicLogoAuthorityV01079=true;
 
   const LOGOS={
     'classic-bos-1986':'assets/team-logos/classic/boston-celtics-1986-alpha-v3.png',
@@ -12,14 +12,14 @@
     'classic-dal-2011':'assets/team-logos/classic/dallas-mavericks-2011-alpha-v3.png',
     'classic-det-1989':'assets/team-logos/classic/detroit-pistons-1989-alpha-v3.png',
     'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004-alpha-v3.png',
-    'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995-alpha-v4.png',
-    'classic-ind-2000':'assets/team-logos/classic/indiana-pacers-2000-alpha-v4.png',
+    'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995-alpha-v5.png',
+    'classic-ind-2000':'assets/team-logos/classic/indiana-pacers-2000-alpha-v5.png',
     'classic-lal-1987':'assets/team-logos/classic/los-angeles-lakers-1987-alpha-v3.png',
     'classic-lal-2002':'assets/team-logos/classic/los-angeles-lakers-2002-alpha-v3.png',
     'classic-mia-2013':'assets/team-logos/classic/miami-heat-2013-alpha-v3.png',
     'classic-phx-2007':'assets/team-logos/classic/phoenix-suns-2007-alpha-v3.png',
-    'classic-sac-2002':'assets/team-logos/classic/sacramento-kings-2002-alpha-v4.png',
-    'classic-sas-2005':'assets/team-logos/classic/san-antonio-spurs-2005-alpha-v4.png',
+    'classic-sac-2002':'assets/team-logos/classic/sacramento-kings-2002-alpha-v5.png',
+    'classic-sas-2005':'assets/team-logos/classic/san-antonio-spurs-2005-alpha-v5.png',
     'classic-sea-1996':'assets/team-logos/classic/seattle-supersonics-1996-alpha-v3.png',
     'classic-tor-2003':'assets/team-logos/classic/toronto-raptors-2003-alpha-v3.png',
     'classic-uta-1997':'assets/team-logos/classic/utah-jazz-1997-alpha-v3.png',
