@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.68 — local authentic Classic logos + user-edited art layouts + true visual centering + global NBA Starting5 rebrand + compact Classic years + played cards move to end of rail + 250-player pool + 20 Classic Teams */
+/* NBA Starting5 v0.10.69 — Classic logo isolation hotfix + local authentic Classic logos + user-edited art layouts + true visual centering + global NBA Starting5 rebrand + compact Classic years + played cards move to end of rail + 250-player pool + 20 Classic Teams */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
