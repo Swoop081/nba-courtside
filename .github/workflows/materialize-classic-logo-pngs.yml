@@ -26,17 +26,12 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from io import BytesIO
-          import requests, cairosvg
+          import html,re,requests,cairosvg
           from PIL import Image
 
-          root=Path('assets/team-logos/classic')
-          root.mkdir(parents=True,exist_ok=True)
+          root=Path('assets/team-logos/classic'); root.mkdir(parents=True,exist_ok=True)
           session=requests.Session()
-          session.headers.update({
-            'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/131 Safari/537.36',
-            'Accept':'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
-            'Referer':'https://www.sportslogos.net/'
-          })
+          session.headers.update({'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/131 Safari/537.36','Accept':'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8','Referer':'https://www.sportslogos.net/'})
 
           sources={
             'boston-celtics-1986':'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19759952.png',
@@ -45,7 +40,7 @@ jobs:
             'chicago-bulls-1998':'https://content.sportslogos.net/logos/6/221/full/chicago_bulls_logo_primary_19672598.png',
             'dallas-mavericks-1995':'https://content.sportslogos.net/logos/6/228/full/dallas_mavericks_logo_primary_19945760.png',
             'dallas-mavericks-2011':'https://content.sportslogos.net/logos/6/228/full/ifk08eam05rwxr3yhol3whdcm.png',
-            'detroit-pistons-1989':'https://content.sportslogos.net/logos/6/223/full/lgv5ssjmmchyoe66kkvh0tlzd.png',
+            'detroit-pistons-1989':'AUTO_DETROIT_1978',
             'detroit-pistons-2004':'https://content.sportslogos.net/logos/6/223/full/detroit_pistons_logo_primary_20029975.png',
             'houston-rockets-1995':'https://www.nicepng.com/png/detail/140-1408322_houston-rockets-logo-1995-houston-rockets-90s-logo.png',
             'indiana-pacers-2000':'https://content.sportslogos.net/logos/6/224/full/oj83q73haoquhxqfiurpfhsgf.png',
@@ -62,25 +57,29 @@ jobs:
           }
 
           def normalize(img,out):
-            img=img.convert('RGBA')
-            bbox=img.getbbox()
+            img=img.convert('RGBA'); bbox=img.getbbox()
             if bbox: img=img.crop(bbox)
             img.thumbnail((920,920),Image.Resampling.LANCZOS)
-            canvas=Image.new('RGBA',(1024,1024),(0,0,0,0))
-            canvas.alpha_composite(img,((1024-img.width)//2,(1024-img.height)//2))
-            canvas.save(out,'PNG',optimize=True)
+            canvas=Image.new('RGBA',(1024,1024),(0,0,0,0)); canvas.alpha_composite(img,((1024-img.width)//2,(1024-img.height)//2)); canvas.save(out,'PNG',optimize=True)
 
-          def fetch_bytes(url):
-            r=session.get(url,timeout=45)
-            r.raise_for_status()
-            return r.content
+          def resolve(url):
+            if url!='AUTO_DETROIT_1978': return url
+            page=session.get('https://logos-download.com/brands/detroit-pistons',timeout=30); page.raise_for_status()
+            matches=re.findall(r'https://i\.logos-download\.com/[^\"\'<> ]*Detroit_Pistons_Logo_1978-s640\.png[^\"\'<> ]*',html.unescape(page.text))
+            if not matches: raise RuntimeError('Detroit 1978 logo source not found')
+            return matches[0]
 
-          for stem,url in sources.items():
-            print('fetching',stem,url)
-            data=fetch_bytes(url)
-            if url.lower().endswith('.svg') or data.lstrip().startswith(b'<svg') or b'<svg' in data[:300]:
-              data=cairosvg.svg2png(bytestring=data,output_width=1024,output_height=1024)
-            normalize(Image.open(BytesIO(data)),root/f'{stem}.png')
+          ok=[]; failed=[]
+          for stem,source in sources.items():
+            try:
+              url=resolve(source); print('fetching',stem,url)
+              r=session.get(url,timeout=45); r.raise_for_status(); data=r.content
+              if url.lower().endswith('.svg') or data.lstrip().startswith(b'<svg') or b'<svg' in data[:300]: data=cairosvg.svg2png(bytestring=data,output_width=1024,output_height=1024)
+              normalize(Image.open(BytesIO(data)),root/f'{stem}.png'); ok.append(stem)
+            except Exception as e:
+              print('SKIP',stem,repr(e)); failed.append(stem)
+          print('UPDATED',','.join(ok)); print('FAILED',','.join(failed))
+          if not ok: raise SystemExit('No authentic logos could be refreshed')
           PY
       - name: Commit authentic PNG assets
         run: |
@@ -90,6 +89,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No PNG changes to commit.'
           else
-            git commit -m 'Replace Classic Team placeholders with authentic era logos'
+            git commit -m 'Refresh Classic Team PNGs from authentic era sources'
             git push
           fi
