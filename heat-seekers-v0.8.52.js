@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.81 — persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */
+/* NBA Starting5 v0.10.82 — four-team Classic expansion + persistent Classic logo transparency + single Classic logo authority + preserved art layouts + Starting5 presentation */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -18,6 +18,7 @@
   document.write('<script src="classic-sacramento-2002-indiana-2000-v0.10.56.js?t='+t+'"><\/script>');
   document.write('<script src="classic-detroit-1989-v0.10.57.js?t='+t+'"><\/script>');
   document.write('<script src="classic-boston-2008-v0.10.58.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-expansion-v0.10.82.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
   document.write('<script src="classic-year-display-v0.10.61.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
@@ -57,6 +58,7 @@
   document.write('<script src="foundation-background-team-logo-v0.9.18.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-bg-logo-editor-v0.9.27.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-authority-v0.10.76.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-logo-expansion-authority-v0.10.82.js?t='+t+'"><\/script>');
   document.write('<script src="classic-logo-runtime-transparency-v0.10.81.js?t='+t+'"><\/script>');
   document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
