@@ -1,7 +1,7 @@
-/* NBA Courtside v0.10.49 — persistent quarter + category information ticker */
+/* NBA Starting5 v0.11.11 — matchup category information ticker, event-driven */
 (()=>{
-  if(window.__courtsideGameInfoBarV01047)return;
-  window.__courtsideGameInfoBarV01047=true;
+  if(window.__courtsideGameInfoBarV01111)return;
+  window.__courtsideGameInfoBarV01111=true;
 
   const labels={
     scoring:'SCORING',
@@ -35,8 +35,8 @@
   const currentText=()=>{
     const s=gameState();
     if(!s)return 'MATCHUP';
-    if(s.overtime)return `OT ${label(s.category)}`;
-    return `Q${s.quarter} ${label(s.category)}`;
+    if(s.overtime)return `OVERTIME · ${label(s.category)}`;
+    return `MATCHUP IS ${label(s.category)}`;
   };
 
   const showCurrent=()=>{
@@ -81,9 +81,9 @@
 
   const wrap=name=>{
     let original=null;try{original=window[name]||eval(name)}catch{}
-    if(typeof original!=='function'||original.__gameInfoV01047)return;
+    if(typeof original!=='function'||original.__gameInfoV01111)return;
     const wrapped=function(){const r=original.apply(this,arguments);requestAnimationFrame(showCurrent);return r;};
-    wrapped.__gameInfoV01047=true;
+    wrapped.__gameInfoV01111=true;
     window[name]=wrapped;
     try{eval(`${name}=window[name]`);}catch{}
   };
@@ -93,10 +93,6 @@
     ['beginQuarter','playQuarter','resetGame','nextQuarter','startOvertime'].forEach(wrap);
     const cat=document.getElementById('categoryLabel');
     if(cat)new MutationObserver(showCurrent).observe(cat,{childList:true,subtree:true,characterData:true});
-    setInterval(()=>{
-      const bar=document.getElementById('gameInfoBar');
-      if(bar&&!bar.classList.contains('is-transition'))showCurrent();
-    },180);
   };
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
