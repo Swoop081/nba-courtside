@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.20 — fast Season hub details + stable gameplay systems */
+/* NBA Starting5 v0.11.30 — Cavaliers 1993 + Spurs 1999 Classic expansion */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -21,6 +21,7 @@
   document.write('<script src="classic-expansion-v0.10.82.js?t='+t+'"><\/script>');
   document.write('<script src="classic-expansion-v0.10.83.js?t='+t+'"><\/script>');
   document.write('<script src="classic-expansion-v0.10.84.js?t='+t+'"><\/script>');
+  document.write('<script src="classic-expansion-v0.11.30.js?t='+t+'"><\/script>');
   document.write('<script src="classic-team-order-v0.9.31.js?t='+t+'"><\/script>');
   document.write('<script src="classic-year-display-v0.10.61.js?t='+t+'"><\/script>');
   document.write('<script src="scoring-audit-v0.10.18.js?t='+t+'"><\/script>');
