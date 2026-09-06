@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.69 — local authentic Classic Team logos, strictly Classic-only */
+/* NBA Starting5 v0.10.74 — local authentic Classic Team logos, strict Classic-only + robust card matching */
 (()=>{
   if(window.__starting5ClassicLocalAuthenticV01069)return;
   window.__starting5ClassicLocalAuthenticV01069=true;
@@ -10,6 +10,9 @@
   const allPlayers=()=>{const seen=new Set(),out=[];pools().forEach(pool=>pool.forEach(p=>{if(p&&!seen.has(p)){seen.add(p);out.push(p)}}));return out;};
   const teams=()=>Array.isArray(window.COURTSIDE_CLASSIC_TEAMS)?window.COURTSIDE_CLASSIC_TEAMS:[];
   const playerById=id=>allPlayers().find(p=>String(p.id)===String(id));
+  const playerBySlug=slug=>allPlayers().find(p=>String(p.artSlug||'')===String(slug||''));
+  const playerByName=name=>{const n=String(name||'').trim().toLowerCase();return n?allPlayers().find(p=>String(p.name||'').trim().toLowerCase()===n):null;};
+  const playerForCard=card=>playerBySlug(card?.dataset?.artSlug)||playerById(card?.dataset?.id)||playerByName(card?.querySelector?.('.identity h3,.player-name,h3')?.textContent);
   const setImg=(img,src)=>{if(img&&src&&img.getAttribute('src')!==src)img.setAttribute('src',src);};
   const labels=t=>[t?.short,t?.team,t?.name].filter(v=>typeof v==='string'&&v.trim()).map(v=>v.toLowerCase());
   const findTeamByText=txt=>{const s=String(txt||'').toLowerCase();if(!s.trim())return null;return teams().find(t=>labels(t).some(label=>s.includes(label)))||null;};
@@ -17,11 +20,11 @@
   const prior=window.logoUrl;
   const resolver=p=>LOGOS[p?.teamId]||(typeof prior==='function'?prior(p):p?.classicLogo||'');
   try{logoUrl=resolver}catch{};window.logoUrl=resolver;window.STARTING5_CLASSIC_LOCAL_PNG_LOGOS={...LOGOS};
-  const fixCard=card=>{const p=playerById(card?.dataset?.id);if(!p||!LOGOS[p.teamId])return;card.querySelectorAll('.foundation-team-logo,.foundation-bg-team-logo,.team-logo,.team-mark img').forEach(img=>setImg(img,LOGOS[p.teamId]));};
+  const fixCard=card=>{const p=playerForCard(card);if(!p||!LOGOS[p.teamId])return;const src=LOGOS[p.teamId];card.classList.add('classic-team-card');card.querySelectorAll('.foundation-team-logo,.foundation-bg-team-logo,.team-logo,.team-mark img').forEach(img=>setImg(img,src));const plaque=card.querySelector('.foundation-team-logo,.team-logo');const bg=card.querySelector('.foundation-bg-team-logo');if(plaque?.src&&bg&&bg.src!==plaque.src)bg.src=plaque.src;};
   const fixCatalogueHeader=()=>{const img=document.getElementById('catalogueTeamLogo'),name=document.getElementById('catalogueTeamName');if(!img)return;const team=findTeamByText((name?.textContent||'')+' '+(img.alt||''));if(team&&LOGOS[team.id])setImg(img,LOGOS[team.id]);};
   const fixTeamImage=img=>{const box=img.closest('[data-team-id],[data-team],.classic-team-selector,.classic-team-header,.team-card,.score-side,section,article,div');const explicit=box?.dataset?.teamId||box?.dataset?.team||'';let team=teams().find(t=>t.id===explicit);if(!team)team=findTeamByText(box?.textContent||img.alt||'');if(team&&LOGOS[team.id])setImg(img,LOGOS[team.id]);};
   const syncDom=()=>{syncData();document.querySelectorAll('.foundation-card,.player-card').forEach(fixCard);fixCatalogueHeader();document.querySelectorAll('#foundationInspectBack img,#catalogueTeamLogo,.classic-team-selector img,.classic-team-header img,.team-card img,#game .score-side img,#final img').forEach(fixTeamImage);};
   let queued=false;const queue=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;syncDom();});};
-  const start=()=>{syncDom();new MutationObserver(queue).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['src']});};
+  const start=()=>{syncDom();new MutationObserver(queue).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['src','data-id','data-art-slug']});setInterval(syncDom,500);};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
