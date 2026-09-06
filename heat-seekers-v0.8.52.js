@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.10.86 — performance hotfix + progression-first Season Mode + image memory manager + nine-team Classic expansion */
+/* NBA Starting5 v0.11.0 — clean Season Mode rebuild + image memory manager + Classic expansion */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -67,8 +67,6 @@
   document.write('<script src="classic-logo-runtime-transparency-v0.10.81.js?t='+t+'"><\/script>');
   document.write('<script src="nba-starting5-brand-v0.10.62.js?t='+t+'"><\/script>');
   document.write('<script src="player-glow-editor-v0.9.33.js?t='+t+'"><\/script>');
-  document.write('<script src="season-mode-hotfix-v0.10.2.js?t='+t+'"><\/script>');
-  document.write('<link rel="stylesheet" href="season-ui-polish-v0.10.48.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-size-v0.10.4.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-card-bumper-v0.10.7.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-stat-number-v0.10.8.css?t='+t+'">');
@@ -88,9 +86,5 @@
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.46.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
-  document.write('<script src="season-mode-v0.10.0.js?t='+t+'"><\/script>');
-  document.write('<script src="season-rewards-v0.10.16.js?t='+t+'"><\/script>');
-  document.write('<script src="season-awards-allstar-v0.10.17.js?t='+t+'"><\/script>');
-  document.write('<script src="season-ui-polish-v0.10.48.js?t='+t+'"><\/script>');
-  document.write('<script src="season-progression-v0.10.86.js?t='+t+'"><\/script>');
+  document.write('<script src="season-mode-v1.0.0.js?t='+t+'"><\/script>');
 })();
