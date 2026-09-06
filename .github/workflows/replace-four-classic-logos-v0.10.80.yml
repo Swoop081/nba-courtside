@@ -19,11 +19,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install pillow requests beautifulsoup4
-      - name: Download clean historical logos from SportsLogos source pages
+      - run: pip install pillow requests
+      - name: Download clean historical PNGs directly
         run: |
           python - <<'PY'
-          import re, requests
+          import requests
           from pathlib import Path
           from PIL import Image
           from io import BytesIO
@@ -31,39 +31,21 @@ jobs:
 
           root=Path('assets/team-logos/classic')
           root.mkdir(parents=True, exist_ok=True)
-
           targets={
-            'sacramento-kings-2002-source-v6.png':(
-              'https://www.sportslogos.net/logos/view/832/Sacramento-Kings-Logo/1995/Primary-Logo','240'),
-            'indiana-pacers-2000-source-v6.png':(
-              'https://www.sportslogos.net/logos/view/oj83q73haoquhxqfiurpfhsgf/Indiana-Pacers-Logo/1991/Primary-Logo','224'),
-            'houston-rockets-1995-source-v6.png':(
-              'https://www.sportslogos.net/logos/view/eigv3ra8cjkojrywrgcvy6z29/Houston-Rockets-Logo/1992/Primary-Logo','230'),
-            'san-antonio-spurs-2005-source-v6.png':(
-              'https://www.sportslogos.net/logos/view/827/San-Antonio-Spurs-Logo/2003/Primary-Logo','233'),
+            'sacramento-kings-2002-source-v6.png':'https://content.sportslogos.net/logos/6/240/full/832.png',
+            'indiana-pacers-2000-source-v6.png':'https://content.sportslogos.net/logos/6/224/full/indiana-pacers-logo-primary-1991-2451.png',
+            'houston-rockets-1995-source-v6.png':'https://content.sportslogos.net/logos/6/230/full/eigv3ra8cjkojrywrgcvy6z29.png',
+            'san-antonio-spurs-2005-source-v6.png':'https://content.sportslogos.net/logos/6/233/full/827.png',
           }
-
-          sess=requests.Session()
-          sess.headers.update({'User-Agent':'Mozilla/5.0 NBA-Starting5 asset fetch'})
-
-          for outname,(page,teamid) in targets.items():
-            html=sess.get(page,timeout=30).text
-            matches=re.findall(r'https://content\.sportslogos\.net/logos/6/'+teamid+r'/full/[^\"\'<> ]+?\.png',html)
-            if not matches:
-              matches=re.findall(r'//content\.sportslogos\.net/logos/6/'+teamid+r'/full/[^\"\'<> ]+?\.png',html)
-              matches=['https:'+u for u in matches]
-            if not matches:
-              raise RuntimeError(f'No SportsLogos PNG found for {outname}')
-            # Prefer primary-logo image URLs over thumbnails/wordmarks.
-            url=matches[0]
-            data=sess.get(url,timeout=30).content
-            im=Image.open(BytesIO(data)).convert('RGBA')
-            px=im.load(); w,h=im.size
-
-            # If the source itself contains an opaque pale matte, remove only the edge-connected matte.
+          sess=requests.Session(); sess.headers.update({'User-Agent':'Mozilla/5.0'})
+          for outname,url in targets.items():
+            r=sess.get(url,timeout=30); print(outname, r.status_code, r.headers.get('content-type'), len(r.content))
+            r.raise_for_status()
+            im=Image.open(BytesIO(r.content)).convert('RGBA'); px=im.load(); w,h=im.size
+            # Remove only an edge-connected pale matte if the downloaded PNG contains one.
             def pale(c):
-              r,g,b,a=c
-              return a>0 and max(r,g,b)-min(r,g,b)<=36 and (r+g+b)/3>=220
+              rr,gg,bb,a=c
+              return a>0 and max(rr,gg,bb)-min(rr,gg,bb)<=45 and (rr+gg+bb)/3>=205
             q=deque()
             for x in range(w): q.extend(((x,0),(x,h-1)))
             for y in range(h): q.extend(((0,y),(w-1,y)))
@@ -71,22 +53,16 @@ jobs:
             while q:
               x,y=q.popleft()
               if x<0 or y<0 or x>=w or y>=h or (x,y) in seen: continue
-              seen.add((x,y))
-              r,g,b,a=px[x,y]
-              if a==0:
-                q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1)))
-                continue
-              if not pale((r,g,b,a)): continue
-              px[x,y]=(r,g,b,0)
+              seen.add((x,y)); c=px[x,y]
+              if c[3]==0:
+                q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1))); continue
+              if not pale(c): continue
+              px[x,y]=(c[0],c[1],c[2],0)
               q.extend(((x+1,y),(x-1,y),(x,y+1),(x,y-1)))
-
-            out=root/outname
-            im.save(out,'PNG',optimize=True)
-            alpha=im.getchannel('A')
-            lo,hi=alpha.getextrema()
-            print(outname, 'source=',url, 'size=',im.size, 'alpha=',(lo,hi))
-            if lo==255:
-              raise RuntimeError(f'{outname} still has no transparent pixels')
+            lo,hi=im.getchannel('A').getextrema()
+            print('alpha',lo,hi,'size',im.size)
+            if lo==255: raise RuntimeError(outname+' has no transparency')
+            im.save(root/outname,'PNG',optimize=True)
           PY
       - name: Commit clean source logos
         run: |
