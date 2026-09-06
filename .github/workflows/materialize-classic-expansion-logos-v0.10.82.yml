@@ -1,0 +1,54 @@
+name: Materialize Classic Expansion Logos v0.10.82
+
+on:
+  push:
+    paths:
+      - '.github/workflows/materialize-classic-expansion-logos-v0.10.82.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  logos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow requests
+      - name: Download transparent era-correct Classic logos
+        run: |
+          python - <<'PY'
+          import requests
+          from pathlib import Path
+          from PIL import Image
+          from io import BytesIO
+          root=Path('assets/team-logos/classic'); root.mkdir(parents=True,exist_ok=True)
+          sources={
+            'phoenix-suns-1993-v1.png':'https://content.sportslogos.net/logos/6/238/full/phoenix_suns_logo_primary_19931753.png',
+            'oklahoma-city-thunder-2012-v1.png':'https://content.sportslogos.net/logos/6/2687/full/oklahoma-city-thunder-logo-primary-2009-9699.png',
+            'houston-rockets-2009-v1.png':'https://content.sportslogos.net/logos/6/230/full/8xe4813lzybfhfl14axgzzqeq.gif',
+            'detroit-pistons-1999-v1.png':'https://content.sportslogos.net/logos/6/223/full/detroit_pistons_logo_primary_19976102.png',
+          }
+          s=requests.Session(); s.headers.update({'User-Agent':'Mozilla/5.0'})
+          for name,url in sources.items():
+            r=s.get(url,timeout=45); print(name,r.status_code,r.headers.get('content-type'),len(r.content)); r.raise_for_status()
+            im=Image.open(BytesIO(r.content)).convert('RGBA')
+            alpha=im.getchannel('A'); lo,hi=alpha.getextrema()
+            if lo==255:
+              print('warning: fully opaque source',name)
+            im.save(root/name,'PNG',optimize=True)
+            print('saved',name,im.size,'alpha',alpha.getextrema())
+          PY
+      - name: Commit logos
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/team-logos/classic/phoenix-suns-1993-v1.png assets/team-logos/classic/oklahoma-city-thunder-2012-v1.png assets/team-logos/classic/houston-rockets-2009-v1.png assets/team-logos/classic/detroit-pistons-1999-v1.png
+          git commit -m 'Add four Classic expansion team logos v0.10.82'
+          git pull --rebase origin main
+          git push origin HEAD:main
