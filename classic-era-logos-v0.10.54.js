@@ -1,7 +1,7 @@
-/* NBA Courtside v0.10.59 — stable era-accurate Classic Team logo resolver; no cross-team header mutation loop */
+/* NBA Courtside v0.10.61 — stable era-accurate Classic Team logo resolver + local loading fallbacks */
 (()=>{
-  if(window.__courtsideClassicEraLogosV01059)return;
-  window.__courtsideClassicEraLogosV01059=true;
+  if(window.__courtsideClassicEraLogosV01061)return;
+  window.__courtsideClassicEraLogosV01061=true;
 
   const ERA={
     'classic-tor-2003':'https://content.sportslogos.net/logos/6/227/full/toronto_raptors_logo_primary_19961665.png',
@@ -26,6 +26,24 @@
     'classic-ind-2000':'https://content.sportslogos.net/logos/6/224/full/oj83q73haoquhxqfiurpfhsgf.png'
   };
 
+  const FALLBACK={
+    'classic-tor-2003':'assets/team-logos/classic/toronto-raptors-2003.svg',
+    'classic-sas-2005':'assets/team-logos/classic/san-antonio-spurs-2005.svg',
+    'classic-chi-1998':'assets/team-logos/classic/chicago-bulls-1998.svg',
+    'classic-lal-1987':'assets/team-logos/classic/los-angeles-lakers-1987.svg',
+    'classic-lal-2002':'assets/team-logos/classic/los-angeles-lakers-2002.svg',
+    'classic-hou-1995':'assets/team-logos/classic/houston-rockets-1995.svg',
+    'classic-det-2004':'assets/team-logos/classic/detroit-pistons-2004.svg',
+    'classic-phx-2007':'assets/team-logos/classic/phoenix-suns-2007.svg',
+    'classic-dal-1995':'assets/team-logos/classic/dallas-mavericks-1995.svg',
+    'classic-bos-1986':'assets/team-logos/classic/boston-celtics-1986.svg',
+    'classic-cha-1993':'assets/team-logos/classic/charlotte-hornets-1993.svg',
+    'classic-uta-1997':'assets/team-logos/classic/utah-jazz-1997.svg',
+    'classic-mia-2013':'assets/team-logos/classic/miami-heat-2013.svg',
+    'classic-sea-1996':'assets/team-logos/classic/seattle-supersonics-1996.svg',
+    'classic-van-1997':'assets/team-logos/classic/vancouver-grizzlies-1997.svg'
+  };
+
   const allPlayers=()=>{
     try{return players||[];}catch{return window.COURTSIDE_FOUNDATION_PLAYERS||[];}
   };
@@ -40,13 +58,26 @@
   try{logoUrl=resolver;}catch{}
   window.logoUrl=resolver;
   window.COURTSIDE_CLASSIC_ERA_LOGOS={...ERA};
+  window.COURTSIDE_CLASSIC_LOGO_FALLBACKS={...FALLBACK};
 
-  function setSrc(img,u){
-    if(img&&u&&img.getAttribute('src')!==u)img.setAttribute('src',u);
+  function armFallback(img,teamId){
+    if(!img||!teamId||img.dataset.classicFallbackArmed==='1')return;
+    const fb=FALLBACK[teamId];if(!fb)return;
+    img.dataset.classicFallbackArmed='1';
+    img.addEventListener('error',()=>{
+      if(img.dataset.classicFallbackUsed==='1')return;
+      img.dataset.classicFallbackUsed='1';
+      img.src=fb;
+    });
+  }
+  function setSrc(img,u,teamId){
+    if(!img||!u)return;
+    armFallback(img,teamId);
+    if(img.getAttribute('src')!==u)img.setAttribute('src',u);
   }
   function repairCard(card){
     const p=playerById(card?.dataset?.id);const u=eraFor(p);if(!u)return;
-    card.querySelectorAll('.foundation-team-logo,.foundation-bg-team-logo,.team-logo,.team-mark img').forEach(img=>setSrc(img,u));
+    card.querySelectorAll('.foundation-team-logo,.foundation-bg-team-logo,.team-logo,.team-mark img').forEach(img=>setSrc(img,u,p.teamId));
   }
   function teamFromSide(side){
     const name=(side.textContent||'').toLowerCase();
@@ -57,7 +88,7 @@
   function repairScoreboard(){
     document.querySelectorAll('#game .score-side').forEach(side=>{
       const team=teamFromSide(side);const u=team&&ERA[team.id];if(!u)return;
-      side.querySelectorAll('img').forEach(img=>setSrc(img,u));
+      side.querySelectorAll('img').forEach(img=>setSrc(img,u,team.id));
     });
   }
   function repairFinal(){
@@ -66,13 +97,10 @@
       const team=(window.COURTSIDE_CLASSIC_TEAMS||[]).find(t=>
         txt.includes(String(t.short||'').toLowerCase())||txt.includes(String(t.team||'').toLowerCase())
       );
-      if(team&&ERA[team.id])setSrc(img,ERA[team.id]);
+      if(team&&ERA[team.id])setSrc(img,ERA[team.id],team.id);
     });
   }
 
-  /* Intentionally do NOT scan generic catalogue/header containers by text.
-     That old repair path could match several teams in one parent and repeatedly
-     overwrite the same image, causing the visible Pistons/Vancouver flicker. */
   const sync=()=>{
     document.querySelectorAll('.foundation-card,.player-card').forEach(repairCard);
     repairScoreboard();repairFinal();
