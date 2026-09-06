@@ -26,8 +26,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from io import BytesIO
-          import requests
-          import cairosvg
+          import re, requests, cairosvg
           from PIL import Image
 
           root=Path('assets/team-logos/classic')
@@ -39,13 +38,9 @@ jobs:
             'miami-heat-2013','phoenix-suns-2007','san-antonio-spurs-2005','seattle-supersonics-1996',
             'toronto-raptors-2003','utah-jazz-1997','vancouver-grizzlies-1997'
           ]
-          remote={
-            'boston-celtics-2008':'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19979720.png',
-            'dallas-mavericks-2011':'https://content.sportslogos.net/logos/6/228/full/ifk08eam05rwxr3yhol3whdcm.png',
-            'detroit-pistons-1989':'https://content.sportslogos.net/logos/6/223/full/lgv5ssjmmchyoe66kkvh0tlzd.png',
-            'indiana-pacers-2000':'https://content.sportslogos.net/logos/6/224/full/oj83q73haoquhxqfiurpfhsgf.png',
-            'sacramento-kings-2002':'https://content.sportslogos.net/logos/6/240/full/832.png',
-          }
+
+          session=requests.Session()
+          session.headers.update({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/131 Safari/537.36','Accept':'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'})
 
           def normalize(img,out):
             img=img.convert('RGBA')
@@ -54,17 +49,36 @@ jobs:
             canvas.alpha_composite(img,((1024-img.width)//2,(1024-img.height)//2))
             canvas.save(out,'PNG',optimize=True)
 
+          def svg_to_png(svg_bytes,out):
+            raw=cairosvg.svg2png(bytestring=svg_bytes,output_width=1024,output_height=1024)
+            normalize(Image.open(BytesIO(raw)),out)
+
           for stem in local:
             src=root/f'{stem}.svg'
-            if not src.exists():
-              raise SystemExit(f'Missing source SVG: {src}')
-            raw=cairosvg.svg2png(bytestring=src.read_bytes(),output_width=1024,output_height=1024)
-            normalize(Image.open(BytesIO(raw)),root/f'{stem}.png')
+            if not src.exists(): raise SystemExit(f'Missing source SVG: {src}')
+            svg_to_png(src.read_bytes(),root/f'{stem}.png')
 
-          headers={'User-Agent':'Mozilla/5.0'}
-          for stem,url in remote.items():
-            r=requests.get(url,headers=headers,timeout=30)
-            r.raise_for_status()
+          # Era-correct sources for the five Classic teams that did not yet have local artwork.
+          # Celtics primary became full-colour in 1996 and covers 2008; Mavericks 2001-17;
+          # Pistons 1978-96; Pacers 1990-2005; Kings 1994-2016.
+          brand_pages={
+            'boston-celtics-2008':'https://brandlogos.net/svg/boston-celtics-logo-svg-9000',
+            'dallas-mavericks-2011':'https://brandlogos.net/svg/dallas-mavericks-logo-svg-30679',
+            'sacramento-kings-2002':'https://brandlogos.net/svg/sacramento-kings-1994-2016-logo-svg-31202'
+          }
+          for stem,page in brand_pages.items():
+            html=session.get(page,timeout=30).text
+            urls=re.findall(r'https://files\.brandlogos\.net/svg/[^\"\'<> ]+\.svg',html)
+            if not urls: raise SystemExit(f'Could not resolve Brandlogos SVG for {stem}')
+            data=session.get(urls[0],timeout=30).content
+            svg_to_png(data,root/f'{stem}.png')
+
+          png_sources={
+            'detroit-pistons-1989':'https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_of_the_Detroit_Pistons_%281978%E2%80%931996%29.png',
+            'indiana-pacers-2000':'https://i.logos-download.com/4116/31571-s640-0f5a88a5a6c0f71275089fee4472a665.png/Indiana_Pacers_Logo_1990-s640.png?dl='
+          }
+          for stem,url in png_sources.items():
+            r=session.get(url,timeout=30); r.raise_for_status()
             normalize(Image.open(BytesIO(r.content)),root/f'{stem}.png')
           PY
       - name: Commit PNG assets
