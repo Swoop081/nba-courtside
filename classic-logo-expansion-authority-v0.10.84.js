@@ -1,13 +1,14 @@
-/* NBA Starting5 v0.11.28 — complete Classic Team logo authority + resilient background parity */
+/* NBA Starting5 v0.11.29 — complete Classic Team logo authority + Bulls 2011 / Magic 2009 */
 (()=>{
-  if(window.__starting5ClassicLogoAuthorityV01128)return;
-  window.__starting5ClassicLogoAuthorityV01128=true;
+  if(window.__starting5ClassicLogoAuthorityV01129)return;
+  window.__starting5ClassicLogoAuthorityV01129=true;
 
   const CANDIDATES={
     'classic-bos-1986':['assets/team-logos/classic/boston-celtics-1986-alpha-v3.png','assets/team-logos/classic/boston-celtics-1986.png','assets/team-logos/classic/boston-celtics-1986.svg'],
     'classic-bos-2008':['assets/team-logos/classic/boston-celtics-2008-alpha-v3.png','assets/team-logos/classic/boston-celtics-2008.png'],
     'classic-cha-1993':['assets/team-logos/classic/charlotte-hornets-1993-alpha-v3.png','assets/team-logos/classic/charlotte-hornets-1993.png','assets/team-logos/classic/charlotte-hornets-1993.svg'],
     'classic-chi-1998':['assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png','assets/team-logos/classic/chicago-bulls-1998.png','assets/team-logos/classic/chicago-bulls-1998.svg'],
+    'classic-chi-2011':['assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png','assets/team-logos/classic/chicago-bulls-1998.png','assets/team-logos/classic/chicago-bulls-1998.svg'],
     'classic-dal-1995':['assets/team-logos/classic/dallas-mavericks-1995-alpha-v3.png','assets/team-logos/classic/dallas-mavericks-1995.png','assets/team-logos/classic/dallas-mavericks-1995.svg'],
     'classic-dal-2011':['assets/team-logos/classic/dallas-mavericks-2011-alpha-v3.png','assets/team-logos/classic/dallas-mavericks-2011.png'],
     'classic-det-1989':['assets/team-logos/classic/detroit-pistons-1989-alpha-v3.png','assets/team-logos/classic/detroit-pistons-1989.png'],
@@ -29,6 +30,7 @@
     'classic-hou-2009':['assets/team-logos/classic/houston-rockets-2009-v1.png'],
     'classic-det-1999':['assets/team-logos/classic/detroit-pistons-1999-v1.png'],
     'classic-orl-1995':['assets/team-logos/classic/orlando-magic-1995.png'],
+    'classic-orl-2009':['https://content.sportslogos.net/logos/6/217/full/orlando_magic_logo_primary_20017625.png','https://cdn.nba.com/logos/nba/1610612753/global/L/logo.svg'],
     'classic-cha-2007':['assets/team-logos/classic/charlotte-bobcats-2007.png'],
     'classic-lac-2014':['assets/team-logos/classic/los-angeles-clippers-2014.png'],
     'classic-nyk-1994':['assets/team-logos/classic/new-york-knicks-1994.png'],
