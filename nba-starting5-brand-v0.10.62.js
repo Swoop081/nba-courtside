@@ -1,10 +1,9 @@
-/* NBA Starting5 v0.10.62 — replace NBA Courtside branding everywhere in the live app */
+/* NBA Starting5 v0.10.66 — replace NBA Courtside branding everywhere and load local Classic PNG logo repair */
 (()=>{
   if(window.__nbaStarting5BrandV01062)return;
   window.__nbaStarting5BrandV01062=true;
 
   const WORDMARK=`<div class="starting5-wordmark" aria-label="NBA Starting5"><img class="starting5-nba-logo" src="assets/brand/nba-logoman-v0.8.23.png" alt="NBA"><span class="starting5-type">STARTING<span class="starting5-five">5</span></span></div>`;
-  const oldNames=['NBA COURTSIDE','NBA Courtside','Courtside'];
 
   function applyMeta(){
     document.title='NBA Starting5';
@@ -41,4 +40,10 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});
   new MutationObserver(()=>requestAnimationFrame(sync)).observe(document.documentElement,{childList:true,subtree:true});
   window.NBA_STARTING5_BRAND={name:'NBA Starting5',wordmarkHtml:WORDMARK};
+
+  if(!window.__starting5ClassicPngLoaderV01066){
+    window.__starting5ClassicPngLoaderV01066=true;
+    const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
+    document.write('<script src="classic-local-png-logos-v0.10.66.js?t='+t+'"><\\/script>');
+  }
 })();
