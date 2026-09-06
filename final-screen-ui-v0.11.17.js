@@ -1,20 +1,24 @@
-/* NBA Starting5 v0.11.17 — final winner headline placement + working lower Menu */
+/* NBA Starting5 v0.11.18 — final winner headline without mutation loop + working lower Menu */
 (()=>{
-  if(window.__starting5FinalUiV01117)return;
-  window.__starting5FinalUiV01117=true;
+  if(window.__starting5FinalUiV01118)return;
+  window.__starting5FinalUiV01118=true;
 
+  let syncing=false;
   const syncWinnerHeadline=()=>{
+    if(syncing)return;
     const final=document.getElementById('final');
     const result=document.getElementById('finalResult');
     if(!final||!result)return;
-
-    // Put the winner directly below the persistent Starting5 header.
-    if(result.parentElement!==final){
-      final.insertBefore(result,final.firstChild);
-    }
-    result.classList.add('s5-final-winner-headline');
-    const text=(result.textContent||'').trim();
-    if(text)result.textContent=text.toUpperCase();
+    syncing=true;
+    try{
+      if(result.parentElement!==final){
+        final.insertBefore(result,final.firstChild);
+      }
+      result.classList.add('s5-final-winner-headline');
+      const text=(result.textContent||'').trim();
+      const upper=text.toUpperCase();
+      if(text&&text!==upper)result.textContent=upper;
+    }finally{syncing=false;}
   };
 
   const style=document.createElement('style');
@@ -43,12 +47,9 @@
   `;
   document.head.appendChild(style);
 
-  // Keep the headline synced when final-result code updates its text.
   const result=document.getElementById('finalResult');
-  if(result)new MutationObserver(syncWinnerHeadline).observe(result,{childList:true,subtree:true,characterData:true});
+  if(result)new MutationObserver(()=>requestAnimationFrame(syncWinnerHeadline)).observe(result,{childList:true,subtree:true,characterData:true});
 
-  // The lower Menu button on the compact final had no dependable route.
-  // Capture it before stale handlers can swallow the tap.
   document.addEventListener('click',e=>{
     const final=document.getElementById('final');
     if(!final?.classList.contains('active'))return;
