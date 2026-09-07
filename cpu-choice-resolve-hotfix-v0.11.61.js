@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.61 — resolve CPU choice rail after each matchup and lock CPU cards to player-card size. */
+/* NBA Starting5 v0.11.62 — resolve CPU choice rail, lock card size, and hard-reset between games. */
 (()=>{
   if(window.__s5CpuChoiceResolveV01161)return;
   window.__s5CpuChoiceResolveV01161=true;
@@ -9,6 +9,9 @@
 
   const stage=()=>document.getElementById('s5CpuChoiceStage');
   const historyLength=()=>{try{return state?.history?.length||0}catch{return 0}};
+  const freshGame=()=>{
+    try{return historyLength()===0&&Number(state?.quarter||1)<=1&&Number(state?.userScore||0)===0&&Number(state?.cpuScore||0)===0}catch{return false}
+  };
 
   const lockCpuCardSize=()=>{
     const first=document.querySelector('#lineup .player-card');
@@ -34,6 +37,22 @@
     });
   };
 
+  const clearFreshGameRail=()=>{
+    if(!freshGame())return false;
+    const s=stage();if(!s)return false;
+    const ticker=s.querySelector('.s5-cpu-choice-ticker');
+    const host=s.querySelector('.s5-cpu-choice-card');
+    const text=(ticker?.textContent||'').trim().toUpperCase();
+    // At the start of a new game the rail must be empty. Do not clear once the
+    // first CPU reveal has actually begun.
+    if(text&&text!=='WAITING FOR PLAYER CHOICE')return false;
+    if(ticker){ticker.textContent='WAITING FOR PLAYER CHOICE';ticker.classList.remove('is-result');}
+    if(host&&host.children.length)host.replaceChildren();
+    awaitingResult=false;
+    lastHistoryLength=0;
+    return true;
+  };
+
   const resolveVisual=()=>{
     const s=stage();if(!s)return;
     const ticker=s.querySelector('.s5-cpu-choice-ticker');
@@ -45,7 +64,6 @@
     lockCpuCardSize();
   };
 
-  // pointerdown fires before the existing click handler that reveals the CPU choice.
   document.addEventListener('pointerdown',e=>{
     const card=e.target.closest?.('#lineup .player-card');
     if(!card||card.classList.contains('used'))return;
@@ -55,8 +73,8 @@
     requestAnimationFrame(lockCpuCardSize);
   },true);
 
-  // The existing interaction layer owns the reveal. This watcher owns the resolved state.
   const tick=()=>{
+    if(clearFreshGameRail())return;
     const len=historyLength();
     if(len>lastHistoryLength){
       lastHistoryLength=len;
@@ -65,7 +83,6 @@
       setTimeout(resolveVisual,0);
       setTimeout(resolveVisual,1600);
     }else if(!awaitingResult&&len===lastHistoryLength&&len>0){
-      // Keeps later re-renders from restoring CPU CHOOSES or un-dimming the last card.
       const s=stage();
       const ticker=s?.querySelector('.s5-cpu-choice-ticker');
       if(ticker&&ticker.textContent.trim().toUpperCase()==='CPU CHOOSES')resolveVisual();
@@ -75,5 +92,6 @@
 
   const timer=setInterval(tick,120);
   window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
-  window.addEventListener('resize',()=>requestAnimationFrame(lockCpuCardSize),{passive:true});
+  window.addEventListener('resize',()=>requestAnimationFrame(()=>{clearFreshGameRail();lockCpuCardSize()}),{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){clearFreshGameRail();lockCpuCardSize()}});
 })();
