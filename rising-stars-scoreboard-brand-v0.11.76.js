@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.76 — use the same Eastern/Western Conference logos on the Rising Stars scoreboard. */
+/* NBA Starting5 v0.11.77 — stable Rising Stars conference scoreboard branding without mutation-observer re-entry. */
 (()=>{
   if(window.__starting5RisingStarsScoreboardBrandV01176)return;
   window.__starting5RisingStarsScoreboardBrandV01176=true;
@@ -7,21 +7,23 @@
   const WEST_LOGO='https://mediacentral.nba.com/wp-content/uploads/logos/nba/Western_Conference.png';
   let active=false;
 
+  const logoFor=label=>String(label||'').trim().toUpperCase()==='WEST'?WEST_LOGO:EAST_LOGO;
+  const altFor=label=>String(label||'').trim().toUpperCase()==='WEST'?'Western Conference':'Eastern Conference';
+
   const paint=()=>{
     const game=document.getElementById('game');
     if(!active||!game?.classList.contains('active'))return;
-    game.classList.add('s5-rising-stars-game');
+    if(!game.classList.contains('s5-rising-stars-game'))game.classList.add('s5-rising-stars-game');
     const sides=game.querySelectorAll('.score-side');
     if(sides.length<2)return;
-    const set=(side,src,label)=>{
-      const span=side.querySelector('span');
-      if(!span)return;
-      if(span.querySelector('.s5-rs-score-conf-logo'))return;
-      span.innerHTML=`<img class="s5-rs-score-conf-logo" src="${src}" alt="${label} Conference">`;
-      span.setAttribute('aria-label',`${label} Conference`);
-    };
-    set(sides[0],EAST_LOGO,'Eastern');
-    set(sides[1],WEST_LOGO,'Western');
+    sides.forEach(side=>{
+      const span=side.querySelector(':scope > span');
+      if(!span||span.querySelector('.s5-rs-score-conf-logo'))return;
+      const label=span.textContent||'';
+      span.dataset.s5RsConference=label.trim().toUpperCase();
+      span.innerHTML=`<img class="s5-rs-score-conf-logo" src="${logoFor(label)}" alt="${altFor(label)}">`;
+      span.setAttribute('aria-label',altFor(label));
+    });
   };
 
   const clear=()=>{
@@ -32,18 +34,14 @@
   document.addEventListener('click',e=>{
     if(e.target.closest('#seasonRisingStars [data-rs-start]')){
       active=true;
-      setTimeout(paint,0);setTimeout(paint,60);setTimeout(paint,220);
+      // Let the standard Rising Stars startGame() finish first, then decorate once.
+      setTimeout(paint,0);
+      setTimeout(paint,80);
+      setTimeout(paint,240);
       return;
     }
     if(active&&e.target.closest('#final #compactPlayAgain,#final #playAgainBtn,#seasonHub [data-season-home],#newGameBtn'))clear();
   },true);
-
-  const observer=new MutationObserver(()=>{if(active)paint()});
-  const start=()=>{
-    const game=document.getElementById('game');
-    if(game)observer.observe(game,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
-  };
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 
   const style=document.createElement('style');
   style.textContent=`
