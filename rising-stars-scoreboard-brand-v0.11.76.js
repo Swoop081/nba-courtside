@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.80 — compact Rising Stars intro + normal scoreboard conference branding with improved logo contrast. */
+/* NBA Starting5 v0.11.82 — compact Rising Stars intro + normal scoreboard conference branding with red Western Conference scheme. */
 (()=>{
   if(window.__starting5RisingStarsScoreboardBrandV01176)return;
   window.__starting5RisingStarsScoreboardBrandV01176=true;
@@ -7,7 +7,7 @@
   const WEST_LOGO='https://mediacentral.nba.com/wp-content/uploads/logos/nba/Western_Conference.png';
   const CONF={
     EAST:{name:'EAST',alt:'Eastern Conference',logo:EAST_LOGO,primary:'#0878bd',secondary:'#ffffff',dark:'#064a79'},
-    WEST:{name:'WEST',alt:'Western Conference',logo:WEST_LOGO,primary:'#5b2a7f',secondary:'#ffffff',dark:'#301442'}
+    WEST:{name:'WEST',alt:'Western Conference',logo:WEST_LOGO,primary:'#c8102e',secondary:'#ffffff',dark:'#7a0b1d'}
   };
   let active=false,userConf='EAST',cpuConf='WEST';
 
