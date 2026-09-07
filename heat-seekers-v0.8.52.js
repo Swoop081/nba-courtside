@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.13.0-dev.2 — data/presentation loader with one gameplay core. */
+/* NBA Starting5 v0.13.0-dev.7 — data/presentation loader with one gameplay core. */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -84,10 +84,12 @@
   document.write('<link rel="stylesheet" href="game-info-bar-v0.10.47.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-info-bar-v0.10.51.css?t='+t+'">');
 
-  /* One gameplay path only. Dynamic visual assets load before the core so first-turn arrows are present immediately. */
+  /* One gameplay path only. Input guard registers first; diagnostics are read-only after the core. */
   document.write('<script src="dynamic-ratings-v0.12.21.js?t='+t+'"><\/script>');
   document.write('<script src="dynamic-rating-image-style-v0.11.95.js?t='+t+'"><\/script>');
+  document.write('<script src="gameplay-input-guard-v0.13.0.js?t='+t+'"><\/script>');
   document.write('<script src="gameplay-core-rebuild-v0.13.0.js?t='+t+'"><\/script>');
+  document.write('<script src="gameplay-integrity-v0.13.0.js?t='+t+'"><\/script>');
 
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
