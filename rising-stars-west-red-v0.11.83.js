@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.90 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings. */
+/* NBA Starting5 v0.11.91 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -51,5 +51,5 @@
   load('data-s5-all-star-champion-cards','all-star-champions-potw-layout-v0.11.87.js');
   load('data-s5-special-final-conference-brand','special-game-final-conference-brand-v0.11.88.js');
   load('data-s5-all-star-completion-compat','all-star-completion-compat-v0.11.89.js');
-  load('data-s5-dynamic-ratings','dynamic-ratings-v0.11.90.js');
+  load('data-s5-dynamic-ratings-v01191','dynamic-ratings-v0.11.91.js');
 })();
