@@ -1,10 +1,18 @@
-/* NBA Starting5 v0.11.47 — fixed update controls with separate bottom status line */
+/* NBA Starting5 v0.11.57 — fixed update controls + Rising Stars event bootstrap */
 (()=>{
   if(window.__starting5UpdateCheckV01147)return;
   window.__starting5UpdateCheckV01147=true;
 
   const btn=document.getElementById('checkUpdatesBtn');
   const label=document.querySelector('.brand-version');
+
+  if(!window.__starting5RisingStarsBootstrapV01157){
+    window.__starting5RisingStarsBootstrapV01157=true;
+    const rs=document.createElement('script');
+    rs.src='season-rising-stars-v0.11.57.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(rs);
+  }
+
   if(!btn)return;
 
   btn.textContent='Check for Updates';
