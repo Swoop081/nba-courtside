@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.25 — final screen + Player of the Week + restart Season + manual overtime */
+/* NBA Starting5 v0.13.0-dev — final screen + Player of the Week + restart Season. Overtime is owned exclusively by the canonical gameplay core. */
 (()=>{
   if(window.__starting5FinalUiV01125)return;
   window.__starting5FinalUiV01125=true;
@@ -7,12 +7,6 @@
     const s=document.createElement('script');
     s.dataset.s5Potw='1';
     s.src='season-player-of-week-v0.11.23.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
-  if(!document.querySelector('script[data-s5-ot-manual]')){
-    const s=document.createElement('script');
-    s.dataset.s5OtManual='1';
-    s.src='overtime-manual-pick-v0.11.25.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
     document.head.appendChild(s);
   }
 
