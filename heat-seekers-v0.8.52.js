@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.74 — direct category ratings + smooth rebounding + actual matchup +/- season ledger */
+/* NBA Starting5 v0.11.76 — direct category ratings + smooth rebounding + actual matchup +/- season ledger + Rising Stars conference scoreboard branding */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -104,5 +104,6 @@
   document.write('<script src="season-matchup-ledger-v0.11.74.js?t='+t+'"><\/script>');
   document.write('<script src="final-screen-ui-v0.11.17.js?t='+t+'"><\/script>');
   document.write('<script src="game41-allstar-handoff-v0.11.66.js?t='+t+'"><\/script>');
+  document.write('<script src="rising-stars-scoreboard-brand-v0.11.76.js?t='+t+'"><\/script>');
   document.write('<script src="update-check-stability-v0.11.7.js?t='+t+'"><\/script>');
 })();
