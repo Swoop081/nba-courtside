@@ -1,12 +1,12 @@
-/* NBA Starting5 v0.13.0 — presentation only. No gameplay wrappers. */
+/* NBA Starting5 v0.13.0-dev.3 — presentation only, driven by canonical gameplay events. */
 (()=>{
+  const SEASON_ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
   const teamFromCard=p=>{if(!p)return null;const t=TEAM_DATA[p.teamId]||['Team','#384154','#f5f7fb','#0f131b'];return{name:p.teamShort,full:p.team,id:p.teamId,logo:`https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`,primary:t[1],secondary:t[2],dark:t[3]}};
+  const seasonActive=()=>{try{return sessionStorage.getItem(SEASON_ACTIVE_KEY)==='1'}catch{return false}};
   function ensureScoreboardTeams(){
-    if(!Array.isArray(userTeam)||!Array.isArray(cpuTeam)||!userTeam[0]||!cpuTeam[0])return;
-    const game=document.getElementById('game');if(!game?.classList.contains('active'))return;
-    if(game.classList.contains('s5-all-star-standard-game')||game.classList.contains('s5-rising-stars-game'))return;
-    const board=game.querySelector('.scoreboard'),sides=board?.querySelectorAll('.score-side');if(!board||!sides||sides.length<2)return;
-    const home=teamFromCard(userTeam[0]),away=teamFromCard(cpuTeam[0]);if(!home||!away)return;
+    if(seasonActive()||!Array.isArray(userTeam)||!Array.isArray(cpuTeam)||!userTeam[0]||!cpuTeam[0])return;
+    const game=document.getElementById('game');if(!game?.classList.contains('active'))return;if(game.classList.contains('s5-all-star-standard-game')||game.classList.contains('s5-rising-stars-game'))return;
+    const board=game.querySelector('.scoreboard'),sides=board?.querySelectorAll('.score-side');if(!board||!sides||sides.length<2)return;const home=teamFromCard(userTeam[0]),away=teamFromCard(cpuTeam[0]);if(!home||!away)return;
     [[sides[0],home],[sides[1],away]].forEach(([side,team])=>{side.style.setProperty('--score-primary',team.primary);side.style.setProperty('--score-secondary',team.secondary);side.style.setProperty('--score-dark',team.dark)});
     sides[0].innerHTML=`<div class="score-team"><div class="score-logo-wrap"><img src="${home.logo}" alt="${home.name}"></div><div class="score-number"><strong id="userScore">${Number(state?.userScore)||0}</strong></div><div class="score-name">${home.name.toUpperCase()}</div></div>`;
     sides[1].innerHTML=`<div class="score-team away-team"><div class="score-number"><strong id="cpuScore">${Number(state?.cpuScore)||0}</strong></div><div class="score-logo-wrap"><img src="${away.logo}" alt="${away.name}"></div><div class="score-name">${away.name.toUpperCase()}</div></div>`;
@@ -20,8 +20,9 @@
     final.innerHTML=`<span class="kicker">FINAL</span><div class="final-matchup"><div class="final-team"><img src="${home.logo}" alt="${home.name}"><span>${home.name}</span><strong>${state.userScore}</strong></div><div class="final-center"><b>FINAL</b><span>—</span></div><div class="final-team"><img src="${away.logo}" alt="${away.name}"><span>${away.name}</span><strong>${state.cpuScore}</strong></div></div><h2 class="final-winner">${tied?'Deadlocked':winner.name+' Win!'}</h2><div class="story-summary">${rows}</div><button id="playAgainBtn" class="primary-btn" type="button">Play Again</button>`;
     document.getElementById('playAgainBtn')?.addEventListener('click',()=>resetGame(),{once:true});
   }
-  const game=document.getElementById('game');if(game)new MutationObserver(()=>{if(game.classList.contains('active'))requestAnimationFrame(ensureScoreboardTeams)}).observe(game,{attributes:true,attributeFilter:['class']});
-  const final=document.getElementById('final');if(final)new MutationObserver(()=>{if(final.classList.contains('active'))requestAnimationFrame(renderFinalPresentation)}).observe(final,{attributes:true,attributeFilter:['class']});
+
+  ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:overtime-start'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(ensureScoreboardTeams)));
+  window.addEventListener('s5:game-finished',()=>requestAnimationFrame(renderFinalPresentation));
 
   window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
     const screen=document.getElementById('catalogue'),launch=document.getElementById('catalogueBtn'),back=document.getElementById('closeCatalogueBtn'),filter=document.getElementById('catalogueSetFilter'),browser=document.querySelector('.catalogue-team-browser'),grid=document.getElementById('catalogueGrid');if(!screen||!launch||!filter||!browser||!grid)return;
