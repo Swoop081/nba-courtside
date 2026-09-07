@@ -1,0 +1,79 @@
+/* NBA Starting5 v0.11.61 — resolve CPU choice rail after each matchup and lock CPU cards to player-card size. */
+(()=>{
+  if(window.__s5CpuChoiceResolveV01161)return;
+  window.__s5CpuChoiceResolveV01161=true;
+
+  let awaitingResult=false;
+  let lastHistoryLength=0;
+  try{lastHistoryLength=state?.history?.length||0}catch{}
+
+  const stage=()=>document.getElementById('s5CpuChoiceStage');
+  const historyLength=()=>{try{return state?.history?.length||0}catch{return 0}};
+
+  const lockCpuCardSize=()=>{
+    const first=document.querySelector('#lineup .player-card');
+    const host=stage()?.querySelector('.s5-cpu-choice-card');
+    if(!first||!host)return;
+    const r=first.getBoundingClientRect();
+    if(!(r.width>0&&r.height>0))return;
+    host.style.setProperty('--s5-cpu-card-w',r.width+'px');
+    host.querySelectorAll('.s5-cpu-history-card').forEach(w=>{
+      w.style.setProperty('width',r.width+'px','important');
+      w.style.setProperty('min-width',r.width+'px','important');
+      w.style.setProperty('max-width',r.width+'px','important');
+      w.style.setProperty('flex-basis',r.width+'px','important');
+      w.style.setProperty('height',r.height+'px','important');
+      w.style.setProperty('aspect-ratio','auto','important');
+      const card=w.querySelector('.player-card');
+      if(card){
+        card.style.setProperty('width',r.width+'px','important');
+        card.style.setProperty('height',r.height+'px','important');
+        card.style.setProperty('min-width','0','important');
+        card.style.setProperty('max-width','none','important');
+      }
+    });
+  };
+
+  const resolveVisual=()=>{
+    const s=stage();if(!s)return;
+    const ticker=s.querySelector('.s5-cpu-choice-ticker');
+    if(ticker){
+      ticker.textContent='WAITING FOR PLAYER CHOICE';
+      ticker.classList.remove('is-result');
+    }
+    s.querySelectorAll('.s5-cpu-history-card').forEach(w=>w.classList.add('previous'));
+    lockCpuCardSize();
+  };
+
+  // pointerdown fires before the existing click handler that reveals the CPU choice.
+  document.addEventListener('pointerdown',e=>{
+    const card=e.target.closest?.('#lineup .player-card');
+    if(!card||card.classList.contains('used'))return;
+    const game=document.getElementById('game');
+    if(!game?.classList.contains('active'))return;
+    awaitingResult=true;
+    requestAnimationFrame(lockCpuCardSize);
+  },true);
+
+  // The existing interaction layer owns the reveal. This watcher owns the resolved state.
+  const tick=()=>{
+    const len=historyLength();
+    if(len>lastHistoryLength){
+      lastHistoryLength=len;
+      awaitingResult=false;
+      resolveVisual();
+      setTimeout(resolveVisual,0);
+      setTimeout(resolveVisual,1600);
+    }else if(!awaitingResult&&len===lastHistoryLength&&len>0){
+      // Keeps later re-renders from restoring CPU CHOOSES or un-dimming the last card.
+      const s=stage();
+      const ticker=s?.querySelector('.s5-cpu-choice-ticker');
+      if(ticker&&ticker.textContent.trim().toUpperCase()==='CPU CHOOSES')resolveVisual();
+      else lockCpuCardSize();
+    }else lockCpuCardSize();
+  };
+
+  const timer=setInterval(tick,120);
+  window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
+  window.addEventListener('resize',()=>requestAnimationFrame(lockCpuCardSize),{passive:true});
+})();
