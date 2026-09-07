@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.12.21 — pure season dynamic-rating state. No renderer/playQuarter wrappers and no player-stat mutation. */
+/* NBA Starting5 v0.13.0-dev.5 — pure season dynamic-rating state. No renderer/playQuarter wrappers and no player-stat mutation. */
 (()=>{
-  if(window.__starting5DynamicRatingsV01221)return;
-  window.__starting5DynamicRatingsV01221=true;
+  if(window.__starting5DynamicRatingsV01305)return;
+  window.__starting5DynamicRatingsV01305=true;
 
   const STORE_KEY='nbaStarting5DynamicRatingsV1';
   const ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
@@ -24,7 +24,8 @@
   const deltaFrom=s=>s.wins>=9?3:s.wins>=6?2:s.wins>=3?1:s.losses>=9?-3:s.losses>=6?-2:s.losses>=3?-1:0;
   const getDelta=p=>deltaFrom(streak(p));
   const getBaseStat=(p,k)=>Number(p?.stats?.[k]??0)||0;
-  const getEffectiveStat=(p,k)=>clamp(getBaseStat(p,k)+(isSeasonGameplay()?getDelta(p):0),0,33);
+  const getSeasonEffectiveStat=(p,k)=>clamp(getBaseStat(p,k)+getDelta(p),0,33);
+  const getEffectiveStat=(p,k)=>isSeasonGameplay()?getSeasonEffectiveStat(p,k):getBaseStat(p,k);
 
   const recordMatchupResult=(winner,loser)=>{
     if(!winner||!loser)return;
@@ -36,7 +37,7 @@
   const recordTie=()=>{};
 
   window.STARTING5_DYNAMIC_RATINGS={
-    getDelta,getStreak:streak,getBaseStat,getEffectiveStat,isSeasonGameplay,
+    getDelta,getStreak:streak,getBaseStat,getEffectiveStat,getSeasonEffectiveStat,isSeasonGameplay,
     recordMatchupResult,recordTie,
     resetAll:()=>{streaks={};write(streaks)},
     snapshot:()=>JSON.parse(JSON.stringify(streaks)),
