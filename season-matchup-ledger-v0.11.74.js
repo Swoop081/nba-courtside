@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.74 — actual/simulated matchup +/- ledger for season awards and All-Star selections. */
+/* NBA Starting5 v0.13.0-dev.2 — actual/simulated matchup +/- ledger for season awards and All-Star selections. Event-driven; no global Storage patch. */
 (()=>{
-  if(window.__starting5MatchupLedgerV01174)return;
-  window.__starting5MatchupLedgerV01174=true;
+  if(window.__starting5MatchupLedgerV01302)return;
+  window.__starting5MatchupLedgerV01302=true;
   const SAVE_KEY='nbaStarting5SeasonV2';
   const ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
   const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
@@ -26,53 +26,27 @@
   function actualHistory(s,g){
     try{
       if(sessionStorage.getItem(ACTIVE_KEY)!=='1'||typeof state==='undefined'||!Array.isArray(state?.history)||!state.history.length)return null;
-      const opp=String(g.home)===String(s.teamId)?String(g.away):String(g.home);
-      const out=[];
-      for(const h of state.history){
-        if(!h?.user||!h?.cpu||!CATS.includes(h.category))continue;
-        const up=h.user,cp=h.cpu,uv=Number(h.userPts??stat(up,h.category))||0,cv=Number(h.cpuPts??stat(cp,h.category))||0,d=uv-cv;
-        out.push({category:h.category,a:{key:key(up),name:up.name,teamId:String(s.teamId),value:uv,diff:d},b:{key:key(cp),name:cp.name,teamId:opp,value:cv,diff:-d}});
-      }
-      return out.length?out:null;
+      const opp=String(g.home)===String(s.teamId)?String(g.away):String(g.home),out=[];
+      for(const h of state.history){if(!h?.user||!h?.cpu||!CATS.includes(h.category))continue;const up=h.user,cp=h.cpu,uv=Number(h.userPts??stat(up,h.category))||0,cv=Number(h.cpuPts??stat(cp,h.category))||0,d=uv-cv;out.push({category:h.category,a:{key:key(up),name:up.name,teamId:String(s.teamId),value:uv,diff:d},b:{key:key(cp),name:cp.name,teamId:opp,value:cv,diff:-d}})}return out.length?out:null;
     }catch{return null}
   }
   function enrich(s){
     if(!s?.results)return false;const gm=gameMap(s);let changed=false;
-    for(const [id,res] of Object.entries(s.results)){
-      if(Array.isArray(res.matchups)&&res.matchups.length)continue;const g=gm.get(id);if(!g)continue;
-      const actual=res.userPlayed?actualHistory(s,g):null;
-      res.matchups=actual||simulateGame(g);
-      res.matchupLedgerSource=actual?'actual':'simulated';
-      if(res.userPlayed&&!actual)res.matchupLedgerSource='legacy-simulated';
-      changed=true;
-    }
-    if(changed)s.matchupLedgerVersion=1;return changed;
+    for(const [id,res] of Object.entries(s.results)){if(Array.isArray(res.matchups)&&res.matchups.length)continue;const g=gm.get(id);if(!g)continue;const actual=res.userPlayed?actualHistory(s,g):null;res.matchups=actual||simulateGame(g);res.matchupLedgerSource=actual?'actual':'simulated';if(res.userPlayed&&!actual)res.matchupLedgerSource='legacy-simulated';changed=true}
+    if(changed)s.matchupLedgerVersion=2;return changed;
   }
   function rowsFrom(s,ids=null){
     enrich(s);const rows=new Map(),gm=gameMap(s),seenGames=new Map();
-    const ensure=(side)=>{const p=playerBy(side.key,side.name,side.teamId);if(!p)return null;const k=key(p);if(!rows.has(k))rows.set(k,{key:k,name:p.name,teamId:String(p.teamId),position:p.position||'',p,plus:0,defPlus:0,games:0,categoryPlus:Object.fromEntries(CATS.map(c=>[c,0]))});return rows.get(k)};
-    for(const [id,res] of Object.entries(s?.results||{})){
-      if(ids&&!ids.has(id))continue;if(!gm.has(id))continue;
-      for(const m of res.matchups||[]){if(!CATS.includes(m.category)||!m.a||!m.b)continue;for(const side of [m.a,m.b]){const r=ensure(side);if(!r)continue;const d=Number(side.diff)||0;r.plus+=d;r.categoryPlus[m.category]+=d;if(DEF.has(m.category))r.defPlus+=d;let set=seenGames.get(r.key);if(!set){set=new Set();seenGames.set(r.key,set)}if(!set.has(id)){set.add(id);r.games++}}}
-    }
-    return [...rows.values()];
+    const ensure=side=>{const p=playerBy(side.key,side.name,side.teamId);if(!p)return null;const k=key(p);if(!rows.has(k))rows.set(k,{key:k,name:p.name,teamId:String(p.teamId),position:p.position||'',p,plus:0,defPlus:0,games:0,categoryPlus:Object.fromEntries(CATS.map(c=>[c,0]))});return rows.get(k)};
+    for(const [id,res] of Object.entries(s?.results||{})){if(ids&&!ids.has(id))continue;if(!gm.has(id))continue;for(const m of res.matchups||[]){if(!CATS.includes(m.category)||!m.a||!m.b)continue;for(const side of [m.a,m.b]){const r=ensure(side);if(!r)continue;const d=Number(side.diff)||0;r.plus+=d;r.categoryPlus[m.category]+=d;if(DEF.has(m.category))r.defPlus+=d;let set=seenGames.get(r.key);if(!set){set=new Set();seenGames.set(r.key,set)}if(!set.has(id)){set.add(id);r.games++}}}}
+    return[...rows.values()];
   }
-  function calculate(s){
-    const arr=rowsFrom(s),mvp=[...arr].sort((a,b)=>b.plus-a.plus||b.games-a.games||a.name.localeCompare(b.name)),dpoy=[...arr].sort((a,b)=>b.defPlus-a.defPlus||b.games-a.games||a.name.localeCompare(b.name));
-    const allNBA={first:[],second:[],third:[]};for(const pos of POS){const q=arr.filter(r=>r.position===pos).sort((a,b)=>b.plus-a.plus||b.games-a.games);if(q[0])allNBA.first.push(q[0]);if(q[1])allNBA.second.push(q[1]);if(q[2])allNBA.third.push(q[2])}
-    return{players:arr,mvp,dpoy,allNBA,completedGames:Object.keys(s?.results||{}).length};
-  }
-  function categoryRows(s){
-    const ids=new Set();for(let i=0;i<Math.min(41,s?.schedule?.length||0);i++)for(const g of s.schedule[i]||[])if(s.results?.[g.id])ids.add(g.id);
-    return rowsFrom(s,ids).map(r=>({key:r.key,p:r.p,plus:{...r.categoryPlus},total:r.plus,games:r.games}));
-  }
+  function calculate(s){const arr=rowsFrom(s),mvp=[...arr].sort((a,b)=>b.plus-a.plus||b.games-a.games||a.name.localeCompare(b.name)),dpoy=[...arr].sort((a,b)=>b.defPlus-a.defPlus||b.games-a.games||a.name.localeCompare(b.name)),allNBA={first:[],second:[],third:[]};for(const pos of POS){const q=arr.filter(r=>r.position===pos).sort((a,b)=>b.plus-a.plus||b.games-a.games);if(q[0])allNBA.first.push(q[0]);if(q[1])allNBA.second.push(q[1]);if(q[2])allNBA.third.push(q[2])}return{players:arr,mvp,dpoy,allNBA,completedGames:Object.keys(s?.results||{}).length}}
+  function categoryRows(s){const ids=new Set();for(let i=0;i<Math.min(41,s?.schedule?.length||0);i++)for(const g of s.schedule[i]||[])if(s.results?.[g.id])ids.add(g.id);return rowsFrom(s,ids).map(r=>({key:r.key,p:r.p,plus:{...r.categoryPlus},total:r.plus,games:r.games}))}
+  function persistEnriched(){try{const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(s&&enrich(s))localStorage.setItem(SAVE_KEY,JSON.stringify(s))}catch{}}
+
   window.STARTING5_MATCHUP_PLUS={calculate,categoryRows,enrich,simulateGame};
   if(window.STARTING5_SEASON_AWARDS)window.STARTING5_SEASON_AWARDS.calculate=calculate;
-
-  const previous=Storage.prototype.setItem;
-  Storage.prototype.setItem=function(k,v){
-    if(this===localStorage&&k===SAVE_KEY){try{const s=JSON.parse(v);if(enrich(s))v=JSON.stringify(s)}catch{}}
-    return previous.call(this,k,v);
-  };
-  try{const s=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(s&&enrich(s))previous.call(localStorage,SAVE_KEY,JSON.stringify(s))}catch{}
+  window.addEventListener('s5:game-finished',()=>setTimeout(persistEnriched,0));
+  persistEnriched();
 })();
