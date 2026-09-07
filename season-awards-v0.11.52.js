@@ -1,68 +1,32 @@
-/* NBA Starting5 v0.11.52 — Season Awards Race + end-of-season awards. */
+/* NBA Starting5 v0.13.0-dev.6 — Season Awards Race presentation, event-driven. */
 (()=>{
-  if(window.__starting5SeasonAwardsV01152)return;
-  window.__starting5SeasonAwardsV01152=true;
-  const SAVE_KEY='nbaStarting5SeasonV2';
-  const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
-  const DEF=['blocks','steals'];
-  const POS=['PG','SG','SF','PF','C'];
+  if(window.__starting5SeasonAwardsV01306)return;
+  window.__starting5SeasonAwardsV01306=true;
+  const SAVE_KEY='nbaStarting5SeasonV2',CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'],DEF=['blocks','steals'],POS=['PG','SG','SF','PF','C'];
   const read=()=>{try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'null')}catch{return null}};
-  const teamPlayers=id=>{let pool=[];try{pool=Array.isArray(players)?players:[]}catch{}return pool.filter(p=>String(p.teamId)===String(id)&&!p.classicTeam)};
+  const pool=()=>{try{return Array.isArray(players)?players:[]}catch{return []}};
+  const teamPlayers=id=>pool().filter(p=>String(p.teamId)===String(id)&&!p.classicTeam);
   const stat=(p,k)=>Number(p?.stats?.[k]??p?.ratings?.[k]??p?.[k]??0)||0;
   const key=p=>String(p.id||p.playerId||`${p.teamId}|${p.name}|${p.position}`);
   const logo=id=>`https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg`;
   const short=id=>{try{return window.TEAM_SHORT?.[id]||TEAM_SHORT?.[id]||teamPlayers(id)[0]?.teamShort||'Team'}catch{return teamPlayers(id)[0]?.teamShort||'Team'}};
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-
-  function gamesById(s){const m=new Map();for(const round of s?.schedule||[])for(const g of round||[])m.set(g.id,g);return m;}
-  function ensureRow(map,p){const k=key(p);if(!map.has(k))map.set(k,{key:k,name:p.name,teamId:String(p.teamId),position:p.position||'',plus:0,defPlus:0,games:0});return map.get(k);}
-  function calculate(s){
-    const rows=new Map(),gm=gamesById(s);
-    for(const id of Object.keys(s?.results||{})){
-      const g=gm.get(id);if(!g)continue;
-      const hp=teamPlayers(g.home),ap=teamPlayers(g.away);
-      for(const pos of POS){
-        const h=hp.find(p=>p.position===pos),a=ap.find(p=>p.position===pos);if(!h||!a)continue;
-        const hr=ensureRow(rows,h),ar=ensureRow(rows,a);
-        let d=0,dd=0;
-        for(const c of CATS)d+=stat(h,c)-stat(a,c);
-        for(const c of DEF)dd+=stat(h,c)-stat(a,c);
-        hr.plus+=d;ar.plus-=d;hr.defPlus+=dd;ar.defPlus-=dd;hr.games++;ar.games++;
-      }
-    }
-    const arr=[...rows.values()];
-    const mvp=[...arr].sort((a,b)=>b.plus-a.plus||b.games-a.games||a.name.localeCompare(b.name));
-    const dpoy=[...arr].sort((a,b)=>b.defPlus-a.defPlus||b.games-a.games||a.name.localeCompare(b.name));
-    const allNBA={first:[],second:[],third:[]};
-    for(const pos of POS){const pool=arr.filter(r=>r.position===pos).sort((a,b)=>b.plus-a.plus||b.games-a.games);if(pool[0])allNBA.first.push(pool[0]);if(pool[1])allNBA.second.push(pool[1]);if(pool[2])allNBA.third.push(pool[2]);}
-    return {players:arr,mvp,dpoy,allNBA,completedGames:Object.keys(s?.results||{}).length};
+  function gamesById(s){const m=new Map();for(const round of s?.schedule||[])for(const g of round||[])m.set(g.id,g);return m}
+  function ensureRow(map,p){const k=key(p);if(!map.has(k))map.set(k,{key:k,name:p.name,teamId:String(p.teamId),position:p.position||'',plus:0,defPlus:0,games:0});return map.get(k)}
+  function fallbackCalculate(s){
+    const rows=new Map(),gm=gamesById(s);for(const id of Object.keys(s?.results||{})){const g=gm.get(id);if(!g)continue;const hp=teamPlayers(g.home),ap=teamPlayers(g.away);for(const pos of POS){const h=hp.find(p=>p.position===pos),a=ap.find(p=>p.position===pos);if(!h||!a)continue;const hr=ensureRow(rows,h),ar=ensureRow(rows,a);let d=0,dd=0;for(const c of CATS)d+=stat(h,c)-stat(a,c);for(const c of DEF)dd+=stat(h,c)-stat(a,c);hr.plus+=d;ar.plus-=d;hr.defPlus+=dd;ar.defPlus-=dd;hr.games++;ar.games++}}
+    const arr=[...rows.values()],mvp=[...arr].sort((a,b)=>b.plus-a.plus||b.games-a.games||a.name.localeCompare(b.name)),dpoy=[...arr].sort((a,b)=>b.defPlus-a.defPlus||b.games-a.games||a.name.localeCompare(b.name)),allNBA={first:[],second:[],third:[]};for(const pos of POS){const q=arr.filter(r=>r.position===pos).sort((a,b)=>b.plus-a.plus||b.games-a.games);if(q[0])allNBA.first.push(q[0]);if(q[1])allNBA.second.push(q[1]);if(q[2])allNBA.third.push(q[2])}return{players:arr,mvp,dpoy,allNBA,completedGames:Object.keys(s?.results||{}).length};
   }
-  window.STARTING5_SEASON_AWARDS={calculate};
+  window.STARTING5_SEASON_AWARDS={calculate:fallbackCalculate};
 
-  const css=document.createElement('style');css.id='s5-awards-style';css.textContent=`
-  .s5-season-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}.s5-season-tab{min-height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0d131b;color:#aab4c3;font-weight:1000;font-size:12px}.s5-season-tab.active{background:#f7b928;color:#090b0f;border-color:#f7b928}.s5-awards{display:none}.s5-awards.active{display:block}.s5-award-card{border:1px solid rgba(255,255,255,.11);border-radius:18px;background:linear-gradient(180deg,#141c27,#090d13);padding:14px;margin-bottom:10px}.s5-award-card h3{margin:0 0 3px;font-size:16px}.s5-award-sub{font-size:9px;color:#8e98a7;text-transform:uppercase;letter-spacing:.11em;font-weight:1000;margin-bottom:10px}.s5-race-row{display:grid;grid-template-columns:24px 28px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.06)}.s5-race-row:first-of-type{border-top:0}.s5-race-row img{width:26px;height:26px;object-fit:contain}.s5-race-row b{font-size:11px}.s5-race-row small{display:block;color:#7f8998;font-size:8px;margin-top:2px}.s5-race-score{font-size:12px;font-weight:1000;color:#f7b928}.s5-allnba-team{margin-top:9px;border-top:1px solid rgba(255,255,255,.07);padding-top:9px}.s5-allnba-team strong{font-size:10px;color:#f7b928;text-transform:uppercase;letter-spacing:.1em}.s5-allnba-line{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:7px;padding:6px 0}.s5-allnba-line img{width:24px;height:24px;object-fit:contain}.s5-allnba-line span{font-size:10px}.s5-awards-final{border-color:rgba(247,185,40,.5);box-shadow:0 0 24px rgba(247,185,40,.08)}
-  `;document.head.appendChild(css);
-
-  function raceRows(rows,field,limit=10){return rows.slice(0,limit).map((r,i)=>`<div class="s5-race-row"><span>${i+1}</span><img src="${logo(r.teamId)}" alt=""><div><b>${esc(r.name)}</b><small>${r.position} · ${esc(short(r.teamId))} · ${r.games} GP</small></div><span class="s5-race-score">${r[field]>=0?'+':''}${r[field]}</span></div>`).join('')||'<div class="s5-award-sub">No completed games yet.</div>';}
-  function allTeam(title,rows){return `<div class="s5-allnba-team"><strong>${title}</strong>${rows.map(r=>`<div class="s5-allnba-line"><img src="${logo(r.teamId)}" alt=""><span><b>${r.position}</b> · ${esc(r.name)}</span><span class="s5-race-score">${r.plus>=0?'+':''}${r.plus}</span></div>`).join('')}</div>`;}
-  function awardsMarkup(s,a){const done=!!s.complete||((s.records?.[s.teamId]?.w||0)+(s.records?.[s.teamId]?.l||0)>=82);const m=a.mvp[0],d=a.dpoy[0];return `<div class="s5-awards active">
-    ${done?`<section class="s5-award-card s5-awards-final"><div class="s5-award-sub">Season Awards</div><h3>MVP — ${esc(m?.name||'—')}</h3><div class="s5-race-score">${m?(m.plus>=0?'+':'')+m.plus:'—'} total differential</div><h3 style="margin-top:14px">Defensive Player of the Year — ${esc(d?.name||'—')}</h3><div class="s5-race-score">${d?(d.defPlus>=0?'+':'')+d.defPlus:'—'} steals + blocks differential</div></section>`:''}
-    <section class="s5-award-card"><h3>MVP Race</h3><div class="s5-award-sub">Total + differential across all seven ratings · ${a.completedGames} league games complete</div>${raceRows(a.mvp,'plus')}</section>
-    <section class="s5-award-card"><h3>Defensive Player of the Year</h3><div class="s5-award-sub">Steals + blocks differential only</div>${raceRows(a.dpoy,'defPlus')}</section>
-    <section class="s5-award-card"><h3>${done?'All-NBA Teams':'Projected All-NBA Teams'}</h3><div class="s5-award-sub">Top three at each position by total + differential</div>${allTeam('First Team',a.allNBA.first)}${allTeam('Second Team',a.allNBA.second)}${allTeam('Third Team',a.allNBA.third)}</section>
-  </div>`;}
-
-  function install(){
-    const hub=document.getElementById('seasonHub'),content=document.getElementById('s5SeasonContent');if(!hub||!content)return false;
-    if(hub.querySelector('.s5-season-tabs'))return true;
-    const tabs=document.createElement('div');tabs.className='s5-season-tabs';tabs.innerHTML='<button class="s5-season-tab active" data-s5-season-view="season">Season</button><button class="s5-season-tab" data-s5-season-view="awards">Awards Race</button>';
-    content.parentNode.insertBefore(tabs,content);
-    const awards=document.createElement('div');awards.id='s5AwardsContent';content.parentNode.insertBefore(awards,content.nextSibling);
-    const setView=v=>{tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.s5SeasonView===v));content.style.display=v==='season'?'':'none';awards.style.display=v==='awards'?'block':'none';if(v==='awards')renderAwards();};
-    tabs.addEventListener('click',e=>{const b=e.target.closest('[data-s5-season-view]');if(b)setView(b.dataset.s5SeasonView)});setView('season');return true;
-  }
-  function renderAwards(){const s=read(),el=document.getElementById('s5AwardsContent');if(!s||!el)return;const a=calculate(s);el.innerHTML=awardsMarkup(s,a);}
-  const originalSet=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){const r=originalSet.apply(this,arguments);if(this===localStorage&&k===SAVE_KEY)setTimeout(()=>{install();renderAwards()},0);return r;};
-  const start=()=>{let n=0,t=setInterval(()=>{if(install()||++n>100)clearInterval(t)},100);new MutationObserver(()=>{install()}).observe(document.documentElement,{childList:true,subtree:true});};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+  const css=document.createElement('style');css.id='s5-awards-style';css.textContent=`.s5-season-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px}.s5-season-tab{min-height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#0d131b;color:#aab4c3;font-weight:1000;font-size:12px}.s5-season-tab.active{background:#f7b928;color:#090b0f;border-color:#f7b928}.s5-awards{display:none}.s5-awards.active{display:block}.s5-award-card{border:1px solid rgba(255,255,255,.11);border-radius:18px;background:linear-gradient(180deg,#141c27,#090d13);padding:14px;margin-bottom:10px}.s5-award-card h3{margin:0 0 3px;font-size:16px}.s5-award-sub{font-size:9px;color:#8e98a7;text-transform:uppercase;letter-spacing:.11em;font-weight:1000;margin-bottom:10px}.s5-race-row{display:grid;grid-template-columns:24px 28px 1fr auto;gap:8px;align-items:center;padding:8px 0;border-top:1px solid rgba(255,255,255,.06)}.s5-race-row:first-of-type{border-top:0}.s5-race-row img{width:26px;height:26px;object-fit:contain}.s5-race-row b{font-size:11px}.s5-race-row small{display:block;color:#7f8998;font-size:8px;margin-top:2px}.s5-race-score{font-size:12px;font-weight:1000;color:#f7b928}.s5-allnba-team{margin-top:9px;border-top:1px solid rgba(255,255,255,.07);padding-top:9px}.s5-allnba-team strong{font-size:10px;color:#f7b928;text-transform:uppercase;letter-spacing:.1em}.s5-allnba-line{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:7px;padding:6px 0}.s5-allnba-line img{width:24px;height:24px;object-fit:contain}.s5-allnba-line span{font-size:10px}.s5-awards-final{border-color:rgba(247,185,40,.5);box-shadow:0 0 24px rgba(247,185,40,.08)}`;document.head.appendChild(css);
+  function raceRows(rows,field,limit=10){return rows.slice(0,limit).map((r,i)=>`<div class="s5-race-row"><span>${i+1}</span><img src="${logo(r.teamId)}" alt=""><div><b>${esc(r.name)}</b><small>${r.position} · ${esc(short(r.teamId))} · ${r.games} GP</small></div><span class="s5-race-score">${r[field]>=0?'+':''}${r[field]}</span></div>`).join('')||'<div class="s5-award-sub">No completed games yet.</div>'}
+  function allTeam(title,rows){return `<div class="s5-allnba-team"><strong>${title}</strong>${rows.map(r=>`<div class="s5-allnba-line"><img src="${logo(r.teamId)}" alt=""><span><b>${r.position}</b> · ${esc(r.name)}</span><span class="s5-race-score">${r.plus>=0?'+':''}${r.plus}</span></div>`).join('')}</div>`}
+  function awardsMarkup(s,a){const done=!!s.complete||((s.records?.[s.teamId]?.w||0)+(s.records?.[s.teamId]?.l||0)>=82),m=a.mvp[0],d=a.dpoy[0];return `<div class="s5-awards active">${done?`<section class="s5-award-card s5-awards-final"><div class="s5-award-sub">Season Awards</div><h3>MVP — ${esc(m?.name||'—')}</h3><div class="s5-race-score">${m?(m.plus>=0?'+':'')+m.plus:'—'} total differential</div><h3 style="margin-top:14px">Defensive Player of the Year — ${esc(d?.name||'—')}</h3><div class="s5-race-score">${d?(d.defPlus>=0?'+':'')+d.defPlus:'—'} steals + blocks differential</div></section>`:''}<section class="s5-award-card"><h3>MVP Race</h3><div class="s5-award-sub">Total matchup differential · ${a.completedGames} league games complete</div>${raceRows(a.mvp,'plus')}</section><section class="s5-award-card"><h3>Defensive Player of the Year</h3><div class="s5-award-sub">Steals + blocks differential only</div>${raceRows(a.dpoy,'defPlus')}</section><section class="s5-award-card"><h3>${done?'All-NBA Teams':'Projected All-NBA Teams'}</h3>${allTeam('First Team',a.allNBA.first)}${allTeam('Second Team',a.allNBA.second)}${allTeam('Third Team',a.allNBA.third)}</section></div>`}
+  function renderAwards(){const s=read(),el=document.getElementById('s5AwardsContent');if(!s||!el)return;const fn=window.STARTING5_SEASON_AWARDS?.calculate||fallbackCalculate;el.innerHTML=awardsMarkup(s,fn(s))}
+  function install(){const hub=document.getElementById('seasonHub'),content=document.getElementById('s5SeasonContent');if(!hub||!content)return false;if(hub.querySelector('.s5-season-tabs'))return true;const tabs=document.createElement('div');tabs.className='s5-season-tabs';tabs.innerHTML='<button class="s5-season-tab active" data-s5-season-view="season">Season</button><button class="s5-season-tab" data-s5-season-view="awards">Awards Race</button>';content.parentNode.insertBefore(tabs,content);const awards=document.createElement('div');awards.id='s5AwardsContent';awards.style.display='none';content.parentNode.insertBefore(awards,content.nextSibling);tabs.addEventListener('click',e=>{const b=e.target.closest('[data-s5-season-view]');if(!b)return;const v=b.dataset.s5SeasonView;tabs.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));content.style.display=v==='season'?'':'none';awards.style.display=v==='awards'?'block':'none';if(v==='awards')renderAwards()});return true}
+  const refresh=()=>{install();if(document.getElementById('s5AwardsContent')?.style.display==='block')renderAwards()};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh,{once:true});else refresh();
+  ['s5:season-result-committed','s5:season-hub-opened'].forEach(name=>window.addEventListener(name,refresh));
+  document.addEventListener('click',e=>{if(e.target.closest('#seasonModeBtn'))requestAnimationFrame(refresh)},true);
 })();
