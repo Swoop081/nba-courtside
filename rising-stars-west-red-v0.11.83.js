@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.96 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings + authentic CPU simulation. */
+/* NBA Starting5 v0.11.97 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings + authentic CPU simulation. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -52,9 +52,6 @@
   load('data-s5-special-final-conference-brand','special-game-final-conference-brand-v0.11.88.js');
   load('data-s5-all-star-completion-compat','all-star-completion-compat-v0.11.89.js');
   load('data-s5-dynamic-ratings-v01196','dynamic-ratings-v0.11.96.js');
-  load('data-s5-dynamic-rating-arrow-style-v01192','dynamic-rating-arrow-style-v0.11.92.js');
-  load('data-s5-dynamic-rating-arrow-style-v01193','dynamic-rating-arrow-style-v0.11.93.js');
-  load('data-s5-dynamic-rating-arrow-style-v01194','dynamic-rating-arrow-style-v0.11.94.js');
   load('data-s5-dynamic-rating-image-style-v01195','dynamic-rating-image-style-v0.11.95.js');
   load('data-s5-cpu-authentic-sim-v01196','season-cpu-authentic-sim-v0.11.96.js');
 })();
