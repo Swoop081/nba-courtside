@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.12.21 — consolidated loader with clean matchup engine. */
+/* NBA Starting5 v0.12.22 — deterministic consolidated loader + clean matchup core. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -26,22 +26,33 @@
   document.addEventListener('click',e=>{if(e.target.closest('#seasonRisingStars [data-rs-start]'))schedule()},true);
   window.addEventListener('pageshow',schedule);
 
-  const load=(attr,src)=>{
-    if(document.querySelector(`script[${attr}]`))return;
-    const s=document.createElement('script');s.setAttribute(attr,'1');s.src=src+'?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());document.head.appendChild(s);
-  };
-  load('data-s5-rs-final-handoff','rising-stars-final-handoff-v0.11.84.js');
-  load('data-s5-all-star-standard','all-star-standard-game-v0.11.85.js');
-  load('data-s5-all-star-final-handoff','all-star-final-handoff-v0.11.86.js');
-  load('data-s5-all-star-champion-cards','all-star-champions-potw-layout-v0.11.87.js');
-  load('data-s5-special-final-conference-brand','special-game-final-conference-brand-v0.11.88.js');
-  load('data-s5-all-star-completion-compat','all-star-completion-compat-v0.11.89.js');
-  load('data-s5-dynamic-ratings-v01221','dynamic-ratings-v0.12.21.js');
-  load('data-s5-dynamic-rating-image-style-v01195','dynamic-rating-image-style-v0.11.95.js');
-  load('data-s5-cpu-authentic-sim-v01196','season-cpu-authentic-sim-v0.11.96.js');
-  load('data-s5-whos-hot-not-v01201','season-whos-hot-not-v0.12.01.js');
-  load('data-s5-selected-card-highlight-v01210','selected-card-highlight-v0.12.10.js');
-  load('data-s5-stat-editor-v01203','stat-editor-v0.12.03.js');
-  load('data-s5-home-continue-order-v01206','home-continue-season-order-v0.12.06.js');
-  load('data-s5-matchup-engine-v01221','matchup-engine-v0.12.21.js');
+  const files=[
+    ['data-s5-rs-final-handoff','rising-stars-final-handoff-v0.11.84.js'],
+    ['data-s5-all-star-standard','all-star-standard-game-v0.11.85.js'],
+    ['data-s5-all-star-final-handoff','all-star-final-handoff-v0.11.86.js'],
+    ['data-s5-all-star-champion-cards','all-star-champions-potw-layout-v0.11.87.js'],
+    ['data-s5-special-final-conference-brand','special-game-final-conference-brand-v0.11.88.js'],
+    ['data-s5-all-star-completion-compat','all-star-completion-compat-v0.11.89.js'],
+    ['data-s5-dynamic-ratings-v01221','dynamic-ratings-v0.12.21.js'],
+    ['data-s5-dynamic-rating-image-style-v01195','dynamic-rating-image-style-v0.11.95.js'],
+    ['data-s5-cpu-authentic-sim-v01196','season-cpu-authentic-sim-v0.11.96.js'],
+    ['data-s5-whos-hot-not-v01201','season-whos-hot-not-v0.12.01.js'],
+    ['data-s5-selected-card-highlight-v01210','selected-card-highlight-v0.12.10.js'],
+    ['data-s5-stat-editor-v01203','stat-editor-v0.12.03.js'],
+    ['data-s5-home-continue-order-v01206','home-continue-season-order-v0.12.06.js'],
+    /* MATCHUP CORE MUST LOAD LAST so nothing can overwrite its category/stat/CPU authority. */
+    ['data-s5-matchup-core-v01222','matchup-core-v0.12.22.js']
+  ];
+
+  const loadOne=([attr,src])=>new Promise(resolve=>{
+    if(document.querySelector(`script[${attr}]`)){resolve();return}
+    const s=document.createElement('script');
+    s.setAttribute(attr,'1');
+    s.async=false;
+    s.src=src+'?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    s.onload=resolve;s.onerror=resolve;
+    document.head.appendChild(s);
+  });
+
+  (async()=>{for(const item of files)await loadOne(item);schedule()})();
 })();
