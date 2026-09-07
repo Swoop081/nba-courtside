@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.58 — All-Star Weekend + season drilldowns + awards + ratings/editor/game authorities */
+/* NBA Starting5 v0.11.61 — All-Star Weekend + season drilldowns + awards + ratings/editor/game authorities */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -87,6 +87,7 @@
   document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
   document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
   document.write('<script src="matchup-category-hotfix-v0.11.33.js?t='+t+'"><\/script>');
+  document.write('<script src="cpu-choice-resolve-hotfix-v0.11.61.js?t='+t+'"><\/script>');
   document.write('<script src="game-card-inspect-v0.11.6.js?t='+t+'"><\/script>');
   document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
   document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
