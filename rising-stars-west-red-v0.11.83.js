@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.12.01 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + season-only dynamic ratings + authentic CPU simulation + Who's Hot/Who's Not. */
+/* NBA Starting5 v0.12.02 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + season-only dynamic ratings + authentic CPU simulation + Who's Hot/Who's Not + long-session performance fix. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -55,4 +55,5 @@
   load('data-s5-dynamic-rating-image-style-v01195','dynamic-rating-image-style-v0.11.95.js');
   load('data-s5-cpu-authentic-sim-v01196','season-cpu-authentic-sim-v0.11.96.js');
   load('data-s5-whos-hot-not-v01201','season-whos-hot-not-v0.12.01.js');
+  load('data-s5-lineup-dom-reuse-v01202','lineup-dom-reuse-v0.12.02.js');
 })();
