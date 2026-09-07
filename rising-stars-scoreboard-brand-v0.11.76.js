@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.79 — compact Rising Stars intro + normal scoreboard conference branding with improved logo contrast. */
+/* NBA Starting5 v0.11.80 — compact Rising Stars intro + normal scoreboard conference branding with improved logo contrast. */
 (()=>{
   if(window.__starting5RisingStarsScoreboardBrandV01176)return;
   window.__starting5RisingStarsScoreboardBrandV01176=true;
@@ -128,4 +128,8 @@
   const start=()=>{wrapIntro();compactIntro()};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
   setTimeout(wrapIntro,0);setTimeout(wrapIntro,120);
+
+  const introPatch=document.createElement('script');
+  introPatch.src='rising-stars-intro-layout-v0.11.80.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+  document.head.appendChild(introPatch);
 })();
