@@ -28,15 +28,12 @@
     const paint=(el,id,score,scoreId,away=false)=>{const name=SHORT[id]||'Team',expected=id+'|'+(away?'A':'H'),shownName=(el.querySelector('.score-name')?.textContent||'').trim(),shownLogo=el.querySelector('img')?.getAttribute('src')||'';if(el.dataset.s5SeasonScoreboard===expected&&shownName===name&&shownLogo.includes('/'+id+'/')){const n=el.querySelector('#'+scoreId);if(n)n.textContent=String(score);return}el.dataset.s5SeasonScoreboard=expected;el.innerHTML=away?`<div class="score-team away-team"><div class="score-number"><strong id="${scoreId}">${score}</strong></div><div class="score-logo-wrap"><img src="${logo(id)}" alt="${name}"></div><div class="score-name">${name}</div></div>`:`<div class="score-team"><div class="score-logo-wrap"><img src="${logo(id)}" alt="${name}"></div><div class="score-number"><strong id="${scoreId}">${score}</strong></div><div class="score-name">${name}</div></div>`};
     paint(sides[0],ids.userId,us,'userScore',false);paint(sides[1],ids.cpuId,cs,'cpuScore',true);
   }
-  function paintFinalContinue(scores){
-    if(!active())return;commitSeasonResult(scores);const s=read(),label=s?.complete?'View Final Standings':'Continue',a=document.getElementById('playAgainBtn'),b=document.getElementById('compactPlayAgain');if(a)a.textContent=label;if(b)b.textContent=label;
-  }
-  function goSeasonHub(e){
-    if(!active())return;const btn=e.target?.closest?.('#playAgainBtn,#compactPlayAgain');if(!btn)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();commitSeasonResult();try{sessionStorage.removeItem(ACTIVE_KEY);sessionStorage.removeItem(PENDING_KEY)}catch{}const seasonBtn=document.getElementById('seasonModeBtn');if(seasonBtn)seasonBtn.click();else try{showScreen('seasonHub')}catch{}window.scrollTo({top:0,behavior:'instant'});
-  }
+  function paintFinalContinue(scores){if(!active())return;commitSeasonResult(scores);const s=read(),label=s?.complete?'View Final Standings':'Continue',a=document.getElementById('playAgainBtn'),b=document.getElementById('compactPlayAgain');if(a)a.textContent=label;if(b)b.textContent=label}
+  function goSeasonHub(e){if(!active())return;const btn=e.target?.closest?.('#playAgainBtn,#compactPlayAgain');if(!btn)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();commitSeasonResult();try{sessionStorage.removeItem(ACTIVE_KEY);sessionStorage.removeItem(PENDING_KEY)}catch{}const seasonBtn=document.getElementById('seasonModeBtn');if(seasonBtn)seasonBtn.click();else try{showScreen('seasonHub')}catch{}window.scrollTo({top:0,behavior:'instant'})}
 
   window.addEventListener('click',goSeasonHub,true);
-  document.addEventListener('click',e=>{if(e.target.closest('#s5PlaySeasonGame')){rememberSeasonGame();try{sessionStorage.setItem(ACTIVE_KEY,'1')}catch{}}},false);
+  /* Capture phase is intentional: season context must exist before the button's own handler starts the first matchup. */
+  document.addEventListener('click',e=>{if(e.target.closest('#s5PlaySeasonGame')){rememberSeasonGame();try{sessionStorage.setItem(ACTIVE_KEY,'1')}catch{}}},true);
   ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:overtime-start'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(paintScoreboard)));
   window.addEventListener('s5:game-finished',e=>{paintScoreboard();requestAnimationFrame(()=>paintFinalContinue(e.detail))});
 })();
