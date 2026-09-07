@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.13.0-dev.9 — presentation only, driven by canonical gameplay events. */
+/* NBA Starting5 v0.13.0-dev.13 — presentation only, driven by canonical gameplay events. */
 (()=>{
   const SEASON_ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
   const teamFromCard=p=>{if(!p)return null;const t=TEAM_DATA[p.teamId]||['Team','#384154','#f5f7fb','#0f131b'];return{name:p.teamShort,full:p.team,id:p.teamId,logo:`https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`,primary:t[1],secondary:t[2],dark:t[3]}};
@@ -22,16 +22,25 @@
     }
     return best?.player||state?.history?.[0]?.user||userTeam?.[0]||null;
   }
+  function exactPlayedCard(p){
+    if(!p)return '';
+    const pid=String(p.id||p.playerId||'');
+    try{
+      const esc=(window.CSS&&CSS.escape)?CSS.escape(pid):pid.replace(/"/g,'\\"');
+      const live=document.querySelector(`#game #lineup .player-card[data-id="${esc}"]`);
+      if(live){const clone=live.cloneNode(true);clone.classList.remove('used','s5-selected-card','s5-selected-choice','s5-position-locked');clone.removeAttribute('aria-disabled');return clone.outerHTML}
+    }catch{}
+    try{return typeof cardMarkup==='function'?cardMarkup(p,{eager:true}):''}catch{return ''}
+  }
   function renderFinalPresentation(){
     const final=document.getElementById('final');if(!final?.classList.contains('active')||!state||!Array.isArray(userTeam)||!Array.isArray(cpuTeam)||!userTeam[0]||!cpuTeam[0])return;
     const game=document.getElementById('game');if(game?.classList.contains('s5-all-star-standard-game')||game?.classList.contains('s5-rising-stars-game'))return;
     const home=teamFromCard(userTeam[0]),away=teamFromCard(cpuTeam[0]);if(!home||!away)return;const tied=state.userScore===state.cpuScore,winner=state.userScore>state.cpuScore?home:away,potg=bestPlayer();
-    let potgCard='';try{if(potg&&typeof cardMarkup==='function')potgCard=cardMarkup(potg,{eager:true})}catch{}
+    const potgCard=exactPlayedCard(potg);
     const actionLabel=seasonActive()?'Continue':'Play Again';
     final.classList.add('compact-final-screen','s5-branded-final');
     final.innerHTML=`<section class="compact-final-card s5-branded-final-card"><div class="compact-final-kicker">FINAL</div><div class="compact-final-scoreboard"><div class="compact-final-team"><img src="${home.logo}" alt="${home.name}"><strong>${state.userScore}</strong><span>${home.name}</span></div><div class="compact-final-dash">–</div><div class="compact-final-team"><img src="${away.logo}" alt="${away.name}"><strong>${state.cpuScore}</strong><span>${away.name}</span></div></div><h2>${tied?'GAME TIED':winner.name.toUpperCase()+' WIN'}</h2><div class="potg-label">PLAYER OF THE GAME</div><div class="potg-card-wrap">${potgCard}</div><div class="potg-name">${potg?.name||''}</div><div class="compact-final-actions"><button type="button" class="primary-btn" id="playAgainBtn">${actionLabel}</button></div></section>`;
     const btn=document.getElementById('playAgainBtn');if(btn&&!seasonActive())btn.addEventListener('click',()=>resetGame(),{once:true});
-    try{if(typeof window.__courtsideFoundationRatingApply==='function')requestAnimationFrame(window.__courtsideFoundationRatingApply)}catch{}
   }
 
   ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:overtime-start'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(ensureScoreboardTeams)));
@@ -49,6 +58,6 @@
   window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
     const intro=document.getElementById('intro'),actions=intro?.querySelector('.brand-launch-actions'),play=document.getElementById('startBtn'),catalogue=document.getElementById('catalogueBtn'),topOptions=document.getElementById('optionsBtn'),topNewGame=document.getElementById('newGameBtn');if(!intro||!actions||!play||!catalogue)return;
     play.textContent='Play';play.classList.add('main-menu-btn','main-menu-play');catalogue.classList.add('main-menu-btn');let menuOptions=document.getElementById('mainMenuOptionsBtn');if(!menuOptions){menuOptions=document.createElement('button');menuOptions.id='mainMenuOptionsBtn';menuOptions.type='button';menuOptions.className='catalogue-launch-btn main-menu-btn';menuOptions.textContent='Options';catalogue.insertAdjacentElement('afterend',menuOptions)}menuOptions.onclick=()=>topOptions?.click();if(topNewGame){topNewGame.textContent='Menu';topNewGame.onclick=()=>{showScreen('intro');window.scrollTo({top:0})}}
-    const style=document.createElement('style');style.id='starting5-main-menu-v01300';style.textContent=`#intro.brand-intro{min-height:calc(100dvh - 96px);display:none;flex-direction:column;justify-content:center;padding:16px 0 28px}#intro.brand-intro.active{display:flex}#intro .brand-launch-wordmark{margin-bottom:34px}#intro .brand-launch-actions{width:min(100%,420px);margin:0 auto;display:grid!important;grid-template-columns:1fr;gap:12px}#intro .main-menu-btn{width:100%;min-height:58px;margin:0!important;border-radius:17px!important;font-size:17px!important;font-weight:1000!important;letter-spacing:.035em!important}#intro .main-menu-play{background:linear-gradient(180deg,#ffd45c,#f7b928)!important;color:#080a0d!important;border-color:#ffe287!important;box-shadow:0 12px 28px rgba(247,185,40,.18)}#intro .brand-version{margin-top:10px;text-align:center}body.starting5-main-menu .topbar{display:none!important}body.starting5-main-menu .app-shell{padding-top:max(18px,env(safe-area-inset-top))}`;document.head.appendChild(style);const sync=()=>document.body.classList.toggle('starting5-main-menu',intro.classList.contains('active'));sync();new MutationObserver(sync).observe(intro,{attributes:true,attributeFilter:['class']});
+    const style=document.createElement('style');style.id='starting5-main-menu-v01300';style.textContent=`#intro.brand-intro{min-height:calc(100dvh - 96px);display:none;flex-direction:column;justify-content:center;padding:16px 0 28px}#intro.brand-intro.active{display:flex}#intro .brand-launch-wordmark{margin-bottom:34px}#intro .brand-launch-actions{width:min(100%,420px);margin:0 auto;display:grid!important;grid-template-columns:1fr;gap:12px}#intro .main-menu-btn{width:100%;min-height:58px;margin:0!important;border-radius:17px!important;font-size:17px!important;font-weight:1000!important;letter-spacing:.035em!important}#intro .main-menu-play{background:linear-gradient(180deg,#ffd45c,#f7b928)!important;color:#080a0d!important;border-color:#ffe287!important;box-shadow:0 12px 28px rgba(247,185,40,.18)}#intro .brand-version{margin-top:10px;text-align:center}body.starting5-main-menu .topbar{display:none!important}body.starting5-main-menu .app-shell{padding-top:max(18px,env(safe-area-inset-top))}#final.s5-branded-final .compact-final-actions{display:flex!important;justify-content:center!important;width:100%!important}#final.s5-branded-final .compact-final-actions #playAgainBtn{margin-left:auto!important;margin-right:auto!important}`;document.head.appendChild(style);const sync=()=>document.body.classList.toggle('starting5-main-menu',intro.classList.contains('active'));sync();new MutationObserver(sync).observe(intro,{attributes:true,attributeFilter:['class']});
   },0));
 })();
