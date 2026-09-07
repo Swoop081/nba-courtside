@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.12.16 — consolidated runtime authority + special-game loaders + season systems. */
+/* NBA Starting5 v0.12.17 — consolidated runtime authority + special-game loaders + season systems. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -44,5 +44,5 @@
   load('data-s5-selected-card-highlight-v01210','selected-card-highlight-v0.12.10.js');
   load('data-s5-stat-editor-v01203','stat-editor-v0.12.03.js');
   load('data-s5-home-continue-order-v01206','home-continue-season-order-v0.12.06.js');
-  load('data-s5-matchup-runtime-authority-v01216','matchup-runtime-authority-v0.12.16.js');
+  load('data-s5-matchup-runtime-authority-v01217','matchup-runtime-authority-v0.12.17.js');
 })();
