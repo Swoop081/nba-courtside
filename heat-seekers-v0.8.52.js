@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.83 — direct category ratings + smooth rebounding + actual matchup +/- season ledger + Rising Stars conference scoreboard branding */
+/* NBA Starting5 v0.13.0 — data/presentation loader with one gameplay core. */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -83,14 +83,11 @@
   document.write('<link rel="stylesheet" href="game-info-bar-v0.10.46.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-info-bar-v0.10.47.css?t='+t+'">');
   document.write('<link rel="stylesheet" href="game-info-bar-v0.10.51.css?t='+t+'">');
-  document.write('<script src="game-flow-v0.10.12.js?t='+t+'"><\/script>');
-  document.write('<script src="game-flow-hotfix-v0.10.13.js?t='+t+'"><\/script>');
-  document.write('<script src="game-interaction-hotfix-v0.10.14.js?t='+t+'"><\/script>');
-  document.write('<script src="matchup-category-hotfix-v0.11.33.js?t='+t+'"><\/script>');
-  document.write('<script src="cpu-choice-resolve-hotfix-v0.11.61.js?t='+t+'"><\/script>');
-  document.write('<script src="game-card-inspect-v0.11.6.js?t='+t+'"><\/script>');
-  document.write('<script src="played-card-rail-order-v0.10.60.js?t='+t+'"><\/script>');
-  document.write('<script src="play-again-reset-v0.10.32.js?t='+t+'"><\/script>');
+
+  /* One gameplay path only. */
+  document.write('<script src="dynamic-ratings-v0.12.21.js?t='+t+'"><\/script>');
+  document.write('<script src="gameplay-core-rebuild-v0.13.0.js?t='+t+'"><\/script>');
+
   document.write('<script src="game-presentation-v0.10.44.js?t='+t+'"><\/script>');
   document.write('<script src="game-info-bar-v0.10.47.js?t='+t+'"><\/script>');
   document.write('<script src="season-mode-v1.0.0.js?t='+t+'"><\/script>');
