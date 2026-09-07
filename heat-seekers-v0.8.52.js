@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.53 — season drilldowns + awards + ratings/editor/game authorities */
+/* NBA Starting5 v0.11.58 — All-Star Weekend + season drilldowns + awards + ratings/editor/game authorities */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -98,6 +98,8 @@
   document.write('<script src="season-presentation-reset-v0.11.5.js?t='+t+'"><\/script>');
   document.write('<script src="season-awards-v0.11.52.js?t='+t+'"><\/script>');
   document.write('<script src="season-drilldown-v0.11.53.js?t='+t+'"><\/script>');
+  document.write('<script src="season-rising-stars-v0.11.57.js?t='+t+'"><\/script>');
+  document.write('<script src="season-all-star-weekend-v0.11.58.js?t='+t+'"><\/script>');
   document.write('<script src="final-screen-ui-v0.11.17.js?t='+t+'"><\/script>');
   document.write('<script src="update-check-stability-v0.11.7.js?t='+t+'"><\/script>');
 })();
