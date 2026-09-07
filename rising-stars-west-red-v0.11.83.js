@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.86 — authoritative red Western Conference scoreboard override + All-Star standard-game/final loaders. */
+/* NBA Starting5 v0.11.87 — authoritative red Western Conference scoreboard override + All-Star standard-game/final/champion-card loaders. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -57,6 +57,12 @@
     const s=document.createElement('script');
     s.dataset.s5AllStarFinalHandoff='1';
     s.src='all-star-final-handoff-v0.11.86.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(s);
+  }
+  if(!document.querySelector('script[data-s5-all-star-champion-cards]')){
+    const s=document.createElement('script');
+    s.dataset.s5AllStarChampionCards='1';
+    s.src='all-star-champions-potw-layout-v0.11.87.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
     document.head.appendChild(s);
   }
 })();
