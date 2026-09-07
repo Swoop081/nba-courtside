@@ -1,12 +1,13 @@
-/* NBA Starting5 v0.13.0-dev.8 — pure season dynamic-rating state with per-save reset. */
+/* NBA Starting5 v0.13.0-dev.11 — persistent Season dynamic ratings across reload/re-entry. */
 (()=>{
-  if(window.__starting5DynamicRatingsV01308)return;
-  window.__starting5DynamicRatingsV01308=true;
+  if(window.__starting5DynamicRatingsV01311)return;
+  window.__starting5DynamicRatingsV01311=true;
 
   const STORE_KEY='nbaStarting5DynamicRatingsV1';
   const META_KEY='nbaStarting5DynamicRatingsSeasonV1';
   const SEASON_KEY='nbaStarting5SeasonV2';
   const ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
+  const PENDING_KEY='nbaStarting5SeasonPendingGameV1';
   const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
   const key=p=>String(p?.playerId||p?.id||`${p?.name||''}|${p?.teamId||''}|${p?.classicTeam||''}`);
   const read=()=>{try{return JSON.parse(localStorage.getItem(STORE_KEY)||'{}')}catch{return {}}};
@@ -24,12 +25,25 @@
     try{localStorage.setItem(META_KEY,id)}catch{}
   };
 
+  const seasonLineupMatchesSave=()=>{
+    try{
+      const s=readSeason();if(!s?.teamId)return false;
+      const team=Array.isArray(userTeam)?userTeam:[];
+      if(!team.length)return false;
+      return team.every(p=>String(p?.teamId||'')===String(s.teamId));
+    }catch{return false}
+  };
+
   const isSeasonGameplay=()=>{
     try{
       const game=document.getElementById('game');
       if(!game?.classList.contains('active'))return false;
       if(sessionStorage.getItem(ACTIVE_KEY)==='1')return true;
-      return game.classList.contains('s5-rising-stars-game')||game.classList.contains('s5-all-star-game');
+      if(sessionStorage.getItem(PENDING_KEY))return true;
+      if(game.classList.contains('s5-rising-stars-game')||game.classList.contains('s5-all-star-game'))return true;
+      /* Reload/re-entry can rebuild the Season matchup UI before ACTIVE_KEY is restored.
+         A real Season lineup is five players from the saved user team, unlike exhibition. */
+      return seasonLineupMatchesSave();
     }catch{return false}
   };
 
