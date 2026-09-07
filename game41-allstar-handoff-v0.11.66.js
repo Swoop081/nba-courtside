@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.67 — safe Game 41 final -> All-Star Weekend handoff + readable used CPU rail. */
+/* NBA Starting5 v0.11.68 — hard-route Game 41 season continuation directly into All-Star Weekend + readable used CPU rail. */
 (()=>{
   if(window.__s5Game41AllStarHandoffV01166)return;
   window.__s5Game41AllStarHandoffV01166=true;
@@ -6,30 +6,49 @@
   const read=()=>{try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'null')}catch{return null}};
   const played=s=>{const r=s?.records?.[s?.teamId]||{w:0,l:0};return Number(r.w||0)+Number(r.l||0)};
   const needsWeekend=s=>!!s&&played(s)===41&&!s?.allStarWeekend?.risingStars?.complete;
+
   const openWeekend=()=>{
     const s=read();if(!needsWeekend(s))return false;
     try{
-      if(window.STARTING5_RISING_STARS?.openIntro){window.STARTING5_RISING_STARS.openIntro();return true;}
+      const api=window.STARTING5_RISING_STARS;
+      if(api&&typeof api.openIntro==='function'){
+        api.openIntro();
+        return !!document.getElementById('seasonRisingStars')?.classList.contains('active');
+      }
     }catch(err){console.error('[Starting5 All-Star handoff]',err)}
     return false;
   };
 
-  // Only intercept Continue on the completed Game 41 final screen.
-  // Do not auto-open from the Season hub: that caused Continue Season to race
-  // the hub render and repeatedly invoke Rising Stars before the UI was ready.
+  const routeWeekend=()=>{
+    if(openWeekend())return;
+    let tries=0;
+    const timer=setInterval(()=>{
+      tries++;
+      if(openWeekend()||tries>=10)clearInterval(timer);
+    },80);
+  };
+
+  // Game 41 final: Continue goes straight to Rising Stars.
   document.addEventListener('click',e=>{
     const final=document.getElementById('final');
     if(!final?.classList.contains('active'))return;
     const btn=e.target.closest('button');if(!btn)return;
-    const text=(btn.textContent||'').trim().toUpperCase();
-    if(text!=='CONTINUE')return;
-    const s=read();if(!needsWeekend(s))return;
+    if((btn.textContent||'').trim().toUpperCase()!=='CONTINUE')return;
+    if(!needsWeekend(read()))return;
     e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    if(openWeekend())return;
-    let tries=0;const timer=setInterval(()=>{
-      tries++;
-      if(openWeekend()||tries>=20)clearInterval(timer);
-    },100);
+    requestAnimationFrame(routeWeekend);
+  },true);
+
+  // Menu: at the exact 41-game breakpoint, Continue Season must NOT enter the
+  // normal Season hub first. That route is what is crashing on the saved Game 41
+  // state. Bypass it completely and enter Rising Stars directly.
+  document.addEventListener('click',e=>{
+    const btn=e.target.closest('button');if(!btn)return;
+    const text=(btn.textContent||'').trim().toUpperCase();
+    const isSeason=btn.id==='seasonModeBtn'||text==='CONTINUE SEASON';
+    if(!isSeason||!needsWeekend(read()))return;
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+    requestAnimationFrame(routeWeekend);
   },true);
 
   const style=document.createElement('style');
