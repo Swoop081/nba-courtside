@@ -21,7 +21,9 @@
     let previous='';try{previous=localStorage.getItem(META_KEY)||''}catch{}
     if(previous===id)return;
     const fresh=Number(s.roundIndex||0)===0&&Object.keys(s.results||{}).length===0;
-    if(previous||fresh){streaks={};write(streaks)}
+    /* Only a genuinely brand-new Season may reset ratings. Never clear an in-progress
+       save merely because its serialized identity changed during reload/re-entry. */
+    if(fresh){streaks={};write(streaks)}
     try{localStorage.setItem(META_KEY,id)}catch{}
   };
 
@@ -41,8 +43,6 @@
       if(sessionStorage.getItem(ACTIVE_KEY)==='1')return true;
       if(sessionStorage.getItem(PENDING_KEY))return true;
       if(game.classList.contains('s5-rising-stars-game')||game.classList.contains('s5-all-star-game'))return true;
-      /* Reload/re-entry can rebuild the Season matchup UI before ACTIVE_KEY is restored.
-         A real Season lineup is five players from the saved user team, unlike exhibition. */
       return seasonLineupMatchesSave();
     }catch{return false}
   };
