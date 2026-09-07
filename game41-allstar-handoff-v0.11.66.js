@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.11.72 — Season hub owns Game 41 -> Rising Stars -> All-Star Game -> Game 42; East/West conference branding. */
+/* NBA Starting5 v0.11.73 — Season hub owns Game 41 -> Rising Stars -> All-Star Game -> Game 42; isolated East/West conference branding. */
 (()=>{
-  if(window.__s5Game41AllStarHandoffV01172)return;
-  window.__s5Game41AllStarHandoffV01172=true;
+  if(window.__s5Game41AllStarHandoffV01173)return;
+  window.__s5Game41AllStarHandoffV01173=true;
 
   const SAVE_KEY='nbaStarting5SeasonV2';
   const EAST_LOGO='https://mediacentral.nba.com/wp-content/uploads/logos/nba/Eastern_Conference.png';
@@ -26,12 +26,17 @@
     if(label)label.innerHTML=savedNext.labelHtml;
     if(matchup)matchup.innerHTML=savedNext.matchupHtml;
     if(btn)btn.textContent=savedNext.buttonText;
+    if(matchup)delete matchup.dataset.s5ConferenceStage;
     card.removeAttribute('data-s5-allstar-stage');
     savedNext=null;
   };
 
-  const eventSide=(side,logo,sub)=>`<div class="s5-side s5-allstar-conf-side"><img class="s5-allstar-conf-logo" src="${logo}" alt="${side} Conference"><strong>${side}</strong><span>${sub}</span></div>`;
-  const eventMatchup=stage=>`${eventSide('EAST',EAST_LOGO,stage==='rising'?'RISING STARS':'ALL-STAR GAME')}<div class="s5-vs">VS</div>${eventSide('WEST',WEST_LOGO,'ALL-STAR WEEKEND')}`;
+  // Deliberately DO NOT use .s5-side here. season-hub-standings-v0.11.20.js
+  // treats every .s5-side as a regular-season team and rewrites it with the
+  // scheduled Game 42 team names/records. These event-side classes isolate the
+  // All-Star Weekend card from that regular-season enhancer.
+  const eventSide=(side,logo,sub)=>`<div class="s5-event-side s5-allstar-conf-side"><img class="s5-allstar-conf-logo" src="${logo}" alt="${side} Conference"><div class="s5-conf-name">${side}</div><span>${sub}</span></div>`;
+  const eventMatchup=stage=>`${eventSide('EAST',EAST_LOGO,stage==='rising'?'RISING STARS':'ALL-STAR GAME')}<div class="s5-vs">VS</div>${eventSide('WEST',WEST_LOGO,stage==='rising'?'RISING STARS':'ALL-STAR GAME')}`;
 
   const paintHub=()=>{
     const s=read(),hub=document.getElementById('seasonHub'),card=nextCard();
@@ -47,7 +52,10 @@
     const wantedBtn=stage==='rising'?'Play Rising Stars':'Play All-Star Game';
     if(label.textContent!==wantedLabel)label.textContent=wantedLabel;
     if(btn.textContent!==wantedBtn)btn.textContent=wantedBtn;
-    if(matchup.dataset.s5ConferenceStage!==stage){matchup.innerHTML=eventMatchup(stage);matchup.dataset.s5ConferenceStage=stage;}
+    if(matchup.dataset.s5ConferenceStage!==stage||matchup.querySelector('.s5-side')){
+      matchup.innerHTML=eventMatchup(stage);
+      matchup.dataset.s5ConferenceStage=stage;
+    }
   };
 
   const decorateConferenceHeaders=()=>{
@@ -79,9 +87,6 @@
       const card=btn.closest('.s5-next'),stage=card?.dataset.s5AllstarStage;
       if(stage){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();openStage(stage);return;}
     }
-    // The existing Season standings enhancer may repaint the regular matchup after
-    // the hub appears. Re-assert the conference matchup only after real user actions,
-    // with no polling or subtree observer.
     if(atBreak(read())){setTimeout(paintHub,30);setTimeout(paintHub,140);}
     setTimeout(decorateConferenceHeaders,0);
   },true);
@@ -90,9 +95,9 @@
   style.textContent=`
     #s5CpuChoiceStage .s5-cpu-history-card.previous{opacity:.52!important;filter:grayscale(.38) saturate(.68) brightness(.82)!important}
     #seasonHub .s5-next[data-s5-allstar-stage] .s5-matchup{grid-template-columns:1fr 42px 1fr}
-    #seasonHub .s5-next[data-s5-allstar-stage] .s5-allstar-conf-side{min-height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    #seasonHub .s5-next[data-s5-allstar-stage] .s5-allstar-conf-side{min-height:94px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
     #seasonHub .s5-next[data-s5-allstar-stage] .s5-allstar-conf-logo{width:92px;height:52px;object-fit:contain;margin:0 auto 3px;display:block}
-    #seasonHub .s5-next[data-s5-allstar-stage] .s5-allstar-conf-side strong{font-size:18px!important;letter-spacing:.06em;min-height:0!important}
+    #seasonHub .s5-next[data-s5-allstar-stage] .s5-conf-name{font-size:18px;font-weight:1000;letter-spacing:.06em;line-height:1.1;color:#fff}
     #seasonHub .s5-next[data-s5-allstar-stage] .s5-allstar-conf-side span{display:block;margin-top:4px;font-size:9px;color:#8e98a7;font-weight:900;text-align:center}
     #seasonRisingStars .s5-rs-team>h3,#seasonAllStarWeekend .s5-as-team>h3{display:flex;align-items:center;gap:8px}
     .s5-event-conf-logo{width:52px;height:30px;object-fit:contain;flex:0 0 auto}
