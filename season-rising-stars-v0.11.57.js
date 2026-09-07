@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.75 — Rising Stars runs through the standard Starting5 gameplay engine. */
+/* NBA Starting5 v0.11.81 — Rising Stars uses standard gameplay with compact intro button in hero. */
 (()=>{
   if(window.__starting5RisingStarsV01157)return;
   window.__starting5RisingStarsV01157=true;
@@ -45,7 +45,7 @@
   const css=document.createElement('style');
   css.id='s5-rising-stars-style';
   css.textContent=`
-    #seasonRisingStars{padding-bottom:34px}.s5-rs-hero{border:1px solid rgba(255,255,255,.12);border-radius:22px;background:linear-gradient(180deg,#172131,#090d13);padding:18px;margin-bottom:12px}.s5-rs-kicker{font-size:10px;color:#f7b928;font-weight:1000;letter-spacing:.16em;text-transform:uppercase}.s5-rs-hero h2{font-size:28px;margin:5px 0}.s5-rs-hero p{margin:0;color:#9aa5b4;font-size:11px;line-height:1.4}.s5-rs-rosters{display:grid;grid-template-columns:1fr 1fr;gap:10px}.s5-rs-team{border:1px solid rgba(255,255,255,.1);border-radius:18px;background:#0d131b;padding:12px}.s5-rs-team h3{margin:0 0 8px;font-size:15px}.s5-rs-row{display:grid;grid-template-columns:26px 1fr auto;gap:7px;align-items:center;padding:7px 0;border-top:1px solid rgba(255,255,255,.06)}.s5-rs-row:first-of-type{border-top:0}.s5-rs-row img{width:24px;height:24px;object-fit:contain}.s5-rs-row b{display:block;font-size:10px}.s5-rs-row small{display:block;color:#7f8998;font-size:7.5px;margin-top:2px}.s5-rs-plus{color:#f7b928;font-size:10px;font-weight:1000}.s5-rs-play{width:100%;min-height:50px;border:0;border-radius:14px;background:#f7b928;color:#090b0f;font-weight:1000;font-size:15px;margin-top:12px}
+    #seasonRisingStars{padding-bottom:34px}.s5-rs-hero{border:1px solid rgba(255,255,255,.12);border-radius:22px;background:linear-gradient(180deg,#172131,#090d13);padding:18px;margin-bottom:12px}.s5-rs-kicker{font-size:10px;color:#f7b928;font-weight:1000;letter-spacing:.16em;text-transform:uppercase}.s5-rs-hero h2{font-size:28px;margin:5px 0}.s5-rs-rosters{display:grid;grid-template-columns:1fr 1fr;gap:10px}.s5-rs-team{border:1px solid rgba(255,255,255,.1);border-radius:18px;background:#0d131b;padding:12px}.s5-rs-team h3{margin:0 0 8px;font-size:15px}.s5-rs-row{display:grid;grid-template-columns:26px 1fr auto;gap:7px;align-items:center;padding:7px 0;border-top:1px solid rgba(255,255,255,.06)}.s5-rs-row:first-of-type{border-top:0}.s5-rs-row img{width:24px;height:24px;object-fit:contain}.s5-rs-row b{display:block;font-size:10px}.s5-rs-row small{display:block;color:#7f8998;font-size:7.5px;margin-top:2px}.s5-rs-plus{color:#f7b928;font-size:10px;font-weight:1000}.s5-rs-play{width:100%;min-height:50px;border:0;border-radius:14px;background:#f7b928;color:#090b0f;font-weight:1000;font-size:15px;margin-top:16px}
     @media(max-width:430px){.s5-rs-rosters{grid-template-columns:1fr}}
   `;
   document.head.appendChild(css);
@@ -66,7 +66,7 @@
   function openIntro(){
     const s=read(),screen=ensureScreen();if(!s||!screen)return;
     const r=selectRosters(s),host=screen.querySelector('#s5RisingStarsContent');
-    host.innerHTML=`<section class="s5-rs-hero"><div class="s5-rs-kicker">Between Games 41 & 42</div><h2>East vs West</h2><p>The five highest cumulative + players in each conference who are in their first, second or third NBA season qualify. Selection is positionless; cards are ordered PG → SG → SF → PF → C only for presentation. Gameplay uses the full Starting5 matchup system.</p></section><div class="s5-rs-rosters">${rosterMarkup('Eastern Conference',r.east)}${rosterMarkup('Western Conference',r.west)}</div><button class="s5-rs-play" data-rs-start>Play Rising Stars</button>`;
+    host.innerHTML=`<section class="s5-rs-hero"><div class="s5-rs-kicker">Between Games 41 & 42</div><h2>East vs West</h2><button class="s5-rs-play" data-rs-start>Play Rising Stars</button></section><div class="s5-rs-rosters">${rosterMarkup('Eastern Conference',r.east)}${rosterMarkup('Western Conference',r.west)}</div>`;
     host.querySelector('[data-rs-start]')?.addEventListener('click',()=>startGame(r));
     activate('seasonRisingStars');
   }
