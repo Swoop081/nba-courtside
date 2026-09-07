@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.89 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders. */
+/* NBA Starting5 v0.11.90 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -41,40 +41,15 @@
   window.addEventListener('pageshow',schedule);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule()});
 
-  if(!document.querySelector('script[data-s5-rs-final-handoff]')){
-    const s=document.createElement('script');
-    s.dataset.s5RsFinalHandoff='1';
-    s.src='rising-stars-final-handoff-v0.11.84.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
-  if(!document.querySelector('script[data-s5-all-star-standard]')){
-    const s=document.createElement('script');
-    s.dataset.s5AllStarStandard='1';
-    s.src='all-star-standard-game-v0.11.85.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
-  if(!document.querySelector('script[data-s5-all-star-final-handoff]')){
-    const s=document.createElement('script');
-    s.dataset.s5AllStarFinalHandoff='1';
-    s.src='all-star-final-handoff-v0.11.86.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
-  if(!document.querySelector('script[data-s5-all-star-champion-cards]')){
-    const s=document.createElement('script');
-    s.dataset.s5AllStarChampionCards='1';
-    s.src='all-star-champions-potw-layout-v0.11.87.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
-  if(!document.querySelector('script[data-s5-special-final-conference-brand]')){
-    const s=document.createElement('script');
-    s.dataset.s5SpecialFinalConferenceBrand='1';
-    s.src='special-game-final-conference-brand-v0.11.88.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
-  if(!document.querySelector('script[data-s5-all-star-completion-compat]')){
-    const s=document.createElement('script');
-    s.dataset.s5AllStarCompletionCompat='1';
-    s.src='all-star-completion-compat-v0.11.89.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
-    document.head.appendChild(s);
-  }
+  const load=(attr,src)=>{
+    if(document.querySelector(`script[${attr}]`))return;
+    const s=document.createElement('script');s.setAttribute(attr,'1');s.src=src+'?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());document.head.appendChild(s);
+  };
+  load('data-s5-rs-final-handoff','rising-stars-final-handoff-v0.11.84.js');
+  load('data-s5-all-star-standard','all-star-standard-game-v0.11.85.js');
+  load('data-s5-all-star-final-handoff','all-star-final-handoff-v0.11.86.js');
+  load('data-s5-all-star-champion-cards','all-star-champions-potw-layout-v0.11.87.js');
+  load('data-s5-special-final-conference-brand','special-game-final-conference-brand-v0.11.88.js');
+  load('data-s5-all-star-completion-compat','all-star-completion-compat-v0.11.89.js');
+  load('data-s5-dynamic-ratings','dynamic-ratings-v0.11.90.js');
 })();
