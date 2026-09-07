@@ -1,11 +1,12 @@
-/* NBA Starting5 v0.13.0-dev.7 — tap-vs-swipe input guard. Presentation/input only; no gameplay authority. */
+/* NBA Starting5 v0.13.0-dev.8 — tap-vs-swipe input guard and rail-arrow removal. Presentation/input only. */
 (()=>{
-  if(window.__starting5GameplayInputGuardV01307)return;
-  window.__starting5GameplayInputGuardV01307=true;
+  if(window.__starting5GameplayInputGuardV01308)return;
+  window.__starting5GameplayInputGuardV01308=true;
 
   const MOVE_LIMIT=10;
   let gesture=null,suppressClick=false;
   const cardFrom=e=>e.target?.closest?.('#game.active #lineup .player-card')||null;
+  const removeRailArrows=()=>document.querySelectorAll('#s5LineupPrev,#s5LineupNext,.s5-rail-arrow').forEach(x=>x.remove());
 
   document.addEventListener('pointerdown',e=>{
     const card=cardFrom(e);
@@ -40,14 +41,16 @@
     e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
   },true);
 
+  window.addEventListener('s5:game-start',()=>requestAnimationFrame(removeRailArrows));
   window.addEventListener('s5:matchup-start',()=>{
-    suppressClick=false;gesture=null;
+    suppressClick=false;gesture=null;removeRailArrows();
     document.querySelectorAll('#game .player-card.s5-selected-choice,#game .player-card.s5-active-opponent').forEach(x=>x.classList.remove('s5-selected-choice','s5-active-opponent'));
   });
 
   window.addEventListener('s5:matchup-resolved',e=>{
     const entry=e.detail?.entry;if(!entry)return;
     requestAnimationFrame(()=>{
+      removeRailArrows();
       const esc=v=>(window.CSS&&CSS.escape)?CSS.escape(String(v)):String(v).replace(/"/g,'\\"');
       const u=document.querySelector(`#game.active #lineup .player-card[data-id="${esc(entry.user?.id||entry.user?.playerId||'')}"]`);
       const cpu=[...document.querySelectorAll(`#game.active .player-card[data-id="${esc(entry.cpu?.id||entry.cpu?.playerId||'')}"]`)].find(c=>!c.closest('#lineup'));
@@ -55,5 +58,6 @@
     });
   });
 
-  const style=document.createElement('style');style.id='s5-gameplay-selection-v01307';style.textContent=`#game .player-card.s5-selected-choice,#game .player-card.s5-active-opponent{outline:4px solid #35d05b!important;outline-offset:-4px!important;box-shadow:0 0 0 2px rgba(53,208,91,.35),0 0 18px rgba(53,208,91,.9)!important;z-index:55!important}#game .player-card.s5-selected-choice::after,#game .player-card.s5-active-opponent::after{content:'';position:absolute;inset:0;border:2px solid rgba(179,255,195,.95);pointer-events:none;z-index:70;box-sizing:border-box}`;document.head.appendChild(style);
+  const style=document.createElement('style');style.id='s5-gameplay-selection-v01308';style.textContent=`#game .s5-rail-arrow,#s5LineupPrev,#s5LineupNext{display:none!important}#lineup{scroll-padding-left:0!important;scroll-padding-right:0!important}#game .player-card.s5-selected-choice,#game .player-card.s5-active-opponent{outline:4px solid #35d05b!important;outline-offset:-4px!important;box-shadow:0 0 0 2px rgba(53,208,91,.35),0 0 18px rgba(53,208,91,.9)!important;z-index:55!important}#game .player-card.s5-selected-choice::after,#game .player-card.s5-active-opponent::after{content:'';position:absolute;inset:0;border:2px solid rgba(179,255,195,.95);pointer-events:none;z-index:70;box-sizing:border-box}`;document.head.appendChild(style);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeRailArrows,{once:true});else removeRailArrows();
 })();
