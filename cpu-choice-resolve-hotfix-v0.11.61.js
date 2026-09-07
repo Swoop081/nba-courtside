@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.62 — resolve CPU choice rail, lock card size, and hard-reset between games. */
+/* NBA Starting5 v0.11.63 — resolve CPU choice rail, lock card size, hard-reset between games, and scope rail to current opponent. */
 (()=>{
   if(window.__s5CpuChoiceResolveV01161)return;
   window.__s5CpuChoiceResolveV01161=true;
@@ -43,8 +43,6 @@
     const ticker=s.querySelector('.s5-cpu-choice-ticker');
     const host=s.querySelector('.s5-cpu-choice-card');
     const text=(ticker?.textContent||'').trim().toUpperCase();
-    // At the start of a new game the rail must be empty. Do not clear once the
-    // first CPU reveal has actually begun.
     if(text&&text!=='WAITING FOR PLAYER CHOICE')return false;
     if(ticker){ticker.textContent='WAITING FOR PLAYER CHOICE';ticker.classList.remove('is-result');}
     if(host&&host.children.length)host.replaceChildren();
@@ -94,4 +92,11 @@
   window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
   window.addEventListener('resize',()=>requestAnimationFrame(()=>{clearFreshGameRail();lockCpuCardSize()}),{passive:true});
   document.addEventListener('visibilitychange',()=>{if(!document.hidden){clearFreshGameRail();lockCpuCardSize()}});
+
+  if(!window.__s5CpuOpponentRailFilterLoadV01163){
+    window.__s5CpuOpponentRailFilterLoadV01163=true;
+    const s=document.createElement('script');
+    s.src='cpu-opponent-rail-filter-v0.11.63.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(s);
+  }
 })();
