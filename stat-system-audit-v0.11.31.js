@@ -1,7 +1,15 @@
-/* NBA Starting5 v0.11.31 — 330-card stat-system audit (read-only, no gameplay rating changes). */
+/* NBA Starting5 v0.11.65 — 330-card stat-system audit + direct smooth rebounding authority loader. */
 (()=>{
   if(window.__starting5StatSystemAuditV01131)return;
   window.__starting5StatSystemAuditV01131=true;
+
+  if(!window.__s5ReboundingSmoothLoadV01165){
+    window.__s5ReboundingSmoothLoadV01165=true;
+    const s=document.createElement('script');
+    s.src='rebounding-smooth-v0.11.65.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    s.async=false;
+    document.head.appendChild(s);
+  }
 
   const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
   const num=v=>Number.isFinite(Number(v))?Number(v):null;
@@ -62,14 +70,14 @@
       veryHighOverall:rows.filter(r=>r.overall>=29).sort((a,b)=>b.overall-a.overall)
     };
     const report={
-      version:'0.11.31',mode:'AUDIT_ONLY',generatedAt:new Date().toISOString(),
+      version:'0.11.65',mode:'AUDIT_ONLY',generatedAt:new Date().toISOString(),
       counts:{players:rows.length,teams:teams.length,modernPlayers:modern.length,classicPlayers:classic.length,modernTeams:teams.filter(t=>!t.classic).length,classicTeams:teams.filter(t=>t.classic).length},
-      legacyAuthority:{overallRuntimeDeclaredCount:Number(window.COURTSIDE_OVERALL_RATINGS_COUNT)||null,note:'Legacy category/overall authority was built for 175 players; this audit evaluates the full live player pool without changing ratings.'},
+      legacyAuthority:{overallRuntimeDeclaredCount:Number(window.COURTSIDE_OVERALL_RATINGS_COUNT)||null,note:'Direct category authorities are active; the unified post-curve is retired.'},
       categories,teams,players:rows,flags,
       methodologyV2:{
         scoring:'Production + efficiency; retain 30 ceiling but stop treating raw PPG as the entire rating.',
         three:'Blend makes/volume, percentage and era context.',
-        rebounding:'RPG foundation with position/minutes context.',
+        rebounding:'Direct RPG authority with a smoother mid-range so small RPG differences do not create exaggerated rating gaps.',
         passing:'Assists plus creation responsibility, with role context.',
         blocks:'BPG foundation with minutes/position context.',
         steals:'SPG foundation with minutes/role context.',
