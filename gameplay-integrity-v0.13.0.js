@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.13.0-dev.7 — runtime parity/integrity diagnostics. Read-only; never changes gameplay state. */
+/* NBA Starting5 v0.13.0-dev.8 — runtime parity/integrity diagnostics. Read-only; never changes gameplay state. */
 (()=>{
-  if(window.__starting5GameplayIntegrityV01307)return;
-  window.__starting5GameplayIntegrityV01307=true;
+  if(window.__starting5GameplayIntegrityV01308)return;
+  window.__starting5GameplayIntegrityV01308=true;
 
   const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
   const CARD_KEYS={scoring:'SCO',dunks:'DNK',three:'3PT',rebounding:'REB',passing:'PAS',blocks:'BLK',steals:'STL'};
@@ -26,7 +26,7 @@
       for(const p of user){const card=document.querySelector(`#game.active #lineup .player-card[data-id="${(window.CSS&&CSS.escape)?CSS.escape(id(p)):id(p)}"]`),shown=cardValue(card,cat),expect=snapshot?.user.get(id(p));if(shown!==null&&shown!==expect)fail('USER_CARD_ACTIVE_VALUE_MISMATCH',{player:p.name,cat,shown,expect})}
       for(const p of user){const delta=Number(dyn()?.getDelta?.(p)||0);if(delta!==0&&dyn()?.isSeasonGameplay?.()){const card=document.querySelector(`#game.active #lineup .player-card[data-id="${(window.CSS&&CSS.escape)?CSS.escape(id(p)):id(p)}"]`);if(card&&!card.querySelector('.s5-dynamic-rating'))fail('FIRST_TURN_DYNAMIC_ARROW_MISSING',{player:p.name,delta})}}
       if(!document.getElementById('s5CpuChoiceStage'))fail('OPPONENT_STAGE_MISSING');
-      if(!document.getElementById('s5LineupPrev')||!document.getElementById('s5LineupNext'))fail('RAIL_ARROWS_MISSING');
+      if(document.getElementById('s5LineupPrev')||document.getElementById('s5LineupNext')||document.querySelector('#game .s5-rail-arrow'))fail('RAIL_ARROWS_PRESENT');
     });
   }
 
