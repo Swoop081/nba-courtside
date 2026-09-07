@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.58 — All-Star Weekend Rising Stars between Games 41 and 42, with Rising Stars MVP. */
+/* NBA Starting5 v0.11.71 — All-Star Weekend Rising Stars between Games 41 and 42, with Rising Stars MVP. */
 (()=>{
   if(window.__starting5RisingStarsV01157)return;
   window.__starting5RisingStarsV01157=true;
@@ -42,8 +42,18 @@
   function play(k){const u=game.user.find(p=>key(p)===k);if(!u||game.usedU.has(k))return;const avail=game.cpu.filter(p=>!game.usedC.has(key(p)));if(!avail.length)return;const c=avail.reduce((a,b)=>stat(b,game.category)>stat(a,game.category)?b:a);const uv=stat(u,game.category),cv=stat(c,game.category),diff=uv-cv;game.usedU.add(key(u));game.usedC.add(key(c));if(diff>0)game.u++;else if(diff<0)game.c++;game.history.push({round:game.round,category:game.category,user:u.name,userKey:key(u),userTeamId:u.teamId,cpu:c.name,cpuKey:key(c),cpuTeamId:c.teamId,uv,cv,userDiff:diff,cpuDiff:-diff});const host=document.getElementById('s5RisingStarsContent'),res=host?.querySelector('.s5-rs-result');if(res)res.innerHTML=`<b>${u.name} ${uv} — ${cv} ${c.name}</b><br>${diff>0?game.userName+' wins the matchup':diff<0?game.cpuName+' wins the matchup':'Tie matchup'}`;host?.querySelectorAll('.s5-rs-card').forEach(x=>x.style.pointerEvents='none');setTimeout(()=>{game.round++;nextRound()},900)}
   function mvpFromHistory(){let best=null;for(const h of game.history){const a={name:h.user,key:h.userKey,teamId:h.userTeamId,diff:h.userDiff},b={name:h.cpu,key:h.cpuKey,teamId:h.cpuTeamId,diff:h.cpuDiff};if(a.diff>0&&(!best||a.diff>best.diff))best=a;if(b.diff>0&&(!best||b.diff>best.diff))best=b}return best||{name:game.history[0]?.user||'—',teamId:game.history[0]?.userTeamId,diff:0}}
   function finish(){const s=read();if(!s)return;const winner=game.u===game.c?'TIE':game.u>game.c?game.userName:game.cpuName,mvp=mvpFromHistory();s.allStarWeekend=s.allStarWeekend||{};s.allStarWeekend.risingStars={complete:true,winner,score:`${game.u}-${game.c}`,mvp,playedAfterGame:41,completedAt:new Date().toISOString(),history:game.history};write(s);const host=document.getElementById('s5RisingStarsContent');if(host)host.innerHTML=`<section class="s5-rs-final"><div class="s5-rs-kicker">Rising Stars Final</div><h2>${winner==='TIE'?'Rising Stars ends tied':winner+' wins'}</h2><p>${game.userName} ${game.u} — ${game.c} ${game.cpuName}</p><div class="s5-rs-mvp">${mvp.teamId?`<img src="${logo(mvp.teamId)}" alt="">`:''}<div class="s5-rs-kicker">Rising Stars MVP</div><b>${mvp.name}</b><span>+${mvp.diff} best matchup differential</span></div><button class="s5-rs-play" data-rs-continue>Continue All-Star Weekend</button></section>`;host?.querySelector('[data-rs-continue]')?.addEventListener('click',()=>{if(window.STARTING5_ALLSTAR_WEEKEND?.openChampions)window.STARTING5_ALLSTAR_WEEKEND.openChampions();else activate('seasonHub')});refreshHubButton()}
-  function refreshHubButton(){const s=read(),btn=document.getElementById('s5PlaySeasonGame');if(!s||!btn)return;const p=played(s);if(p===41&&!complete(s)){btn.textContent='All-Star Weekend — Rising Stars';const label=btn.closest('.s5-next')?.querySelector('.s5-next-label');if(label)label.textContent='ALL-STAR WEEKEND · BETWEEN GAMES 41 & 42'}}
+  function refreshHubButton(){
+    const s=read(),btn=document.getElementById('s5PlaySeasonGame');if(!s||!btn)return;
+    const p=played(s);if(p!==41||complete(s))return;
+    const desiredBtn='All-Star Weekend — Rising Stars';
+    if(btn.textContent!==desiredBtn)btn.textContent=desiredBtn;
+    const label=btn.closest('.s5-next')?.querySelector('.s5-next-label');
+    const desiredLabel='ALL-STAR WEEKEND · BETWEEN GAMES 41 & 42';
+    if(label&&label.textContent!==desiredLabel)label.textContent=desiredLabel;
+  }
   document.addEventListener('click',e=>{const btn=e.target.closest('#s5PlaySeasonGame');if(!btn)return;const s=read();if(s&&played(s)===41&&!complete(s)){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();openIntro()}},true);
-  const obs=new MutationObserver(()=>refreshHubButton());const start=()=>{const host=document.getElementById('s5SeasonContent');if(host)obs.observe(host,{childList:true,subtree:true});refreshHubButton()};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+  const obs=new MutationObserver(()=>refreshHubButton());
+  const start=()=>{const host=document.getElementById('s5SeasonContent');if(host)obs.observe(host,{childList:true,subtree:true});refreshHubButton()};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
   window.STARTING5_RISING_STARS={selectRosters,openIntro,eligible,DRAFT_YEAR};
 })();
