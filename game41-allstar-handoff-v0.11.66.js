@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.66 — Game 41 final -> All-Star Weekend handoff + readable used CPU rail. */
+/* NBA Starting5 v0.11.67 — safe Game 41 final -> All-Star Weekend handoff + readable used CPU rail. */
 (()=>{
   if(window.__s5Game41AllStarHandoffV01166)return;
   window.__s5Game41AllStarHandoffV01166=true;
@@ -8,10 +8,15 @@
   const needsWeekend=s=>!!s&&played(s)===41&&!s?.allStarWeekend?.risingStars?.complete;
   const openWeekend=()=>{
     const s=read();if(!needsWeekend(s))return false;
-    if(window.STARTING5_RISING_STARS?.openIntro){window.STARTING5_RISING_STARS.openIntro();return true;}
+    try{
+      if(window.STARTING5_RISING_STARS?.openIntro){window.STARTING5_RISING_STARS.openIntro();return true;}
+    }catch(err){console.error('[Starting5 All-Star handoff]',err)}
     return false;
   };
 
+  // Only intercept Continue on the completed Game 41 final screen.
+  // Do not auto-open from the Season hub: that caused Continue Season to race
+  // the hub render and repeatedly invoke Rising Stars before the UI was ready.
   document.addEventListener('click',e=>{
     const final=document.getElementById('final');
     if(!final?.classList.contains('active'))return;
@@ -21,20 +26,11 @@
     const s=read();if(!needsWeekend(s))return;
     e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
     if(openWeekend())return;
-    let tries=0;const timer=setInterval(()=>{tries++;if(openWeekend()||tries>=20)clearInterval(timer)},100);
+    let tries=0;const timer=setInterval(()=>{
+      tries++;
+      if(openWeekend()||tries>=20)clearInterval(timer);
+    },100);
   },true);
-
-  // In case the normal final-screen continuation already tried to return to the hub,
-  // automatically route the exact 41-game breakpoint into Rising Stars.
-  const tick=()=>{
-    const s=read();if(!needsWeekend(s))return;
-    const final=document.getElementById('final');
-    const hub=document.getElementById('seasonHub');
-    if(final?.classList.contains('active'))return;
-    if(hub?.classList.contains('active'))openWeekend();
-  };
-  const timer=setInterval(tick,250);
-  window.addEventListener('pagehide',()=>clearInterval(timer),{once:true});
 
   const style=document.createElement('style');
   style.textContent=`
