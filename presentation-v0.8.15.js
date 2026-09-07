@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.13.0-dev.3 — presentation only, driven by canonical gameplay events. */
+/* NBA Starting5 v0.13.0-dev.9 — presentation only, driven by canonical gameplay events. */
 (()=>{
   const SEASON_ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
   const teamFromCard=p=>{if(!p)return null;const t=TEAM_DATA[p.teamId]||['Team','#384154','#f5f7fb','#0f131b'];return{name:p.teamShort,full:p.team,id:p.teamId,logo:`https://cdn.nba.com/logos/nba/${p.teamId}/global/L/logo.svg`,primary:t[1],secondary:t[2],dark:t[3]}};
@@ -11,14 +11,27 @@
     sides[0].innerHTML=`<div class="score-team"><div class="score-logo-wrap"><img src="${home.logo}" alt="${home.name}"></div><div class="score-number"><strong id="userScore">${Number(state?.userScore)||0}</strong></div><div class="score-name">${home.name.toUpperCase()}</div></div>`;
     sides[1].innerHTML=`<div class="score-team away-team"><div class="score-number"><strong id="cpuScore">${Number(state?.cpuScore)||0}</strong></div><div class="score-logo-wrap"><img src="${away.logo}" alt="${away.name}"></div><div class="score-name">${away.name.toUpperCase()}</div></div>`;
   }
-  function categoryVerb(h){const winner=h.userPts>=h.cpuPts?h.user:h.cpu,loser=h.userPts>=h.cpuPts?h.cpu:h.user;switch(h.category){case'rebounding':return`${winner.name} outrebounded ${loser.name}`;case'passing':return`${winner.name} found the better passing lanes against ${loser.name}`;case'blocks':return`${winner.name} protected the rim against ${loser.name}`;case'steals':return`${winner.name} stole the ball away from ${loser.name}`;case'dunks':return`${winner.name} dominated above the rim against ${loser.name}`;case'three':return`${winner.name} beat ${loser.name} from beyond the arc`;default:return`${winner.name} won the matchup against ${loser.name}`}}
+  function bestPlayer(){
+    let best=null;
+    for(const h of state?.history||[]){
+      if(Number(h.userPts)===Number(h.cpuPts))continue;
+      const winner=Number(h.userPts)>Number(h.cpuPts)?h.user:h.cpu;
+      const margin=Math.abs((Number(h.userPts)||0)-(Number(h.cpuPts)||0));
+      const score=Math.max(Number(h.userPts)||0,Number(h.cpuPts)||0);
+      if(!best||margin>best.margin||(margin===best.margin&&score>best.score))best={player:winner,margin,score};
+    }
+    return best?.player||state?.history?.[0]?.user||userTeam?.[0]||null;
+  }
   function renderFinalPresentation(){
-    const final=document.querySelector('#final.active .final-card');if(!final||!state||!Array.isArray(userTeam)||!Array.isArray(cpuTeam)||!userTeam[0]||!cpuTeam[0])return;
+    const final=document.getElementById('final');if(!final?.classList.contains('active')||!state||!Array.isArray(userTeam)||!Array.isArray(cpuTeam)||!userTeam[0]||!cpuTeam[0])return;
     const game=document.getElementById('game');if(game?.classList.contains('s5-all-star-standard-game')||game?.classList.contains('s5-rising-stars-game'))return;
-    const home=teamFromCard(userTeam[0]),away=teamFromCard(cpuTeam[0]);if(!home||!away)return;const tied=state.userScore===state.cpuScore,winner=state.userScore>state.cpuScore?home:away;
-    const rows=(state.history||[]).map(h=>`<div class="story-row"><span class="story-q">${h.quarter==='OT'?'OT':'Q'+h.quarter}</span><div><strong>${categoryVerb(h)}</strong><small>${STAT_LABELS[h.category]} · ${h.user.name} ${h.userPts}–${h.cpuPts} ${h.cpu.name}</small></div></div>`).join('');
-    final.innerHTML=`<span class="kicker">FINAL</span><div class="final-matchup"><div class="final-team"><img src="${home.logo}" alt="${home.name}"><span>${home.name}</span><strong>${state.userScore}</strong></div><div class="final-center"><b>FINAL</b><span>—</span></div><div class="final-team"><img src="${away.logo}" alt="${away.name}"><span>${away.name}</span><strong>${state.cpuScore}</strong></div></div><h2 class="final-winner">${tied?'Deadlocked':winner.name+' Win!'}</h2><div class="story-summary">${rows}</div><button id="playAgainBtn" class="primary-btn" type="button">Play Again</button>`;
-    document.getElementById('playAgainBtn')?.addEventListener('click',()=>resetGame(),{once:true});
+    const home=teamFromCard(userTeam[0]),away=teamFromCard(cpuTeam[0]);if(!home||!away)return;const tied=state.userScore===state.cpuScore,winner=state.userScore>state.cpuScore?home:away,potg=bestPlayer();
+    let potgCard='';try{if(potg&&typeof cardMarkup==='function')potgCard=cardMarkup(potg,{eager:true})}catch{}
+    const actionLabel=seasonActive()?'Continue':'Play Again';
+    final.classList.add('compact-final-screen','s5-branded-final');
+    final.innerHTML=`<section class="compact-final-card s5-branded-final-card"><div class="compact-final-kicker">FINAL</div><div class="compact-final-scoreboard"><div class="compact-final-team"><img src="${home.logo}" alt="${home.name}"><strong>${state.userScore}</strong><span>${home.name}</span></div><div class="compact-final-dash">–</div><div class="compact-final-team"><img src="${away.logo}" alt="${away.name}"><strong>${state.cpuScore}</strong><span>${away.name}</span></div></div><h2>${tied?'GAME TIED':winner.name.toUpperCase()+' WIN'}</h2><div class="potg-label">PLAYER OF THE GAME</div><div class="potg-card-wrap">${potgCard}</div><div class="potg-name">${potg?.name||''}</div><div class="compact-final-actions"><button type="button" class="primary-btn" id="playAgainBtn">${actionLabel}</button></div></section>`;
+    const btn=document.getElementById('playAgainBtn');if(btn&&!seasonActive())btn.addEventListener('click',()=>resetGame(),{once:true});
+    try{if(typeof window.__courtsideFoundationRatingApply==='function')requestAnimationFrame(window.__courtsideFoundationRatingApply)}catch{}
   }
 
   ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:overtime-start'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(ensureScoreboardTeams)));
