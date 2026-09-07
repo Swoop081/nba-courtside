@@ -1,0 +1,43 @@
+/* NBA Starting5 v0.11.83 — authoritative red Western Conference scoreboard override. */
+(()=>{
+  if(window.__starting5RisingStarsWestRedV01183)return;
+  window.__starting5RisingStarsWestRedV01183=true;
+
+  const WEST_PRIMARY='#c8102e';
+  const WEST_DARK='#7a0b1d';
+
+  const paint=()=>{
+    const game=document.getElementById('game');
+    if(!game?.classList.contains('active')||!game.classList.contains('s5-rising-stars-game'))return;
+    const sides=[...game.querySelectorAll('.scoreboard .score-side')];
+    sides.forEach(side=>{
+      const name=(side.querySelector('.score-name')?.textContent||'').trim().toUpperCase();
+      const alt=(side.querySelector('.score-logo-wrap img')?.alt||'').trim().toUpperCase();
+      if(name!=='WEST'&&!alt.includes('WESTERN'))return;
+      side.style.setProperty('--score-primary',WEST_PRIMARY);
+      side.style.setProperty('--score-dark',WEST_DARK);
+      side.style.setProperty('background',`linear-gradient(180deg,${WEST_PRIMARY},${WEST_DARK})`,'important');
+      const team=side.querySelector('.score-team');
+      if(team)team.style.setProperty('background','transparent','important');
+    });
+  };
+
+  const schedule=()=>{setTimeout(paint,0);setTimeout(paint,40);setTimeout(paint,120);setTimeout(paint,260)};
+
+  document.addEventListener('click',e=>{
+    if(e.target.closest('#seasonRisingStars [data-rs-start]'))schedule();
+  },true);
+
+  const wrap=name=>{
+    let fn=null;try{fn=window[name]||eval(name)}catch{}
+    if(typeof fn!=='function'||fn.__s5WestRedV01183)return;
+    const wrapped=function(){const out=fn.apply(this,arguments);schedule();return out};
+    wrapped.__s5WestRedV01183=true;
+    window[name]=wrapped;
+    try{eval(`${name}=window[name]`)}catch{}
+  };
+  ['beginQuarter','playQuarter','startOvertime'].forEach(wrap);
+
+  window.addEventListener('pageshow',schedule);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule()});
+})();
