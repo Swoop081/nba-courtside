@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.93 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings. */
+/* NBA Starting5 v0.11.94 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + dynamic ratings. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -54,4 +54,5 @@
   load('data-s5-dynamic-ratings-v01191','dynamic-ratings-v0.11.91.js');
   load('data-s5-dynamic-rating-arrow-style-v01192','dynamic-rating-arrow-style-v0.11.92.js');
   load('data-s5-dynamic-rating-arrow-style-v01193','dynamic-rating-arrow-style-v0.11.93.js');
+  load('data-s5-dynamic-rating-arrow-style-v01194','dynamic-rating-arrow-style-v0.11.94.js');
 })();
