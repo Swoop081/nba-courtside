@@ -1,50 +1,13 @@
-/* NBA Courtside v0.10.44 — category bar directly below scoreboard */
+/* NBA Starting5 v0.13.0 — category bar presentation only. */
 (()=>{
-  if(window.__courtsideGamePresentationV01044)return;
-  window.__courtsideGamePresentationV01044=true;
-
-  const ensureCategoryHost=()=>{
-    const game=document.getElementById('game');
-    const scoreboard=game?.querySelector('.scoreboard');
-    if(!game||!scoreboard)return null;
-    let host=document.getElementById('gameCategoryBarHost');
-    if(!host){
-      host=document.createElement('div');
-      host.id='gameCategoryBarHost';
-      host.className='game-category-bar-host';
-      scoreboard.insertAdjacentElement('afterend',host);
-    }
-    const btn=document.getElementById('nextQuarterBtn');
-    if(btn&&btn.parentElement!==host)host.appendChild(btn);
-    return host;
+  if(window.__starting5CategoryBarV01300)return;
+  window.__starting5CategoryBarV01300=true;
+  const ensure=()=>{
+    const game=document.getElementById('game'),scoreboard=game?.querySelector('.scoreboard');if(!game||!scoreboard)return null;
+    let host=document.getElementById('gameCategoryBarHost');if(!host){host=document.createElement('div');host.id='gameCategoryBarHost';host.className='game-category-bar-host';scoreboard.insertAdjacentElement('afterend',host)}
+    const btn=document.getElementById('nextQuarterBtn');if(btn&&btn.parentElement!==host)host.appendChild(btn);return host;
   };
-
-  const sync=()=>{
-    const host=ensureCategoryHost();
-    const btn=document.getElementById('nextQuarterBtn');
-    if(!host||!btn)return;
-    const visible=getComputedStyle(btn).display!=='none';
-    host.classList.toggle('hidden',!visible);
-  };
-
-  const wrap=name=>{
-    const original=window[name];
-    if(typeof original!=='function'||original.__categoryBarWrapped)return;
-    const wrapped=function(){
-      const out=original.apply(this,arguments);
-      requestAnimationFrame(()=>{ensureCategoryHost();sync();});
-      setTimeout(sync,0);
-      return out;
-    };
-    wrapped.__categoryBarWrapped=true;
-    window[name]=wrapped;
-    try{eval(`${name}=window[name]`);}catch{}
-  };
-
-  const start=()=>{
-    ensureCategoryHost();sync();
-    ['beginQuarter','playQuarter','resetGame'].forEach(wrap);
-    new MutationObserver(()=>sync()).observe(document.body,{subtree:true,attributes:true,attributeFilter:['style','class']});
-  };
+  const sync=()=>{const host=ensure(),btn=document.getElementById('nextQuarterBtn');if(!host||!btn)return;host.classList.toggle('hidden',getComputedStyle(btn).display==='none')};
+  const start=()=>{ensure();sync();const btn=document.getElementById('nextQuarterBtn');if(btn)new MutationObserver(sync).observe(btn,{attributes:true,attributeFilter:['style','class','disabled'],childList:true,subtree:true})};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
