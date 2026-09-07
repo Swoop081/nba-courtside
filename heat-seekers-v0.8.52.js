@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.64 — direct category ratings + frozen CPU played-card values */
+/* NBA Starting5 v0.11.66 — direct category ratings + smooth rebounding + frozen CPU played-card values + Game 41 All-Star handoff */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -29,6 +29,7 @@
   document.write('<script src="three-point-ratings-data-v0.10.20.js?t='+t+'"><\/script>');
   document.write('<script src="three-point-ratings-v0.10.20.js?t='+t+'"><\/script>');
   document.write('<script src="rebounding-ratings-v0.10.21.js?t='+t+'"><\/script>');
+  document.write('<script src="rebounding-smooth-scale-v0.11.65.js?t='+t+'"><\/script>');
   document.write('<script src="blocks-ratings-v0.10.22.js?t='+t+'"><\/script>');
   document.write('<script src="steals-ratings-v0.10.23.js?t='+t+'"><\/script>');
   document.write('<script src="steals-scale-v0.11.50.js?t='+t+'"><\/script>');
@@ -101,5 +102,6 @@
   document.write('<script src="season-rising-stars-v0.11.57.js?t='+t+'"><\/script>');
   document.write('<script src="season-all-star-weekend-v0.11.58.js?t='+t+'"><\/script>');
   document.write('<script src="final-screen-ui-v0.11.17.js?t='+t+'"><\/script>');
+  document.write('<script src="game41-allstar-handoff-v0.11.66.js?t='+t+'"><\/script>');
   document.write('<script src="update-check-stability-v0.11.7.js?t='+t+'"><\/script>');
 })();
