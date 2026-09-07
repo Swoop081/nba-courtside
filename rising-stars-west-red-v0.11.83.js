@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.12.13 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + season-only dynamic ratings + authentic CPU simulation + Who's Hot/Who's Not + long-session performance fix + exact matchup stat binding + corrected rail ordering + tap-only selection highlights + exact CPU active-card highlight + played-card scoreboard contribution lock + authoritative current-category sync + matchup ledger integrity + home Continue Season ordering. */
+/* NBA Starting5 v0.12.14 — authoritative red Western Conference scoreboard override + All-Star/Rising Stars special-game loaders + season-only dynamic ratings + authentic CPU simulation + Who's Hot/Who's Not + long-session performance fix + exact matchup stat binding + corrected rail ordering + tap-only selection highlights + exact CPU active-card highlight + played-card scoreboard contribution lock + authoritative current-category sync + matchup ledger integrity + Stat Editor + home Continue Season ordering. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -60,5 +60,6 @@
   load('data-s5-matchup-category-authority-v01212','matchup-category-authority-v0.12.12.js');
   load('data-s5-matchup-ledger-integrity-v01213','matchup-ledger-integrity-v0.12.13.js');
   load('data-s5-selected-card-highlight-v01210','selected-card-highlight-v0.12.10.js');
+  load('data-s5-stat-editor-v01203','stat-editor-v0.12.03.js');
   load('data-s5-home-continue-order-v01206','home-continue-season-order-v0.12.06.js');
 })();
