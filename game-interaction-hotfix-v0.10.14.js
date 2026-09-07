@@ -1,14 +1,22 @@
-/* NBA Starting5 v0.11.59 — persistent CPU choice ticker + played-card rail. */
+/* NBA Starting5 v0.11.64 — persistent CPU choice ticker with frozen played-card snapshots. */
 (()=>{
   if(window.__courtsideGameInteractionHotfixV01114)return;
   window.__courtsideGameInteractionHotfixV01114=true;
 
   let busy=false,choiceTimer=0,resultTimer=0;
-  let cpuPlayed=[],pendingCpuId='',lastHistoryLength=0;
+  let cpuPlayed=[],pendingCpuId='',lastHistoryLength=0,lastCpuSignature='';
   const CPU_REVEAL_MS=1500;
   const RESULT_REVEAL_MS=1500;
 
   const idOf=p=>String(p?.id||p?.playerId||'');
+  const cpuSignature=()=>{try{return (Array.isArray(cpuTeam)?cpuTeam:[]).map(idOf).filter(Boolean).sort().join('|')}catch{return ''}};
+  const clonePlayer=p=>({...p,stats:p?.stats&&typeof p.stats==='object'?{...p.stats}:p?.stats,ratings:p?.ratings&&typeof p.ratings==='object'?{...p.ratings}:p?.ratings,art:p?.art?{...p.art}:p?.art,theme:p?.theme?{...p.theme}:p?.theme});
+  const snapshotEntry=p=>{
+    const category=String(state?.category||'');
+    const player=clonePlayer(p);
+    return {id:idOf(p),player,category,value:Number(player?.stats?.[category]??0)};
+  };
+
   const canPick=card=>{
     if(busy||!card||card.classList.contains('used'))return false;
     if(typeof state==='undefined'||!state)return false;
@@ -57,15 +65,16 @@
     host.style.setProperty('--s5-cpu-gap',gap+'px');
   };
 
-  const cpuCardMarkup=(p,previous)=>{
-    let html='';try{html=typeof cardMarkup==='function'?cardMarkup(p,{activeStat:state?.category||null,eager:true}):''}catch{}
-    return `<div class="s5-cpu-history-card${previous?' previous':''}" data-cpu-id="${idOf(p)}">${html}</div>`;
+  const cpuCardMarkup=(entry,previous)=>{
+    let html='';
+    try{html=typeof cardMarkup==='function'?cardMarkup(entry.player,{activeStat:entry.category||null,used:previous,eager:true}):''}catch{}
+    return `<div class="s5-cpu-history-card${previous?' previous':''}" data-cpu-id="${entry.id}" data-frozen-category="${entry.category}" data-frozen-value="${entry.value}">${html}</div>`;
   };
 
   const renderCpuRail=()=>{
     const stage=ensureStage(),host=stage?.querySelector('.s5-cpu-choice-card');if(!host)return;
     syncRailGeometry();
-    host.innerHTML=cpuPlayed.map((p,i)=>cpuCardMarkup(p,!pendingCpuId||i>0)).join('');
+    host.innerHTML=cpuPlayed.map(entry=>cpuCardMarkup(entry,!pendingCpuId||entry.id!==pendingCpuId)).join('');
     host.querySelectorAll('.stat-circle b').forEach(x=>x.style.visibility='hidden');
     host.scrollLeft=0;
     stage.classList.remove('hidden');
@@ -73,7 +82,10 @@
 
   const resetForNewGameIfNeeded=()=>{
     let len=0,q=0,us=0,cs=0;try{len=state?.history?.length||0;q=Number(state?.quarter)||0;us=Number(state?.userScore)||0;cs=Number(state?.cpuScore)||0}catch{}
-    if(len===0&&q<=1&&us===0&&cs===0&&(lastHistoryLength>0||cpuPlayed.length)){cpuPlayed=[];pendingCpuId='';}
+    const sig=cpuSignature();
+    const opponentChanged=!!sig&&!!lastCpuSignature&&sig!==lastCpuSignature;
+    if(opponentChanged||(len===0&&q<=1&&us===0&&cs===0&&(lastHistoryLength>0||cpuPlayed.length))){cpuPlayed=[];pendingCpuId='';}
+    if(sig)lastCpuSignature=sig;
     lastHistoryLength=len;
   };
 
@@ -95,18 +107,19 @@
 
   const showCpuChoice=p=>{
     const stage=ensureStage();if(!stage||!p)return;
-    pendingCpuId=idOf(p);
-    cpuPlayed=cpuPlayed.filter(x=>idOf(x)!==pendingCpuId);
-    cpuPlayed.unshift(p);
+    const entry=snapshotEntry(p);
+    pendingCpuId=entry.id;
+    cpuPlayed=cpuPlayed.filter(x=>x.id!==pendingCpuId);
+    cpuPlayed.unshift(entry);
     stage.classList.remove('hidden');
     setTicker('CPU CHOOSES');
     renderCpuRail();
   };
 
   const showResult=()=>{
-    // The normal game result presentation remains authoritative. Keep this bar
-    // as CPU CHOOSES so the opponent card stays visible until the next matchup.
-    setTicker('CPU CHOOSES');
+    // As soon as the matchup resolves, the CPU card becomes a frozen used card.
+    pendingCpuId='';
+    setTicker('WAITING FOR PLAYER CHOICE');
     renderCpuRail();
   };
 
@@ -140,7 +153,7 @@
 
     choiceTimer=setTimeout(()=>{
       const before=state?.history?.length||0;
-      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.59 pick failed',err);busy=false;return}
+      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.64 pick failed',err);busy=false;return}
       const after=state?.history?.length||0;
       lastHistoryLength=after;
       if(after>before){
@@ -173,14 +186,14 @@
     .s5-cpu-choice-card:empty{display:none!important}.s5-cpu-choice-card::-webkit-scrollbar{display:none}
     .s5-cpu-history-card{flex:0 0 var(--s5-cpu-card-w,34.4vw);width:var(--s5-cpu-card-w,34.4vw);min-width:0;aspect-ratio:2.5/3.5;transition:opacity .2s ease,filter .2s ease}
     .s5-cpu-history-card>.player-card{width:100%!important;height:100%!important;min-width:0!important;max-width:none!important;margin:0!important;transform:none!important;pointer-events:none!important}
-    .s5-cpu-history-card.previous{opacity:.34!important;filter:grayscale(.48) saturate(.55)!important;pointer-events:none!important}
+    .s5-cpu-history-card.previous,.s5-cpu-history-card.previous>.player-card{opacity:.34!important;filter:grayscale(.72) saturate(.38)!important;pointer-events:none!important}
     .s5-cpu-choice-card .stat-circle{position:relative!important}.s5-cpu-choice-card .stat-circle b{visibility:hidden!important}.s5-cpu-choice-card .stat-circle:after{content:'?';position:absolute;inset:0;display:grid;place-items:center;font:1000 1em/1 inherit;color:#fff}
     @media(max-width:430px){.s5-cpu-choice-ticker{min-height:60px;font-size:22px}}
   `;
   document.head.appendChild(style);
 
-  const start=()=>{ensureStage();wrapBegin();resetForNewGameIfNeeded();setMatchupLabel();unlockFreshQuarter();setTicker('WAITING FOR PLAYER CHOICE');renderCpuRail();};
+  const start=()=>{lastCpuSignature=cpuSignature();ensureStage();wrapBegin();resetForNewGameIfNeeded();setMatchupLabel();unlockFreshQuarter();setTicker('WAITING FOR PLAYER CHOICE');renderCpuRail();};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden){setMatchupLabel();unlockFreshQuarter();syncRailGeometry();renderCpuRail()}});
-  window.addEventListener('resize',()=>requestAnimationFrame(()=>{syncRailGeometry();renderCpuRail()}),{passive:true});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){resetForNewGameIfNeeded();setMatchupLabel();unlockFreshQuarter();syncRailGeometry();renderCpuRail()}});
+  window.addEventListener('resize',()=>requestAnimationFrame(()=>{resetForNewGameIfNeeded();syncRailGeometry();renderCpuRail()}),{passive:true});
 })();
