@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.13.0-dev.6 — Foundation art scale sync without DOM mutation polling. */
+/* NBA Starting5 v0.13.0-dev.14 — Foundation art scale sync for gameplay, finals and awards. */
 (()=>{
-  if(window.__starting5FoundationArtScaleV01306)return;
-  window.__starting5FoundationArtScaleV01306=true;
+  if(window.__starting5FoundationArtScaleV01314)return;
+  window.__starting5FoundationArtScaleV01314=true;
   const KEY='nbaCourtsideArtEditorV1';
   const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
   const configFor=slug=>read()[slug]||window.COURTSIDE_FOUNDATION_ART_LAYOUT?.[slug]||null;
@@ -12,7 +12,7 @@
   function observeCurrent(){document.querySelectorAll('.foundation-card').forEach(card=>{if(!observed.has(card)){observed.add(card);ro.observe(card)}})}
   const refresh=()=>requestAnimationFrame(()=>{applyAll();observeCurrent()});
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refresh,{once:true});else refresh();
-  ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:season-hub-opened','s5:allstar-champions-open','s5:rising-stars-intro-open','s5:allstar-intro-open'].forEach(name=>window.addEventListener(name,refresh));
+  ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:game-finished','s5:player-of-week-open','s5:season-hub-opened','s5:allstar-champions-open','s5:rising-stars-intro-open','s5:allstar-intro-open'].forEach(name=>window.addEventListener(name,refresh));
   document.addEventListener('click',refresh,true);
   window.addEventListener('resize',refresh,{passive:true});
   window.__courtsideFoundationArtScaleApply=applyAll;
