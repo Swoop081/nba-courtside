@@ -35,7 +35,7 @@
   }
 
   ['s5:game-start','s5:matchup-start','s5:matchup-resolved','s5:overtime-start'].forEach(name=>window.addEventListener(name,()=>requestAnimationFrame(ensureScoreboardTeams)));
-  window.addEventListener('s5:game-finished',()=>requestAnimationFrame(renderFinalPresentation));
+  window.addEventListener('s5:game-finished',renderFinalPresentation);
 
   window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{
     const screen=document.getElementById('catalogue'),launch=document.getElementById('catalogueBtn'),back=document.getElementById('closeCatalogueBtn'),filter=document.getElementById('catalogueSetFilter'),browser=document.querySelector('.catalogue-team-browser'),grid=document.getElementById('catalogueGrid');if(!screen||!launch||!filter||!browser||!grid)return;
