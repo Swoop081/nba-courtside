@@ -1,15 +1,28 @@
-/* NBA Starting5 v0.13.0-dev.5 — pure season dynamic-rating state. No renderer/playQuarter wrappers and no player-stat mutation. */
+/* NBA Starting5 v0.13.0-dev.8 — pure season dynamic-rating state with per-save reset. */
 (()=>{
-  if(window.__starting5DynamicRatingsV01305)return;
-  window.__starting5DynamicRatingsV01305=true;
+  if(window.__starting5DynamicRatingsV01308)return;
+  window.__starting5DynamicRatingsV01308=true;
 
   const STORE_KEY='nbaStarting5DynamicRatingsV1';
+  const META_KEY='nbaStarting5DynamicRatingsSeasonV1';
+  const SEASON_KEY='nbaStarting5SeasonV2';
   const ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
   const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
   const key=p=>String(p?.playerId||p?.id||`${p?.name||''}|${p?.teamId||''}|${p?.classicTeam||''}`);
   const read=()=>{try{return JSON.parse(localStorage.getItem(STORE_KEY)||'{}')}catch{return {}}};
   const write=v=>{try{localStorage.setItem(STORE_KEY,JSON.stringify(v))}catch{}};
+  const readSeason=()=>{try{return JSON.parse(localStorage.getItem(SEASON_KEY)||'null')}catch{return null}};
   let streaks=read();
+
+  const ensureSeasonIdentity=()=>{
+    const s=readSeason();if(!s?.createdAt||!s?.teamId)return;
+    const id=`${s.createdAt}|${s.teamId}`;
+    let previous='';try{previous=localStorage.getItem(META_KEY)||''}catch{}
+    if(previous===id)return;
+    const fresh=Number(s.roundIndex||0)===0&&Object.keys(s.results||{}).length===0;
+    if(previous||fresh){streaks={};write(streaks)}
+    try{localStorage.setItem(META_KEY,id)}catch{}
+  };
 
   const isSeasonGameplay=()=>{
     try{
@@ -20,7 +33,7 @@
     }catch{return false}
   };
 
-  const streak=p=>{const v=streaks[key(p)]||{};return{wins:Math.max(0,+v.wins||0),losses:Math.max(0,+v.losses||0)}};
+  const streak=p=>{ensureSeasonIdentity();const v=streaks[key(p)]||{};return{wins:Math.max(0,+v.wins||0),losses:Math.max(0,+v.losses||0)}};
   const deltaFrom=s=>s.wins>=9?3:s.wins>=6?2:s.wins>=3?1:s.losses>=9?-3:s.losses>=6?-2:s.losses>=3?-1:0;
   const getDelta=p=>deltaFrom(streak(p));
   const getBaseStat=(p,k)=>Number(p?.stats?.[k]??0)||0;
@@ -28,7 +41,7 @@
   const getEffectiveStat=(p,k)=>isSeasonGameplay()?getSeasonEffectiveStat(p,k):getBaseStat(p,k);
 
   const recordMatchupResult=(winner,loser)=>{
-    if(!winner||!loser)return;
+    if(!winner||!loser)return;ensureSeasonIdentity();
     const w=streak(winner),l=streak(loser);
     streaks[key(winner)]={wins:w.wins+1,losses:0};
     streaks[key(loser)]={wins:0,losses:l.losses+1};
@@ -43,4 +56,5 @@
     snapshot:()=>JSON.parse(JSON.stringify(streaks)),
     apply:()=>{},applyAll:()=>{},restoreAll:()=>{},refreshBase:()=>{}
   };
+  ensureSeasonIdentity();
 })();
