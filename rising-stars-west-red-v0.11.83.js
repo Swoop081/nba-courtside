@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.84 — authoritative red Western Conference scoreboard override + Rising Stars final handoff loader. */
+/* NBA Starting5 v0.11.85 — authoritative red Western Conference scoreboard override + All-Star standard-game loader. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -45,6 +45,12 @@
     const s=document.createElement('script');
     s.dataset.s5RsFinalHandoff='1';
     s.src='rising-stars-final-handoff-v0.11.84.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(s);
+  }
+  if(!document.querySelector('script[data-s5-all-star-standard]')){
+    const s=document.createElement('script');
+    s.dataset.s5AllStarStandard='1';
+    s.src='all-star-standard-game-v0.11.85.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
     document.head.appendChild(s);
   }
 })();
