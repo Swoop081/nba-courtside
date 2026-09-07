@@ -1,169 +1,21 @@
-/* NBA Starting5 v0.11.23 — Eastern + Western Player of the Week every 4 Season games */
+/* NBA Starting5 v0.13.0-dev.4 — Eastern + Western Player of the Week every 4 Season games. */
 (()=>{
-  if(window.__starting5PlayerOfWeekV01123)return;
-  window.__starting5PlayerOfWeekV01123=true;
-
-  const SAVE_KEY='nbaStarting5SeasonV2';
-  const ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
-  const PENDING_GAME_KEY='nbaStarting5SeasonPendingGameV1';
+  if(window.__starting5PlayerOfWeekV01304)return;window.__starting5PlayerOfWeekV01304=true;
+  const SAVE_KEY='nbaStarting5SeasonV2',ACTIVE_KEY='nbaStarting5SeasonGameUiV1',PENDING_GAME_KEY='nbaStarting5SeasonPendingGameV1';
   const EAST=new Set(['1610612737','1610612738','1610612751','1610612766','1610612741','1610612739','1610612765','1610612754','1610612748','1610612749','1610612752','1610612753','1610612755','1610612761','1610612764']);
-  const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
-  const POS={PG:0,SG:1,SF:2,PF:3,C:4};
-  let processing=false;
-
-  const read=()=>{try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'null')}catch{return null}};
-  const write=s=>localStorage.setItem(SAVE_KEY,JSON.stringify(s));
-  const pool=()=>{try{return Array.isArray(players)?players:[]}catch{return []}};
-  const key=p=>String(p?.id||p?.playerId||`${p?.teamId||''}|${p?.name||'Player'}`);
-  const teamPlayers=id=>pool().filter(p=>String(p.teamId)===String(id)&&!p.classicTeam).sort((a,b)=>(POS[a.position]??9)-(POS[b.position]??9)).slice(0,5);
-  const findPlayer=k=>pool().find(p=>key(p)===String(k))||null;
-  const fullTeam=id=>teamPlayers(id)[0]?.team||teamPlayers(id)[0]?.teamShort||'Team';
-  const logo=id=>`https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg`;
-  const hash=s=>{let h=2166136261;for(const ch of String(s)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0};
-  const stat=(p,c)=>Number(p?.stats?.[c])||0;
-
-  function ensureMeta(s){
-    s.playerOfWeek=s.playerOfWeek||{};
-    const m=s.playerOfWeek;
-    m.scores=m.scores||{};
-    m.processedRounds=Array.isArray(m.processedRounds)?m.processedRounds:[];
-    m.awards=Array.isArray(m.awards)?m.awards:[];
-    return m;
-  }
-  function addScore(m,p,margin){
-    const n=Math.max(0,Number(margin)||0);if(!p||n<=0)return;
-    const k=key(p),teamId=String(p.teamId||'');
-    const row=m.scores[k]||(m.scores[k]={playerKey:k,name:p.name||'Player',teamId,score:0});
-    row.score+=n;
-  }
-
-  function scoreActualUserGame(m){
-    let hist=[];try{hist=Array.isArray(state?.history)?state.history:[]}catch{}
-    if(!hist.length)return false;
-    for(const h of hist){
-      const up=Number(h.userPts)||0,cp=Number(h.cpuPts)||0;
-      if(up===cp)continue;
-      addScore(m,up>cp?h.user:h.cpu,Math.abs(up-cp));
-    }
-    return true;
-  }
-
-  function scoreSimulatedGame(m,g){
-    const a=teamPlayers(g.home),b=teamPlayers(g.away);if(!a.length||!b.length)return;
-    for(let q=0;q<4;q++){
-      const seed=hash(`${g.id}|${q}`),pi=seed%Math.min(a.length,b.length),cat=CATS[(seed>>>4)%CATS.length];
-      const pa=a[pi],pb=b[pi],d=stat(pa,cat)-stat(pb,cat);if(d===0)continue;
-      const margin=Math.max(1,Math.min(12,Math.round(Math.abs(d)/3)));
-      addScore(m,d>0?pa:pb,margin);
-    }
-  }
-
-  function winnerFor(m,conference){
-    const rows=Object.values(m.scores).filter(r=>(conference==='east')===EAST.has(String(r.teamId)));
-    rows.sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name));
-    return rows[0]||null;
-  }
-
-  function processCompletedRounds(){
-    if(processing)return;
-    processing=true;
-    try{
-      const s=read();if(!s)return;
-      const m=ensureMeta(s),completed=Math.max(0,Number(s.roundIndex)||0);if(!completed)return;
-      const currentRound=completed-1;
-      const blockStart=Math.floor(currentRound/4)*4;
-      const already=new Set(m.processedRounds.map(Number));
-      for(let ri=blockStart;ri<completed;ri++){
-        if(already.has(ri))continue;
-        const round=s.schedule?.[ri]||[];
-        for(const g of round){
-          const result=s.results?.[g.id];
-          if(!result)continue;
-          const isCurrentUser=ri===currentRound&&result.userPlayed===true;
-          if(isCurrentUser&&scoreActualUserGame(m))continue;
-          scoreSimulatedGame(m,g);
-        }
-        m.processedRounds.push(ri);
-      }
-      if(completed%4===0&&m.lastAwardRound!==completed){
-        const east=winnerFor(m,'east'),west=winnerFor(m,'west');
-        if(east&&west){
-          const award={round:completed,week:completed/4,east:{...east},west:{...west}};
-          m.pending=award;m.awards.push(award);m.lastAwardRound=completed;m.scores={};
-        }
-      }
-      write(s);
-    }finally{processing=false}
-  }
-
-  function ensureScreen(){
-    let screen=document.getElementById('seasonPlayerOfWeek');if(screen)return screen;
-    const shell=document.querySelector('.app-shell');if(!shell)return null;
-    screen=document.createElement('section');screen.id='seasonPlayerOfWeek';screen.className='screen s5-potw-screen';
-    screen.innerHTML='<div class="s5-potw-kicker">NBA STARTING5</div><h2>PLAYERS OF THE WEEK</h2><div class="s5-potw-week"></div><div class="s5-potw-grid"></div><button type="button" class="primary-btn s5-potw-continue">Continue Season</button>';
-    shell.appendChild(screen);
-    screen.querySelector('.s5-potw-continue')?.addEventListener('click',()=>{
-      const s=read();if(s?.playerOfWeek){s.playerOfWeek.pending=null;write(s)}
-      try{sessionStorage.removeItem(ACTIVE_KEY);sessionStorage.removeItem(PENDING_GAME_KEY)}catch{}
-      const seasonBtn=document.getElementById('seasonModeBtn');
-      if(seasonBtn)seasonBtn.click();else try{showScreen('seasonHub')}catch{}
-      window.scrollTo({top:0,behavior:'instant'});
-    });
-    return screen;
-  }
-
-  function cardFor(row,conference){
-    const p=findPlayer(row.playerKey);
-    let card='';try{if(p&&typeof cardMarkup==='function')card=cardMarkup(p,{eager:true})}catch{}
-    return `<article class="s5-potw-player ${conference}">
-      <div class="s5-potw-conf">${conference==='east'?'EASTERN':'WESTERN'} CONFERENCE</div>
-      <div class="s5-potw-card">${card}</div>
-      <div class="s5-potw-name">${row.name}</div>
-      <div class="s5-potw-team"><img src="${logo(row.teamId)}" alt="">${fullTeam(row.teamId)}</div>
-      <div class="s5-potw-score"><strong>+${row.score}</strong><span>WEEKLY MARGIN</span></div>
-    </article>`;
-  }
-
-  function showAward(){
-    const s=read(),a=s?.playerOfWeek?.pending;if(!a)return false;
-    const screen=ensureScreen();if(!screen)return false;
-    screen.querySelector('.s5-potw-week').textContent=`WEEK ${a.week} · GAMES ${a.round-3}–${a.round}`;
-    screen.querySelector('.s5-potw-grid').innerHTML=cardFor(a.east,'east')+cardFor(a.west,'west');
-    document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));screen.classList.add('active');
-    try{if(typeof window.__courtsideFoundationRatingApply==='function')requestAnimationFrame(window.__courtsideFoundationRatingApply)}catch{}
-    window.scrollTo({top:0,behavior:'instant'});return true;
-  }
-
-  const style=document.createElement('style');
-  style.textContent=`
-    .s5-potw-screen{padding:8px 14px 26px!important;text-align:center}.s5-potw-kicker{color:#f7b928;font-size:10px;font-weight:1000;letter-spacing:.18em;margin-top:4px}.s5-potw-screen h2{margin:5px 0 3px;font-size:28px;line-height:1;font-weight:1000}.s5-potw-week{color:#8f99a8;font-size:10px;font-weight:900;letter-spacing:.09em;margin-bottom:12px}.s5-potw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}.s5-potw-player{min-width:0;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:linear-gradient(180deg,#121925,#090d13);padding:9px 7px 10px;overflow:hidden}.s5-potw-conf{font-size:8px;font-weight:1000;letter-spacing:.08em;color:#f7b928;margin-bottom:7px}.s5-potw-card{width:100%;display:flex;justify-content:center;overflow:hidden}.s5-potw-card>.player-card{width:100%!important;max-width:154px!important;min-width:0!important;pointer-events:none!important}.s5-potw-name{font-size:12px;font-weight:1000;line-height:1.05;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.s5-potw-team{display:flex;align-items:center;justify-content:center;gap:4px;color:#aab3c0;font-size:8px;font-weight:900;margin-top:4px;white-space:nowrap;overflow:hidden}.s5-potw-team img{width:17px;height:17px;object-fit:contain}.s5-potw-score{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.08)}.s5-potw-score strong{display:block;font-size:24px;line-height:1;color:#fff}.s5-potw-score span{display:block;margin-top:2px;font-size:7px;font-weight:1000;letter-spacing:.09em;color:#8f99a8}.s5-potw-continue{width:100%;min-height:54px;margin-top:12px;font-size:18px!important;font-weight:1000!important}
-    @media(max-width:390px){.s5-potw-screen{padding-left:10px!important;padding-right:10px!important}.s5-potw-grid{gap:7px}.s5-potw-player{padding-left:5px;padding-right:5px}.s5-potw-card>.player-card{max-width:145px!important}.s5-potw-screen h2{font-size:25px}}
-  `;
-  document.head.appendChild(style);
-
-  // If this handler wins the Continue event directly, show the award immediately.
-  window.addEventListener('click',e=>{
-    const btn=e.target?.closest?.('#playAgainBtn,#compactPlayAgain');if(!btn)return;
-    if(sessionStorage.getItem(ACTIVE_KEY)!=='1')return;
-    processCompletedRounds();
-    const s=read();if(!s?.playerOfWeek?.pending)return;
-    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    showAward();
-  },true);
-
-  // Season Core's Continue handler clicks Season Mode after committing/clearing the game.
-  // Catch that navigation when a weekly award is pending and route to the award screen instead.
-  document.addEventListener('click',e=>{
-    const btn=e.target?.closest?.('#seasonModeBtn');if(!btn)return;
-    const s=read();if(!s?.playerOfWeek?.pending)return;
-    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    showAward();
-  },true);
-
-  const start=()=>{
-    ensureScreen();
-    const final=document.getElementById('final');
-    if(final)new MutationObserver(()=>{if(final.classList.contains('active'))setTimeout(processCompletedRounds,0)}).observe(final,{attributes:true,attributeFilter:['class'],childList:true});
-  };
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+  const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'],POS={PG:0,SG:1,SF:2,PF:3,C:4};let processing=false;
+  const read=()=>{try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'null')}catch{return null}},write=s=>{try{localStorage.setItem(SAVE_KEY,JSON.stringify(s))}catch{}},pool=()=>{try{return Array.isArray(players)?players:[]}catch{return []}},key=p=>String(p?.id||p?.playerId||`${p?.teamId||''}|${p?.name||'Player'}`),teamPlayers=id=>pool().filter(p=>String(p.teamId)===String(id)&&!p.classicTeam).sort((a,b)=>(POS[a.position]??9)-(POS[b.position]??9)).slice(0,5),findPlayer=k=>pool().find(p=>key(p)===String(k))||null,fullTeam=id=>teamPlayers(id)[0]?.team||teamPlayers(id)[0]?.teamShort||'Team',logo=id=>`https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg`,hash=s=>{let h=2166136261;for(const ch of String(s)){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0},stat=(p,c)=>Number(p?.stats?.[c])||0;
+  function ensureMeta(s){s.playerOfWeek=s.playerOfWeek||{};const m=s.playerOfWeek;m.scores=m.scores||{};m.processedRounds=Array.isArray(m.processedRounds)?m.processedRounds:[];m.awards=Array.isArray(m.awards)?m.awards:[];return m}
+  function addScore(m,p,margin){const n=Math.max(0,Number(margin)||0);if(!p||n<=0)return;const k=key(p),teamId=String(p.teamId||''),row=m.scores[k]||(m.scores[k]={playerKey:k,name:p.name||'Player',teamId,score:0});row.score+=n}
+  function scoreActualUserGame(m){let hist=[];try{hist=Array.isArray(state?.history)?state.history:[]}catch{}if(!hist.length)return false;for(const h of hist){const up=Number(h.userPts)||0,cp=Number(h.cpuPts)||0;if(up===cp)continue;addScore(m,up>cp?h.user:h.cpu,Math.abs(up-cp))}return true}
+  function scoreSimulatedGame(m,g){const a=teamPlayers(g.home),b=teamPlayers(g.away);if(!a.length||!b.length)return;for(let q=0;q<4;q++){const seed=hash(`${g.id}|${q}`),pi=seed%Math.min(a.length,b.length),cat=CATS[(seed>>>4)%CATS.length],pa=a[pi],pb=b[pi],d=stat(pa,cat)-stat(pb,cat);if(d===0)continue;addScore(m,d>0?pa:pb,Math.max(1,Math.min(12,Math.round(Math.abs(d)/3))))}}
+  function winnerFor(m,conference){const rows=Object.values(m.scores).filter(r=>(conference==='east')===EAST.has(String(r.teamId)));rows.sort((a,b)=>b.score-a.score||a.name.localeCompare(b.name));return rows[0]||null}
+  function processCompletedRounds(){if(processing)return;processing=true;try{const s=read();if(!s)return;const m=ensureMeta(s),completed=Math.max(0,Number(s.roundIndex)||0);if(!completed)return;const currentRound=completed-1,blockStart=Math.floor(currentRound/4)*4,already=new Set(m.processedRounds.map(Number));for(let ri=blockStart;ri<completed;ri++){if(already.has(ri))continue;const round=s.schedule?.[ri]||[];for(const g of round){const result=s.results?.[g.id];if(!result)continue;const isCurrentUser=ri===currentRound&&result.userPlayed===true;if(isCurrentUser&&scoreActualUserGame(m))continue;scoreSimulatedGame(m,g)}m.processedRounds.push(ri)}if(completed%4===0&&m.lastAwardRound!==completed){const east=winnerFor(m,'east'),west=winnerFor(m,'west');if(east&&west){const award={round:completed,week:completed/4,east:{...east},west:{...west}};m.pending=award;m.awards.push(award);m.lastAwardRound=completed;m.scores={}}}write(s)}finally{processing=false}}
+  function ensureScreen(){let screen=document.getElementById('seasonPlayerOfWeek');if(screen)return screen;const shell=document.querySelector('.app-shell');if(!shell)return null;screen=document.createElement('section');screen.id='seasonPlayerOfWeek';screen.className='screen s5-potw-screen';screen.innerHTML='<div class="s5-potw-kicker">NBA STARTING5</div><h2>PLAYERS OF THE WEEK</h2><div class="s5-potw-week"></div><div class="s5-potw-grid"></div><button type="button" class="primary-btn s5-potw-continue">Continue Season</button>';shell.appendChild(screen);screen.querySelector('.s5-potw-continue')?.addEventListener('click',()=>{const s=read();if(s?.playerOfWeek){s.playerOfWeek.pending=null;write(s)}try{sessionStorage.removeItem(ACTIVE_KEY);sessionStorage.removeItem(PENDING_GAME_KEY)}catch{}window.STARTING5_SEASON_MODE?.renderHub?.();try{showScreen('seasonHub')}catch{}window.scrollTo({top:0,behavior:'instant'})});return screen}
+  function cardFor(row,conference){const p=findPlayer(row.playerKey);let card='';try{if(p&&typeof cardMarkup==='function')card=cardMarkup(p,{eager:true})}catch{}return `<article class="s5-potw-player ${conference}"><div class="s5-potw-conf">${conference==='east'?'EASTERN':'WESTERN'} CONFERENCE</div><div class="s5-potw-card">${card}</div><div class="s5-potw-name">${row.name}</div><div class="s5-potw-team"><img src="${logo(row.teamId)}" alt="">${fullTeam(row.teamId)}</div><div class="s5-potw-score"><strong>+${row.score}</strong><span>WEEKLY MARGIN</span></div></article>`}
+  function showAward(){const s=read(),a=s?.playerOfWeek?.pending;if(!a)return false;const screen=ensureScreen();if(!screen)return false;screen.querySelector('.s5-potw-week').textContent=`WEEK ${a.week} · GAMES ${a.round-3}–${a.round}`;screen.querySelector('.s5-potw-grid').innerHTML=cardFor(a.east,'east')+cardFor(a.west,'west');document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));screen.classList.add('active');try{if(typeof window.__courtsideFoundationRatingApply==='function')requestAnimationFrame(window.__courtsideFoundationRatingApply)}catch{}window.scrollTo({top:0,behavior:'instant'});return true}
+  const style=document.createElement('style');style.textContent=`.s5-potw-screen{padding:8px 14px 26px!important;text-align:center}.s5-potw-kicker{color:#f7b928;font-size:10px;font-weight:1000;letter-spacing:.18em;margin-top:4px}.s5-potw-screen h2{margin:5px 0 3px;font-size:28px;line-height:1;font-weight:1000}.s5-potw-week{color:#8f99a8;font-size:10px;font-weight:900;letter-spacing:.09em;margin-bottom:12px}.s5-potw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}.s5-potw-player{min-width:0;border:1px solid rgba(255,255,255,.1);border-radius:18px;background:linear-gradient(180deg,#121925,#090d13);padding:9px 7px 10px;overflow:hidden}.s5-potw-conf{font-size:8px;font-weight:1000;letter-spacing:.08em;color:#f7b928;margin-bottom:7px}.s5-potw-card{width:100%;display:flex;justify-content:center;overflow:hidden}.s5-potw-card>.player-card{width:100%!important;max-width:154px!important;min-width:0!important;pointer-events:none!important}.s5-potw-name{font-size:12px;font-weight:1000;line-height:1.05;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.s5-potw-team{display:flex;align-items:center;justify-content:center;gap:4px;color:#aab3c0;font-size:8px;font-weight:900;margin-top:4px;white-space:nowrap;overflow:hidden}.s5-potw-team img{width:17px;height:17px;object-fit:contain}.s5-potw-score{margin-top:7px;padding-top:7px;border-top:1px solid rgba(255,255,255,.08)}.s5-potw-score strong{display:block;font-size:24px;line-height:1;color:#fff}.s5-potw-score span{display:block;margin-top:2px;font-size:7px;font-weight:1000;letter-spacing:.09em;color:#8f99a8}.s5-potw-continue{width:100%;min-height:54px;margin-top:12px;font-size:18px!important;font-weight:1000!important}@media(max-width:390px){.s5-potw-screen{padding-left:10px!important;padding-right:10px!important}.s5-potw-grid{gap:7px}.s5-potw-player{padding-left:5px;padding-right:5px}.s5-potw-card>.player-card{max-width:145px!important}.s5-potw-screen h2{font-size:25px}}`;document.head.appendChild(style);
+  window.addEventListener('s5:game-finished',()=>processCompletedRounds());
+  window.addEventListener('s5:season-continue-request',e=>{processCompletedRounds();if(!read()?.playerOfWeek?.pending)return;e.preventDefault();showAward()});
+  const start=()=>ensureScreen();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
