@@ -1,12 +1,14 @@
-/* NBA Starting5 v0.11.14 — CPU choice/result share one ticker + nameplate inspection split */
+/* NBA Starting5 v0.11.59 — persistent CPU choice ticker + played-card rail. */
 (()=>{
   if(window.__courtsideGameInteractionHotfixV01114)return;
   window.__courtsideGameInteractionHotfixV01114=true;
 
   let busy=false,choiceTimer=0,resultTimer=0;
+  let cpuPlayed=[],pendingCpuId='',lastHistoryLength=0;
   const CPU_REVEAL_MS=1500;
   const RESULT_REVEAL_MS=1500;
 
+  const idOf=p=>String(p?.id||p?.playerId||'');
   const canPick=card=>{
     if(busy||!card||card.classList.contains('used'))return false;
     if(typeof state==='undefined'||!state)return false;
@@ -31,30 +33,58 @@
     if(!stage){
       stage=document.createElement('section');
       stage.id='s5CpuChoiceStage';
-      stage.className='s5-cpu-choice-stage hidden';
-      stage.innerHTML='<div class="s5-cpu-choice-ticker">CPU CHOOSES</div><div class="s5-cpu-choice-card"></div>';
+      stage.className='s5-cpu-choice-stage';
+      stage.innerHTML='<div class="s5-cpu-choice-ticker">WAITING FOR PLAYER CHOICE</div><div class="s5-cpu-choice-card"></div>';
       rail.insertAdjacentElement('afterend',stage);
-    }else{
-      // Remove the old secondary result bar if it exists from an earlier build.
-      stage.querySelector('.s5-cpu-result-ticker')?.remove();
-    }
+    }else stage.querySelector('.s5-cpu-result-ticker')?.remove();
+    stage.classList.remove('hidden');
     return stage;
   };
 
-  const setTicker=(text,isResult=false)=>{
-    const stage=ensureStage();
-    const ticker=stage?.querySelector('.s5-cpu-choice-ticker');
+  const setTicker=text=>{
+    const ticker=ensureStage()?.querySelector('.s5-cpu-choice-ticker');
     if(!ticker)return;
     ticker.textContent=String(text||'').toUpperCase();
-    ticker.classList.toggle('is-result',!!isResult);
+    ticker.classList.remove('is-result');
+  };
+
+  const syncRailGeometry=()=>{
+    const stage=ensureStage(),host=stage?.querySelector('.s5-cpu-choice-card'),rail=document.getElementById('lineup'),first=rail?.querySelector('.player-card');
+    if(!host||!rail||!first)return;
+    const rect=first.getBoundingClientRect();
+    if(rect.width>0)host.style.setProperty('--s5-cpu-card-w',rect.width+'px');
+    const cs=getComputedStyle(rail);let gap=parseFloat(cs.columnGap||cs.gap||'');if(!Number.isFinite(gap))gap=10;
+    host.style.setProperty('--s5-cpu-gap',gap+'px');
+  };
+
+  const cpuCardMarkup=(p,previous)=>{
+    let html='';try{html=typeof cardMarkup==='function'?cardMarkup(p,{activeStat:state?.category||null,eager:true}):''}catch{}
+    return `<div class="s5-cpu-history-card${previous?' previous':''}" data-cpu-id="${idOf(p)}">${html}</div>`;
+  };
+
+  const renderCpuRail=()=>{
+    const stage=ensureStage(),host=stage?.querySelector('.s5-cpu-choice-card');if(!host)return;
+    syncRailGeometry();
+    host.innerHTML=cpuPlayed.map((p,i)=>cpuCardMarkup(p,!pendingCpuId||i>0)).join('');
+    host.querySelectorAll('.stat-circle b').forEach(x=>x.style.visibility='hidden');
+    host.scrollLeft=0;
+    stage.classList.remove('hidden');
+  };
+
+  const resetForNewGameIfNeeded=()=>{
+    let len=0,q=0,us=0,cs=0;try{len=state?.history?.length||0;q=Number(state?.quarter)||0;us=Number(state?.userScore)||0;cs=Number(state?.cpuScore)||0}catch{}
+    if(len===0&&q<=1&&us===0&&cs===0&&(lastHistoryLength>0||cpuPlayed.length)){cpuPlayed=[];pendingCpuId='';}
+    lastHistoryLength=len;
   };
 
   const clearStage=()=>{
     clearTimeout(choiceTimer);clearTimeout(resultTimer);busy=false;
+    resetForNewGameIfNeeded();
+    pendingCpuId='';
     const stage=ensureStage();if(!stage)return;
-    stage.classList.add('hidden');
-    setTicker('CPU CHOOSES',false);
-    const host=stage.querySelector('.s5-cpu-choice-card');if(host)host.innerHTML='';
+    stage.classList.remove('hidden');
+    setTicker('WAITING FOR PLAYER CHOICE');
+    renderCpuRail();
   };
 
   const setMatchupLabel=()=>{
@@ -65,22 +95,19 @@
 
   const showCpuChoice=p=>{
     const stage=ensureStage();if(!stage||!p)return;
+    pendingCpuId=idOf(p);
+    cpuPlayed=cpuPlayed.filter(x=>idOf(x)!==pendingCpuId);
+    cpuPlayed.unshift(p);
     stage.classList.remove('hidden');
-    setTicker('CPU CHOOSES',false);
-    let html='';
-    try{html=typeof cardMarkup==='function'?cardMarkup(p,{activeStat:state?.category||null,eager:true}):''}catch{}
-    const host=stage.querySelector('.s5-cpu-choice-card');if(host)host.innerHTML=html;
+    setTicker('CPU CHOOSES');
+    renderCpuRail();
   };
 
   const showResult=()=>{
-    const h=state?.history?.[state.history.length-1];if(!h)return;
-    const u=Number(h.userPts)||0,c=Number(h.cpuPts)||0;
-    let text=`TIE · ${u}–${c}`;
-    if(u>c)text=`${h.user?.name||'YOU'} WINS · ${u}–${c}`;
-    else if(c>u)text=`${h.cpu?.name||'CPU'} WINS · ${c}–${u}`;
-    // Reuse the exact CPU CHOOSES information bar instead of creating a new bar
-    // beneath the opponent card. The opponent card remains visible during result.
-    setTicker(text,true);
+    // The normal game result presentation remains authoritative. Keep this bar
+    // as CPU CHOOSES so the opponent card stays visible until the next matchup.
+    setTicker('CPU CHOOSES');
+    renderCpuRail();
   };
 
   const unlockFreshQuarter=()=>{
@@ -113,11 +140,12 @@
 
     choiceTimer=setTimeout(()=>{
       const before=state?.history?.length||0;
-      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.14 pick failed',err);busy=false;return}
+      try{playQuarter(card.dataset.id)}catch(err){console.error('Starting5 v0.11.59 pick failed',err);busy=false;return}
       const after=state?.history?.length||0;
+      lastHistoryLength=after;
       if(after>before){
         showResult();
-        resultTimer=setTimeout(()=>{const s=ensureStage();if(s)s.classList.add('hidden');busy=false;},RESULT_REVEAL_MS);
+        resultTimer=setTimeout(()=>{busy=false;renderCpuRail();},RESULT_REVEAL_MS);
       }else busy=false;
     },CPU_REVEAL_MS);
   },true);
@@ -129,7 +157,7 @@
       clearStage();
       const r=fn.apply(this,arguments);
       setMatchupLabel();
-      requestAnimationFrame(()=>{setMatchupLabel();unlockFreshQuarter();});
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{setMatchupLabel();unlockFreshQuarter();syncRailGeometry();renderCpuRail();}));
       return r
     };
     wrapped.__s5CpuRevealWrapped=true;window.beginQuarter=wrapped;try{beginQuarter=wrapped}catch{}
@@ -138,18 +166,21 @@
   const style=document.createElement('style');
   style.textContent=`
     #quarterHistoryStrip,.quarter-history-strip{display:none!important}
-    .s5-cpu-choice-stage{margin:14px 0 0;display:flex;flex-direction:column;align-items:center;gap:12px}.s5-cpu-choice-stage.hidden{display:none!important}
+    .s5-cpu-choice-stage,.s5-cpu-choice-stage.hidden{margin:14px 0 0;display:flex!important;flex-direction:column;align-items:stretch;gap:12px}
     .s5-cpu-choice-ticker{width:100%;min-height:64px;box-sizing:border-box;border:1px solid rgba(255,255,255,.16);border-radius:18px;background:linear-gradient(180deg,#171f2b,#0d1219);display:flex;align-items:center;justify-content:center;padding:12px 16px;font-size:24px;font-weight:1000;letter-spacing:.02em;color:#f7b928;text-align:center}
-    .s5-cpu-choice-ticker.is-result{color:#fff}
     .s5-cpu-result-ticker{display:none!important}
-    .s5-cpu-choice-card{width:min(34.4vw,168px);aspect-ratio:2.5/3.5;display:flex;align-items:stretch;justify-content:center}
-    .s5-cpu-choice-card>.player-card{width:100%!important;height:100%!important;min-width:0!important;max-width:none!important;margin:0!important;transform:none!important;pointer-events:none!important}
+    .s5-cpu-choice-card{width:100%!important;height:auto!important;aspect-ratio:auto!important;display:flex;align-items:flex-start;justify-content:flex-start;gap:var(--s5-cpu-gap,10px);overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .s5-cpu-choice-card:empty{display:none!important}.s5-cpu-choice-card::-webkit-scrollbar{display:none}
+    .s5-cpu-history-card{flex:0 0 var(--s5-cpu-card-w,34.4vw);width:var(--s5-cpu-card-w,34.4vw);min-width:0;aspect-ratio:2.5/3.5;transition:opacity .2s ease,filter .2s ease}
+    .s5-cpu-history-card>.player-card{width:100%!important;height:100%!important;min-width:0!important;max-width:none!important;margin:0!important;transform:none!important;pointer-events:none!important}
+    .s5-cpu-history-card.previous{opacity:.34!important;filter:grayscale(.48) saturate(.55)!important;pointer-events:none!important}
     .s5-cpu-choice-card .stat-circle{position:relative!important}.s5-cpu-choice-card .stat-circle b{visibility:hidden!important}.s5-cpu-choice-card .stat-circle:after{content:'?';position:absolute;inset:0;display:grid;place-items:center;font:1000 1em/1 inherit;color:#fff}
-    @media(max-width:430px){.s5-cpu-choice-ticker{min-height:60px;font-size:22px}.s5-cpu-choice-card{width:36vw;max-width:148px}}
+    @media(max-width:430px){.s5-cpu-choice-ticker{min-height:60px;font-size:22px}}
   `;
   document.head.appendChild(style);
 
-  const start=()=>{ensureStage();wrapBegin();setMatchupLabel();unlockFreshQuarter();};
+  const start=()=>{ensureStage();wrapBegin();resetForNewGameIfNeeded();setMatchupLabel();unlockFreshQuarter();setTicker('WAITING FOR PLAYER CHOICE');renderCpuRail();};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden){setMatchupLabel();unlockFreshQuarter()}});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){setMatchupLabel();unlockFreshQuarter();syncRailGeometry();renderCpuRail()}});
+  window.addEventListener('resize',()=>requestAnimationFrame(()=>{syncRailGeometry();renderCpuRail()}),{passive:true});
 })();
