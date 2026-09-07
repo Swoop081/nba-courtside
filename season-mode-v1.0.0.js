@@ -1,9 +1,11 @@
-/* NBA Starting5 v0.11.35 — authentic 2022-23 NBA 82-game schedule template, reused every season. */
+/* NBA Starting5 v0.13.0-dev.3 — authentic 82-game Season adapter with no gameplay-function wrapping. */
 (()=>{
   if(window.__starting5SeasonV100)return;
   window.__starting5SeasonV100=true;
 
   const SAVE_KEY='nbaStarting5SeasonV2';
+  const ACTIVE_KEY='nbaStarting5SeasonGameUiV1';
+  const PENDING_KEY='nbaStarting5SeasonPendingGameV1';
   const TEMPLATE_CACHE_KEY='nbaStarting5ScheduleTemplate2022_23';
   const TEMPLATE_URL='https://raw.githubusercontent.com/mdahlman/nba-schedule/main/data/nba-full-schedule-2022-2023.csv';
   const OLD_KEYS=['nbaCourtsideSeasonModeV1','nbaCourtsideSeasonReturnPendingV1','nbaCourtsideSeasonGameActiveV1','nbaCourtsideAllStarActiveV1'];
@@ -12,12 +14,13 @@
   const POS={PG:0,SG:1,SF:2,PF:3,C:4};
   const CATS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
   const ABBR={ATL:'1610612737',BOS:'1610612738',BKN:'1610612751',CHA:'1610612766',CHI:'1610612741',CLE:'1610612739',DAL:'1610612742',DEN:'1610612743',DET:'1610612765',GSW:'1610612744',HOU:'1610612745',IND:'1610612754',LAC:'1610612746',LAL:'1610612747',MEM:'1610612763',MIA:'1610612748',MIL:'1610612749',MIN:'1610612750',NOP:'1610612740',NYK:'1610612752',OKC:'1610612760',ORL:'1610612753',PHI:'1610612755',PHX:'1610612756',POR:'1610612757',SAC:'1610612758',SAS:'1610612759',TOR:'1610612761',UTA:'1610612762',WAS:'1610612764'};
-  let activeGame=null,templatePromise=null;
+  let templatePromise=null;
 
   OLD_KEYS.forEach(k=>{try{localStorage.removeItem(k);sessionStorage.removeItem(k)}catch{}});
 
   const read=()=>{try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'null')}catch{return null}};
   const write=s=>localStorage.setItem(SAVE_KEY,JSON.stringify(s));
+  const readPending=()=>{try{return JSON.parse(sessionStorage.getItem(PENDING_KEY)||'null')}catch{return null}};
   const short=id=>window.TEAM_SHORT?.[id]||TEAM_SHORT?.[id]||teamPlayers(id)[0]?.teamShort||'Team';
   const full=id=>teamPlayers(id)[0]?.team||short(id);
   const logo=id=>`https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg`;
@@ -52,22 +55,15 @@
     games.forEach((g,i)=>{if(g.home===tid||g.away===tid)userIdx.push(i)});
     if(userIdx.length!==82)throw new Error(`${short(tid)} schedule has ${userIdx.length} games, expected 82`);
     const rounds=[];let start=0;
-    userIdx.forEach((idx,n)=>{
-      const end=n===81?games.length-1:idx;
-      const chunk=games.slice(start,end+1).map(g=>({...g,round:n+1}));
-      rounds.push(chunk);start=end+1;
-    });
+    userIdx.forEach((idx,n)=>{const end=n===81?games.length-1:idx;rounds.push(games.slice(start,end+1).map(g=>({...g,round:n+1})));start=end+1});
     return rounds;
   }
   const emptyRecords=()=>Object.fromEntries(IDS.map(id=>[id,{w:0,l:0}]));
-  async function createSeason(teamId){
-    const games=await loadTemplate(),schedule=buildScheduleForTeam(teamId,games);
-    return {version:2,scheduleTemplate:'NBA_2022_23',teamId:String(teamId),roundIndex:0,schedule,records:emptyRecords(),results:{},complete:false,createdAt:new Date().toISOString()};
-  }
+  async function createSeason(teamId){const games=await loadTemplate(),schedule=buildScheduleForTeam(teamId,games);return{version:2,scheduleTemplate:'NBA_2022_23',teamId:String(teamId),roundIndex:0,schedule,records:emptyRecords(),results:{},complete:false,createdAt:new Date().toISOString()}}
   const userGame=s=>s.schedule[s.roundIndex]?.find(g=>g.home===s.teamId||g.away===s.teamId)||null;
   function simWinner(a,b){const sa=strength(a),sb=strength(b),p=Math.max(.2,Math.min(.8,.5+(sa-sb)/35));return Math.random()<p?a:b}
-  function applyResult(s,g,winner,userPlayed=false,score=''){if(s.results[g.id])return;const loser=winner===g.home?g.away:g.home;s.results[g.id]={winner,loser,userPlayed,score};s.records[winner].w++;s.records[loser].l++}
-  function simulateRestOfRound(s,round,userGameId){for(const g of round){if(g.id===userGameId)continue;applyResult(s,g,simWinner(g.home,g.away),false)}}
+  function applyResult(s,g,winner,userPlayed=false,score=''){if(!g||s.results[g.id])return;const loser=winner===g.home?g.away:g.home;s.results[g.id]={winner,loser,userPlayed,score};s.records[winner]=s.records[winner]||{w:0,l:0};s.records[loser]=s.records[loser]||{w:0,l:0};s.records[winner].w++;s.records[loser].l++}
+  function simulateRestOfRound(s,round,userGameId){for(const g of round){if(g.id===userGameId||s.results[g.id])continue;applyResult(s,g,simWinner(g.home,g.away),false)}}
   const standings=(s,ids)=>ids.map(id=>({id,...s.records[id]})).sort((a,b)=>b.w-a.w||a.l-b.l||strength(b.id)-strength(a.id));
 
   const css=document.createElement('style');css.id='starting5-season-v100-style';css.textContent=`
@@ -108,23 +104,21 @@
   function startGame(){
     const s=read(),g=s&&userGame(s);if(!s||!g)return;
     const opp=g.home===s.teamId?g.away:g.home,ut=teamPlayers(s.teamId),ct=teamPlayers(opp);if(ut.length<5||ct.length<5){alert('This team does not yet have a complete Starting 5.');return}
-    activeGame={roundIndex:s.roundIndex,gameId:g.id,userId:s.teamId,oppId:opp,home:g.home,away:g.away};userTeam=ut;cpuTeam=ct;state={quarter:1,userScore:0,cpuScore:0,usedUser:new Set(),usedCpu:new Set(),category:null,history:[],overtime:false};showScreen('game');beginQuarter();window.scrollTo(0,0);
-    const sides=document.querySelectorAll('#game .score-side span');if(sides[0])sides[0].textContent=short(s.teamId);if(sides[1])sides[1].textContent=short(opp);
+    userTeam=ut;cpuTeam=ct;state={quarter:1,userScore:0,cpuScore:0,usedUser:new Set(),usedCpu:new Set(),category:null,history:[],overtime:false};showScreen('game');
+    try{window.dispatchEvent(new CustomEvent('s5:game-start',{detail:{state,userTeam,cpuTeam,mode:'season'}}))}catch{}
+    beginQuarter();window.scrollTo(0,0);
   }
 
-  const baseFinish=window.finishGame||finishGame;
-  if(typeof baseFinish==='function'){
-    finishGame=function(){
-      if(!activeGame)return baseFinish.apply(this,arguments);
-      const snapshot={...activeGame},s=read();if(!s){activeGame=null;return baseFinish.apply(this,arguments)}
-      const round=s.schedule[s.roundIndex]||[],g=round.find(x=>x.id===snapshot.gameId);let userWon=state.userScore>state.cpuScore;if(state.userScore===state.cpuScore)userWon=Math.random()>=.5;
-      applyResult(s,g,userWon?s.teamId:snapshot.oppId,true,`${state.userScore}-${state.cpuScore}`);simulateRestOfRound(s,round,g.id);s.roundIndex++;if(s.roundIndex>=82)s.complete=true;write(s);
-      const out=baseFinish.apply(this,arguments),rec=s.records[s.teamId];document.getElementById('finalResult').textContent=userWon?`${short(s.teamId)} Win!`:`${short(s.teamId)} Lose`;
-      const btn=document.getElementById('playAgainBtn');if(btn)btn.textContent=s.complete?'View Final Standings':`Continue · ${rec.w}-${rec.l}`;activeGame={...snapshot,finished:true};return out;
-    };
-  }
-  document.addEventListener('click',e=>{const btn=e.target.closest('#playAgainBtn,#compactPlayAgain');if(!btn||!activeGame?.finished)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();activeGame=null;renderHub();showScreen('seasonHub');window.scrollTo(0,0)},true);
+  window.addEventListener('s5:game-finished',e=>{
+    try{if(sessionStorage.getItem(ACTIVE_KEY)!=='1')return}catch{return}
+    const p=readPending(),s=read();if(!p||!s||s.results?.[p.gameId])return;
+    const round=s.schedule?.[p.roundIndex]||[],g=round.find(x=>x.id===p.gameId);if(!g)return;
+    const us=Number(e.detail?.userScore??state?.userScore)||0,cs=Number(e.detail?.cpuScore??state?.cpuScore)||0;
+    let winner=us>cs?p.userId:p.oppId;if(us===cs)winner=Math.random()<.5?p.userId:p.oppId;
+    applyResult(s,g,winner,true,`${us}-${cs}`);simulateRestOfRound(s,round,g.id);s.roundIndex=Math.max(Number(s.roundIndex)||0,p.roundIndex+1);if(s.roundIndex>=82)s.complete=true;write(s);
+  });
 
   function start(){ensureUI();renderTeamPicker();const b=document.getElementById('seasonModeBtn');if(b&&read())b.textContent='Continue Season';loadTemplate().catch(()=>{})}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+  window.STARTING5_SEASON_MODE={openSeason,renderHub,teamPlayers};
 })();
