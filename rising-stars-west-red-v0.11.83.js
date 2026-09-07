@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.83 — authoritative red Western Conference scoreboard override. */
+/* NBA Starting5 v0.11.84 — authoritative red Western Conference scoreboard override + Rising Stars final handoff loader. */
 (()=>{
   if(window.__starting5RisingStarsWestRedV01183)return;
   window.__starting5RisingStarsWestRedV01183=true;
@@ -40,4 +40,11 @@
 
   window.addEventListener('pageshow',schedule);
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedule()});
+
+  if(!document.querySelector('script[data-s5-rs-final-handoff]')){
+    const s=document.createElement('script');
+    s.dataset.s5RsFinalHandoff='1';
+    s.src='rising-stars-final-handoff-v0.11.84.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(s);
+  }
 })();
