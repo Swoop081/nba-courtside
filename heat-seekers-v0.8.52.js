@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.61 — All-Star Weekend + season drilldowns + awards + ratings/editor/game authorities */
+/* NBA Starting5 v0.11.64 — direct category ratings + frozen CPU played-card values */
 (()=>{
   const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
   document.write('<link rel="stylesheet" href="layout-v0.8.75.css?t='+t+'">');
@@ -35,7 +35,6 @@
   document.write('<script src="assists-ratings-v0.10.24.js?t='+t+'"><\/script>');
   document.write('<script src="dunking-ratings-v0.10.25.js?t='+t+'"><\/script>');
   document.write('<script src="overall-ratings-v0.10.26.js?t='+t+'"><\/script>');
-  document.write('<script src="ratings-v2-unified-v0.11.32.js?t='+t+'"><\/script>');
   document.write('<script src="stat-system-audit-v0.11.31.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-png-art-v0.9.8.js?t='+t+'"><\/script>');
   document.write('<script src="foundation-detroit-positions-v0.9.11.js?t='+t+'"><\/script>');
