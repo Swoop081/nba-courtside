@@ -22,7 +22,9 @@ jobs:
       - name: Install dependencies
         run: pip install pandas pyarrow
       - name: Run calibration
-        run: python per36-freeagents-classics.py
+        run: |
+          sed -i 's/nba_players_25_26_regular_season_wide_data.csv/nba_players_regular_season_25_26_wide_data.csv/' per36-freeagents-classics.py
+          python per36-freeagents-classics.py
       - name: Validate JavaScript and calibration integrity
         run: |
           node --check season-free-agent-pool-v0.13.1.js
@@ -46,6 +48,6 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add season-free-agent-pool-v0.13.1.js classic-*.js stats-per36-free-agents.json stats-per36-classics.json PER36-FREE-AGENTS.md PER36-CLASSICS.md
+          git add per36-freeagents-classics.py season-free-agent-pool-v0.13.1.js classic-*.js stats-per36-free-agents.json stats-per36-classics.json PER36-FREE-AGENTS.md PER36-CLASSICS.md
           git commit -m "Apply gameplay-weighted Per36 to free agents and classics"
           git push
