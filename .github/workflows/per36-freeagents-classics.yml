@@ -32,6 +32,7 @@ jobs:
           replacement='''def modern_regular_map():\n    df=pd.read_csv(io.StringIO(download_text(MODERN_REG_URL)))\n    out={}\n    for _,r in df.iterrows():\n        k=norm(r['player_name']); m=float(r['minutes_played'] or 0)\n        if not k or m<=0: continue\n        vals={\n          'scoring':(float(r['one_point_made'] or 0)+2*float(r['two_point_made'] or 0)+3*float(r['three_point_made'] or 0))/m*36,\n          'rebounding':(float(r['offensive_rebounds'] or 0)+float(r['defensive_rebounds'] or 0))/m*36,\n          'passing':float(r['assists'] or 0)/m*36,\n          'three':float(r['three_point_made'] or 0)/m*36,\n          'steals':float(r['steals'] or 0)/m*36,\n          'blocks':float(r['blocks'] or 0)/m*36,\n        }\n        gp=float(r['wins'] or 0)+float(r['losses'] or 0)\n        if k not in out or m>out[k]['minutes']: out[k]={'minutes':m,'gp':gp,'raw':vals,'row':r}\n    return out\n\n'''
           s=re.sub(r'def modern_regular_map\(\):.*?(?=def parquet_rows)',replacement,s,flags=re.S)
           s=s.replace("regmpg=current['minutes']/max(1,float(current['row'].get('gp',current['row'].get('GP',82)) or 82))","regmpg=current['minutes']/max(1,current.get('gp',82))")
+          s=s.replace("int(float(r[draft])) if draft and not pd.isna(r[draft]) else 0","int(float(r[draft])) if draft and not pd.isna(r[draft]) and str(r[draft]).replace('.', '', 1).isdigit() else 0")
           p.write_text(s)
           PY
           python per36-freeagents-classics.py
