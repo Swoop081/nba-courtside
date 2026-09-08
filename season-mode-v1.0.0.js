@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.13.0-dev.3 — authentic 82-game Season adapter with no gameplay-function wrapping. */
+/* NBA Starting5 v0.13.0-dev.4 — 82-game Season adapter with card-based CPU simulation. */
 (()=>{
   if(window.__starting5SeasonV100)return;
   window.__starting5SeasonV100=true;
@@ -25,8 +25,22 @@
   const full=id=>teamPlayers(id)[0]?.team||short(id);
   const logo=id=>`https://cdn.nba.com/logos/nba/${id}/global/L/logo.svg`;
   const teamPlayers=id=>{let pool=[];try{pool=Array.isArray(players)?players:[]}catch{}return pool.filter(p=>String(p.teamId)===String(id)&&!p.classicTeam).sort((a,b)=>(POS[a.position]??9)-(POS[b.position]??9)).slice(0,5)};
-  const overall=p=>{try{return typeof window.courtsideOverall==='function'?window.courtsideOverall(p):Math.round(CATS.reduce((n,k)=>n+(+p.stats?.[k]||0),0)/CATS.length)}catch{return 20}};
-  const strength=id=>{const r=teamPlayers(id);return r.length?r.reduce((n,p)=>n+overall(p),0)/r.length:20};
+  const statValue=(p,k)=>Math.max(5,Math.min(30,Number(p?.stats?.[k])||5));
+  const teamPower=id=>{
+    const r=teamPlayers(id);if(r.length!==5)return 20;
+    let total=0;
+    for(const k of CATS){const vals=r.map(p=>statValue(p,k)).sort((a,b)=>b-a);total+=vals[0]*.34+vals[1]*.24+vals[2]*.18+vals[3]*.14+vals[4]*.10;}
+    return total/CATS.length;
+  };
+  function simulateCardGame(a,b){
+    const left=teamPlayers(a),right=teamPlayers(b);if(left.length!==5||right.length!==5)return Math.random()<.5?a:b;
+    const usedA=new Set(),usedB=new Set();let scoreA=0,scoreB=0;
+    const pick=(roster,used,k)=>{let best=null;for(const p of roster){if(used.has(p.id))continue;if(!best||statValue(p,k)>statValue(best,k))best=p;}return best;};
+    for(let q=0;q<4;q++){const k=CATS[Math.floor(Math.random()*CATS.length)],pa=pick(left,usedA,k),pb=pick(right,usedB,k);if(!pa||!pb)break;usedA.add(pa.id);usedB.add(pb.id);scoreA+=statValue(pa,k);scoreB+=statValue(pb,k);}
+    if(scoreA===scoreB){const pa=left.find(p=>!usedA.has(p.id)),pb=right.find(p=>!usedB.has(p.id)),k=CATS[Math.floor(Math.random()*CATS.length)];if(pa&&pb){scoreA+=statValue(pa,k);scoreB+=statValue(pb,k);}}
+    if(scoreA===scoreB){const pa=teamPower(a),pb=teamPower(b),p=.5+Math.max(-.12,Math.min(.12,(pa-pb)/40));return Math.random()<p?a:b;}
+    return scoreA>scoreB?a:b;
+  }
 
   function parseTemplate(csv){
     const lines=String(csv||'').trim().split(/\r?\n/);if(lines.length<1200)throw new Error('Incomplete 2022-23 schedule');
@@ -61,10 +75,10 @@
   const emptyRecords=()=>Object.fromEntries(IDS.map(id=>[id,{w:0,l:0}]));
   async function createSeason(teamId){const games=await loadTemplate(),schedule=buildScheduleForTeam(teamId,games);return{version:2,scheduleTemplate:'NBA_2022_23',teamId:String(teamId),roundIndex:0,schedule,records:emptyRecords(),results:{},complete:false,createdAt:new Date().toISOString()}}
   const userGame=s=>s.schedule[s.roundIndex]?.find(g=>g.home===s.teamId||g.away===s.teamId)||null;
-  function simWinner(a,b){const sa=strength(a),sb=strength(b),p=Math.max(.2,Math.min(.8,.5+(sa-sb)/35));return Math.random()<p?a:b}
+  function simWinner(a,b){return simulateCardGame(a,b)}
   function applyResult(s,g,winner,userPlayed=false,score=''){if(!g||s.results[g.id])return;const loser=winner===g.home?g.away:g.home;s.results[g.id]={winner,loser,userPlayed,score};s.records[winner]=s.records[winner]||{w:0,l:0};s.records[loser]=s.records[loser]||{w:0,l:0};s.records[winner].w++;s.records[loser].l++}
   function simulateRestOfRound(s,round,userGameId){for(const g of round){if(g.id===userGameId||s.results[g.id])continue;applyResult(s,g,simWinner(g.home,g.away),false)}}
-  const standings=(s,ids)=>ids.map(id=>({id,...s.records[id]})).sort((a,b)=>b.w-a.w||a.l-b.l||strength(b.id)-strength(a.id));
+  const standings=(s,ids)=>ids.map(id=>({id,...s.records[id]})).sort((a,b)=>b.w-a.w||a.l-b.l||teamPower(b.id)-teamPower(a.id));
 
   const css=document.createElement('style');css.id='starting5-season-v100-style';css.textContent=`
     .s5-season-launch{width:100%;min-height:48px;border-radius:14px;border:1px solid rgba(255,255,255,.18);background:linear-gradient(180deg,#1a2230,#0b0f15);color:#fff;font-weight:1000;font-size:15px;margin-top:8px}
