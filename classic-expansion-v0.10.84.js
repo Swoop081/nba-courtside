@@ -59,7 +59,7 @@
     ['Carlos Boozer','PF',[20,20,2,27,10,13,12],25,'carlos-boozer','2430'],
     ['Joakim Noah','C',[12,20,0,29,12,27,18],27,'joakim-noah','201149']
   ]});
-  const magic2009=makeTeam({id:'classic-orl-2009',team:'Orlando Magic 2009',short:'Magic 2009',season:'2009',logo:'https://content.sportslogos.net/logos/6/217/full/orlando_magic_logo_primary_20017625.png',theme:{a:'#0077C0',b:'#C4CED4',c:'#000000'},rows:[
+  const magic2009=makeTeam({id:'classic-orl-2009',team:'Orlando Magic 2009',short:'Magic 2009',season:'2009',logo:'assets/team-logos/classic/orlando-magic-2009-transparent.png',theme:{a:'#0077C0',b:'#C4CED4',c:'#000000'},rows:[
     ['Jameer Nelson','PG',[20,9,24,6,24,3,17],24,'jameer-nelson','2749'],
     ['Courtney Lee','SG',[13,16,20,8,8,8,17],20,'courtney-lee','201584'],
     ['Hedo Turkoglu','SF',[20,11,25,11,22,6,10],25,'hedo-turkoglu','2045'],

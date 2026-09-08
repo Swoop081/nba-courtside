@@ -20,7 +20,7 @@
 
   const cavs1993=makeTeam({
     id:'classic-cle-1993',team:'Cleveland Cavaliers 1993',short:'Cavaliers 1993',season:'1993',
-    logo:'https://content.sportslogos.net/logos/6/222/full/cleveland_cavaliers_logo_primary_19846739.png',
+    logo:'assets/team-logos/classic/cleveland-cavaliers-1993-transparent.png',
     theme:{a:'#E35205',b:'#003DA5',c:'#FFFFFF'},
     rows:[
       ['Mark Price','PG',[18,7,29,6,28,3,23],28,'mark-price','899'],
@@ -33,7 +33,7 @@
 
   const spurs1999=makeTeam({
     id:'classic-sas-1999',team:'San Antonio Spurs 1999',short:'Spurs 1999',season:'1999',
-    logo:'https://content.sportslogos.net/logos/6/233/full/e04ylwkfdofkr2ctlerjov26s.png',
+    logo:'assets/team-logos/classic/san-antonio-spurs-1999-transparent.png',
     theme:{a:'#000000',b:'#C4CED4',c:'#EF426F'},
     rows:[
       ['Avery Johnson','PG',[13,8,7,5,25,3,18],22,'avery-johnson','422'],
