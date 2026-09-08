@@ -1,0 +1,229 @@
+name: Calibrate Modern Per36 Ratings
+
+on:
+  push:
+    branches: [per36-modern-calibration-temp]
+    paths:
+      - .github/workflows/calibrate-modern-per36.yml
+
+permissions:
+  contents: write
+
+jobs:
+  calibrate:
+    if: github.event.head_commit.message == 'Add one-shot Per36 calibration workflow'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: per36-modern-calibration-temp
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install parser dependencies
+        run: python -m pip install --quiet pandas lxml requests
+
+      - name: Build Basketball-Reference Per36 calibration
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, math, re, unicodedata
+          from io import StringIO
+          from pathlib import Path
+          import pandas as pd
+          import requests
+
+          SOURCE='https://www.basketball-reference.com/leagues/NBA_2026_per_minute.html'
+          SEASON='2025-26'
+          PLAYERS=[
+            ('derrick-white','Derrick White'),
+            ('michael-porter-jr','Michael Porter Jr.'),
+            ('josh-hart','Josh Hart'),
+            ('vj-edgecombe','VJ Edgecombe'),
+            ('jakobe-walter',"Ja'Kobe Walter"),
+            ('josh-giddey','Josh Giddey'),
+            ('jarrett-allen','Jarrett Allen'),
+            ('cade-cunningham','Cade Cunningham'),
+            ('obi-toppin','Obi Toppin'),
+            ('kyle-kuzma','Kyle Kuzma'),
+            ('jalen-johnson','Jalen Johnson'),
+            ('kon-knueppel','Kon Knueppel'),
+            ('bam-adebayo','Bam Adebayo'),
+            ('jalen-suggs','Jalen Suggs'),
+            ('bub-carrington','Bub Carrington'),
+            ('nikola-jokic','Nikola Jokic'),
+            ('rudy-gobert','Rudy Gobert'),
+            ('shai-gilgeous-alexander','Shai Gilgeous-Alexander'),
+            ('scoot-henderson','Scoot Henderson'),
+            ('keyonte-george','Keyonte George'),
+            ('brandin-podziemski','Brandin Podziemski'),
+            ('brook-lopez','Brook Lopez'),
+            ('luka-doncic','Luka Doncic'),
+            ('dillon-brooks','Dillon Brooks'),
+            ('zach-lavine','Zach LaVine'),
+            ('cooper-flagg','Cooper Flagg'),
+            ('reed-sheppard','Reed Sheppard'),
+            ('gg-jackson','GG Jackson'),
+            ('jeremiah-fears','Jeremiah Fears'),
+            ('victor-wembanyama','Victor Wembanyama'),
+          ]
+          ALIASES={
+            'ggjackson':'ggjacksonii',
+          }
+          FIELDS={
+            'scoring':('PTS',0),
+            'rebounding':('TRB',1),
+            'passing':('AST',2),
+            'three':('3P',3),
+            'steals':('STL',5),
+            'blocks':('BLK',6),
+          }
+
+          def norm(s):
+            s=unicodedata.normalize('NFKD',str(s)).encode('ascii','ignore').decode('ascii').lower()
+            return re.sub(r'[^a-z0-9]+','',s)
+
+          headers={'User-Agent':'Mozilla/5.0 (compatible; NBAStarting5/1.0; +https://github.com/Swoop081/nba-courtside)'}
+          r=requests.get(SOURCE,headers=headers,timeout=45)
+          r.raise_for_status()
+          tables=pd.read_html(StringIO(r.text))
+          df=None
+          for t in tables:
+            cols=[str(c[-1] if isinstance(c,tuple) else c) for c in t.columns]
+            if 'Player' in cols and all(x in cols for x in ['PTS','TRB','AST','3P','STL','BLK']):
+              t=t.copy(); t.columns=cols; df=t; break
+          if df is None:
+            raise RuntimeError('Could not find Basketball-Reference Per 36 table')
+          df=df[df['Player'].astype(str)!='Player'].copy()
+          for c in ['PTS','TRB','AST','3P','STL','BLK']:
+            df[c]=pd.to_numeric(df[c],errors='coerce')
+          df['_norm']=df['Player'].map(norm)
+
+          raw={}
+          for slug,name in PLAYERS:
+            target=norm(name)
+            candidates=df[df['_norm']==target]
+            if candidates.empty and target in ALIASES:
+              candidates=df[df['_norm']==ALIASES[target]]
+            if candidates.empty:
+              # Safe suffix handling for Jr/II style Basketball-Reference names only.
+              candidates=df[df['_norm'].map(lambda x: x.startswith(target) or target.startswith(x))]
+            if candidates.empty:
+              raise RuntimeError(f'No Per36 match for {name}')
+            if len(candidates)>1 and 'Team' in candidates.columns:
+              tot=candidates[candidates['Team'].astype(str).eq('TOT')]
+              row=(tot.iloc[0] if not tot.empty else candidates.iloc[0])
+            else:
+              row=candidates.iloc[0]
+            vals={k:float(row[col]) for k,(col,_) in FIELDS.items()}
+            if any(math.isnan(v) for v in vals.values()):
+              raise RuntimeError(f'Missing Per36 value for {name}: {vals}')
+            raw[slug]={'name':name,'bref_name':str(row['Player']),'per36':vals}
+
+          def rate(x,lo,mid,hi):
+            if hi<=lo: return 15
+            if x<=mid:
+              y=5 if mid<=lo else 5+(x-lo)/(mid-lo)*10
+            else:
+              y=30 if hi<=mid else 15+(x-mid)/(hi-mid)*15
+            return max(5,min(30,int(math.floor(y+0.5))))
+
+          anchors={}
+          for stat in FIELDS:
+            vals=[raw[s]['per36'][stat] for s,_ in PLAYERS]
+            lo=min(vals); hi=max(vals); mid=(lo+hi)/2
+            template={}
+            for rating in range(5,31):
+              if rating<=15:
+                x=lo if rating==5 else lo+(rating-5)/10*(mid-lo)
+              else:
+                x=mid+(rating-15)/15*(hi-mid)
+              template[str(rating)]=round(x,3)
+            anchors[stat]={
+              'min_per36':round(lo,3),'rating_at_min':5,
+              'mid_per36':round(mid,3),'rating_at_mid':15,
+              'max_per36':round(hi,3),'rating_at_max':30,
+              'rating_template_per36':template,
+            }
+          for slug,_ in PLAYERS:
+            ratings={}
+            for stat in FIELDS:
+              a=anchors[stat]
+              ratings[stat]=rate(raw[slug]['per36'][stat],a['min_per36'],a['mid_per36'],a['max_per36'])
+            raw[slug]['ratings']=ratings
+
+          # Update only the six Per36-backed slots in the canonical modern RAW_PLAYERS definitions.
+          app=Path('app.js')
+          text=app.read_text()
+          for slug,_ in PLAYERS:
+            pat=re.compile(r"\[([0-9]+(?:,[0-9]+){7})\],'"+re.escape(slug)+r"'")
+            m=pat.search(text)
+            if not m:
+              raise RuntimeError(f'Could not locate RAW_PLAYERS stats for {slug}')
+            old=[int(x) for x in m.group(1).split(',')]
+            new=old[:]
+            for stat,(_,idx) in FIELDS.items(): new[idx]=raw[slug]['ratings'][stat]
+            replacement='['+','.join(map(str,new))+"],'"+slug+"'"
+            text=text[:m.start()]+replacement+text[m.end():]
+          app.write_text(text)
+
+          payload={
+            'schema':'nba-starting5-per36-calibration-v1',
+            'source':{'provider':'Basketball-Reference','url':SOURCE,'season':SEASON,'table':'Per 36 Minutes'},
+            'population':'30 current NBA Starting5 modern team representatives',
+            'categories':{
+              'scoring':'PTS/36','rebounding':'TRB/36','passing':'AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'
+            },
+            'formula':{
+              'floor_rating':5,'mid_rating':15,'ceiling_rating':30,
+              'midpoint_definition':'(population min + population max) / 2',
+              'lower_segment':'5 + (x-min)/(mid-min)*10',
+              'upper_segment':'15 + (x-mid)/(max-mid)*15',
+              'rounding':'nearest integer, half up','clamp':'5..30'
+            },
+            'anchors':anchors,
+            'players':raw,
+          }
+          Path('stats-per36-current-v0.13.0.json').write_text(json.dumps(payload,indent=2,ensure_ascii=False)+'\n')
+
+          # Human-readable reusable classic-team conversion template.
+          labels={'scoring':'PTS/36','rebounding':'TRB/36','passing':'AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'}
+          lines=['# NBA Starting5 Per-36 Rating Template','',f'Source baseline: Basketball-Reference {SEASON} Per 36 Minutes.','',
+                 'Ratings are calibrated only from the 30 current Starting5 modern representatives. Minimum = 5, arithmetic range midpoint = 15, maximum = 30. Values between anchors use piecewise linear interpolation and nearest-integer rounding.','']
+          for stat in FIELDS:
+            a=anchors[stat]
+            lines += [f'## {labels[stat]}', '', f"5 = {a['min_per36']:.3f} | 15 = {a['mid_per36']:.3f} | 30 = {a['max_per36']:.3f}", '', '| Rating | Per 36 benchmark |','|---:|---:|']
+            for rating in range(5,31): lines.append(f"| {rating} | {a['rating_template_per36'][str(rating)]:.3f} |")
+            lines.append('')
+          Path('PER36-RATING-TEMPLATE.md').write_text('\n'.join(lines)+'\n')
+
+          # Validation: exact 30-player population, six values each, ratings never below 5 or above 30, and observed extrema map correctly.
+          assert len(raw)==30
+          for stat in FIELDS:
+            vals=[(raw[s]['per36'][stat],raw[s]['ratings'][stat]) for s,_ in PLAYERS]
+            assert min(r for _,r in vals)>=5 and max(r for _,r in vals)<=30
+            assert min(vals,key=lambda z:z[0])[1]==5
+            assert max(vals,key=lambda z:z[0])[1]==30
+          print(json.dumps({'anchors':anchors},indent=2))
+          PY
+
+      - name: Commit calibration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app.js stats-per36-current-v0.13.0.json PER36-RATING-TEMPLATE.md
+          git commit -m 'Calibrate modern ratings from Basketball-Reference Per36'
+          DATA_SHA=$(git rev-parse HEAD)
+          python - <<PY
+          import json
+          p='build.json'; b=json.load(open(p))
+          b.update(version='0.13.0-dev.20',build='20260908-1605',commit='${DATA_SHA}',channel='per36-modern-calibration')
+          open(p,'w').write(json.dumps(b,separators=(',',':'))+'\n')
+          PY
+          git add build.json
+          git commit -m 'Bump build for Per36 modern calibration'
+          git push origin HEAD:per36-modern-calibration-temp
