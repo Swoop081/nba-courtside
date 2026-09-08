@@ -1,7 +1,12 @@
-/* NBA Starting5 v0.13.0-dev.12 — tap-vs-swipe guard, clean round transition ratings, rail-arrow removal. */
+/* NBA Starting5 v0.13.0-dev.15 — tap-vs-swipe guard, clean round transition ratings, rail-arrow removal. */
 (()=>{
-  if(window.__starting5GameplayInputGuardV01312)return;
-  window.__starting5GameplayInputGuardV01312=true;
+  if(window.__starting5GameplayInputGuardV01315)return;
+  window.__starting5GameplayInputGuardV01315=true;
+
+  /* Register rare tied-overtime handling before the gameplay core and before final/Season adapters. */
+  const sdSrc='gameplay-sudden-death-v0.13.1.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+  if(document.readyState==='loading')document.write('<script src="'+sdSrc+'"><\/script>');
+  else if(!window.__starting5SuddenDeathV0131){const s=document.createElement('script');s.src=sdSrc;document.head.appendChild(s)}
 
   const MOVE_LIMIT=10;
   let gesture=null,suppressClick=false;
@@ -76,6 +81,6 @@
     });
   });
 
-  const style=document.createElement('style');style.id='s5-gameplay-selection-v01312';style.textContent=`#game .s5-rail-arrow,#s5LineupPrev,#s5LineupNext{display:none!important}#lineup{scroll-padding-left:0!important;scroll-padding-right:0!important}#game .player-card.s5-selected-choice,#game .player-card.s5-active-opponent{outline:4px solid #35d05b!important;outline-offset:-4px!important;box-shadow:0 0 0 2px rgba(53,208,91,.35),0 0 18px rgba(53,208,91,.9)!important;z-index:55!important}#game .player-card.s5-selected-choice::after,#game .player-card.s5-active-opponent::after{content:'';position:absolute;inset:0;border:2px solid rgba(179,255,195,.95);pointer-events:none;z-index:70;box-sizing:border-box}#game .player-card.s5-rating-waiting .foundation-rating,#game .player-card.s5-rating-waiting .stats .stat.active .stat-circle{opacity:.36!important}`;document.head.appendChild(style);
+  const style=document.createElement('style');style.id='s5-gameplay-selection-v01315';style.textContent=`#game .s5-rail-arrow,#s5LineupPrev,#s5LineupNext{display:none!important}#lineup{scroll-padding-left:0!important;scroll-padding-right:0!important}#game .player-card.s5-selected-choice,#game .player-card.s5-active-opponent{outline:4px solid #35d05b!important;outline-offset:-4px!important;box-shadow:0 0 0 2px rgba(53,208,91,.35),0 0 18px rgba(53,208,91,.9)!important;z-index:55!important}#game .player-card.s5-selected-choice::after,#game .player-card.s5-active-opponent::after{content:'';position:absolute;inset:0;border:2px solid rgba(179,255,195,.95);pointer-events:none;z-index:70;box-sizing:border-box}#game .player-card.s5-rating-waiting .foundation-rating,#game .player-card.s5-rating-waiting .stats .stat.active .stat-circle{opacity:.36!important}`;document.head.appendChild(style);
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeRailArrows,{once:true});else removeRailArrows();
 })();
