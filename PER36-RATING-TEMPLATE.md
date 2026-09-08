@@ -4,7 +4,7 @@ Source: Basketball-Reference 2025-26 regular-season Per 36 Minutes.
 
 Calibration population: the 30 current NBA Starting5 modern team representatives. Observed minimum = rating 5; arithmetic midpoint of the observed min/max range = rating 15; observed maximum = rating 30. Values between anchors use piecewise linear interpolation, nearest-integer half-up rounding, and a 5–30 clamp.
 
-Dunking and Free Throws are intentionally outside this Per-36 calibration.
+NBA Starting5 has exactly seven gameplay categories: Scoring, Rebounding, Passing, 3-Point, Steals, Blocks, and Dunking. The first six are calibrated from Per-36 production below. Dunking is the seventh category and is calibrated separately because there is no equivalent standard Per-36 box-score category.
 
 ## PTS/36
 
@@ -203,4 +203,3 @@ Dunking and Free Throws are intentionally outside this Per-36 calibration.
 | 28 | 3.553 |
 | 29 | 3.677 |
 | 30 | 3.800 |
-
