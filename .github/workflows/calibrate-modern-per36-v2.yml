@@ -1,0 +1,98 @@
+name: Calibrate Modern Per36 Ratings V2
+on:
+  push:
+    branches: [per36-modern-calibration-temp]
+    paths: [.github/workflows/calibrate-modern-per36-v2.yml]
+permissions:
+  contents: write
+jobs:
+  calibrate:
+    if: github.event.head_commit.message == 'Run corrected Per36 calibration'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: per36-modern-calibration-temp
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python -m pip install --quiet pandas lxml requests
+      - name: Calibrate six modern categories
+        run: |
+          python - <<'PY'
+          import json,math,re,unicodedata
+          from io import StringIO
+          from pathlib import Path
+          import pandas as pd, requests
+          URL='https://www.basketball-reference.com/leagues/NBA_2026_per_minute.html'
+          P=[('derrick-white','Derrick White'),('michael-porter-jr','Michael Porter Jr.'),('josh-hart','Josh Hart'),('vj-edgecombe','VJ Edgecombe'),('jakobe-walter',"Ja'Kobe Walter"),('josh-giddey','Josh Giddey'),('jarrett-allen','Jarrett Allen'),('cade-cunningham','Cade Cunningham'),('obi-toppin','Obi Toppin'),('kyle-kuzma','Kyle Kuzma'),('jalen-johnson','Jalen Johnson'),('kon-knueppel','Kon Knueppel'),('bam-adebayo','Bam Adebayo'),('jalen-suggs','Jalen Suggs'),('bub-carrington','Bub Carrington'),('nikola-jokic','Nikola Jokic'),('rudy-gobert','Rudy Gobert'),('shai-gilgeous-alexander','Shai Gilgeous-Alexander'),('scoot-henderson','Scoot Henderson'),('keyonte-george','Keyonte George'),('brandin-podziemski','Brandin Podziemski'),('brook-lopez','Brook Lopez'),('luka-doncic','Luka Doncic'),('dillon-brooks','Dillon Brooks'),('zach-lavine','Zach LaVine'),('cooper-flagg','Cooper Flagg'),('reed-sheppard','Reed Sheppard'),('gg-jackson','GG Jackson'),('jeremiah-fears','Jeremiah Fears'),('victor-wembanyama','Victor Wembanyama')]
+          F={'scoring':('PTS',0),'rebounding':('TRB',1),'passing':('AST',2),'three':('3P',3),'steals':('STL',5),'blocks':('BLK',6)}
+          def norm(s):
+            s=unicodedata.normalize('NFKD',str(s)).encode('ascii','ignore').decode().lower()
+            return re.sub('[^a-z0-9]','',s)
+          r=requests.get(URL,headers={'User-Agent':'Mozilla/5.0'},timeout=45);r.raise_for_status();r.encoding='utf-8'
+          df=None
+          for t in pd.read_html(StringIO(r.text)):
+            cols=[str(c[-1] if isinstance(c,tuple) else c) for c in t.columns]
+            if 'Player' in cols and all(c in cols for c in ['PTS','TRB','AST','3P','STL','BLK']):
+              t=t.copy();t.columns=cols;df=t;break
+          assert df is not None
+          df=df[df.Player.astype(str)!='Player'].copy();df['_n']=df.Player.map(norm)
+          for c in ['PTS','TRB','AST','3P','STL','BLK']: df[c]=pd.to_numeric(df[c],errors='coerce')
+          raw={}
+          for slug,name in P:
+            n=norm(name); cand=df[df._n==n]
+            if cand.empty and slug=='gg-jackson': cand=df[df._n=='ggjacksonii']
+            if cand.empty: cand=df[df._n.map(lambda x:x.startswith(n) or n.startswith(x))]
+            if cand.empty: raise RuntimeError('No match: '+name+'; nearby='+','.join(df[df.Player.astype(str).str.contains(name.split()[-1],case=False,na=False)].Player.astype(str).head(8)))
+            if len(cand)>1 and 'Team' in cand.columns:
+              tot=cand[cand.Team.astype(str)=='TOT']; row=tot.iloc[0] if len(tot) else cand.iloc[0]
+            else: row=cand.iloc[0]
+            raw[slug]={'name':name,'bref_name':str(row.Player),'per36':{k:float(row[c]) for k,(c,i) in F.items()}}
+          anchors={}
+          def rating(x,lo,mid,hi):
+            y=5+(x-lo)/(mid-lo)*10 if x<=mid else 15+(x-mid)/(hi-mid)*15
+            return max(5,min(30,int(math.floor(y+.5))))
+          for k in F:
+            vs=[raw[s]['per36'][k] for s,n in P];lo=min(vs);hi=max(vs);mid=(lo+hi)/2
+            template={}
+            for rt in range(5,31):
+              x=lo+(rt-5)/10*(mid-lo) if rt<=15 else mid+(rt-15)/15*(hi-mid)
+              template[str(rt)]=round(x,3)
+            anchors[k]={'min_per36':round(lo,3),'mid_per36':round(mid,3),'max_per36':round(hi,3),'rating_at_min':5,'rating_at_mid':15,'rating_at_max':30,'rating_template_per36':template}
+          for slug,name in P:
+            raw[slug]['ratings']={k:rating(raw[slug]['per36'][k],anchors[k]['min_per36'],anchors[k]['mid_per36'],anchors[k]['max_per36']) for k in F}
+          text=Path('app.js').read_text()
+          for slug,name in P:
+            pat=re.compile(r"\[([0-9]+(?:,[0-9]+){7})\],'"+re.escape(slug)+r"'");m=pat.search(text)
+            if not m: raise RuntimeError('RAW_PLAYERS missing '+slug)
+            a=list(map(int,m.group(1).split(',')))
+            for k,(c,i) in F.items(): a[i]=raw[slug]['ratings'][k]
+            rep='['+','.join(map(str,a))+"],'"+slug+"'";text=text[:m.start()]+rep+text[m.end():]
+          Path('app.js').write_text(text)
+          data={'schema':'nba-starting5-per36-calibration-v1','source':{'provider':'Basketball-Reference','url':URL,'season':'2025-26','table':'Per 36 Minutes'},'population':'30 current NBA Starting5 modern team representatives','categories':{'scoring':'PTS/36','rebounding':'TRB/36','passing':'AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'},'formula':{'floor_rating':5,'mid_rating':15,'ceiling_rating':30,'midpoint_definition':'(population min + population max) / 2','lower_segment':'5 + (x-min)/(mid-min)*10','upper_segment':'15 + (x-mid)/(max-mid)*15','rounding':'nearest integer, half up','clamp':'5..30'},'anchors':anchors,'players':raw}
+          Path('stats-per36-current-v0.13.0.json').write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n')
+          labels={'scoring':'PTS/36','rebounding':'TRB/36','passing':'AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'}
+          out=['# NBA Starting5 Per-36 Rating Template','','Basketball-Reference 2025-26 Per 36 Minutes; calibrated from the 30 modern Starting5 representatives.','','Anchors: observed minimum = rating 5; arithmetic range midpoint = rating 15; observed maximum = rating 30. Piecewise linear interpolation; nearest integer; clamp 5–30.','']
+          for k in F:
+            a=anchors[k];out += ['## '+labels[k],'',f"5 = {a['min_per36']:.3f} | 15 = {a['mid_per36']:.3f} | 30 = {a['max_per36']:.3f}",'','| Rating | Per 36 benchmark |','|---:|---:|']+[f"| {rt} | {a['rating_template_per36'][str(rt)]:.3f} |" for rt in range(5,31)]+['']
+          Path('PER36-RATING-TEMPLATE.md').write_text('\n'.join(out)+'\n')
+          assert len(raw)==30
+          for k in F:
+            pairs=[(raw[s]['per36'][k],raw[s]['ratings'][k]) for s,n in P];assert min(x[1] for x in pairs)>=5 and max(x[1] for x in pairs)<=30;assert min(pairs)[1]==5;assert max(pairs)[1]==30
+          print(json.dumps({'anchors':anchors},indent=2))
+          PY
+      - name: Commit generated calibration
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app.js stats-per36-current-v0.13.0.json PER36-RATING-TEMPLATE.md
+          git commit -m 'Calibrate modern ratings from Basketball-Reference Per36'
+          DATA_SHA=$(git rev-parse HEAD)
+          python - <<PY
+          import json
+          b=json.load(open('build.json'));b.update(version='0.13.0-dev.20',build='20260908-1615',commit='${DATA_SHA}',channel='per36-modern-calibration');open('build.json','w').write(json.dumps(b,separators=(',',':'))+'\n')
+          PY
+          git add build.json
+          git commit -m 'Bump build for Per36 modern calibration'
+          git push origin HEAD:per36-modern-calibration-temp
