@@ -1,4 +1,4 @@
-/* NBA Starting5 v0.11.44 — standalone resilient Card Art Editor. */
+/* NBA Starting5 v0.13.0-dev.17 — responsive Card Art Editor with frame-synced dragging. */
 (()=>{
   const KEY='nbaCourtsideArtEditorV1';
   const read=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
@@ -40,7 +40,7 @@
       .art-editor.hidden{display:none!important}.art-editor-body{max-width:560px;margin:0 auto}.art-editor-head{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5;background:#07090d;padding:4px 0 12px}.art-editor-head h2{margin:0;font-size:20px}.art-editor-close{min-width:52px;height:44px}
       .art-editor-selectors{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.art-editor-selectors #artPlayerSelect{grid-column:1/-1}.art-editor select{width:100%;min-height:44px;border-radius:12px;background:#151b25;color:#fff;border:1px solid rgba(255,255,255,.14);padding:0 10px;font-weight:850}
       .art-editor-nav{display:grid;grid-template-columns:54px 1fr 54px;gap:8px;align-items:center;margin-bottom:12px}.art-editor-nav button{height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#151b25;color:#fff;font-size:25px}.art-editor-player{text-align:center;font-size:16px;font-weight:950}.art-editor-player small{display:block;margin-top:3px;color:#9da6b4;font-size:10px}
-      .art-editor-preview{width:min(72vw,290px);margin:0 auto 16px}.art-editor-preview .player-card{width:100%!important;pointer-events:none!important}.art-editor-preview .foundation-art img,.art-editor-preview .cutout-art{pointer-events:auto!important;touch-action:none!important}
+      .art-editor-preview{width:min(72vw,290px);margin:0 auto 16px}.art-editor-preview .player-card{width:100%!important;pointer-events:none!important}.art-editor-preview .foundation-art img,.art-editor-preview .cutout-art{pointer-events:auto!important;touch-action:none!important;cursor:grab;will-change:transform,left,top;-webkit-user-drag:none;user-select:none}.art-editor-preview .foundation-art img:active,.art-editor-preview .cutout-art:active{cursor:grabbing}
       .art-editor-controls{display:grid;gap:12px;background:#10151d;border:1px solid rgba(255,255,255,.11);border-radius:18px;padding:14px}.art-control label{display:flex;justify-content:space-between;font-size:13px;font-weight:900;margin-bottom:6px}.art-control output{color:#f7b928}.art-control input[type=range]{width:100%;accent-color:#f7b928}
       .art-editor-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.art-editor-actions button{min-height:46px;border-radius:13px;border:1px solid rgba(255,255,255,.16);background:#171e29;color:#fff;font-weight:900}.art-editor-actions .primary{background:#f7b928;color:#080a0d;border-color:#f7b928}.art-editor-progress{text-align:center;margin:10px 0 0;color:#9da6b4;font-size:11px}.art-editor-note{font-size:11px;color:#adb5c2;text-align:center;line-height:1.4}
     `;document.head.appendChild(s);
@@ -55,7 +55,7 @@
     if(!btn&&options){btn=document.createElement('button');btn.id='cardArtEditorBtn';btn.type='button';btn.className='art-editor-launch';btn.textContent='Card Art Editor';options.appendChild(btn);}
     let ed=document.getElementById('cardArtEditor');
     if(!ed){
-      ed=document.createElement('section');ed.id='cardArtEditor';ed.className='art-editor hidden';ed.innerHTML=`<div class="art-editor-body"><div class="art-editor-head"><h2>Card Art Editor</h2><button id="artEditorClose" class="ghost-btn art-editor-close" type="button">Done</button></div><div class="art-editor-selectors"><select id="artSetSelect"></select><select id="artTeamSelect"></select><select id="artPlayerSelect"></select></div><div class="art-editor-nav"><button id="artPrev" type="button">‹</button><div id="artPlayerName" class="art-editor-player"></div><button id="artNext" type="button">›</button></div><div id="artPreview" class="art-editor-preview"></div><div class="art-editor-controls"><div class="art-control"><label>X position <output id="artXOut"></output></label><input id="artX" type="range" min="-25" max="125" step="0.5"></div><div class="art-control"><label>Y position <output id="artYOut"></output></label><input id="artY" type="range" min="-300" max="300" step="1"></div><div class="art-control"><label>Size <output id="artScaleOut"></output></label><input id="artScale" type="range" min="0.50" max="4.50" step="0.01"></div></div><div class="art-editor-actions"><button id="artReset" type="button">Reset This Card</button><button id="artCopy" type="button">Copy JSON</button><button id="artExport" class="primary" type="button">Export Art Layout</button><button id="artClearAll" type="button">Clear All Edits</button></div><div id="artProgress" class="art-editor-progress"></div><p class="art-editor-note">Drag the player directly on the card or use the sliders. Changes save immediately.</p></div>`;document.body.appendChild(ed);
+      ed=document.createElement('section');ed.id='cardArtEditor';ed.className='art-editor hidden';ed.innerHTML=`<div class="art-editor-body"><div class="art-editor-head"><h2>Card Art Editor</h2><button id="artEditorClose" class="ghost-btn art-editor-close" type="button">Done</button></div><div class="art-editor-selectors"><select id="artSetSelect"></select><select id="artTeamSelect"></select><select id="artPlayerSelect"></select></div><div class="art-editor-nav"><button id="artPrev" type="button">‹</button><div id="artPlayerName" class="art-editor-player"></div><button id="artNext" type="button">›</button></div><div id="artPreview" class="art-editor-preview"></div><div class="art-editor-controls"><div class="art-control"><label>X position <output id="artXOut"></output></label><input id="artX" type="range" min="-25" max="125" step="0.5"></div><div class="art-control"><label>Y position <output id="artYOut"></output></label><input id="artY" type="range" min="-300" max="300" step="1"></div><div class="art-control"><label>Size <output id="artScaleOut"></output></label><input id="artScale" type="range" min="0.50" max="4.50" step="0.01"></div></div><div class="art-editor-actions"><button id="artReset" type="button">Reset This Card</button><button id="artCopy" type="button">Copy JSON</button><button id="artExport" class="primary" type="button">Export Art Layout</button><button id="artClearAll" type="button">Clear All Edits</button></div><div id="artProgress" class="art-editor-progress"></div><p class="art-editor-note">Drag the player directly on the card or use the sliders. Changes save when you release.</p></div>`;document.body.appendChild(ed);
 
       const setSel=ed.querySelector('#artSetSelect'),teamSel=ed.querySelector('#artTeamSelect'),playerSel=ed.querySelector('#artPlayerSelect');
       const preview=ed.querySelector('#artPreview'),nameEl=ed.querySelector('#artPlayerName'),progress=ed.querySelector('#artProgress');
@@ -68,15 +68,57 @@
       const saved=p=>read()[p.artSlug]||baseFor(p);
       const syncOut=()=>{x.value=draft.x;y.value=draft.y;sc.value=draft.scale;xo.textContent=`${draft.x.toFixed(1)}%`;yo.textContent=`${draft.y.toFixed(0)}px`;so.textContent=`${draft.scale.toFixed(2)}×`;};
       const save=()=>{const p=current(),store=read();store[p.artSlug]={x:round(draft.x,1),y:round(draft.y,0),scale:round(draft.scale,2)};write(store);progress.textContent=`${Object.keys(store).length} of ${all.length} cards edited`;document.querySelectorAll(`.player-card[data-art-slug="${p.artSlug}"] .cutout-art,.player-card[data-art-slug="${p.artSlug}"] .foundation-art img`).forEach(img=>applyImg(img,store[p.artSlug]));};
-      function bindDrag(img,stage){if(!img||!stage)return;img.onpointerdown=e=>{e.preventDefault();img.setPointerCapture?.(e.pointerId);drag={sx:e.clientX,sy:e.clientY,x:draft.x,y:draft.y,w:stage.clientWidth||1};};img.onpointermove=e=>{if(!drag)return;draft.x=clamp(drag.x+(e.clientX-drag.sx)/drag.w*100,-25,125);draft.y=clamp(drag.y+(e.clientY-drag.sy),-300,300);applyImg(img,draft);syncOut();};img.onpointerup=img.onpointercancel=()=>{if(drag){drag=null;save();}};}
+      function bindDrag(img,stage){
+        if(!img||!stage)return;
+        let raf=0,pending=null;
+        const paint=()=>{
+          raf=0;
+          if(!drag||!pending)return;
+          const {cx,cy}=pending;
+          draft.x=clamp(drag.x+(cx-drag.sx)/drag.w*100,-25,125);
+          draft.y=clamp(drag.y+(cy-drag.sy),-300,300);
+          applyImg(img,draft);
+          x.value=draft.x;y.value=draft.y;
+          xo.textContent=`${draft.x.toFixed(1)}%`;
+          yo.textContent=`${draft.y.toFixed(0)}px`;
+        };
+        img.onpointerdown=e=>{
+          e.preventDefault();
+          img.setPointerCapture?.(e.pointerId);
+          drag={sx:e.clientX,sy:e.clientY,x:draft.x,y:draft.y,w:stage.clientWidth||1,filter:img.style.getPropertyValue('filter'),filterPriority:img.style.getPropertyPriority('filter')};
+          pending={cx:e.clientX,cy:e.clientY};
+          img.style.setProperty('filter','none','important');
+        };
+        img.onpointermove=e=>{
+          if(!drag)return;
+          e.preventDefault();
+          pending={cx:e.clientX,cy:e.clientY};
+          if(!raf)raf=requestAnimationFrame(paint);
+        };
+        const finish=e=>{
+          if(!drag)return;
+          if(e){pending={cx:e.clientX,cy:e.clientY};paint();}
+          const {filter,filterPriority}=drag;
+          drag=null;pending=null;
+          if(raf){cancelAnimationFrame(raf);raf=0;}
+          if(filter)img.style.setProperty('filter',filter,filterPriority||'important');
+          else img.style.removeProperty('filter');
+          save();
+        };
+        img.onpointerup=finish;
+        img.onpointercancel=finish;
+      }
       const render=()=>{const p=current();if(!p)return;playerSel.value=p.artSlug;nameEl.innerHTML=`${p.name}<small>${p.set||'Classic Teams'} · ${p.teamShort||p.team||''}</small>`;preview.innerHTML=cardMarkup(p,{eager:true});draft=saved(p);syncOut();requestAnimationFrame(()=>{const img=preview.querySelector('.foundation-art img,.cutout-art'),stage=preview.querySelector('.foundation-art,.art-stage');applyImg(img,draft);bindDrag(img,stage);window.applyStarting5PlayerGlow?.();});};
       const rebuildTeams=()=>{const m=new Map();setPool().forEach(p=>m.set(teamKey(p),teamLabel(p)));teamSel.innerHTML='<option value="All Teams">All Teams</option>'+[...m].sort((a,b)=>a[1].localeCompare(b[1])).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');};
       const rebuildPlayers=keep=>{list=filtered();playerSel.innerHTML=list.map(p=>`<option value="${p.artSlug}">${p.name}</option>`).join('');idx=Math.max(0,list.findIndex(p=>p.artSlug===keep));render();};
-      [x,y,sc].forEach(el=>el.addEventListener('input',()=>{draft={x:+x.value,y:+y.value,scale:+sc.value};applyImg(preview.querySelector('.foundation-art img,.cutout-art'),draft);syncOut();save();}));
+      [x,y,sc].forEach(el=>{
+        el.addEventListener('input',()=>{draft={x:+x.value,y:+y.value,scale:+sc.value};applyImg(preview.querySelector('.foundation-art img,.cutout-art'),draft);xo.textContent=`${draft.x.toFixed(1)}%`;yo.textContent=`${draft.y.toFixed(0)}px`;so.textContent=`${draft.scale.toFixed(2)}×`;});
+        el.addEventListener('change',save);
+      });
       setSel.onchange=()=>{const keep=current()?.artSlug;rebuildTeams();rebuildPlayers(keep)};teamSel.onchange=()=>rebuildPlayers(current()?.artSlug);playerSel.onchange=()=>{idx=list.findIndex(p=>p.artSlug===playerSel.value);render();};
       ed.querySelector('#artPrev').onclick=()=>{if(list.length){idx=(idx-1+list.length)%list.length;render();}};ed.querySelector('#artNext').onclick=()=>{if(list.length){idx=(idx+1)%list.length;render();}};
       ed.querySelector('#artReset').onclick=()=>{const p=current(),store=read();delete store[p.artSlug];write(store);render();progress.textContent=`${Object.keys(store).length} of ${all.length} cards edited`;};
-      const exportData=()=>{const store=read(),cards={};all.forEach(p=>cards[p.artSlug]={...(store[p.artSlug]||baseFor(p)),edited:!!store[p.artSlug],name:p.name,set:p.set||'Classic Teams',team:p.teamShort||p.team});return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.11.44',exportedAt:new Date().toISOString(),cards};};
+      const exportData=()=>{const store=read(),cards={};all.forEach(p=>cards[p.artSlug]={...(store[p.artSlug]||baseFor(p)),edited:!!store[p.artSlug],name:p.name,set:p.set||'Classic Teams',team:p.teamShort||p.team});return {format:'NBA Starting5 Art Layout',version:2,gameVersion:'0.13.0-dev.17',exportedAt:new Date().toISOString(),cards};};
       ed.querySelector('#artCopy').onclick=async()=>{try{await navigator.clipboard.writeText(JSON.stringify(exportData(),null,2));}catch{}};
       ed.querySelector('#artExport').onclick=()=>{const blob=new Blob([JSON.stringify(exportData(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='nba-starting5-art-layout.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
       ed.querySelector('#artClearAll').onclick=()=>{if(confirm('Clear every Card Art Editor adjustment on this device?')){localStorage.removeItem(KEY);render();}};
