@@ -13,11 +13,11 @@
       'Rick Mahorn':'rick-mahorn','Bill Laimbeer':'bill-laimbeer'
     },
     rows:[
-      ['Isiah Thomas','PG',[18,16,20,8,25,9,27],27],
-      ['Joe Dumars','SG',[17,14,17,6,19,5,19],25],
-      ['Mark Aguirre','SF',[16,20,21,10,10,8,11],22],
-      ['Rick Mahorn','PF',[7,18,3,16,4,16,15],19],
-      ['Bill Laimbeer','C',[14,10,24,22,9,19,15],23]
+      ['Isiah Thomas','PG',[20,16,17,15,28,16,27],27],
+      ['Joe Dumars','SG',[20,14,16,5,24,10,19],25],
+      ['Mark Aguirre','SF',[23,20,18,21,21,21,10],22],
+      ['Rick Mahorn','PF',[8,18,11,26,5,26,17],19],
+      ['Bill Laimbeer','C',[18,10,18,26,18,26,10],23]
     ]
   };
 

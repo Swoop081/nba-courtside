@@ -20,11 +20,11 @@
      round(30*sqrt(BPG/3)); steals round(30*(SPG/2)^.60); era-relative 3PT;
      dunking remains subjective using athleticism, role and reputation. */
   const rows=[
-    ['Muggsy Bogues','PG',[10,1,7,9,26,5,30],24],
-    ['Kendall Gill','SG',[17,23,10,11,14,12,24],22],
-    ['Johnny Newman','SF',[12,18,10,5,8,10,16],18],
-    ['Larry Johnson','PF',[22,28,9,24,15,9,15],27],
-    ['Alonzo Mourning','C',[21,27,1,24,5,30,10],28]
+    ['Muggsy Bogues','PG',[8,1,16,16,28,8,28],24],
+    ['Kendall Gill','SG',[20,23,16,20,21,22,27],22],
+    ['Johnny Newman','SF',[21,18,16,15,19,21,23],18],
+    ['Larry Johnson','PF',[21,28,16,25,21,18,10],27],
+    ['Alonzo Mourning','C',[23,27,11,26,5,30,5],28]
   ];
   const slugs={
     'Muggsy Bogues':'muggsy-bogues',

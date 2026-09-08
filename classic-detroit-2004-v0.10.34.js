@@ -22,11 +22,11 @@
     dunking remains subjective using reputation/athleticism/role.
   */
   const rows=[
-    ['Chauncey Billups','PG',[17,12,26,8,19,5,21],23],
-    ['Richard Hamilton','SG',[18,14,10,8,15,8,23],21],
-    ['Tayshaun Prince','SF',[10,18,20,11,10,15,17],20],
-    ['Rasheed Wallace','PF',[14,24,18,16,8,24,21],24],
-    ['Ben Wallace','C',[10,25,7,29,8,30,28],27]
+    ['Chauncey Billups','PG',[20,12,20,15,25,10,21],23],
+    ['Richard Hamilton','SG',[21,14,16,15,22,14,23],21],
+    ['Tayshaun Prince','SF',[12,18,18,21,18,25,18],20],
+    ['Rasheed Wallace','PF',[19,24,19,23,17,27,19],24],
+    ['Ben Wallace','C',[5,25,11,27,12,30,28],27]
   ];
   const slugs={
     'Chauncey Billups':'chauncey-billups',

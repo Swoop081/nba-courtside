@@ -26,11 +26,11 @@
   /* 2010-11 regular-season statistical basis. Approved Courtside transforms are used for
      scoring/rebounding/passing/blocks/steals, with era/volume-aware 3PT and subjective dunking. */
   const rows=[
-    ['Jason Kidd','PG',[8,6,24,10,25,11,27],24,'jason-kidd-2011'],
-    ['Jason Terry','SG',[16,8,26,4,15,8,21],22,'jason-terry'],
-    ['Shawn Marion','SF',[13,22,6,16,7,13,19],23,'shawn-marion-2011'],
-    ['Dirk Nowitzki','PF',[23,11,26,16,11,13,13],29,'dirk-nowitzki'],
-    ['Tyson Chandler','C',[10,27,5,22,3,18,13],25,'tyson-chandler']
+    ['Jason Kidd','PG',[5,6,21,20,28,20,28],24,'jason-kidd-2011'],
+    ['Jason Terry','SG',[21,8,21,5,23,15,24],22,'jason-terry'],
+    ['Shawn Marion','SF',[19,22,16,25,15,24,21],23,'shawn-marion-2011'],
+    ['Dirk Nowitzki','PF',[25,11,18,24,19,23,8],29,'dirk-nowitzki'],
+    ['Tyson Chandler','C',[15,27,11,27,5,26,10],25,'tyson-chandler']
   ];
 
   const added=rows.map(([name,position,ratings,overall,slug])=>{

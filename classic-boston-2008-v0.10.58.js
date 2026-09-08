@@ -9,11 +9,11 @@
     logo:'https://content.sportslogos.net/logos/6/213/full/boston_celtics_logo_primary_19979720.png',
     theme:{a:'#007A33',b:'#FFFFFF',c:'#BA9653'},
     rows:[
-      ['Rajon Rondo','PG',[11,18,8,10,17,8,27],23,'rajon-rondo'],
-      ['Ray Allen','SG',[17,10,30,9,12,8,19],24,'ray-allen'],
-      ['Paul Pierce','SF',[20,19,27,12,16,12,23],27,'paul-pierce'],
-      ['Kevin Garnett','PF',[19,23,5,21,13,20,24],28,'kevin-garnett'],
-      ['Kendrick Perkins','C',[7,20,1,14,6,21,11],20,'kendrick-perkins']
+      ['Rajon Rondo','PG',[15,18,16,20,25,17,28],23,'rajon-rondo'],
+      ['Ray Allen','SG',[20,10,23,15,19,16,19],24,'ray-allen'],
+      ['Paul Pierce','SF',[22,19,21,20,23,21,23],27,'paul-pierce'],
+      ['Kevin Garnett','PF',[23,23,15,26,21,26,25],28,'kevin-garnett'],
+      ['Kendrick Perkins','C',[8,20,11,25,10,28,10],20,'kendrick-perkins']
     ]
   };
 

@@ -14,11 +14,11 @@
      blocks = round(30*sqrt(BPG/3)); steals = round(30*(SPG/2)^.60);
      3PT is era-relative and dunking is subjective by athleticism/role/reputation. */
   const rows=[
-    ['Dennis Johnson','PG',[16,14,10,8,19,11,24],23],
-    ['Danny Ainge','SG',[11,8,18,7,17,5,22],20],
-    ['Larry Bird','SF',[26,16,29,23,21,13,30],30],
-    ['Kevin McHale','PF',[21,22,6,19,11,24,14],27],
-    ['Robert Parish','C',[16,21,5,22,8,20,17],24]
+    ['Dennis Johnson','PG',[19,14,16,15,25,21,26],23],
+    ['Danny Ainge','SG',[16,8,17,15,25,10,27],20],
+    ['Larry Bird','SF',[25,16,18,25,25,22,28],30],
+    ['Kevin McHale','PF',[23,22,11,25,19,28,5],27],
+    ['Robert Parish','C',[21,21,11,26,15,27,18],24]
   ];
   const slugs={
     'Dennis Johnson':'dennis-johnson',

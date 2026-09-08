@@ -18,53 +18,53 @@
     return {team,added};
   };
   const knicks=makeTeam({id:'classic-nyk-1994',team:'New York Knicks 1994',short:'Knicks 1994',season:'1994',logo:'assets/team-logos/classic/new-york-knicks-1994.png',theme:{a:'#006BB6',b:'#F58426',c:'#BEC0C2'},rows:[
-    ['Derek Harper','PG',[13,8,18,6,21,5,24],21,'derek-harper'],
-    ['John Starks','SG',[18,18,24,7,16,6,25],24,'john-starks'],
-    ['Charles Smith','SF',[12,15,4,12,7,12,11],18,'charles-smith'],
-    ['Charles Oakley','PF',[11,16,1,28,8,14,20],23,'charles-oakley'],
-    ['Patrick Ewing','C',[24,24,1,27,9,29,17],29,'patrick-ewing']
+    ['Derek Harper','PG',[15,8,19,5,24,8,28],21,'derek-harper'],
+    ['John Starks','SG',[21,18,21,10,25,10,28],24,'john-starks'],
+    ['Charles Smith','SF',[18,15,16,21,12,27,17],18,'charles-smith'],
+    ['Charles Oakley','PF',[14,16,11,27,19,16,25],23,'charles-oakley'],
+    ['Patrick Ewing','C',[24,24,16,26,17,29,21],29,'patrick-ewing']
   ]});
   const hawks=makeTeam({id:'classic-atl-1993',team:'Atlanta Hawks 1993',short:'Hawks 1993',season:'1993',logo:'assets/team-logos/classic/atlanta-hawks-1993.png',theme:{a:'#E03A3E',b:'#FFFFFF',c:'#FDB927'},rows:[
-    ['Mookie Blaylock','PG',[13,8,20,8,24,5,30],24,'mookie-blaylock'],
-    ['Stacey Augmon','SG',[13,22,5,12,8,11,20],20,'stacey-augmon'],
-    ['Dominique Wilkins','SF',[27,30,16,18,10,11,18],29,'dominique-wilkins'],
-    ['Kevin Willis','PF',[17,21,1,29,7,15,12],25,'kevin-willis'],
-    ['Jon Koncak','C',[7,12,0,16,4,20,8],17,'jon-koncak']
+    ['Mookie Blaylock','PG',[16,8,19,15,28,20,29],24,'mookie-blaylock'],
+    ['Stacey Augmon','SG',[20,22,11,20,19,17,27],20,'stacey-augmon'],
+    ['Dominique Wilkins','SF',[28,30,20,22,20,20,20],29,'dominique-wilkins'],
+    ['Kevin Willis','PF',[20,21,16,27,16,21,19],25,'kevin-willis'],
+    ['Jon Koncak','C',[5,12,16,24,18,27,25],17,'jon-koncak']
   ]});
   const sixers=makeTeam({id:'classic-phi-2001',team:'Philadelphia 76ers 2001',short:'76ers 2001',season:'2001',logo:'https://cdn.nba.com/logos/nba/1610612755/global/L/logo.svg',theme:{a:'#006BB6',b:'#ED174C',c:'#FFFFFF'},rows:[
-    ['Eric Snow','PG',[11,6,10,6,24,4,24],21,'eric-snow','727'],
-    ['Allen Iverson','SG',[30,25,18,9,22,5,30],30,'allen-iverson','947'],
-    ['George Lynch','SF',[10,13,8,18,8,9,20],19,'george-lynch','779'],
-    ['Tyrone Hill','PF',[12,16,1,27,6,13,14],22,'tyrone-hill','238'],
-    ['Dikembe Mutombo','C',[14,19,0,30,5,30,14],28,'dikembe-mutombo','87']
+    ['Eric Snow','PG',[8,6,16,15,27,10,27],21,'eric-snow','727'],
+    ['Allen Iverson','SG',[27,25,19,12,22,16,29],30,'allen-iverson','947'],
+    ['George Lynch','SF',[5,13,16,24,15,20,25],19,'george-lynch','779'],
+    ['Tyrone Hill','PF',[10,16,11,26,5,20,10],22,'tyrone-hill','238'],
+    ['Dikembe Mutombo','C',[8,19,11,28,5,30,5],28,'dikembe-mutombo','87']
   ]});
   const knicks2012=makeTeam({id:'classic-nyk-2012',team:'New York Knicks 2012',short:'Knicks 2012',season:'2012',logo:'https://cdn.nba.com/logos/nba/1610612752/global/L/logo.svg',theme:{a:'#006BB6',b:'#F58426',c:'#BEC0C2'},rows:[
-    ['Jeremy Lin','PG',[20,17,19,7,25,4,19],24,'jeremy-lin','202391'],
-    ['Landry Fields','SG',[11,14,14,14,10,6,13],19,'landry-fields','202361'],
-    ['Carmelo Anthony','SF',[28,21,24,14,12,7,15],29,'carmelo-anthony','2546'],
-    ["Amar'e Stoudemire",'PF',[23,28,3,21,8,16,12],27,'amare-stoudemire','2405'],
-    ['Tyson Chandler','C',[14,28,0,29,5,28,14],27,'tyson-chandler','2199']
+    ['Jeremy Lin','PG',[22,17,18,17,28,18,28],24,'jeremy-lin','202391'],
+    ['Landry Fields','SG',[12,14,18,21,20,17,25],19,'landry-fields','202361'],
+    ['Carmelo Anthony','SF',[25,21,19,23,20,21,22],29,'carmelo-anthony','2546'],
+    ["Amar'e Stoudemire",'PF',[21,28,16,25,8,25,20],27,'amare-stoudemire','2405'],
+    ['Tyson Chandler','C',[12,28,11,26,5,27,21],27,'tyson-chandler','2199']
   ]});
   const cavs=makeTeam({id:'classic-cle-2004',team:'Cleveland Cavaliers 2004',short:'Cavaliers 2004',season:'2004',logo:'https://cdn.nba.com/logos/nba/1610612739/global/L/logo.svg',theme:{a:'#860038',b:'#FDBB30',c:'#041E42'},rows:[
-    ['Jeff McInnis','PG',[14,10,17,5,22,3,16],21,'jeff-mcinnis','686'],
-    ['LeBron James','SG',[27,30,18,18,23,18,26],30,'lebron-james','2544'],
-    ['Eric Williams','SF',[10,11,14,9,8,7,13],18,'eric-williams','726'],
-    ['Carlos Boozer','PF',[19,21,2,28,10,14,13],25,'carlos-boozer','2430'],
-    ['Zydrunas Ilgauskas','C',[19,18,2,24,8,27,10],25,'zydrunas-ilgauskas','980']
+    ['Jeff McInnis','PG',[15,10,18,5,25,10,21],21,'jeff-mcinnis','686'],
+    ['LeBron James','SG',[21,30,18,20,24,23,26],30,'lebron-james','2544'],
+    ['Eric Williams','SF',[16,11,18,21,18,16,24],18,'eric-williams','726'],
+    ['Carlos Boozer','PF',[19,21,11,27,16,24,20],25,'carlos-boozer','2430'],
+    ['Zydrunas Ilgauskas','C',[20,18,11,25,11,30,10],25,'zydrunas-ilgauskas','980']
   ]});
   const bulls2011=makeTeam({id:'classic-chi-2011',team:'Chicago Bulls 2011',short:'Bulls 2011',season:'2011',logo:'assets/team-logos/classic/chicago-bulls-1998-alpha-v3.png',theme:{a:'#CE1141',b:'#000000',c:'#FFFFFF'},rows:[
-    ['Derrick Rose','PG',[30,28,19,10,27,5,22],30,'derrick-rose','201565'],
-    ['Keith Bogans','SG',[9,7,20,7,8,5,16],18,'keith-bogans','1903'],
-    ['Luol Deng','SF',[21,19,18,17,11,12,21],25,'luol-deng','2736'],
-    ['Carlos Boozer','PF',[20,20,2,27,10,13,12],25,'carlos-boozer','2430'],
-    ['Joakim Noah','C',[12,20,0,29,12,27,18],27,'joakim-noah','201149']
+    ['Derrick Rose','PG',[25,28,19,16,27,22,20],30,'derrick-rose','201565'],
+    ['Keith Bogans','SG',[5,7,23,15,18,17,19],18,'keith-bogans','1903'],
+    ['Luol Deng','SF',[19,19,19,21,18,22,20],25,'luol-deng','2736'],
+    ['Carlos Boozer','PF',[21,20,11,26,19,19,19],25,'carlos-boozer','2430'],
+    ['Joakim Noah','C',[15,20,11,27,18,27,21],27,'joakim-noah','201149']
   ]});
   const magic2009=makeTeam({id:'classic-orl-2009',team:'Orlando Magic 2009',short:'Magic 2009',season:'2009',logo:'assets/team-logos/classic/orlando-magic-2009-transparent.png',theme:{a:'#0077C0',b:'#C4CED4',c:'#000000'},rows:[
-    ['Jameer Nelson','PG',[20,9,24,6,24,3,17],24,'jameer-nelson','2749'],
-    ['Courtney Lee','SG',[13,16,20,8,8,8,17],20,'courtney-lee','201584'],
-    ['Hedo Turkoglu','SF',[20,11,25,11,22,6,10],25,'hedo-turkoglu','2045'],
-    ['Rashard Lewis','PF',[21,16,28,17,10,9,13],26,'rashard-lewis','1740'],
-    ['Dwight Howard','C',[25,30,0,30,8,30,20],30,'dwight-howard','2730']
+    ['Jameer Nelson','PG',[21,9,22,16,25,8,24],24,'jameer-nelson','2749'],
+    ['Courtney Lee','SG',[14,16,19,11,14,17,25],20,'courtney-lee','201584'],
+    ['Hedo Turkoglu','SF',[19,11,20,20,23,16,17],25,'hedo-turkoglu','2045'],
+    ['Rashard Lewis','PF',[20,16,24,21,18,22,20],26,'rashard-lewis','1740'],
+    ['Dwight Howard','C',[23,30,11,28,10,30,20],30,'dwight-howard','2730']
   ]});
 
   const all=[...knicks.added,...hawks.added,...sixers.added,...knicks2012.added,...cavs.added,...bulls2011.added,...magic2009.added];

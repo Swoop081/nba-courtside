@@ -23,11 +23,11 @@
     logo:'assets/team-logos/classic/cleveland-cavaliers-1993-transparent.png',
     theme:{a:'#E35205',b:'#003DA5',c:'#FFFFFF'},
     rows:[
-      ['Mark Price','PG',[18,7,29,6,28,3,23],28,'mark-price','899'],
-      ['Craig Ehlo','SG',[12,14,23,10,11,7,20],19,'craig-ehlo','378'],
-      ['Gerald Wilkins','SF',[13,23,16,8,12,9,20],22,'gerald-wilkins','786'],
-      ['Larry Nance','PF',[17,28,2,19,10,26,20],25,'larry-nance','77685'],
-      ['Brad Daugherty','C',[20,22,1,24,16,18,12],27,'brad-daugherty','921']
+      ['Mark Price','PG',[22,7,20,8,28,14,25],28,'mark-price','899'],
+      ['Craig Ehlo','SG',[16,14,19,21,20,19,26],19,'craig-ehlo','378'],
+      ['Gerald Wilkins','SF',[18,23,17,15,20,18,25],22,'gerald-wilkins','786'],
+      ['Larry Nance','PF',[19,28,11,25,19,29,15],25,'larry-nance','77685'],
+      ['Brad Daugherty','C',[21,22,11,26,22,23,12],27,'brad-daugherty','921']
     ]
   });
 
@@ -36,11 +36,11 @@
     logo:'assets/team-logos/classic/san-antonio-spurs-1999-transparent.png',
     theme:{a:'#000000',b:'#C4CED4',c:'#EF426F'},
     rows:[
-      ['Avery Johnson','PG',[13,8,7,5,25,3,18],22,'avery-johnson','422'],
-      ['Mario Elie','SG',[10,10,24,6,10,6,17],21,'mario-elie','53'],
-      ['Sean Elliott','SF',[11,16,25,9,10,8,14],23,'sean-elliott','251'],
-      ['Tim Duncan','PF',[22,27,1,27,14,30,23],30,'tim-duncan','1495'],
-      ['David Robinson','C',[16,28,1,25,10,30,24],29,'david-robinson','764']
+      ['Avery Johnson','PG',[10,8,15,5,27,15,21],22,'avery-johnson','422'],
+      ['Mario Elie','SG',[15,10,18,16,19,17,24],21,'mario-elie','53'],
+      ['Sean Elliott','SF',[16,16,18,20,19,19,8],23,'sean-elliott','251'],
+      ['Tim Duncan','PF',[22,27,11,26,17,28,16],30,'tim-duncan','1495'],
+      ['David Robinson','C',[20,28,11,27,18,29,27],29,'david-robinson','764']
     ]
   });
 

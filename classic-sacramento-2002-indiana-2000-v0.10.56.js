@@ -34,11 +34,11 @@
       'Chris Webber':'chris-webber','Vlade Divac':'vlade-divac'
     },
     rows:[
-      ['Mike Bibby','PG',[14,12,24,6,17,8,21],22],
-      ['Doug Christie','SG',[12,17,22,11,15,9,30],24],
-      ['Peja Stojakovic','SF',[21,13,29,12,10,8,21],26],
-      ['Chris Webber','PF',[25,27,9,23,17,20,27],29],
-      ['Vlade Divac','C',[11,18,7,19,14,19,20],24]
+      ['Mike Bibby','PG',[19,12,18,10,24,16,22],22],
+      ['Doug Christie','SG',[15,17,19,20,23,19,28],24],
+      ['Peja Stojakovic','SF',[22,13,21,21,17,14,20],26],
+      ['Chris Webber','PF',[24,27,16,25,23,26,26],29],
+      ['Vlade Divac','C',[16,18,15,26,22,26,22],24]
     ]
   });
 
@@ -52,11 +52,11 @@
       'Dale Davis':'dale-davis','Rik Smits':'rik-smits'
     },
     rows:[
-      ['Mark Jackson','PG',[8,8,23,9,24,5,20],23],
-      ['Reggie Miller','SG',[18,10,29,7,10,9,20],25],
-      ['Jalen Rose','SF',[18,17,25,11,15,13,21],25],
-      ['Dale Davis','PF',[10,24,4,23,5,20,16],24],
-      ['Rik Smits','C',[13,19,5,12,6,20,10],21]
+      ['Mark Jackson','PG',[10,8,19,20,29,15,22],23],
+      ['Reggie Miller','SG',[21,10,21,5,18,19,20],25],
+      ['Jalen Rose','SF',[20,17,18,19,21,22,20],25],
+      ['Dale Davis','PF',[15,24,11,27,5,27,18],24],
+      ['Rik Smits','C',[22,19,11,24,14,27,8],21]
     ]
   });
 

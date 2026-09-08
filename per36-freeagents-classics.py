@@ -19,7 +19,7 @@ HIST_URL='https://raw.githubusercontent.com/cmuchina3/nba-stats-1947-present-cur
 def norm(s):
  s=unicodedata.normalize('NFKD',str(s)).encode('ascii','ignore').decode().lower(); s=re.sub(r'\b(jr|sr|ii|iii|iv)\b','',s); return re.sub('[^a-z0-9]','',s)
 def get(url):
- with urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=90) as r:return r.read().decode('utf-8-sig')
+ with urlopen(Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=20) as r:return r.read().decode('utf-8-sig')
 def half(x):return int(math.floor(x+.5))
 def prating(p):
  p=max(0,min(1,p))
@@ -83,7 +83,7 @@ def tuple_entries(path):
   try:old=[int(x.strip()) for x in m.group(6).split(',')]
   except:continue
   if len(old)!=7:continue
-  prefix=text[:m.start()]; seasons=re.findall(r"season\s*:\s*['\"](\d{4})['\"]",prefix); year=int(seasons[-1]) if seasons else 0
+  prefix=text[:m.start()]; seasons=re.findall(r"season\s*:\s*['\"](\d{4})['\"]",prefix); year=int(seasons[-1]) if seasons else (int(re.findall(r'(19\d{2}|20\d{2})',path)[-1]) if re.findall(r'(19\d{2}|20\d{2})',path) else 0)
   out.append({'file':path,'name':m.group(3),'position':m.group(5),'season':year,'old':old,'start':m.start()})
  return out
 
@@ -92,7 +92,7 @@ def historical_regular():
  def cc(*names):
   for n in names:
    if canon(n) in cmap:return cmap[canon(n)]
- name=cc('player'); season=cc('season'); team=cc('tm','team'); mp=cc('mp'); cols={'scoring':cc('pts'),'rebounding':cc('trb'),'passing':cc('ast'),'three':cc('3p','x3p','fg3m'),'steals':cc('stl'),'blocks':cc('blk')}
+ name=cc('player'); season=cc('season'); team=cc('tm','team'); mp=cc('mp'); cols={'scoring':cc('pts_per_36_min'),'rebounding':cc('trb_per_36_min'),'passing':cc('ast_per_36_min'),'three':cc('x3p_per_36_min'),'steals':cc('stl_per_36_min'),'blocks':cc('blk_per_36_min')}
  if not name or not season or any(v is None for v in cols.values()):raise RuntimeError('Historical Per36 schema unresolved: '+str(list(df.columns)))
  out=defaultdict(list)
  for _,r in df.iterrows():
@@ -151,12 +151,19 @@ def main():
  for f in files:entries+=tuple_entries(f)
  if len(files)<18 or len(entries)<80:raise RuntimeError(f'Classic discovery too small: {len(files)} files, {len(entries)} entries')
  hist=historical_regular(); years=sorted(set(p['season'] for p in entries)); pomaps={}
+ import time
  for y in years:
-  try:pomaps[y]=historical_playoffs(y)
-  except Exception as e:print('WARN playoff',y,e);pomaps[y]={}
+  pomaps[y]={}
+  for attempt in range(3):
+   try:
+    pomaps[y]=historical_playoffs(y); break
+   except Exception as e:
+    print('WARN playoff',y,'attempt',attempt+1,e)
+    if attempt<2: time.sleep(1.5*(attempt+1))
+  time.sleep(.35)
  missing=[]
  for p in entries:
-  rows=hist.get((norm(p['name']),p['season']),[])
+  classic_alias={'ronartest':'metta world peace','pennyhardaway':'anfernee hardaway'}; lookup=norm(classic_alias.get(norm(p['name']),p['name'])); rows=hist.get((lookup,p['season']),[])
   if not rows:missing.append(f"{p['name']} {p['season']}");continue
   rr=max(rows,key=lambda x:x['minutes']); adj=dict(rr['per36']); q=pomaps[p['season']].get(norm(p['name'])); pw=0
   if q:pw=CLASSIC_PO_CAP*min(1,q['minutes']/PO_FULL);adj={c:(1-pw)*adj[c]+pw*q['per36'][c] for c in CATS}

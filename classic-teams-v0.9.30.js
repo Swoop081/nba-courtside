@@ -13,19 +13,19 @@
   };
   const teams=[
     {id:'classic-tor-2003',team:'Toronto Raptors 2003',short:'Raptors 2003',season:'2003',logo:LOGOS.tor2003,theme:{a:'#753BBD',b:'#CE1141',c:'#111111'},rows:[
-      ['Alvin Williams','PG',[16,7,18,8,23,2,14]],['Vince Carter','SG',[28,30,24,18,20,10,18]],['Morris Peterson','SF',[20,18,23,15,14,7,16]],['Jerome Williams','PF',[14,24,4,28,10,12,20]],['Antonio Davis','C',[20,24,4,27,10,24,12]]
+      ['Alvin Williams','PG',[17,7,18,12,24,18,26]],['Vince Carter','SG',[23,30,19,19,20,25,22]],['Morris Peterson','SF',[17,18,19,18,18,20,21]],['Jerome Williams','PF',[8,24,11,26,11,20,28]],['Antonio Davis','C',[17,24,11,25,18,25,5]]
     ]},
     {id:'classic-sas-2005',team:'San Antonio Spurs 2005',short:'Spurs 2005',season:'2005',logo:LOGOS.sas2005,theme:{a:'#000000',b:'#C4CED4',c:'#6F7275'},rows:[
-      ['Tony Parker','PG',[25,22,13,10,27,2,15]],['Manu Ginóbili','SG',[24,25,24,14,24,6,24]],['Bruce Bowen','SF',[13,8,23,10,9,4,28]],['Tim Duncan','PF',[28,25,8,30,22,30,16]],['Rasho Nesterović','C',[14,16,2,24,8,24,8]]
+      ['Tony Parker','PG',[20,22,18,15,25,10,22]],['Manu Ginóbili','SG',[22,25,20,21,23,20,28]],['Bruce Bowen','SF',[5,8,19,16,14,22,16]],['Tim Duncan','PF',[23,25,11,27,19,29,10]],['Rasho Nesterović','C',[5,16,11,25,8,29,8]]
     ]},
     {id:'classic-chi-1998',team:'Chicago Bulls 1998',short:'Bulls 1998',season:'1998',logo:LOGOS.chi1998,theme:{a:'#CE1141',b:'#FFFFFF',c:'#111111'},rows:[
-      ['Ron Harper','PG',[16,19,12,13,18,8,24]],['Michael Jordan','SG',[30,29,20,19,23,12,27]],['Scottie Pippen','SF',[27,27,20,24,26,16,29]],['Dennis Rodman','PF',[10,15,2,30,16,16,20]],['Luc Longley','C',[14,15,3,22,10,18,8]]
+      ['Ron Harper','PG',[12,19,16,19,21,24,27]],['Michael Jordan','SG',[27,29,17,21,20,22,27]],['Scottie Pippen','SF',[20,27,19,20,24,25,28]],['Dennis Rodman','PF',[5,15,16,29,19,17,10]],['Luc Longley','C',[16,15,11,23,20,26,16]]
     ]},
     {id:'classic-lal-2002',team:'Los Angeles Lakers 2002',short:'Lakers 2002',season:'2002',logo:LOGOS.lal2002,theme:{a:'#552583',b:'#FDB927',c:'#111111'},rows:[
-      ['Derek Fisher','PG',[18,8,25,7,20,2,18]],['Kobe Bryant','SG',[29,30,24,18,23,10,24]],['Rick Fox','SF',[16,13,21,13,14,7,20]],['Robert Horry','PF',[17,20,24,19,16,17,18]],["Shaquille O'Neal",'C',[30,30,1,30,14,28,8]]
+      ['Derek Fisher','PG',[16,8,23,5,20,15,22]],['Kobe Bryant','SG',[24,30,18,20,23,21,25]],['Rick Fox','SF',[8,13,18,22,23,18,21]],['Robert Horry','PF',[5,20,19,24,21,26,25]],["Shaquille O'Neal",'C',[27,30,11,26,19,28,8]]
     ]},
     {id:'classic-hou-1995',team:'Houston Rockets 1995',short:'Rockets 1995',season:'1995',logo:LOGOS.hou1995,theme:{a:'#CE1141',b:'#FDB927',c:'#111111'},rows:[
-      ['Kenny Smith','PG',[19,9,26,7,23,2,12]],['Clyde Drexler','SG',[27,29,20,21,23,9,23]],['Robert Horry','SF',[19,23,23,22,14,24,20]],['Carl Herrera','PF',[13,18,2,21,8,15,10]],['Hakeem Olajuwon','C',[30,28,10,30,20,30,25]]
+      ['Kenny Smith','PG',[18,9,23,5,24,15,23]],['Clyde Drexler','SG',[23,29,21,22,23,22,28]],['Robert Horry','SF',[12,23,20,21,21,26,27]],['Carl Herrera','PF',[12,18,11,24,8,25,21]],['Hakeem Olajuwon','C',[26,28,15,26,20,30,27]]
     ]}
   ];
   const nameCounts={};

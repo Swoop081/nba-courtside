@@ -33,11 +33,11 @@
     logo:'assets/team-logos/classic/phoenix-suns-2007.svg',theme:{a:'#1D1160',b:'#E56020',c:'#F9A01B'},
     slugs:{'Steve Nash':'steve-nash','Raja Bell':'raja-bell','Shawn Marion':'shawn-marion','Boris Diaw':'boris-diaw',"Amar'e Stoudemire":'amare-stoudemire'},
     rows:[
-      ['Steve Nash','PG',[19,4,30,8,30,5,17],27],
-      ['Raja Bell','SG',[15,8,27,7,10,9,15],20],
-      ['Shawn Marion','SF',[18,27,14,23,8,21,30],27],
-      ['Boris Diaw','PF',[10,14,18,10,17,12,11],19],
-      ["Amar'e Stoudemire",'C',[20,30,7,22,5,20,20],26]
+      ['Steve Nash','PG',[21,4,21,15,30,10,15],27],
+      ['Raja Bell','SG',[16,8,23,10,18,18,10],20],
+      ['Shawn Marion','SF',[19,27,18,25,11,27,28],27],
+      ['Boris Diaw','PF',[12,14,16,20,24,22,8],19],
+      ["Amar'e Stoudemire",'C',[24,30,15,26,5,27,21],26]
     ]
   });
 
@@ -47,11 +47,11 @@
     logo:'assets/team-logos/classic/dallas-mavericks-1995.svg',theme:{a:'#0B60AD',b:'#1F9B48',c:'#FFFFFF'},
     slugs:{'Jason Kidd':'jason-kidd','Jim Jackson':'jim-jackson','Jamal Mashburn':'jamal-mashburn','Popeye Jones':'popeye-jones','Lorenzo Williams':'lorenzo-williams'},
     rows:[
-      ['Jason Kidd','PG',[12,18,17,12,24,9,29],25],
-      ['Jim Jackson','SG',[26,18,24,12,14,8,13],25],
-      ['Jamal Mashburn','SF',[24,22,25,9,15,8,20],26],
-      ['Popeye Jones','PF',[10,16,7,24,9,9,15],18],
-      ['Lorenzo Williams','C',[4,18,6,15,4,23,13],16]
+      ['Jason Kidd','PG',[15,18,18,21,28,18,28],25],
+      ['Jim Jackson','SG',[25,18,18,20,20,16,8],25],
+      ['Jamal Mashburn','SF',[24,22,19,16,21,10,20],26],
+      ['Popeye Jones','PF',[15,16,11,28,18,20,8],18],
+      ['Lorenzo Williams','C',[5,18,11,26,15,28,17],16]
     ]
   });
 

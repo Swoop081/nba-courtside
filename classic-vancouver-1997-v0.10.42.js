@@ -14,11 +14,11 @@
      blocks = round(30*sqrt(BPG/3)); steals = round(30*(SPG/2)^.60);
      3PT is era-relative and dunking is subjective by athleticism/role/reputation. */
   const rows=[
-    ['Greg Anthony','PG',[10,7,22,5,21,8,27],22],
-    ['Anthony Peeler','SG',[14,16,27,8,14,8,25],22],
-    ['Shareef Abdur-Rahim','SF',[19,26,17,16,10,17,20],26],
-    ['George Lynch','PF',[8,20,11,15,8,12,24],19],
-    ['Bryant Reeves','C',[16,18,6,19,9,17,13],23]
+    ['Greg Anthony','PG',[14,7,20,15,27,10,29],22],
+    ['Anthony Peeler','SG',[19,16,21,16,22,18,27],22],
+    ['Shareef Abdur-Rahim','SF',[21,26,16,23,17,25,20],26],
+    ['George Lynch','PF',[12,20,16,25,18,22,28],19],
+    ['Bryant Reeves','C',[19,18,11,24,16,24,5],23]
   ];
   const slugs={
     'Greg Anthony':'greg-anthony',

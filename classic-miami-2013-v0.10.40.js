@@ -14,11 +14,11 @@
      blocks = round(30*sqrt(BPG/3)); steals = round(30*(SPG/2)^.60);
      3PT uses the approved efficiency/makes/attempts blend and dunking is subjective by athleticism/role/reputation. */
   const rows=[
-    ['Mario Chalmers','PG',[9,8,24,5,13,8,25],21],
-    ['Dwyane Wade','SG',[21,28,8,12,17,15,29],28],
-    ['Shane Battier','SF',[7,10,27,5,5,15,15],19],
-    ['LeBron James','PF',[27,30,25,18,23,16,27],30],
-    ['Chris Bosh','C',[17,22,12,16,8,20,19],25]
+    ['Mario Chalmers','PG',[12,8,21,8,23,14,28],21],
+    ['Dwyane Wade','SG',[23,28,16,20,24,24,28],28],
+    ['Shane Battier','SF',[5,10,24,12,10,25,16],19],
+    ['LeBron James','PF',[26,30,19,24,26,23,27],30],
+    ['Chris Bosh','C',[20,22,17,24,15,27,20],25]
   ];
   const slugs={
     'Mario Chalmers':'mario-chalmers',
