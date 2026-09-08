@@ -24,9 +24,10 @@ jobs:
           p=Path('per36-freeagents-classics.py'); s=p.read_text()
           s=s.replace("cols={'scoring':cc('pts'),'rebounding':cc('trb'),'passing':cc('ast'),'three':cc('3p','x3p','fg3m'),'steals':cc('stl'),'blocks':cc('blk')}","cols={'scoring':cc('pts_per_36_min'),'rebounding':cc('trb_per_36_min'),'passing':cc('ast_per_36_min'),'three':cc('x3p_per_36_min'),'steals':cc('stl_per_36_min'),'blocks':cc('blk_per_36_min')}")
           s=s.replace("year=int(seasons[-1]) if seasons else 0","year=int(seasons[-1]) if seasons else (int(re.findall(r'(19\\d{2}|20\\d{2})',path)[-1]) if re.findall(r'(19\\d{2}|20\\d{2})',path) else 0)")
+          s=s.replace("rows=hist.get((norm(p['name']),p['season']),[])","classic_alias={'ronartest':'metta world peace','pennyhardaway':'anfernee hardaway'}; lookup=norm(classic_alias.get(norm(p['name']),p['name'])); rows=hist.get((lookup,p['season']),[])")
           s=s.replace('timeout=90','timeout=20')
           old="""pomaps={}\n for y in years:\n  try:pomaps[y]=historical_playoffs(y)\n  except Exception as e:print('WARN playoff',y,e);pomaps[y]={}"""
-          new="""pomaps={}\n from concurrent.futures import ThreadPoolExecutor\n def fetch_po(y):\n  try:return y,historical_playoffs(y)\n  except Exception as e:print('WARN playoff',y,e);return y,{}\n with ThreadPoolExecutor(max_workers=8) as ex:\n  for y,m in ex.map(fetch_po,years):pomaps[y]=m"""
+          new="""pomaps={}\n import time\n for y in years:\n  pomaps[y]={}\n  for attempt in range(3):\n   try:\n    pomaps[y]=historical_playoffs(y); break\n   except Exception as e:\n    print('WARN playoff',y,'attempt',attempt+1,e)\n    if attempt<2: time.sleep(1.5*(attempt+1))\n  time.sleep(.35)"""
           if old not in s: raise SystemExit('playoff patch target missing')
           s=s.replace(old,new); p.write_text(s)
           PY
@@ -44,7 +45,8 @@ jobs:
           assert statistics.median(p['ratings']['scoring'] for p in cl['players'])>5
           for n in ['Michael Jordan','LeBron James','Allen Iverson']:
            h=[p for p in cl['players'] if p['name']==n]; assert h and max(p['ratings']['scoring'] for p in h)>=20,n
-          print({'freeAgents':fa['count'],'classicFiles':len(cl['classicFiles']),'classicEntries':cl['count'],'classicPlayoffMatches':cl['playoffMatches']})
+          assert cl['playoffMatches']>=0
+          print({'freeAgents':fa['count'],'classicFiles':len(cl['classicFiles']),'classicEntries':cl['count'],'classicPlayoffMatches':cl['playoffMatches'],'classicMedianScoring':statistics.median(p['ratings']['scoring'] for p in cl['players'])})
           PY
       - name: Commit
         run: |
