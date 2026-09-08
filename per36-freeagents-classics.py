@@ -10,7 +10,7 @@ KNOTS=[(0.00,5),(0.01,10),(0.05,15),(0.15,18),(0.30,20),(0.50,22),(0.70,24),(0.8
 FULL_CONF_MINUTES=1000.0
 PLAYOFF_FULL_CONF_MINUTES=150.0
 CLASSIC_PLAYOFF_MAX=0.15
-MODERN_REG_URL='https://raw.githubusercontent.com/EasySportsApps/nba_api_25_26_data/main/nba_players_25_26_regular_season_wide_data.csv'
+MODERN_REG_URL='https://raw.githubusercontent.com/EasySportsApps/nba_api_25_26_data/main/nba_players_regular_season_25_26_wide_data.csv'
 PRIOR_URL='https://raw.githubusercontent.com/coder-data/NBA-Stats-Salaries-2024-2025/main/NBA%20Player%20Statistics%202024-2025.csv'
 MODERN_PO_URL='https://raw.githubusercontent.com/llimllib/nba_data/main/data/players_2026_playoffs.parquet'
 HIST_REG_URL='https://raw.githubusercontent.com/cmuchina3/nba-stats-1947-present-curated/main/data/raw/Per%2036%20Minutes.csv'
@@ -67,26 +67,21 @@ def prior_map():
     return out
 
 def modern_regular_map():
-    text=download_text(MODERN_REG_URL); df=pd.read_csv(io.StringIO(text))
-    def find(*parts):
-        for c in df.columns:
-            s=str(c).lower().replace('_',' ')
-            if all(p in s for p in parts): return c
-        return None
-    name=find('player','name') or find('player'); mins=find('minutes') or find('min')
-    cols={'scoring':find('points'),'rebounding':find('rebounds'),'passing':find('assists'),'three':find('three','made') or find('3pm'),'steals':find('steals'),'blocks':find('blocks')}
-    # Known EasySportsApps wide schema uses total component names; resolve common abbreviations too.
-    for k,candidates in {'scoring':['pts','points'],'rebounding':['reb','trb','rebounds'],'passing':['ast','assists'],'three':['fg3m','3pm','three_point_field_goals_made'],'steals':['stl','steals'],'blocks':['blk','blocks']}.items():
-        if cols[k] is None:
-            for cand in candidates:
-                hit=next((c for c in df.columns if str(c).lower()==cand),None)
-                if hit is not None: cols[k]=hit; break
+    df=pd.read_csv(io.StringIO(download_text(MODERN_REG_URL)))
     out={}
     for _,r in df.iterrows():
-        k=norm(r[name]); m=float(r[mins] or 0)
+        k=norm(r['player_name']); m=float(r['minutes_played'] or 0)
         if not k or m<=0: continue
-        vals={c:float(r[col] or 0)/m*36 for c,col in cols.items()}
-        if k not in out or m>out[k]['minutes']: out[k]={'minutes':m,'raw':vals,'row':r}
+        vals={
+          'scoring':(float(r['one_point_made'] or 0)+2*float(r['two_point_made'] or 0)+3*float(r['three_point_made'] or 0))/m*36,
+          'rebounding':(float(r['offensive_rebounds'] or 0)+float(r['defensive_rebounds'] or 0))/m*36,
+          'passing':float(r['assists'] or 0)/m*36,
+          'three':float(r['three_point_made'] or 0)/m*36,
+          'steals':float(r['steals'] or 0)/m*36,
+          'blocks':float(r['blocks'] or 0)/m*36,
+        }
+        gp=float(r['wins'] or 0)+float(r['losses'] or 0)
+        if k not in out or m>out[k]['minutes']: out[k]={'minutes':m,'gp':gp,'raw':vals,'row':r}
     return out
 
 def parquet_rows(url):
@@ -107,7 +102,7 @@ def parquet_rows(url):
         for c in CATS:
             pc=stats[c]
             vals[c]=float(r[pc]) if pc and not pd.isna(r[pc]) else float(r[totals[c]] if totals[c] and not pd.isna(r[totals[c]]) else 0)/m*36
-        item={'minutes':m,'gp':float(r[gp] if gp and not pd.isna(r[gp]) else 1),'per36':vals,'age':float(r[age] if age and not pd.isna(r[age]) else 99),'draftYear':int(float(r[draft])) if draft and not pd.isna(r[draft]) else 0}
+        item={'minutes':m,'gp':float(r[gp] if gp and not pd.isna(r[gp]) else 1),'per36':vals,'age':float(r[age] if age and not pd.isna(r[age]) else 99),'draftYear':int(float(r[draft])) if draft and not pd.isna(r[draft]) and str(r[draft]).replace('.', '', 1).isdigit() else 0}
         if k not in out or m>out[k]['minutes']:out[k]=item
     return out
 
@@ -215,7 +210,7 @@ def main():
             w=0; adj=dict(base); source='position baseline (no NBA season sample)'
         powt=0; po=mpo.get(k)
         if current and po:
-            conf=min(1,po['minutes']/PLAYOFF_FULL_CONF_MINUTES); regmpg=current['minutes']/max(1,float(current['row'].get('gp',current['row'].get('GP',82)) or 82)); pompg=po['minutes']/max(1,po['gp']); ratio=pompg/regmpg if regmpg else 1
+            conf=min(1,po['minutes']/PLAYOFF_FULL_CONF_MINUTES); regmpg=current['minutes']/max(1,current.get('gp',82)); pompg=po['minutes']/max(1,po['gp']); ratio=pompg/regmpg if regmpg else 1
             young=po['age']<=23 or po['draftYear']>=2024; cap=(.35 if young and ratio>=1.15 else .30 if young else .15 if ratio>=1.15 else .12); basew=.30 if young else .12; powt=min(cap,basew*conf*max(.75,min(1.25,ratio)))
             adj={c:(1-powt)*adj[c]+powt*po['per36'][c] for c in CATS}
         ratings={c:rating_against(bvals[c],adj[c]) for c in CATS}

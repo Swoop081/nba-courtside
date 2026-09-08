@@ -1,0 +1,1114 @@
+{
+  "schema": "nba-starting5-classics-per36-v1",
+  "count": 24,
+  "benchmarkPopulation": 150,
+  "classicFiles": [
+    "classic-boston-1986-v0.10.37.js",
+    "classic-boston-2008-v0.10.58.js",
+    "classic-charlotte-1993-v0.10.38.js",
+    "classic-dallas-2011-v0.10.55.js",
+    "classic-detroit-1989-v0.10.57.js",
+    "classic-detroit-2004-v0.10.34.js",
+    "classic-expansion-v0.10.82.js",
+    "classic-expansion-v0.10.83.js",
+    "classic-expansion-v0.10.84.js",
+    "classic-expansion-v0.11.30.js",
+    "classic-lakers-1987-v0.10.36.js",
+    "classic-miami-2013-v0.10.40.js",
+    "classic-phoenix-2007-dallas-1995-v0.10.35.js",
+    "classic-sacramento-2002-indiana-2000-v0.10.56.js",
+    "classic-seattle-1996-v0.10.41.js",
+    "classic-teams-v0.9.30.js",
+    "classic-utah-1997-v0.10.39.js",
+    "classic-vancouver-1997-v0.10.42.js"
+  ],
+  "playoffYearsFetched": {
+    "1995": true,
+    "1998": true,
+    "2002": true,
+    "2003": true,
+    "2005": true
+  },
+  "players": [
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Alvin Williams",
+      "position": "PG",
+      "season": 2003,
+      "old": [
+        16,
+        7,
+        18,
+        8,
+        23,
+        2,
+        14
+      ],
+      "start": 928,
+      "end": 971,
+      "new": [
+        5,
+        7,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2003,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Vince Carter",
+      "position": "SG",
+      "season": 2003,
+      "old": [
+        28,
+        30,
+        24,
+        18,
+        20,
+        10,
+        18
+      ],
+      "start": 972,
+      "end": 1016,
+      "new": [
+        5,
+        30,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2003,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Morris Peterson",
+      "position": "SF",
+      "season": 2003,
+      "old": [
+        20,
+        18,
+        23,
+        15,
+        14,
+        7,
+        16
+      ],
+      "start": 1017,
+      "end": 1063,
+      "new": [
+        5,
+        18,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2003,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Jerome Williams",
+      "position": "PF",
+      "season": 2003,
+      "old": [
+        14,
+        24,
+        4,
+        28,
+        10,
+        12,
+        20
+      ],
+      "start": 1064,
+      "end": 1110,
+      "new": [
+        5,
+        24,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2003,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Antonio Davis",
+      "position": "C",
+      "season": 2003,
+      "old": [
+        20,
+        24,
+        4,
+        27,
+        10,
+        24,
+        12
+      ],
+      "start": 1111,
+      "end": 1154,
+      "new": [
+        5,
+        24,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2003,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Tony Parker",
+      "position": "PG",
+      "season": 2005,
+      "old": [
+        25,
+        22,
+        13,
+        10,
+        27,
+        2,
+        15
+      ],
+      "start": 1329,
+      "end": 1371,
+      "new": [
+        5,
+        22,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2005,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Manu Ginóbili",
+      "position": "SG",
+      "season": 2005,
+      "old": [
+        24,
+        25,
+        24,
+        14,
+        24,
+        6,
+        24
+      ],
+      "start": 1372,
+      "end": 1416,
+      "new": [
+        5,
+        25,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2005,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Bruce Bowen",
+      "position": "SF",
+      "season": 2005,
+      "old": [
+        13,
+        8,
+        23,
+        10,
+        9,
+        4,
+        28
+      ],
+      "start": 1417,
+      "end": 1457,
+      "new": [
+        5,
+        8,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2005,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Tim Duncan",
+      "position": "PF",
+      "season": 2005,
+      "old": [
+        28,
+        25,
+        8,
+        30,
+        22,
+        30,
+        16
+      ],
+      "start": 1458,
+      "end": 1499,
+      "new": [
+        5,
+        25,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2005,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Rasho Nesterović",
+      "position": "C",
+      "season": 2005,
+      "old": [
+        14,
+        16,
+        2,
+        24,
+        8,
+        24,
+        8
+      ],
+      "start": 1500,
+      "end": 1544,
+      "new": [
+        5,
+        16,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2005,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Ron Harper",
+      "position": "PG",
+      "season": 1998,
+      "old": [
+        16,
+        19,
+        12,
+        13,
+        18,
+        8,
+        24
+      ],
+      "start": 1715,
+      "end": 1756,
+      "new": [
+        5,
+        19,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1998,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Michael Jordan",
+      "position": "SG",
+      "season": 1998,
+      "old": [
+        30,
+        29,
+        20,
+        19,
+        23,
+        12,
+        27
+      ],
+      "start": 1757,
+      "end": 1803,
+      "new": [
+        5,
+        29,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1998,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Scottie Pippen",
+      "position": "SF",
+      "season": 1998,
+      "old": [
+        27,
+        27,
+        20,
+        24,
+        26,
+        16,
+        29
+      ],
+      "start": 1804,
+      "end": 1850,
+      "new": [
+        5,
+        27,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1998,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Dennis Rodman",
+      "position": "PF",
+      "season": 1998,
+      "old": [
+        10,
+        15,
+        2,
+        30,
+        16,
+        16,
+        20
+      ],
+      "start": 1851,
+      "end": 1895,
+      "new": [
+        5,
+        15,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1998,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Luc Longley",
+      "position": "C",
+      "season": 1998,
+      "old": [
+        14,
+        15,
+        3,
+        22,
+        10,
+        18,
+        8
+      ],
+      "start": 1896,
+      "end": 1936,
+      "new": [
+        5,
+        15,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1998,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Derek Fisher",
+      "position": "PG",
+      "season": 2002,
+      "old": [
+        18,
+        8,
+        25,
+        7,
+        20,
+        2,
+        18
+      ],
+      "start": 2113,
+      "end": 2154,
+      "new": [
+        5,
+        8,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2002,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Kobe Bryant",
+      "position": "SG",
+      "season": 2002,
+      "old": [
+        29,
+        30,
+        24,
+        18,
+        23,
+        10,
+        24
+      ],
+      "start": 2155,
+      "end": 2198,
+      "new": [
+        5,
+        30,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2002,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Rick Fox",
+      "position": "SF",
+      "season": 2002,
+      "old": [
+        16,
+        13,
+        21,
+        13,
+        14,
+        7,
+        20
+      ],
+      "start": 2199,
+      "end": 2238,
+      "new": [
+        5,
+        13,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2002,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Robert Horry",
+      "position": "PF",
+      "season": 2002,
+      "old": [
+        17,
+        20,
+        24,
+        19,
+        16,
+        17,
+        18
+      ],
+      "start": 2239,
+      "end": 2283,
+      "new": [
+        5,
+        20,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 2002,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Kenny Smith",
+      "position": "PG",
+      "season": 1995,
+      "old": [
+        19,
+        9,
+        26,
+        7,
+        23,
+        2,
+        12
+      ],
+      "start": 2504,
+      "end": 2544,
+      "new": [
+        5,
+        9,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1995,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Clyde Drexler",
+      "position": "SG",
+      "season": 1995,
+      "old": [
+        27,
+        29,
+        20,
+        21,
+        23,
+        9,
+        23
+      ],
+      "start": 2545,
+      "end": 2589,
+      "new": [
+        5,
+        29,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1995,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Robert Horry",
+      "position": "SF",
+      "season": 1995,
+      "old": [
+        19,
+        23,
+        23,
+        22,
+        14,
+        24,
+        20
+      ],
+      "start": 2590,
+      "end": 2634,
+      "new": [
+        5,
+        23,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1995,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Carl Herrera",
+      "position": "PF",
+      "season": 1995,
+      "old": [
+        13,
+        18,
+        2,
+        21,
+        8,
+        15,
+        10
+      ],
+      "start": 2635,
+      "end": 2677,
+      "new": [
+        5,
+        18,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1995,
+      "playoffMatched": false
+    },
+    {
+      "file": "classic-teams-v0.9.30.js",
+      "name": "Hakeem Olajuwon",
+      "position": "C",
+      "season": 1995,
+      "old": [
+        30,
+        28,
+        10,
+        30,
+        20,
+        30,
+        25
+      ],
+      "start": 2678,
+      "end": 2724,
+      "new": [
+        5,
+        28,
+        11,
+        5,
+        5,
+        5,
+        5
+      ],
+      "adjusted": {
+        "scoring": 0,
+        "rebounding": 0,
+        "passing": 0,
+        "three": 0,
+        "steals": 0,
+        "blocks": 0
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 5,
+        "passing": 5,
+        "three": 11,
+        "steals": 5,
+        "blocks": 5
+      },
+      "playoffWeight": 0,
+      "regularSourceYear": 1995,
+      "playoffMatched": false
+    }
+  ]
+}
