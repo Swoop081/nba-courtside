@@ -1,0 +1,4067 @@
+{
+  "schema": "nba-starting5-per36-calibration-150-v1",
+  "population": 150,
+  "teamCount": 30,
+  "source": "2025-26 NBA regular-season totals from an official-NBA-Stats-API export; converted to Per36",
+  "formula": "min=5, min/max midpoint=15, max=30; piecewise linear; half-up; clamp 5..30",
+  "substitutions": [
+    {
+      "team": "BKN",
+      "projected": "Mikel Brown Jr.",
+      "auditPlayer": "Ben Saraf"
+    },
+    {
+      "team": "SAC",
+      "projected": "Darius Acuff Jr.",
+      "auditPlayer": "Malik Monk"
+    },
+    {
+      "team": "MEM",
+      "projected": "Cameron Boozer",
+      "auditPlayer": "Jerami Grant"
+    },
+    {
+      "team": "CHI",
+      "projected": "Caleb Wilson",
+      "auditPlayer": "Patrick Williams"
+    },
+    {
+      "team": "GSW",
+      "projected": "Yaxel Lendeborg",
+      "auditPlayer": "Moses Moody"
+    },
+    {
+      "team": "WAS",
+      "projected": "AJ Dybantsa",
+      "auditPlayer": "Tre Johnson"
+    },
+    {
+      "team": "UTA",
+      "projected": "Darryn Peterson",
+      "auditPlayer": "Ace Bailey"
+    },
+    {
+      "team": "DAL",
+      "projected": "Kyrie Irving",
+      "auditPlayer": "AJ Johnson"
+    },
+    {
+      "team": "NOP",
+      "projected": "Herb Jones",
+      "auditPlayer": "Jeremiah Fears"
+    },
+    {
+      "team": "POR",
+      "projected": "Damian Lillard",
+      "auditPlayer": "Shaedon Sharpe"
+    },
+    {
+      "team": "HOU",
+      "projected": "Fred VanVleet",
+      "auditPlayer": "Reed Sheppard"
+    },
+    {
+      "team": "IND",
+      "projected": "Tyrese Haliburton",
+      "auditPlayer": "Ben Sheppard"
+    }
+  ],
+  "anchors": {
+    "scoring": {
+      "rating5": 9.369,
+      "rating15": 21.884,
+      "rating30": 34.398
+    },
+    "rebounding": {
+      "rating5": 2.814,
+      "rating15": 9.453,
+      "rating30": 16.092
+    },
+    "passing": {
+      "rating5": 1.065,
+      "rating15": 6.161,
+      "rating30": 11.257
+    },
+    "three": {
+      "rating5": 0.0,
+      "rating15": 2.574,
+      "rating30": 5.148
+    },
+    "steals": {
+      "rating5": 0.375,
+      "rating15": 1.574,
+      "rating30": 2.773
+    },
+    "blocks": {
+      "rating5": 0.0,
+      "rating15": 1.901,
+      "rating30": 3.801
+    }
+  },
+  "distribution": {
+    "scoring": {
+      "5": 2,
+      "6": 3,
+      "7": 4,
+      "8": 7,
+      "9": 10,
+      "10": 8,
+      "11": 15,
+      "12": 15,
+      "13": 14,
+      "14": 8,
+      "15": 9,
+      "16": 13,
+      "17": 4,
+      "18": 7,
+      "19": 7,
+      "20": 7,
+      "21": 3,
+      "22": 2,
+      "23": 1,
+      "24": 1,
+      "25": 3,
+      "26": 4,
+      "27": 0,
+      "28": 0,
+      "29": 2,
+      "30": 1
+    },
+    "rebounding": {
+      "5": 3,
+      "6": 8,
+      "7": 23,
+      "8": 21,
+      "9": 11,
+      "10": 16,
+      "11": 9,
+      "12": 14,
+      "13": 8,
+      "14": 7,
+      "15": 2,
+      "16": 1,
+      "17": 4,
+      "18": 0,
+      "19": 4,
+      "20": 1,
+      "21": 3,
+      "22": 3,
+      "23": 2,
+      "24": 2,
+      "25": 3,
+      "26": 2,
+      "27": 0,
+      "28": 1,
+      "29": 1,
+      "30": 1
+    },
+    "passing": {
+      "5": 1,
+      "6": 6,
+      "7": 13,
+      "8": 16,
+      "9": 14,
+      "10": 17,
+      "11": 16,
+      "12": 15,
+      "13": 6,
+      "14": 10,
+      "15": 4,
+      "16": 4,
+      "17": 6,
+      "18": 6,
+      "19": 0,
+      "20": 1,
+      "21": 6,
+      "22": 0,
+      "23": 3,
+      "24": 1,
+      "25": 0,
+      "26": 0,
+      "27": 2,
+      "28": 1,
+      "29": 1,
+      "30": 1
+    },
+    "three": {
+      "5": 14,
+      "6": 4,
+      "7": 4,
+      "8": 3,
+      "9": 7,
+      "10": 7,
+      "11": 9,
+      "12": 12,
+      "13": 19,
+      "14": 13,
+      "15": 8,
+      "16": 7,
+      "17": 15,
+      "18": 5,
+      "19": 7,
+      "20": 4,
+      "21": 1,
+      "22": 6,
+      "23": 1,
+      "24": 1,
+      "25": 0,
+      "26": 1,
+      "27": 0,
+      "28": 1,
+      "29": 0,
+      "30": 1
+    },
+    "steals": {
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 15,
+      "9": 21,
+      "10": 12,
+      "11": 17,
+      "12": 25,
+      "13": 16,
+      "14": 14,
+      "15": 7,
+      "16": 5,
+      "17": 5,
+      "18": 0,
+      "19": 0,
+      "20": 1,
+      "21": 2,
+      "22": 4,
+      "23": 0,
+      "24": 0,
+      "25": 1,
+      "26": 0,
+      "27": 0,
+      "28": 1,
+      "29": 0,
+      "30": 1
+    },
+    "blocks": {
+      "5": 2,
+      "6": 23,
+      "7": 40,
+      "8": 22,
+      "9": 18,
+      "10": 10,
+      "11": 7,
+      "12": 9,
+      "13": 2,
+      "14": 3,
+      "15": 5,
+      "16": 0,
+      "17": 3,
+      "18": 1,
+      "19": 1,
+      "20": 0,
+      "21": 2,
+      "22": 0,
+      "23": 0,
+      "24": 0,
+      "25": 0,
+      "26": 0,
+      "27": 1,
+      "28": 0,
+      "29": 0,
+      "30": 1
+    }
+  },
+  "top5": {
+    "scoring": [
+      {
+        "name": "Giannis Antetokounmpo",
+        "team": "MIA",
+        "raw": 34.3985,
+        "rating": 30
+      },
+      {
+        "name": "Shai Gilgeous-Alexander",
+        "team": "OKC",
+        "raw": 33.7378,
+        "rating": 29
+      },
+      {
+        "name": "Luka Doncic",
+        "team": "LAL",
+        "raw": 33.7097,
+        "rating": 29
+      },
+      {
+        "name": "Ty Jerome",
+        "team": "MEM",
+        "raw": 31.3563,
+        "rating": 26
+      },
+      {
+        "name": "Kawhi Leonard",
+        "team": "TOR",
+        "raw": 31.3077,
+        "rating": 26
+      }
+    ],
+    "rebounding": [
+      {
+        "name": "Mitchell Robinson",
+        "team": "BOS",
+        "raw": 16.0919,
+        "rating": 30
+      },
+      {
+        "name": "Zach Edey",
+        "team": "MEM",
+        "raw": 15.4729,
+        "rating": 29
+      },
+      {
+        "name": "Donovan Clingan",
+        "team": "POR",
+        "raw": 15.3379,
+        "rating": 28
+      },
+      {
+        "name": "Victor Wembanyama",
+        "team": "SAS",
+        "raw": 14.202,
+        "rating": 26
+      },
+      {
+        "name": "Jusuf Nurkic",
+        "team": "UTA",
+        "raw": 14.1265,
+        "rating": 26
+      }
+    ],
+    "passing": [
+      {
+        "name": "Trae Young",
+        "team": "WAS",
+        "raw": 11.2572,
+        "rating": 30
+      },
+      {
+        "name": "Nikola Jokic",
+        "team": "DEN",
+        "raw": 11.0789,
+        "rating": 29
+      },
+      {
+        "name": "Cade Cunningham",
+        "team": "DET",
+        "raw": 10.5099,
+        "rating": 28
+      },
+      {
+        "name": "Josh Giddey",
+        "team": "CHI",
+        "raw": 10.2717,
+        "rating": 27
+      },
+      {
+        "name": "Ja Morant",
+        "team": "POR",
+        "raw": 10.1953,
+        "rating": 27
+      }
+    ],
+    "three": [
+      {
+        "name": "Stephen Curry",
+        "team": "GSW",
+        "raw": 5.1478,
+        "rating": 30
+      },
+      {
+        "name": "LaMelo Ball",
+        "team": "MIN",
+        "raw": 4.8537,
+        "rating": 28
+      },
+      {
+        "name": "Ty Jerome",
+        "team": "MEM",
+        "raw": 4.4643,
+        "rating": 26
+      },
+      {
+        "name": "Max Strus",
+        "team": "CLE",
+        "raw": 4.1208,
+        "rating": 24
+      },
+      {
+        "name": "Luka Doncic",
+        "team": "LAL",
+        "raw": 3.9955,
+        "rating": 23
+      }
+    ],
+    "steals": [
+      {
+        "name": "Ausar Thompson",
+        "team": "DET",
+        "raw": 2.7727,
+        "rating": 30
+      },
+      {
+        "name": "Cason Wallace",
+        "team": "OKC",
+        "raw": 2.6392,
+        "rating": 28
+      },
+      {
+        "name": "Jalen Suggs",
+        "team": "ORL",
+        "raw": 2.4022,
+        "rating": 25
+      },
+      {
+        "name": "Dyson Daniels",
+        "team": "ATL",
+        "raw": 2.129,
+        "rating": 22
+      },
+      {
+        "name": "Dejounte Murray",
+        "team": "NOP",
+        "raw": 2.1263,
+        "rating": 22
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Victor Wembanyama",
+        "team": "SAS",
+        "raw": 3.8014,
+        "rating": 30
+      },
+      {
+        "name": "Dereck Lively II",
+        "team": "DAL",
+        "raw": 3.4353,
+        "rating": 27
+      },
+      {
+        "name": "Zach Edey",
+        "team": "MEM",
+        "raw": 2.6634,
+        "rating": 21
+      },
+      {
+        "name": "Alex Sarr",
+        "team": "WAS",
+        "raw": 2.6214,
+        "rating": 21
+      },
+      {
+        "name": "Chet Holmgren",
+        "team": "OKC",
+        "raw": 2.3612,
+        "rating": 19
+      }
+    ]
+  },
+  "players": [
+    {
+      "team": "MIL",
+      "name": "Ryan Rollins",
+      "positionIndex": 0,
+      "nbaPlayerId": "1631157",
+      "sourceName": "Ryan Rollins",
+      "minutes2025_26": 2375.483,
+      "raw": {
+        "scoring": 19.4133,
+        "rebounding": 5.1223,
+        "passing": 6.2741,
+        "three": 2.7885,
+        "steals": 1.667,
+        "blocks": 0.4698
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 8,
+        "passing": 15,
+        "three": 16,
+        "steals": 16,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "MIL",
+      "name": "Tyler Herro",
+      "positionIndex": 1,
+      "nbaPlayerId": "1629639",
+      "sourceName": "Tyler Herro",
+      "minutes2025_26": 1032.653,
+      "raw": {
+        "scoring": 23.6013,
+        "rebounding": 5.5081,
+        "passing": 4.7412,
+        "three": 2.9284,
+        "steals": 0.8018,
+        "blocks": 0.4183
+      },
+      "ratings": {
+        "scoring": 17,
+        "rebounding": 9,
+        "passing": 12,
+        "three": 17,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "MIL",
+      "name": "Jaime Jaquez Jr.",
+      "positionIndex": 2,
+      "nbaPlayerId": "1631170",
+      "sourceName": "Jaime Jaquez Jr.",
+      "minutes2025_26": 2121.21,
+      "raw": {
+        "scoring": 19.5511,
+        "rebounding": 6.3643,
+        "passing": 5.9739,
+        "three": 0.9843,
+        "steals": 0.8655,
+        "blocks": 0.3564
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 10,
+        "passing": 15,
+        "three": 9,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "MIL",
+      "name": "Kyle Kuzma",
+      "positionIndex": 3,
+      "nbaPlayerId": "1628398",
+      "sourceName": "Kyle Kuzma",
+      "minutes2025_26": 1805.742,
+      "raw": {
+        "scoring": 17.863,
+        "rebounding": 6.2401,
+        "passing": 3.6683,
+        "three": 1.6547,
+        "steals": 0.9171,
+        "blocks": 0.5582
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 10,
+        "passing": 10,
+        "three": 11,
+        "steals": 10,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "MIL",
+      "name": "Myles Turner",
+      "positionIndex": 4,
+      "nbaPlayerId": "1626167",
+      "sourceName": "Myles Turner",
+      "minutes2025_26": 1911.803,
+      "raw": {
+        "scoring": 15.9305,
+        "rebounding": 7.1179,
+        "passing": 1.9395,
+        "three": 2.7681,
+        "steals": 0.9415,
+        "blocks": 2.1655
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 11,
+        "passing": 7,
+        "three": 16,
+        "steals": 10,
+        "blocks": 17
+      }
+    },
+    {
+      "team": "BKN",
+      "name": "Ben Saraf",
+      "positionIndex": 0,
+      "nbaPlayerId": "1642879",
+      "sourceName": "Ben Saraf",
+      "minutes2025_26": 916.318,
+      "raw": {
+        "scoring": 13.0435,
+        "rebounding": 3.6145,
+        "passing": 5.6967,
+        "three": 0.7465,
+        "steals": 1.4929,
+        "blocks": 0.3143
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 6,
+        "passing": 14,
+        "three": 8,
+        "steals": 14,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "BKN",
+      "name": "Egor Demin",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642856",
+      "sourceName": "Egor Dëmin",
+      "minutes2025_26": 1308.208,
+      "raw": {
+        "scoring": 14.7499,
+        "rebounding": 4.5406,
+        "passing": 4.7607,
+        "three": 3.4123,
+        "steals": 1.1558,
+        "blocks": 0.4678
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 8,
+        "passing": 12,
+        "three": 20,
+        "steals": 12,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "BKN",
+      "name": "Michael Porter Jr.",
+      "positionIndex": 2,
+      "nbaPlayerId": "1629008",
+      "sourceName": "Michael Porter Jr.",
+      "minutes2025_26": 1688.603,
+      "raw": {
+        "scoring": 26.8411,
+        "rebounding": 7.8242,
+        "passing": 3.3685,
+        "three": 3.7522,
+        "steals": 1.1726,
+        "blocks": 0.2772
+      },
+      "ratings": {
+        "scoring": 21,
+        "rebounding": 13,
+        "passing": 10,
+        "three": 22,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "BKN",
+      "name": "Julius Randle",
+      "positionIndex": 3,
+      "nbaPlayerId": "203944",
+      "sourceName": "Julius Randle",
+      "minutes2025_26": 2610.297,
+      "raw": {
+        "scoring": 22.9905,
+        "rebounding": 7.3371,
+        "passing": 5.489,
+        "three": 1.5033,
+        "steals": 1.1861,
+        "blocks": 0.2482
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 12,
+        "passing": 14,
+        "three": 11,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "BKN",
+      "name": "Day'Ron Sharpe",
+      "positionIndex": 4,
+      "nbaPlayerId": "1630549",
+      "sourceName": "Day'Ron Sharpe",
+      "minutes2025_26": 1159.915,
+      "raw": {
+        "scoring": 16.7598,
+        "rebounding": 12.8182,
+        "passing": 4.5003,
+        "three": 0.2793,
+        "steals": 2.0795,
+        "blocks": 0.807
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 23,
+        "passing": 12,
+        "three": 6,
+        "steals": 21,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "SAC",
+      "name": "Malik Monk",
+      "positionIndex": 0,
+      "nbaPlayerId": "1628370",
+      "sourceName": "Malik Monk",
+      "minutes2025_26": 1363.643,
+      "raw": {
+        "scoring": 20.3807,
+        "rebounding": 3.0888,
+        "passing": 4.884,
+        "three": 3.2736,
+        "steals": 0.9768,
+        "blocks": 0.6336
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 5,
+        "passing": 12,
+        "three": 19,
+        "steals": 10,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "SAC",
+      "name": "Zach LaVine",
+      "positionIndex": 1,
+      "nbaPlayerId": "203897",
+      "sourceName": "Zach LaVine",
+      "minutes2025_26": 1224.263,
+      "raw": {
+        "scoring": 21.9953,
+        "rebounding": 3.1758,
+        "passing": 2.6171,
+        "three": 2.9111,
+        "steals": 0.8234,
+        "blocks": 0.2941
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 6,
+        "passing": 8,
+        "three": 17,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "SAC",
+      "name": "De'Andre Hunter",
+      "positionIndex": 2,
+      "nbaPlayerId": "1629631",
+      "sourceName": "De'Andre Hunter",
+      "minutes2025_26": 1175.487,
+      "raw": {
+        "scoring": 18.8348,
+        "rebounding": 5.6657,
+        "passing": 2.7563,
+        "three": 2.2969,
+        "steals": 0.9188,
+        "blocks": 0.1838
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 9,
+        "passing": 8,
+        "three": 14,
+        "steals": 10,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "SAC",
+      "name": "Keegan Murray",
+      "positionIndex": 3,
+      "nbaPlayerId": "1631099",
+      "sourceName": "Keegan Murray",
+      "minutes2025_26": 793.097,
+      "raw": {
+        "scoring": 14.5707,
+        "rebounding": 5.9917,
+        "passing": 1.7249,
+        "three": 1.4071,
+        "steals": 1.0894,
+        "blocks": 1.6341
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 10,
+        "passing": 6,
+        "three": 10,
+        "steals": 11,
+        "blocks": 14
+      }
+    },
+    {
+      "team": "SAC",
+      "name": "Domantas Sabonis",
+      "positionIndex": 4,
+      "nbaPlayerId": "1627734",
+      "sourceName": "Domantas Sabonis",
+      "minutes2025_26": 563.588,
+      "raw": {
+        "scoring": 19.2268,
+        "rebounding": 13.7973,
+        "passing": 4.9824,
+        "three": 0.3194,
+        "steals": 1.1498,
+        "blocks": 0.2555
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 25,
+        "passing": 13,
+        "three": 6,
+        "steals": 11,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "MEM",
+      "name": "Ty Jerome",
+      "positionIndex": 0,
+      "nbaPlayerId": "1629660",
+      "sourceName": "Ty Jerome",
+      "minutes2025_26": 338.688,
+      "raw": {
+        "scoring": 31.3563,
+        "rebounding": 4.4643,
+        "passing": 9.0349,
+        "three": 4.4643,
+        "steals": 1.7007,
+        "blocks": 0.4252
+      },
+      "ratings": {
+        "scoring": 26,
+        "rebounding": 7,
+        "passing": 23,
+        "three": 26,
+        "steals": 17,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "MEM",
+      "name": "Jaylen Wells",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642377",
+      "sourceName": "Jaylen Wells",
+      "minutes2025_26": 1820.642,
+      "raw": {
+        "scoring": 17.1039,
+        "rebounding": 4.3501,
+        "passing": 2.1948,
+        "three": 2.5507,
+        "steals": 1.2062,
+        "blocks": 0.178
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 7,
+        "passing": 7,
+        "three": 15,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "MEM",
+      "name": "Cedric Coward",
+      "positionIndex": 2,
+      "nbaPlayerId": "1642907",
+      "sourceName": "Cedric Coward",
+      "minutes2025_26": 1597.947,
+      "raw": {
+        "scoring": 18.9919,
+        "rebounding": 8.2005,
+        "passing": 3.8524,
+        "three": 2.0952,
+        "steals": 0.9012,
+        "blocks": 0.6083
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 13,
+        "passing": 10,
+        "three": 13,
+        "steals": 9,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "MEM",
+      "name": "Jerami Grant",
+      "positionIndex": 3,
+      "nbaPlayerId": "203924",
+      "sourceName": "Jerami Grant",
+      "minutes2025_26": 1695.102,
+      "raw": {
+        "scoring": 22.5119,
+        "rebounding": 4.2051,
+        "passing": 2.591,
+        "three": 2.8883,
+        "steals": 0.892,
+        "blocks": 0.7646
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 7,
+        "passing": 8,
+        "three": 17,
+        "steals": 9,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "MEM",
+      "name": "Zach Edey",
+      "positionIndex": 4,
+      "nbaPlayerId": "1641744",
+      "sourceName": "Zach Edey",
+      "minutes2025_26": 283.852,
+      "raw": {
+        "scoring": 19.024,
+        "rebounding": 15.4729,
+        "passing": 1.5219,
+        "three": 0.1268,
+        "steals": 0.8878,
+        "blocks": 2.6634
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 29,
+        "passing": 6,
+        "three": 5,
+        "steals": 9,
+        "blocks": 21
+      }
+    },
+    {
+      "team": "CHI",
+      "name": "Josh Giddey",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630581",
+      "sourceName": "Josh Giddey",
+      "minutes2025_26": 1731.357,
+      "raw": {
+        "scoring": 19.1087,
+        "rebounding": 9.3152,
+        "passing": 10.2717,
+        "three": 2.1417,
+        "steals": 1.1436,
+        "blocks": 0.5614
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 15,
+        "passing": 27,
+        "three": 13,
+        "steals": 11,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "CHI",
+      "name": "Norman Powell",
+      "positionIndex": 1,
+      "nbaPlayerId": "1626181",
+      "sourceName": "Norman Powell",
+      "minutes2025_26": 1716.937,
+      "raw": {
+        "scoring": 26.4401,
+        "rebounding": 4.2355,
+        "passing": 2.9984,
+        "three": 3.2709,
+        "steals": 1.3419,
+        "blocks": 0.2935
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 7,
+        "passing": 9,
+        "three": 19,
+        "steals": 13,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "CHI",
+      "name": "Matas Buzelis",
+      "positionIndex": 2,
+      "nbaPlayerId": "1641824",
+      "sourceName": "Matas Buzelis",
+      "minutes2025_26": 2248.248,
+      "raw": {
+        "scoring": 20.0476,
+        "rebounding": 7.1736,
+        "passing": 2.53,
+        "three": 2.7702,
+        "steals": 0.8807,
+        "blocks": 1.8574
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 12,
+        "passing": 8,
+        "three": 16,
+        "steals": 9,
+        "blocks": 15
+      }
+    },
+    {
+      "team": "CHI",
+      "name": "Patrick Williams",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630172",
+      "sourceName": "Patrick Williams",
+      "minutes2025_26": 1473.78,
+      "raw": {
+        "scoring": 12.3356,
+        "rebounding": 5.2518,
+        "passing": 2.5648,
+        "three": 2.3206,
+        "steals": 1.1969,
+        "blocks": 0.6351
+      },
+      "ratings": {
+        "scoring": 7,
+        "rebounding": 9,
+        "passing": 8,
+        "three": 14,
+        "steals": 12,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "CHI",
+      "name": "Nic Claxton",
+      "positionIndex": 4,
+      "nbaPlayerId": "1629651",
+      "sourceName": "Nic Claxton",
+      "minutes2025_26": 1920.367,
+      "raw": {
+        "scoring": 15.1846,
+        "rebounding": 8.9608,
+        "passing": 4.7428,
+        "three": 0.0562,
+        "steals": 0.8436,
+        "blocks": 1.4435
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 14,
+        "passing": 12,
+        "three": 5,
+        "steals": 9,
+        "blocks": 13
+      }
+    },
+    {
+      "team": "CHA",
+      "name": "Coby White",
+      "positionIndex": 0,
+      "nbaPlayerId": "1629632",
+      "sourceName": "Coby White",
+      "minutes2025_26": 1249.788,
+      "raw": {
+        "scoring": 25.0026,
+        "rebounding": 4.8968,
+        "passing": 5.761,
+        "three": 3.3126,
+        "steals": 0.7201,
+        "blocks": 0.144
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 8,
+        "passing": 14,
+        "three": 19,
+        "steals": 8,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "CHA",
+      "name": "Kon Knueppel",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642851",
+      "sourceName": "Kon Knueppel",
+      "minutes2025_26": 2550.747,
+      "raw": {
+        "scoring": 21.142,
+        "rebounding": 6.097,
+        "passing": 3.8671,
+        "three": 3.853,
+        "steals": 0.8045,
+        "blocks": 0.2682
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 10,
+        "passing": 10,
+        "three": 22,
+        "steals": 9,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "CHA",
+      "name": "Brandon Miller",
+      "positionIndex": 2,
+      "nbaPlayerId": "1641706",
+      "sourceName": "Brandon Miller",
+      "minutes2025_26": 1968.312,
+      "raw": {
+        "scoring": 23.9779,
+        "rebounding": 5.8344,
+        "passing": 3.9689,
+        "three": 3.7311,
+        "steals": 1.2071,
+        "blocks": 0.8048
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 10,
+        "passing": 11,
+        "three": 22,
+        "steals": 12,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "CHA",
+      "name": "Naz Reid",
+      "positionIndex": 3,
+      "nbaPlayerId": "1629675",
+      "sourceName": "Naz Reid",
+      "minutes2025_26": 2007.35,
+      "raw": {
+        "scoring": 18.7591,
+        "rebounding": 8.5546,
+        "passing": 3.0488,
+        "three": 2.9053,
+        "steals": 1.363,
+        "blocks": 1.3989
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 14,
+        "passing": 9,
+        "three": 17,
+        "steals": 13,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "CHA",
+      "name": "Moussa Diabate",
+      "positionIndex": 4,
+      "nbaPlayerId": "1631217",
+      "sourceName": "Moussa Diabaté",
+      "minutes2025_26": 1898.957,
+      "raw": {
+        "scoring": 10.9007,
+        "rebounding": 12.0382,
+        "passing": 2.673,
+        "three": 0.019,
+        "steals": 1.0616,
+        "blocks": 1.365
+      },
+      "ratings": {
+        "scoring": 6,
+        "rebounding": 21,
+        "passing": 8,
+        "three": 5,
+        "steals": 11,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "LAC",
+      "name": "Darius Garland",
+      "positionIndex": 0,
+      "nbaPlayerId": "1629636",
+      "sourceName": "Darius Garland",
+      "minutes2025_26": 1344.277,
+      "raw": {
+        "scoring": 22.6293,
+        "rebounding": 2.8655,
+        "passing": 8.0608,
+        "three": 3.2672,
+        "steals": 1.1515,
+        "blocks": 0.2142
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 5,
+        "passing": 21,
+        "three": 19,
+        "steals": 11,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "LAC",
+      "name": "Kris Dunn",
+      "positionIndex": 1,
+      "nbaPlayerId": "1627739",
+      "sourceName": "Kris Dunn",
+      "minutes2025_26": 2230.0,
+      "raw": {
+        "scoring": 9.6215,
+        "rebounding": 4.3749,
+        "passing": 4.7623,
+        "three": 1.2915,
+        "steals": 2.1148,
+        "blocks": 0.226
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 7,
+        "passing": 12,
+        "three": 10,
+        "steals": 22,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "LAC",
+      "name": "Brandon Ingram",
+      "positionIndex": 2,
+      "nbaPlayerId": "1627742",
+      "sourceName": "Brandon Ingram",
+      "minutes2025_26": 2603.863,
+      "raw": {
+        "scoring": 22.8814,
+        "rebounding": 5.945,
+        "passing": 3.9265,
+        "three": 1.8665,
+        "steals": 0.8019,
+        "blocks": 0.7604
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 10,
+        "passing": 11,
+        "three": 12,
+        "steals": 9,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "LAC",
+      "name": "Rui Hachimura",
+      "positionIndex": 3,
+      "nbaPlayerId": "1629060",
+      "sourceName": "Rui Hachimura",
+      "minutes2025_26": 1926.565,
+      "raw": {
+        "scoring": 14.5752,
+        "rebounding": 4.2231,
+        "passing": 1.0651,
+        "three": 2.1676,
+        "steals": 0.7288,
+        "blocks": 0.3924
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 7,
+        "passing": 5,
+        "three": 13,
+        "steals": 8,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "LAC",
+      "name": "Brook Lopez",
+      "positionIndex": 4,
+      "nbaPlayerId": "201572",
+      "sourceName": "Brook Lopez",
+      "minutes2025_26": 1635.273,
+      "raw": {
+        "scoring": 13.9573,
+        "rebounding": 6.01,
+        "passing": 2.1354,
+        "three": 2.5097,
+        "steals": 0.9907,
+        "blocks": 1.9153
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 10,
+        "passing": 7,
+        "three": 15,
+        "steals": 10,
+        "blocks": 15
+      }
+    },
+    {
+      "team": "DAL",
+      "name": "AJ Johnson",
+      "positionIndex": 0,
+      "nbaPlayerId": "1642358",
+      "sourceName": "AJ Johnson",
+      "minutes2025_26": 453.433,
+      "raw": {
+        "scoring": 12.7031,
+        "rebounding": 4.3667,
+        "passing": 3.7315,
+        "three": 0.9527,
+        "steals": 0.8733,
+        "blocks": 0.2382
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 7,
+        "passing": 10,
+        "three": 9,
+        "steals": 9,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "DAL",
+      "name": "Max Christie",
+      "positionIndex": 1,
+      "nbaPlayerId": "1631108",
+      "sourceName": "Max Christie",
+      "minutes2025_26": 2244.48,
+      "raw": {
+        "scoring": 15.1572,
+        "rebounding": 3.9938,
+        "passing": 2.4219,
+        "three": 2.8871,
+        "steals": 0.7538,
+        "blocks": 0.4331
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 7,
+        "passing": 8,
+        "three": 17,
+        "steals": 8,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "DAL",
+      "name": "Cooper Flagg",
+      "positionIndex": 2,
+      "nbaPlayerId": "1642843",
+      "sourceName": "Cooper Flagg",
+      "minutes2025_26": 2343.858,
+      "raw": {
+        "scoring": 22.6242,
+        "rebounding": 7.1574,
+        "passing": 4.8535,
+        "three": 1.1059,
+        "steals": 1.2902,
+        "blocks": 0.983
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 12,
+        "passing": 12,
+        "three": 9,
+        "steals": 13,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "DAL",
+      "name": "P.J. Washington",
+      "positionIndex": 3,
+      "nbaPlayerId": "1629023",
+      "sourceName": "P.J. Washington",
+      "minutes2025_26": 1735.62,
+      "raw": {
+        "scoring": 16.4483,
+        "rebounding": 8.1723,
+        "passing": 2.0327,
+        "three": 1.5764,
+        "steals": 1.1408,
+        "blocks": 1.2445
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 13,
+        "passing": 7,
+        "three": 11,
+        "steals": 11,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "DAL",
+      "name": "Dereck Lively II",
+      "positionIndex": 4,
+      "nbaPlayerId": "1641726",
+      "sourceName": "Dereck Lively II",
+      "minutes2025_26": 115.273,
+      "raw": {
+        "scoring": 9.369,
+        "rebounding": 11.5551,
+        "passing": 4.0599,
+        "three": 0.0,
+        "steals": 1.2492,
+        "blocks": 3.4353
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 20,
+        "passing": 11,
+        "three": 5,
+        "steals": 12,
+        "blocks": 27
+      }
+    },
+    {
+      "team": "WAS",
+      "name": "Trae Young",
+      "positionIndex": 0,
+      "nbaPlayerId": "1629027",
+      "sourceName": "Trae Young",
+      "minutes2025_26": 383.753,
+      "raw": {
+        "scoring": 25.235,
+        "rebounding": 2.8143,
+        "passing": 11.2572,
+        "three": 2.5329,
+        "steals": 1.2195,
+        "blocks": 0.1876
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 5,
+        "passing": 30,
+        "three": 15,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "WAS",
+      "name": "Kyshawn George",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642273",
+      "sourceName": "Kyshawn George",
+      "minutes2025_26": 1390.963,
+      "raw": {
+        "scoring": 18.3758,
+        "rebounding": 6.3409,
+        "passing": 5.5386,
+        "three": 2.5623,
+        "steals": 1.2423,
+        "blocks": 1.1129
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 10,
+        "passing": 14,
+        "three": 15,
+        "steals": 12,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "WAS",
+      "name": "Tre Johnson",
+      "positionIndex": 2,
+      "nbaPlayerId": "1642848",
+      "sourceName": "Tre Johnson",
+      "minutes2025_26": 1442.817,
+      "raw": {
+        "scoring": 18.2892,
+        "rebounding": 4.2417,
+        "passing": 3.044,
+        "three": 2.8694,
+        "steals": 0.8234,
+        "blocks": 0.4491
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 7,
+        "passing": 9,
+        "three": 17,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "WAS",
+      "name": "Anthony Davis",
+      "positionIndex": 3,
+      "nbaPlayerId": "203076",
+      "sourceName": "Anthony Davis",
+      "minutes2025_26": 625.63,
+      "raw": {
+        "scoring": 23.4196,
+        "rebounding": 12.7168,
+        "passing": 3.2224,
+        "three": 0.5754,
+        "steals": 1.2659,
+        "blocks": 1.8989
+      },
+      "ratings": {
+        "scoring": 17,
+        "rebounding": 22,
+        "passing": 9,
+        "three": 7,
+        "steals": 12,
+        "blocks": 15
+      }
+    },
+    {
+      "team": "WAS",
+      "name": "Alex Sarr",
+      "positionIndex": 4,
+      "nbaPlayerId": "1642259",
+      "sourceName": "Alex Sarr",
+      "minutes2025_26": 1304.662,
+      "raw": {
+        "scoring": 21.6056,
+        "rebounding": 9.7956,
+        "passing": 3.5871,
+        "three": 1.3797,
+        "steals": 1.0761,
+        "blocks": 2.6214
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 16,
+        "passing": 10,
+        "three": 10,
+        "steals": 11,
+        "blocks": 21
+      }
+    },
+    {
+      "team": "NOP",
+      "name": "Dejounte Murray",
+      "positionIndex": 0,
+      "nbaPlayerId": "1627749",
+      "sourceName": "Dejounte Murray",
+      "minutes2025_26": 389.417,
+      "raw": {
+        "scoring": 21.6324,
+        "rebounding": 6.9334,
+        "passing": 8.2277,
+        "three": 1.7565,
+        "steals": 2.1263,
+        "blocks": 0.2773
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 11,
+        "passing": 21,
+        "three": 12,
+        "steals": 22,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "NOP",
+      "name": "Trey Murphy III",
+      "positionIndex": 1,
+      "nbaPlayerId": "1630530",
+      "sourceName": "Trey Murphy III",
+      "minutes2025_26": 2340.638,
+      "raw": {
+        "scoring": 21.8402,
+        "rebounding": 5.7984,
+        "passing": 3.8451,
+        "three": 3.2914,
+        "steals": 1.5227,
+        "blocks": 0.3691
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 9,
+        "passing": 10,
+        "three": 19,
+        "steals": 15,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "NOP",
+      "name": "Jeremiah Fears",
+      "positionIndex": 2,
+      "nbaPlayerId": "1642847",
+      "sourceName": "Jeremiah Fears",
+      "minutes2025_26": 2111.903,
+      "raw": {
+        "scoring": 19.927,
+        "rebounding": 5.1139,
+        "passing": 4.7559,
+        "three": 1.7217,
+        "steals": 1.6535,
+        "blocks": 0.5114
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 8,
+        "passing": 12,
+        "three": 12,
+        "steals": 16,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "NOP",
+      "name": "Zion Williamson",
+      "positionIndex": 3,
+      "nbaPlayerId": "1629627",
+      "sourceName": "Zion Williamson",
+      "minutes2025_26": 1841.063,
+      "raw": {
+        "scoring": 25.4592,
+        "rebounding": 6.9025,
+        "passing": 3.8912,
+        "three": 0.0196,
+        "steals": 1.1732,
+        "blocks": 0.6648
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 11,
+        "passing": 11,
+        "three": 5,
+        "steals": 12,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "NOP",
+      "name": "Derik Queen",
+      "positionIndex": 4,
+      "nbaPlayerId": "1642852",
+      "sourceName": "Derik Queen",
+      "minutes2025_26": 2023.38,
+      "raw": {
+        "scoring": 16.8668,
+        "rebounding": 10.177,
+        "passing": 5.302,
+        "three": 0.4092,
+        "steals": 1.4945,
+        "blocks": 1.3166
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 17,
+        "passing": 13,
+        "three": 7,
+        "steals": 14,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "PHX",
+      "name": "Devin Booker",
+      "positionIndex": 0,
+      "nbaPlayerId": "1626164",
+      "sourceName": "Devin Booker",
+      "minutes2025_26": 2146.43,
+      "raw": {
+        "scoring": 27.9758,
+        "rebounding": 4.1595,
+        "passing": 6.474,
+        "three": 2.0462,
+        "steals": 0.8554,
+        "blocks": 0.3019
+      },
+      "ratings": {
+        "scoring": 22,
+        "rebounding": 7,
+        "passing": 16,
+        "three": 13,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "PHX",
+      "name": "Jalen Green",
+      "positionIndex": 1,
+      "nbaPlayerId": "1630224",
+      "sourceName": "Jalen Green",
+      "minutes2025_26": 828.325,
+      "raw": {
+        "scoring": 24.686,
+        "rebounding": 5.0415,
+        "passing": 3.955,
+        "three": 3.0857,
+        "steals": 1.4777,
+        "blocks": 0.3477
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 8,
+        "passing": 11,
+        "three": 18,
+        "steals": 14,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "PHX",
+      "name": "Dillon Brooks",
+      "positionIndex": 2,
+      "nbaPlayerId": "1628415",
+      "sourceName": "Dillon Brooks",
+      "minutes2025_26": 1701.583,
+      "raw": {
+        "scoring": 23.9283,
+        "rebounding": 4.2948,
+        "passing": 2.0945,
+        "three": 2.6869,
+        "steals": 1.2059,
+        "blocks": 0.1904
+      },
+      "ratings": {
+        "scoring": 17,
+        "rebounding": 7,
+        "passing": 7,
+        "three": 16,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "PHX",
+      "name": "Miles Bridges",
+      "positionIndex": 3,
+      "nbaPlayerId": "1628970",
+      "sourceName": "Miles Bridges",
+      "minutes2025_26": 2387.232,
+      "raw": {
+        "scoring": 19.8154,
+        "rebounding": 6.7861,
+        "passing": 3.7097,
+        "three": 2.2319,
+        "steals": 0.6937,
+        "blocks": 0.5127
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 11,
+        "passing": 10,
+        "three": 14,
+        "steals": 8,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "PHX",
+      "name": "Mark Williams",
+      "positionIndex": 4,
+      "nbaPlayerId": "1631109",
+      "sourceName": "Mark Williams",
+      "minutes2025_26": 1416.05,
+      "raw": {
+        "scoring": 17.796,
+        "rebounding": 12.1267,
+        "passing": 1.4745,
+        "three": 0.0254,
+        "steals": 1.3983,
+        "blocks": 1.3983
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 21,
+        "passing": 6,
+        "three": 5,
+        "steals": 14,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "GSW",
+      "name": "Stephen Curry",
+      "positionIndex": 0,
+      "nbaPlayerId": "201939",
+      "sourceName": "Stephen Curry",
+      "minutes2025_26": 1328.728,
+      "raw": {
+        "scoring": 30.9409,
+        "rebounding": 4.1724,
+        "passing": 5.5,
+        "three": 5.1478,
+        "steals": 1.3276,
+        "blocks": 0.4606
+      },
+      "ratings": {
+        "scoring": 26,
+        "rebounding": 7,
+        "passing": 14,
+        "three": 30,
+        "steals": 13,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "GSW",
+      "name": "Brandin Podziemski",
+      "positionIndex": 1,
+      "nbaPlayerId": "1641764",
+      "sourceName": "Brandin Podziemski",
+      "minutes2025_26": 2332.673,
+      "raw": {
+        "scoring": 17.4855,
+        "rebounding": 6.4664,
+        "passing": 4.6916,
+        "three": 2.3612,
+        "steals": 1.3581,
+        "blocks": 0.2315
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 11,
+        "passing": 12,
+        "three": 14,
+        "steals": 13,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "GSW",
+      "name": "Moses Moody",
+      "positionIndex": 2,
+      "nbaPlayerId": "1630541",
+      "sourceName": "Moses Moody",
+      "minutes2025_26": 1539.898,
+      "raw": {
+        "scoring": 17.0193,
+        "rebounding": 4.6756,
+        "passing": 2.2911,
+        "three": 3.5301,
+        "steals": 1.3559,
+        "blocks": 0.7949
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 8,
+        "passing": 7,
+        "three": 21,
+        "steals": 13,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "GSW",
+      "name": "Draymond Green",
+      "positionIndex": 3,
+      "nbaPlayerId": "203110",
+      "sourceName": "Draymond Green",
+      "minutes2025_26": 1868.888,
+      "raw": {
+        "scoring": 10.9798,
+        "rebounding": 7.2235,
+        "passing": 7.2428,
+        "three": 1.9455,
+        "steals": 1.175,
+        "blocks": 0.809
+      },
+      "ratings": {
+        "scoring": 6,
+        "rebounding": 12,
+        "passing": 18,
+        "three": 13,
+        "steals": 12,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "GSW",
+      "name": "Kristaps Porzingis",
+      "positionIndex": 4,
+      "nbaPlayerId": "204001",
+      "sourceName": "Kristaps Porziņģis",
+      "minutes2025_26": 768.892,
+      "raw": {
+        "scoring": 24.9554,
+        "rebounding": 7.819,
+        "passing": 3.7925,
+        "three": 2.5283,
+        "steals": 0.8428,
+        "blocks": 1.7792
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 13,
+        "passing": 10,
+        "three": 15,
+        "steals": 9,
+        "blocks": 14
+      }
+    },
+    {
+      "team": "ORL",
+      "name": "Jalen Suggs",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630591",
+      "sourceName": "Jalen Suggs",
+      "minutes2025_26": 1573.57,
+      "raw": {
+        "scoring": 17.982,
+        "rebounding": 5.0331,
+        "passing": 7.1379,
+        "three": 2.7911,
+        "steals": 2.4022,
+        "blocks": 0.9151
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 8,
+        "passing": 18,
+        "three": 16,
+        "steals": 25,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "ORL",
+      "name": "Desmond Bane",
+      "positionIndex": 1,
+      "nbaPlayerId": "1630217",
+      "sourceName": "Desmond Bane",
+      "minutes2025_26": 2756.045,
+      "raw": {
+        "scoring": 21.5134,
+        "rebounding": 4.415,
+        "passing": 4.415,
+        "three": 2.1814,
+        "steals": 1.1233,
+        "blocks": 0.4833
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 7,
+        "passing": 12,
+        "three": 13,
+        "steals": 11,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "ORL",
+      "name": "Franz Wagner",
+      "positionIndex": 2,
+      "nbaPlayerId": "1630532",
+      "sourceName": "Franz Wagner",
+      "minutes2025_26": 1019.003,
+      "raw": {
+        "scoring": 24.6947,
+        "rebounding": 6.2532,
+        "passing": 3.9921,
+        "three": 1.6958,
+        "steals": 1.1305,
+        "blocks": 0.3886
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 10,
+        "passing": 11,
+        "three": 12,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "ORL",
+      "name": "Paolo Banchero",
+      "positionIndex": 3,
+      "nbaPlayerId": "1631094",
+      "sourceName": "Paolo Banchero",
+      "minutes2025_26": 2501.685,
+      "raw": {
+        "scoring": 23.0101,
+        "rebounding": 8.6917,
+        "passing": 5.3676,
+        "three": 1.2088,
+        "steals": 0.7339,
+        "blocks": 0.5756
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 14,
+        "passing": 13,
+        "three": 10,
+        "steals": 8,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "ORL",
+      "name": "Wendell Carter Jr.",
+      "positionIndex": 4,
+      "nbaPlayerId": "1628976",
+      "sourceName": "Wendell Carter Jr.",
+      "minutes2025_26": 2288.352,
+      "raw": {
+        "scoring": 14.5048,
+        "rebounding": 9.0773,
+        "passing": 2.4227,
+        "three": 1.1327,
+        "steals": 0.9439,
+        "blocks": 0.7709
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 14,
+        "passing": 8,
+        "three": 9,
+        "steals": 10,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "POR",
+      "name": "Ja Morant",
+      "positionIndex": 0,
+      "nbaPlayerId": "1629630",
+      "sourceName": "Ja Morant",
+      "minutes2025_26": 568.5,
+      "raw": {
+        "scoring": 24.6332,
+        "rebounding": 4.1161,
+        "passing": 10.1953,
+        "three": 1.2665,
+        "steals": 1.2665,
+        "blocks": 0.3799
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 7,
+        "passing": 27,
+        "three": 10,
+        "steals": 12,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "POR",
+      "name": "Shaedon Sharpe",
+      "positionIndex": 1,
+      "nbaPlayerId": "1631101",
+      "sourceName": "Shaedon Sharpe",
+      "minutes2025_26": 1471.302,
+      "raw": {
+        "scoring": 25.4958,
+        "rebounding": 5.3096,
+        "passing": 3.2298,
+        "three": 2.5202,
+        "steals": 1.7128,
+        "blocks": 0.1468
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 9,
+        "passing": 9,
+        "three": 15,
+        "steals": 17,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "POR",
+      "name": "Toumani Camara",
+      "positionIndex": 2,
+      "nbaPlayerId": "1641739",
+      "sourceName": "Toumani Camara",
+      "minutes2025_26": 2731.237,
+      "raw": {
+        "scoring": 14.4989,
+        "rebounding": 5.5491,
+        "passing": 2.6493,
+        "three": 2.8866,
+        "steals": 1.239,
+        "blocks": 0.4613
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 9,
+        "passing": 8,
+        "three": 17,
+        "steals": 12,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "POR",
+      "name": "Deni Avdija",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630166",
+      "sourceName": "Deni Avdija",
+      "minutes2025_26": 2199.385,
+      "raw": {
+        "scoring": 26.1564,
+        "rebounding": 7.4312,
+        "passing": 7.2347,
+        "three": 2.046,
+        "steals": 0.8348,
+        "blocks": 0.6711
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 12,
+        "passing": 18,
+        "three": 13,
+        "steals": 9,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "POR",
+      "name": "Donovan Clingan",
+      "positionIndex": 4,
+      "nbaPlayerId": "1642270",
+      "sourceName": "Donovan Clingan",
+      "minutes2025_26": 2093.637,
+      "raw": {
+        "scoring": 16.0601,
+        "rebounding": 15.3379,
+        "passing": 2.7856,
+        "three": 1.4444,
+        "steals": 0.7566,
+        "blocks": 2.2353
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 28,
+        "passing": 8,
+        "three": 11,
+        "steals": 8,
+        "blocks": 18
+      }
+    },
+    {
+      "team": "LAL",
+      "name": "Luka Doncic",
+      "positionIndex": 0,
+      "nbaPlayerId": "1629029",
+      "sourceName": "Luka Dončić",
+      "minutes2025_26": 2288.602,
+      "raw": {
+        "scoring": 33.7097,
+        "rebounding": 7.7864,
+        "passing": 8.337,
+        "three": 3.9955,
+        "steals": 1.6517,
+        "blocks": 0.5348
+      },
+      "ratings": {
+        "scoring": 29,
+        "rebounding": 12,
+        "passing": 21,
+        "three": 23,
+        "steals": 16,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "LAL",
+      "name": "Austin Reaves",
+      "positionIndex": 1,
+      "nbaPlayerId": "1630559",
+      "sourceName": "Austin Reaves",
+      "minutes2025_26": 1761.65,
+      "raw": {
+        "scoring": 24.2568,
+        "rebounding": 4.9045,
+        "passing": 5.7219,
+        "three": 2.4114,
+        "steals": 1.1444,
+        "blocks": 0.4087
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 8,
+        "passing": 14,
+        "three": 14,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "LAL",
+      "name": "Quentin Grimes",
+      "positionIndex": 2,
+      "nbaPlayerId": "1629656",
+      "sourceName": "Quentin Grimes",
+      "minutes2025_26": 2205.722,
+      "raw": {
+        "scoring": 16.4191,
+        "rebounding": 4.4557,
+        "passing": 3.9824,
+        "three": 2.0728,
+        "steals": 1.0446,
+        "blocks": 0.457
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 7,
+        "passing": 11,
+        "three": 13,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "LAL",
+      "name": "Sandro Mamukelashvili",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630572",
+      "sourceName": "Sandro Mamukelashvili",
+      "minutes2025_26": 1750.692,
+      "raw": {
+        "scoring": 18.363,
+        "rebounding": 8.1225,
+        "passing": 3.1051,
+        "three": 2.3648,
+        "steals": 1.3161,
+        "blocks": 0.8431
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 13,
+        "passing": 9,
+        "three": 14,
+        "steals": 13,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "LAL",
+      "name": "Walker Kessler",
+      "positionIndex": 4,
+      "nbaPlayerId": "1631117",
+      "sourceName": "Walker Kessler",
+      "minutes2025_26": 153.98,
+      "raw": {
+        "scoring": 16.8334,
+        "rebounding": 12.625,
+        "passing": 3.5069,
+        "three": 1.4028,
+        "steals": 1.6366,
+        "blocks": 2.1042
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 22,
+        "passing": 10,
+        "three": 10,
+        "steals": 16,
+        "blocks": 17
+      }
+    },
+    {
+      "team": "UTA",
+      "name": "Keyonte George",
+      "positionIndex": 0,
+      "nbaPlayerId": "1641718",
+      "sourceName": "Keyonte George",
+      "minutes2025_26": 1786.108,
+      "raw": {
+        "scoring": 25.6983,
+        "rebounding": 4.011,
+        "passing": 6.6916,
+        "three": 2.7008,
+        "steals": 1.169,
+        "blocks": 0.2822
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 7,
+        "passing": 17,
+        "three": 16,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "UTA",
+      "name": "Ace Bailey",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642846",
+      "sourceName": "Ace Bailey",
+      "minutes2025_26": 1987.643,
+      "raw": {
+        "scoring": 17.9851,
+        "rebounding": 5.4698,
+        "passing": 2.3727,
+        "three": 2.4813,
+        "steals": 1.0867,
+        "blocks": 0.8875
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 9,
+        "passing": 8,
+        "three": 15,
+        "steals": 11,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "UTA",
+      "name": "Lauri Markkanen",
+      "positionIndex": 2,
+      "nbaPlayerId": "1628374",
+      "sourceName": "Lauri Markkanen",
+      "minutes2025_26": 1442.597,
+      "raw": {
+        "scoring": 28.0245,
+        "rebounding": 7.212,
+        "passing": 2.221,
+        "three": 2.8698,
+        "steals": 1.0481,
+        "blocks": 0.5241
+      },
+      "ratings": {
+        "scoring": 22,
+        "rebounding": 12,
+        "passing": 7,
+        "three": 17,
+        "steals": 11,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "UTA",
+      "name": "Jaren Jackson Jr.",
+      "positionIndex": 3,
+      "nbaPlayerId": "1628991",
+      "sourceName": "Jaren Jackson Jr.",
+      "minutes2025_26": 1454.648,
+      "raw": {
+        "scoring": 23.0406,
+        "rebounding": 6.7315,
+        "passing": 2.3263,
+        "three": 2.0789,
+        "steals": 1.3117,
+        "blocks": 1.7076
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 11,
+        "passing": 7,
+        "three": 13,
+        "steals": 13,
+        "blocks": 14
+      }
+    },
+    {
+      "team": "UTA",
+      "name": "Jusuf Nurkic",
+      "positionIndex": 4,
+      "nbaPlayerId": "203994",
+      "sourceName": "Jusuf Nurkić",
+      "minutes2025_26": 1083.068,
+      "raw": {
+        "scoring": 14.8578,
+        "rebounding": 14.1265,
+        "passing": 6.5148,
+        "three": 0.831,
+        "steals": 1.7284,
+        "blocks": 0.7313
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 26,
+        "passing": 16,
+        "three": 8,
+        "steals": 17,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "MIA",
+      "name": "Davion Mitchell",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630558",
+      "sourceName": "Davion Mitchell",
+      "minutes2025_26": 2000.255,
+      "raw": {
+        "scoring": 11.7705,
+        "rebounding": 3.3656,
+        "passing": 8.153,
+        "three": 1.6198,
+        "steals": 1.2238,
+        "blocks": 0.198
+      },
+      "ratings": {
+        "scoring": 7,
+        "rebounding": 6,
+        "passing": 21,
+        "three": 11,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "MIA",
+      "name": "Tim Hardaway Jr.",
+      "positionIndex": 1,
+      "nbaPlayerId": "203501",
+      "sourceName": "Tim Hardaway Jr.",
+      "minutes2025_26": 2127.3,
+      "raw": {
+        "scoring": 18.2598,
+        "rebounding": 3.4861,
+        "passing": 1.8277,
+        "three": 3.7907,
+        "steals": 0.7108,
+        "blocks": 0.1692
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 6,
+        "passing": 6,
+        "three": 22,
+        "steals": 8,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "MIA",
+      "name": "Andrew Wiggins",
+      "positionIndex": 2,
+      "nbaPlayerId": "203952",
+      "sourceName": "Andrew Wiggins",
+      "minutes2025_26": 2062.598,
+      "raw": {
+        "scoring": 18.2391,
+        "rebounding": 5.7423,
+        "passing": 3.1766,
+        "three": 2.4086,
+        "steals": 1.3265,
+        "blocks": 1.2043
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 9,
+        "passing": 9,
+        "three": 14,
+        "steals": 13,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "MIA",
+      "name": "Giannis Antetokounmpo",
+      "positionIndex": 3,
+      "nbaPlayerId": "203507",
+      "sourceName": "Giannis Antetokounmpo",
+      "minutes2025_26": 1039.23,
+      "raw": {
+        "scoring": 34.3985,
+        "rebounding": 12.1936,
+        "passing": 6.7896,
+        "three": 0.5196,
+        "steals": 1.1778,
+        "blocks": 0.8314
+      },
+      "ratings": {
+        "scoring": 30,
+        "rebounding": 21,
+        "passing": 17,
+        "three": 7,
+        "steals": 12,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "MIA",
+      "name": "Bam Adebayo",
+      "positionIndex": 4,
+      "nbaPlayerId": "1628389",
+      "sourceName": "Bam Adebayo",
+      "minutes2025_26": 2364.685,
+      "raw": {
+        "scoring": 22.3489,
+        "rebounding": 11.144,
+        "passing": 3.532,
+        "three": 1.9334,
+        "steals": 1.3093,
+        "blocks": 0.746
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 19,
+        "passing": 10,
+        "three": 13,
+        "steals": 13,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "DET",
+      "name": "Cade Cunningham",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630595",
+      "sourceName": "Cade Cunningham",
+      "minutes2025_26": 2171.672,
+      "raw": {
+        "scoring": 25.3795,
+        "rebounding": 5.8849,
+        "passing": 10.5099,
+        "three": 2.0721,
+        "steals": 1.5251,
+        "blocks": 0.8952
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 10,
+        "passing": 28,
+        "three": 13,
+        "steals": 15,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "DET",
+      "name": "Ausar Thompson",
+      "positionIndex": 1,
+      "nbaPlayerId": "1641709",
+      "sourceName": "Ausar Thompson",
+      "minutes2025_26": 1895.61,
+      "raw": {
+        "scoring": 13.6927,
+        "rebounding": 7.9383,
+        "passing": 4.33,
+        "three": 0.1139,
+        "steals": 2.7727,
+        "blocks": 1.3104
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 13,
+        "passing": 11,
+        "three": 5,
+        "steals": 30,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "DET",
+      "name": "Duncan Robinson",
+      "positionIndex": 2,
+      "nbaPlayerId": "1629130",
+      "sourceName": "Duncan Robinson",
+      "minutes2025_26": 2113.158,
+      "raw": {
+        "scoring": 15.9969,
+        "rebounding": 3.4924,
+        "passing": 2.7087,
+        "three": 3.7479,
+        "steals": 0.7496,
+        "blocks": 0.3748
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 6,
+        "passing": 8,
+        "three": 22,
+        "steals": 8,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "DET",
+      "name": "John Collins",
+      "positionIndex": 3,
+      "nbaPlayerId": "1628381",
+      "sourceName": "John Collins",
+      "minutes2025_26": 1871.478,
+      "raw": {
+        "scoring": 17.9858,
+        "rebounding": 7.0597,
+        "passing": 1.3465,
+        "three": 1.712,
+        "steals": 1.1542,
+        "blocks": 0.981
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 11,
+        "passing": 6,
+        "three": 12,
+        "steals": 11,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "DET",
+      "name": "Jalen Duren",
+      "positionIndex": 4,
+      "nbaPlayerId": "1631105",
+      "sourceName": "Jalen Duren",
+      "minutes2025_26": 1975.853,
+      "raw": {
+        "scoring": 24.8703,
+        "rebounding": 13.4281,
+        "passing": 2.5144,
+        "three": 0.0,
+        "steals": 1.0385,
+        "blocks": 1.075
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 24,
+        "passing": 8,
+        "three": 5,
+        "steals": 11,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "MIN",
+      "name": "LaMelo Ball",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630163",
+      "sourceName": "LaMelo Ball",
+      "minutes2025_26": 2017.447,
+      "raw": {
+        "scoring": 25.7851,
+        "rebounding": 6.192,
+        "passing": 9.172,
+        "three": 4.8537,
+        "steals": 1.5525,
+        "blocks": 0.3212
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 10,
+        "passing": 24,
+        "three": 28,
+        "steals": 15,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "MIN",
+      "name": "Anthony Edwards",
+      "positionIndex": 1,
+      "nbaPlayerId": "1630162",
+      "sourceName": "Anthony Edwards",
+      "minutes2025_26": 2136.593,
+      "raw": {
+        "scoring": 29.6041,
+        "rebounding": 5.0885,
+        "passing": 3.8079,
+        "three": 3.4541,
+        "steals": 1.3985,
+        "blocks": 0.8256
+      },
+      "ratings": {
+        "scoring": 24,
+        "rebounding": 8,
+        "passing": 10,
+        "three": 20,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "MIN",
+      "name": "Ayo Dosunmu",
+      "positionIndex": 2,
+      "nbaPlayerId": "1630245",
+      "sourceName": "Ayo Dosunmu",
+      "minutes2025_26": 1881.043,
+      "raw": {
+        "scoring": 19.5594,
+        "rebounding": 4.5358,
+        "passing": 4.7654,
+        "three": 2.354,
+        "steals": 1.11,
+        "blocks": 0.3445
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 8,
+        "passing": 12,
+        "three": 14,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "MIN",
+      "name": "Jaden McDaniels",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630183",
+      "sourceName": "Jaden McDaniels",
+      "minutes2025_26": 2316.413,
+      "raw": {
+        "scoring": 16.8467,
+        "rebounding": 4.8178,
+        "passing": 3.0927,
+        "three": 1.6008,
+        "steals": 1.2588,
+        "blocks": 1.1345
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 8,
+        "passing": 9,
+        "three": 11,
+        "steals": 12,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "MIN",
+      "name": "Rudy Gobert",
+      "positionIndex": 4,
+      "nbaPlayerId": "203497",
+      "sourceName": "Rudy Gobert",
+      "minutes2025_26": 2380.047,
+      "raw": {
+        "scoring": 12.5392,
+        "rebounding": 13.1897,
+        "passing": 1.9361,
+        "three": 0.0,
+        "steals": 0.8773,
+        "blocks": 1.8756
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 23,
+        "passing": 7,
+        "three": 5,
+        "steals": 9,
+        "blocks": 15
+      }
+    },
+    {
+      "team": "BOS",
+      "name": "Payton Pritchard",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630202",
+      "sourceName": "Payton Pritchard",
+      "minutes2025_26": 2555.523,
+      "raw": {
+        "scoring": 18.9472,
+        "rebounding": 4.3952,
+        "passing": 5.7476,
+        "three": 2.9865,
+        "steals": 0.8171,
+        "blocks": 0.1409
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 7,
+        "passing": 14,
+        "three": 17,
+        "steals": 9,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "BOS",
+      "name": "Derrick White",
+      "positionIndex": 1,
+      "nbaPlayerId": "1628401",
+      "sourceName": "Derrick White",
+      "minutes2025_26": 2624.957,
+      "raw": {
+        "scoring": 17.3763,
+        "rebounding": 4.6492,
+        "passing": 5.6778,
+        "three": 2.8663,
+        "steals": 1.2069,
+        "blocks": 1.344
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 8,
+        "passing": 14,
+        "three": 17,
+        "steals": 12,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "BOS",
+      "name": "Paul George",
+      "positionIndex": 2,
+      "nbaPlayerId": "202331",
+      "sourceName": "Paul George",
+      "minutes2025_26": 1135.032,
+      "raw": {
+        "scoring": 20.3307,
+        "rebounding": 6.2166,
+        "passing": 4.2184,
+        "three": 3.1717,
+        "steals": 1.9665,
+        "blocks": 0.5075
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 10,
+        "passing": 11,
+        "three": 18,
+        "steals": 20,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "BOS",
+      "name": "Jayson Tatum",
+      "positionIndex": 3,
+      "nbaPlayerId": "1628369",
+      "sourceName": "Jayson Tatum",
+      "minutes2025_26": 521.85,
+      "raw": {
+        "scoring": 24.0069,
+        "rebounding": 11.0377,
+        "passing": 5.8638,
+        "three": 3.2423,
+        "steals": 1.5177,
+        "blocks": 0.207
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 19,
+        "passing": 14,
+        "three": 19,
+        "steals": 15,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "BOS",
+      "name": "Mitchell Robinson",
+      "positionIndex": 4,
+      "nbaPlayerId": "1629011",
+      "sourceName": "Mitchell Robinson",
+      "minutes2025_26": 1174.502,
+      "raw": {
+        "scoring": 10.4214,
+        "rebounding": 16.0919,
+        "passing": 1.5939,
+        "three": 0.0,
+        "steals": 1.7165,
+        "blocks": 2.1456
+      },
+      "ratings": {
+        "scoring": 6,
+        "rebounding": 30,
+        "passing": 6,
+        "three": 5,
+        "steals": 17,
+        "blocks": 17
+      }
+    },
+    {
+      "team": "TOR",
+      "name": "Immanuel Quickley",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630193",
+      "sourceName": "Immanuel Quickley",
+      "minutes2025_26": 2231.308,
+      "raw": {
+        "scoring": 18.5541,
+        "rebounding": 4.5498,
+        "passing": 6.6956,
+        "three": 2.8719,
+        "steals": 1.4843,
+        "blocks": 0.0807
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 8,
+        "passing": 17,
+        "three": 17,
+        "steals": 14,
+        "blocks": 5
+      }
+    },
+    {
+      "team": "TOR",
+      "name": "RJ Barrett",
+      "positionIndex": 1,
+      "nbaPlayerId": "1629628",
+      "sourceName": "RJ Barrett",
+      "minutes2025_26": 1725.76,
+      "raw": {
+        "scoring": 22.9047,
+        "rebounding": 6.2581,
+        "passing": 3.9426,
+        "three": 2.0026,
+        "steals": 0.8761,
+        "blocks": 0.3963
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 10,
+        "passing": 11,
+        "three": 13,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "TOR",
+      "name": "Kawhi Leonard",
+      "positionIndex": 2,
+      "nbaPlayerId": "202695",
+      "sourceName": "Kawhi Leonard",
+      "minutes2025_26": 2084.728,
+      "raw": {
+        "scoring": 31.3077,
+        "rebounding": 7.1319,
+        "passing": 4.0408,
+        "three": 2.9702,
+        "steals": 2.1067,
+        "blocks": 0.4662
+      },
+      "ratings": {
+        "scoring": 26,
+        "rebounding": 12,
+        "passing": 11,
+        "three": 17,
+        "steals": 22,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "TOR",
+      "name": "Scottie Barnes",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630567",
+      "sourceName": "Scottie Barnes",
+      "minutes2025_26": 2680.777,
+      "raw": {
+        "scoring": 19.4451,
+        "rebounding": 8.0574,
+        "passing": 6.3653,
+        "three": 0.9132,
+        "steals": 1.5309,
+        "blocks": 1.5578
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 13,
+        "passing": 16,
+        "three": 9,
+        "steals": 15,
+        "blocks": 13
+      }
+    },
+    {
+      "team": "TOR",
+      "name": "Jakob Poeltl",
+      "positionIndex": 4,
+      "nbaPlayerId": "1627751",
+      "sourceName": "Jakob Poeltl",
+      "minutes2025_26": 1149.06,
+      "raw": {
+        "scoring": 15.4457,
+        "rebounding": 10.1196,
+        "passing": 2.9137,
+        "three": 0.0,
+        "steals": 1.2532,
+        "blocks": 1.0026
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 17,
+        "passing": 9,
+        "three": 5,
+        "steals": 12,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "HOU",
+      "name": "Reed Sheppard",
+      "positionIndex": 0,
+      "nbaPlayerId": "1642263",
+      "sourceName": "Reed Sheppard",
+      "minutes2025_26": 2146.923,
+      "raw": {
+        "scoring": 18.6127,
+        "rebounding": 3.9908,
+        "passing": 4.6448,
+        "three": 3.8064,
+        "steals": 2.0457,
+        "blocks": 0.9055
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 7,
+        "passing": 12,
+        "three": 22,
+        "steals": 21,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "HOU",
+      "name": "Amen Thompson",
+      "positionIndex": 1,
+      "nbaPlayerId": "1641708",
+      "sourceName": "Amen Thompson",
+      "minutes2025_26": 2953.15,
+      "raw": {
+        "scoring": 17.5907,
+        "rebounding": 7.4849,
+        "passing": 5.12,
+        "three": 0.3048,
+        "steals": 1.4507,
+        "blocks": 0.5851
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 12,
+        "passing": 13,
+        "three": 6,
+        "steals": 14,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "HOU",
+      "name": "Kevin Durant",
+      "positionIndex": 2,
+      "nbaPlayerId": "201142",
+      "sourceName": "Kevin Durant",
+      "minutes2025_26": 2839.823,
+      "raw": {
+        "scoring": 25.6833,
+        "rebounding": 5.4003,
+        "passing": 4.7158,
+        "three": 2.3579,
+        "steals": 0.786,
+        "blocks": 0.9001
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 9,
+        "passing": 12,
+        "three": 14,
+        "steals": 8,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "HOU",
+      "name": "Jabari Smith Jr.",
+      "positionIndex": 3,
+      "nbaPlayerId": "1631095",
+      "sourceName": "Jabari Smith Jr.",
+      "minutes2025_26": 2705.365,
+      "raw": {
+        "scoring": 16.1679,
+        "rebounding": 7.0393,
+        "passing": 1.9029,
+        "three": 2.3553,
+        "steals": 0.7452,
+        "blocks": 0.9448
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 11,
+        "passing": 7,
+        "three": 14,
+        "steals": 8,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "HOU",
+      "name": "Alperen Sengun",
+      "positionIndex": 4,
+      "nbaPlayerId": "1630578",
+      "sourceName": "Alperen Sengun",
+      "minutes2025_26": 2397.695,
+      "raw": {
+        "scoring": 22.0111,
+        "rebounding": 9.6092,
+        "passing": 6.6814,
+        "three": 0.6006,
+        "steals": 1.2762,
+        "blocks": 1.1561
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 15,
+        "passing": 17,
+        "three": 7,
+        "steals": 13,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "ATL",
+      "name": "CJ McCollum",
+      "positionIndex": 0,
+      "nbaPlayerId": "203468",
+      "sourceName": "CJ McCollum",
+      "minutes2025_26": 2263.372,
+      "raw": {
+        "scoring": 22.6494,
+        "rebounding": 4.0082,
+        "passing": 4.6603,
+        "three": 3.0379,
+        "steals": 1.018,
+        "blocks": 0.5567
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 7,
+        "passing": 12,
+        "three": 18,
+        "steals": 10,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "ATL",
+      "name": "Nickeil Alexander-Walker",
+      "positionIndex": 1,
+      "nbaPlayerId": "1629638",
+      "sourceName": "Nickeil Alexander-Walker",
+      "minutes2025_26": 2603.177,
+      "raw": {
+        "scoring": 22.4587,
+        "rebounding": 3.7062,
+        "passing": 3.9552,
+        "three": 3.4711,
+        "steals": 1.4106,
+        "blocks": 0.5808
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 6,
+        "passing": 11,
+        "three": 20,
+        "steals": 14,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "ATL",
+      "name": "Dyson Daniels",
+      "positionIndex": 2,
+      "nbaPlayerId": "1630700",
+      "sourceName": "Dyson Daniels",
+      "minutes2025_26": 2519.54,
+      "raw": {
+        "scoring": 12.8738,
+        "rebounding": 7.4299,
+        "passing": 6.4155,
+        "three": 0.3143,
+        "steals": 2.129,
+        "blocks": 0.4429
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 12,
+        "passing": 16,
+        "three": 6,
+        "steals": 22,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "ATL",
+      "name": "Jalen Johnson",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630552",
+      "sourceName": "Jalen Johnson",
+      "minutes2025_26": 2531.598,
+      "raw": {
+        "scoring": 23.0511,
+        "rebounding": 10.523,
+        "passing": 8.0487,
+        "three": 1.7064,
+        "steals": 1.2656,
+        "blocks": 0.4408
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 17,
+        "passing": 21,
+        "three": 12,
+        "steals": 12,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "ATL",
+      "name": "Onyeka Okongwu",
+      "positionIndex": 4,
+      "nbaPlayerId": "1630168",
+      "sourceName": "Onyeka Okongwu",
+      "minutes2025_26": 2296.968,
+      "raw": {
+        "scoring": 17.6006,
+        "rebounding": 8.8081,
+        "passing": 3.6204,
+        "three": 2.2569,
+        "steals": 1.2852,
+        "blocks": 1.2382
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 14,
+        "passing": 10,
+        "three": 14,
+        "steals": 13,
+        "blocks": 12
+      }
+    },
+    {
+      "team": "CLE",
+      "name": "James Harden",
+      "positionIndex": 0,
+      "nbaPlayerId": "201935",
+      "sourceName": "James Harden",
+      "minutes2025_26": 2438.495,
+      "raw": {
+        "scoring": 24.3888,
+        "rebounding": 4.9604,
+        "passing": 8.2231,
+        "three": 3.1741,
+        "steals": 1.1663,
+        "blocks": 0.4134
+      },
+      "ratings": {
+        "scoring": 18,
+        "rebounding": 8,
+        "passing": 21,
+        "three": 18,
+        "steals": 12,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "CLE",
+      "name": "Donovan Mitchell",
+      "positionIndex": 1,
+      "nbaPlayerId": "1628378",
+      "sourceName": "Donovan Mitchell",
+      "minutes2025_26": 2342.063,
+      "raw": {
+        "scoring": 30.0043,
+        "rebounding": 4.8573,
+        "passing": 6.1177,
+        "three": 3.4431,
+        "steals": 1.5986,
+        "blocks": 0.3074
+      },
+      "ratings": {
+        "scoring": 25,
+        "rebounding": 8,
+        "passing": 15,
+        "three": 20,
+        "steals": 15,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "CLE",
+      "name": "Max Strus",
+      "positionIndex": 2,
+      "nbaPlayerId": "1629622",
+      "sourceName": "Max Strus",
+      "minutes2025_26": 288.295,
+      "raw": {
+        "scoring": 16.7329,
+        "rebounding": 8.1167,
+        "passing": 2.9969,
+        "three": 4.1208,
+        "steals": 0.3746,
+        "blocks": 0.0
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 13,
+        "passing": 9,
+        "three": 24,
+        "steals": 5,
+        "blocks": 5
+      }
+    },
+    {
+      "team": "CLE",
+      "name": "Evan Mobley",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630596",
+      "sourceName": "Evan Mobley",
+      "minutes2025_26": 2074.288,
+      "raw": {
+        "scoring": 20.4793,
+        "rebounding": 10.1702,
+        "passing": 4.0612,
+        "three": 1.076,
+        "steals": 0.8331,
+        "blocks": 1.9612
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 17,
+        "passing": 11,
+        "three": 9,
+        "steals": 9,
+        "blocks": 15
+      }
+    },
+    {
+      "team": "CLE",
+      "name": "Jarrett Allen",
+      "positionIndex": 4,
+      "nbaPlayerId": "1628386",
+      "sourceName": "Jarrett Allen",
+      "minutes2025_26": 1519.12,
+      "raw": {
+        "scoring": 20.3802,
+        "rebounding": 11.2802,
+        "passing": 2.3698,
+        "three": 0.0237,
+        "steals": 1.3034,
+        "blocks": 1.1138
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 19,
+        "passing": 8,
+        "three": 5,
+        "steals": 13,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "SAS",
+      "name": "De'Aaron Fox",
+      "positionIndex": 0,
+      "nbaPlayerId": "1628368",
+      "sourceName": "De'Aaron Fox",
+      "minutes2025_26": 2231.065,
+      "raw": {
+        "scoring": 21.5574,
+        "rebounding": 4.3567,
+        "passing": 7.1804,
+        "three": 2.1138,
+        "steals": 1.4361,
+        "blocks": 0.3066
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 7,
+        "passing": 18,
+        "three": 13,
+        "steals": 14,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "SAS",
+      "name": "Stephon Castle",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642264",
+      "sourceName": "Stephon Castle",
+      "minutes2025_26": 2037.743,
+      "raw": {
+        "scoring": 20.0163,
+        "rebounding": 6.3953,
+        "passing": 8.8686,
+        "three": 1.431,
+        "steals": 1.378,
+        "blocks": 0.3357
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 10,
+        "passing": 23,
+        "three": 11,
+        "steals": 13,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "SAS",
+      "name": "Devin Vassell",
+      "positionIndex": 2,
+      "nbaPlayerId": "1630170",
+      "sourceName": "Devin Vassell",
+      "minutes2025_26": 2044.232,
+      "raw": {
+        "scoring": 16.413,
+        "rebounding": 4.7372,
+        "passing": 2.941,
+        "three": 2.9233,
+        "steals": 1.0038,
+        "blocks": 0.4403
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 8,
+        "passing": 9,
+        "three": 17,
+        "steals": 10,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "SAS",
+      "name": "Julian Champagnie",
+      "positionIndex": 3,
+      "nbaPlayerId": "1630577",
+      "sourceName": "Julian Champagnie",
+      "minutes2025_26": 2265.963,
+      "raw": {
+        "scoring": 14.4733,
+        "rebounding": 7.5147,
+        "passing": 2.0177,
+        "three": 3.098,
+        "steals": 0.985,
+        "blocks": 0.6037
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 12,
+        "passing": 7,
+        "three": 18,
+        "steals": 10,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "SAS",
+      "name": "Victor Wembanyama",
+      "positionIndex": 4,
+      "nbaPlayerId": "1641705",
+      "sourceName": "Victor Wembanyama",
+      "minutes2025_26": 1865.648,
+      "raw": {
+        "scoring": 30.874,
+        "rebounding": 14.202,
+        "passing": 3.84,
+        "three": 2.3541,
+        "steals": 1.2736,
+        "blocks": 3.8014
+      },
+      "ratings": {
+        "scoring": 26,
+        "rebounding": 26,
+        "passing": 10,
+        "three": 14,
+        "steals": 12,
+        "blocks": 30
+      }
+    },
+    {
+      "team": "DEN",
+      "name": "Jamal Murray",
+      "positionIndex": 0,
+      "nbaPlayerId": "1627750",
+      "sourceName": "Jamal Murray",
+      "minutes2025_26": 2651.892,
+      "raw": {
+        "scoring": 25.8608,
+        "rebounding": 4.4798,
+        "passing": 7.2627,
+        "three": 3.3259,
+        "steals": 0.896,
+        "blocks": 0.3937
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 8,
+        "passing": 18,
+        "three": 19,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "DEN",
+      "name": "Christian Braun",
+      "positionIndex": 1,
+      "nbaPlayerId": "1631128",
+      "sourceName": "Christian Braun",
+      "minutes2025_26": 1399.138,
+      "raw": {
+        "scoring": 13.534,
+        "rebounding": 5.4291,
+        "passing": 3.0876,
+        "three": 1.1064,
+        "steals": 0.7719,
+        "blocks": 0.3088
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 9,
+        "passing": 9,
+        "three": 9,
+        "steals": 8,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "DEN",
+      "name": "Cameron Johnson",
+      "positionIndex": 2,
+      "nbaPlayerId": "1629661",
+      "sourceName": "Cameron Johnson",
+      "minutes2025_26": 1647.032,
+      "raw": {
+        "scoring": 14.426,
+        "rebounding": 4.5026,
+        "passing": 2.8852,
+        "three": 2.4043,
+        "steals": 0.8743,
+        "blocks": 0.459
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 8,
+        "passing": 9,
+        "three": 14,
+        "steals": 9,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "DEN",
+      "name": "Aaron Gordon",
+      "positionIndex": 3,
+      "nbaPlayerId": "203932",
+      "sourceName": "Aaron Gordon",
+      "minutes2025_26": 1004.958,
+      "raw": {
+        "scoring": 20.8486,
+        "rebounding": 7.4869,
+        "passing": 3.4389,
+        "three": 2.1852,
+        "steals": 0.7523,
+        "blocks": 0.3582
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 12,
+        "passing": 10,
+        "three": 13,
+        "steals": 8,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "DEN",
+      "name": "Nikola Jokic",
+      "positionIndex": 4,
+      "nbaPlayerId": "203999",
+      "sourceName": "Nikola Jokić",
+      "minutes2025_26": 2264.855,
+      "raw": {
+        "scoring": 28.5952,
+        "rebounding": 13.2883,
+        "passing": 11.0789,
+        "three": 1.7802,
+        "steals": 1.4623,
+        "blocks": 0.8424
+      },
+      "ratings": {
+        "scoring": 23,
+        "rebounding": 24,
+        "passing": 29,
+        "three": 12,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "IND",
+      "name": "Ben Sheppard",
+      "positionIndex": 0,
+      "nbaPlayerId": "1641767",
+      "sourceName": "Ben Sheppard",
+      "minutes2025_26": 1390.477,
+      "raw": {
+        "scoring": 11.8837,
+        "rebounding": 5.0486,
+        "passing": 2.9515,
+        "three": 2.1748,
+        "steals": 1.0097,
+        "blocks": 0.1553
+      },
+      "ratings": {
+        "scoring": 7,
+        "rebounding": 8,
+        "passing": 9,
+        "three": 13,
+        "steals": 10,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "IND",
+      "name": "Andrew Nembhard",
+      "positionIndex": 1,
+      "nbaPlayerId": "1629614",
+      "sourceName": "Andrew Nembhard",
+      "minutes2025_26": 1785.593,
+      "raw": {
+        "scoring": 19.4759,
+        "rebounding": 3.2258,
+        "passing": 8.8105,
+        "three": 2.1573,
+        "steals": 1.0282,
+        "blocks": 0.1613
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 6,
+        "passing": 23,
+        "three": 13,
+        "steals": 10,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "IND",
+      "name": "Aaron Nesmith",
+      "positionIndex": 2,
+      "nbaPlayerId": "1630174",
+      "sourceName": "Aaron Nesmith",
+      "minutes2025_26": 1334.95,
+      "raw": {
+        "scoring": 16.7467,
+        "rebounding": 5.0429,
+        "passing": 2.3192,
+        "three": 2.8316,
+        "steals": 0.7011,
+        "blocks": 0.6202
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 8,
+        "passing": 7,
+        "three": 17,
+        "steals": 8,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "IND",
+      "name": "Pascal Siakam",
+      "positionIndex": 3,
+      "nbaPlayerId": "1627783",
+      "sourceName": "Pascal Siakam",
+      "minutes2025_26": 2056.652,
+      "raw": {
+        "scoring": 25.9937,
+        "rebounding": 7.1942,
+        "passing": 4.131,
+        "three": 1.8379,
+        "steals": 1.2078,
+        "blocks": 0.4376
+      },
+      "ratings": {
+        "scoring": 20,
+        "rebounding": 12,
+        "passing": 11,
+        "three": 12,
+        "steals": 12,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "IND",
+      "name": "Ivica Zubac",
+      "positionIndex": 4,
+      "nbaPlayerId": "1627826",
+      "sourceName": "Ivica Zubac",
+      "minutes2025_26": 1446.698,
+      "raw": {
+        "scoring": 16.8466,
+        "rebounding": 12.6661,
+        "passing": 2.6128,
+        "three": 0.0,
+        "steals": 0.4479,
+        "blocks": 0.9954
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 22,
+        "passing": 8,
+        "three": 5,
+        "steals": 6,
+        "blocks": 10
+      }
+    },
+    {
+      "team": "NYK",
+      "name": "Jalen Brunson",
+      "positionIndex": 0,
+      "nbaPlayerId": "1628973",
+      "sourceName": "Jalen Brunson",
+      "minutes2025_26": 2589.807,
+      "raw": {
+        "scoring": 26.7866,
+        "rebounding": 3.4335,
+        "passing": 6.992,
+        "three": 2.7106,
+        "steals": 0.7923,
+        "blocks": 0.1112
+      },
+      "ratings": {
+        "scoring": 21,
+        "rebounding": 6,
+        "passing": 17,
+        "three": 16,
+        "steals": 8,
+        "blocks": 6
+      }
+    },
+    {
+      "team": "NYK",
+      "name": "Josh Hart",
+      "positionIndex": 1,
+      "nbaPlayerId": "1628404",
+      "sourceName": "Josh Hart",
+      "minutes2025_26": 1993.575,
+      "raw": {
+        "scoring": 14.3019,
+        "rebounding": 8.7762,
+        "passing": 5.7244,
+        "three": 1.8058,
+        "steals": 1.3544,
+        "blocks": 0.307
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 14,
+        "passing": 14,
+        "three": 12,
+        "steals": 13,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "NYK",
+      "name": "Mikal Bridges",
+      "positionIndex": 2,
+      "nbaPlayerId": "1628969",
+      "sourceName": "Mikal Bridges",
+      "minutes2025_26": 2691.935,
+      "raw": {
+        "scoring": 15.7938,
+        "rebounding": 4.1725,
+        "passing": 4.0655,
+        "three": 2.0862,
+        "steals": 1.4309,
+        "blocks": 0.8291
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 7,
+        "passing": 11,
+        "three": 13,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "NYK",
+      "name": "OG Anunoby",
+      "positionIndex": 3,
+      "nbaPlayerId": "1628384",
+      "sourceName": "OG Anunoby",
+      "minutes2025_26": 2223.872,
+      "raw": {
+        "scoring": 18.0982,
+        "rebounding": 5.682,
+        "passing": 2.3473,
+        "three": 2.5415,
+        "steals": 1.6836,
+        "blocks": 0.777
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 9,
+        "passing": 8,
+        "three": 15,
+        "steals": 16,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "NYK",
+      "name": "Karl-Anthony Towns",
+      "positionIndex": 4,
+      "nbaPlayerId": "1626157",
+      "sourceName": "Karl-Anthony Towns",
+      "minutes2025_26": 2321.782,
+      "raw": {
+        "scoring": 23.32,
+        "rebounding": 13.7842,
+        "passing": 3.5042,
+        "three": 1.7521,
+        "steals": 1.0078,
+        "blocks": 0.6202
+      },
+      "ratings": {
+        "scoring": 17,
+        "rebounding": 25,
+        "passing": 10,
+        "three": 12,
+        "steals": 10,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "OKC",
+      "name": "Shai Gilgeous-Alexander",
+      "positionIndex": 0,
+      "nbaPlayerId": "1628983",
+      "sourceName": "Shai Gilgeous-Alexander",
+      "minutes2025_26": 2258.947,
+      "raw": {
+        "scoring": 33.7378,
+        "rebounding": 4.6535,
+        "passing": 7.1396,
+        "three": 1.8327,
+        "steals": 1.514,
+        "blocks": 0.8287
+      },
+      "ratings": {
+        "scoring": 29,
+        "rebounding": 8,
+        "passing": 18,
+        "three": 12,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "OKC",
+      "name": "Cason Wallace",
+      "positionIndex": 1,
+      "nbaPlayerId": "1641717",
+      "sourceName": "Cason Wallace",
+      "minutes2025_26": 2046.07,
+      "raw": {
+        "scoring": 11.6125,
+        "rebounding": 4.1875,
+        "passing": 3.5189,
+        "three": 1.7771,
+        "steals": 2.6392,
+        "blocks": 0.4927
+      },
+      "ratings": {
+        "scoring": 7,
+        "rebounding": 7,
+        "passing": 10,
+        "three": 12,
+        "steals": 28,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "OKC",
+      "name": "Jalen Williams",
+      "positionIndex": 2,
+      "nbaPlayerId": "1631114",
+      "sourceName": "Jalen Williams",
+      "minutes2025_26": 935.963,
+      "raw": {
+        "scoring": 21.6547,
+        "rebounding": 5.8848,
+        "passing": 6.9618,
+        "three": 0.8847,
+        "steals": 1.5001,
+        "blocks": 0.3462
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 10,
+        "passing": 17,
+        "three": 8,
+        "steals": 14,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "OKC",
+      "name": "Chet Holmgren",
+      "positionIndex": 3,
+      "nbaPlayerId": "1631096",
+      "sourceName": "Chet Holmgren",
+      "minutes2025_26": 1997.268,
+      "raw": {
+        "scoring": 21.2871,
+        "rebounding": 11.0671,
+        "passing": 2.0728,
+        "three": 1.5862,
+        "steals": 0.7751,
+        "blocks": 2.3612
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 19,
+        "passing": 7,
+        "three": 11,
+        "steals": 8,
+        "blocks": 19
+      }
+    },
+    {
+      "team": "OKC",
+      "name": "Isaiah Hartenstein",
+      "positionIndex": 4,
+      "nbaPlayerId": "1628392",
+      "sourceName": "Isaiah Hartenstein",
+      "minutes2025_26": 1137.425,
+      "raw": {
+        "scoring": 13.673,
+        "rebounding": 14.0211,
+        "passing": 5.254,
+        "three": 0.0,
+        "steals": 1.5192,
+        "blocks": 1.1394
+      },
+      "ratings": {
+        "scoring": 8,
+        "rebounding": 25,
+        "passing": 13,
+        "three": 5,
+        "steals": 15,
+        "blocks": 11
+      }
+    },
+    {
+      "team": "PHI",
+      "name": "Tyrese Maxey",
+      "positionIndex": 0,
+      "nbaPlayerId": "1630178",
+      "sourceName": "Tyrese Maxey",
+      "minutes2025_26": 2661.118,
+      "raw": {
+        "scoring": 26.7857,
+        "rebounding": 3.9232,
+        "passing": 6.2365,
+        "three": 2.9762,
+        "steals": 1.7587,
+        "blocks": 0.744
+      },
+      "ratings": {
+        "scoring": 21,
+        "rebounding": 7,
+        "passing": 15,
+        "three": 17,
+        "steals": 17,
+        "blocks": 9
+      }
+    },
+    {
+      "team": "PHI",
+      "name": "VJ Edgecombe",
+      "positionIndex": 1,
+      "nbaPlayerId": "1642845",
+      "sourceName": "VJ Edgecombe",
+      "minutes2025_26": 2623.305,
+      "raw": {
+        "scoring": 16.4541,
+        "rebounding": 5.8049,
+        "passing": 4.3228,
+        "three": 2.0447,
+        "steals": 1.4684,
+        "blocks": 0.5352
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 10,
+        "passing": 11,
+        "three": 13,
+        "steals": 14,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "PHI",
+      "name": "Jaylen Brown",
+      "positionIndex": 2,
+      "nbaPlayerId": "1627759",
+      "sourceName": "Jaylen Brown",
+      "minutes2025_26": 2442.838,
+      "raw": {
+        "scoring": 30.0339,
+        "rebounding": 7.2506,
+        "passing": 5.3643,
+        "three": 2.0632,
+        "steals": 1.0611,
+        "blocks": 0.3979
+      },
+      "ratings": {
+        "scoring": 25,
+        "rebounding": 12,
+        "passing": 13,
+        "three": 13,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    {
+      "team": "PHI",
+      "name": "LeBron James",
+      "positionIndex": 3,
+      "nbaPlayerId": "2544",
+      "sourceName": "LeBron James",
+      "minutes2025_26": 1989.055,
+      "raw": {
+        "scoring": 22.7324,
+        "rebounding": 6.5881,
+        "passing": 7.8188,
+        "three": 1.3936,
+        "steals": 1.3031,
+        "blocks": 0.6335
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 11,
+        "passing": 20,
+        "three": 10,
+        "steals": 13,
+        "blocks": 8
+      }
+    },
+    {
+      "team": "PHI",
+      "name": "Joel Embiid",
+      "positionIndex": 4,
+      "nbaPlayerId": "203954",
+      "sourceName": "Joel Embiid",
+      "minutes2025_26": 1200.638,
+      "raw": {
+        "scoring": 30.6137,
+        "rebounding": 8.7853,
+        "passing": 4.4976,
+        "three": 1.5892,
+        "steals": 0.6297,
+        "blocks": 1.3793
+      },
+      "ratings": {
+        "scoring": 25,
+        "rebounding": 14,
+        "passing": 12,
+        "three": 11,
+        "steals": 7,
+        "blocks": 12
+      }
+    }
+  ]
+}
