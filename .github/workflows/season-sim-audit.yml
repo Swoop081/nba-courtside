@@ -1,0 +1,73 @@
+name: Season simulation audit
+on:
+  push:
+    branches: [season-sim-audit-20260908]
+    paths: ['.github/workflows/season-sim-audit.yml']
+permissions:
+  contents: write
+jobs:
+  simulate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: season-sim-audit-20260908}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Run 10000 no-free-agent seasons
+        run: |
+          cat > /tmp/sim.js <<'NODE'
+          const fs=require('fs'),vm=require('vm'),https=require('https');
+          const foundation=fs.readFileSync('foundation-v0.9.0.js','utf8');
+          const overallSrc=fs.readFileSync('overall-ratings-v0.10.26.js','utf8');
+          function extract(src,start,end){const a=src.indexOf(start); if(a<0)throw Error('missing '+start); const b=src.indexOf(end,a); if(b<0)throw Error('missing end'); return src.slice(a+start.length,b);}
+          const fdExpr=extract(foundation,'const FD=',';\nconst slug=');
+          const rowsExpr=extract(overallSrc,'const rows=',';\nconst norm=');
+          const FD=vm.runInNewContext('('+fdExpr+')');
+          const rows=vm.runInNewContext('('+rowsExpr+')');
+          const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,' ').trim().toLowerCase();
+          const overall=new Map(rows.filter(r=>!r.classic).map(r=>[norm(r.name),+r.overall]));
+          const team={};
+          for(const [name,id,ps] of FD){
+            const vals=ps.map(p=>overall.get(norm(p[0]))).filter(Number.isFinite);
+            if(vals.length!==5)throw Error(`${name} has ${vals.length} mapped overalls`);
+            team[id]={name,players:ps.map(p=>p[0]),strength:vals.reduce((a,b)=>a+b,0)/5,overalls:vals};
+          }
+          if(Object.keys(team).length!==30)throw Error('expected 30 teams');
+          const ABBR={ATL:'1610612737',BOS:'1610612738',BKN:'1610612751',CHA:'1610612766',CHI:'1610612741',CLE:'1610612739',DAL:'1610612742',DEN:'1610612743',DET:'1610612765',GSW:'1610612744',HOU:'1610612745',IND:'1610612754',LAC:'1610612746',LAL:'1610612747',MEM:'1610612763',MIA:'1610612748',MIL:'1610612749',MIN:'1610612750',NOP:'1610612740',NYK:'1610612752',OKC:'1610612760',ORL:'1610612753',PHI:'1610612755',PHX:'1610612756',POR:'1610612757',SAC:'1610612758',SAS:'1610612759',TOR:'1610612761',UTA:'1610612762',WAS:'1610612764'};
+          function get(url){return new Promise((resolve,reject)=>https.get(url,r=>{let d='';r.on('data',x=>d+=x);r.on('end',()=>r.statusCode===200?resolve(d):reject(Error('HTTP '+r.statusCode)));}).on('error',reject));}
+          const actual={DET:60,BOS:56,NYK:53,CLE:52,TOR:46,ATL:46,PHI:45,ORL:45,CHA:44,MIA:43,MIL:32,CHI:31,BKN:20,IND:19,WAS:17,OKC:64,SAS:62,DEN:54,LAL:53,HOU:52,MIN:49,PHX:45,POR:42,LAC:42,GSW:37,NOP:26,DAL:26,MEM:25,SAC:22,UTA:22};
+          const EAST=new Set(['ATL','BOS','BKN','CHA','CHI','CLE','DET','IND','MIA','MIL','NYK','ORL','PHI','TOR','WAS']);
+          (async()=>{
+            const csv=await get('https://raw.githubusercontent.com/mdahlman/nba-schedule/main/data/nba-full-schedule-2022-2023.csv');
+            const games=[]; for(const line of csv.trim().split(/\r?\n/).slice(1)){const c=line.split(',');const away=ABBR[c[4]],home=ABBR[c[5]];if(away&&home)games.push([away,home]);}
+            if(games.length!==1230)throw Error('schedule '+games.length);
+            const ids=Object.keys(team), sums=Object.fromEntries(ids.map(id=>[id,0])), sq=Object.fromEntries(ids.map(id=>[id,0]));
+            const N=10000;
+            for(let s=0;s<N;s++){
+              const wins=Object.fromEntries(ids.map(id=>[id,0]));
+              for(const [a,b] of games){const sa=team[a].strength,sb=team[b].strength,p=Math.max(.2,Math.min(.8,.5+(sa-sb)/35));const w=Math.random()<p?a:b;wins[w]++;}
+              for(const id of ids){sums[id]+=wins[id];sq[id]+=wins[id]*wins[id];}
+            }
+            const rev=Object.fromEntries(Object.entries(ABBR).map(([a,id])=>[id,a]));
+            let out=ids.map(id=>{const mean=sums[id]/N,variance=sq[id]/N-mean*mean;const a=rev[id];return {abbr:a,team:team[id].name,strength:+team[id].strength.toFixed(2),players:team[id].players,overalls:team[id].overalls,simWins:+mean.toFixed(2),simSD:+Math.sqrt(Math.max(0,variance)).toFixed(2),actualWins:actual[a],winDelta:+(mean-actual[a]).toFixed(2),conference:EAST.has(a)?'East':'West'};});
+            const realRank={}; [...out].sort((a,b)=>b.actualWins-a.actualWins).forEach((x,i)=>realRank[x.abbr]=i+1);
+            const simRank={}; [...out].sort((a,b)=>b.simWins-a.simWins).forEach((x,i)=>simRank[x.abbr]=i+1);
+            out=out.map(x=>({...x,actualRank:realRank[x.abbr],simRank:simRank[x.abbr],rankDelta:simRank[x.abbr]-realRank[x.abbr]})).sort((a,b)=>b.simWins-a.simWins);
+            const report={schema:'nba-starting5-season-sim-audit-v1',seasons:N,freeAgents:false,engine:'exact season-mode-v1.0.0 simWinner: p=clamp(.2,.8,.5+(strengthA-strengthB)/35), strength=mean courtsideOverall of five starters',schedule:'2022-23 1230-game template used by live season mode',teams:out,outliers:[...out].sort((a,b)=>Math.abs(b.winDelta)-Math.abs(a.winDelta)).slice(0,15)};
+            fs.writeFileSync('season-sim-audit-10000.json',JSON.stringify(report,null,2));
+            let md='# NBA Starting5 — 10,000 Season Simulation Audit\n\nNo free-agent signings. Uses the current live season AI formula and current five-player overall ratings. Comparison is against final 2025–26 NBA regular-season standings.\n\n| Sim rk | Team | Strength | Sim W | Actual W | Δ W | Real rk | Δ rk |\n|---:|---|---:|---:|---:|---:|---:|---:|\n';
+            out.forEach(x=>md+=`| ${x.simRank} | ${x.team} | ${x.strength.toFixed(2)} | ${x.simWins.toFixed(2)} | ${x.actualWins} | ${x.winDelta>=0?'+':''}${x.winDelta.toFixed(2)} | ${x.actualRank} | ${x.rankDelta>=0?'+':''}${x.rankDelta} |\n`);
+            md+='\n## Biggest absolute win outliers\n\n'; report.outliers.forEach(x=>md+=`- ${x.team}: ${x.simWins.toFixed(2)} simulated vs ${x.actualWins} actual (${x.winDelta>=0?'+':''}${x.winDelta.toFixed(2)}), strength ${x.strength.toFixed(2)}.\n`);
+            const sas=out.find(x=>x.abbr==='SAS');md+=`\n## Spurs\n\nCurrent five: ${sas.players.map((p,i)=>`${p} (${sas.overalls[i]})`).join(', ')}. Team strength ${sas.strength.toFixed(2)}; ${sas.simWins.toFixed(2)} simulated wins vs ${sas.actualWins} actual.\n`;
+            fs.writeFileSync('SEASON-SIM-AUDIT-10000.md',md);
+            console.log(JSON.stringify({spurs:sas,top:out.slice(0,5),outliers:report.outliers.slice(0,10)},null,2));
+          })().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+          node /tmp/sim.js
+      - name: Commit audit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add season-sim-audit-10000.json SEASON-SIM-AUDIT-10000.md
+          git commit -m "Run 10000-season no-free-agent audit"
+          git push
