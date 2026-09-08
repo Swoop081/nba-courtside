@@ -1,0 +1,69 @@
+name: Season development ratings audit
+on:
+  push:
+    branches: [season-sim-audit-20260908]
+    paths: ['.github/workflows/season-rating-development-pass.yml']
+permissions: {contents: write}
+jobs:
+  tune:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: season-sim-audit-20260908}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Apply visible development ratings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('foundation-v0.9.0.js')
+          s=p.read_text()
+          changes={
+            "['Jayson Tatum','PF',[29,26,27,25,22,15,18]]":"['Jayson Tatum','PF',[30,27,28,26,23,16,19]]",
+            "['Kon Knueppel','SF',[21,15,27,15,17,5,12]]":"['Kon Knueppel','SF',[24,18,29,18,20,7,14]]",
+            "['Egor Demin','PG',[18,16,19,13,25,6,14]]":"['Egor Demin','PG',[20,18,21,15,27,7,16]]",
+            "['Cooper Flagg','SF',[25,29,20,24,20,24,20]]":"['Cooper Flagg','SF',[26,30,22,25,22,25,21]]",
+            "['Jamal Murray','PG',[26,15,27,10,24,3,11]]":"['Jamal Murray','PG',[27,16,28,11,25,3,12]]",
+            "['Aaron Gordon','PF',[21,29,17,22,16,16,12]]":"['Aaron Gordon','PF',[22,30,18,23,17,17,13]]",
+            "['Nikola Jokić','C',[29,19,25,30,30,13,17]]":"['Nikola Jokić','C',[30,19,26,30,30,14,18]]",
+            "['Jeremiah Fears','SG',[19,20,18,12,21,3,17]]":"['Jeremiah Fears','SG',[21,22,20,14,23,4,19]]",
+            "['Derik Queen','C',[20,22,12,25,14,18,8]]":"['Derik Queen','C',[22,24,14,27,16,20,10]]",
+            "['VJ Edgecombe','SG',[22,28,20,17,16,13,20]]":"['VJ Edgecombe','SG',[24,29,22,19,18,14,22]]",
+            "['Tre Johnson','SG',[21,18,25,10,15,4,10]]":"['Tre Johnson','SG',[23,20,27,12,17,5,12]]",
+            "['Ace Bailey','SF',[22,28,22,19,13,17,14]]":"['Ace Bailey','SF',[24,29,24,21,15,18,16]]",
+            "['Collin Murray-Boyles','C',[18,25,10,25,13,20,15]]":"['Collin Murray-Boyles','C',[20,27,12,27,15,22,17]]"
+          }
+          for old,new in changes.items():
+            if old not in s: raise SystemExit(f'missing source row: {old}')
+            s=s.replace(old,new)
+          p.write_text(s)
+          PY
+          node --check foundation-v0.9.0.js
+      - name: Run 10000 season audit
+        run: |
+          cat > /tmp/sim.js <<'JS'
+          const fs=require('fs'),vm=require('vm');
+          const foundation=fs.readFileSync('foundation-v0.9.0.js','utf8');
+          const fdMatch=foundation.match(/const FD=(\[[\s\S]*?\n\];)/);if(!fdMatch)throw Error('FD not found');
+          const ctx={};vm.createContext(ctx);vm.runInContext('FD='+fdMatch[1],ctx);const FD=ctx.FD;
+          const cats=['scoring','dunks','three','rebounding','passing','blocks','steals'];
+          const ids=FD.map(t=>t[1]);const teams=new Map(FD.map(t=>[t[1],{name:t[0],players:t[2].map((p,i)=>({id:t[1]+'-'+i,stats:Object.fromEntries(cats.map((k,j)=>[k,p[2][j]]))}))}]));
+          function v(p,k){return Math.max(5,Math.min(30,Number(p.stats[k])||5))}
+          function power(id){const r=teams.get(id).players;let total=0;for(const k of cats){const a=r.map(p=>v(p,k)).sort((x,y)=>y-x);total+=a[0]*.34+a[1]*.24+a[2]*.18+a[3]*.14+a[4]*.10}return total/cats.length}
+          function game(a,b){const A=teams.get(a).players,B=teams.get(b).players,ua=new Set,ub=new Set;let sa=0,sb=0;const pick=(r,u,k)=>r.filter(p=>!u.has(p.id)).sort((x,y)=>v(y,k)-v(x,k))[0];for(let q=0;q<4;q++){const k=cats[Math.floor(Math.random()*cats.length)],pa=pick(A,ua,k),pb=pick(B,ub,k);ua.add(pa.id);ub.add(pb.id);sa+=v(pa,k);sb+=v(pb,k)}if(sa===sb){const pa=A.find(p=>!ua.has(p.id)),pb=B.find(p=>!ub.has(p.id)),k=cats[Math.floor(Math.random()*cats.length)];if(pa&&pb){sa+=v(pa,k);sb+=v(pb,k)}}if(sa===sb){const p=.5+Math.max(-.12,Math.min(.12,(power(a)-power(b))/40));return Math.random()<p?a:b}return sa>sb?a:b}
+          const actual={ATL:46,BOS:56,BKN:20,CHA:44,CHI:31,CLE:52,DAL:26,DEN:54,DET:60,GSW:37,HOU:52,IND:19,LAC:42,LAL:53,MEM:25,MIA:43,MIL:32,MIN:49,NOP:26,NYK:53,OKC:64,ORL:45,PHI:45,PHX:45,POR:42,SAC:22,SAS:62,TOR:46,UTA:22,WAS:17};
+          const abbr=['ATL','BOS','BKN','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHX','POR','SAC','SAS','TOR','UTA','WAS'];const rev=Object.fromEntries(ids.map((id,i)=>[id,abbr[i]]));
+          const wins=Object.fromEntries(ids.map(id=>[id,0])),N=10000;
+          for(let s=0;s<N;s++){const rec=Object.fromEntries(ids.map(id=>[id,0]));for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++){for(let n=0;n<3;n++)rec[game(ids[i],ids[j])]++}for(const id of ids){for(let n=0;n<82-87;n++){let b;do b=ids[Math.floor(Math.random()*ids.length)];while(b===id);rec[game(id,b)]++}wins[id]+=rec[id]}}
+          const rows=ids.map(id=>({id,name:teams.get(id).name,power:power(id),sim:wins[id]/N,actual:actual[rev[id]]})).sort((a,b)=>b.sim-a.sim);let out='# NBA Starting5 — Development Ratings 10,000 Season Audit\n\nNo free agents. Visible card ratings only. Includes modest Denver/Boston boosts and forward-development boosts for the 2025 rookie class represented in Starting5.\n\n| Rank | Team | Power | Sim W | Actual W | Delta |\n|---:|---|---:|---:|---:|---:|\n';for(const r of rows)out+=`| ${rows.indexOf(r)+1} | ${r.name} | ${r.power.toFixed(2)} | ${r.sim.toFixed(2)} | ${r.actual} | ${(r.sim-r.actual>=0?'+':'')+(r.sim-r.actual).toFixed(2)} |\n`;out+='\n## Largest absolute outliers\n\n';for(const r of [...rows].sort((a,b)=>Math.abs(b.sim-b.actual)-Math.abs(a.sim-a.actual)).slice(0,15))out+=`- ${r.name}: ${r.sim.toFixed(2)} vs ${r.actual} (${(r.sim-r.actual>=0?'+':'')+(r.sim-r.actual).toFixed(2)})\n`;fs.writeFileSync('SEASON-SIM-DEVELOPMENT-AUDIT-10000.md',out);console.log(out);
+          JS
+          node /tmp/sim.js
+      - name: Commit results and remove one-shot workflow
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          rm .github/workflows/season-rating-development-pass.yml
+          git add foundation-v0.9.0.js SEASON-SIM-DEVELOPMENT-AUDIT-10000.md .github/workflows/season-rating-development-pass.yml
+          git commit -m "Apply development ratings and rerun season audit"
+          git push
