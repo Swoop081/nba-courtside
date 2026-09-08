@@ -1,7 +1,7 @@
-/* NBA Starting5 v0.13.0-dev.11 — persistent Season dynamic ratings across reload/re-entry. */
+/* NBA Starting5 v0.13.0-dev.15 — persistent Season dynamic ratings with tie reset. */
 (()=>{
-  if(window.__starting5DynamicRatingsV01311)return;
-  window.__starting5DynamicRatingsV01311=true;
+  if(window.__starting5DynamicRatingsV01315)return;
+  window.__starting5DynamicRatingsV01315=true;
 
   const STORE_KEY='nbaStarting5DynamicRatingsV1';
   const META_KEY='nbaStarting5DynamicRatingsSeasonV1';
@@ -61,7 +61,12 @@
     streaks[key(loser)]={wins:0,losses:l.losses+1};
     write(streaks);
   };
-  const recordTie=()=>{};
+  const recordTie=(a,b)=>{
+    if(!a||!b)return;ensureSeasonIdentity();
+    streaks[key(a)]={wins:0,losses:0};
+    streaks[key(b)]={wins:0,losses:0};
+    write(streaks);
+  };
 
   window.STARTING5_DYNAMIC_RATINGS={
     getDelta,getStreak:streak,getBaseStat,getEffectiveStat,getSeasonEffectiveStat,isSeasonGameplay,
