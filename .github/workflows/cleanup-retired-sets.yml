@@ -1,0 +1,123 @@
+name: Permanent Retired Set Cleanup
+
+on:
+  push:
+    branches: [retired-set-cleanup-temp]
+    paths: [.github/workflows/cleanup-retired-sets.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: retired-set-cleanup-temp
+          fetch-depth: 0
+
+      - name: Remove Heat Seekers, Thunder and Lightning, and Interceptors
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # The old Heat Seekers filename had long since become the generic Starting5 runtime loader.
+          # Preserve that live loader exactly under a neutral permanent name.
+          mv heat-seekers-v0.8.52.js starting5-runtime-loader-v0.13.0.js
+          python - <<'PY'
+          from pathlib import Path
+
+          # Point the app at the neutral runtime loader.
+          p=Path('index.html')
+          s=p.read_text()
+          old="'heat-seekers-v0.8.52.js'"
+          new="'starting5-runtime-loader-v0.13.0.js'"
+          if old not in s:
+              raise SystemExit('index.html did not contain the expected legacy loader reference')
+          p.write_text(s.replace(old,new))
+
+          # art-v0.8.20.js: lines 12-70 are the retired Thunder & Lightning set.
+          p=Path('art-v0.8.20.js')
+          lines=p.read_text().splitlines()
+          if len(lines) < 74 or not lines[11].startswith('const THUNDER_LIGHTNING=') or 'COURTSIDE_STAT_KEYS_7' not in lines[70]:
+              raise SystemExit('art-v0.8.20.js layout changed; refusing unsafe set removal')
+          keep=lines[:11]+lines[70:]
+          keep[0]='/* NBA Starting5 — current-team art/stat presentation + seven-category gameplay. */'
+          p.write_text('\n'.join(keep)+'\n')
+
+          # art-sizing-v0.8.8.css: everything from this marker onward is retired-set-only tuning.
+          p=Path('art-sizing-v0.8.8.css')
+          s=p.read_text()
+          marker='/* Thunder & Lightning composition pass'
+          i=s.find(marker)
+          if i < 0:
+              raise SystemExit('Thunder sizing marker not found')
+          s=s[:i].rstrip()+'\n'
+          s=s.replace('/* NBA Courtside v0.8.48 — per-player composition tuning + Thunder & Lightning depth fix */','/* NBA Starting5 — current-team per-player composition tuning. */')
+          p.write_text(s)
+          PY
+
+          # Dedicated retired-set code and supplied set backgrounds.
+          rm -f \
+            thunder-balance-v0.8.48.js \
+            art-adjustments-v0.8.58.js \
+            set-backgrounds-v0.8.79.js \
+            positions-v0.8.53.js \
+            inceptors-v0.8.80.js \
+            interceptors-v0.8.81.js \
+            interceptors-stats-v0.8.82.js \
+            'assets/player-art/heat-seekers.JPG' \
+            'assets/player-art/thunder-&-lightning.JPG' \
+            'assets/player-art/interceptors.JPG'
+
+          # Historical one-shot workflows that still referred to the retired Heat Seekers filename.
+          rm -f \
+            .github/workflows/activate-classic-expansion-v0.10.83.yml \
+            .github/workflows/activate-classic-expansion-v0.10.84.yml \
+            .github/workflows/activate-classic-logo-transparency-v0.10.81.yml \
+            .github/workflows/activate-classic-runtime-transparency-v0.10.80.yml
+
+          # Remove the temporary audit/cleanup workflows themselves from the finished branch.
+          rm -f \
+            .github/workflows/audit-retired-sets.yml \
+            .github/workflows/audit-retired-set-boundaries.yml \
+            .github/workflows/cleanup-retired-sets.yml
+
+          echo '=== post-cleanup retired-set references ==='
+          if git grep -nEi 'Heat[ -]?Seekers?|heat-seekers|Thunder[ &-]+Lightning|Thunder and Lightning|Interceptors?|Inceptors?|interceptor|inceptor' -- . ':!*.md'; then
+            echo 'Retired set reference remains in active tracked code.' >&2
+            exit 1
+          fi
+
+          echo '=== post-cleanup retired-set filenames ==='
+          if git ls-files | grep -Ei 'heat[-_ ]?seek|thunder[-_& ]+lightning|interceptors?|inceptors?'; then
+            echo 'Retired set filename remains.' >&2
+            exit 1
+          fi
+
+          node --check art-v0.8.20.js
+          node --check starting5-runtime-loader-v0.13.0.js
+          test "$(grep -o "starting5-runtime-loader-v0.13.0.js" index.html | wc -l)" -eq 1
+          test "$(grep -c 'const THUNDER_LIGHTNING' art-v0.8.20.js || true)" -eq 0
+          test "$(grep -c 'COURTSIDE_STAT_KEYS_7' art-v0.8.20.js)" -eq 1
+
+      - name: Commit cleanup and bump build
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Permanently remove retired card sets'
+          CLEAN_SHA=$(git rev-parse HEAD)
+          python - <<PY
+          import json
+          p='build.json'
+          b=json.load(open(p))
+          b.update(version='0.13.0-dev.21',build='20260908-1650',commit='${CLEAN_SHA}',channel='retired-set-cleanup')
+          open(p,'w').write(json.dumps(b,separators=(',',':'))+'\n')
+          PY
+          git add build.json
+          git commit -m 'Bump build for retired set cleanup'
+          git push origin HEAD:retired-set-cleanup-temp
