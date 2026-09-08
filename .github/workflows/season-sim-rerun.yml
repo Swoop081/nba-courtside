@@ -1,0 +1,40 @@
+name: Season simulation rerun
+on:
+  push:
+    branches: [season-sim-audit-20260908]
+    paths: ['.github/workflows/season-sim-rerun.yml']
+permissions: {contents: write}
+jobs:
+  simulate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: season-sim-audit-20260908}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Run current 10000-season audit
+        run: |
+          cat > /tmp/sim.js <<'JS'
+          const fs=require('fs'),vm=require('vm');
+          const foundation=fs.readFileSync('foundation-v0.9.0.js','utf8');
+          const fdMatch=foundation.match(/const FD=(\[[\s\S]*?\n\];)/);if(!fdMatch)throw new Error('FD not found');
+          const ctx={};vm.createContext(ctx);vm.runInContext('FD='+fdMatch[1],ctx);const FD=ctx.FD;
+          const cats=['scoring','dunks','three','rebounding','passing','blocks','steals'];
+          const ids=FD.map(t=>t[1]);const teams=new Map(FD.map(t=>[t[1],{name:t[0],players:t[2].map((p,i)=>({id:t[1]+'-'+i,stats:Object.fromEntries(cats.map((k,j)=>[k,p[2][j]]))}))}]));
+          const v=(p,k)=>Math.max(5,Math.min(30,+p.stats[k]||5));
+          const power=id=>{const r=teams.get(id).players;let total=0;for(const k of cats){const a=r.map(p=>v(p,k)).sort((x,y)=>y-x);total+=a[0]*.34+a[1]*.24+a[2]*.18+a[3]*.14+a[4]*.10}return total/cats.length};
+          function game(a,b){const A=teams.get(a).players,B=teams.get(b).players,ua=new Set,ub=new Set;let sa=0,sb=0;const pick=(r,u,k)=>r.filter(p=>!u.has(p.id)).sort((x,y)=>v(y,k)-v(x,k))[0];for(let q=0;q<4;q++){const k=cats[Math.floor(Math.random()*7)],pa=pick(A,ua,k),pb=pick(B,ub,k);ua.add(pa.id);ub.add(pb.id);sa+=v(pa,k);sb+=v(pb,k)}if(sa===sb){const pa=A.find(p=>!ua.has(p.id)),pb=B.find(p=>!ub.has(p.id)),k=cats[Math.floor(Math.random()*7)];if(pa&&pb){sa+=v(pa,k);sb+=v(pb,k)}}if(sa===sb){const p=.5+Math.max(-.12,Math.min(.12,(power(a)-power(b))/40));return Math.random()<p?a:b}return sa>sb?a:b}
+          const actual={ATL:46,BOS:56,BKN:20,CHA:44,CHI:31,CLE:52,DAL:26,DEN:54,DET:60,GSW:37,HOU:52,IND:19,LAC:42,LAL:53,MEM:25,MIA:43,MIL:32,MIN:49,NOP:26,NYK:53,OKC:64,ORL:45,PHI:45,PHX:45,POR:42,SAC:22,SAS:62,TOR:46,UTA:22,WAS:17};
+          const abbr=['ATL','BOS','BKN','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHX','POR','SAC','SAS','TOR','UTA','WAS'];const wins=Object.fromEntries(ids.map(id=>[id,0])),N=10000;
+          for(let s=0;s<N;s++){const rec=Object.fromEntries(ids.map(id=>[id,0]));for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++){const a=ids[i],b=ids[j];for(let n=0;n<3;n++)rec[game(a,b)]++}for(const id of ids){const extra=82-(ids.length-1)*3;for(let n=0;n<extra;n++){let b;do b=ids[Math.floor(Math.random()*ids.length)];while(b===id);rec[game(id,b)]++}wins[id]+=rec[id]}}
+          const rows=ids.map((id,i)=>({id,name:teams.get(id).name,power:power(id),sim:wins[id]/N,actual:actual[abbr[i]]})).sort((a,b)=>b.sim-a.sim);const real=[...rows].sort((a,b)=>b.actual-a.actual),rr=Object.fromEntries(real.map((r,i)=>[r.id,i+1]));let out='# NBA Starting5 — Post-Spurs-Boost 10,000 Season Audit\n\nNo free agents. Current visible card ratings only.\n\n| Sim rk | Team | Card power | Sim W | Actual W | Δ W | Real rk | Δ rk |\n|---:|---|---:|---:|---:|---:|---:|---:|\n';rows.forEach((r,i)=>out+=`| ${i+1} | ${r.name} | ${r.power.toFixed(2)} | ${r.sim.toFixed(2)} | ${r.actual} | ${(r.sim-r.actual>=0?'+':'')+(r.sim-r.actual).toFixed(2)} | ${rr[r.id]} | ${(i+1-rr[r.id]>=0?'+':'')+(i+1-rr[r.id])} |\n`);out+='\n## Biggest absolute win outliers\n\n';[...rows].sort((a,b)=>Math.abs(b.sim-b.actual)-Math.abs(a.sim-a.actual)).slice(0,15).forEach(r=>out+=`- ${r.name}: ${r.sim.toFixed(2)} vs ${r.actual} (${(r.sim-r.actual>=0?'+':'')+(r.sim-r.actual).toFixed(2)}), power ${r.power.toFixed(2)}.\n`);fs.writeFileSync('SEASON-SIM-POST-SPURS-BOOST-10000.md',out);console.log(out);
+          JS
+          node /tmp/sim.js
+      - name: Commit audit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add SEASON-SIM-POST-SPURS-BOOST-10000.md
+          git commit -m "Audit season simulation after Spurs progression boosts"
+          git push
