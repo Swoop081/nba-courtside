@@ -17,22 +17,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch 2025-26 NBA Per36 and build 150-player calibration audit
+      - name: Build 150-player calibration audit from 2025-26 NBA data
         run: |
+          curl --fail --location --retry 3 --output /tmp/nba-2025-26.csv \
+            https://raw.githubusercontent.com/EasySportsApps/nba_api_25_26_data/main/nba_players_regular_season_25_26_wide_data.csv
           python - <<'PY'
-          import json, math, re, time, unicodedata
-          from urllib.parse import urlencode
-          from urllib.request import Request, urlopen
+          import csv, json, math, re, unicodedata
 
-          TEAM_IDS={
-            'ATL':'1610612737','BOS':'1610612738','BKN':'1610612751','CHA':'1610612766','CHI':'1610612741','CLE':'1610612739',
-            'DAL':'1610612742','DEN':'1610612743','DET':'1610612765','GSW':'1610612744','HOU':'1610612745','IND':'1610612754',
-            'LAC':'1610612746','LAL':'1610612747','MEM':'1610612763','MIA':'1610612748','MIL':'1610612749','MIN':'1610612750',
-            'NOP':'1610612740','NYK':'1610612752','OKC':'1610612760','ORL':'1610612753','PHI':'1610612755','PHX':'1610612756',
-            'POR':'1610612757','SAC':'1610612758','SAS':'1610612759','TOR':'1610612761','UTA':'1610612762','WAS':'1610612764'}
-
-          # Current 2026-27 representative fives. Six projected 2026 rookies with no 2025-26 NBA sample are
-          # replaced by current veteran/second-year roster alternatives so every one of the 150 has an NBA Per36 baseline.
           FIVES={
             'MIL':['Ryan Rollins','Tyler Herro','Jaime Jaquez Jr.','Kyle Kuzma','Myles Turner'],
             'BKN':['Mikel Brown Jr.','Egor Demin','Michael Porter Jr.','Julius Randle',"Day'Ron Sharpe"],
@@ -69,64 +60,47 @@ jobs:
 
           def norm(s):
             s=unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()
-            s=s.replace('ё','e')
             s=re.sub(r'\b(jr|sr|ii|iii|iv)\b','',s)
             return re.sub(r'[^a-z0-9]','',s)
 
-          params={
-            'College':'','Conference':'','Country':'','DateFrom':'','DateTo':'','Division':'','DraftPick':'','DraftYear':'',
-            'GameScope':'','GameSegment':'','Height':'','LastNGames':'0','LeagueID':'00','Location':'','MeasureType':'Base',
-            'Month':'0','OpponentTeamID':'0','Outcome':'','PORound':'0','PaceAdjust':'N','PerMode':'Per36','Period':'0',
-            'PlayerExperience':'','PlayerPosition':'','PlusMinus':'N','Rank':'N','Season':'2025-26','SeasonSegment':'',
-            'SeasonType':'Regular Season','ShotClockRange':'','StarterBench':'','TeamID':'0','TwoWay':'','VsConference':'',
-            'VsDivision':'','Weight':''}
-          url='https://stats.nba.com/stats/leaguedashplayerstats?'+urlencode(params)
-          headers={
-            'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140 Safari/537.36',
-            'Referer':'https://www.nba.com/','Origin':'https://www.nba.com','Accept':'application/json, text/plain, */*',
-            'Accept-Language':'en-US,en;q=0.9'}
-          data=None
-          last=None
-          for i in range(5):
-            try:
-              req=Request(url,headers=headers)
-              with urlopen(req,timeout=45) as r:
-                data=json.loads(r.read().decode('utf-8'))
-              break
-            except Exception as e:
-              last=e; time.sleep(4*(i+1))
-          if data is None: raise RuntimeError(f'NBA stats request failed: {last}')
-          rs=data['resultSets'][0]
-          cols=rs['headers']; rows=[dict(zip(cols,r)) for r in rs['rowSet']]
-          bynorm={norm(r['PLAYER_NAME']):r for r in rows}
+          with open('/tmp/nba-2025-26.csv',encoding='utf-8-sig',newline='') as f:
+            rows=list(csv.DictReader(f))
+          bynorm={norm(r['player_name']):r for r in rows}
 
-          aliases={
-            norm('VJ Edgecombe'):norm('VJ Edgecombe'), norm('Egor Demin'):norm('Egor Demin'),
-            norm('Luka Doncic'):norm('Luka Doncic'), norm('Nikola Jokic'):norm('Nikola Jokic'),
-            norm('Jusuf Nurkic'):norm('Jusuf Nurkic'), norm('Alperen Sengun'):norm('Alperen Sengun'),
-            norm('Kristaps Porzingis'):norm('Kristaps Porzingis')}
+          def per36(row):
+            m=float(row['minutes_played'])
+            if m<=0: raise ValueError('zero minutes')
+            one=float(row['one_point_made']); two=float(row['two_point_made']); three=float(row['three_point_made'])
+            return {
+              'scoring':(one+2*two+3*three)/m*36,
+              'rebounding':(float(row['offensive_rebounds'])+float(row['defensive_rebounds']))/m*36,
+              'passing':float(row['assists'])/m*36,
+              'three':three/m*36,
+              'steals':float(row['steals'])/m*36,
+              'blocks':float(row['blocks'])/m*36,
+            }
 
-          stat_cols={'scoring':'PTS','rebounding':'REB','passing':'AST','three':'FG3M','steals':'STL','blocks':'BLK'}
           selected=[]; missing=[]
           for team,names in FIVES.items():
             for pos,name in enumerate(names):
               key=norm(name); row=bynorm.get(key)
               if row is None:
-                # fuzzy: exact normalized prefix/suffix after suffix stripping
                 cand=[r for k,r in bynorm.items() if k==key or k.startswith(key) or key.startswith(k)]
                 row=cand[0] if len(cand)==1 else None
               if row is None:
-                missing.append({'team':team,'name':name,'norm':key})
-                continue
-              raw={k:float(row[c]) for k,c in stat_cols.items()}
-              selected.append({'team':team,'name':name,'positionIndex':pos,'nbaPlayerId':str(row['PLAYER_ID']),'sourceName':row['PLAYER_NAME'],'sourceTeam2025_26':row['TEAM_ABBREVIATION'],'gp':int(row['GP']),'raw':raw})
-
+                missing.append({'team':team,'name':name,'norm':key}); continue
+              selected.append({
+                'team':team,'name':name,'positionIndex':pos,'nbaPlayerId':row['player_id'],
+                'sourceName':row['player_name'],'sourceTeam2025_26':row['team'],
+                'minutes2025_26':round(float(row['minutes_played']),3),
+                'raw':{k:round(v,4) for k,v in per36(row).items()}
+              })
           if missing:
-            print('MISSING:',json.dumps(missing,indent=2))
-            raise SystemExit(f'{len(missing)} selected players not found in 2025-26 NBA Per36 dataset')
+            print('MISSING:',json.dumps(missing,indent=2,ensure_ascii=False))
+            raise SystemExit(f'{len(missing)} selected players not found')
           assert len(selected)==150
 
-          cats=list(stat_cols)
+          cats=['scoring','rebounding','passing','three','steals','blocks']
           anchors={}
           for cat in cats:
             vals=[p['raw'][cat] for p in selected]
@@ -136,11 +110,8 @@ jobs:
           def half_up(x): return int(math.floor(x+0.5))
           def rate(x,a):
             lo=a['rating5']; mid=a['rating15']; hi=a['rating30']
-            if hi<=lo: return 15
-            if x<=mid:
-              y=5+(x-lo)/(mid-lo)*10 if mid>lo else 15
-            else:
-              y=15+(x-mid)/(hi-mid)*15 if hi>mid else 30
+            if x<=mid: y=5+(x-lo)/(mid-lo)*10 if mid>lo else 15
+            else: y=15+(x-mid)/(hi-mid)*15 if hi>mid else 30
             return max(5,min(30,half_up(y)))
 
           dist={c:{str(n):0 for n in range(5,31)} for c in cats}
@@ -154,30 +125,35 @@ jobs:
 
           out={
             'schema':'nba-starting5-per36-calibration-150-v1',
-            'generatedFrom':'NBA.com 2025-26 regular-season Per 36 Minutes',
-            'population':150,
-            'teamCount':30,
-            'selectionNote':'Current 2026-27 representative fives. Six projected 2026 rookies with no 2025-26 NBA sample were replaced by current roster alternatives with NBA data so the calibration population remains exactly 150.',
+            'generatedFrom':'2025-26 NBA regular-season totals exported from the official NBA Stats API; converted to Per36',
+            'population':150,'teamCount':30,
+            'selectionNote':'30 current 2026-27 representative fives. Six projected 2026 rookies without a 2025-26 NBA sample were replaced by current-roster alternatives with NBA data for this calibration audit.',
+            'substitutions':[
+              {'team':'SAC','projected':'Darius Acuff Jr.','auditPlayer':'Malik Monk'},
+              {'team':'MEM','projected':'Cameron Boozer','auditPlayer':'Jerami Grant'},
+              {'team':'CHI','projected':'Caleb Wilson','auditPlayer':'Patrick Williams'},
+              {'team':'GSW','projected':'Yaxel Lendeborg','auditPlayer':'Moses Moody'},
+              {'team':'WAS','projected':'AJ Dybantsa','auditPlayer':'Tre Johnson'},
+              {'team':'UTA','projected':'Darryn Peterson','auditPlayer':'Ace Bailey'}],
             'formula':{'rating5':'population minimum','rating15':'arithmetic midpoint of population min/max','rating30':'population maximum','interpolation':'piecewise linear, half-up rounding, clamp 5..30'},
             'anchors':anchors,'distribution':dist,'top5':top5,'players':selected}
           with open('stats-per36-current-150-audit.json','w',encoding='utf-8') as f: json.dump(out,f,ensure_ascii=False,indent=2)
 
+          labels={'scoring':'Scoring PTS/36','rebounding':'Rebounding REB/36','passing':'Passing AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'}
           lines=['# NBA Starting5 — 150-player Per-36 calibration audit','',
                  'Population: 30 current 2026–27 representative fives = 150 players.','',
-                 'Source: NBA.com 2025–26 regular-season Per 36 Minutes.','',
+                 'Source: 2025–26 NBA regular-season totals exported from the official NBA Stats API, converted to Per 36.','',
                  'Six projected 2026 rookies without a 2025–26 NBA sample were replaced by current-roster alternatives with NBA data for this calibration audit.','',
-                 '## Anchors','', '| Category | 5 | 15 | 30 |','|---|---:|---:|---:|']
-          labels={'scoring':'Scoring PTS/36','rebounding':'Rebounding REB/36','passing':'Passing AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'}
+                 '## Anchors','', '| Category | Rating 5 | Rating 15 | Rating 30 |','|---|---:|---:|---:|---:|']
           for c in cats:
             a=anchors[c]; lines.append(f"| {labels[c]} | {a['rating5']:.3f} | {a['rating15']:.3f} | {a['rating30']:.3f} |")
           lines += ['', '## Top five by category','']
           for c in cats:
             lines.append(f"### {labels[c]}")
-            for i,p in enumerate(top5[c],1): lines.append(f"{i}. {p['name']} ({p['team']}) — {p['raw']:.1f} raw → {p['rating']}")
+            for i,p in enumerate(top5[c],1): lines.append(f"{i}. {p['name']} ({p['team']}) — {p['raw']:.2f} raw → {p['rating']}")
             lines.append('')
           lines += ['## Rating distribution','', '| Rating | SCO | REB | PAS | 3PT | STL | BLK |','|---:|---:|---:|---:|---:|---:|---:|']
-          for n in range(5,31):
-            lines.append('| '+str(n)+' | '+' | '.join(str(dist[c][str(n)]) for c in cats)+' |')
+          for n in range(5,31): lines.append('| '+str(n)+' | '+' | '.join(str(dist[c][str(n)]) for c in cats)+' |')
           with open('PER36-150-AUDIT.md','w',encoding='utf-8') as f: f.write('\n'.join(lines)+'\n')
           print(json.dumps({'anchors':anchors,'top5':top5,'distribution':dist},indent=2,ensure_ascii=False))
           PY
