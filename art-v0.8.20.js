@@ -1,4 +1,4 @@
-/* NBA Courtside v0.8.48 — Tip-Off 27 + Thunder & Lightning */
+/* NBA Starting5 — current-team art/stat presentation + seven-category gameplay. */
 const artUrlBeforeV088=artUrl;
 artUrl=function(p){return `assets/player-art/${p.artSlug}.png?v=0.8.48`;};
 
@@ -8,65 +8,6 @@ const courtsideScale=(v,l)=>Math.max(1,Math.min(30,Math.round(30*v/l)));
 const COURTSIDE_3PT_LEADER=4*Math.sqrt(.366/.360);
 const courtsideThreeRating=(m,p)=>m<=0?1:Math.max(1,Math.min(30,Math.round(30*(m*Math.sqrt((p||0)/.360))/COURTSIDE_3PT_LEADER)));
 players.forEach(p=>{const s=COURTSIDE_2025_26[p.artSlug];if(!s)return;const[pts,reb,ast,stl,blk,tm,tp]=s;p.season='2025–26';p.stats.scoring=courtsideScale(pts,33.5);p.stats.three=courtsideThreeRating(tm,tp);p.stats.rebounding=courtsideScale(reb,12.9);p.stats.passing=courtsideScale(ast,10.7);p.stats.blocks=courtsideScale(blk,3.1);p.stats.steals=courtsideScale(stl,2);if(Number.isFinite(COURTSIDE_DUNK_REPUTATION[p.artSlug]))p.stats.dunks=COURTSIDE_DUNK_REPUTATION[p.artSlug];});
-
-const THUNDER_LIGHTNING=[
-['Antoine Walker','Boston Celtics','1610612738','2000–01','antoine-walker',[23.4,8.9,5.5,1.7,.6,2.7,.367],23],
-['Kenny Anderson','Brooklyn Nets','1610612751','1993–94','kenny-anderson',[18.8,3.9,9.6,1.9,.2,.8,.315],18],
-['Nate Robinson','New York Knicks','1610612752','2008–09','nate-robinson',[17.2,3.9,4.1,1.3,.1,1.7,.325],30],
-['Julius Erving','Philadelphia 76ers','1610612755','1980–81','julius-erving',[24.6,8,4.4,2.1,1.8,.1,.222],30],
-['Vince Carter','Toronto Raptors','1610612761','2000–01','vince-carter',[27.6,5.5,3.9,1.5,1.1,2.2,.408],30],
-['Michael Jordan','Chicago Bulls','1610612741','1988–89','michael-jordan',[32.5,8,8,2.9,.8,.3,.276],30],
-['Bob Sura','Cleveland Cavaliers','1610612739','1999–00','bob-sura',[13.8,3.9,3.9,1.2,.3,1.1,.346],24],
-['Grant Hill','Detroit Pistons','1610612765','1996–97','grant-hill',[21.4,9,7.3,1.8,.6,.2,.303],29],
-['Jamaal Tinsley','Indiana Pacers','1610612754','2004–05','jamaal-tinsley',[15.4,4,6.4,2,.3,1,.372],17],
-['T.J. Ford','Milwaukee Bucks','1610612749','2005–06','tj-ford',[12.2,4.3,6.6,1.4,.1,.1,.337],25],
-['Doc Rivers','Atlanta Hawks','1610612737','1986–87','doc-rivers',[12.8,3.6,10,2.1,.4,.2,.19],17],
-['Kendall Gill','Charlotte Hornets','1610612766','1990–91','kendall-gill',[20.5,5,4.2,1.9,.6,.3,.284],27],
-['Harold Miner','Miami Heat','1610612748','1994–95','harold-miner',[10.5,2.6,1.5,.8,.2,.2,.286],30],
-["Shaquille O'Neal",'Orlando Magic','1610612753','1994–95','shaquille-oneal',[29.3,11.4,2.7,.9,2.4,0,0],30],
-['Caron Butler','Washington Wizards','1610612764','2007–08','caron-butler',[20.3,6.7,4.9,2.2,.3,1.1,.357],25],
-['LaPhonso Ellis','Denver Nuggets','1610612743','1996–97','laphonso-ellis',[21.9,7,2.4,.8,.9,1.1,.36],28],
-['Isaiah Rider','Minnesota Timberwolves','1610612750','1994–95','jr-rider',[20.4,3.3,3.3,1,.2,1.9,.352],30],
-['Serge Ibaka','Oklahoma City Thunder','1610612760','2012–13','serge-ibaka',[13.2,7.7,.5,.4,3,0,.351],27],
-['Arvydas Sabonis','Portland Trail Blazers','1610612757','1997–98','arvydas-sabonis',[16,10,3,.9,1.1,.3,.313],21],
-['Jeff Hornacek','Utah Jazz','1610612762','1995–96','jeff-hornacek',[15.2,2.5,4.1,1.3,.2,1.7,.466],16],
-['Jason Richardson','Golden State Warriors','1610612744','2005–06','jason-richardson',[23.2,5.8,3.1,1.3,.5,2.4,.384],30],
-['DeAndre Jordan','LA Clippers','1610612746','2015–16','deandre-jordan',[12.7,13.8,1.2,.7,2.3,0,0],30],
-['Lonzo Ball','Los Angeles Lakers','1610612747','2017–18','lonzo-ball',[10.2,6.9,7.2,1.7,.8,1.7,.305],22],
-['Dan Majerle','Phoenix Suns','1610612756','1992–93','dan-majerle',[16.9,4.7,3.8,1.7,.4,2.1,.381],25],
-["De'Aaron Fox",'Sacramento Kings','1610612758','2023–24','deaaron-fox',[26.6,4.6,5.6,2,.4,2.9,.369],29],
-['Jason Kidd','Dallas Mavericks','1610612742','1995–96','jason-kidd',[16.6,6.8,9.7,2.2,.3,1.6,.336],20],
-['Kenny Smith','Houston Rockets','1610612745','1990–91','kenny-smith',[17.3,2.1,7.1,1.4,.1,.9,.363],22],
-['Shareef Abdur-Rahim','Memphis Grizzlies','1610612763','1999–00','shareef-abdur-rahim',[20.3,10.1,3.3,1.1,1.1,.3,.302],27],
-['Zion Williamson','New Orleans Pelicans','1610612740','2020–21','zion-williamson',[27,7.2,3.7,.9,.6,.2,.294],30],
-['Tony Parker','San Antonio Spurs','1610612759','2008–09','tony-parker',[22,3.1,6.9,.9,.1,.3,.292],24]
-];
-
-/* Historical cards use a compressed 1–30 curve. Non-zero NBA production has a floor of 5,
-   while true zero production remains 1. This keeps the season line mathematical but prevents
-   the old direct-to-leader ratio from filling the set with 1–4 ratings. */
-const historicScale=(v,leader)=>{if(!(v>0))return 1;const r=Math.min(1,v/leader);return Math.max(5,Math.min(30,Math.round(5+25*Math.pow(r,.82))))};
-const historicThree=(made,pct)=>{if(!(made>0))return 1;const adj=made*Math.sqrt(Math.max(0,pct||0)/.360),r=Math.min(1,adj/4.05);return Math.max(5,Math.min(30,Math.round(5+25*Math.pow(r,.68))))};
-const THUNDER_ART={
-'antoine-walker':[50,100,.74],'kenny-anderson':[50,100,.82],'nate-robinson':[50,101,.73],'julius-erving':[50,100,.72],'vince-carter':[50,100,.80],'michael-jordan':[50,100,.76],'bob-sura':[50,100,.80],'grant-hill':[50,100,.78],'jamaal-tinsley':[50,100,.78],'tj-ford':[50,100,.80],'doc-rivers':[50,100,.76],'kendall-gill':[50,100,.78],'harold-miner':[50,100,.80],'shaquille-oneal':[50,100,.76],'caron-butler':[50,100,.78],'laphonso-ellis':[50,100,.80],'jr-rider':[50,100,.78],'serge-ibaka':[50,100,.77],'arvydas-sabonis':[50,100,.74],'jeff-hornacek':[50,100,.78],'jason-richardson':[50,100,.80],'deandre-jordan':[50,100,.76],'lonzo-ball':[50,100,.73],'dan-majerle':[50,100,.78],'deaaron-fox':[50,100,.74],'jason-kidd':[50,100,.78],'kenny-smith':[50,100,.78],'shareef-abdur-rahim':[50,100,.78],'zion-williamson':[50,100,.74],'tony-parker':[50,100,.77]};
-THUNDER_LIGHTNING.forEach((r,i)=>{const[name,team,tid,season,slug,line,dunk]=r,[pts,reb,ast,stl,blk,tm,tp]=line,t=THUNDER_ART[slug]||[50,100,.76];players.push({id:'p'+(30+i),name,team,teamShort:TEAM_SHORT[tid]||team,season,teamId:tid,playerId:'legacy-'+slug,stats:{scoring:historicScale(pts,33.5),dunks:dunk,three:historicThree(tm,tp),freeThrows:1,rebounding:historicScale(reb,13.8),passing:historicScale(ast,10.7),blocks:historicScale(blk,3.1),steals:historicScale(stl,2.9)},artSlug:slug,art:{x:t[0]+'%',y:t[1]+'%',s:t[2],r:0},theme:{a:'#164b8f',b:'#ffd93d',c:'#07182f'},set:'Thunder & Lightning'});});
-
-const originalCardMarkupThunder=cardMarkup;
-cardMarkup=function(p,o={}){let html=originalCardMarkupThunder(p,o);if(p.set!=='Thunder & Lightning')return html;html=html.replace('player-card ','player-card thunder-lightning ');html=html.replace('<div class="team-mark">','<div class="storm-lightning" aria-hidden="true"><i class="bolt bolt-a"></i><i class="bolt bolt-b"></i><i class="bolt bolt-c"></i><i class="storm-flash flash-a"></i><i class="storm-flash flash-b"></i></div><div class="team-mark">');return html;};
-
-(function installThunderLightningVisuals(){const style=document.createElement('style');style.id='thunder-lightning-set-style-v0848';style.textContent=`
-.player-card.thunder-lightning{background:linear-gradient(155deg,#102c55 0%,#07172f 45%,#020811 100%)!important}
-.player-card.thunder-lightning .card-backdrop{background:radial-gradient(ellipse at 15% 18%,rgba(78,112,154,.72) 0 8%,transparent 30%),radial-gradient(ellipse at 83% 14%,rgba(34,69,111,.86) 0 13%,transparent 39%),radial-gradient(ellipse at 49% 48%,rgba(9,25,48,.96) 0 31%,transparent 67%),linear-gradient(168deg,#173b6b 0%,#0a1c36 46%,#02070e 100%)!important}
-.player-card.thunder-lightning .holo-grid{background:radial-gradient(ellipse at 12% 26%,rgba(200,220,245,.13),transparent 28%),radial-gradient(ellipse at 78% 20%,rgba(119,157,204,.13),transparent 31%),radial-gradient(ellipse at 48% 66%,rgba(36,76,128,.18),transparent 44%)!important;opacity:1!important;mix-blend-mode:screen}
-.player-card.thunder-lightning .beam{display:none!important}.player-card.thunder-lightning .rarity-burst{opacity:.2!important;background:repeating-conic-gradient(from 10deg,rgba(72,149,255,.15) 0 1deg,transparent 1deg 18deg)!important}
-.player-card.thunder-lightning .storm-lightning{position:absolute;inset:0;z-index:8;overflow:hidden;pointer-events:none}.player-card.thunder-lightning .bolt{position:absolute;display:block;width:10%;height:64%;background:linear-gradient(180deg,#fff 0%,#fffac4 16%,#ffe029 49%,#62b2ff 78%,rgba(80,169,255,.1) 100%);clip-path:polygon(48% 0,70% 0,57% 19%,82% 19%,47% 50%,65% 50%,25% 100%,39% 61%,17% 61%,42% 31%,24% 31%);filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px #ffe440) drop-shadow(0 0 13px #398cff);opacity:.94;mix-blend-mode:screen}
-.player-card.thunder-lightning .bolt-a{left:58%;top:-7%;transform:rotate(9deg) scaleX(.82)}.player-card.thunder-lightning .bolt-b{left:25%;top:7%;height:50%;width:7%;transform:rotate(-19deg);opacity:.67}.player-card.thunder-lightning .bolt-c{right:5%;top:29%;height:46%;width:6%;transform:rotate(23deg);opacity:.58}
-.player-card.thunder-lightning .storm-flash{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.34),rgba(255,226,66,.12) 28%,transparent 70%);filter:blur(4px)}.player-card.thunder-lightning .flash-a{width:58%;height:28%;left:33%;top:4%}.player-card.thunder-lightning .flash-b{width:42%;height:23%;left:2%;top:24%;background:radial-gradient(circle,rgba(111,180,255,.3),transparent 68%)}
-.player-card.thunder-lightning .foil-field{background:radial-gradient(ellipse at 70% 18%,rgba(255,223,63,.13),transparent 29%),radial-gradient(ellipse at 26% 51%,rgba(62,142,255,.16),transparent 38%)!important;opacity:.75!important}.player-card.thunder-lightning .edge-glow{box-shadow:inset 0 0 14px rgba(62,147,255,.82),inset 0 0 3px #ffe14d,0 0 14px rgba(255,215,40,.42)!important}
-.player-card.thunder-lightning .identity{background:radial-gradient(ellipse at 22% 15%,rgba(84,113,153,.42),transparent 38%),linear-gradient(90deg,#122e51 0%,#0b203d 58%,#07162c 100%)!important;border-top:1px solid rgba(255,224,68,.74)!important;box-shadow:inset 0 6px 16px rgba(62,121,184,.18)!important}.player-card.thunder-lightning .identity h3{color:#fff!important;text-shadow:0 0 7px rgba(62,151,255,.7),0 2px 5px #000!important}.player-card.thunder-lightning .identity p{color:#d7e7ff!important}.player-card.thunder-lightning .frame-outer{border-color:#ffe04f!important;box-shadow:inset 0 0 14px rgba(63,144,255,.33),0 0 12px rgba(255,218,54,.48)!important}
-`;document.head.appendChild(style);})();
-
-window.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const sync=()=>{const n=document.getElementById('catalogueTeamName'),b=document.querySelector('.catalogue-set-logo');if(!n||!b)return;if(n.textContent==='Thunder & Lightning'){b.classList.add('thunder-set-logo');b.innerHTML='<span>NBA</span><strong>THUNDER</strong><b>& LIGHTNING</b>';}else if(n.textContent==='NBA Tip-Off 27'){b.classList.remove('thunder-set-logo');b.innerHTML='<span>NBA</span><strong>TIP-OFF</strong><b>27</b>';}};const s=document.createElement('style');s.textContent='.catalogue-set-logo.thunder-set-logo{background:radial-gradient(circle at 35% 25%,#fff 0 3%,#ffe853 4% 20%,#164b8f 21% 58%,#07182f 59% 100%)!important;border-color:#ffe24f!important;box-shadow:0 0 0 3px #0a2142,0 10px 24px rgba(0,0,0,.55),0 0 22px rgba(73,154,255,.35)!important}.catalogue-set-logo.thunder-set-logo strong{font-size:14px!important;color:#fff}.catalogue-set-logo.thunder-set-logo b{font-size:10px!important;color:#ffe24f!important}';document.head.appendChild(s);const n=document.getElementById('catalogueTeamName');if(n)new MutationObserver(sync).observe(n,{childList:true,subtree:true,characterData:true});sync();},80));
 
 const COURTSIDE_STAT_KEYS_7=['scoring','dunks','three','rebounding','passing','blocks','steals'];
 beginQuarter=function(){state.category=COURTSIDE_STAT_KEYS_7[Math.floor(Math.random()*COURTSIDE_STAT_KEYS_7.length)];$('#quarterLabel').textContent=state.overtime?'OT':'Q'+state.quarter;$('#categoryLabel').textContent=STAT_LABELS[state.category].toUpperCase();$('#userScore').textContent=state.userScore;$('#cpuScore').textContent=state.cpuScore;$('#instruction').textContent=state.overtime?'Overtime — your final player is in':('Choose one unused player for '+STAT_LABELS[state.category]);$('#revealPanel').classList.add('hidden');renderLineup();if(state.overtime){const uP=userTeam.find(p=>!state.usedUser.has(p.id));if(uP)setTimeout(()=>playQuarter(uP.id),350);}};
