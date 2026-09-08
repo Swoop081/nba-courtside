@@ -24,7 +24,7 @@
     ['Miami Heat','Tim Hardaway Jr.','SG',[17,8,23,6,9,2,6]],
     ['Milwaukee Bucks','Kel’el Ware','C',[14,23,7,22,6,22,6]],
     ['Minnesota Timberwolves','Ayo Dosunmu','SG',[16,18,17,9,14,4,14]],
-    ['New Orleans Pelicans','Bennedict Mathurin','SG',[20,22,16,11,10,3,7]],
+    ['New Orleans Pelicans','Bennedict Mathurin','SF',[20,22,16,11,10,3,7]],
     ['New York Knicks','Andre Drummond','C',[10,19,1,26,5,16,8]],
     ['Oklahoma City Thunder','Alex Caruso','SG',[11,9,18,9,15,6,26]],
     ['Orlando Magic','Nikola Vučević','C',[19,9,19,23,14,9,6]],
@@ -32,7 +32,7 @@
     ['Phoenix Suns','Khaman Maluach','C',[11,21,2,19,5,19,5]],
     ['Portland Trail Blazers','Jrue Holiday','PG',[16,12,19,10,20,6,21]],
     ['Sacramento Kings','Malik Monk','SG',[20,20,23,7,19,2,8]],
-    ['San Antonio Spurs','Devin Vassell','SG',[19,18,22,9,14,6,11]],
+    ['San Antonio Spurs','Devin Vassell','SF',[19,18,22,9,14,6,11]],
     ['Toronto Raptors','Jakob Poeltl','C',[14,20,1,23,12,20,7]],
     ['Utah Jazz','Isaiah Collier','PG',[14,18,9,9,20,2,11]],
     ['Washington Wizards','Deandre Ayton','C',[17,22,2,24,7,16,5]]
