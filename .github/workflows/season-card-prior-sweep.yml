@@ -1,0 +1,36 @@
+name: Season card prior sweep
+on:
+  push:
+    branches: [season-sim-audit-20260908]
+    paths: ['.github/workflows/season-card-prior-sweep.yml']
+permissions: {contents: write}
+jobs:
+  sweep:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: season-sim-audit-20260908}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Sweep card/form blend
+        run: |
+          cat > /tmp/sweep.js <<'JS'
+          const fs=require('fs'),vm=require('vm');const s=fs.readFileSync('foundation-v0.9.0.js','utf8'),m=s.match(/const FD=(\[[\s\S]*?\n\];)/);if(!m)throw Error('FD');const c={};vm.createContext(c);vm.runInContext('FD='+m[1],c);const FD=c.FD;
+          const cats=['scoring','dunks','three','rebounding','passing','blocks','steals'],actual={ATL:46,BOS:56,BKN:20,CHA:44,CHI:31,CLE:52,DAL:26,DEN:54,DET:60,GSW:37,HOU:52,IND:19,LAC:42,LAL:53,MEM:25,MIA:43,MIL:32,MIN:49,NOP:26,NYK:53,OKC:64,ORL:45,PHI:45,PHX:45,POR:42,SAC:22,SAS:62,TOR:46,UTA:22,WAS:17};
+          const abbr=['ATL','BOS','BKN','CHA','CHI','CLE','DAL','DEN','DET','GSW','HOU','IND','LAC','LAL','MEM','MIA','MIL','MIN','NOP','NYK','OKC','ORL','PHI','PHX','POR','SAC','SAS','TOR','UTA','WAS'];const ids=FD.map(x=>x[1]),byId=new Map(FD.map((t,ti)=>[t[1],{name:t[0],abbr:abbr[ti],p:t[2].map((p,i)=>({id:i,s:Object.fromEntries(cats.map((k,j)=>[k,p[2][j]]))}))}]));
+          const v=(p,k)=>Math.max(5,Math.min(30,+p.s[k]||5));function cardGame(a,b){const A=byId.get(a).p,B=byId.get(b).p,ua=new Set,ub=new Set;let sa=0,sb=0;const pick=(R,U,k)=>R.filter(p=>!U.has(p.id)).sort((x,y)=>v(y,k)-v(x,k))[0];for(let q=0;q<4;q++){const k=cats[Math.floor(Math.random()*7)],pa=pick(A,ua,k),pb=pick(B,ub,k);ua.add(pa.id);ub.add(pb.id);sa+=v(pa,k);sb+=v(pb,k)}if(sa===sb){const pa=A.find(p=>!ua.has(p.id)),pb=B.find(p=>!ub.has(p.id)),k=cats[Math.floor(Math.random()*7)];if(pa&&pb){sa+=v(pa,k);sb+=v(pb,k)}}return sa===sb?.5:(sa>sb?1:0)}
+          const cp={};for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++){let w=0,N=2500;for(let n=0;n<N;n++)w+=cardGame(ids[i],ids[j]);cp[ids[i]+'|'+ids[j]]=w/N;}
+          const log5=(a,b)=>{const wa=actual[byId.get(a).abbr]/82,wb=actual[byId.get(b).abbr]/82;const num=wa*(1-wb),den=num+wb*(1-wa);return den?num/den:.5};const cardP=(a,b)=>{const ia=ids.indexOf(a),ib=ids.indexOf(b);return ia<ib?cp[a+'|'+b]:1-cp[b+'|'+a]};
+          let out='# Season card/form prior sweep\n\nCard matchup probabilities come from 2,500 five-card games per team pair. Form prior is the final 2025–26 win percentage, used as a proxy for bench/depth/coaching/continuity not represented by five cards.\n\n| Form weight | Card weight | RMSE wins | MAE wins | Spurs exp W | OKC exp W | WAS exp W |\n|---:|---:|---:|---:|---:|---:|---:|\n';
+          for(const fw of [0,.15,.25,.35,.45,.55,.65,.75]){const cw=1-fw,exp=Object.fromEntries(ids.map(id=>[id,0]));for(let i=0;i<ids.length;i++)for(let j=i+1;j<ids.length;j++){const a=ids[i],b=ids[j],p=cw*cardP(a,b)+fw*log5(a,b);exp[a]+=82/29*p;exp[b]+=82/29*(1-p)}let se=0,ae=0;for(const id of ids){const d=exp[id]-actual[byId.get(id).abbr];se+=d*d;ae+=Math.abs(d)}const rm=Math.sqrt(se/30),ma=ae/30,sas=ids[26],okc=ids[20],was=ids[29];out+=`| ${fw.toFixed(2)} | ${cw.toFixed(2)} | ${rm.toFixed(2)} | ${ma.toFixed(2)} | ${exp[sas].toFixed(1)} | ${exp[okc].toFixed(1)} | ${exp[was].toFixed(1)} |\n`;}
+          fs.writeFileSync('SEASON-SIM-CARD-PRIOR-SWEEP.md',out);console.log(out);
+          JS
+          node /tmp/sweep.js
+      - name: Commit sweep
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add SEASON-SIM-CARD-PRIOR-SWEEP.md
+          git commit -m "Audit card simulation against season form prior"
+          git push
