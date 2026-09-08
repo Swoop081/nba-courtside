@@ -6,19 +6,19 @@ const FD=[
 ['Atlanta Hawks','1610612737',[
 ['CJ McCollum','PG',[24,10,26,8,23,2,11]],['Nickeil Alexander-Walker','SG',[18,15,22,10,15,5,20]],['Dyson Daniels','SF',[18,22,16,22,24,10,30]],['Jalen Johnson','PF',[25,29,20,27,24,18,18]],['Onyeka Okongwu','C',[20,28,10,26,12,24,13]]]],
 ['Boston Celtics','1610612738',[
-['Payton Pritchard','PG',[22,8,27,9,20,2,12]],['Derrick White','SG',[23,12,26,11,21,18,24]],['Paul George','SF',[24,21,25,18,20,14,23]],['Jayson Tatum','PF',[29,26,27,25,22,15,18]],['Neemias Queta','C',[15,27,3,25,6,23,8]]]],
+['Payton Pritchard','PG',[22,8,27,9,20,2,12]],['Derrick White','SG',[23,12,26,11,21,18,24]],['Paul George','SF',[24,21,25,18,20,14,23]],['Jayson Tatum','PF',[30,27,28,26,23,16,19]],['Neemias Queta','C',[15,27,3,25,6,23,8]]]],
 ['Brooklyn Nets','1610612751',[
-['Egor Demin','PG',[18,16,19,13,25,6,14]],['Terance Mann','SG',[17,18,20,14,14,7,16]],['Michael Porter Jr.','SF',[26,24,28,23,12,8,10]],['Julius Randle','PF',[25,25,20,27,21,8,11]],['Day\'Ron Sharpe','C',[17,27,4,28,8,19,10]]]],
+['Egor Demin','PG',[20,18,21,15,27,7,16]],['Terance Mann','SG',[17,18,20,14,14,7,16]],['Michael Porter Jr.','SF',[26,24,28,23,12,8,10]],['Julius Randle','PF',[25,25,20,27,21,8,11]],['Day\'Ron Sharpe','C',[17,27,4,28,8,19,10]]]],
 ['Charlotte Hornets','1610612766',[
-['Coby White','PG',[24,13,26,10,21,2,10]],['Brandon Miller','SG',[24,23,26,15,16,8,15]],['Kon Knueppel','SF',[21,15,27,15,17,5,12]],['Naz Reid','PF',[22,24,25,21,13,15,10]],['Moussa Diabaté','C',[14,27,2,27,7,22,12]]]],
+['Coby White','PG',[24,13,26,10,21,2,10]],['Brandon Miller','SG',[24,23,26,15,16,8,15]],['Kon Knueppel','SF',[24,18,29,18,20,7,14]],['Naz Reid','PF',[22,24,25,21,13,15,10]],['Moussa Diabaté','C',[14,27,2,27,7,22,12]]]],
 ['Chicago Bulls','1610612741',[
 ['Josh Giddey','PG',[23,16,18,24,27,7,13]],['Norman Powell','SG',[25,18,27,11,14,4,13]],['Matas Buzelis','SF',[20,27,18,18,13,16,10]],['Caleb Wilson','PF',[18,28,14,22,11,18,9]],['Nic Claxton','C',[17,28,2,26,10,27,13]]]],
 ['Cleveland Cavaliers','1610612739',[
 ['James Harden','PG',[27,10,28,16,29,3,12]],['Donovan Mitchell','SG',[28,26,27,12,23,4,18]],['Peyton Watson','SF',[17,26,17,17,9,24,16]],['Evan Mobley','PF',[23,27,17,28,19,29,15]],['Jarrett Allen','C',[20,28,2,27,9,26,12]]]],
 ['Dallas Mavericks','1610612742',[
-['Kyrie Irving','PG',[28,16,29,9,24,2,15]],['Max Christie','SG',[18,17,23,12,12,7,14]],['Cooper Flagg','SF',[25,29,20,24,20,24,20]],['P.J. Washington','PF',[21,24,23,22,14,19,14]],['Daniel Gafford','C',[19,30,1,25,7,28,11]]]],
+['Kyrie Irving','PG',[28,16,29,9,24,2,15]],['Max Christie','SG',[18,17,23,12,12,7,14]],['Cooper Flagg','SF',[26,30,22,25,22,25,21]],['P.J. Washington','PF',[21,24,23,22,14,19,14]],['Daniel Gafford','C',[19,30,1,25,7,28,11]]]],
 ['Denver Nuggets','1610612743',[
-['Jamal Murray','PG',[26,15,27,10,24,3,11]],['Christian Braun','SG',[20,27,21,16,14,8,17]],['Cameron Johnson','SF',[21,17,27,16,14,7,13]],['Aaron Gordon','PF',[21,29,17,22,16,16,12]],['Nikola Jokić','C',[29,19,25,30,30,13,17]]]],
+['Jamal Murray','PG',[27,16,28,11,25,3,12]],['Christian Braun','SG',[20,27,21,16,14,8,17]],['Cameron Johnson','SF',[21,17,27,16,14,7,13]],['Aaron Gordon','PF',[22,30,18,23,17,17,13]],['Nikola Jokić','C',[30,19,26,30,30,14,18]]]],
 ['Detroit Pistons','1610612765',[
 ['Cade Cunningham','PG',[27,19,24,17,28,5,15]],['Duncan Robinson','SG',[19,5,29,7,11,2,8]],['Ausar Thompson','SF',[19,30,10,24,17,20,25]],['John Collins','PF',[22,28,20,24,11,17,10]],['Jalen Duren','C',[20,29,1,29,9,22,11]]]],
 ['Golden State Warriors','1610612744',[
@@ -40,7 +40,7 @@ const FD=[
 ['Minnesota Timberwolves','1610612750',[
 ['LaMelo Ball','PG',[25,15,27,19,29,2,18]],['Anthony Edwards','SG',[30,30,27,18,23,10,20]],['Jaden McDaniels','SF',[18,22,21,16,10,21,23]],['Jonathan Kuminga','PF',[22,29,16,20,12,12,11]],['Rudy Gobert','C',[16,28,1,30,6,30,10]]]],
 ['New Orleans Pelicans','1610612740',[
-['Dejounte Murray','PG',[23,18,21,20,26,5,23]],['Jeremiah Fears','SG',[19,20,18,12,21,3,17]],['Trey Murphy III','SF',[24,27,28,19,13,10,14]],['Zion Williamson','PF',[28,30,8,25,20,11,11]],['Derik Queen','C',[20,22,12,25,14,18,8]]]],
+['Dejounte Murray','PG',[23,18,21,20,26,5,23]],['Jeremiah Fears','SG',[21,22,20,14,23,4,19]],['Trey Murphy III','SF',[24,27,28,19,13,10,14]],['Zion Williamson','PF',[28,30,8,25,20,11,11]],['Derik Queen','C',[22,24,14,27,16,20,10]]]],
 ['New York Knicks','1610612752',[
 ['Jalen Brunson','PG',[29,8,28,8,26,1,10]],['Mikal Bridges','SG',[23,21,26,15,15,11,22]],['Josh Hart','SF',[19,20,17,26,22,7,18]],['OG Anunoby','PF',[22,24,25,19,11,18,28]],['Karl-Anthony Towns','C',[27,24,28,27,17,15,8]]]],
 ['Oklahoma City Thunder','1610612760',[
@@ -48,7 +48,7 @@ const FD=[
 ['Orlando Magic','1610612753',[
 ['Jalen Suggs','PG',[21,20,22,13,20,9,28]],['Desmond Bane','SG',[24,15,28,14,18,5,14]],['Franz Wagner','SF',[26,25,20,19,21,8,14]],['Paolo Banchero','PF',[28,28,20,25,22,11,13]],['Wendell Carter Jr.','C',[19,22,19,25,10,19,9]]]],
 ['Philadelphia 76ers','1610612755',[
-['Tyrese Maxey','PG',[28,17,28,9,24,2,13]],['VJ Edgecombe','SG',[22,28,20,17,16,13,20]],['Jaylen Brown','SF',[27,29,23,20,15,12,20]],['LeBron James','PF',[28,26,22,24,28,13,18]],['Joel Embiid','C',[29,24,24,28,19,27,10]]]],
+['Tyrese Maxey','PG',[28,17,28,9,24,2,13]],['VJ Edgecombe','SG',[24,29,22,19,18,14,22]],['Jaylen Brown','SF',[27,29,23,20,15,12,20]],['LeBron James','PF',[28,26,22,24,28,13,18]],['Joel Embiid','C',[29,24,24,28,19,27,10]]]],
 ['Phoenix Suns','1610612756',[
 ['Devin Booker','PG',[29,18,28,13,26,3,12]],['Jalen Green','SG',[26,29,24,12,17,7,12]],['Dillon Brooks','SF',[21,17,24,12,9,8,23]],['Miles Bridges','PF',[23,28,24,22,14,12,10]],['Mark Williams','C',[19,29,1,28,7,27,9]]]],
 ['Portland Trail Blazers','1610612757',[
@@ -58,11 +58,11 @@ const FD=[
 ['San Antonio Spurs','1610612759',[
 ['De\'Aaron Fox','PG',[27,28,22,11,25,3,23]],['Dylan Harper','SG',[24,25,21,18,23,8,17]],['Stephon Castle','SF',[24,28,19,22,23,15,24]],['Tobias Harris','PF',[20,19,23,19,12,9,9]],['Victor Wembanyama','C',[30,30,27,30,22,30,18]]]],
 ['Toronto Raptors','1610612761',[
-['Immanuel Quickley','PG',[24,10,27,10,25,2,13]],['RJ Barrett','SG',[24,25,19,19,16,6,12]],['Kawhi Leonard','SF',[28,24,27,20,18,17,29]],['Scottie Barnes','PF',[24,25,19,26,25,21,21]],['Collin Murray-Boyles','C',[18,25,10,25,13,20,15]]]],
+['Immanuel Quickley','PG',[24,10,27,10,25,2,13]],['RJ Barrett','SG',[24,25,19,19,16,6,12]],['Kawhi Leonard','SF',[28,24,27,20,18,17,29]],['Scottie Barnes','PF',[24,25,19,26,25,21,21]],['Collin Murray-Boyles','C',[20,27,12,27,15,22,17]]]],
 ['Utah Jazz','1610612762',[
-['Keyonte George','PG',[24,12,26,9,24,2,11]],['Darryn Peterson','SG',[23,25,23,14,20,8,16]],['Ace Bailey','SF',[22,28,22,19,13,17,14]],['Lauri Markkanen','PF',[26,26,28,24,12,11,8]],['Jaren Jackson Jr.','C',[24,24,25,22,9,30,12]]]],
+['Keyonte George','PG',[24,12,26,9,24,2,11]],['Darryn Peterson','SG',[23,25,23,14,20,8,16]],['Ace Bailey','SF',[24,29,24,21,15,18,16]],['Lauri Markkanen','PF',[26,26,28,24,12,11,8]],['Jaren Jackson Jr.','C',[24,24,25,22,9,30,12]]]],
 ['Washington Wizards','1610612764',[
-['Trae Young','PG',[29,6,29,7,30,1,8]],['Tre Johnson','SG',[21,18,25,10,15,4,10]],['AJ Dybantsa','SF',[24,29,21,22,18,17,18]],['Anthony Davis','PF',[28,28,18,30,17,30,16]],['Alex Sarr','C',[21,25,20,25,10,29,11]]]]
+['Trae Young','PG',[29,6,29,7,30,1,8]],['Tre Johnson','SG',[23,20,27,12,17,5,12]],['AJ Dybantsa','SF',[24,29,21,22,18,17,18]],['Anthony Davis','PF',[28,28,18,30,17,30,16]],['Alex Sarr','C',[21,25,20,25,10,29,11]]]]
 ];
 const slug=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 const shortName=n=>n.replace('Los Angeles ','').replace('Golden State ','').replace('Oklahoma City ','').replace('New Orleans ','').replace('Portland ','').replace('Philadelphia ','').replace('Minnesota ','').replace('Washington ','').replace('Cleveland ','').replace('Charlotte ','').replace('Milwaukee ','').replace('Sacramento ','').replace('San Antonio ','').replace('Toronto ','').replace('Atlanta ','').replace('Boston ','').replace('Brooklyn ','').replace('Chicago ','').replace('Dallas ','').replace('Denver ','').replace('Detroit ','').replace('Houston ','').replace('Indiana ','').replace('Memphis ','').replace('Miami ','').replace('New York ','').replace('Orlando ','').replace('Phoenix ','').replace('Utah ','').replace('LA ','');
