@@ -1,0 +1,1226 @@
+{
+  "schema": "nba-starting5-season-sim-audit-v1",
+  "seasons": 10000,
+  "freeAgents": false,
+  "engine": "exact season-mode-v1.0.0 simWinner: p=clamp(.2,.8,.5+(strengthA-strengthB)/35), strength=mean courtsideOverall of five starters",
+  "schedule": "2022-23 1230-game template used by live season mode",
+  "teams": [
+    {
+      "abbr": "PHI",
+      "team": "Philadelphia 76ers",
+      "strength": 26.8,
+      "players": [
+        "Tyrese Maxey",
+        "VJ Edgecombe",
+        "Jaylen Brown",
+        "LeBron James",
+        "Joel Embiid"
+      ],
+      "overalls": [
+        29,
+        24,
+        28,
+        27,
+        26
+      ],
+      "simWins": 50.5,
+      "simSD": 4.38,
+      "actualWins": 45,
+      "winDelta": 5.5,
+      "conference": "East",
+      "actualRank": 14,
+      "simRank": 1,
+      "rankDelta": -13
+    },
+    {
+      "abbr": "CLE",
+      "team": "Cleveland Cavaliers",
+      "strength": 25.2,
+      "players": [
+        "James Harden",
+        "Donovan Mitchell",
+        "Peyton Watson",
+        "Evan Mobley",
+        "Jarrett Allen"
+      ],
+      "overalls": [
+        27,
+        29,
+        23,
+        25,
+        22
+      ],
+      "simWins": 46.52,
+      "simSD": 4.49,
+      "actualWins": 52,
+      "winDelta": -5.48,
+      "conference": "East",
+      "actualRank": 8,
+      "simRank": 2,
+      "rankDelta": -6
+    },
+    {
+      "abbr": "POR",
+      "team": "Portland Trail Blazers",
+      "strength": 25.2,
+      "players": [
+        "Ja Morant",
+        "Damian Lillard",
+        "Toumani Camara",
+        "Deni Avdija",
+        "Donovan Clingan"
+      ],
+      "overalls": [
+        25,
+        28,
+        22,
+        26,
+        25
+      ],
+      "simWins": 46.5,
+      "simSD": 4.44,
+      "actualWins": 42,
+      "winDelta": 4.5,
+      "conference": "West",
+      "actualRank": 19,
+      "simRank": 3,
+      "rankDelta": -16
+    },
+    {
+      "abbr": "HOU",
+      "team": "Houston Rockets",
+      "strength": 24.4,
+      "players": [
+        "Fred VanVleet",
+        "Amen Thompson",
+        "Kevin Durant",
+        "Jabari Smith Jr.",
+        "Alperen Şengün"
+      ],
+      "overalls": [
+        22,
+        26,
+        28,
+        21,
+        25
+      ],
+      "simWins": 44.72,
+      "simSD": 4.44,
+      "actualWins": 52,
+      "winDelta": -7.28,
+      "conference": "West",
+      "actualRank": 9,
+      "simRank": 4,
+      "rankDelta": -5
+    },
+    {
+      "abbr": "ATL",
+      "team": "Atlanta Hawks",
+      "strength": 24.4,
+      "players": [
+        "CJ McCollum",
+        "Nickeil Alexander-Walker",
+        "Dyson Daniels",
+        "Jalen Johnson",
+        "Onyeka Okongwu"
+      ],
+      "overalls": [
+        22,
+        25,
+        23,
+        28,
+        24
+      ],
+      "simWins": 44.63,
+      "simSD": 4.52,
+      "actualWins": 46,
+      "winDelta": -1.37,
+      "conference": "East",
+      "actualRank": 11,
+      "simRank": 5,
+      "rankDelta": -6
+    },
+    {
+      "abbr": "MIN",
+      "team": "Minnesota Timberwolves",
+      "strength": 24.2,
+      "players": [
+        "LaMelo Ball",
+        "Anthony Edwards",
+        "Jaden McDaniels",
+        "Jonathan Kuminga",
+        "Rudy Gobert"
+      ],
+      "overalls": [
+        26,
+        29,
+        22,
+        20,
+        24
+      ],
+      "simWins": 44.14,
+      "simSD": 4.5,
+      "actualWins": 49,
+      "winDelta": -4.86,
+      "conference": "West",
+      "actualRank": 10,
+      "simRank": 6,
+      "rankDelta": -4
+    },
+    {
+      "abbr": "UTA",
+      "team": "Utah Jazz",
+      "strength": 24,
+      "players": [
+        "Keyonte George",
+        "Darryn Peterson",
+        "Ace Bailey",
+        "Lauri Markkanen",
+        "Jaren Jackson Jr."
+      ],
+      "overalls": [
+        25,
+        25,
+        20,
+        26,
+        24
+      ],
+      "simWins": 43.74,
+      "simSD": 4.5,
+      "actualWins": 22,
+      "winDelta": 21.74,
+      "conference": "West",
+      "actualRank": 27,
+      "simRank": 7,
+      "rankDelta": -20
+    },
+    {
+      "abbr": "NYK",
+      "team": "New York Knicks",
+      "strength": 24,
+      "players": [
+        "Jalen Brunson",
+        "Mikal Bridges",
+        "Josh Hart",
+        "OG Anunoby",
+        "Karl-Anthony Towns"
+      ],
+      "overalls": [
+        25,
+        22,
+        22,
+        25,
+        26
+      ],
+      "simWins": 43.45,
+      "simSD": 4.46,
+      "actualWins": 53,
+      "winDelta": -9.55,
+      "conference": "East",
+      "actualRank": 7,
+      "simRank": 8,
+      "rankDelta": 1
+    },
+    {
+      "abbr": "DEN",
+      "team": "Denver Nuggets",
+      "strength": 23.6,
+      "players": [
+        "Jamal Murray",
+        "Christian Braun",
+        "Cameron Johnson",
+        "Aaron Gordon",
+        "Nikola Jokić"
+      ],
+      "overalls": [
+        28,
+        18,
+        20,
+        22,
+        30
+      ],
+      "simWins": 42.64,
+      "simSD": 4.51,
+      "actualWins": 54,
+      "winDelta": -11.36,
+      "conference": "West",
+      "actualRank": 5,
+      "simRank": 9,
+      "rankDelta": 4
+    },
+    {
+      "abbr": "CHI",
+      "team": "Chicago Bulls",
+      "strength": 23.6,
+      "players": [
+        "Josh Giddey",
+        "Norman Powell",
+        "Matas Buzelis",
+        "Caleb Wilson",
+        "Nic Claxton"
+      ],
+      "overalls": [
+        25,
+        23,
+        23,
+        26,
+        21
+      ],
+      "simWins": 42.51,
+      "simSD": 4.49,
+      "actualWins": 31,
+      "winDelta": 11.51,
+      "conference": "East",
+      "actualRank": 22,
+      "simRank": 10,
+      "rankDelta": -12
+    },
+    {
+      "abbr": "TOR",
+      "team": "Toronto Raptors",
+      "strength": 23.2,
+      "players": [
+        "Immanuel Quickley",
+        "RJ Barrett",
+        "Kawhi Leonard",
+        "Scottie Barnes",
+        "Collin Murray-Boyles"
+      ],
+      "overalls": [
+        22,
+        22,
+        29,
+        26,
+        17
+      ],
+      "simWins": 41.64,
+      "simSD": 4.53,
+      "actualWins": 46,
+      "winDelta": -4.36,
+      "conference": "East",
+      "actualRank": 12,
+      "simRank": 11,
+      "rankDelta": -1
+    },
+    {
+      "abbr": "BOS",
+      "team": "Boston Celtics",
+      "strength": 23.2,
+      "players": [
+        "Payton Pritchard",
+        "Derrick White",
+        "Paul George",
+        "Jayson Tatum",
+        "Neemias Queta"
+      ],
+      "overalls": [
+        21,
+        22,
+        25,
+        27,
+        21
+      ],
+      "simWins": 41.54,
+      "simSD": 4.5,
+      "actualWins": 56,
+      "winDelta": -14.46,
+      "conference": "East",
+      "actualRank": 4,
+      "simRank": 12,
+      "rankDelta": 8
+    },
+    {
+      "abbr": "IND",
+      "team": "Indiana Pacers",
+      "strength": 23,
+      "players": [
+        "Tyrese Haliburton",
+        "Andrew Nembhard",
+        "Aaron Nesmith",
+        "Pascal Siakam",
+        "Ivica Zubac"
+      ],
+      "overalls": [
+        27,
+        22,
+        19,
+        26,
+        21
+      ],
+      "simWins": 41.09,
+      "simSD": 4.53,
+      "actualWins": 19,
+      "winDelta": 22.09,
+      "conference": "East",
+      "actualRank": 29,
+      "simRank": 13,
+      "rankDelta": -16
+    },
+    {
+      "abbr": "OKC",
+      "team": "Oklahoma City Thunder",
+      "strength": 22.8,
+      "players": [
+        "Shai Gilgeous-Alexander",
+        "Cason Wallace",
+        "Jalen Williams",
+        "Chet Holmgren",
+        "Isaiah Hartenstein"
+      ],
+      "overalls": [
+        28,
+        17,
+        23,
+        25,
+        21
+      ],
+      "simWins": 40.73,
+      "simSD": 4.49,
+      "actualWins": 64,
+      "winDelta": -23.27,
+      "conference": "West",
+      "actualRank": 1,
+      "simRank": 14,
+      "rankDelta": 13
+    },
+    {
+      "abbr": "MIA",
+      "team": "Miami Heat",
+      "strength": 22.8,
+      "players": [
+        "Davion Mitchell",
+        "Klay Thompson",
+        "Andrew Wiggins",
+        "Giannis Antetokounmpo",
+        "Bam Adebayo"
+      ],
+      "overalls": [
+        19,
+        16,
+        24,
+        29,
+        26
+      ],
+      "simWins": 40.66,
+      "simSD": 4.53,
+      "actualWins": 43,
+      "winDelta": -2.34,
+      "conference": "East",
+      "actualRank": 17,
+      "simRank": 15,
+      "rankDelta": -2
+    },
+    {
+      "abbr": "DET",
+      "team": "Detroit Pistons",
+      "strength": 22.8,
+      "players": [
+        "Cade Cunningham",
+        "Duncan Robinson",
+        "Ausar Thompson",
+        "John Collins",
+        "Jalen Duren"
+      ],
+      "overalls": [
+        28,
+        17,
+        23,
+        22,
+        24
+      ],
+      "simWins": 40.55,
+      "simSD": 4.5,
+      "actualWins": 60,
+      "winDelta": -19.45,
+      "conference": "East",
+      "actualRank": 3,
+      "simRank": 16,
+      "rankDelta": 13
+    },
+    {
+      "abbr": "SAS",
+      "team": "San Antonio Spurs",
+      "strength": 22.6,
+      "players": [
+        "De'Aaron Fox",
+        "Dylan Harper",
+        "Stephon Castle",
+        "Tobias Harris",
+        "Victor Wembanyama"
+      ],
+      "overalls": [
+        24,
+        18,
+        24,
+        18,
+        29
+      ],
+      "simWins": 40.31,
+      "simSD": 4.49,
+      "actualWins": 62,
+      "winDelta": -21.69,
+      "conference": "West",
+      "actualRank": 2,
+      "simRank": 17,
+      "rankDelta": 15
+    },
+    {
+      "abbr": "NOP",
+      "team": "New Orleans Pelicans",
+      "strength": 22.4,
+      "players": [
+        "Dejounte Murray",
+        "Jeremiah Fears",
+        "Trey Murphy III",
+        "Zion Williamson",
+        "Derik Queen"
+      ],
+      "overalls": [
+        23,
+        18,
+        27,
+        24,
+        20
+      ],
+      "simWins": 39.71,
+      "simSD": 4.53,
+      "actualWins": 26,
+      "winDelta": 13.71,
+      "conference": "West",
+      "actualRank": 23,
+      "simRank": 18,
+      "rankDelta": -5
+    },
+    {
+      "abbr": "ORL",
+      "team": "Orlando Magic",
+      "strength": 22.4,
+      "players": [
+        "Jalen Suggs",
+        "Desmond Bane",
+        "Franz Wagner",
+        "Paolo Banchero",
+        "Wendell Carter Jr."
+      ],
+      "overalls": [
+        22,
+        23,
+        23,
+        25,
+        19
+      ],
+      "simWins": 39.55,
+      "simSD": 4.51,
+      "actualWins": 45,
+      "winDelta": -5.45,
+      "conference": "East",
+      "actualRank": 13,
+      "simRank": 19,
+      "rankDelta": 6
+    },
+    {
+      "abbr": "LAL",
+      "team": "Los Angeles Lakers",
+      "strength": 22.2,
+      "players": [
+        "Luka Dončić",
+        "Austin Reaves",
+        "Ziaire Williams",
+        "Jarred Vanderbilt",
+        "Walker Kessler"
+      ],
+      "overalls": [
+        30,
+        24,
+        17,
+        14,
+        26
+      ],
+      "simWins": 39.39,
+      "simSD": 4.46,
+      "actualWins": 53,
+      "winDelta": -13.61,
+      "conference": "West",
+      "actualRank": 6,
+      "simRank": 20,
+      "rankDelta": 14
+    },
+    {
+      "abbr": "DAL",
+      "team": "Dallas Mavericks",
+      "strength": 22.2,
+      "players": [
+        "Kyrie Irving",
+        "Max Christie",
+        "Cooper Flagg",
+        "P.J. Washington",
+        "Daniel Gafford"
+      ],
+      "overalls": [
+        27,
+        17,
+        26,
+        21,
+        20
+      ],
+      "simWins": 39.36,
+      "simSD": 4.54,
+      "actualWins": 26,
+      "winDelta": 13.36,
+      "conference": "West",
+      "actualRank": 24,
+      "simRank": 21,
+      "rankDelta": -3
+    },
+    {
+      "abbr": "WAS",
+      "team": "Washington Wizards",
+      "strength": 22.2,
+      "players": [
+        "Trae Young",
+        "Tre Johnson",
+        "AJ Dybantsa",
+        "Anthony Davis",
+        "Alex Sarr"
+      ],
+      "overalls": [
+        19,
+        15,
+        27,
+        27,
+        23
+      ],
+      "simWins": 39.19,
+      "simSD": 4.5,
+      "actualWins": 17,
+      "winDelta": 22.19,
+      "conference": "East",
+      "actualRank": 30,
+      "simRank": 22,
+      "rankDelta": -8
+    },
+    {
+      "abbr": "PHX",
+      "team": "Phoenix Suns",
+      "strength": 22,
+      "players": [
+        "Devin Booker",
+        "Jalen Green",
+        "Dillon Brooks",
+        "Miles Bridges",
+        "Mark Williams"
+      ],
+      "overalls": [
+        24,
+        23,
+        21,
+        22,
+        20
+      ],
+      "simWins": 38.93,
+      "simSD": 4.54,
+      "actualWins": 45,
+      "winDelta": -6.07,
+      "conference": "West",
+      "actualRank": 15,
+      "simRank": 23,
+      "rankDelta": 8
+    },
+    {
+      "abbr": "MEM",
+      "team": "Memphis Grizzlies",
+      "strength": 22,
+      "players": [
+        "Jaylen Wells",
+        "Cedric Coward",
+        "Jerami Grant",
+        "Cameron Boozer",
+        "Zach Edey"
+      ],
+      "overalls": [
+        15,
+        20,
+        23,
+        28,
+        24
+      ],
+      "simWins": 38.87,
+      "simSD": 4.51,
+      "actualWins": 25,
+      "winDelta": 13.87,
+      "conference": "West",
+      "actualRank": 25,
+      "simRank": 24,
+      "rankDelta": -1
+    },
+    {
+      "abbr": "GSW",
+      "team": "Golden State Warriors",
+      "strength": 21.8,
+      "players": [
+        "Stephen Curry",
+        "Brandin Podziemski",
+        "Jimmy Butler",
+        "Draymond Green",
+        "Kristaps Porziņģis"
+      ],
+      "overalls": [
+        27,
+        20,
+        23,
+        18,
+        21
+      ],
+      "simWins": 38.37,
+      "simSD": 4.5,
+      "actualWins": 37,
+      "winDelta": 1.37,
+      "conference": "West",
+      "actualRank": 20,
+      "simRank": 25,
+      "rankDelta": 5
+    },
+    {
+      "abbr": "SAC",
+      "team": "Sacramento Kings",
+      "strength": 21.6,
+      "players": [
+        "Darius Acuff Jr.",
+        "Zach LaVine",
+        "Keegan Murray",
+        "De'Andre Hunter",
+        "Domantas Sabonis"
+      ],
+      "overalls": [
+        26,
+        24,
+        21,
+        14,
+        23
+      ],
+      "simWins": 37.86,
+      "simSD": 4.49,
+      "actualWins": 22,
+      "winDelta": 15.86,
+      "conference": "West",
+      "actualRank": 26,
+      "simRank": 26,
+      "rankDelta": 0
+    },
+    {
+      "abbr": "LAC",
+      "team": "LA Clippers",
+      "strength": 21.2,
+      "players": [
+        "Darius Garland",
+        "Keaton Wagler",
+        "Brandon Ingram",
+        "Rui Hachimura",
+        "Brook Lopez"
+      ],
+      "overalls": [
+        24,
+        24,
+        23,
+        19,
+        16
+      ],
+      "simWins": 36.87,
+      "simSD": 4.52,
+      "actualWins": 42,
+      "winDelta": -5.13,
+      "conference": "West",
+      "actualRank": 18,
+      "simRank": 27,
+      "rankDelta": 9
+    },
+    {
+      "abbr": "CHA",
+      "team": "Charlotte Hornets",
+      "strength": 20.8,
+      "players": [
+        "Coby White",
+        "Brandon Miller",
+        "Kon Knueppel",
+        "Naz Reid",
+        "Moussa Diabaté"
+      ],
+      "overalls": [
+        16,
+        25,
+        23,
+        21,
+        19
+      ],
+      "simWins": 35.72,
+      "simSD": 4.41,
+      "actualWins": 44,
+      "winDelta": -8.28,
+      "conference": "East",
+      "actualRank": 16,
+      "simRank": 28,
+      "rankDelta": 12
+    },
+    {
+      "abbr": "MIL",
+      "team": "Milwaukee Bucks",
+      "strength": 20.8,
+      "players": [
+        "Ryan Rollins",
+        "Tyler Herro",
+        "Jaime Jaquez Jr.",
+        "Kyle Kuzma",
+        "Myles Turner"
+      ],
+      "overalls": [
+        25,
+        22,
+        18,
+        18,
+        21
+      ],
+      "simWins": 35.65,
+      "simSD": 4.43,
+      "actualWins": 32,
+      "winDelta": 3.65,
+      "conference": "East",
+      "actualRank": 21,
+      "simRank": 29,
+      "rankDelta": 8
+    },
+    {
+      "abbr": "BKN",
+      "team": "Brooklyn Nets",
+      "strength": 20.4,
+      "players": [
+        "Egor Demin",
+        "Terance Mann",
+        "Michael Porter Jr.",
+        "Julius Randle",
+        "Day'Ron Sharpe"
+      ],
+      "overalls": [
+        19,
+        14,
+        26,
+        24,
+        19
+      ],
+      "simWins": 34.67,
+      "simSD": 4.44,
+      "actualWins": 20,
+      "winDelta": 14.67,
+      "conference": "East",
+      "actualRank": 28,
+      "simRank": 30,
+      "rankDelta": 2
+    }
+  ],
+  "outliers": [
+    {
+      "abbr": "OKC",
+      "team": "Oklahoma City Thunder",
+      "strength": 22.8,
+      "players": [
+        "Shai Gilgeous-Alexander",
+        "Cason Wallace",
+        "Jalen Williams",
+        "Chet Holmgren",
+        "Isaiah Hartenstein"
+      ],
+      "overalls": [
+        28,
+        17,
+        23,
+        25,
+        21
+      ],
+      "simWins": 40.73,
+      "simSD": 4.49,
+      "actualWins": 64,
+      "winDelta": -23.27,
+      "conference": "West",
+      "actualRank": 1,
+      "simRank": 14,
+      "rankDelta": 13
+    },
+    {
+      "abbr": "WAS",
+      "team": "Washington Wizards",
+      "strength": 22.2,
+      "players": [
+        "Trae Young",
+        "Tre Johnson",
+        "AJ Dybantsa",
+        "Anthony Davis",
+        "Alex Sarr"
+      ],
+      "overalls": [
+        19,
+        15,
+        27,
+        27,
+        23
+      ],
+      "simWins": 39.19,
+      "simSD": 4.5,
+      "actualWins": 17,
+      "winDelta": 22.19,
+      "conference": "East",
+      "actualRank": 30,
+      "simRank": 22,
+      "rankDelta": -8
+    },
+    {
+      "abbr": "IND",
+      "team": "Indiana Pacers",
+      "strength": 23,
+      "players": [
+        "Tyrese Haliburton",
+        "Andrew Nembhard",
+        "Aaron Nesmith",
+        "Pascal Siakam",
+        "Ivica Zubac"
+      ],
+      "overalls": [
+        27,
+        22,
+        19,
+        26,
+        21
+      ],
+      "simWins": 41.09,
+      "simSD": 4.53,
+      "actualWins": 19,
+      "winDelta": 22.09,
+      "conference": "East",
+      "actualRank": 29,
+      "simRank": 13,
+      "rankDelta": -16
+    },
+    {
+      "abbr": "UTA",
+      "team": "Utah Jazz",
+      "strength": 24,
+      "players": [
+        "Keyonte George",
+        "Darryn Peterson",
+        "Ace Bailey",
+        "Lauri Markkanen",
+        "Jaren Jackson Jr."
+      ],
+      "overalls": [
+        25,
+        25,
+        20,
+        26,
+        24
+      ],
+      "simWins": 43.74,
+      "simSD": 4.5,
+      "actualWins": 22,
+      "winDelta": 21.74,
+      "conference": "West",
+      "actualRank": 27,
+      "simRank": 7,
+      "rankDelta": -20
+    },
+    {
+      "abbr": "SAS",
+      "team": "San Antonio Spurs",
+      "strength": 22.6,
+      "players": [
+        "De'Aaron Fox",
+        "Dylan Harper",
+        "Stephon Castle",
+        "Tobias Harris",
+        "Victor Wembanyama"
+      ],
+      "overalls": [
+        24,
+        18,
+        24,
+        18,
+        29
+      ],
+      "simWins": 40.31,
+      "simSD": 4.49,
+      "actualWins": 62,
+      "winDelta": -21.69,
+      "conference": "West",
+      "actualRank": 2,
+      "simRank": 17,
+      "rankDelta": 15
+    },
+    {
+      "abbr": "DET",
+      "team": "Detroit Pistons",
+      "strength": 22.8,
+      "players": [
+        "Cade Cunningham",
+        "Duncan Robinson",
+        "Ausar Thompson",
+        "John Collins",
+        "Jalen Duren"
+      ],
+      "overalls": [
+        28,
+        17,
+        23,
+        22,
+        24
+      ],
+      "simWins": 40.55,
+      "simSD": 4.5,
+      "actualWins": 60,
+      "winDelta": -19.45,
+      "conference": "East",
+      "actualRank": 3,
+      "simRank": 16,
+      "rankDelta": 13
+    },
+    {
+      "abbr": "SAC",
+      "team": "Sacramento Kings",
+      "strength": 21.6,
+      "players": [
+        "Darius Acuff Jr.",
+        "Zach LaVine",
+        "Keegan Murray",
+        "De'Andre Hunter",
+        "Domantas Sabonis"
+      ],
+      "overalls": [
+        26,
+        24,
+        21,
+        14,
+        23
+      ],
+      "simWins": 37.86,
+      "simSD": 4.49,
+      "actualWins": 22,
+      "winDelta": 15.86,
+      "conference": "West",
+      "actualRank": 26,
+      "simRank": 26,
+      "rankDelta": 0
+    },
+    {
+      "abbr": "BKN",
+      "team": "Brooklyn Nets",
+      "strength": 20.4,
+      "players": [
+        "Egor Demin",
+        "Terance Mann",
+        "Michael Porter Jr.",
+        "Julius Randle",
+        "Day'Ron Sharpe"
+      ],
+      "overalls": [
+        19,
+        14,
+        26,
+        24,
+        19
+      ],
+      "simWins": 34.67,
+      "simSD": 4.44,
+      "actualWins": 20,
+      "winDelta": 14.67,
+      "conference": "East",
+      "actualRank": 28,
+      "simRank": 30,
+      "rankDelta": 2
+    },
+    {
+      "abbr": "BOS",
+      "team": "Boston Celtics",
+      "strength": 23.2,
+      "players": [
+        "Payton Pritchard",
+        "Derrick White",
+        "Paul George",
+        "Jayson Tatum",
+        "Neemias Queta"
+      ],
+      "overalls": [
+        21,
+        22,
+        25,
+        27,
+        21
+      ],
+      "simWins": 41.54,
+      "simSD": 4.5,
+      "actualWins": 56,
+      "winDelta": -14.46,
+      "conference": "East",
+      "actualRank": 4,
+      "simRank": 12,
+      "rankDelta": 8
+    },
+    {
+      "abbr": "MEM",
+      "team": "Memphis Grizzlies",
+      "strength": 22,
+      "players": [
+        "Jaylen Wells",
+        "Cedric Coward",
+        "Jerami Grant",
+        "Cameron Boozer",
+        "Zach Edey"
+      ],
+      "overalls": [
+        15,
+        20,
+        23,
+        28,
+        24
+      ],
+      "simWins": 38.87,
+      "simSD": 4.51,
+      "actualWins": 25,
+      "winDelta": 13.87,
+      "conference": "West",
+      "actualRank": 25,
+      "simRank": 24,
+      "rankDelta": -1
+    },
+    {
+      "abbr": "NOP",
+      "team": "New Orleans Pelicans",
+      "strength": 22.4,
+      "players": [
+        "Dejounte Murray",
+        "Jeremiah Fears",
+        "Trey Murphy III",
+        "Zion Williamson",
+        "Derik Queen"
+      ],
+      "overalls": [
+        23,
+        18,
+        27,
+        24,
+        20
+      ],
+      "simWins": 39.71,
+      "simSD": 4.53,
+      "actualWins": 26,
+      "winDelta": 13.71,
+      "conference": "West",
+      "actualRank": 23,
+      "simRank": 18,
+      "rankDelta": -5
+    },
+    {
+      "abbr": "LAL",
+      "team": "Los Angeles Lakers",
+      "strength": 22.2,
+      "players": [
+        "Luka Dončić",
+        "Austin Reaves",
+        "Ziaire Williams",
+        "Jarred Vanderbilt",
+        "Walker Kessler"
+      ],
+      "overalls": [
+        30,
+        24,
+        17,
+        14,
+        26
+      ],
+      "simWins": 39.39,
+      "simSD": 4.46,
+      "actualWins": 53,
+      "winDelta": -13.61,
+      "conference": "West",
+      "actualRank": 6,
+      "simRank": 20,
+      "rankDelta": 14
+    },
+    {
+      "abbr": "DAL",
+      "team": "Dallas Mavericks",
+      "strength": 22.2,
+      "players": [
+        "Kyrie Irving",
+        "Max Christie",
+        "Cooper Flagg",
+        "P.J. Washington",
+        "Daniel Gafford"
+      ],
+      "overalls": [
+        27,
+        17,
+        26,
+        21,
+        20
+      ],
+      "simWins": 39.36,
+      "simSD": 4.54,
+      "actualWins": 26,
+      "winDelta": 13.36,
+      "conference": "West",
+      "actualRank": 24,
+      "simRank": 21,
+      "rankDelta": -3
+    },
+    {
+      "abbr": "CHI",
+      "team": "Chicago Bulls",
+      "strength": 23.6,
+      "players": [
+        "Josh Giddey",
+        "Norman Powell",
+        "Matas Buzelis",
+        "Caleb Wilson",
+        "Nic Claxton"
+      ],
+      "overalls": [
+        25,
+        23,
+        23,
+        26,
+        21
+      ],
+      "simWins": 42.51,
+      "simSD": 4.49,
+      "actualWins": 31,
+      "winDelta": 11.51,
+      "conference": "East",
+      "actualRank": 22,
+      "simRank": 10,
+      "rankDelta": -12
+    },
+    {
+      "abbr": "DEN",
+      "team": "Denver Nuggets",
+      "strength": 23.6,
+      "players": [
+        "Jamal Murray",
+        "Christian Braun",
+        "Cameron Johnson",
+        "Aaron Gordon",
+        "Nikola Jokić"
+      ],
+      "overalls": [
+        28,
+        18,
+        20,
+        22,
+        30
+      ],
+      "simWins": 42.64,
+      "simSD": 4.51,
+      "actualWins": 54,
+      "winDelta": -11.36,
+      "conference": "West",
+      "actualRank": 5,
+      "simRank": 9,
+      "rankDelta": 4
+    }
+  ]
+}
