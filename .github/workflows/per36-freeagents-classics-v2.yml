@@ -1,0 +1,53 @@
+name: Per36 free agents and classics v2
+on:
+  push:
+    branches: [per36-freeagents-classics-v2]
+    paths:
+      - 'per36-freeagents-classics.py'
+      - '.github/workflows/per36-freeagents-classics-v2.yml'
+permissions:
+  contents: write
+jobs:
+  calibrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: per36-freeagents-classics-v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install pandas pyarrow
+      - name: Run calibration
+        run: python per36-freeagents-classics.py
+      - name: Validate outputs
+        run: |
+          node --check season-free-agent-pool-v0.13.1.js
+          python - <<'PY'
+          import json, subprocess, statistics
+          fa=json.load(open('stats-per36-free-agents.json'))
+          cl=json.load(open('stats-per36-classics.json'))
+          assert fa['count']==30, fa['count']
+          assert len(cl['classicFiles'])>=18, len(cl['classicFiles'])
+          assert cl['count']>=80, cl['count']
+          for f in cl['classicFiles']: subprocess.run(['node','--check',f],check=True)
+          players=fa['players']+cl['players']
+          assert all(p['new'][1]==p['old'][1] for p in players)
+          assert all(5<=v<=30 for p in players for i,v in enumerate(p['new']) if i!=1)
+          cr=[p['ratings']['scoring'] for p in cl['players']]
+          assert statistics.median(cr)>5
+          for name in ['Michael Jordan','LeBron James','Allen Iverson']:
+              hits=[p for p in cl['players'] if p['name']==name]
+              assert hits, name
+              assert max(p['ratings']['scoring'] for p in hits)>=20, (name,hits)
+          print({'freeAgents':fa['count'],'classicFiles':len(cl['classicFiles']),'classicEntries':cl['count'],'classicPlayoffMatches':cl['playoffMatches'],'classicMedianScoring':statistics.median(cr)})
+          PY
+      - name: Commit outputs
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add season-free-agent-pool-v0.13.1.js classic-*.js stats-per36-free-agents.json stats-per36-classics.json PER36-FREE-AGENTS.md PER36-CLASSICS.md
+          git commit -m "Apply Per36 model to free agents and classics"
+          git push
