@@ -1,0 +1,34 @@
+name: Audit Retired Starting5 Sets
+
+on:
+  push:
+    branches: [retired-set-cleanup-temp]
+    paths:
+      - .github/workflows/audit-retired-sets.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: retired-set-cleanup-temp
+          fetch-depth: 0
+      - name: Find retired set remnants
+        shell: bash
+        run: |
+          set -u
+          echo '=== filenames ==='
+          git ls-files | grep -Ei 'heat[-_ ]?seek|thunder|lightning|interceptor' || true
+          echo '=== textual references ==='
+          git grep -nEi 'Heat[ -]?Seekers?|heat-seekers|Thunder[ &-]+Lightning|Thunder and Lightning|Interceptors?|interceptor' -- ':!.github/workflows/audit-retired-sets.yml' || true
+          echo '=== heat-seekers file head/tail ==='
+          if [ -f heat-seekers-v0.8.52.js ]; then
+            wc -l -c heat-seekers-v0.8.52.js
+            sed -n '1,100p' heat-seekers-v0.8.52.js
+            echo '--- tail ---'
+            tail -n 100 heat-seekers-v0.8.52.js
+          fi
