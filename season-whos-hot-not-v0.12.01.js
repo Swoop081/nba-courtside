@@ -16,3 +16,11 @@
   window.addEventListener('s5:season-continue-request',e=>{if(!read()?.whosHotNot?.pending&&!ensurePending())return;e.preventDefault();showScreenNow()});
   const start=()=>ensureScreen();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
 })();
+
+/* v0.13.2 loader: keep the Season hub clean; Free Agency is loaded as an event screen only. */
+(()=>{
+  if(window.__starting5SeasonFreeAgencyLoaderV0132)return;window.__starting5SeasonFreeAgencyLoaderV0132=true;
+  const load=(src,ready)=>new Promise((resolve,reject)=>{if(ready())return resolve();const existing=[...document.scripts].find(s=>String(s.src||'').includes(src));if(existing){existing.addEventListener('load',resolve,{once:true});existing.addEventListener('error',reject,{once:true});return}const el=document.createElement('script');el.src=`${src}?v=0132`;el.async=false;el.onload=resolve;el.onerror=reject;document.head.appendChild(el)});
+  const boot=async()=>{try{await load('season-free-agent-pool-v0.13.1.js',()=>Array.isArray(window.NBA_STARTING5_SEASON_FREE_AGENTS)&&window.NBA_STARTING5_SEASON_FREE_AGENTS.length>0);await load('season-free-agency-v0.13.2.js',()=>!!window.STARTING5_SEASON_FREE_AGENCY)}catch(e){console.error('[Starting5 free agency loader]',e)}};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();
