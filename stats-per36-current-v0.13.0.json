@@ -1,5 +1,5 @@
 {
-  "schema": "nba-starting5-per36-calibration-v1",
+  "schema": "nba-starting5-per36-calibration-v2-linear-5-30",
   "source": {
     "provider": "Basketball-Reference",
     "url": "https://www.basketball-reference.com/leagues/NBA_2026_per_minute.html",
@@ -18,11 +18,10 @@
   },
   "formula": {
     "floor_rating": 5,
-    "mid_rating": 15,
+    "statistical_mid_rating": 17.5,
     "ceiling_rating": 30,
-    "midpoint_definition": "(population minimum + population maximum) / 2",
-    "lower_segment": "5 + (x-min)/(mid-min)*10",
-    "upper_segment": "15 + (x-mid)/(max-mid)*15",
+    "midpoint_definition": "rating midpoint = (5 + 30) / 2 = 17.5; statistical midpoint = (population minimum + population maximum) / 2",
+    "linear_formula": "5 + 25 * (x-min) / (max-min)",
     "rounding": "nearest integer, half up",
     "clamp": "5..30"
   },
@@ -31,35 +30,35 @@
       "min_per36": 11.6,
       "rating_at_min": 5,
       "mid_per36": 22.65,
-      "rating_at_mid": 15,
+      "rating_at_mid": 17.5,
       "max_per36": 33.7,
       "rating_at_max": 30,
       "rating_template_per36": {
         "5": 11.6,
-        "6": 12.705,
-        "7": 13.81,
-        "8": 14.915,
-        "9": 16.02,
-        "10": 17.125,
-        "11": 18.23,
-        "12": 19.335,
-        "13": 20.44,
-        "14": 21.545,
-        "15": 22.65,
-        "16": 23.387,
-        "17": 24.123,
-        "18": 24.86,
-        "19": 25.597,
-        "20": 26.333,
-        "21": 27.07,
-        "22": 27.807,
-        "23": 28.543,
-        "24": 29.28,
-        "25": 30.017,
-        "26": 30.753,
-        "27": 31.49,
-        "28": 32.227,
-        "29": 32.963,
+        "6": 12.484,
+        "7": 13.368,
+        "8": 14.252,
+        "9": 15.136,
+        "10": 16.02,
+        "11": 16.904,
+        "12": 17.788,
+        "13": 18.672,
+        "14": 19.556,
+        "15": 20.44,
+        "16": 21.324,
+        "17": 22.208,
+        "18": 23.092,
+        "19": 23.976,
+        "20": 24.86,
+        "21": 25.744,
+        "22": 26.628,
+        "23": 27.512,
+        "24": 28.396,
+        "25": 29.28,
+        "26": 30.164,
+        "27": 31.048,
+        "28": 31.932,
+        "29": 32.816,
         "30": 33.7
       }
     },
@@ -67,35 +66,35 @@
       "min_per36": 3.2,
       "rating_at_min": 5,
       "mid_per36": 8.7,
-      "rating_at_mid": 15,
+      "rating_at_mid": 17.5,
       "max_per36": 14.2,
       "rating_at_max": 30,
       "rating_template_per36": {
         "5": 3.2,
-        "6": 3.75,
-        "7": 4.3,
-        "8": 4.85,
-        "9": 5.4,
-        "10": 5.95,
-        "11": 6.5,
-        "12": 7.05,
-        "13": 7.6,
-        "14": 8.15,
-        "15": 8.7,
-        "16": 9.067,
-        "17": 9.433,
-        "18": 9.8,
-        "19": 10.167,
-        "20": 10.533,
-        "21": 10.9,
-        "22": 11.267,
-        "23": 11.633,
-        "24": 12.0,
-        "25": 12.367,
-        "26": 12.733,
-        "27": 13.1,
-        "28": 13.467,
-        "29": 13.833,
+        "6": 3.64,
+        "7": 4.08,
+        "8": 4.52,
+        "9": 4.96,
+        "10": 5.4,
+        "11": 5.84,
+        "12": 6.28,
+        "13": 6.72,
+        "14": 7.16,
+        "15": 7.6,
+        "16": 8.04,
+        "17": 8.48,
+        "18": 8.92,
+        "19": 9.36,
+        "20": 9.8,
+        "21": 10.24,
+        "22": 10.68,
+        "23": 11.12,
+        "24": 11.56,
+        "25": 12.0,
+        "26": 12.44,
+        "27": 12.88,
+        "28": 13.32,
+        "29": 13.76,
         "30": 14.2
       }
     },
@@ -103,35 +102,35 @@
       "min_per36": 1.9,
       "rating_at_min": 5,
       "mid_per36": 6.5,
-      "rating_at_mid": 15,
+      "rating_at_mid": 17.5,
       "max_per36": 11.1,
       "rating_at_max": 30,
       "rating_template_per36": {
         "5": 1.9,
-        "6": 2.36,
-        "7": 2.82,
-        "8": 3.28,
-        "9": 3.74,
-        "10": 4.2,
-        "11": 4.66,
-        "12": 5.12,
-        "13": 5.58,
-        "14": 6.04,
-        "15": 6.5,
-        "16": 6.807,
-        "17": 7.113,
-        "18": 7.42,
-        "19": 7.727,
-        "20": 8.033,
-        "21": 8.34,
-        "22": 8.647,
-        "23": 8.953,
-        "24": 9.26,
-        "25": 9.567,
-        "26": 9.873,
-        "27": 10.18,
-        "28": 10.487,
-        "29": 10.793,
+        "6": 2.268,
+        "7": 2.636,
+        "8": 3.004,
+        "9": 3.372,
+        "10": 3.74,
+        "11": 4.108,
+        "12": 4.476,
+        "13": 4.844,
+        "14": 5.212,
+        "15": 5.58,
+        "16": 5.948,
+        "17": 6.316,
+        "18": 6.684,
+        "19": 7.052,
+        "20": 7.42,
+        "21": 7.788,
+        "22": 8.156,
+        "23": 8.524,
+        "24": 8.892,
+        "25": 9.26,
+        "26": 9.628,
+        "27": 9.996,
+        "28": 10.364,
+        "29": 10.732,
         "30": 11.1
       }
     },
@@ -139,35 +138,35 @@
       "min_per36": 0.0,
       "rating_at_min": 5,
       "mid_per36": 2.0,
-      "rating_at_mid": 15,
+      "rating_at_mid": 17.5,
       "max_per36": 4.0,
       "rating_at_max": 30,
       "rating_template_per36": {
         "5": 0.0,
-        "6": 0.2,
-        "7": 0.4,
-        "8": 0.6,
-        "9": 0.8,
-        "10": 1.0,
-        "11": 1.2,
-        "12": 1.4,
-        "13": 1.6,
-        "14": 1.8,
-        "15": 2.0,
-        "16": 2.133,
-        "17": 2.267,
-        "18": 2.4,
-        "19": 2.533,
-        "20": 2.667,
-        "21": 2.8,
-        "22": 2.933,
-        "23": 3.067,
-        "24": 3.2,
-        "25": 3.333,
-        "26": 3.467,
-        "27": 3.6,
-        "28": 3.733,
-        "29": 3.867,
+        "6": 0.16,
+        "7": 0.32,
+        "8": 0.48,
+        "9": 0.64,
+        "10": 0.8,
+        "11": 0.96,
+        "12": 1.12,
+        "13": 1.28,
+        "14": 1.44,
+        "15": 1.6,
+        "16": 1.76,
+        "17": 1.92,
+        "18": 2.08,
+        "19": 2.24,
+        "20": 2.4,
+        "21": 2.56,
+        "22": 2.72,
+        "23": 2.88,
+        "24": 3.04,
+        "25": 3.2,
+        "26": 3.36,
+        "27": 3.52,
+        "28": 3.68,
+        "29": 3.84,
         "30": 4.0
       }
     },
@@ -175,35 +174,35 @@
       "min_per36": 0.8,
       "rating_at_min": 5,
       "mid_per36": 1.6,
-      "rating_at_mid": 15,
+      "rating_at_mid": 17.5,
       "max_per36": 2.4,
       "rating_at_max": 30,
       "rating_template_per36": {
         "5": 0.8,
-        "6": 0.88,
-        "7": 0.96,
-        "8": 1.04,
-        "9": 1.12,
-        "10": 1.2,
-        "11": 1.28,
-        "12": 1.36,
-        "13": 1.44,
-        "14": 1.52,
-        "15": 1.6,
-        "16": 1.653,
-        "17": 1.707,
-        "18": 1.76,
-        "19": 1.813,
-        "20": 1.867,
-        "21": 1.92,
-        "22": 1.973,
-        "23": 2.027,
-        "24": 2.08,
-        "25": 2.133,
-        "26": 2.187,
-        "27": 2.24,
-        "28": 2.293,
-        "29": 2.347,
+        "6": 0.864,
+        "7": 0.928,
+        "8": 0.992,
+        "9": 1.056,
+        "10": 1.12,
+        "11": 1.184,
+        "12": 1.248,
+        "13": 1.312,
+        "14": 1.376,
+        "15": 1.44,
+        "16": 1.504,
+        "17": 1.568,
+        "18": 1.632,
+        "19": 1.696,
+        "20": 1.76,
+        "21": 1.824,
+        "22": 1.888,
+        "23": 1.952,
+        "24": 2.016,
+        "25": 2.08,
+        "26": 2.144,
+        "27": 2.208,
+        "28": 2.272,
+        "29": 2.336,
         "30": 2.4
       }
     },
@@ -211,35 +210,35 @@
       "min_per36": 0.1,
       "rating_at_min": 5,
       "mid_per36": 1.95,
-      "rating_at_mid": 15,
+      "rating_at_mid": 17.5,
       "max_per36": 3.8,
       "rating_at_max": 30,
       "rating_template_per36": {
         "5": 0.1,
-        "6": 0.285,
-        "7": 0.47,
-        "8": 0.655,
-        "9": 0.84,
-        "10": 1.025,
-        "11": 1.21,
-        "12": 1.395,
-        "13": 1.58,
-        "14": 1.765,
-        "15": 1.95,
-        "16": 2.073,
-        "17": 2.197,
-        "18": 2.32,
-        "19": 2.443,
-        "20": 2.567,
-        "21": 2.69,
-        "22": 2.813,
-        "23": 2.937,
-        "24": 3.06,
-        "25": 3.183,
-        "26": 3.307,
-        "27": 3.43,
-        "28": 3.553,
-        "29": 3.677,
+        "6": 0.248,
+        "7": 0.396,
+        "8": 0.544,
+        "9": 0.692,
+        "10": 0.84,
+        "11": 0.988,
+        "12": 1.136,
+        "13": 1.284,
+        "14": 1.432,
+        "15": 1.58,
+        "16": 1.728,
+        "17": 1.876,
+        "18": 2.024,
+        "19": 2.172,
+        "20": 2.32,
+        "21": 2.468,
+        "22": 2.616,
+        "23": 2.764,
+        "24": 2.912,
+        "25": 3.06,
+        "26": 3.208,
+        "27": 3.356,
+        "28": 3.504,
+        "29": 3.652,
         "30": 3.8
       }
     }
@@ -256,12 +255,12 @@
         "blocks": 1.3
       },
       "ratings": {
-        "scoring": 10,
+        "scoring": 12,
         "rebounding": 8,
-        "passing": 13,
-        "three": 22,
-        "steals": 10,
-        "blocks": 11
+        "passing": 15,
+        "three": 23,
+        "steals": 11,
+        "blocks": 13
       }
     },
     "michael-porter-jr": {
@@ -275,11 +274,11 @@
         "blocks": 0.3
       },
       "ratings": {
-        "scoring": 21,
-        "rebounding": 13,
-        "passing": 8,
+        "scoring": 22,
+        "rebounding": 15,
+        "passing": 9,
         "three": 29,
-        "steals": 10,
+        "steals": 11,
         "blocks": 6
       }
     },
@@ -295,10 +294,10 @@
       },
       "ratings": {
         "scoring": 5,
-        "rebounding": 19,
-        "passing": 12,
-        "three": 13,
-        "steals": 21,
+        "rebounding": 20,
+        "passing": 14,
+        "three": 15,
+        "steals": 22,
         "blocks": 6
       }
     },
@@ -313,12 +312,12 @@
         "blocks": 0.5
       },
       "ratings": {
-        "scoring": 9,
-        "rebounding": 10,
-        "passing": 10,
-        "three": 15,
-        "steals": 14,
-        "blocks": 7
+        "scoring": 11,
+        "rebounding": 11,
+        "passing": 12,
+        "three": 18,
+        "steals": 16,
+        "blocks": 8
       }
     },
     "jakobe-walter": {
@@ -332,11 +331,11 @@
         "blocks": 0.3
       },
       "ratings": {
-        "scoring": 6,
-        "rebounding": 7,
-        "passing": 5,
-        "three": 20,
-        "steals": 19,
+        "scoring": 7,
+        "rebounding": 8,
+        "passing": 6,
+        "three": 22,
+        "steals": 21,
         "blocks": 6
       }
     },
@@ -351,11 +350,11 @@
         "blocks": 0.6
       },
       "ratings": {
-        "scoring": 12,
-        "rebounding": 17,
-        "passing": 27,
-        "three": 16,
-        "steals": 9,
+        "scoring": 13,
+        "rebounding": 19,
+        "passing": 28,
+        "three": 18,
+        "steals": 10,
         "blocks": 8
       }
     },
@@ -370,12 +369,12 @@
         "blocks": 1.1
       },
       "ratings": {
-        "scoring": 13,
-        "rebounding": 22,
+        "scoring": 15,
+        "rebounding": 23,
         "passing": 6,
         "three": 5,
-        "steals": 11,
-        "blocks": 10
+        "steals": 13,
+        "blocks": 12
       }
     },
     "cade-cunningham": {
@@ -389,12 +388,12 @@
         "blocks": 0.9
       },
       "ratings": {
-        "scoring": 19,
-        "rebounding": 10,
+        "scoring": 21,
+        "rebounding": 11,
         "passing": 28,
-        "three": 16,
-        "steals": 14,
-        "blocks": 9
+        "three": 18,
+        "steals": 16,
+        "blocks": 10
       }
     },
     "obi-toppin": {
@@ -408,10 +407,10 @@
         "blocks": 0.1
       },
       "ratings": {
-        "scoring": 16,
-        "rebounding": 16,
-        "passing": 11,
-        "three": 23,
+        "scoring": 19,
+        "rebounding": 18,
+        "passing": 13,
+        "three": 24,
         "steals": 8,
         "blocks": 5
       }
@@ -427,11 +426,11 @@
         "blocks": 0.6
       },
       "ratings": {
-        "scoring": 11,
-        "rebounding": 10,
-        "passing": 9,
-        "three": 14,
-        "steals": 6,
+        "scoring": 12,
+        "rebounding": 12,
+        "passing": 10,
+        "three": 16,
+        "steals": 7,
         "blocks": 8
       }
     },
@@ -446,11 +445,11 @@
         "blocks": 0.4
       },
       "ratings": {
-        "scoring": 15,
-        "rebounding": 20,
-        "passing": 20,
-        "three": 14,
-        "steals": 11,
+        "scoring": 18,
+        "rebounding": 22,
+        "passing": 22,
+        "three": 16,
+        "steals": 13,
         "blocks": 7
       }
     },
@@ -465,9 +464,9 @@
         "blocks": 0.3
       },
       "ratings": {
-        "scoring": 14,
-        "rebounding": 10,
-        "passing": 9,
+        "scoring": 16,
+        "rebounding": 12,
+        "passing": 10,
         "three": 29,
         "steals": 5,
         "blocks": 6
@@ -484,12 +483,12 @@
         "blocks": 0.7
       },
       "ratings": {
-        "scoring": 15,
-        "rebounding": 22,
-        "passing": 8,
-        "three": 15,
-        "steals": 11,
-        "blocks": 8
+        "scoring": 17,
+        "rebounding": 23,
+        "passing": 9,
+        "three": 17,
+        "steals": 13,
+        "blocks": 9
       }
     },
     "jalen-suggs": {
@@ -503,12 +502,12 @@
         "blocks": 0.9
       },
       "ratings": {
-        "scoring": 11,
-        "rebounding": 8,
-        "passing": 17,
-        "three": 21,
+        "scoring": 12,
+        "rebounding": 9,
+        "passing": 19,
+        "three": 23,
         "steals": 30,
-        "blocks": 9
+        "blocks": 10
       }
     },
     "bub-carrington": {
@@ -522,10 +521,10 @@
         "blocks": 0.3
       },
       "ratings": {
-        "scoring": 7,
-        "rebounding": 7,
-        "passing": 14,
-        "three": 20,
+        "scoring": 8,
+        "rebounding": 8,
+        "passing": 16,
+        "three": 22,
         "steals": 5,
         "blocks": 6
       }
@@ -541,12 +540,12 @@
         "blocks": 0.8
       },
       "ratings": {
-        "scoring": 23,
+        "scoring": 24,
         "rebounding": 28,
         "passing": 30,
-        "three": 14,
-        "steals": 14,
-        "blocks": 9
+        "three": 16,
+        "steals": 16,
+        "blocks": 10
       }
     },
     "rudy-gobert": {
@@ -561,11 +560,11 @@
       },
       "ratings": {
         "scoring": 6,
-        "rebounding": 27,
+        "rebounding": 28,
         "passing": 5,
         "three": 5,
-        "steals": 6,
-        "blocks": 15
+        "steals": 7,
+        "blocks": 17
       }
     },
     "shai-gilgeous-alexander": {
@@ -581,10 +580,10 @@
       "ratings": {
         "scoring": 30,
         "rebounding": 8,
-        "passing": 17,
-        "three": 14,
-        "steals": 14,
-        "blocks": 9
+        "passing": 19,
+        "three": 16,
+        "steals": 16,
+        "blocks": 10
       }
     },
     "scoot-henderson": {
@@ -598,11 +597,11 @@
         "blocks": 0.4
       },
       "ratings": {
-        "scoring": 13,
-        "rebounding": 6,
-        "passing": 13,
-        "three": 20,
-        "steals": 11,
+        "scoring": 15,
+        "rebounding": 7,
+        "passing": 15,
+        "three": 22,
+        "steals": 13,
         "blocks": 7
       }
     },
@@ -617,11 +616,11 @@
         "blocks": 0.3
       },
       "ratings": {
-        "scoring": 19,
-        "rebounding": 6,
-        "passing": 16,
-        "three": 20,
-        "steals": 10,
+        "scoring": 21,
+        "rebounding": 7,
+        "passing": 18,
+        "three": 22,
+        "steals": 11,
         "blocks": 6
       }
     },
@@ -636,11 +635,11 @@
         "blocks": 0.2
       },
       "ratings": {
-        "scoring": 10,
-        "rebounding": 11,
-        "passing": 11,
-        "three": 18,
-        "steals": 12,
+        "scoring": 12,
+        "rebounding": 13,
+        "passing": 13,
+        "three": 20,
+        "steals": 14,
         "blocks": 6
       }
     },
@@ -655,12 +654,12 @@
         "blocks": 1.9
       },
       "ratings": {
-        "scoring": 7,
-        "rebounding": 10,
-        "passing": 5,
-        "three": 19,
+        "scoring": 8,
+        "rebounding": 11,
+        "passing": 6,
+        "three": 21,
         "steals": 8,
-        "blocks": 15
+        "blocks": 17
       }
     },
     "luka-doncic": {
@@ -675,11 +674,11 @@
       },
       "ratings": {
         "scoring": 30,
-        "rebounding": 13,
-        "passing": 21,
+        "rebounding": 15,
+        "passing": 22,
         "three": 30,
-        "steals": 17,
-        "blocks": 7
+        "steals": 19,
+        "blocks": 8
       }
     },
     "dillon-brooks": {
@@ -693,11 +692,11 @@
         "blocks": 0.2
       },
       "ratings": {
-        "scoring": 17,
-        "rebounding": 7,
-        "passing": 5,
-        "three": 20,
-        "steals": 10,
+        "scoring": 19,
+        "rebounding": 8,
+        "passing": 6,
+        "three": 22,
+        "steals": 11,
         "blocks": 6
       }
     },
@@ -712,10 +711,10 @@
         "blocks": 0.3
       },
       "ratings": {
-        "scoring": 14,
+        "scoring": 17,
         "rebounding": 5,
         "passing": 7,
-        "three": 22,
+        "three": 23,
         "steals": 5,
         "blocks": 6
       }
@@ -731,12 +730,12 @@
         "blocks": 1.0
       },
       "ratings": {
-        "scoring": 15,
-        "rebounding": 12,
-        "passing": 12,
-        "three": 11,
-        "steals": 11,
-        "blocks": 10
+        "scoring": 17,
+        "rebounding": 14,
+        "passing": 13,
+        "three": 12,
+        "steals": 13,
+        "blocks": 11
       }
     },
     "reed-sheppard": {
@@ -750,12 +749,12 @@
         "blocks": 0.9
       },
       "ratings": {
-        "scoring": 11,
-        "rebounding": 6,
-        "passing": 11,
+        "scoring": 13,
+        "rebounding": 7,
+        "passing": 12,
         "three": 29,
-        "steals": 23,
-        "blocks": 9
+        "steals": 24,
+        "blocks": 10
       }
     },
     "gg-jackson": {
@@ -769,12 +768,12 @@
         "blocks": 1.3
       },
       "ratings": {
-        "scoring": 14,
-        "rebounding": 12,
-        "passing": 6,
-        "three": 15,
-        "steals": 6,
-        "blocks": 11
+        "scoring": 16,
+        "rebounding": 14,
+        "passing": 7,
+        "three": 18,
+        "steals": 7,
+        "blocks": 13
       }
     },
     "jeremiah-fears": {
@@ -788,12 +787,12 @@
         "blocks": 0.5
       },
       "ratings": {
-        "scoring": 13,
-        "rebounding": 8,
-        "passing": 11,
-        "three": 14,
-        "steals": 17,
-        "blocks": 7
+        "scoring": 14,
+        "rebounding": 9,
+        "passing": 13,
+        "three": 16,
+        "steals": 19,
+        "blocks": 8
       }
     },
     "victor-wembanyama": {
@@ -807,11 +806,11 @@
         "blocks": 3.8
       },
       "ratings": {
-        "scoring": 26,
+        "scoring": 27,
         "rebounding": 30,
-        "passing": 9,
-        "three": 18,
-        "steals": 11,
+        "passing": 10,
+        "three": 20,
+        "steals": 13,
         "blocks": 30
       }
     }
