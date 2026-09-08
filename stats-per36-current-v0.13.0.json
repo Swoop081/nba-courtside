@@ -1,0 +1,819 @@
+{
+  "schema": "nba-starting5-per36-calibration-v1",
+  "source": {
+    "provider": "Basketball-Reference",
+    "url": "https://www.basketball-reference.com/leagues/NBA_2026_per_minute.html",
+    "season": "2025-26",
+    "table": "Per 36 Minutes",
+    "retrieved_for_calibration": "2026-09-08"
+  },
+  "population": "30 current NBA Starting5 modern team representatives",
+  "categories": {
+    "scoring": "PTS/36",
+    "rebounding": "TRB/36",
+    "passing": "AST/36",
+    "three": "3PM/36",
+    "steals": "STL/36",
+    "blocks": "BLK/36"
+  },
+  "formula": {
+    "floor_rating": 5,
+    "mid_rating": 15,
+    "ceiling_rating": 30,
+    "midpoint_definition": "(population minimum + population maximum) / 2",
+    "lower_segment": "5 + (x-min)/(mid-min)*10",
+    "upper_segment": "15 + (x-mid)/(max-mid)*15",
+    "rounding": "nearest integer, half up",
+    "clamp": "5..30"
+  },
+  "anchors": {
+    "scoring": {
+      "min_per36": 11.6,
+      "rating_at_min": 5,
+      "mid_per36": 22.65,
+      "rating_at_mid": 15,
+      "max_per36": 33.7,
+      "rating_at_max": 30,
+      "rating_template_per36": {
+        "5": 11.6,
+        "6": 12.705,
+        "7": 13.81,
+        "8": 14.915,
+        "9": 16.02,
+        "10": 17.125,
+        "11": 18.23,
+        "12": 19.335,
+        "13": 20.44,
+        "14": 21.545,
+        "15": 22.65,
+        "16": 23.387,
+        "17": 24.123,
+        "18": 24.86,
+        "19": 25.597,
+        "20": 26.333,
+        "21": 27.07,
+        "22": 27.807,
+        "23": 28.543,
+        "24": 29.28,
+        "25": 30.017,
+        "26": 30.753,
+        "27": 31.49,
+        "28": 32.227,
+        "29": 32.963,
+        "30": 33.7
+      }
+    },
+    "rebounding": {
+      "min_per36": 3.2,
+      "rating_at_min": 5,
+      "mid_per36": 8.7,
+      "rating_at_mid": 15,
+      "max_per36": 14.2,
+      "rating_at_max": 30,
+      "rating_template_per36": {
+        "5": 3.2,
+        "6": 3.75,
+        "7": 4.3,
+        "8": 4.85,
+        "9": 5.4,
+        "10": 5.95,
+        "11": 6.5,
+        "12": 7.05,
+        "13": 7.6,
+        "14": 8.15,
+        "15": 8.7,
+        "16": 9.067,
+        "17": 9.433,
+        "18": 9.8,
+        "19": 10.167,
+        "20": 10.533,
+        "21": 10.9,
+        "22": 11.267,
+        "23": 11.633,
+        "24": 12.0,
+        "25": 12.367,
+        "26": 12.733,
+        "27": 13.1,
+        "28": 13.467,
+        "29": 13.833,
+        "30": 14.2
+      }
+    },
+    "passing": {
+      "min_per36": 1.9,
+      "rating_at_min": 5,
+      "mid_per36": 6.5,
+      "rating_at_mid": 15,
+      "max_per36": 11.1,
+      "rating_at_max": 30,
+      "rating_template_per36": {
+        "5": 1.9,
+        "6": 2.36,
+        "7": 2.82,
+        "8": 3.28,
+        "9": 3.74,
+        "10": 4.2,
+        "11": 4.66,
+        "12": 5.12,
+        "13": 5.58,
+        "14": 6.04,
+        "15": 6.5,
+        "16": 6.807,
+        "17": 7.113,
+        "18": 7.42,
+        "19": 7.727,
+        "20": 8.033,
+        "21": 8.34,
+        "22": 8.647,
+        "23": 8.953,
+        "24": 9.26,
+        "25": 9.567,
+        "26": 9.873,
+        "27": 10.18,
+        "28": 10.487,
+        "29": 10.793,
+        "30": 11.1
+      }
+    },
+    "three": {
+      "min_per36": 0.0,
+      "rating_at_min": 5,
+      "mid_per36": 2.0,
+      "rating_at_mid": 15,
+      "max_per36": 4.0,
+      "rating_at_max": 30,
+      "rating_template_per36": {
+        "5": 0.0,
+        "6": 0.2,
+        "7": 0.4,
+        "8": 0.6,
+        "9": 0.8,
+        "10": 1.0,
+        "11": 1.2,
+        "12": 1.4,
+        "13": 1.6,
+        "14": 1.8,
+        "15": 2.0,
+        "16": 2.133,
+        "17": 2.267,
+        "18": 2.4,
+        "19": 2.533,
+        "20": 2.667,
+        "21": 2.8,
+        "22": 2.933,
+        "23": 3.067,
+        "24": 3.2,
+        "25": 3.333,
+        "26": 3.467,
+        "27": 3.6,
+        "28": 3.733,
+        "29": 3.867,
+        "30": 4.0
+      }
+    },
+    "steals": {
+      "min_per36": 0.8,
+      "rating_at_min": 5,
+      "mid_per36": 1.6,
+      "rating_at_mid": 15,
+      "max_per36": 2.4,
+      "rating_at_max": 30,
+      "rating_template_per36": {
+        "5": 0.8,
+        "6": 0.88,
+        "7": 0.96,
+        "8": 1.04,
+        "9": 1.12,
+        "10": 1.2,
+        "11": 1.28,
+        "12": 1.36,
+        "13": 1.44,
+        "14": 1.52,
+        "15": 1.6,
+        "16": 1.653,
+        "17": 1.707,
+        "18": 1.76,
+        "19": 1.813,
+        "20": 1.867,
+        "21": 1.92,
+        "22": 1.973,
+        "23": 2.027,
+        "24": 2.08,
+        "25": 2.133,
+        "26": 2.187,
+        "27": 2.24,
+        "28": 2.293,
+        "29": 2.347,
+        "30": 2.4
+      }
+    },
+    "blocks": {
+      "min_per36": 0.1,
+      "rating_at_min": 5,
+      "mid_per36": 1.95,
+      "rating_at_mid": 15,
+      "max_per36": 3.8,
+      "rating_at_max": 30,
+      "rating_template_per36": {
+        "5": 0.1,
+        "6": 0.285,
+        "7": 0.47,
+        "8": 0.655,
+        "9": 0.84,
+        "10": 1.025,
+        "11": 1.21,
+        "12": 1.395,
+        "13": 1.58,
+        "14": 1.765,
+        "15": 1.95,
+        "16": 2.073,
+        "17": 2.197,
+        "18": 2.32,
+        "19": 2.443,
+        "20": 2.567,
+        "21": 2.69,
+        "22": 2.813,
+        "23": 2.937,
+        "24": 3.06,
+        "25": 3.183,
+        "26": 3.307,
+        "27": 3.43,
+        "28": 3.553,
+        "29": 3.677,
+        "30": 3.8
+      }
+    }
+  },
+  "players": {
+    "derrick-white": {
+      "name": "Derrick White",
+      "per36": {
+        "scoring": 17.4,
+        "rebounding": 4.6,
+        "passing": 5.7,
+        "three": 2.9,
+        "steals": 1.2,
+        "blocks": 1.3
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 8,
+        "passing": 13,
+        "three": 22,
+        "steals": 10,
+        "blocks": 11
+      }
+    },
+    "michael-porter-jr": {
+      "name": "Michael Porter Jr.",
+      "per36": {
+        "scoring": 26.8,
+        "rebounding": 7.8,
+        "passing": 3.4,
+        "three": 3.8,
+        "steals": 1.2,
+        "blocks": 0.3
+      },
+      "ratings": {
+        "scoring": 21,
+        "rebounding": 13,
+        "passing": 8,
+        "three": 29,
+        "steals": 10,
+        "blocks": 6
+      }
+    },
+    "josh-hart": {
+      "name": "Josh Hart",
+      "per36": {
+        "scoring": 11.6,
+        "rebounding": 10.0,
+        "passing": 5.1,
+        "three": 1.6,
+        "steals": 1.9,
+        "blocks": 0.2
+      },
+      "ratings": {
+        "scoring": 5,
+        "rebounding": 19,
+        "passing": 12,
+        "three": 13,
+        "steals": 21,
+        "blocks": 6
+      }
+    },
+    "vj-edgecombe": {
+      "name": "VJ Edgecombe",
+      "per36": {
+        "scoring": 16.5,
+        "rebounding": 5.8,
+        "passing": 4.3,
+        "three": 2.0,
+        "steals": 1.5,
+        "blocks": 0.5
+      },
+      "ratings": {
+        "scoring": 9,
+        "rebounding": 10,
+        "passing": 10,
+        "three": 15,
+        "steals": 14,
+        "blocks": 7
+      }
+    },
+    "jakobe-walter": {
+      "name": "Ja'Kobe Walter",
+      "per36": {
+        "scoring": 13.2,
+        "rebounding": 4.5,
+        "passing": 2.1,
+        "three": 2.7,
+        "steals": 1.8,
+        "blocks": 0.3
+      },
+      "ratings": {
+        "scoring": 6,
+        "rebounding": 7,
+        "passing": 5,
+        "three": 20,
+        "steals": 19,
+        "blocks": 6
+      }
+    },
+    "josh-giddey": {
+      "name": "Josh Giddey",
+      "per36": {
+        "scoring": 19.1,
+        "rebounding": 9.3,
+        "passing": 10.3,
+        "three": 2.1,
+        "steals": 1.1,
+        "blocks": 0.6
+      },
+      "ratings": {
+        "scoring": 12,
+        "rebounding": 17,
+        "passing": 27,
+        "three": 16,
+        "steals": 9,
+        "blocks": 8
+      }
+    },
+    "jarrett-allen": {
+      "name": "Jarrett Allen",
+      "per36": {
+        "scoring": 20.4,
+        "rebounding": 11.3,
+        "passing": 2.4,
+        "three": 0.0,
+        "steals": 1.3,
+        "blocks": 1.1
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 22,
+        "passing": 6,
+        "three": 5,
+        "steals": 11,
+        "blocks": 10
+      }
+    },
+    "cade-cunningham": {
+      "name": "Cade Cunningham",
+      "per36": {
+        "scoring": 25.4,
+        "rebounding": 5.9,
+        "passing": 10.5,
+        "three": 2.1,
+        "steals": 1.5,
+        "blocks": 0.9
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 10,
+        "passing": 28,
+        "three": 16,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    "obi-toppin": {
+      "name": "Obi Toppin",
+      "per36": {
+        "scoring": 23.7,
+        "rebounding": 9.0,
+        "passing": 4.7,
+        "three": 3.1,
+        "steals": 1.0,
+        "blocks": 0.1
+      },
+      "ratings": {
+        "scoring": 16,
+        "rebounding": 16,
+        "passing": 11,
+        "three": 23,
+        "steals": 8,
+        "blocks": 5
+      }
+    },
+    "kyle-kuzma": {
+      "name": "Kyle Kuzma",
+      "per36": {
+        "scoring": 17.9,
+        "rebounding": 6.2,
+        "passing": 3.7,
+        "three": 1.7,
+        "steals": 0.9,
+        "blocks": 0.6
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 10,
+        "passing": 9,
+        "three": 14,
+        "steals": 6,
+        "blocks": 8
+      }
+    },
+    "jalen-johnson": {
+      "name": "Jalen Johnson",
+      "per36": {
+        "scoring": 23.0,
+        "rebounding": 10.5,
+        "passing": 8.0,
+        "three": 1.7,
+        "steals": 1.3,
+        "blocks": 0.4
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 20,
+        "passing": 20,
+        "three": 14,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    "kon-knueppel": {
+      "name": "Kon Knueppel",
+      "per36": {
+        "scoring": 21.1,
+        "rebounding": 6.1,
+        "passing": 3.9,
+        "three": 3.9,
+        "steals": 0.8,
+        "blocks": 0.3
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 10,
+        "passing": 9,
+        "three": 29,
+        "steals": 5,
+        "blocks": 6
+      }
+    },
+    "bam-adebayo": {
+      "name": "Bam Adebayo",
+      "per36": {
+        "scoring": 22.3,
+        "rebounding": 11.1,
+        "passing": 3.5,
+        "three": 1.9,
+        "steals": 1.3,
+        "blocks": 0.7
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 22,
+        "passing": 8,
+        "three": 15,
+        "steals": 11,
+        "blocks": 8
+      }
+    },
+    "jalen-suggs": {
+      "name": "Jalen Suggs",
+      "per36": {
+        "scoring": 18.0,
+        "rebounding": 5.0,
+        "passing": 7.1,
+        "three": 2.8,
+        "steals": 2.4,
+        "blocks": 0.9
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 8,
+        "passing": 17,
+        "three": 21,
+        "steals": 30,
+        "blocks": 9
+      }
+    },
+    "bub-carrington": {
+      "name": "Bub Carrington",
+      "per36": {
+        "scoring": 13.9,
+        "rebounding": 4.4,
+        "passing": 6.0,
+        "three": 2.7,
+        "steals": 0.8,
+        "blocks": 0.3
+      },
+      "ratings": {
+        "scoring": 7,
+        "rebounding": 7,
+        "passing": 14,
+        "three": 20,
+        "steals": 5,
+        "blocks": 6
+      }
+    },
+    "nikola-jokic": {
+      "name": "Nikola Jokić",
+      "per36": {
+        "scoring": 28.6,
+        "rebounding": 13.3,
+        "passing": 11.1,
+        "three": 1.8,
+        "steals": 1.5,
+        "blocks": 0.8
+      },
+      "ratings": {
+        "scoring": 23,
+        "rebounding": 28,
+        "passing": 30,
+        "three": 14,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    "rudy-gobert": {
+      "name": "Rudy Gobert",
+      "per36": {
+        "scoring": 12.5,
+        "rebounding": 13.2,
+        "passing": 1.9,
+        "three": 0.0,
+        "steals": 0.9,
+        "blocks": 1.9
+      },
+      "ratings": {
+        "scoring": 6,
+        "rebounding": 27,
+        "passing": 5,
+        "three": 5,
+        "steals": 6,
+        "blocks": 15
+      }
+    },
+    "shai-gilgeous-alexander": {
+      "name": "Shai Gilgeous-Alexander",
+      "per36": {
+        "scoring": 33.7,
+        "rebounding": 4.7,
+        "passing": 7.1,
+        "three": 1.8,
+        "steals": 1.5,
+        "blocks": 0.8
+      },
+      "ratings": {
+        "scoring": 30,
+        "rebounding": 8,
+        "passing": 17,
+        "three": 14,
+        "steals": 14,
+        "blocks": 9
+      }
+    },
+    "scoot-henderson": {
+      "name": "Scoot Henderson",
+      "per36": {
+        "scoring": 20.6,
+        "rebounding": 3.9,
+        "passing": 5.4,
+        "three": 2.7,
+        "steals": 1.3,
+        "blocks": 0.4
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 6,
+        "passing": 13,
+        "three": 20,
+        "steals": 11,
+        "blocks": 7
+      }
+    },
+    "keyonte-george": {
+      "name": "Keyonte George",
+      "per36": {
+        "scoring": 25.7,
+        "rebounding": 4.0,
+        "passing": 6.7,
+        "three": 2.7,
+        "steals": 1.2,
+        "blocks": 0.3
+      },
+      "ratings": {
+        "scoring": 19,
+        "rebounding": 6,
+        "passing": 16,
+        "three": 20,
+        "steals": 10,
+        "blocks": 6
+      }
+    },
+    "brandin-podziemski": {
+      "name": "Brandin Podziemski",
+      "per36": {
+        "scoring": 17.5,
+        "rebounding": 6.5,
+        "passing": 4.7,
+        "three": 2.4,
+        "steals": 1.4,
+        "blocks": 0.2
+      },
+      "ratings": {
+        "scoring": 10,
+        "rebounding": 11,
+        "passing": 11,
+        "three": 18,
+        "steals": 12,
+        "blocks": 6
+      }
+    },
+    "brook-lopez": {
+      "name": "Brook Lopez",
+      "per36": {
+        "scoring": 14.0,
+        "rebounding": 6.0,
+        "passing": 2.1,
+        "three": 2.5,
+        "steals": 1.0,
+        "blocks": 1.9
+      },
+      "ratings": {
+        "scoring": 7,
+        "rebounding": 10,
+        "passing": 5,
+        "three": 19,
+        "steals": 8,
+        "blocks": 15
+      }
+    },
+    "luka-doncic": {
+      "name": "Luka Dončić",
+      "per36": {
+        "scoring": 33.7,
+        "rebounding": 7.8,
+        "passing": 8.3,
+        "three": 4.0,
+        "steals": 1.7,
+        "blocks": 0.5
+      },
+      "ratings": {
+        "scoring": 30,
+        "rebounding": 13,
+        "passing": 21,
+        "three": 30,
+        "steals": 17,
+        "blocks": 7
+      }
+    },
+    "dillon-brooks": {
+      "name": "Dillon Brooks",
+      "per36": {
+        "scoring": 23.9,
+        "rebounding": 4.3,
+        "passing": 2.1,
+        "three": 2.7,
+        "steals": 1.2,
+        "blocks": 0.2
+      },
+      "ratings": {
+        "scoring": 17,
+        "rebounding": 7,
+        "passing": 5,
+        "three": 20,
+        "steals": 10,
+        "blocks": 6
+      }
+    },
+    "zach-lavine": {
+      "name": "Zach LaVine",
+      "per36": {
+        "scoring": 22.0,
+        "rebounding": 3.2,
+        "passing": 2.6,
+        "three": 2.9,
+        "steals": 0.8,
+        "blocks": 0.3
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 5,
+        "passing": 7,
+        "three": 22,
+        "steals": 5,
+        "blocks": 6
+      }
+    },
+    "cooper-flagg": {
+      "name": "Cooper Flagg",
+      "per36": {
+        "scoring": 22.6,
+        "rebounding": 7.2,
+        "passing": 4.9,
+        "three": 1.1,
+        "steals": 1.3,
+        "blocks": 1.0
+      },
+      "ratings": {
+        "scoring": 15,
+        "rebounding": 12,
+        "passing": 12,
+        "three": 11,
+        "steals": 11,
+        "blocks": 10
+      }
+    },
+    "reed-sheppard": {
+      "name": "Reed Sheppard",
+      "per36": {
+        "scoring": 18.6,
+        "rebounding": 4.0,
+        "passing": 4.6,
+        "three": 3.8,
+        "steals": 2.0,
+        "blocks": 0.9
+      },
+      "ratings": {
+        "scoring": 11,
+        "rebounding": 6,
+        "passing": 11,
+        "three": 29,
+        "steals": 23,
+        "blocks": 9
+      }
+    },
+    "gg-jackson": {
+      "name": "GG Jackson",
+      "per36": {
+        "scoring": 21.0,
+        "rebounding": 7.2,
+        "passing": 2.5,
+        "three": 2.0,
+        "steals": 0.9,
+        "blocks": 1.3
+      },
+      "ratings": {
+        "scoring": 14,
+        "rebounding": 12,
+        "passing": 6,
+        "three": 15,
+        "steals": 6,
+        "blocks": 11
+      }
+    },
+    "jeremiah-fears": {
+      "name": "Jeremiah Fears",
+      "per36": {
+        "scoring": 19.9,
+        "rebounding": 5.1,
+        "passing": 4.8,
+        "three": 1.7,
+        "steals": 1.7,
+        "blocks": 0.5
+      },
+      "ratings": {
+        "scoring": 13,
+        "rebounding": 8,
+        "passing": 11,
+        "three": 14,
+        "steals": 17,
+        "blocks": 7
+      }
+    },
+    "victor-wembanyama": {
+      "name": "Victor Wembanyama",
+      "per36": {
+        "scoring": 30.9,
+        "rebounding": 14.2,
+        "passing": 3.8,
+        "three": 2.4,
+        "steals": 1.3,
+        "blocks": 3.8
+      },
+      "ratings": {
+        "scoring": 26,
+        "rebounding": 30,
+        "passing": 9,
+        "three": 18,
+        "steals": 11,
+        "blocks": 30
+      }
+    }
+  }
+}
