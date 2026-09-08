@@ -1,0 +1,26 @@
+name: Inspect Retired Set Boundaries
+on:
+  push:
+    branches: [retired-set-cleanup-temp]
+    paths: [.github/workflows/audit-retired-set-boundaries.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: retired-set-cleanup-temp
+      - shell: bash
+        run: |
+          echo '=== art-v0.8.20 markers ==='
+          grep -nE 'THUNDER|Thunder|historicScale|historicThree|document.write|positions|balance' art-v0.8.20.js || true
+          echo '=== art-v0.8.20 numbered tail ==='
+          nl -ba art-v0.8.20.js | tail -n 120
+          echo '=== positions loader refs ==='
+          git grep -n 'positions-v0.8.53.js' -- ':!.github/workflows/*' || true
+          echo '=== inceptors refs ==='
+          git grep -nEi 'inceptors-v0.8.80|interceptors-v0.8.81|interceptors-stats-v0.8.82' -- ':!.github/workflows/*' || true
+          echo '=== set-background loader refs ==='
+          git grep -n 'set-backgrounds-v0.8.79.js' -- ':!.github/workflows/*' || true
