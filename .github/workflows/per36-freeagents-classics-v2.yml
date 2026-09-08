@@ -27,6 +27,11 @@ jobs:
           p=Path('per36-freeagents-classics.py')
           s=p.read_text()
           s=s.replace("cols={'scoring':cc('pts'),'rebounding':cc('trb'),'passing':cc('ast'),'three':cc('3p','x3p','fg3m'),'steals':cc('stl'),'blocks':cc('blk')}","cols={'scoring':cc('pts_per_36_min'),'rebounding':cc('trb_per_36_min'),'passing':cc('ast_per_36_min'),'three':cc('x3p_per_36_min'),'steals':cc('stl_per_36_min'),'blocks':cc('blk_per_36_min')}")
+          s=s.replace('timeout=90','timeout=20')
+          old="""pomaps={}\n for y in years:\n  try:pomaps[y]=historical_playoffs(y)\n  except Exception as e:print('WARN playoff',y,e);pomaps[y]={}"""
+          new="""pomaps={}\n from concurrent.futures import ThreadPoolExecutor\n def fetch_po(y):\n  try:return y,historical_playoffs(y)\n  except Exception as e:print('WARN playoff',y,e);return y,{}\n with ThreadPoolExecutor(max_workers=8) as ex:\n  for y,m in ex.map(fetch_po,years):pomaps[y]=m"""
+          if old not in s: raise SystemExit('playoff loop patch target missing')
+          s=s.replace(old,new)
           p.write_text(s)
           PY
           python per36-freeagents-classics.py
@@ -37,9 +42,9 @@ jobs:
           import json, subprocess, statistics
           fa=json.load(open('stats-per36-free-agents.json'))
           cl=json.load(open('stats-per36-classics.json'))
-          assert fa['count']==30, fa['count']
-          assert len(cl['classicFiles'])>=18, len(cl['classicFiles'])
-          assert cl['count']>=80, cl['count']
+          assert fa['count']==30
+          assert len(cl['classicFiles'])>=18
+          assert cl['count']>=80
           for f in cl['classicFiles']: subprocess.run(['node','--check',f],check=True)
           players=fa['players']+cl['players']
           assert all(p['new'][1]==p['old'][1] for p in players)
@@ -48,8 +53,7 @@ jobs:
           assert statistics.median(cr)>5
           for name in ['Michael Jordan','LeBron James','Allen Iverson']:
               hits=[p for p in cl['players'] if p['name']==name]
-              assert hits, name
-              assert max(p['ratings']['scoring'] for p in hits)>=20, (name,hits)
+              assert hits and max(p['ratings']['scoring'] for p in hits)>=20, name
           print({'freeAgents':fa['count'],'classicFiles':len(cl['classicFiles']),'classicEntries':cl['count'],'classicPlayoffMatches':cl['playoffMatches'],'classicMedianScoring':statistics.median(cr)})
           PY
       - name: Commit outputs
