@@ -1,40 +1,41 @@
 /* NBA Starting5 — initial 30-player Season free-agent pool
    Ratings order: scoring, dunks, three, rebounding, passing, blocks, steals.
-   Veterans are calibrated to 2025-26 production and the existing Foundation 0-30 scale.
-   Unproven players use conservative projections. One primary position only. */
+   Ratings are role/production based against the existing Foundation scale: ordinary bench players
+   sit mainly in the low/mid teens, strong reserves can reach the high teens/low 20s, and only
+   genuine elite specialists receive mid/high-20 category ratings. One primary position only. */
 (()=>{
   const KEYS=['scoring','dunks','three','rebounding','passing','blocks','steals'];
   const RAW=[
-    ['Atlanta Hawks','Luguentz Dort','SF',[15,18,22,16,10,8,22]],
-    ['Boston Celtics','Mitchell Robinson','C',[13,29,1,30,5,27,14]],
-    ['Brooklyn Nets','Noah Clowney','PF',[17,23,20,23,9,22,11]],
-    ['Charlotte Hornets','Grayson Allen','SG',[20,8,28,10,16,3,11]],
-    ['Chicago Bulls','Rob Dillingham','PG',[20,13,23,7,20,2,10]],
-    ['Cleveland Cavaliers','Jaylon Tyson','SF',[19,20,19,18,14,7,13]],
-    ['Dallas Mavericks','Dereck Lively II','C',[16,29,1,27,9,27,10]],
-    ['Denver Nuggets','Cameron Johnson','SF',[22,15,27,15,14,6,12]],
-    ['Detroit Pistons','Ron Holland II','SF',[18,27,14,19,12,12,18]],
-    ['Golden State Warriors','Yaxel Lendeborg','PF',[17,25,15,23,14,20,16]],
-    ['Houston Rockets','Reed Sheppard','SG',[22,10,28,10,20,6,20]],
-    ['Indiana Pacers','Obi Toppin','PF',[20,29,22,19,11,10,9]],
-    ['LA Clippers','Kris Dunn','PG',[14,14,17,15,20,8,28]],
-    ['Los Angeles Lakers','Collin Sexton','PG',[24,21,22,9,21,3,12]],
-    ['Memphis Grizzlies','D’Angelo Russell','PG',[21,7,25,8,25,2,11]],
-    ['Miami Heat','Tim Hardaway Jr.','SG',[21,12,27,9,12,3,9]],
-    ['Milwaukee Bucks','Kel’el Ware','C',[18,28,10,27,8,27,9]],
-    ['Minnesota Timberwolves','Ayo Dosunmu','SG',[20,23,21,12,18,7,18]],
-    ['New Orleans Pelicans','Bennedict Mathurin','SG',[24,27,20,15,14,5,10]],
-    ['New York Knicks','Andre Drummond','C',[14,24,1,30,7,20,12]],
-    ['Oklahoma City Thunder','Alex Caruso','SG',[15,13,22,13,19,10,30]],
-    ['Orlando Magic','Nikola Vučević','C',[23,13,23,27,18,13,9]],
-    ['Philadelphia 76ers','Anfernee Simons','SG',[24,18,28,9,23,2,9]],
-    ['Phoenix Suns','Khaman Maluach','C',[15,28,3,25,7,25,8]],
-    ['Portland Trail Blazers','Jrue Holiday','PG',[20,16,23,14,24,10,25]],
-    ['Sacramento Kings','Malik Monk','SG',[24,25,27,10,23,3,11]],
-    ['San Antonio Spurs','Devin Vassell','SG',[23,22,26,13,18,9,15]],
-    ['Toronto Raptors','Jakob Poeltl','C',[18,25,1,28,16,25,10]],
-    ['Utah Jazz','Isaiah Collier','PG',[18,23,12,13,24,4,15]],
-    ['Washington Wizards','Deandre Ayton','C',[21,27,3,29,10,20,8]]
+    ['Atlanta Hawks','Luguentz Dort','SF',[14,15,19,12,9,5,20]],
+    ['Boston Celtics','Mitchell Robinson','C',[10,23,1,26,4,22,8]],
+    ['Brooklyn Nets','Noah Clowney','PF',[13,18,16,18,7,17,8]],
+    ['Charlotte Hornets','Grayson Allen','SG',[17,5,24,7,12,2,8]],
+    ['Chicago Bulls','Rob Dillingham','PG',[16,9,19,5,17,1,7]],
+    ['Cleveland Cavaliers','Jaylon Tyson','SF',[15,16,15,14,11,5,10]],
+    ['Dallas Mavericks','Dereck Lively II','C',[12,24,1,22,7,22,7]],
+    ['Denver Nuggets','Cameron Johnson','SF',[18,11,23,11,11,4,9]],
+    ['Detroit Pistons','Ron Holland II','SF',[14,22,10,15,9,8,14]],
+    ['Golden State Warriors','Yaxel Lendeborg','PF',[13,19,11,17,10,15,12]],
+    ['Houston Rockets','Reed Sheppard','SG',[18,7,23,7,16,4,16]],
+    ['Indiana Pacers','Obi Toppin','PF',[16,24,18,14,8,7,6]],
+    ['LA Clippers','Kris Dunn','PG',[10,10,13,11,16,5,24]],
+    ['Los Angeles Lakers','Collin Sexton','PG',[20,17,18,6,17,2,9]],
+    ['Memphis Grizzlies','D’Angelo Russell','PG',[17,4,21,6,21,1,8]],
+    ['Miami Heat','Tim Hardaway Jr.','SG',[17,8,23,6,9,2,6]],
+    ['Milwaukee Bucks','Kel’el Ware','C',[14,23,7,22,6,22,6]],
+    ['Minnesota Timberwolves','Ayo Dosunmu','SG',[16,18,17,9,14,4,14]],
+    ['New Orleans Pelicans','Bennedict Mathurin','SG',[20,22,16,11,10,3,7]],
+    ['New York Knicks','Andre Drummond','C',[10,19,1,26,5,16,8]],
+    ['Oklahoma City Thunder','Alex Caruso','SG',[11,9,18,9,15,6,26]],
+    ['Orlando Magic','Nikola Vučević','C',[19,9,19,23,14,9,6]],
+    ['Philadelphia 76ers','Anfernee Simons','SG',[20,14,23,6,19,1,6]],
+    ['Phoenix Suns','Khaman Maluach','C',[11,21,2,19,5,19,5]],
+    ['Portland Trail Blazers','Jrue Holiday','PG',[16,12,19,10,20,6,21]],
+    ['Sacramento Kings','Malik Monk','SG',[20,20,23,7,19,2,8]],
+    ['San Antonio Spurs','Devin Vassell','SG',[19,18,22,9,14,6,11]],
+    ['Toronto Raptors','Jakob Poeltl','C',[14,20,1,23,12,20,7]],
+    ['Utah Jazz','Isaiah Collier','PG',[14,18,9,9,20,2,11]],
+    ['Washington Wizards','Deandre Ayton','C',[17,22,2,24,7,16,5]]
   ];
   const pool=RAW.map(([team,name,position,ratings],index)=>({
     id:`season-fa-${String(index+1).padStart(2,'0')}`,
