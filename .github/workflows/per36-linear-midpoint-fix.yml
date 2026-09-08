@@ -1,0 +1,164 @@
+name: Per36 Linear Midpoint Recalibration
+
+on:
+  push:
+    branches: [per36-linear-midpoint-fix]
+    paths: [.github/workflows/per36-linear-midpoint-fix.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  recalibrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: per36-linear-midpoint-fix
+          fetch-depth: 0
+
+      - name: Recalibrate six Per36 categories to linear 5-30 scale
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+          from decimal import Decimal, ROUND_HALF_UP
+
+          data_path=Path('stats-per36-current-v0.13.0.json')
+          data=json.loads(data_path.read_text())
+          cats=('scoring','rebounding','passing','three','steals','blocks')
+
+          def D(v): return Decimal(str(v))
+          def rating(x, lo, hi):
+              raw=D(5)+D(25)*(D(x)-D(lo))/(D(hi)-D(lo))
+              n=int(raw.quantize(Decimal('1'), rounding=ROUND_HALF_UP))
+              return max(5,min(30,n))
+          def bench(r, lo, hi):
+              return float((D(lo)+(D(r)-D(5))*(D(hi)-D(lo))/D(25)).quantize(Decimal('0.001'), rounding=ROUND_HALF_UP))
+
+          data['schema']='nba-starting5-per36-calibration-v2-linear-5-30'
+          data['formula']={
+              'floor_rating':5,
+              'statistical_mid_rating':17.5,
+              'ceiling_rating':30,
+              'midpoint_definition':'rating midpoint = (5 + 30) / 2 = 17.5; statistical midpoint = (population minimum + population maximum) / 2',
+              'linear_formula':'5 + 25 * (x-min) / (max-min)',
+              'rounding':'nearest integer, half up',
+              'clamp':'5..30'
+          }
+          for cat in cats:
+              a=data['anchors'][cat]
+              lo=a['min_per36']; hi=a['max_per36']
+              mid=(D(lo)+D(hi))/D(2)
+              a.clear()
+              a.update({
+                  'min_per36':lo,
+                  'rating_at_min':5,
+                  'mid_per36':float(mid),
+                  'rating_at_mid':17.5,
+                  'max_per36':hi,
+                  'rating_at_max':30,
+                  'rating_template_per36':{str(r):bench(r,lo,hi) for r in range(5,31)}
+              })
+          for slug,p in data['players'].items():
+              p['ratings']={cat:rating(p['per36'][cat],data['anchors'][cat]['min_per36'],data['anchors'][cat]['max_per36']) for cat in cats}
+          data_path.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n')
+
+          # Rewrite the current 30-player game data. Preserve Dunking exactly; remove retired Free Throws.
+          p=Path('app.js'); s=p.read_text()
+          s=re.sub(r"const STAT_LABELS=\{[^;]+\};", "const STAT_LABELS={scoring:'Scoring',dunks:'Dunking',three:'3PT',rebounding:'Rebounding',passing:'Passing',blocks:'Blocks',steals:'Steals'};", s, count=1)
+          s=re.sub(r"const CARD_LABELS=\{[^;]+\};", "const CARD_LABELS={scoring:'SCO',dunks:'DNK',three:'3PT',rebounding:'REB',passing:'PAS',blocks:'BLK',steals:'STL'};", s, count=1)
+          s=re.sub(r"const STAT_KEYS=\[[^;]+\];", "const STAT_KEYS=['scoring','dunks','three','rebounding','passing','blocks','steals'];", s, count=1)
+          s=re.sub(r"const RAW_STAT_KEYS=\[[^;]+\];", "const RAW_STAT_KEYS=['scoring','rebounding','passing','three','dunks','steals','blocks'];", s, count=1)
+          start=s.index('const RAW_PLAYERS=['); end=s.index('];\nconst players=',start)+2
+          segment=s[start:end]
+          seen=set()
+          pat=re.compile(r",\[([0-9]+(?:,[0-9]+){7})\],'([^']+)'\)")
+          def repl(m):
+              vals=[int(x) for x in m.group(1).split(',')]
+              slug=m.group(2)
+              if slug not in data['players']:
+                  raise SystemExit(f'missing Per36 row for {slug}')
+              r=data['players'][slug]['ratings']; dunk=vals[4]
+              new=[r['scoring'],r['rebounding'],r['passing'],r['three'],dunk,r['steals'],r['blocks']]
+              seen.add(slug)
+              return ',['+','.join(map(str,new))+"],'"+slug+"')"
+          segment2,n=pat.subn(repl,segment)
+          if n!=30 or len(seen)!=30:
+              raise SystemExit(f'expected 30 current player rows, updated {n}/{len(seen)}')
+          s=s[:start]+segment2+s[end:]
+          if 'freeThrows' in s or 'Free Throws' in s:
+              raise SystemExit('retired Free Throws reference remains in app.js')
+          p.write_text(s)
+
+          # Stop the old current-team ratio scaler from overriding the calibrated app data.
+          p=Path('art-v0.8.20.js'); s=p.read_text()
+          a=s.index('const COURTSIDE_2025_26='); b=s.index('const COURTSIDE_STAT_KEYS_7=',a)
+          s=s[:a]+s[b:]
+          s=s.replace("style.textContent='.player-card .stats .stat:nth-child(4){display:none!important}.player-card .stats{", "style.textContent='.player-card .stats{")
+          p.write_text(s)
+
+          # The old hidden fourth row was only hiding Free Throws; with seven real categories it would hide Rebounding.
+          p=Path('index.html'); s=p.read_text()
+          s=s.replace('.player-card .stats .stat:nth-child(4){display:none!important}','')
+          p.write_text(s)
+
+          # Regenerate reusable Classic Team conversion template on the same uniform scale.
+          labels={'scoring':'PTS/36','rebounding':'TRB/36','passing':'AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'}
+          out=['# NBA Starting5 Per-36 Rating Template','',
+               'Source: Basketball-Reference 2025-26 regular-season Per 36 Minutes.','',
+               'Calibration population: the 30 current NBA Starting5 modern team representatives. The observed minimum maps to 5 and the observed maximum maps to 30 using one continuous linear scale. The numerical midpoint of the 5–30 rating scale is 17.5, so the arithmetic midpoint of each observed Per-36 range maps to 17.5 (and player ratings are rounded half-up to the nearest whole number).','',
+               'NBA Starting5 has exactly seven gameplay categories: Scoring, Rebounding, Passing, 3-Point, Steals, Blocks, and Dunking. The first six use this Per-36 calibration. Dunking is calibrated separately.','',
+               '**Formula:** `rating = 5 + 25 × (player Per-36 − minimum Per-36) / (maximum Per-36 − minimum Per-36)`, rounded half-up and clamped to 5–30.','']
+          for cat in cats:
+              a=data['anchors'][cat]
+              out += [f"## {labels[cat]}",'',f"5 = {a['min_per36']:.3f} | 17.5 = {a['mid_per36']:.3f} | 30 = {a['max_per36']:.3f}",'','| Rating | Per-36 benchmark |','|---:|---:|']
+              for r in range(5,31): out.append(f"| {r} | {a['rating_template_per36'][str(r)]:.3f} |")
+              out.append('')
+          Path('PER36-RATING-TEMPLATE.md').write_text('\n'.join(out)+'\n')
+          PY
+
+          node --check app.js
+          node --check art-v0.8.20.js
+          python - <<'PY'
+          import json,re
+          d=json.load(open('stats-per36-current-v0.13.0.json'))
+          cats=('scoring','rebounding','passing','three','steals','blocks')
+          assert d['formula']['statistical_mid_rating']==17.5
+          for c in cats:
+              vals=[p['ratings'][c] for p in d['players'].values()]
+              assert min(vals)>=5 and max(vals)<=30
+              assert 5 in vals and 30 in vals
+              a=d['anchors'][c]
+              assert a['rating_at_mid']==17.5
+          s=open('app.js').read()
+          assert 'freeThrows' not in s and 'Free Throws' not in s
+          assert "const RAW_STAT_KEYS=['scoring','rebounding','passing','three','dunks','steals','blocks'];" in s
+          assert "const STAT_KEYS=['scoring','dunks','three','rebounding','passing','blocks','steals'];" in s
+          assert 'COURTSIDE_2025_26' not in open('art-v0.8.20.js').read()
+          assert '.stat:nth-child(4){display:none!important}' not in open('index.html').read()
+          print('Per36 linear 5-30 validation passed for 30 players and six categories.')
+          PY
+
+      - name: Commit recalibration and build bump
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add app.js art-v0.8.20.js index.html stats-per36-current-v0.13.0.json PER36-RATING-TEMPLATE.md
+          git commit -m 'Recalibrate Per36 ratings to linear 5-30 scale'
+          DATA_SHA=$(git rev-parse HEAD)
+          python - <<PY
+          import json
+          p='build.json'; b=json.load(open(p))
+          b.update(version='0.13.0-dev.22',build='20260908-1735',commit='${DATA_SHA}',channel='per36-linear-calibration')
+          open(p,'w').write(json.dumps(b,separators=(',',':'))+'\n')
+          PY
+          git add build.json
+          git commit -m 'Bump build for linear Per36 calibration'
+          git rm .github/workflows/per36-linear-midpoint-fix.yml
+          git commit -m 'Remove one-shot Per36 recalibration workflow'
+          git push origin HEAD:per36-linear-midpoint-fix
