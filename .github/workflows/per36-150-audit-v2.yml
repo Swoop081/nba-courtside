@@ -1,0 +1,96 @@
+name: Per36 150-player audit v2
+on:
+  push:
+    paths: ['.github/workflows/per36-150-audit-v2.yml']
+permissions:
+  contents: write
+jobs:
+  audit:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build audit
+        run: |
+          curl -fL --retry 3 -o /tmp/nba.csv https://raw.githubusercontent.com/EasySportsApps/nba_api_25_26_data/main/nba_players_regular_season_25_26_wide_data.csv
+          python3 - <<'PY'
+          import csv,json,math,re,unicodedata
+          F={
+          'MIL':['Ryan Rollins','Tyler Herro','Jaime Jaquez Jr.','Kyle Kuzma','Myles Turner'],
+          'BKN':['Ben Saraf','Egor Demin','Michael Porter Jr.','Julius Randle',"Day'Ron Sharpe"],
+          'SAC':['Malik Monk','Zach LaVine',"De'Andre Hunter",'Keegan Murray','Domantas Sabonis'],
+          'MEM':['Ty Jerome','Jaylen Wells','Cedric Coward','Jerami Grant','Zach Edey'],
+          'CHI':['Josh Giddey','Norman Powell','Matas Buzelis','Patrick Williams','Nic Claxton'],
+          'CHA':['Coby White','Kon Knueppel','Brandon Miller','Naz Reid','Moussa Diabate'],
+          'LAC':['Darius Garland','Kris Dunn','Brandon Ingram','Rui Hachimura','Brook Lopez'],
+          'DAL':['AJ Johnson','Max Christie','Cooper Flagg','P.J. Washington','Dereck Lively II'],
+          'WAS':['Trae Young','Kyshawn George','Tre Johnson','Anthony Davis','Alex Sarr'],
+          'NOP':['Dejounte Murray','Trey Murphy III','Jeremiah Fears','Zion Williamson','Derik Queen'],
+          'PHX':['Devin Booker','Jalen Green','Dillon Brooks','Miles Bridges','Mark Williams'],
+          'GSW':['Stephen Curry','Brandin Podziemski','Moses Moody','Draymond Green','Kristaps Porzingis'],
+          'ORL':['Jalen Suggs','Desmond Bane','Franz Wagner','Paolo Banchero','Wendell Carter Jr.'],
+          'POR':['Ja Morant','Shaedon Sharpe','Toumani Camara','Deni Avdija','Donovan Clingan'],
+          'LAL':['Luka Doncic','Austin Reaves','Quentin Grimes','Sandro Mamukelashvili','Walker Kessler'],
+          'UTA':['Keyonte George','Ace Bailey','Lauri Markkanen','Jaren Jackson Jr.','Jusuf Nurkic'],
+          'MIA':['Davion Mitchell','Tim Hardaway Jr.','Andrew Wiggins','Giannis Antetokounmpo','Bam Adebayo'],
+          'DET':['Cade Cunningham','Ausar Thompson','Duncan Robinson','John Collins','Jalen Duren'],
+          'MIN':['LaMelo Ball','Anthony Edwards','Ayo Dosunmu','Jaden McDaniels','Rudy Gobert'],
+          'BOS':['Payton Pritchard','Derrick White','Paul George','Jayson Tatum','Mitchell Robinson'],
+          'TOR':['Immanuel Quickley','RJ Barrett','Kawhi Leonard','Scottie Barnes','Jakob Poeltl'],
+          'HOU':['Reed Sheppard','Amen Thompson','Kevin Durant','Jabari Smith Jr.','Alperen Sengun'],
+          'ATL':['CJ McCollum','Nickeil Alexander-Walker','Dyson Daniels','Jalen Johnson','Onyeka Okongwu'],
+          'CLE':['James Harden','Donovan Mitchell','Max Strus','Evan Mobley','Jarrett Allen'],
+          'SAS':["De'Aaron Fox",'Stephon Castle','Devin Vassell','Julian Champagnie','Victor Wembanyama'],
+          'DEN':['Jamal Murray','Christian Braun','Cameron Johnson','Aaron Gordon','Nikola Jokic'],
+          'IND':['Ben Sheppard','Andrew Nembhard','Aaron Nesmith','Pascal Siakam','Ivica Zubac'],
+          'NYK':['Jalen Brunson','Josh Hart','Mikal Bridges','OG Anunoby','Karl-Anthony Towns'],
+          'OKC':['Shai Gilgeous-Alexander','Cason Wallace','Jalen Williams','Chet Holmgren','Isaiah Hartenstein'],
+          'PHI':['Tyrese Maxey','VJ Edgecombe','Jaylen Brown','LeBron James','Joel Embiid']}
+          assert len(F)==30 and sum(map(len,F.values()))==150
+          def n(s):
+            s=unicodedata.normalize('NFKD',s).encode('ascii','ignore').decode().lower()
+            s=re.sub(r'\b(jr|sr|ii|iii|iv)\b','',s)
+            return re.sub('[^a-z0-9]','',s)
+          R=list(csv.DictReader(open('/tmp/nba.csv',encoding='utf-8-sig'))); B={n(r['player_name']):r for r in R}
+          def raw(r):
+            m=float(r['minutes_played']); one=float(r['one_point_made']); two=float(r['two_point_made']); th=float(r['three_point_made'])
+            return {'scoring':(one+2*two+3*th)/m*36,'rebounding':(float(r['offensive_rebounds'])+float(r['defensive_rebounds']))/m*36,'passing':float(r['assists'])/m*36,'three':th/m*36,'steals':float(r['steals'])/m*36,'blocks':float(r['blocks'])/m*36}
+          P=[]; missing=[]
+          for team,names in F.items():
+            for pos,name in enumerate(names):
+              r=B.get(n(name))
+              if not r: missing.append([team,name]); continue
+              P.append({'team':team,'name':name,'positionIndex':pos,'nbaPlayerId':r['player_id'],'sourceName':r['player_name'],'minutes2025_26':round(float(r['minutes_played']),3),'raw':{k:round(v,4) for k,v in raw(r).items()}})
+          if missing: print('MISSING',missing); raise SystemExit(1)
+          C=['scoring','rebounding','passing','three','steals','blocks']; A={}
+          for c in C:
+            v=[p['raw'][c] for p in P]; lo=min(v); hi=max(v); A[c]={'rating5':round(lo,3),'rating15':round((lo+hi)/2,3),'rating30':round(hi,3)}
+          def rate(x,a):
+            lo,mid,hi=a['rating5'],a['rating15'],a['rating30']; y=5+(x-lo)/(mid-lo)*10 if x<=mid else 15+(x-mid)/(hi-mid)*15
+            return max(5,min(30,int(math.floor(y+.5))))
+          D={c:{str(i):0 for i in range(5,31)} for c in C}
+          for p in P:
+            p['ratings']={c:rate(p['raw'][c],A[c]) for c in C}
+            for c in C:D[c][str(p['ratings'][c])]+=1
+          T={c:[{'name':p['name'],'team':p['team'],'raw':p['raw'][c],'rating':p['ratings'][c]} for p in sorted(P,key=lambda p:p['raw'][c],reverse=True)[:5]] for c in C}
+          subs=[['BKN','Mikel Brown Jr.','Ben Saraf'],['SAC','Darius Acuff Jr.','Malik Monk'],['MEM','Cameron Boozer','Jerami Grant'],['CHI','Caleb Wilson','Patrick Williams'],['GSW','Yaxel Lendeborg','Moses Moody'],['WAS','AJ Dybantsa','Tre Johnson'],['UTA','Darryn Peterson','Ace Bailey'],['DAL','Kyrie Irving','AJ Johnson'],['NOP','Herb Jones','Jeremiah Fears'],['POR','Damian Lillard','Shaedon Sharpe'],['HOU','Fred VanVleet','Reed Sheppard'],['IND','Tyrese Haliburton','Ben Sheppard']]
+          O={'schema':'nba-starting5-per36-calibration-150-v1','population':150,'teamCount':30,'source':'2025-26 NBA regular-season totals from an official-NBA-Stats-API export; converted to Per36','formula':'min=5, min/max midpoint=15, max=30; piecewise linear; half-up; clamp 5..30','substitutions':[{'team':x,'projected':y,'auditPlayer':z} for x,y,z in subs],'anchors':A,'distribution':D,'top5':T,'players':P}
+          json.dump(O,open('stats-per36-current-150-audit.json','w'),ensure_ascii=False,indent=2)
+          L={'scoring':'Scoring PTS/36','rebounding':'Rebounding REB/36','passing':'Passing AST/36','three':'3PM/36','steals':'STL/36','blocks':'BLK/36'}
+          m=['# NBA Starting5 — 150-player Per-36 calibration audit','','Population: 30 representative current-team fives = 150 players.','', '## Anchors','','| Category | 5 | 15 | 30 |','|---|---:|---:|---:|']
+          for c in C:m.append(f"| {L[c]} | {A[c]['rating5']:.3f} | {A[c]['rating15']:.3f} | {A[c]['rating30']:.3f} |")
+          m+=['','## Top five','']
+          for c in C:
+            m+=['### '+L[c]]+[f"{i}. {p['name']} ({p['team']}) — {p['raw']:.2f} → {p['rating']}" for i,p in enumerate(T[c],1)]+['']
+          m+=['## Distribution','','| Rating | SCO | REB | PAS | 3PT | STL | BLK |','|---:|---:|---:|---:|---:|---:|---:|']
+          for i in range(5,31):m.append('| '+str(i)+' | '+' | '.join(str(D[c][str(i)]) for c in C)+' |')
+          open('PER36-150-AUDIT.md','w').write('\n'.join(m)+'\n')
+          print(json.dumps({'anchors':A,'top5':T,'distribution':D},indent=2))
+          PY
+      - name: Commit audit
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add stats-per36-current-150-audit.json PER36-150-AUDIT.md
+          git commit -m 'Build full 150-player Per36 calibration audit'
+          git push
