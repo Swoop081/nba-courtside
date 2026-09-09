@@ -13,6 +13,14 @@
     document.head.appendChild(rs);
   }
 
+  if(!window.__starting5DreamTeamBootstrapV0140){
+    window.__starting5DreamTeamBootstrapV0140=true;
+    const t=window.COURTSIDE_ASSET_TOKEN||Date.now();
+    const css=document.createElement('link');css.rel='stylesheet';css.href='dream-team-v0.14.0.css?t='+t;document.head.appendChild(css);
+    const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src+'?t='+t;s.onload=resolve;s.onerror=reject;document.head.appendChild(s)});
+    (async()=>{try{if(!window.NBA_STARTING5_SEASON_FREE_AGENTS)await load('season-free-agent-pool-v0.13.1.js');await load('dream-team-v0.14.0.js')}catch(e){console.error('Dream Team bootstrap failed',e)}})();
+  }
+
   if(!btn)return;
 
   btn.textContent='Check for Updates';
