@@ -21,6 +21,13 @@
     (async()=>{try{if(!window.NBA_STARTING5_SEASON_FREE_AGENTS)await load('season-free-agent-pool-v0.13.1.js');await load('dream-team-v0.14.0.js')}catch(e){console.error('Dream Team bootstrap failed',e)}})();
   }
 
+  if(!window.__starting5CardEditorTeamDropdownBootstrapV0143){
+    window.__starting5CardEditorTeamDropdownBootstrapV0143=true;
+    const ce=document.createElement('script');
+    ce.src='card-editor-team-dropdown-v0.14.3.js?t='+(window.COURTSIDE_ASSET_TOKEN||Date.now());
+    document.head.appendChild(ce);
+  }
+
   if(!btn)return;
 
   btn.textContent='Check for Updates';
@@ -29,42 +36,14 @@
 
   let status=document.getElementById('starting5UpdateStatus');
   if(!status){
-    status=document.createElement('div');
-    status.id='starting5UpdateStatus';
-    status.setAttribute('aria-live','polite');
-    status.style.cssText='min-height:18px;height:18px;margin:8px 0 0;text-align:center;color:#8e96a3;font-size:10px;font-weight:800;letter-spacing:.04em;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
-    btn.insertAdjacentElement('afterend',status);
+    status=document.createElement('div');status.id='starting5UpdateStatus';status.setAttribute('aria-live','polite');status.style.cssText='min-height:18px;height:18px;margin:8px 0 0;text-align:center;color:#8e96a3;font-size:10px;font-weight:800;letter-spacing:.04em;line-height:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';btn.insertAdjacentElement('afterend',status);
   }
 
   const setStatus=text=>{status.textContent=text||'';};
   const currentVersion=()=>String(label?.dataset?.buildVersion||label?.textContent||'').replace(/^v/i,'').trim();
   const syncLabel=version=>{if(label&&version){label.textContent='v'+version;label.dataset.buildVersion=version;}};
 
-  const showMask=version=>{
-    let mask=document.getElementById('s5UpdateMask');
-    if(mask)return mask;
-    mask=document.createElement('div');mask.id='s5UpdateMask';
-    mask.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#05070b;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:#fff;font-family:inherit;text-align:center;padding:24px';
-    mask.innerHTML='<div style="font-size:18px;font-weight:1000;letter-spacing:.02em">NBA STARTING5</div><div style="font-size:12px;color:#aeb6c3">Updating to v'+String(version||'latest')+'…</div>';
-    document.body.appendChild(mask);return mask;
-  };
+  const showMask=version=>{let mask=document.getElementById('s5UpdateMask');if(mask)return mask;mask=document.createElement('div');mask.id='s5UpdateMask';mask.style.cssText='position:fixed;inset:0;z-index:2147483647;background:#05070b;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:#fff;font-family:inherit;text-align:center;padding:24px';mask.innerHTML='<div style="font-size:18px;font-weight:1000;letter-spacing:.02em">NBA STARTING5</div><div style="font-size:12px;color:#aeb6c3">Updating to v'+String(version||'latest')+'…</div>';document.body.appendChild(mask);return mask;};
 
-  window.addEventListener('click',async e=>{
-    const target=e.target?.closest?.('#checkUpdatesBtn');if(!target)return;
-    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    if(btn.disabled)return;
-    btn.disabled=true;setStatus('Checking for updates…');
-    let b=null;
-    try{const r=await fetch('build.json?t='+Date.now(),{cache:'no-store'});if(r.ok)b=await r.json();}catch{}
-    if(!b?.version){setStatus('Could not check. Try again.');btn.disabled=false;setTimeout(()=>setStatus(''),1800);return;}
-    const running=currentVersion();
-    if(String(b.version)===running){syncLabel(b.version);setStatus('You’re up to date · v'+b.version);btn.disabled=false;setTimeout(()=>setStatus(''),1800);return;}
-    setStatus('Update available · loading v'+b.version+'…');showMask(b.version);
-    try{sessionStorage.setItem('starting5PendingVersion',b.version)}catch{}
-    try{
-      if('serviceWorker'in navigator){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));}
-      if('caches'in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}
-    }catch{}
-    location.replace('/nba-courtside/?release='+encodeURIComponent(b.commit||b.version)+'&t='+Date.now());
-  },true);
+  window.addEventListener('click',async e=>{const target=e.target?.closest?.('#checkUpdatesBtn');if(!target)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();if(btn.disabled)return;btn.disabled=true;setStatus('Checking for updates…');let b=null;try{const r=await fetch('build.json?t='+Date.now(),{cache:'no-store'});if(r.ok)b=await r.json();}catch{}if(!b?.version){setStatus('Could not check. Try again.');btn.disabled=false;setTimeout(()=>setStatus(''),1800);return;}const running=currentVersion();if(String(b.version)===running){syncLabel(b.version);setStatus('You’re up to date · v'+b.version);btn.disabled=false;setTimeout(()=>setStatus(''),1800);return;}setStatus('Update available · loading v'+b.version+'…');showMask(b.version);try{sessionStorage.setItem('starting5PendingVersion',b.version)}catch{}try{if('serviceWorker'in navigator){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));}if('caches'in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}}catch{}location.replace('/nba-courtside/?release='+encodeURIComponent(b.commit||b.version)+'&t='+Date.now());},true);
 })();
